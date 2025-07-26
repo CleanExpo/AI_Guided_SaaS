@@ -50,7 +50,7 @@ export class MCPIntegration extends EventEmitter {
     // Set up event handlers
     this.setupServerEventHandlers(instance);
     
-    this.emit('server:registered', { serverId: server.name   
+    this.emit('server:registered', { serverId: server.name   )
     })
 }
 
@@ -137,8 +137,8 @@ export class MCPIntegration extends EventEmitter {
   public async call(serverId: string, method: string, params? null : any): Promise<any> {
 { await this.sendMessage({
       serverId,
-      method,
-      params
+      method)
+      params)
     });
 
     return response.result
@@ -175,28 +175,28 @@ export class MCPIntegration extends EventEmitter {
         const handler = this.responseHandlers.get(message.id.toString())!;
         handler({ serverId: server.config.name,
           result: message.result,
-          error: message.error,
-          id: message.id   
+          error: message.error)
+          id: message.id   )
     })
 } else {
         // Handle notification messages
-        this.emit('notification', { serverId: server.config.name,
+        this.emit('notification', { serverId: server.config.name,)
           ...message    })
 }
     });
 
     server.on('error', (error: Error) =>  {
-      this.emit('server:error', { serverId: server.config.name,
+      this.emit('server:error', { serverId: server.config.name,)
         error    })
 });
 
     server.on('started', () =>  {
-      this.emit('server:started', { serverId: server.config.name   
+      this.emit('server:started', { serverId: server.config.name   )
     })
 });
 
     server.on('stopped', () =>  {
-      this.emit('server:stopped', { serverId: server.config.name   
+      this.emit('server:stopped', { serverId: server.config.name   )
     })    })
 }
 
@@ -275,8 +275,8 @@ class MCPServerInstance extends EventEmitter {
     };
 
     this.process = spawn(command, args, {
-      env,
-      stdio: ['pipe', 'pipe', 'pipe']
+      env)
+      stdio: ['pipe', 'pipe', 'pipe'])
     });
 
     // Handle stdout (messages from server)
@@ -292,7 +292,7 @@ class MCPServerInstance extends EventEmitter {
     // Handle process exit
     this.process.on('exit', (code) => {
       this.running = false;
-      this.emit('stopped', { exitCode: code   
+      this.emit('stopped', { exitCode: code   )
     })
 });
 
@@ -406,7 +406,7 @@ export function createMCPIntegration(): MCPIntegration {
   const integration = new MCPIntegration();
   
   // Register default servers
-  MCP_SERVERS.forEach(server => {
+  MCP_SERVERS.forEach(server => {)
     integration.registerServer(server)
 };);
   

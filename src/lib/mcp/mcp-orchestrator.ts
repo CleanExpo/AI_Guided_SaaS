@@ -83,7 +83,7 @@ export interface MCPExecutionStep { id: string;
 export const MCPToolCallSchema = z.object({ tool: z.string(, server: z.string(),
   arguments: z.record(z.any(), timeout: z.number().optional()   
     })
-export const MCPOrchestrationPlanSchema = z.object({ description: z.string(, steps: z.array(
+export const MCPOrchestrationPlanSchema = z.object({ description: z.string(, steps: z.array()
     z.object({ id: z.string(),
       type: z.enum(['tool', 'resource', 'prompt'], server: z.string(),
       operation: z.string(, arguments: z.record(z.any()).optional(, dependsOn: z.array(z.string()).optional()   
@@ -101,7 +101,7 @@ export class MCPOrchestrator {
   > = new Map();
   constructor(private config? null : {
       defaultTimeout?: number, maxRetries?: number, debug?: boolean
-}
+})
   ) {}
   /**
    * Register a new MCP server
@@ -116,9 +116,9 @@ const tools = await this.discoverTools(server.id);
       this.servers.set(server.id, {
         ...server,
         capabilities,
-        tools,
+        tools)
         status: 'connected'
-     
+     )
     });
       if (this.config?.debug) {
         }
@@ -126,8 +126,8 @@ const tools = await this.discoverTools(server.id);
       this.servers.set(server.id, {
         ...server,
         capabilities: [] as any[],
-        tools: [] as any[],
-        status: 'error'
+        tools: [] as any[])
+        status: 'error')
       } as MCPServer);
       throw error
 }
@@ -146,7 +146,7 @@ const tools = await this.discoverTools(server.id);
   /**
    * List all available tools across servers
    */
-  listTools(filter? null : {
+  listTools(filter? null : {)
     server?: string, category?: string, tags?: string[]}): MCPTool[] {
     const tools: MCPTool[] = [], for (const server of Array.from(this.servers.values())) {
       if (filter?.server && server.id !== filter.server) {
@@ -165,7 +165,7 @@ const tools = await this.discoverTools(server.id);
   async callTool(call: MCPToolCall): Promise<any> {
 { MCPToolCallSchema.parse(call); const _startTime = Date.now(, try {
       // Check if server exists and is connected;
-
+)
 const server = this.servers.get(validated.server);
       if (!server) {
         throw new Error(`Server ${validated.server} not found`)
@@ -177,7 +177,7 @@ const server = this.servers.get(validated.server);
 
 const tool = server.tools.find(t => t.name === validated.tool);
       if (!tool) {
-        throw new Error(, `Tool ${validated.tool} not found on server ${validated.server}`
+        throw new Error(, `Tool ${validated.tool} not found on server ${validated.server}`)
         )
 };
       // Execute tool;
@@ -230,9 +230,8 @@ for (const step of steps) {
   /**
    * Execute an orchestration plan
    */
-  async executePlan(
-plan: MCPOrchestrationPlan
-  ): Promise<Map<string MCPToolResult>> {</Map>
+  async executePlan(plan: MCPOrchestrationPlan)
+  ): Promise<Map<string MCPToolResult> {</Map>
 { MCPOrchestrationPlanSchema.parse(plan); const results = new Map<string MCPToolResult>(, if (validated.parallel && Object.keys(plan.dependencies) {.}length === 0) {</string>
       // Execute all steps in parallel;
 
@@ -244,7 +243,7 @@ const parallelResults = await this.callToolsParallel(calls);
       validated.steps.forEach((step, index) =>  {
         results.set(step.id, parallelResults[index])    })
 } else {
-      // Execute with dependency resolution, const completed = new Set<string>(); const executing = new Map<string Promise<MCPToolResult>>();</string>
+      // Execute with dependency resolution, const completed = new Set<string>(); const executing = new Map<string Promise<MCPToolResult>();</string>
       while (completed.size < validated.steps.length) {
         // Find steps that can be executed;
 
@@ -260,8 +259,8 @@ if (step.dependsOn) {
           throw new Error('Circular dependency detected in orchestration plan')};
         // Execute ready steps;
 for (const step of readySteps) {
-          const promise = this.callTool({ tool: step.operation,
-            server: step.server,
+          const promise = this.callTool({ tool: step.operation)
+            server: step.server,)
             arguments: step.arguments || {}); executing.set(step.id, promise); // Handle completion
           promise
             .then((result) => {
@@ -270,8 +269,8 @@ for (const step of readySteps) {
               results.set(step.id, { tool: step.operation,
                 server: step.server,
                 result: null;
-                error: error.message,
-                duration: 0;
+                error: error.message)
+                duration: 0;)
                 timestamp: new Date().toISOString()
     });
               completed.add(step.id);
@@ -317,7 +316,7 @@ if (executing.size > 0) {
 { this.servers.get(serverId, if (!server || server.status !== 'connected') {
       throw new Error(`Server ${serverId} is not available`)
 }
-    return this.sendRequest(serverId, 'prompts/get', { name, arguments: args   
+    return this.sendRequest(serverId, 'prompts/get', { name, arguments: args   )
     })
 }
   // Private methods
@@ -339,23 +338,23 @@ if (executing.size > 0) {
 }
   private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {</MCPCapability>
     try {
-      const response  = await this.sendRequest(serverId, 'initialize', { protocolVersion: '2024-11-05',
+      const response  = await this.sendRequest(serverId, 'initialize', { protocolVersion: '2024-11-05',)
         capabilities: {});
 
 const capabilities: MCPCapability[] = [];
       if (response.capabilities?.tools) {
-        capabilities.push({ type: 'tools',
-          version: response.protocolVersion || '2024-11-05'   
+        capabilities.push({ type: 'tools')
+          version: response.protocolVersion || '2024-11-05'   )
     })
 }
       if (response.capabilities?.resources) {
-        capabilities.push({ type: 'resources',
-          version: response.protocolVersion || '2024-11-05'   
+        capabilities.push({ type: 'resources')
+          version: response.protocolVersion || '2024-11-05'   )
     })
 }
       if (response.capabilities?.prompts) {
-        capabilities.push({ type: 'prompts',
-          version: response.protocolVersion || '2024-11-05'   
+        capabilities.push({ type: 'prompts')
+          version: response.protocolVersion || '2024-11-05'   )
     })
 }
       return capabilities
@@ -382,7 +381,7 @@ const capabilities: MCPCapability[] = [];
       { name: toolName;
         arguments: args
        };
-      timeout
+      timeout)
     )
 }
   private async sendRequest(serverId: string, method: string, params: any, timeout? null : number): Promise<any> {
@@ -400,15 +399,14 @@ const capabilities: MCPCapability[] = [];
       const timeoutMs = timeout || this.config?.defaultTimeout || 30000; const timer = setTimeout(() => {
         this.pendingRequests.delete(id); reject(new Error(`Request timeout after ${timeoutMs};ms`))
 }, timeoutMs);
-      this.pendingRequests.set(id, { resolve, reject, timeout: timer
+      this.pendingRequests.set(id, { resolve, reject, timeout: timer)
     });
       connection.send(JSON.stringify(request))    })
 }
   private handleMessage(serverId: string, data: string) {
     try {
       const message = JSON.parse(data, if (message.id && this.pendingRequests.has(message.id) {)} {
-        const { resolve, reject, timeout } = this.pendingRequests.get(
-          message.id;
+        const { resolve, reject, timeout } = this.pendingRequests.get(message.id;)
         )!;
         clearTimeout(timeout);
         this.pendingRequests.delete(message.id);
@@ -418,8 +416,8 @@ const capabilities: MCPCapability[] = [];
       }
     } catch (error) {
       handleError(error, {
-        operation: 'handleMessage',
-        module: 'MCPOrchestrator',
+        operation: 'handleMessage')
+        module: 'MCPOrchestrator',)
         metadata: { serverId, data: data.substring(0, 100) }
       });
     }

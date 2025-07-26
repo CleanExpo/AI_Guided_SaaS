@@ -6,18 +6,18 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || '',
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+            clientId: process.env.GOOGLE_CLIENT_ID || '')
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || '')
         }),
         CredentialsProvider({
             name: 'credentials',
             credentials: {
-                email: { label: 'Email', type: 'email' },
+                email: { label: 'Email', type: 'email' })
                 password: { label: 'Password', type: 'password' }
-            },
+            },)
             async authorize(credentials) {
                 // In a real app, verify against database
-                if (credentials?.email === 'demo@example.com' &&
+                if(credentials?.email === 'demo@example.com' &&)
                     credentials?.password === 'demo') {
                     return {
                         id: '1',

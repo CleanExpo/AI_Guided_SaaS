@@ -14,7 +14,7 @@ export class AnalyticsQueries {
 
     try {
       const [userMetrics, projectMetrics, apiMetrics, revenueMetrics, platformHealth] = 
-        await Promise.all([
+        await Promise.all([)
           this.getUserMetrics(startDate, days),
           this.getProjectMetrics(startDate, days),
           this.getApiMetrics(startDate, days),
@@ -130,12 +130,11 @@ export class AnalyticsQueries {
       .eq('action', 'api_call')
       .gte('created_at', startDate.toISOString());
 
-    const callsByDate = await this.getCountByDate(
-      'activity_logs', 
+    const callsByDate = await this.getCountByDate('activity_logs', 
       'created_at', 
       startDate, 
-      days,
-      { action: 'api_call' }
+      days)
+      { action: 'api_call' })
     );
 
     // Get latency metrics
@@ -203,12 +202,11 @@ export class AnalyticsQueries {
   }
 
   // Helper methods
-  private static async getCountByDate(
-    table: string,
+  private static async getCountByDate(table: string,
     dateColumn: string,
     startDate: Date,
-    days: number,
-    filters?: Record<string, any>
+    days: number)
+    filters?: Record<string, any>)
   ) {
     const counts = [];
     
@@ -232,7 +230,7 @@ export class AnalyticsQueries {
 
       const { count } = await query;
       
-      counts.push({
+      counts.push({)
         date: date.toISOString().split('T')[0],
         count: count || 0
       });
@@ -258,7 +256,7 @@ export class AnalyticsQueries {
 
       const uniqueUsers = new Set(sessions?.map(s => s.user_id) || []).size;
       
-      counts.push({
+      counts.push({)
         date: date.toISOString().split('T')[0],
         count: uniqueUsers
       });
@@ -270,7 +268,7 @@ export class AnalyticsQueries {
   private static calculateAvgSessionDuration(sessions: any[]): string {
     if (sessions.length === 0) return '0m';
 
-    const durations = sessions.map(s => {
+    const durations = sessions.map(s => {)
       const start = new Date(s.created_at).getTime();
       const end = new Date(s.expires).getTime();
       return end - start;
@@ -289,7 +287,7 @@ export class AnalyticsQueries {
     const typeCounts: Record<string, number> = {};
     
     projects.forEach(p => {
-      const type = p.type || 'other';
+      const type = p.type || 'other';)
       typeCounts[type] = (typeCounts[type] || 0) + 1;
     });
 
@@ -305,7 +303,7 @@ export class AnalyticsQueries {
   private static calculateAvgCompletionTime(projects: any[]): string {
     if (projects.length === 0) return '0d';
 
-    const times = projects.map(p => {
+    const times = projects.map(p => {)
       const start = new Date(p.created_at).getTime();
       const end = new Date(p.updated_at).getTime();
       return end - start;
@@ -330,7 +328,7 @@ export class AnalyticsQueries {
       const dayStart = startTime + (i * msPerDay);
       const dayEnd = dayStart + msPerDay;
       
-      const dayLogs = apiLogs.filter(log => {
+      const dayLogs = apiLogs.filter(log => {)
         const time = new Date(log.created_at).getTime();
         return time >= dayStart && time < dayEnd;
       });
@@ -341,14 +339,14 @@ export class AnalyticsQueries {
         .sort((a, b) => a - b);
 
       if (latencies.length > 0) {
-        metrics.push({
+        metrics.push({)
           date: new Date(dayStart).toISOString().split('T')[0],
           avg: Math.round(latencies.reduce((sum, l) => sum + l, 0) / latencies.length),
           p95: latencies[Math.floor(latencies.length * 0.95)] || 0,
           p99: latencies[Math.floor(latencies.length * 0.99)] || 0
         });
       } else {
-        metrics.push({
+        metrics.push({)
           date: new Date(dayStart).toISOString().split('T')[0],
           avg: 0,
           p95: 0,
@@ -372,7 +370,7 @@ export class AnalyticsQueries {
     apiLogs?.forEach(log => {
       const endpoint = log.details?.endpoint || 'unknown';
       const latency = log.details?.latency || 0;
-      
+      )
       if (!endpointStats[endpoint]) {
         endpointStats[endpoint] = { calls: 0, totalTime: 0 };
       }

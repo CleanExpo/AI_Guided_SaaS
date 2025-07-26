@@ -21,36 +21,42 @@ const handleSubmit = async (e: React.FormEvent) => {
     setError('');
 
     try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',
-        headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ password    })
+      const response = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
       });
 
       if (response.ok) {
-        router.push('/admin/dashboard')
-} else {
-        setError('Invalid password')
-}
+        router.push('/admin/dashboard');
+      } else {
+        setError('Invalid password');
+      }
     } catch (error) {
-      setError('Authentication failed')
-} finally {
-      setLoading(false)
-}
+      setError('Authentication failed');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center glass">
-          <Card className="w-full max-w-md" className="glass
-        <CardHeader className="glass"
-          <CardTitle className="flex items-center" className="glass
-            <Shield className="w-5 h-5 mr-2"     />
+      <Card className="w-full max-w-md glass">
+        <CardHeader className="glass">
+
+
+          <CardTitle className="flex items-center glass">
+            <Shield className="w-5 h-5 mr-2" />
             Admin Login
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass"
+        <CardContent className="glass">
+
+
           <form onSubmit={handleSubmit} className="space-y-4" role="form">
             <Input
               type="password"
+
               placeholder="Admin Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -58,6 +64,8 @@ const handleSubmit = async (e: React.FormEvent) => {
             />
             {error && (
               <div className="flex items-center text-red-600 text-sm">
+
+
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 {error}
               </div>
@@ -69,5 +77,5 @@ const handleSubmit = async (e: React.FormEvent) => {
         </CardContent>
       </Card>
     </div>
-  )
-};
+  );
+}

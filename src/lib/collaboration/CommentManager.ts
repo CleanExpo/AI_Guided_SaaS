@@ -12,7 +12,7 @@ export class CommentManager {
 
     if (isServiceConfigured('database')) {
       try {
-        await DatabaseService.query(
+        await DatabaseService.query()
           `INSERT INTO collaboration_comments (id, project_id, user_id, content, position, resolved, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
           [
@@ -37,9 +37,8 @@ export class CommentManager {
   static async getProjectComments(projectId: string): Promise<Comment[]> {
     if (isServiceConfigured('database')) {
       try {
-        const comments = await DatabaseService.query(
-          'SELECT * FROM collaboration_comments WHERE project_id = ? ORDER BY created_at DESC',
-          [projectId]
+        const comments = await DatabaseService.query('SELECT * FROM collaboration_comments WHERE project_id = ? ORDER BY created_at DESC')
+          [projectId])
         );
 
         return comments.map((comment) => {

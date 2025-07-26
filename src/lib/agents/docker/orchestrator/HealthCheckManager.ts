@@ -45,9 +45,7 @@ export class HealthCheckManager extends EventEmitter {
 
   getHealthStatus(): Record<string, { 
     status: string; 
-    lastCheck?: Date; 
-    healthStatus?: string; 
-  }> {
+    lastCheck?: Date; >healthStatus?: string; >}> {
     const status: Record<string, any> = {};
     
     for (const [agentId, containerizedAgent] of this.containers) {

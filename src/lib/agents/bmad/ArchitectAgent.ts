@@ -49,8 +49,8 @@ export class ArchitectAgent extends Agent {
         'api-designer',
         'threat-modeler',
         'cost-estimator'
-      ],
-      temperature: 0.4
+      ])
+      temperature: 0.4)
     });
 
     this.componentDesigner = new ComponentDesigner();
@@ -58,7 +58,7 @@ export class ArchitectAgent extends Agent {
     this.infrastructurePlanner = new InfrastructurePlanner();
   }
 
-  protected async execute(input: string): Promise<AgentResult<SystemArchitecture>> {
+  protected async execute(input: string): Promise<AgentResult<SystemArchitecture> {
     try {
       this.think('Starting architecture design process...');
 
@@ -70,35 +70,32 @@ export class ArchitectAgent extends Agent {
       const qualityStandards = this.getSharedMemory('quality-standards') || [];
 
       this.observe('Retrieved inputs from other agents', {
-        requirementCount: requirements.length,
-        constraintCount: constraints.length
+        requirementCount: requirements.length)
+        constraintCount: constraints.length)
       });
 
       // Step 1: Define architecture overview and style
-      const overview = await this.defineArchitectureOverview(
-        input,
+      const overview = await this.defineArchitectureOverview(input,
         requirements,
-        constraints,
-        qualityStandards
+        constraints)
+        qualityStandards)
       );
       this.observe('Defined architecture overview', overview);
 
       // Step 2: Design system components
-      const components = await this.componentDesigner.designComponents(
-        requirements,
-        userStories,
-        overview
+      const components = await this.componentDesigner.designComponents(requirements,
+        userStories)
+        overview)
       );
       this.observe('Designed system components', { count: components.length });
 
       // Step 3: Design data model
-      const dataModel = await this.dataModelDesigner.designDataModel(
-        components,
-        requirements
+      const dataModel = await this.dataModelDesigner.designDataModel(components)
+        requirements)
       );
       this.observe('Designed data model', {
-        entities: dataModel.entities.length,
-        relationships: dataModel.relationships.length
+        entities: dataModel.entities.length)
+        relationships: dataModel.relationships.length)
       });
 
       // Step 4: Design APIs
@@ -106,24 +103,22 @@ export class ArchitectAgent extends Agent {
       this.observe('Designed APIs', { endpoints: apiDesign.endpoints.length });
 
       // Step 5: Plan infrastructure
-      const infrastructure = await this.infrastructurePlanner.planInfrastructure(
-        components,
-        overview,
-        timeline
+      const infrastructure = await this.infrastructurePlanner.planInfrastructure(components,
+        overview)
+        timeline)
       );
       this.observe('Planned infrastructure', {
-        provider: infrastructure.cloudProvider,
-        services: infrastructure.services.length
+        provider: infrastructure.cloudProvider)
+        services: infrastructure.services.length)
       });
 
       // Step 6: Design security architecture
-      const security = await this.designSecurity(
-        components,
-        infrastructure,
-        apiDesign
+      const security = await this.designSecurity(components,
+        infrastructure)
+        apiDesign)
       );
       this.observe('Designed security architecture', {
-        compliance: security.compliance
+        compliance: security.compliance)
       });
 
       // Step 7: Plan integrations
@@ -131,23 +126,21 @@ export class ArchitectAgent extends Agent {
       this.observe('Planned integrations', { count: integrations.length });
 
       // Step 8: Define deployment strategy
-      const deploymentStrategy = await this.defineDeploymentStrategy(
-        infrastructure,
-        components,
-        timeline
+      const deploymentStrategy = await this.defineDeploymentStrategy(infrastructure,
+        components)
+        timeline)
       );
       this.observe('Defined deployment strategy', {
-        type: deploymentStrategy.type
+        type: deploymentStrategy.type)
       });
 
       // Step 9: Document technical decisions
-      const technicalDecisions = await this.documentTechnicalDecisions(
-        overview,
-        components,
-        infrastructure
+      const technicalDecisions = await this.documentTechnicalDecisions(overview,
+        components)
+        infrastructure)
       );
       this.observe('Documented technical decisions', {
-        count: technicalDecisions.length
+        count: technicalDecisions.length)
       });
 
       // Step 10: Identify architectural patterns
@@ -196,11 +189,10 @@ export class ArchitectAgent extends Agent {
     }
   }
 
-  private async defineArchitectureOverview(
-    input: string,
+  private async defineArchitectureOverview(input: string,
     requirements: any[],
-    constraints: string[],
-    qualityStandards: any[]
+    constraints: string[])
+    qualityStandards: any[])
   ): Promise<ArchitectureOverview> {
     const prompt = architecturePrompts.overview
       .replace('{requirements}', JSON.stringify(requirements, null, 2))
@@ -208,33 +200,31 @@ export class ArchitectAgent extends Agent {
       .replace('{qualityStandards}', JSON.stringify(qualityStandards, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature,
-      model: 'gpt-4'
+      temperature: this.config.temperature)
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private async designAPIs(
-    components: Component[],
-    dataModel: DataModel
+  private async designAPIs(components: Component[])
+    dataModel: DataModel)
   ): Promise<APIDesign> {
     const prompt = architecturePrompts.apiDesign
       .replace('{components}', JSON.stringify(components, null, 2))
       .replace('{dataModel}', JSON.stringify(dataModel, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature,
-      model: 'gpt-4'
+      temperature: this.config.temperature)
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private async designSecurity(
-    components: Component[],
-    infrastructure: Infrastructure,
-    apiDesign: APIDesign
+  private async designSecurity(components: Component[],
+    infrastructure: Infrastructure)
+    apiDesign: APIDesign)
   ): Promise<SecurityArchitecture> {
     const prompt = architecturePrompts.security
       .replace('{components}', JSON.stringify(components, null, 2))
@@ -243,15 +233,14 @@ export class ArchitectAgent extends Agent {
 
     const response = await generateAIResponse(prompt, {
       temperature: 0.3, // Lower temperature for security decisions
-      model: 'gpt-4'
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private async planIntegrations(
-    input: string,
-    components: Component[]
+  private async planIntegrations(input: string)
+    components: Component[])
   ): Promise<Integration[]> {
     const prompt = `Based on the project requirements and components, identify necessary third-party integrations.
 
@@ -276,17 +265,16 @@ Consider common integrations like:
 Format as JSON array of Integration objects.`;
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature,
-      model: 'gpt-4'
+      temperature: this.config.temperature)
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private async defineDeploymentStrategy(
-    infrastructure: Infrastructure,
-    components: Component[],
-    timeline: any
+  private async defineDeploymentStrategy(infrastructure: Infrastructure,
+    components: Component[])
+    timeline: any)
   ): Promise<DeploymentStrategy> {
     const prompt = architecturePrompts.deployment
       .replace('{infrastructure}', JSON.stringify(infrastructure, null, 2))
@@ -294,17 +282,16 @@ Format as JSON array of Integration objects.`;
       .replace('{timeline}', JSON.stringify(timeline, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature,
-      model: 'gpt-4'
+      temperature: this.config.temperature)
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private async documentTechnicalDecisions(
-    overview: ArchitectureOverview,
-    components: Component[],
-    infrastructure: Infrastructure
+  private async documentTechnicalDecisions(overview: ArchitectureOverview,
+    components: Component[])
+    infrastructure: Infrastructure)
   ): Promise<TechnicalDecision[]> {
     const prompt = `Document key technical decisions made in this architecture.
 
@@ -322,16 +309,15 @@ For each major decision, document:
 Format as JSON array of TechnicalDecision objects.`;
 
     const response = await generateAIResponse(prompt, {
-      temperature: 0.3,
-      model: 'gpt-4'
+      temperature: 0.3)
+      model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
-  private identifyPatterns(
-    overview: ArchitectureOverview,
-    components: Component[]
+  private identifyPatterns(overview: ArchitectureOverview)
+    components: Component[])
   ): string[] {
     const patterns: string[] = [];
 
@@ -362,8 +348,7 @@ Format as JSON array of TechnicalDecision objects.`;
     return [...new Set(patterns)]; // Remove duplicates
   }
 
-  private generateArchitectureDocumentation(
-    architecture: SystemArchitecture
+  private generateArchitectureDocumentation(architecture: SystemArchitecture)
   ): string {
     let doc = `# System Architecture Documentation\n\n`;
     
@@ -374,14 +359,14 @@ Format as JSON array of TechnicalDecision objects.`;
 
     doc += `## Architectural Principles\n`;
     architecture.overview.principles.forEach(principle => {
-      doc += `- ${principle}\n`;
+      doc += `- ${principle}\n`;)
     });
 
     doc += `\n## Components\n`;
     architecture.components.forEach(component => {
       doc += `### ${component.name}\n`;
       doc += `- **Type**: ${component.type}\n`;
-      doc += `- **Responsibility**: ${component.responsibility}\n`;
+      doc += `- **Responsibility**: ${component.responsibility}\n`;)
       doc += `- **Technology**: ${component.technology.join(', ')}\n\n`;
     });
 

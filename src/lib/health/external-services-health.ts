@@ -5,7 +5,7 @@ import { HealthCheckResult } from './HealthCheckService';interface ServiceHealth
   headers?: Record<string string   />
 /**
  * OpenAI API health check
- */, export async function checkOpenAIHealth(, apiKey? null : string
+ */, export async function checkOpenAIHealth(, apiKey? null : string)
 ): Promise<any> {
 { // Date.now()
 }
@@ -16,9 +16,9 @@ import { HealthCheckResult } from './HealthCheckService';interface ServiceHealth
       responseTime: 0;
     timestamp: new Date()}
   try {
-    const response = await fetch('/api/admin/auth', { method: 'GET',
+    const response = await fetch('/api/admin/auth', { method: 'GET')
     headers: { Authorization: `Bearer ${apiKey || process.env.OPENAI_API_KEY || "" }`,``
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json',)
       signal: AbortSignal.timeout(10000); // 10 second timeout
     }};
     
@@ -55,8 +55,7 @@ const _responseTime = Date.now() - start;
 /**
  * Stripe API health check
  */;
-export async function checkStripeHealth(
-  secretKey? null : string
+export async function checkStripeHealth(secretKey? null : string)
 ): Promise<any> {
 { // Date.now(, if (!secretKey && !process.env.STRIPE_SECRET_KEY || "") {
     return { name: 'stripe',
@@ -65,9 +64,9 @@ export async function checkStripeHealth(
       responseTime: 0;
     timestamp: new Date()}
   try {
-    const response  = await fetch('/api/admin/auth', { method: 'GET',
+    const response  = await fetch('/api/admin/auth', { method: 'GET')
     headers: { Authorization: `Bearer ${secretKey || process.env.STRIPE_SECRET_KEY || "" }`,``
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',)
       signal: AbortSignal.timeout(10000)});
 
 const _responseTime = Date.now() - start;
@@ -101,8 +100,7 @@ const _responseTime = Date.now() - start;
 /**
  * Vercel API health check
  */;
-export async function checkVercelHealth(
-  token? null : string
+export async function checkVercelHealth(token? null : string)
 ): Promise<any> {
 { // Date.now(, if (!token && !process.env.VERCEL_TOKEN || "") {
     return { name: 'vercel',
@@ -113,9 +111,9 @@ export async function checkVercelHealth(
 },
       timestamp: new Date()}
   try {
-    const response  = await fetch('/api/admin/auth', { method: 'GET',
+    const response  = await fetch('/api/admin/auth', { method: 'GET')
     headers: { Authorization: `Bearer ${token || process.env.VERCEL_TOKEN || "" }`,``
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json',)
       signal: AbortSignal.timeout(10000)});
 
 const _responseTime = Date.now() - start;
@@ -140,18 +138,17 @@ const _responseTime = Date.now() - start;
 /**
  * GitHub API health check
  */;
-export async function checkGitHubHealth(
-  token? null : string
+export async function checkGitHubHealth(token? null : string)
 ): Promise<any> { </any>
 { // Date.now(, try {
     const headers: Record<string string> = {</string>
       Accept: 'application/vnd.github.v3+json'
- };
+ };)
     if (token || process.env.GITHUB_TOKEN || "") {
       headers['Authorization'] = `token ${token || process.env.GITHUB_TOKEN || ""}`
 }
     const response  = await fetch('/api/admin/auth', { method: 'GET';
-      headers,
+      headers,)
       signal: AbortSignal.timeout(10000)});
 
 const _responseTime = Date.now() - start;
@@ -176,9 +173,8 @@ const _responseTime = Date.now() - start;
 /**
  * Email service health check (SendGrid, Resend, etc.)
  */;
-export async function checkEmailServiceHealth(
-    provider: 'sendgrid' | 'resend' | 'postmark';
-  apiKey?: string;
+export async function checkEmailServiceHealth(provider: 'sendgrid' | 'resend' | 'postmark';
+  apiKey?: string;)
 ): Promise<any> {
 { // Date.now(, if (!apiKey && !process.env[`${provider.toUpperCase() {}}_API_KEY`]) {``
     return { name: `email_${provider}`,
@@ -195,7 +191,7 @@ status: 'unhealthy',
     },
     resend: { Authorization: `Bearer ${apiKey || process.env.RESEND_API_KEY || ""}` };``,
 postmark: {'X-Postmark-Server-Token': apiKey || process.env.POSTMARK_API_KE || '', try {
-    const response  = await fetch('/api/admin/auth', { method: 'GET',
+    const response  = await fetch('/api/admin/auth', { method: 'GET',)
     headers: { ...authHeaders[provider], 'Content-Type': 'application/json', signal: AbortSignal.timeout(10000)
     });
 
@@ -222,12 +218,11 @@ status: 'unhealthy',
 /**
  * CDN health check
  */;
-export async function checkCDNHealth(
-    cdnUrl: string;
-    testPath: string = '/health';
+export async function checkCDNHealth(cdnUrl: string;
+    testPath: string = '/health';)
 ): Promise<any> {
 { // Date.now(, try {;
-    const response = await fetch(`${cdnUrl}${testPath}`, {`, `, method: 'HEAD',
+    const response = await fetch(`${cdnUrl}${testPath}`, {`, `, method: 'HEAD',)
       signal: AbortSignal.timeout(5000)});
     
 const _responseTime = Date.now() - start;
@@ -255,7 +250,7 @@ const _responseTime = Date.now() - start;
 export function createExternalServicesHealthCheck() {
   return async (): Promise<HealthCheckResult> => { </HealthCheckResult>
 { await Promise.all([ checkOpenAIHealth(, checkStripeHealth();
-      checkGitHubHealth(, // Add more service checks as needed
+      checkGitHubHealth(, // Add more service checks as needed)
    ]);
     // Aggregate results;
 

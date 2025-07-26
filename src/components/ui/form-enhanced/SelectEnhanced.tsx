@@ -16,39 +16,33 @@ export function SelectEnhanced({
   required,
   placeholder,
   options,
-  id,
-  ...props
+  id)
+  ...props)
 }: SelectProps) {
   const generatedId = React.useId();
   const selectId = id || generatedId;
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return (
-    <div className="w-full">
+  return(<div className="w-full">
       {label && (
         <label
-          htmlFor={selectId}
-          className="block text-sm font-medium text-foreground mb-1"
-        >
+          htmlFor={selectId}>className="block text-sm font-medium text-foreground mb-1">>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
+        </label>)
       )}
       
       <div className="relative">
         <select
           id={selectId}
-          className={cn(
-            baseSelectClasses,
+          className={cn(baseSelectClasses,
             inputVariants[variant],
             inputSizes[selectSize],
             inputStates[hasError ? 'error' : state],
-            'pr-10',
-            className
-          )}
-          {...props}
-        >
+            'pr-10')
+            className)
+          )}>{...props}>
           {placeholder && (
             <option value="" disabled>
               {placeholder}
@@ -57,9 +51,7 @@ export function SelectEnhanced({
           {options.map((option) => (
             <option
               key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-            >
+              value={option.value}>disabled={option.disabled}>
               {option.label}
             </option>
           ))}
@@ -71,10 +63,8 @@ export function SelectEnhanced({
       </div>
       
       {displayText && (
-        <p className={cn(
-          'mt-1 text-xs',
-          hasError ? 'text-red-500' : 'text-muted-foreground'
-        )}>
+        <p className={cn()
+          'mt-1 text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
           {displayText}
         </p>
       )}

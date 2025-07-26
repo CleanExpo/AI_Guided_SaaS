@@ -30,7 +30,7 @@ export abstract class TextSplitter {
         // Save current chunk
         chunks.push({ text: currentChunk.trim(, metadata: { startIndex, endIndex: currentIndex, chunkIndex: chunkIndex++ }};
         // Start new chunk with overlap;
-
+)
 const _overlap = this.getOverlapText(currentChunk);
         currentChunk = overlap + split;
         startIndex = currentIndex - this.config.lengthFunction!(overlap)
@@ -69,7 +69,7 @@ const words = text.split(/\s+/);
 export class CharacterTextSplitter extends TextSplitter {
   private separator: string, constructor(config: TextSplitterConfig & { separator?: string }) {
     super(config, this.separator = config.separator || '\n\n'
-}
+})
   split(text: string): TextChunk[] {
     const splits = text.split(this.separator, if (this.config.keepSeparator) {;
       // Re-add separator to splits, for (let i = 0; i < splits.length - 1; i++) {
@@ -86,7 +86,7 @@ export class CharacterTextSplitter extends TextSplitter {
 export class RecursiveCharacterTextSplitter extends TextSplitter {
   private separators: string[], constructor(config: TextSplitterConfig & { separators?: string[] }) {
     super(config, this.separators = config.separators || ['\n\n', '\n', '. ', ', ', '']
-}
+})
   split(text: string): TextChunk[] {
     return this.recursiveSplit(text, this.separators)}
   private recursiveSplit(text: string, separators: string[]): TextChunk[] { if (!separators.length) {
@@ -139,7 +139,7 @@ const _chunkText = text.slice(currentIndex, endIndex);
  * Splits code files intelligently by functions/classes
  */;
 export class CodeTextSplitter extends TextSplitter {
-  private language: string, constructor(config: TextSplitterConfig & { language: string
+  private language: string, constructor(config: TextSplitterConfig & { language: string)
     }) {
     super(config, this.language = config.language.toLowerCase()}
   split(text: string): TextChunk[] {
@@ -175,7 +175,7 @@ export class CodeTextSplitter extends TextSplitter {
         ', '],
       cpp: ['\nvoid ', '\nint ', '\nclass ', '\nstruct ', '\n\n', '\n', ', '],
       go: ['\nfunc ', '\ntype ', '\n\n', '\n', ', '],
-      rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ', '], const separators = languagePatterns[this.language] || ['\n\n', '\n', ', '], return new RecursiveCharacterTextSplitter({ ...this.config,
+      rust: ['\nfn ', '\nstruct ', '\nenum ', '\nimpl ', '\n\n', '\n', ', '], const separators = languagePatterns[this.language] || ['\n\n', '\n', ', '], return new RecursiveCharacterTextSplitter({ ...this.config,)
       separators })}
 /**
  * Markdown text splitter
@@ -199,7 +199,7 @@ const sections: string[] = [];
 }
     // Further split by other markdown elements;
 
-const markdownSplitter  = new RecursiveCharacterTextSplitter({ ...this.config,;
+const markdownSplitter  = new RecursiveCharacterTextSplitter({ ...this.config,;)
     separators: ['\n## ', '\n### ', '\n#### ', '\n\n', '\n', ', '] });
 
 const allChunks: TextChunk[] = [];
@@ -216,10 +216,10 @@ const allChunks: TextChunk[] = [];
 /**
  * Factory function to create appropriate text splitter
  */;
-export function createTextSplitter(
+export function createTextSplitter()
     type: 'character' | 'recursive' | 'code' | 'markdown', config: TextSplitterConfig & { language?: string, separator?: string }): 'character' | 'recursive' | 'code' | 'markdown', config: TextSplitterConfig & { language?: string, separator?: string }): TextSplitter { switch (type) {
     case 'character':
-      return new CharacterTextSplitter(config, break, case 'recursive':;
+      return new CharacterTextSplitter(config, break, case 'recursive':;)
       return new RecursiveCharacterTextSplitter(config);
     break;
     case 'code':;

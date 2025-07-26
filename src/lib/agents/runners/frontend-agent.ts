@@ -5,7 +5,7 @@ import { logger } from '@/lib/logger';
   protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'component_creation':
-      return this.createComponent(task.payload, break, case 'ui_enhancement':;
+      return this.createComponent(task.payload, break, case 'ui_enhancement':;)
       return this.enhanceUI(task.payload);
     break;
       case 'responsive_design':
@@ -78,8 +78,8 @@ if (require.main === module) {
       'responsive_design',
       'state_management',
       'routing',
-      'ui_enhancement',
-      'accessibility',
+      'ui_enhancement')
+      'accessibility',)
       'performance_optimization'] });
   agent.start().catch ((error) => {
     logger.error('Failed to start, Frontend: Agent:', error, process.exit(1)    })

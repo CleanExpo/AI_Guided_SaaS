@@ -74,8 +74,8 @@ Focus on, identifying:
 `;
 
 const response = await this.aiService.generateResponse({ message: prompt;
-    persona: 'architect',
-      context: 'requirement_extraction'   
+    persona: 'architect')
+      context: 'requirement_extraction'   )
     })
     try {
       const parsed = JSON.parse(response.message);
@@ -85,7 +85,7 @@ const response = await this.aiService.generateResponse({ message: prompt;
 }
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
     return requirements.map((req, index) => ({ id: req.id || `req_${String(index + 1).padStart(3, '0')}`, ``,
-category: this.validateCategory(req.category, description: req.description || 'No description provided',
+category: this.validateCategory(req.category, description: req.description || 'No description provided',)
     priority: this.validatePriority(req.priority),
     agents: this.determineAgents(req, keywords: req.keywords || this.extractKeywords(req.description),
     constraints: req.constraints || []
@@ -139,8 +139,7 @@ projectName: this.extractProjectName(originalInput);
       // complexity
   }
 }
-  private determineComplexity(
-requirements: ExtractedRequirement[]
+  private determineComplexity(requirements: ExtractedRequirement[])
   ): DevelopmentRoadmap['complexity'] {
     const _score = requirements.reduce((total, req) => {
       let points = 0, // Priority scoring, if (req.priority === 'high') {p}oints += 3;
@@ -157,9 +156,8 @@ requirements: ExtractedRequirement[]
     if (score < 50) {r}eturn 'complex';
     return 'enterprise'
 }
-  private createPhases(
-requirements: ExtractedRequirement[],
-    complexity: DevelopmentRoadmap['complexity']
+  private createPhases(requirements: ExtractedRequirement[])
+    complexity: DevelopmentRoadmap['complexity'])
   ): RoadmapPhase[] {
     const phases: RoadmapPhase[] = [], // Phase, 1: Architecture & Planning, if (complexity !== 'simple') {
       phases.push({ id: 'phase_1',
@@ -172,8 +170,8 @@ requirements: ExtractedRequirement[],
           'API specification'
    ],
         dependencies: [],
-    duration: complexity === 'enterprise' ? '2 weeks' : '1 week',
-        parallel: false   
+    duration: complexity === 'enterprise' ? '2 weeks' : '1 week')
+        parallel: false   )
     })
 }
     // Phase, 2: Core Development;
@@ -183,8 +181,8 @@ const coreAgents = new Set<string>();</string>
       .filter((req) => req.priority === 'high')
       .forEach((req) => req.agents.forEach((agent) => coreAgents.add(agent))
     phases.push({ id: 'phase_2',
-      name: 'Core Development',
-      agents: Array.from(coreAgents, tasks: requirements
+      name: 'Core Development')
+      agents: Array.from(coreAgents, tasks: requirements)
         .filter((req) => req.priority === 'high')
         .map((req) => req.description, dependencies: complexity !== 'simple' ? ['phase_1'] : any[],
     duration: this.estimatePhaseDuration(requirements.filter((req) => req.priority === 'high', parallel: coreAgents.size > 1
@@ -194,8 +192,8 @@ const coreAgents = new Set<string>();</string>
 
 const featureReqs = requirements.filter((req) => req.priority === 'medium');
     if (featureReqs.length > 0) {
-      phases.push({ id: 'phase_3',
-        name: 'Feature Development',
+      phases.push({ id: 'phase_3')
+        name: 'Feature Development',)
         agents: Array.from(new Set(featureReqs.flatMap(req => req.agents), tasks: featureReqs.map((req) => req.description, dependencies: ['phase_2'],
     duration: this.estimatePhaseDuration(featureReqs),
     parallel: true   
@@ -212,9 +210,9 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
         'Security audit'
    ],
       dependencies: featureReqs.length > 0 ? ['phase_3'] : ['phase_2'],
-    duration: complexity === 'simple' ? '3 days' : '1 week',
+    duration: complexity === 'simple' ? '3 days' : '1 week')
       parallel: false
-   
+   )
     });
     // Phase, 5: Deployment
     phases.push({ id: 'phase_5',
@@ -227,9 +225,9 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
         'Monitoring setup'
    ],
       dependencies: ['phase_4'],
-    duration: '3-5 days',
+    duration: '3-5 days')
       parallel: false
-   
+   )
     });
     return phases
 }
@@ -243,9 +241,8 @@ const featureReqs = requirements.filter((req) => req.priority === 'medium');
     if (points < 20) {r}eturn '3-4 weeks';
     return '4-6 weeks'
 }
-  private estimateDuration(
-phases: RoadmapPhase[],
-    complexity: DevelopmentRoadmap['complexity']
+  private estimateDuration(phases: RoadmapPhase[])
+    complexity: DevelopmentRoadmap['complexity'])
   ) {
     // Simple estimation based on complexity
         const baseWeeks={ simple: 2;
@@ -280,7 +277,7 @@ const missing = this.findMissingDependencies(requirements);
     return conflicts
 }
   private findMissingDependencies(requirements: ExtractedRequirement[]): string[] {
-    const missing: string[] = [], // Example: If API is required but no backend agent assigned, const _hasAPI  = requirements.some(r =>
+    const missing: string[] = [], // Example: If API is required but no backend agent assigned, const _hasAPI  = requirements.some(r =>)
       r.keywords.some(k => k.includes('api')) ||
       r.description.toLowerCase().includes('api'));
 
@@ -295,8 +292,8 @@ const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
     
         return [{ id: 'req_001',
       category: 'functional',
-      description: input.substring(0, 200, priority: 'high',
-      agents: ['agent_architect'],
+      description: input.substring(0, 200, priority: 'high')
+      agents: ['agent_architect'],)
     keywords: this.extractKeywords(input),
     constraints: any[]
     }]

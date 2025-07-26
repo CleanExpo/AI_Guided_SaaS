@@ -85,7 +85,7 @@ export abstract class VectorStore {
   abstract listDocuments(filter? null : SearchFilter): Promise<Document[]></Document>
   abstract clear(): Promise<any></any>
   // Common helper methods
-  protected chunkDocument(content: string, chunkSize: number = 1000,
+  protected chunkDocument(content: string, chunkSize: number = 1000,)
   overlap: number = 200): string[] {
     const chunks: string[] = []; let start = 0, while (start < content.length) {
       const _end = Math.min(start + chunkSize, content.length);
@@ -193,16 +193,16 @@ const results: SearchResult[] = [];
           const chunk = doc.chunks?.find(c => c.id === id); if (chunk) {
             results.push({ id: documentId;
               score,
-              content: chunk.content,
-    metadata: doc.metadata,
+              content: chunk.content)
+    metadata: doc.metadata,)
     highlights: [chunk.content.substring(0, 100) + '...']
             })} else {
         // Handle full document results, const doc = this.documents.get(id, if (doc) {
           results.push({
             id,
             score,
-            content: doc.content,
-    metadata: doc.metadata,
+            content: doc.content)
+    metadata: doc.metadata,)
     highlights: [doc.content.substring(0, 100) + '...']
           })}
     return results
@@ -236,7 +236,7 @@ const results: SearchResult[] = [];
 // Factory function to create vector store based on provider;
 export function createVectorStore(config: VectorStoreConfig): VectorStoreConfig): VectorStore {switch (config.provider) {
     case 'memory':
-      return new MemoryVectorStore(config, break, case 'pinecone':;
+      return new MemoryVectorStore(config, break, case 'pinecone':;)
       // return new PineconeVectorStore(config);
     break;
       throw new Error('Pinecone provider not implemented yet');

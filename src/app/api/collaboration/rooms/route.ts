@@ -29,22 +29,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             logger.info('Collaboration room created', { roomId, projectId });
             
             return NextResponse.json({
-                success: true,
+                success: true)
                 room
             }, {
-                status: 201
+                status: 201)
             });
         } catch (error) {
             handleError(error, {
                 operation: 'createCollaborationRoom',
-                module: 'collaboration/rooms',
-                metadata: { projectId: data.projectId }
+                module: 'collaboration/rooms')
+                metadata: { projectId: data.projectId })
             });
             
             return NextResponse.json({
                 error: 'Failed to create collaboration room'
             }, {
-                status: 500
+                status: 500)
             });
         }
     });
@@ -65,14 +65,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, rooms    })
     } catch (error) {
         handleError(error, {
-            operation: 'getRooms',
-            module: 'collaboration/rooms'
+            operation: 'getRooms')
+            module: 'collaboration/rooms')
         });
         
         return NextResponse.json({
             error: 'Failed to fetch rooms'
         }, {
-            status: 500
+            status: 500)
         });
     }
 }

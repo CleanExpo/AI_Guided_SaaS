@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 
-const CreateWorkflowSchema = z.object({ 
+const CreateWorkflowSchema = z.object({ )
     type: z.enum(['deployment', 'testing', 'notification', 'custom']),
     projectId: z.string().optional(),
     name: z.string().optional(),
@@ -22,15 +22,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             createdAt: new Date().toISOString(), active: true
         }
         
-        return NextResponse.json({ success: true, workflow }, { status: 201   
+        return NextResponse.json({ success: true, workflow }, { status: 201   )
     })
 } catch (error) {
         logger.error('Create workflow error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Failed to create workflow' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to create workflow' }, { status: 500   )
     })
 }
 }
@@ -54,12 +54,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ];
         
         return NextResponse.json({ success: true,
-            workflows,
-            total: workflows.length   
+            workflows)
+            total: workflows.length   )
     })
 } catch (error) {
         logger.error('Get workflows error:', error);
-        return NextResponse.json({ error: 'Failed to fetch workflows' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch workflows' }, { status: 500   )
     })
 }
 }

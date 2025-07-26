@@ -234,7 +234,7 @@ export class PulsedExecutor extends EventEmitter {
       let totalIdle = 0;
       let totalTick = 0;
       
-      cpus.forEach(cpu => {
+      cpus.forEach(cpu => {)
         for (const type in cpu.times) {
           totalTick += cpu.times[type]
 }; totalIdle += cpu.times.idle
@@ -267,7 +267,7 @@ export class PulsedExecutor extends EventEmitter {
     if (!agent) {r}eturn;
     
     agent.updateMetrics({ lastPulseTime: executionTime;
-      averageResponseTime: executionTime // Agent will calculate rolling average   
+      averageResponseTime: executionTime // Agent will calculate rolling average   )
     })
 }
 

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       dimensions = { width: 512, height: 512 }
     } = body;
     if (!prompt) {
-      return NextResponse.json({ error: 'Prompt is required' }, { status: 400   
+      return NextResponse.json({ error: 'Prompt is required' }, { status: 400   )
     })
 }
     // Visual generation logic would go here
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: true, generation    })
 } catch (error) {
     logger.error('Visual generation error:', error);
-        return NextResponse.json({ error: 'Generation failed' }, { status: 500   
+        return NextResponse.json({ error: 'Generation failed' }, { status: 500   )
     })
 }
 }
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const url = new URL(request.url);
     const generationId = url.searchParams.get('generationId');
     if (!generationId) {
-      return NextResponse.json({ error: 'Generation ID is required' }, { status: 400   
+      return NextResponse.json({ error: 'Generation ID is required' }, { status: 400   )
     })
 }
     // Simulate getting generation status
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: true, generation    })
 } catch (error) {
     logger.error('Get generation error:', error);
-        return NextResponse.json({ error: 'Failed to get generation' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to get generation' }, { status: 500   )
     })
     }
 }

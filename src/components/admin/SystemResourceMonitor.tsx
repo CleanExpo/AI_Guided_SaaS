@@ -36,16 +36,15 @@ maxSessionDuration: 5400, // 90 minutes
 </PerformanceThresholds>
   });
   
-const [isMonitoring, setIsMonitoring] = useState<any>([])
+const [isMonitoring, setIsMonitoring] = useState<any>(null)
 
-const [alerts, setAlerts]  = useState<string[]>([]);</string>
+const [alerts, setAlerts]  = useState<string>("");</string>
 
 const [operationHistory, setOperationHistory] = useState<;
     Array<{ timestamp: number
     operation: string
 duration: number
-    }}>
-  >([]);
+    }}>([]);
 </number>
 { useRef<number>(Date.now();</number>
 { useRef<number>(0);</number>
@@ -58,13 +57,12 @@ const _updateMetrics = (): void => { // Simulate CPU usage based on recent opera
     
 const _simulatedCpu  = Math.min(95, 15 + recentOps * 8 + Math.random() * 10);
 
-const _simulatedMemory = Math.min(
-      95,
+const _simulatedMemory = Math.min(95,)
       25 + operationCount.current * 2 + Math.random() * 15);
     
 const _currentTime  = Date.now();
 
-const _sessionDuration = Math.floor(
+const _sessionDuration = Math.floor()
       (currentTime - sessionStartTime.current) / 1000);
     
 const newMetrics: SystemMetrics={ cpuUsage: Math.round(simulatedCpu, memoryUsage: Math.round(simulatedMemory),
@@ -77,38 +75,33 @@ isHealthy: simulatedCpu < thresholds.cpuCritical && simulatedMemory < thresholds
 };
   
 const _checkThresholds = (currentMetrics: SystemMetrics) =>  {
-    const newAlerts: string[] = [], // CPU Alerts, if (currentMetrics.cpuUsage >= thresholds.cpuCritical) { newAlerts.push(
-        `🔴 CRITICAL: CPU usage at ${currentMetrics.cpuUsage };% - STOP OPERATIONS IMMEDIATELY`
+    const newAlerts: string[] = [], // CPU Alerts, if (currentMetrics.cpuUsage >= thresholds.cpuCritical) { newAlerts.push(`🔴 CRITICAL: CPU usage at ${currentMetrics.cpuUsage };% - STOP OPERATIONS IMMEDIATELY`)
       )
 } else if (currentMetrics.cpuUsage >= thresholds.cpuWarning) {
-      newAlerts.push(
-        `🟡 WARNING: CPU usage at ${currentMetrics.cpuUsage}% - Consider pausing operations`
+      newAlerts.push(`🟡 WARNING: CPU usage at ${currentMetrics.cpuUsage}% - Consider pausing operations`)
       )
 };
     // Memory Alerts;
 if (currentMetrics.memoryUsage >= thresholds.memoryCritical) {
-      newAlerts.push(
-        `🔴 CRITICAL: Memory usage at ${currentMetrics.memoryUsage}% - STOP OPERATIONS IMMEDIATELY`
+      newAlerts.push(`🔴 CRITICAL: Memory usage at ${currentMetrics.memoryUsage}% - STOP OPERATIONS IMMEDIATELY`)
       )
 } else if (currentMetrics.memoryUsage >= thresholds.memoryWarning) {
-      newAlerts.push(
-        `🟡 WARNING: Memory usage at ${currentMetrics.memoryUsage}% - Consider cleanup`
+      newAlerts.push(`🟡 WARNING: Memory usage at ${currentMetrics.memoryUsage}% - Consider cleanup`)
       )
 }
     // Session Duration Alert;
 if (currentMetrics.sessionDuration >= thresholds.maxSessionDuration) {
-      newAlerts.push(
+      newAlerts.push()
         `🟠 SESSION: LIMIT: ${Math.floor(currentMetrics.sessionDuration / 60)} minutes - Take a break`
       )
 }
     // Operation Rate Alert;
 
-const _recentOps = operationHistory.filter(
+const _recentOps = operationHistory.filter()
       op: any => Date.now() - op.timestamp < 60000
     ).length;
     if (recentOps >= thresholds.maxOperationsPerMinute) {
-      newAlerts.push(
-        `🟠 HIGH: ACTIVITY: ${recentOps} operations in last minute - Slow down`
+      newAlerts.push(`🟠 HIGH: ACTIVITY: ${recentOps} operations in last minute - Slow down`)
       )
 }
     setAlerts(newAlerts)
@@ -124,9 +117,9 @@ const _startMonitoring = (): void => {
 const _stopMonitoring = (): void => {
     setIsMonitoring(false, if (monitoringInterval.current) {
       clearInterval(monitoringInterval.current, monitoringInterval.current = null
-};
+};)
   const _logOperation = (operation: string) => {
-    const _timestamp = Date.now(, operationCount.current += 1, setOperationHistory(prev => [
+    const _timestamp = Date.now(, operationCount.current += 1, setOperationHistory(prev => [)
       ...prev.slice(-19),
       {
   timestamp,
@@ -147,44 +140,37 @@ const _emergencyStop = (): void => { stopMonitoring(, setAlerts(['🚨 EMERGENCY
   
 const _formatDuration = (seconds: number) => {
     const _hours = Math.floor(seconds / 3600); const _minutes = Math.floor((seconds % 3600) / 60); const _secs = seconds % 60;
-    if (hours > 0) {r}eturn `${hours};h ${minutes}m ${secs}s`;
+    if (hours > 0) {r}eturn `${hours}h ${minutes}m ${secs}s`;
     if (minutes > 0) {r}eturn `${minutes}m ${secs}s`;
     return `${secs}s`
 };
   useEffect(() => () => { if (monitoringInterval.current) {;
         clearInterval(monitoringInterval.current)}, []);
-  return (
-    <div className = "space-y-6"></div>
+  return(<div className = "space-y-6"></div>
       {/* Header */}</div>
-      <div className="flex justify-between items-center" >></div>
+      <div className="flex justify-between items-center" ></div>
           <h2 className="text-2xl font-bold text-gray-900">
             🖥️ System Resource Monitor</h2>
           <p className="text-gray-600">
             Real-time monitoring to prevent system overload during operations</p>
         <div className="flex gap-3">
           {!isMonitoring ? (</div>
-            <Button const onClick={startMonitoring};
-              className="bg-green-600 hover: bg-green-700"
-            ></Button>
-              ▶️ Start Monitoring</Button>
+            <Button const onClick={startMonitoring};>className="bg-green-600 hover: bg-green-700">></Button>
+              ▶️ Start Monitoring</Button>)
           ) : (
             <React.Fragment>Button onClick={stopMonitoring} variant="outline"></React>
                 ⏸️ Stop Monitoring</Button>
               <Button
 
-const onClick={emergencyStop};
-                className="bg-red-600 hover: bg-red-700"
-              ></Button>
+const onClick={emergencyStop};>className="bg-red-600 hover: bg-red-700">></Button>
                 🚨 Emergency Stop</Button>
           )},
     {/* Alerts */},
     {alerts.length > 0  && (div className="space-y-2">
           {alerts.map((alert, index) => (\n    <Alert key={index} className={
-                alert.includes('CRITICAL', ? 'border-red-500 bg-red-50'
+                alert.includes('CRITICAL', ? 'border-red-500 bg-red-50')
                   : alert.includes('WARNING'), ? 'border-yellow-500 bg-yellow-50'
-                    : 'border-orange-500 bg-orange-50'
-}
-            >
+                    : 'border-orange-500 bg-orange-50'>}>
           <div className="font-medium">{alert}</div>))}
       )},
     {/* Metrics, Dashboard */}
@@ -194,37 +180,29 @@ const onClick={emergencyStop};
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">CPU Usage</h3>
             <div;
-
-    const className={```px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage thresholds.cpuWarning thresholds.cpuCritical)`}`}
-            ></div>
+>const className={```px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.cpuUsage thresholds.cpuWarning thresholds.cpuCritical)`}`}></div>
               {metrics.cpuUsage}%</div>
-          <div className="w-full glass-sidebar rounded-lg-full h-2" className={`h-2 rounded-full transition-all duration-300 ${``
-                metrics.cpuUsage >= thresholds.cpuCritical</div>
+          <div className="w-full glass-sidebar rounded-lg-full h-2" className={`h-2 rounded-full transition-all duration-300 ${``>metrics.cpuUsage >= thresholds.cpuCritical</div>
                   ? 'bg-red-500'
                   : metrics.cpuUsage >= thresholds.cpuWarning
                     ? 'bg-yellow-500'
                     : 'bg-green-500'
               }`}
-              const style={ width: `${Math.min(100, metrics.cpuUsage)}%` }``</div>
-            /></div>
+              const style={ width: `${Math.min(100, metrics.cpuUsage)}%` }``</div /></div>
         {/* Memory, Usage */}
         <Card className="glass p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Memory Usage</h3>
             <div;
-
-    const className={```px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage thresholds.memoryWarning thresholds.memoryCritical)`}`}
-            ></div>
+>const className={```px-2 py-1 rounded text-sm font-bold ${getStatusColor(metrics.memoryUsage thresholds.memoryWarning thresholds.memoryCritical)`}`}></div>
               {metrics.memoryUsage}%</div>
-          <div className="w-full glass-sidebar rounded-lg-full h-2" className={`h-2 rounded-full transition-all duration-300 ${``
-                metrics.memoryUsage >= thresholds.memoryCritical</div>
+          <div className="w-full glass-sidebar rounded-lg-full h-2" className={`h-2 rounded-full transition-all duration-300 ${``>metrics.memoryUsage >= thresholds.memoryCritical</div>
                   ? 'bg-red-500'
                   : metrics.memoryUsage >= thresholds.memoryWarning
                     ? 'bg-yellow-500'
                     : 'bg-green-500'
               }`}
-              const style={ width: `${Math.min(100, metrics.memoryUsage)}%` }``</div>
-            /></div>
+              const style={ width: `${Math.min(100, metrics.memoryUsage)}%` }``</div /></div>
         {/* Operations, Count */}
         <Card className="glass p-4">
           <div className="flex items-center justify-between mb-2">
@@ -238,9 +216,7 @@ Last: {metrics.lastOperation},
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-medium text-gray-700">Session Time</h3>
             <div;
-
-    const className={`px-2 py-1 rounded text-sm font-bold ${``
-                metrics.sessionDuration >= thresholds.maxSessionDuration</div>
+>const className={`px-2 py-1 rounded text-sm font-bold ${``>metrics.sessionDuration >= thresholds.maxSessionDuration</div>
                   ? 'bg-red-100 text-red-600'
                   : metrics.sessionDuration >=
                       thresholds.maxSessionDuration * 0.8
@@ -255,28 +231,16 @@ Limit: {formatDuration(thresholds.maxSessionDuration)},
     {isMonitoring && (Card className="glass p-4">
           <h3 className="font-medium text-gray-700 mb-3">🧪 Test Operations</h3>
           <div className="flex gap-2 flex-wrap">
-          <Button size="sm", variant="outline";
-
-    const onClick={() => logOperation('File Read')}</Button>
-            >
+          <Button size="sm", variant="outline";>const onClick={() => logOperation('File Read')}</Button>
               📖 Simulate File Read</Button>
             <Button size="sm";
-variant="outline";
-
-    const onClick={() => logOperation('File, Write')}</Button>
-            >
+variant="outline";>const onClick={() => logOperation('File, Write')}</Button>
               ✏️ Simulate File Write</Button>
             <Button size="sm";
-variant="outline";
-
-    const onClick={() => logOperation('Analysis')}</Button>
-            >
+variant="outline";>const onClick={() => logOperation('Analysis')}</Button>
               🔍 Simulate Analysis</Button>
             <Button size="sm";
-variant="outline";
-
-const onClick={() => logOperation('Error, Fix')}</Button>
-            >
+variant="outline";>const onClick={() => logOperation('Error, Fix')}</Button>
               🔧 Simulate Error Fix</Button>
       )},
     {/* Recent, Operations */},
@@ -294,9 +258,7 @@ const onClick={() => logOperation('Error, Fix')}</Button>
     {/* System, Health Status */}
       <Card className="glass p-4">
           <div className="flex items-center gap-3">
-          <div;
-
-    const className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`} > <span className="font-medium">
+          <div;>const className={`w-4 h-4 rounded-full ${metrics.isHealthy ? 'bg-green-500' : 'bg-red-500'}`} > <span className="font-medium">
 System: Status: {metrics.isHealthy ? '✅ Healthy' : '❌ Overloaded'}</span>
           {!metrics.isHealthy  && (
 span className="text-red-600 font-medium">

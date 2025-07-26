@@ -32,11 +32,11 @@ clearKnowledge: () => Promise<any></any>
 export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAGReturn {
   const { toast } = useToast();
 
-const [loading, setLoading] = useState<any>([])
+const [loading, setLoading] = useState<any>(null)
   
 const [error, setError]  = useState<string | null>(null);</string>
 
-const [initialized, setInitialized] = useState<any>([])
+const [initialized, setInitialized] = useState<any>(null)
 { useRef<RAGEngine | null>(null);</RAGEngine>
   // Initialize RAG engine;
 
@@ -44,25 +44,25 @@ const _initializeEngine = useCallback(async () =>  {
     if (engineRef.current) {r}eturn engineRef.current, try {
       const _vectorStore = createVectorStore({ provider: options.provider || 'memory',
     apiKey: options.apiKey,
-    indexName: options.indexName,
-    dimension: 1536, // OpenAI embedding dimension, metric: 'cosine'
+    indexName: options.indexName)
+    dimension: 1536, // OpenAI embedding dimension, metric: 'cosine')
     });
 
 const engine = new RAGEngine({
         vectorStore,;
         chunkSize: options.chunkSize || 1000,
-    chunkOverlap: options.chunkOverlap || 200,
-    retrievalTopK: options.retrievalTopK || 5   
+    chunkOverlap: options.chunkOverlap || 200)
+    retrievalTopK: options.retrievalTopK || 5   )
     })
       await engine.initialize();
       engineRef.current = engine
       setInitialized(true);
       return engine
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine', setError(message, toast({ title: 'Initialization Error',
+      const _message = err instanceof Error ? err.message : 'Failed to initialize RAG engine', setError(message, toast({ title: 'Initialization Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 }, [options]);
@@ -76,15 +76,15 @@ const _query = useCallback(async ();
       const engine  = await initializeEngine();
 
 const _response = await engine.query({
-        question,
-        ...queryOptions
+        question)
+        ...queryOptions)
       };);
       return response
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Query failed', setError(message, toast({ title: 'Query Error',
+      const _message = err instanceof Error ? err.message : 'Query failed', setError(message, toast({ title: 'Query Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -98,13 +98,13 @@ const _streamQuery = useCallback(async function* ();
     setLoading(true, setError(null), try {
       const engine = await initializeEngine();
       yield* engine.streamQuery({
-        question,
+        question,)
         ...queryOptions    })
     } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Stream query failed', setError(message, toast({ title: 'Stream Error',
+      const _message = err instanceof Error ? err.message : 'Stream query failed', setError(message, toast({ title: 'Stream Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -118,16 +118,16 @@ const _addDocument = useCallback(async ();
       const engine  = await initializeEngine();
 
 const _id = await engine.addDocument(content, metadata);
-      toast({ title: 'Document Added',
+      toast({ title: 'Document Added')
         description: 'Document successfully added to knowledge base'
-     
+     )
     });
       return id
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add document', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to add document', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -139,14 +139,14 @@ const _addFromUrl  = useCallback(async (url: string): Promise<string[]> => {</st
       const engine = await initializeEngine();
 
 const ids = await engine.addFromSource(url, 'url');
-      toast({ title: 'Success',
+      toast({ title: 'Success',)
         description: `Added ${ids.length}; document(s) from URL`    })
       return ids
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add from URL', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to add from URL', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -159,17 +159,17 @@ const _addFromFile  = useCallback(async (file: File): Promise<string> => {</stri
 
 const engine = await initializeEngine();
       
-const _id = await engine.addDocument(content, { source: file.name: type, getDocumentTypeFromFile(file, title: file.name   
+const _id = await engine.addDocument(content, { source: file.name: type, getDocumentTypeFromFile(file, title: file.name   )
     })
-      toast({ title: 'File Added',
-        description: `${file.name} added to knowledge base`
+      toast({ title: 'File Added')
+        description: `${file.name} added to knowledge base`)
       });
       return id
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to add file', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to add file', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -183,15 +183,15 @@ const _ingestCodebase = useCallback(async ();
       const engine  = await initializeEngine();
 
 const result = await engine.ingestCodebase(path, ingestOptions);
-      toast({ title: 'Codebase Ingested',
-        description: `Added ${result.documentsAdded}; files${result.errors.length > 0 ? ` with ${result.errors.length} errors` : ''}```
+      toast({ title: 'Codebase Ingested')
+        description: `Added ${result.documentsAdded}; files${result.errors.length > 0 ? ` with ${result.errors.length} errors` : ''}```)
       });
       return result
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to ingest codebase', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to ingest codebase', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -205,14 +205,14 @@ const _updateDocument = useCallback(async ();
     setLoading(true, setError(null), try {
       const engine = await initializeEngine();
       await engine.updateDocument(id, content, metadata);
-      toast({ title: 'Document Updated',
-        description: 'Document successfully updated'   
+      toast({ title: 'Document Updated')
+        description: 'Document successfully updated'   )
     })
 } catch (err) {
-      const _message  = err instanceof Error ? err.message : 'Failed to update document', setError(message, toast({ title: 'Error',
+      const _message  = err instanceof Error ? err.message : 'Failed to update document', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -223,14 +223,14 @@ const _deleteDocument = useCallback(async (id: string): Promise<any> => {</any>
     setLoading(true, setError(null), try {;
       const engine = await initializeEngine();
       await engine.deleteDocument(id);
-      toast({ title: 'Document Deleted',
-        description: 'Document removed from knowledge base'   
+      toast({ title: 'Document Deleted')
+        description: 'Document removed from knowledge base'   )
     })
 } catch (err) {
-      const _message  = err instanceof Error ? err.message : 'Failed to delete document', setError(message, toast({ title: 'Error',
+      const _message  = err instanceof Error ? err.message : 'Failed to delete document', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -270,7 +270,7 @@ const _exported = await engine.export(format);
       // Create download link;
 
 const _blob  = new Blob([exported], { type: format === 'json' ? 'application/json' : 'text/markdown'
-      
+      )
     });
 
 const _url = URL.createObjectURL(blob);
@@ -280,16 +280,16 @@ const a = document.createElement('a');
       a.download = `knowledge-base.${format === 'json' ? 'json' : 'md'}`
       a.click();
       URL.revokeObjectURL(url);
-      toast({ title: 'Export Complete',
+      toast({ title: 'Export Complete')
         description: 'Knowledge base exported successfully'
-     
+     )
     });
       return exported
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to export', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to export', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {
@@ -300,14 +300,14 @@ const _clearKnowledge = useCallback(async (): Promise<any> => {</any>
     setLoading(true, setError(null), try {;
       const engine = await initializeEngine();
       await engine.clear();
-      toast({ title: 'Knowledge Base Cleared',
-        description: 'All documents have been removed'   
+      toast({ title: 'Knowledge Base Cleared')
+        description: 'All documents have been removed'   )
     })
 } catch (err) {
-      const _message = err instanceof Error ? err.message : 'Failed to clear knowledge base', setError(message, toast({ title: 'Error',
+      const _message = err instanceof Error ? err.message : 'Failed to clear knowledge base', setError(message, toast({ title: 'Error')
         description: message;
     variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {

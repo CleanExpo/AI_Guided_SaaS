@@ -14,23 +14,23 @@ import Link from 'next/link';
 
 
 const apiEndpoints = [
-  { name: 'Authentication',
+  { name: 'Authentication';
     slug: 'auth',
-    description: 'User authentication and session management',
+    description: 'User authentication and session management';
     version: 'v1',
-    status: 'stable'
+    status: 'stable';
   },
-  { name: 'Users',
+  { name: 'Users';
     slug: 'users',
-    description: 'User management and profiles',
+    description: 'User management and profiles';
     version: 'v1',
-    status: 'stable'
+    status: 'stable';
   },
-  { name: 'Projects',
+  { name: 'Projects';
     slug: 'projects',
-    description: 'Project creation and management',
+    description: 'Project creation and management';
     version: 'v1',
-    status: 'beta'
+    status: 'beta';
   }
 ];
 
@@ -50,19 +50,19 @@ export default function ApiDocsPage() {
 
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {apiEndpoints.map((endpoint) => (
-            <Card key={endpoint.slug} className="hover:shadow-md-lg transition-shadow-md" className="glass
-              <CardHeader className="glass"
+            <Card key={endpoint.slug} className="hover:shadow-md-lg transition-shadow-md glass">
+              <CardHeader className="glass">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg" className="glass{endpoint.name}</CardTitle>
+                  <CardTitle className="text-lg glass">{endpoint.name}</CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
                     {endpoint.status}
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="glass"
-          <p className="text-gray-600 mb-4">{endpoint.description}</p>
+              <CardContent className="glass">
+                <p className="text-gray-600 mb-4">{endpoint.description}</p>
                 <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500">Version {endpoint.version}</span>
+                  <span className="text-sm text-gray-500">Version {endpoint.version}</span>
                   <Link href={`/api-docs/${endpoint.slug}`}>
                     <Button size="sm">
                       <ExternalLink className="w-4 h-4 mr-2"   />
@@ -82,12 +82,13 @@ export default function ApiDocsPage() {
               To get started with our API, you'll need to authenticate using your API key.
             </p>
             <div className="glass rounded-xl-lg p-4">
-          <code className="text-sm">
-                curl -H "Authorization: Bearer ${process.env.AUTH_TOKEN || ""}  || """ https://api.aiguidedsaas.com/v1/
+              <code className="text-sm">
+                curl -H "Authorization: Bearer YOUR_API_KEY" https://api.aiguidedsaas.com/v1/
               </code>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

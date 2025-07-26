@@ -10,7 +10,7 @@ g,
 export default function AdvancedDocumentationDashboard() {
   return (Card></Card>, <CardHeader className="glass"
           </CardHeader>
-        <CardTitle className="flex items-center gap-2" className="glass
+        <CardTitle className="flex items-center gap-2 glass
           </CardTitle><BookOpen className="w-5 h-5 text-green-600"     />
           Advanced Documentation Dashboard</BookOpen>
       <CardContent className="glass"

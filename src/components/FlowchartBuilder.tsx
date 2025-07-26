@@ -34,13 +34,13 @@ const initialEdges: Edge[]  = [
   { id: 'e3-4', source: '3', target: '4' }];
 export default function FlowchartBuilder({ projectName, onSaveFlow }: FlowchartBuilderProps, onSaveFlow }: FlowchartBuilderProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges, const [nodeId, setNodeId]  = useState<any>([])
-{ useCallback(
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges, const [nodeId, setNodeId]  = useState<any>(null)
+{ useCallback()
     (params: Connection) => setEdges((eds) => addEdge(params, eds),
     [setEdges]);
 
 const _addNode  = useCallback(() =>  {
-    const newNode: Node={ id: nodeId.toString(,
+    const newNode: Node={ id: nodeId.toString(,)
     position: { x: Math.random() * 400 y: Math.random() * 400  },
     data: { label: `Node ${ nodeId}` }}``
     setNodes((nds) => nds.concat(newNode))
@@ -81,8 +81,7 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           toast({ title: "Success", description: "Error importing, flow: Invalid file format" })}
       reader.readAsText(file)
 }, [setNodes, setEdges])
-  return (
-    <div className="h-full flex flex-col"    /><Card className="mb-4"    / className="glass
+  return(<div className="h-full flex flex-col"    /><Card className="mb-4"    / className="glass
           <CardHeader     / className="glass"
           <CardTitle className="flex items-center justify-between"    / className="glass
           <span>Flowchart Builder - {projectName}</span>
@@ -106,28 +105,23 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
 </Upload>
                 <input type="file"
 accept=".json";
-
-const onChange={importFlow}
-                  className="hidden"    />
+>const onChange={importFlow}>className="hidden"    />
           <CardContent     / className="glass"
           <p className="text-sm text-gray-600">
-            Create and visualize your project workflow. Drag nodes to reposition them,
+            Create and visualize your project workflow. Drag nodes to reposition them)
             connect nodes by dragging from one node to another, and use the controls to navigate.</p>
       <div className="flex-1  -gray-200 rounded-xl-lg overflow-hidden"    />
           <ReactFlow
 
 nodes={nodes} edges={edges}
           onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
-          const onConnect={onConnect};
-          // fitView attributionPosition="bottom-left";
-            />
+          const onConnect={onConnect}; />/ fitView attributionPosition="bottom-left"; />>
           <Controls><MiniMap     />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1
     
     </Controls></Background>
     </Button>
-    </any>
-  />
+    </any />
       <Card className="mt-4"    / className="glass
           <CardContent className="pt-4"     / className="glass
           <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"    />
@@ -141,4 +135,4 @@ nodes={nodes} edges={edges}
           <h4 className="font-medium text-gray-900 mb-1">Editing</h4>
               <p className="text-gray-600">Double-click nodes to edit labels</p>
 
-}}}}}}}}
+}}}}}}}})

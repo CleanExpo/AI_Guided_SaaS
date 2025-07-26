@@ -53,10 +53,9 @@ export function WhiteLabelProvider({ children }: { children: React.ReactNode }) 
     return null;
   }
 
-  return (
-    <WhiteLabelContext.Provider value={{ config, updateConfig, isLoading }}>
+  return(<WhiteLabelContext.Provider value={{ config, updateConfig, isLoading }}>
       {children}
-    </WhiteLabelContext.Provider>
+    </WhiteLabelContext.Provider>)
   );
 }
 
@@ -68,11 +67,11 @@ export function useWhiteLabelConfig() {
 
 // Component for rendering white-label aware elements
 export function WhiteLabelText({ 
-  type, 
+  type)
   className = '' 
 }: { 
   type: 'company' | 'tagline' | 'description';
-  className?: string;
+  className?: string;)
 }) {
   const config = useWhiteLabelConfig();
   
@@ -86,23 +85,20 @@ export function WhiteLabelText({
 }
 
 export function WhiteLabelLogo({ 
-  variant = 'light',
+  variant = 'light')
   className = '' 
 }: { 
   variant?: 'light' | 'dark';
-  className?: string;
+  className?: string;)
 }) {
   const config = useWhiteLabelConfig();
   const logoSrc = variant === 'dark' ? config.logo.dark : config.logo.light;
   
-  return (
-    <img
+  return(<img
       src={logoSrc}
       alt={config.companyName}
       width={config.logo.width}
-      height={config.logo.height}
-      className={className}
-    />
+      height={config.logo.height}>className={className} />>)
   );
 }
 
@@ -176,9 +172,8 @@ export function PoweredBy({ className = '' }: { className?: string }) {
     return null;
   }
   
-  return (
-    <p className={`text-sm text-gray-500 ${className}`}>
+  return(<p className={`text-sm text-gray-500 ${className}`}>
       Powered by AI Guided SaaS
-    </p>
+    </p>)
   );
 }

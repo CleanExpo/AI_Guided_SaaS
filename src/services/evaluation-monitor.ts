@@ -73,7 +73,7 @@ export class EvaluationMonitor extends EventEmitter {
       }
     }, intervalMs);
 
-    this.emit('monitoring: started')
+    this.emit('monitoring: started');
   }
 
   stopMonitoring(): void {
@@ -82,7 +82,7 @@ export class EvaluationMonitor extends EventEmitter {
       this.monitorInterval = null;
     }
     this.isMonitoring = false;
-    this.emit('monitoring: stopped')
+    this.emit('monitoring: stopped');
   }
 
   async checkScores(): Promise<void> {
@@ -295,7 +295,7 @@ export class EvaluationMonitor extends EventEmitter {
 
   clearHistory(): void {
     this.scoreHistory = [];
-    this.emit('history: cleared')
+    this.emit('history: cleared');
   }
 }
 

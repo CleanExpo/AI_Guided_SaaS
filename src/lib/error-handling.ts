@@ -8,11 +8,10 @@ export interface ErrorContext {
 }
 
 export class AppError extends Error {
-  constructor(
-    message: string,
+  constructor(message: string,
     public code: string,
-    public statusCode: number = 500,
-    public context?: ErrorContext
+    public statusCode: number = 500)
+    public context?: ErrorContext)
   ) {
     super(message);
     this.name = 'AppError';
@@ -23,14 +22,13 @@ export class AppError extends Error {
  * Standard error handler for catch blocks
  * Ensures all errors are properly logged with context
  */
-export function handleError(
-  error: unknown,
-  context: ErrorContext,
+export function handleError(error: unknown,
+  context: ErrorContext)
   options?: {
     rethrow?: boolean;
     fallbackValue?: unknown;
     userMessage?: string;
-  }
+  })
 ): unknown {
   const { rethrow = false, fallbackValue, userMessage } = options || {};
 
@@ -43,8 +41,8 @@ export function handleError(
       message: err.message,
       stack: err.stack,
       name: err.name,
-    },
-    context,
+    })
+    context,)
   });
 
   // Track error metrics (integrate with analytics)
@@ -55,11 +53,10 @@ export function handleError(
 
   // Rethrow if requested
   if (rethrow) {
-    throw new AppError(
-      userMessage || err.message,
+    throw new AppError(userMessage || err.message,
       'HANDLED_ERROR',
-      500,
-      context
+      500)
+      context)
     );
   }
 
@@ -110,11 +107,10 @@ export async function withErrorHandling<T>(
     return fallbackValue;
   }
   
-  throw new AppError(
-    userMessage || 'Operation failed after retries',
+  throw new AppError(userMessage || 'Operation failed after retries',
     'OPERATION_FAILED',
-    500,
-    context
+    500)
+    context)
   );
 }
 
@@ -133,8 +129,8 @@ export function withErrorBoundary<T extends (...args: unknown[]) => unknown>(
       if (result instanceof Promise) {
         return result.catch(error => {
           handleError(error, {
-            ...context,
-            operation: fn.name || 'anonymous function',
+            ...context)
+            operation: fn.name || 'anonymous function',)
           });
           throw error;
         });
@@ -143,8 +139,8 @@ export function withErrorBoundary<T extends (...args: unknown[]) => unknown>(
       return result;
     } catch (error) {
       handleError(error, {
-        ...context,
-        operation: fn.name || 'anonymous function',
+        ...context)
+        operation: fn.name || 'anonymous function',)
       });
       throw error;
     }

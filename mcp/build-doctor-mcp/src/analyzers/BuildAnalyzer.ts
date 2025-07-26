@@ -35,18 +35,21 @@ export class BuildAnalyzer {
     this.logger = new Logger('BuildAnalyzer');
   }
 
-  async analyzeBuild(projectPath: string, options: { includeWarnings?: boolean } = {}): Promise<BuildDiagnosis> {
+  async analyzeBuild(
+    projectPath: string,
+    options: { includeWarnings?: boolean } = {}
+  ): Promise<BuildDiagnosis> {
     this.logger.info('Starting comprehensive build analysis...');
 
     const errors: BuildError[] = [];
-    
+
     // Run build and capture errors
     const buildErrors = await this.runBuildAndCaptureErrors(projectPath);
     errors.push(...buildErrors);
 
     // Analyze source files
     const sourceFiles = await this.getSourceFiles(projectPath);
-    
+
     for (const file of sourceFiles) {
       try {
         const content = await fs.readFile(file, 'utf-8');
@@ -59,21 +62,28 @@ export class BuildAnalyzer {
 
     // Categorize errors
     const diagnosis: BuildDiagnosis = {
-      errors: errors.filter(e => options.includeWarnings || e.severity === 'error'),
-      syntaxErrors: errors.filter(e => e.type === 'syntax').length,
-      typeScriptErrors: errors.filter(e => e.type === 'typescript').length,
-      jsxErrors: errors.filter(e => e.type === 'jsx').length,
-      importErrors: errors.filter(e => e.type === 'import').length,
-      configErrors: errors.filter(e => e.type === 'config').length,
-      warnings: errors.filter(e => e.severity === 'warning').length,
+      errors: errors.filter(
+        (e) => options.includeWarnings || e.severity === 'error'
+      ),
+      syntaxErrors: errors.filter((e) => e.type === 'syntax').length,
+      typeScriptErrors: errors.filter((e) => e.type === 'typescript').length,
+      jsxErrors: errors.filter((e) => e.type === 'jsx').length,
+      importErrors: errors.filter((e) => e.type === 'import').length,
+      configErrors: errors.filter((e) => e.type === 'config').length,
+      warnings: errors.filter((e) => e.severity === 'warning').length,
     };
 
-    this.logger.info(`Analysis complete: ${diagnosis.errors.length} issues found`);
+    this.logger.info(
+      `Analysis complete: ${diagnosis.errors.length} issues found`
+    );
     return diagnosis;
   }
 
-  async findSyntaxErrors(projectPath: string, files?: string[]): Promise<BuildError[]> {
-    const targetFiles = files || await this.getSourceFiles(projectPath);
+  async findSyntaxErrors(
+    projectPath: string,
+    files?: string[]
+  ): Promise<BuildError[]> {
+    const targetFiles = files || (await this.getSourceFiles(projectPath));
     const errors: BuildError[] = [];
 
     for (const file of targetFiles) {
@@ -129,7 +139,9 @@ export class BuildAnalyzer {
     return errors;
   }
 
-  private async runBuildAndCaptureErrors(projectPath: string): Promise<BuildError[]> {
+  private async runBuildAndCaptureErrors(
+    projectPath: string
+  ): Promise<BuildError[]> {
     const errors: BuildError[] = [];
 
     try {
@@ -156,7 +168,11 @@ export class BuildAnalyzer {
     return files;
   }
 
-  private async analyzeFile(file: string, content: string, options: any): Promise<BuildError[]> {
+  private async analyzeFile(
+    file: string,
+    content: string,
+    options: any
+  ): Promise<BuildError[]> {
     const errors: BuildError[] = [];
     const ext = path.extname(file);
 
@@ -177,7 +193,10 @@ export class BuildAnalyzer {
     return errors;
   }
 
-  private async checkSyntax(file: string, content: string): Promise<BuildError[]> {
+  private async checkSyntax(
+    file: string,
+    content: string
+  ): Promise<BuildError[]> {
     const errors: BuildError[] = [];
     const ext = path.extname(file);
 
@@ -212,12 +231,15 @@ export class BuildAnalyzer {
     return errors;
   }
 
-  private async checkJSXStructure(file: string, content: string): Promise<BuildError[]> {
+  private async checkJSXStructure(
+    file: string,
+    content: string
+  ): Promise<BuildError[]> {
     const errors: BuildError[] = [];
 
     // Check for common JSX issues
     const lines = content.split('\\n');
-    
+
     // Check for duplicate props
     const propRegex = /\\s(\\w+)=/g;
     lines.forEach((line, index) => {
@@ -242,16 +264,16 @@ export class BuildAnalyzer {
     // Check for unterminated JSX
     const openTags = content.match(/<(\w+)[^>]*>/g) || [];
     const closeTags = content.match(/<\/(\w+)>/g) || [];
-    
+
     const tagStack: string[] = [];
-    openTags.forEach(tag => {
+    openTags.forEach((tag) => {
       const tagName = tag.match(/<(\w+)/)?.[1];
       if (tagName && !tag.endsWith('/>')) {
         tagStack.push(tagName);
       }
     });
 
-    closeTags.forEach(tag => {
+    closeTags.forEach((tag) => {
       const tagName = tag.match(/<\/(\w+)>/)?.[1];
       const lastTag = tagStack.pop();
       if (tagName !== lastTag) {
@@ -282,19 +304,23 @@ export class BuildAnalyzer {
 
   private checkImports(file: string, content: string): BuildError[] {
     const errors: BuildError[] = [];
-    const importRegex = /import\\s+(?:{[^}]+}|\\*\\s+as\\s+\\w+|\\w+)\\s+from\\s+['"](.*)['"]/g;
-    
+    const importRegex =
+      /import\\s+(?:{[^}]+}|\\*\\s+as\\s+\\w+|\\w+)\\s+from\\s+['"](.*)['"]/g;
+
     let match;
     let lineNum = 1;
     const lines = content.split('\\n');
-    
+
     lines.forEach((line, index) => {
       const importMatch = line.match(/import.*from\\s+['"](.*)['"]/);
       if (importMatch) {
         const importPath = importMatch[1];
-        
+
         // Check for missing extensions in relative imports
-        if (importPath.startsWith('.') && !importPath.match(/\\.(js|jsx|ts|tsx|json|css|scss)$/)) {
+        if (
+          importPath.startsWith('.') &&
+          !importPath.match(/\\.(js|jsx|ts|tsx|json|css|scss)$/)
+        ) {
           errors.push({
             file,
             line: index + 1,
@@ -313,7 +339,7 @@ export class BuildAnalyzer {
   private parseBuildOutput(output: string): BuildError[] {
     const errors: BuildError[] = [];
     const lines = output.split('\\n');
-    
+
     const errorPatterns = [
       // Next.js error pattern
       /(.+?)\\s*\\((\\d+):(\\d+)\\)\\s*(.+)/,
@@ -323,7 +349,7 @@ export class BuildAnalyzer {
       /Error:\\s*(.+?)\\s+at\\s+(.+?):(\\d+):(\\d+)/,
     ];
 
-    lines.forEach(line => {
+    lines.forEach((line) => {
       for (const pattern of errorPatterns) {
         const match = line.match(pattern);
         if (match) {
@@ -346,9 +372,11 @@ export class BuildAnalyzer {
   private parseTypeScriptOutput(output: string): BuildError[] {
     const errors: BuildError[] = [];
     const lines = output.split('\\n');
-    
-    lines.forEach(line => {
-      const match = line.match(/(.+?)\\((\\d+),(\\d+)\\):\\s*error\\s+TS(\\d+):\\s*(.+)/);
+
+    lines.forEach((line) => {
+      const match = line.match(
+        /(.+?)\\((\\d+),(\\d+)\\):\\s*error\\s+TS(\\d+):\\s*(.+)/
+      );
       if (match) {
         errors.push({
           file: match[1],

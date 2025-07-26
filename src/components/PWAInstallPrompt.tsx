@@ -49,17 +49,14 @@ export default function PWAInstallPrompt() {
     return null;
   }
 
-  return (
-    <>
+  return(<>
       {/* Mobile Bottom Sheet Style */}
       {isMobile ? (
         <div className="glass fixed inset-x-0 bottom-0 z-50 p-4 bg-gradient-to-t from-black/50 to-transparent">
           <Card className="glass shadow-md-2xl">
             <CardContent className="glass p-6">
               <button
-                onClick={handleDismiss}
-                className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-               aria-label="Button">
+                onClick={handleDismiss}>className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600">aria-label="Button">
                 <X className="h-5 w-5" />
               </button>
               
@@ -74,16 +71,12 @@ export default function PWAInstallPrompt() {
                   </p>
                   <div className="flex gap-3">
                     <Button 
-                      onClick={handleInstall}
-                      className="bg-orange-500 hover:bg-orange-600"
-                    >
+                      onClick={handleInstall}>className="bg-orange-500 hover:bg-orange-600">>
                       <Download className="h-4 w-4 mr-2" />
                       Install Now
                     </Button>
                     <Button 
-                      variant="ghost"
-                      onClick={handleDismiss}
-                    >
+                      variant="ghost">onClick={handleDismiss}>
                       Maybe Later
                     </Button>
                   </div>
@@ -91,16 +84,14 @@ export default function PWAInstallPrompt() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div>)
       ) : (
         /* Desktop Floating Card */
         <div className="fixed bottom-8 right-8 z-50 max-w-sm">
-          <Card className="shadow-md-2xl -orange-200" className="glass
+          <Card className="shadow-md-2xl -orange-200 glass
             <CardContent className="glass p-6">
               <button
-                onClick={handleDismiss}
-                className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-               aria-label="Button">
+                onClick={handleDismiss}>className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600">aria-label="Button">
                 <X className="h-5 w-5" />
               </button>
               
@@ -132,16 +123,12 @@ export default function PWAInstallPrompt() {
 
               <div className="flex gap-3">
                 <Button 
-                  onClick={handleInstall}
-                  className="flex-1 bg-orange-500 hover:bg-orange-600"
-                >
+                  onClick={handleInstall}>className="flex-1 bg-orange-500 hover:bg-orange-600">>
                   <Download className="h-4 w-4 mr-2" />
                   Install App
                 </Button>
                 <Button 
-                  variant="outline"
-                  onClick={handleDismiss}
-                >
+                  variant="outline">onClick={handleDismiss}>
                   Not Now
                 </Button>
               </div>

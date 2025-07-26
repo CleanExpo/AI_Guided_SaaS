@@ -34,8 +34,8 @@ export class TypeScriptAgent extends Agent {
   constructor(config: Partial<AgentConfig> = {}) {</AgentConfig>
     super({ id: 'typescript-agent',
       name: 'TypeScript Specialist',
-      type: 'specialist',
-      ...config
+      type: 'specialist')
+      ...config)
     });
     
     this.initializeTypeScript()
@@ -67,8 +67,8 @@ export class TypeScriptAgent extends Agent {
 
   private initializeTypeScript(): void {
     const configPath = ts.findConfigFile();
-      process.cwd(, ts.sys.fileExists,
-      'tsconfig.json'
+      process.cwd(, ts.sys.fileExists)
+      'tsconfig.json')
     );
     
     if (configPath) {
@@ -79,9 +79,8 @@ export class TypeScriptAgent extends Agent {
         path.dirname(configPath)
       );
       
-      this.program = ts.createProgram(
-        compilerOptions.fileNames,
-        compilerOptions.options
+      this.program = ts.createProgram(compilerOptions.fileNames)
+        compilerOptions.options)
       );
       this.checker = this.program.getTypeChecker()
 }
@@ -111,8 +110,8 @@ export class TypeScriptAgent extends Agent {
       this.logger.error('TypeScript task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message,
-          task: message.type
+        payload: { error: error.message)
+          task: message.type)
         }    })
 }
   }
@@ -133,17 +132,17 @@ export class TypeScriptAgent extends Agent {
     
     // Send analysis results
     await this.sendMessage({ to: 'orchestrator',
-      type: 'type-analysis',
+      type: 'type-analysis')
       payload: analysis
-   
+   )
     });
     
     // If critical errors exist, notify other agents
     if (analysis.totalErrors > 100) {
       await this.sendMessage({ to: 'architect-agent',
         type: 'critical-type-issues',
-        payload: { errorCount: analysis.totalErrors,
-          topIssues: analysis.errorsByType
+        payload: { errorCount: analysis.totalErrors)
+          topIssues: analysis.errorsByType)
         }    })
 }
   }
@@ -165,8 +164,8 @@ export class TypeScriptAgent extends Agent {
     
     // Report results
     await this.sendMessage({ to: 'orchestrator',
-      type: 'type-fixes-complete',
-      payload: { totalFixes: appliedFixes.length,
+      type: 'type-fixes-complete')
+      payload: { totalFixes: appliedFixes.length,)
         filesModified: new Set(appliedFixes.map(f => f.file)).size,
         fixes: appliedFixes
       }    })
@@ -190,8 +189,8 @@ export class TypeScriptAgent extends Agent {
       type: 'types-generated',
       payload: {
         source,
-        outputPath,
-        typeCount: inferredTypes.length
+        outputPath)
+        typeCount: inferredTypes.length)
       }    })
 }
 
@@ -219,8 +218,8 @@ export class TypeScriptAgent extends Agent {
     await this.sendMessage({ to: 'orchestrator',
       type: 'refactoring-complete',
       payload: { path: targetPath;
-        refactoringsApplied: applied.length,
-        strict
+        refactoringsApplied: applied.length)
+        strict)
       }    })
 }
 
@@ -241,7 +240,7 @@ export class TypeScriptAgent extends Agent {
       let match;
       
       while ((match = errorRegex.exec(output)) !== null) {
-        errors.push({ file: match[1],
+        errors.push({ file: match[1],)
           line: parseInt(match[2], column: parseInt(match[3]),
           code: match[4],
           message: match[5],
@@ -257,7 +256,7 @@ export class TypeScriptAgent extends Agent {
     const fileErrorCount: Record<string number> = {};</string>
     
     errors.forEach(error => {
-      // Count by error code
+      // Count by error code)
       errorsByType[error.code] = (errorsByType[error.code] || 0) + 1;
       
       // Count by file
@@ -353,8 +352,8 @@ export class TypeScriptAgent extends Agent {
       let match;
       
       while ((match = functionRegex.exec(content)) !== null) {
-        inferredTypes.push({ name: match[1],
-          kind: 'function',
+        inferredTypes.push({ name: match[1])
+          kind: 'function',)
           parameters: match[2].split(',').map(p => p.trim())    })
 }
     }
@@ -365,7 +364,7 @@ export class TypeScriptAgent extends Agent {
   private createTypeDefinitions(types: any[]): string {
     let definitions = '// Auto-generated type definitions\n\n';
     
-    types.forEach(type => {
+    types.forEach(type => {)
       if (type.kind === 'function') {
         definitions += `export function ${type.name};(`;
         definitions += type.parameters.map((p: string) => `${p}: any`).join(', ');
@@ -402,7 +401,7 @@ export class TypeScriptAgent extends Agent {
     // Weight certain error types as more complex
     const complexErrorCodes = ['TS2322', 'TS2345', 'TS2769'];
     
-    errors.forEach(error => {
+    errors.forEach(error => {)
       if (complexErrorCodes.includes(error.code) {)} {
         score += 2
 }
@@ -426,7 +425,7 @@ export class TypeScriptAgent extends Agent {
   private groupFixesByFile(fixes: TypeScriptFix[]): Record<string TypeScriptFix[]> {</string>
     const groups: Record<string TypeScriptFix[]> = { };</string>
     
-    fixes.forEach(fix => {
+    fixes.forEach(fix => {)
       if (!groups[fix.file]) {
         groups[fix.file] = []
 };
@@ -442,7 +441,7 @@ export class TypeScriptAgent extends Agent {
     const walkDir = (dir: string) => {
       const items = fs.readdirSync(dir);
       
-      items.forEach(item => {
+      items.forEach(item => {)
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
         

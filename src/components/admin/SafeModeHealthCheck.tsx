@@ -16,12 +16,12 @@ import {
 } from './safe-mode';
 
 export default function SafeModeHealthCheck() {
-  const [issues, setIssues] = useState<HealthIssue[]>([]);
+  const [issues, setIssues] = useState<HealthIssuenull>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [currentBatch, setCurrentBatch] = useState<HealthIssue[]>([]);
+  const [currentBatch, setCurrentBatch] = useState<HealthIssuenull>(null);
   const [checkpoint, setCheckpoint] = useState<CheckpointState | null>(null);
-  const [processingLog, setProcessingLog] = useState<string[]>([]);
+  const [processingLog, setProcessingLog] = useState<string>("");
   const [batchConfig, setBatchConfig] = useState<BatchConfig>({
     maxIssuesPerBatch: 3,
     maxTimePerBatch: 300, // 5 minutes
@@ -32,55 +32,49 @@ export default function SafeModeHealthCheck() {
   const processor = useRef(new SafeModeProcessor());
 
   const handleScanForIssues = async () => {
-    await processor.current.scanForIssues(
-      setIsScanning,
-      setIssues,
-      setProcessingLog
+    await processor.current.scanForIssues(setIsScanning,
+      setIssues)
+      setProcessingLog)
     );
   };
 
   const handleStartSafeProcessing = async () => {
-    await processor.current.startSafeProcessing(
-      issues,
+    await processor.current.startSafeProcessing(issues,
       batchConfig,
       setIsProcessing,
-      setCheckpoint,
-      setProcessingLog
+      setCheckpoint)
+      setProcessingLog)
     );
   };
 
   const handlePauseProcessing = () => {
-    processor.current.pauseProcessing(
-      setIsProcessing,
-      setProcessingLog
+    processor.current.pauseProcessing(setIsProcessing)
+      setProcessingLog)
     );
   };
 
   const handleResumeProcessing = async () => {
-    await processor.current.resumeProcessing(
-      checkpoint,
+    await processor.current.resumeProcessing(checkpoint,
       issues,
       batchConfig,
       setIsProcessing,
       setProcessingLog,
-      setCheckpoint,
-      setCurrentBatch
+      setCheckpoint)
+      setCurrentBatch)
     );
   };
 
   const handleResetProcessing = () => {
-    processor.current.resetProcessing(
-      setIsProcessing,
+    processor.current.resetProcessing(setIsProcessing,
       setCheckpoint,
       setCurrentBatch,
       setProcessingLog,
-      setIssues,
-      setProcessingLog
+      setIssues)
+      setProcessingLog)
     );
   };
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       <HeaderSection
         issues={issues}
         isScanning={isScanning}
@@ -89,15 +83,11 @@ export default function SafeModeHealthCheck() {
         onScanForIssues={handleScanForIssues}
         onStartSafeProcessing={handleStartSafeProcessing}
         onPauseProcessing={handlePauseProcessing}
-        onResumeProcessing={handleResumeProcessing}
-        onResetProcessing={handleResetProcessing}
-      />
+        onResumeProcessing={handleResumeProcessing}>onResetProcessing={handleResetProcessing} />>
 
       <ConfigurationSection
         batchConfig={batchConfig}
-        setBatchConfig={setBatchConfig}
-        isProcessing={isProcessing}
-      />
+        setBatchConfig={setBatchConfig}>isProcessing={isProcessing} />>
 
       <ProgressSection checkpoint={checkpoint} issues={issues} />
 
@@ -108,6 +98,6 @@ export default function SafeModeHealthCheck() {
       <ProcessingLog processingLog={processingLog} />
 
       <SafetyGuidelines />
-    </div>
+    </div>)
   );
 }

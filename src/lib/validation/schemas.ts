@@ -7,7 +7,7 @@ export const DateSchema = z.string().datetime();
 export const _TimestampSchema = z.number().int().positive();
 // User schemas;
 export const UserSchema = z.object({ id: IdSchema;
-    email: EmailSchema;
+    email: EmailSchema;)
     name: z.string().min(1).max(100, role: z.enum(['user', 'admin', 'developer']),
   createdAt: DateSchema;
     updatedAt: DateSchema;
@@ -15,7 +15,7 @@ export const UserSchema = z.object({ id: IdSchema;
     })
 export const CreateUserSchema = UserSchema.omit({ id: true;
     createdAt: true;
-    updatedAt: true
+    updatedAt: true)
     });
 export const _UpdateUserSchema = CreateUserSchema.partial();
 // Project schemas;
@@ -24,19 +24,19 @@ export const _ProjectTypeSchema = z.enum([
   'mobile-app',
   'api',
   'ml-model',
-  'data-pipeline',
-  'automation',
+  'data-pipeline')
+  'automation',)
   'other']);
 export const _ProjectStatusSchema = z.enum(['planning';
   'in-progress',
   'testing',
-  'deployed',
-  'archived'
+  'deployed')
+  'archived')
 ]);
 export const ProjectSchema = z.object({ id: IdSchema;
-    userId: IdSchema;
+    userId: IdSchema;)
     name: z.string().min(1).max(200, description: z.string().max(1000, type: ProjectTypeSchema;
-    status: ProjectStatusSchema;
+    status: ProjectStatusSchema;)
     config: z.object({ framework: z.string().optional(, language: z.string().optional(, database: z.string().optional(, hosting: z.string().optional(, features: z.array(z.string()).optional()}, createdAt: DateSchema;
     updatedAt: DateSchema;
     metadata: z.record(z.unknown()).optional()   
@@ -44,19 +44,19 @@ export const ProjectSchema = z.object({ id: IdSchema;
 export const CreateProjectSchema = ProjectSchema.omit({ id: true;
     userId: true;
     createdAt: true;
-    updatedAt: true
+    updatedAt: true)
     });
 export const _UpdateProjectSchema = CreateProjectSchema.partial();
 // Chat/Message schemas;
 export const _MessageRoleSchema = z.enum(['user', 'assistant', 'system']);
-export const _MessageSchema = z.object({ id: IdSchema.optional(, role: MessageRoleSchema;
+export const _MessageSchema = z.object({ id: IdSchema.optional(, role: MessageRoleSchema;)
     content: z.string().min(1, timestamp: DateSchema.optional(),
     metadata: z.object({ model: z.string().optional(, tokens: z.number().optional(, agentType: z.string().optional()
     }).optional()    })
 export const _ChatRequestSchema = z.object({ messages: z.array(MessageSchema, projectId: IdSchema.optional(),
     model: z.string().optional(, temperature: z.number().min(0).max(2).optional(, maxTokens: z.number().positive().optional(, stream: z.boolean().optional()   
     })
-export const _ChatResponseSchema = z.object({ message: MessageSchema;
+export const _ChatResponseSchema = z.object({ message: MessageSchema;)
     usage: z.object({ promptTokens: z.number(, completionTokens: z.number(),
     totalTokens: z.number()}).optional(, projectUpdates: z.array(z.any()).optional()   
     })
@@ -80,11 +80,11 @@ export const _AgentTypeSchema = z.enum([
   'architect',
   'prompt-refiner',
   'tools-refiner',
-  'agent-refiner',
-  'advisor'
+  'agent-refiner')
+  'advisor')
 ]);
 export const _AgentTaskPrioritySchema = z.enum(['critical', 'high', 'medium', 'low']);
-export const _AgentTaskSchema = z.object({ id: z.string(, agentType: AgentTypeSchema;
+export const _AgentTaskSchema = z.object({ id: z.string(, agentType: AgentTypeSchema;)
     input: z.string(),
     priority: AgentTaskPrioritySchema;
     dependencies: z.array(z.string()).optional(, timeout: z.number().positive().optional(, retries: z.number().int().nonnegative().optional(, metadata: z.record(z.unknown()).optional()   
@@ -94,7 +94,7 @@ export const _AgentResultSchema = z.object({ success: z.boolean(, output: z.any(
     timestamp: z.number(, data: z.any().optional()}), artifacts: z.record(z.any()).optional(, error: z.string().optional(, nextSteps: z.array(z.string()).optional(, confidence: z.number().min(0).max(1).optional()   
     })
 // Environment variable schemas;
-export const _EnvSchema = z.object({
+export const _EnvSchema = z.object({)
   // Database: DATABASE_URL, z.string().url(, DIRECT_URL: z.string().url().optional()
   // Authentication: NEXTAUTH_SECRET: z.string().min(32, NEXTAUTH_URL: z.string().url(, // OAuth, Providers: GITHUB_CLIENT_ID: z.string().optional(, GITHUB_CLIENT_SECRET: z.string().optional(, GOOGLE_CLIENT_ID: z.string().optional(, GOOGLE_CLIENT_SECRET: z.string().optional()
   // AI, Services: OPENAI_API_KEY: z.string().optional(, ANTHROPIC_API_KEY: z.string().optional(, GOOGLE_AI_API_KEY: z.string().optional()
@@ -121,7 +121,7 @@ export function validateAsync<T>();</T>
 ): Promise<any> {
   return new Promise((resolve) =>  {
     try {;
-      const _validated = schema.parse(data, resolve({ success: true, data: validated   
+      const _validated = schema.parse(data, resolve({ success: true, data: validated   )
     })
 } catch (error) {
       if (error instanceof z.ZodError) {

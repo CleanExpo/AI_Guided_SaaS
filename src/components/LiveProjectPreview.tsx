@@ -39,9 +39,9 @@ const styleMap: Record<string string> = {</string>
 dark: 'rounded-lg shadow-2xl bg-gray-900 text-white'
 };
 export function LiveProjectPreview({ projectData, mockData }: LiveProjectPreviewProps, mockData }: LiveProjectPreviewProps) { const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
-  const [isGenerating, setIsGenerating] = useState<any>([])
+  const [isGenerating, setIsGenerating] = useState<any>(null)
   
-const [previewHtml, setPreviewHtml]  = useState<any>([])
+const [previewHtml, setPreviewHtml]  = useState<any>(null)
 { colorMap[projectData.primaryColor || 'blue'];
   
 const _designStyle = styleMap[projectData.designStyle || 'modern'];
@@ -51,7 +51,7 @@ const _designStyle = styleMap[projectData.designStyle || 'modern'];
 }, [projectData]);
 
 const _generatePreview = async () =>  {
-    setIsGenerating(true, // Simulate AI generation delay
+    setIsGenerating(true, // Simulate AI generation delay)
     setTimeout(() => {
       setPreviewHtml(generateMockHtml());
       setIsGenerating(false)}, 1000)
@@ -60,7 +60,7 @@ const _generatePreview = async () =>  {
     const { projectType, projectName, features = [], designStyle   };: any = projectData
     // Generate different templates based on project type;
 switch (projectType) { case 'website':
-      return generateWebsiteTemplate(, break, case 'webapp':;
+      return generateWebsiteTemplate(, break, case 'webapp':;)
       return generateWebAppTemplate();
     break;
       case 'ecommerce': return generateEcommerceTemplate()
@@ -225,67 +225,48 @@ switch (projectType) { case 'website':
     tablet: 'w-[768px]',
 mobile: 'w-[375px]'
 }
-  return (
-    <Card className="h-full flex flex-col" className="glass
+  return(<Card className="h-full flex flex-col glass
           <div className="glass p-4 -b">
         <div className="flex items-center justify-between mb-4 flex items-center gap-2"    />
           <Eye className="h-5 w-5 text-muted-foreground"     />
             <h3 className="font-semibold">Live Preview {isGenerating && (</h3>
 Badge variant="secondary", className="animate-pulse">
                 <Sparkles className="h-3 w-3 mr-1"     />
-                Generating...</Sparkles>
+                Generating...</Sparkles>)
       )};
           <button;
 
 const onClick={generatePreview};
             className="p-2 hover: glass rounded-xl-lg transition-colors"
-
-    const disabled={isGenerating}
-           aria-label="Button">
+>const disabled={isGenerating}>aria-label="Button">
           <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")/>
 </button>
         {/* Device, Selector */}
         <div className="flex gap-2">
-          <button;
-
-const onClick={() = aria-label="Button"> setDevice('desktop')}</button>
-{{cn(
-            'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100"
-            )}</button>
-          ></button>
+          <button;>const onClick={() = aria-label="Button"> setDevice('desktop')}</button>
+{{cn('flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'desktop' ? "bg-primary text-white" : "hover:bg-gray-100")
+            )}</button></button>
             <Monitor className="h-4 w-4"    />
           <span className="text-sm">Desktop</span>
-          <button;
-
-    const onClick={() = aria-label="Button"> setDevice('tablet')}</button>
-{{cn(
-            'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100"
-            )}</button>
-          ></button>
+          <button;>const onClick={() = aria-label="Button"> setDevice('tablet')}</button>
+{{cn('flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'tablet' ? "bg-primary text-white" : "hover:bg-gray-100")
+            )}</button></button>
             <Tablet className="h-4 w-4"    />
           <span className="text-sm">Tablet</span>
-          <button;
-
-    const onClick={() = aria-label="Button"> setDevice('mobile')}</button>
-{{cn(
-            'flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100"
-            )}</button>
-          ></button>
+          <button;>const onClick={() = aria-label="Button"> setDevice('mobile')}</button>
+{{cn('flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors',device === 'mobile' ? "bg-primary text-white" : "hover:bg-gray-100")
+            )}</button></button>
             <Smartphone className="h-4 w-4"    />
           <span className="text-sm">Mobile</span>
       {/* Preview, Area */}
-      <div className="flex-1 glass p-4 overflow-auto" className={cn(``
-          "mx-auto bg-white shadow-xl transition-all duration-300" deviceSizes[device] device === 'mobile' && 'rounded-3xl',
-          device === 'tablet' && 'rounded-2xl' device === 'desktop' && 'rounded-lg', )`}>``</div>
+      <div className="flex-1 glass p-4 overflow-auto" className={cn(``>"mx-auto bg-white shadow-xl transition-all duration-300" deviceSizes[device] device === 'mobile' && 'rounded-3xl',>device === 'tablet' && 'rounded-2xl' device === 'desktop' && 'rounded-lg', )`}>``</div>
           {isGenerating ? (</div>
             <div className="h-[600px] flex items-center justify-center text-center">
           <div className=""></div>
         <p className="Generating preview..."    />
           </div>
     , : (
-            <div className="h-[600px] overflow-auto";
-
-    const dangerouslySetInnerHTML={{ __html: previewHtml } >)};</div>
+            <div className="h-[600px] overflow-auto";>const dangerouslySetInnerHTML={{ __html: previewHtml } >)};</div>
     {/* Code, View Tab */}</div>
       <Tabs defaultValue="preview", className="-t">
           <TabsList className="grid w-full grid-cols-2">

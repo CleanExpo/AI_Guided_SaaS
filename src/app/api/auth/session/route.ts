@@ -7,27 +7,25 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const session = request.cookies.get('session');
         
         if (!session) {
-            return NextResponse.json({ authenticated: false,
-                user: null   
+            return NextResponse.json({ authenticated: false)
+                user: null   )
     })
 }
         
         // Simulate authenticated session
         return NextResponse.json({ authenticated: true,
             user: { id: 'user_123', 
-                name: 'John Doe', 
-                email: 'john@example.com' 
+                name: 'John Doe')
+                email: 'john@example.com' )
             }    })
     } catch (error) {
         handleError(error, {
-            operation: 'checkSession',
-            module: 'auth/session'
+            operation: 'checkSession')
+            module: 'auth/session')
         });
         
-        return NextResponse.json(
-            { error: 'Session check failed' }, 
-            { status: 500 }
+        return NextResponse.json({ error: 'Session check failed' })
+            { status: 500 })
         );
     }
-}
 }

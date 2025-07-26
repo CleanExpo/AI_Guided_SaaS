@@ -76,7 +76,7 @@ export const _logAssistantInteraction = (
     generatedComponents: string[],
     page: string = 'ui-builder'
 ): void => { generatedComponents.forEach((componentType) =>  {
-    logger.log({;
+    logger.log({;)
       componentId: `ai-generated-${Date.now() };-${componentType}`,``
       componentType,
       page,

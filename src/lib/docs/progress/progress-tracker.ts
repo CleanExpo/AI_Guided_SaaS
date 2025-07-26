@@ -2,9 +2,8 @@ import { UserProgress } from '../types';
 import { createClient } from '@supabase/supabase-js';
 import { logger } from '@/lib/logger';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '')
+  process.env.SUPABASE_SERVICE_ROLE_KEY || '')
 );
 
 export class ProgressTracker {
@@ -48,9 +47,8 @@ export class ProgressTracker {
     }
   }
 
-  async updateProgress(
-    userId: string,
-    updates: Partial<UserProgress>
+  async updateProgress(userId: string)
+    updates: Partial<UserProgress>)
   ): Promise<void> {
     try {
       const current = this.userProgress.get(userId) || await this.loadUserProgress(userId);
@@ -67,8 +65,8 @@ export class ProgressTracker {
           interactive_elements_completed: updated.interactiveElementsCompleted,
           quiz_scores: updated.quizScores,
           total_points: updated.totalPoints,
-          current_path: updated.currentPath,
-          preferences: updated.preferences,
+          current_path: updated.currentPath)
+          preferences: updated.preferences,)
           updated_at: new Date().toISOString()
         });
     } catch (error) {
@@ -83,15 +81,14 @@ export class ProgressTracker {
     if (!progress.sectionsCompleted.includes(sectionId)) {
       progress.sectionsCompleted.push(sectionId);
       await this.updateProgress(userId, {
-        sectionsCompleted: progress.sectionsCompleted
+        sectionsCompleted: progress.sectionsCompleted)
       });
     }
   }
 
-  async recordQuizScore(
-    userId: string,
-    quizId: string,
-    score: number
+  async recordQuizScore(userId: string,
+    quizId: string)
+    score: number)
   ): Promise<void> {
     const progress = this.userProgress.get(userId);
     if (!progress) return;
@@ -100,14 +97,13 @@ export class ProgressTracker {
     progress.totalPoints += score;
 
     await this.updateProgress(userId, {
-      quizScores: progress.quizScores,
-      totalPoints: progress.totalPoints
+      quizScores: progress.quizScores)
+      totalPoints: progress.totalPoints)
     });
   }
 
-  getRecommendedSections(
-    userId: string,
-    availableSections: string[]
+  getRecommendedSections(userId: string)
+    availableSections: string[])
   ): string[] {
     const progress = this.userProgress.get(userId);
     if (!progress) return availableSections.slice(0, 5);
@@ -120,9 +116,8 @@ export class ProgressTracker {
     return recommendations.slice(0, 5);
   }
 
-  private matchesUserPreferences(
-    sectionId: string,
-    preferences: UserProgress['preferences']
+  private matchesUserPreferences(sectionId: string)
+    preferences: UserProgress['preferences'])
   ): boolean {
     // Simple matching logic - would be more sophisticated in production
     return true;

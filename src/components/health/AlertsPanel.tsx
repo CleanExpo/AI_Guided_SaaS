@@ -11,7 +11,7 @@ interface Alert { id: string
 }
 
 export function AlertsPanel() {
-  const [alerts, setAlerts] = useState<Alert[]>([])
+  const [alerts, setAlerts] = useState<Alertnull>(null);
 
   useEffect(() => {
     // Simulate loading alerts
@@ -21,7 +21,7 @@ export function AlertsPanel() {
         message: 'System running normally',
         timestamp: new Date()
 }
-    ])
+    ]);
 }, []);
 
   return (
@@ -49,5 +49,5 @@ export function AlertsPanel() {
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -45,15 +45,15 @@ const commonVariables: Record<string EnvVariable[]> = {</string>
     type: 'api_key', required: false, description: 'Google AI API key' }
    ]
 };
-export function EnvVariableEditor({ variables: initialVariables, onChange, projectType  = 'default', readOnly  = false
+export function EnvVariableEditor({ variables: initialVariables, onChange, projectType  = 'default', readOnly  = false)
 }: EnvVariableEditorProps): initialVariables, onChange, projectType  = 'default', readOnly = false
 }: EnvVariableEditorProps) { const [variables, setVariables]  = useState<EnvVariable[]>(initialVariables)</EnvVariable>
 
-const [showSecrets, setShowSecrets] = useState<Record<string boolean>>({});</Record>
+const [showSecrets, setShowSecrets] = useState<Record<string boolean>({});</Record>
   
-const [validationErrors, setValidationErrors]  = useState<Record<string string>>({});</Record>
+const [validationErrors, setValidationErrors]  = useState<Record<string string>({});</Record>
 
-const [isValidating, setIsValidating] = useState<any>([])
+const [isValidating, setIsValidating] = useState<any>(null)
 { (): void => {
     const newVar: EnvVariable={ key: '',
     value: '',
@@ -99,10 +99,10 @@ if (validationErrors[updated[index].key]) {
     return Object.keys(errors).length === 0
 }
   const _exportEnvFile = (): void => {
-    const content = variables, .filter((v) => v.key && v.value, .map((v) => `${v.key};="${v.value}"`)``;
+    const content = variables, .filter((v) => v.key && v.value, .map((v) => `${v.key}="${v.value}"`)``;
       .join('\n');
 
-const _blob  = new Blob([content], { type: 'text/plain'
+const _blob  = new Blob([content], { type: 'text/plain')
     });
 
 const _url = URL.createObjectURL(blob);
@@ -129,7 +129,7 @@ const imported: EnvVariable[] = []
 
 const _existing = variables.find(v => v.key === key);
           imported.push({
-            key,
+            key,)
             value: type, key.includes('SECRET') || key.includes('PRIVATE') ? 'secret'  : null
                   key.includes('API_KEY') || key.includes('TOKEN') ? 'api_key' : 'public',
             required?: existing.required || false,
@@ -160,8 +160,7 @@ description?: existing.description })}
     break
 };
       default: return 'bg-green-100 text-green-700'}}
-  return (
-    <Card className="glass p-6">
+  return(<Card className="glass p-6">
           <div className="mb-6 flex items-center justify-between mb-4"     />
           <div>
           <h3 className="text-lg font-semibold flex items-center gap-2">
@@ -173,33 +172,25 @@ description?: existing.description })}
           <Button
 size="sm";
 variant="outline";
-
-    onClick={addSuggestedVariables} disabled={readOnly}
-            ></Button>
+>onClick={addSuggestedVariables} disabled={readOnly}></Button>
               <Plus className="h-4 w-4 mr-2"     />
               Add Suggested</Plus>
             <Button size="sm";
 variant="outline";
-
-    const onClick={exportEnvFile}
-            >
+>const onClick={exportEnvFile}>
           <Download className="h-4 w-4 mr-2"     />
               Export</Download>
             <label>
           <Button size="sm";
 variant="outline";
 
-    const disabled={readOnly}
-                // asChild
-              ></Button>
+    const disabled={readOnly} />/ asChild></Button>
                 <span>
           <Upload className="h-4 w-4 mr-2"     />
                   Import</Upload>
               <input aria-label="file" type="file"
 accept=".env, .env.local";
-
-const onChange={importEnvFile}
-                className="hidden"    />
+>const onChange={importEnvFile}>className="hidden"    />
           </label>
         {/* Security, Notice */}
         <Alert className="mb-4">
@@ -207,31 +198,25 @@ const onChange={importEnvFile}
           <AlertDescription></AlertDescription>
             Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.</AlertDescription>
       {/* Variables, List */}
-      <div className="space-y-4">
+      <div className="space-y-4">)
         {variables.map((variable, index) => (\n    <div key={index} className="glass  rounded-xl-lg p-4 grid grid-cols-12 gap-4">
               {/* Key */}</div>
               <div className="col-span-4">
           <label className="text-sm font-medium mb-1 block">Key</label>
                 <Input
-
-const value={variable.key};
-                  const onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};/>
+>const value={variable.key};>const onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};/>
                   ="VARIABLE_NAME";
 
-    disabled={readOnly} className={cn(
-                    validationErrors[variable.key] && "border-red-500"
-                  )/>/>
+    disabled={readOnly} className={cn(validationErrors[variable.key] && "border-red-500")
+                  )/ />>
               {/* Value */}
               <div className="col-span-6">
           <label className="text-sm font-medium mb-1 block">Value</label>
                 <div className="relative">
           <Input
-
-type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'password'} value={variable.value}
-                    const onChange={(e) => handleUpdateVariable(index, 'value', e.target.value)} />
+>type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'password'} value={variable.value}>const onChange={(e) => handleUpdateVariable(index, 'value', e.target.value)} />
 {{variable.type === 'api_key' ? 'sk-...' : 'Enter value'}
-                    disabled={readOnly} className={cn(
-            'pr-10',validationErrors[variable.key] && "border-red-500"
+                    disabled={readOnly} className={cn('pr-10',validationErrors[variable.key] && "border-red-500")
                     )/>
                   {variable.type !== 'public'  && (/Input>
                     <button type = "button"; const onClick={() = aria-label="Button"> toggleShowSecret(variable.key)}</button>
@@ -245,9 +230,7 @@ type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'passwo
                   )},
     {/* Type & Actions */}
               <div className="col-span-2 flex items-end gap-2">
-          <select;
-
-    value={variable.type} onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}</select>
+          <select;>value={variable.type} onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}</select>
 {{readOnly};
                   className="flex-1 px-2 py-2  rounded-lg-md text-sm";
                 ></select>
@@ -266,7 +249,7 @@ type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'passwo
   },
     {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
               <div className="flex items-center gap-2">
-          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))}>/>
+          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))} />>
                   {getTypeIcon(variable.type)}/>
                   <span className="ml-1">{variable.type}</span>
                 {variable.required  && (
@@ -288,9 +271,7 @@ const onClick={handleAddVariable}
     {/* Validation */}
       <div className="mt-6 flex justify-end">
           <Button
-
-onClick={validateVariables} disabled={isValidating}
-        ></Button>
+>onClick={validateVariables} disabled={isValidating}></Button>
           {isValidating ? 'Validating...' : 'Validate All'}
   )
 }

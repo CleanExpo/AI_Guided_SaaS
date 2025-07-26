@@ -84,7 +84,7 @@ export abstract class BaseAgent extends EventEmitter {
     try {
       await this.onInitialize();
       this.state.status = 'ready';
-      this.emit('agent:ready', { agentId: this.config.id   
+      this.emit('agent:ready', { agentId: this.config.id   )
     })
 } catch (error) {
       this.state.status = 'error';
@@ -177,7 +177,7 @@ export abstract class BaseAgent extends EventEmitter {
   
   public async stop(): Promise<void> {
     this.state.status = 'shutting_down';
-    this.emit('agent:stopping', { agentId: this.config.id
+    this.emit('agent:stopping', { agentId: this.config.id)
     });
     
     // Clear task queue
@@ -192,7 +192,7 @@ export abstract class BaseAgent extends EventEmitter {
     await this.onStop();
     
     this.state.status = 'offline';
-    this.emit('agent:stopped', { agentId: this.config.id   
+    this.emit('agent:stopped', { agentId: this.config.id   )
     })
 }
   

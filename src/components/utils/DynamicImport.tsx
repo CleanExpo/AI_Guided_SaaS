@@ -11,15 +11,14 @@ interface DynamicImportOptions {
 
 // Loading component
 export function DefaultLoadingComponent() {
-  return (
-    <div className="flex items-center justify-center min-h-[200px]">
+  return(<div className="flex items-center justify-center min-h-[200px]">
       <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
-    </div>
+    </div>)
   );
 }
 
 // Dynamic imports for heavy components
-export const DynamicAdvancedCodeEditor = dynamic(
+export const DynamicAdvancedCodeEditor = dynamic()
   () => import('@/components/editor/AdvancedCodeEditor'),
   {
     loading: DefaultLoadingComponent,
@@ -27,7 +26,7 @@ export const DynamicAdvancedCodeEditor = dynamic(
   }
 );
 
-export const DynamicMarketplaceHome = dynamic(
+export const DynamicMarketplaceHome = dynamic()
   () => import('@/components/marketplace/MarketplaceHome').then(mod => ({ default: mod.MarketplaceHome })),
   {
     loading: DefaultLoadingComponent,
@@ -35,7 +34,7 @@ export const DynamicMarketplaceHome = dynamic(
   }
 );
 
-export const DynamicAnalyticsDashboard = dynamic(
+export const DynamicAnalyticsDashboard = dynamic()
   () => import('@/components/analytics/AnalyticsDashboard'),
   {
     loading: DefaultLoadingComponent,
@@ -43,7 +42,7 @@ export const DynamicAnalyticsDashboard = dynamic(
   }
 );
 
-export const DynamicMonacoEditor = dynamic(
+export const DynamicMonacoEditor = dynamic()
   () => import('@monaco-editor/react'),
   {
     loading: DefaultLoadingComponent,
@@ -51,7 +50,7 @@ export const DynamicMonacoEditor = dynamic(
   }
 );
 
-export const DynamicReactFlow = dynamic(
+export const DynamicReactFlow = dynamic()
   () => import('@xyflow/react').then(mod => ({ default: mod.ReactFlow })),
   {
     loading: DefaultLoadingComponent,
@@ -61,12 +60,12 @@ export const DynamicReactFlow = dynamic(
 
 // Helper function to create dynamic imports
 export function createDynamicImport<P = {}>(
-  importFunc: () => Promise<{ default: ComponentType<P> } | ComponentType<P>>,
+  importFunc: () => Promise<{ default: ComponentType<P> } | ComponentType<P>,
   options: DynamicImportOptions = {}
 ) {
   return dynamic(importFunc, {
     loading: options.loading || DefaultLoadingComponent,
-    ssr: options.ssr ?? true,
+    ssr: options.ssr ?? true))
   });
 }
 
@@ -90,7 +89,7 @@ export function useLazyLoad<T extends HTMLElement = HTMLDivElement>(
     const element = elementRef.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
+    const observer = new IntersectionObserver()
       ([entry]) => {
         if (entry.isIntersecting && !hasLoaded) {
           setIsIntersecting(true);
@@ -129,18 +128,17 @@ export function LazyLoadWrapper({
   fallback = <DefaultLoadingComponent />,
   threshold = 0.1,
   rootMargin = '50px',
-  once = true,
+  once = true))
 }: LazyLoadWrapperProps) {
   const { elementRef, isIntersecting, hasLoaded } = useLazyLoad({
     threshold,
-    rootMargin,
+    rootMargin))
   });
 
   const shouldRender = once ? hasLoaded : isIntersecting;
 
-  return (
-    <div ref={elementRef}>
+  return(<div ref={elementRef}>
       {shouldRender ? children : fallback}
-    </div>
+    </div>)
   );
 }

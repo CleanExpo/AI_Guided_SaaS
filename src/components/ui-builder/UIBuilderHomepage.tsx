@@ -18,7 +18,7 @@ export default function UIBuilderHomepage() {
         </div>
         
         <Card className="glass"
-          <CardContent className="py-12 text-center" className="glass
+          <CardContent className="py-12 text-center glass
             <Layout className="h-16 w-16 text-gray-400 mx-auto mb-4"  />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">UI Builder Coming Soon</h3>
             <p className="text-gray-600 mb-6">

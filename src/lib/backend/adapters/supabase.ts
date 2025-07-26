@@ -12,8 +12,8 @@ export class SupabaseAdapter implements BackendAdapter {
   // Authentication
   async signUp(email: string, password: string, metadata? null : any): Promise<User> {
     const { data, error  }: any = await this.client.auth.signUp({
-      email,
-      password,;
+      email)
+      password,;)
       options: { data: metadata }});
     if (error) {
       throw new BackendError(error.message, 'AUTH_ERROR', 400)}
@@ -23,8 +23,8 @@ export class SupabaseAdapter implements BackendAdapter {
 }
   async signIn(email: string, password: string): Promise<{ user: User, token: string }> {
     const { data, error  }: any = await this.client.auth.signInWithPassword({
-      email,
-      password
+      email)
+      password)
 });
     if (error) {
       throw new BackendError(error.message, 'AUTH_ERROR', 401)}
@@ -32,7 +32,7 @@ export class SupabaseAdapter implements BackendAdapter {
       throw new BackendError('Login failed', 'AUTH_ERROR', 401)}
     return { user: this.mapSupabaseUser(data.user, token: data.session.access_token
   }
-}
+})
   async signOut(): Promise<void> {
     const { error  }: any = await this.client.auth.signOut();
     if (error) {
@@ -88,12 +88,12 @@ export class SupabaseAdapter implements BackendAdapter {
       .eq('id', id);
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {;</PaginatedResponse>
-    let query = this.client, .from('projects', .select('*', { count: 'exact'
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;</PaginatedResponse>
+    let query = this.client, .from('projects', .select('*', { count: 'exact')
     });
       .eq('userId', userId);
     if (options?.orderBy) {
-      query = query.order(options.orderBy, { ascending: options.order === 'asc'   
+      query = query.order(options.orderBy, { ascending: options.order === 'asc'   )
     })
     }
     if (options?.limit) {
@@ -155,15 +155,15 @@ const total = count || 0;
       .eq('id', id);
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {;</PaginatedResponse>
-    let query = this.client, .from(collection, .select('*', { count: 'exact'
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {;</PaginatedResponse>
+    let query = this.client, .from(collection, .select('*', { count: 'exact')
     });
     if (options?.filters) {
       Object.entries(options.filters).forEach(([key, value]) => {
         query = query.eq(key, value)    })
     }
     if (options?.orderBy) {
-      query = query.order(options.orderBy, { ascending: options.order === 'asc'   
+      query = query.order(options.orderBy, { ascending: options.order === 'asc'   )
     })
     }
     if (options?.limit) {
@@ -195,24 +195,23 @@ collection: string;
     filters?: Record<string any></string>
   ): () => void {;
     const channel = this.client, .channel(`${collection}_changes`);
-      .on(
-        'postgres_changes',
+      .on('postgres_changes',
         { event: '*',
-          schema: 'public',
-          table: collection;
+          schema: 'public')
+          table: collection;)
           filter?: filters this.buildFilter(filters) : undefined
         };
         (payload) =>  {
           callback({ type: payload.eventType as any,
             table: collection;
-            record: payload.new as T,
-            oldRecord: payload.old as T
+            record: payload.new as T)
+            oldRecord: payload.old as T)
     })}
       .subscribe();
     return () => {
       channel.unsubscribe()};
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string;)
   file: File): Promise<string> {
     const { data, error  }: any = await this.client.storage;
       .from(bucket);
@@ -254,11 +253,11 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
   select(fields: string[]): QueryBuilder<T> {</T>
     this.query = this.client.from(this.query.table).select(fields.join(',');
         return this};
-  where(field: string, operator: string;
+  where(field: string, operator: string;)
   value: any): QueryBuilder<T> {</T>
     switch (operator) {
       case '=':
-      this.query = this.query.eq(field, value, break, case '!=':
+      this.query = this.query.eq(field, value, break, case '!=':)
       this.query = this.query.neq(field, value);
         break;
       case '>':
@@ -285,7 +284,7 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
     return this
 }
   orderBy(field: string, direction: 'asc' | 'desc' = 'asc'): QueryBuilder<T> {</T>
-    this.query = this.query.order(field, { ascending: direction === 'asc'
+    this.query = this.query.order(field, { ascending: direction === 'asc')
     });
     return this
 }
@@ -294,7 +293,7 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
         return this}
   offset(count: number): QueryBuilder<T> {</T>
     this.query = this.query.range(count, count + 1000, // Large upper bound
-    return this}
+    return this})
   async execute(): Promise<T[]> {;</T>
     const { data, error  }: any = await this.query;
     if (error) {
@@ -308,7 +307,7 @@ class SupabaseQueryBuilder<T> implements QueryBuilder<T> {</T>
     return data
 }
   async count(): Promise<number> {
-    const { count, error  }: any = await this.query.select('*', { count: 'exact', head: true
+    const { count, error  }: any = await this.query.select('*', { count: 'exact', head: true)
     });
     if (error) {
       throw new BackendError(error.message, 'QUERY_ERROR', 400)};

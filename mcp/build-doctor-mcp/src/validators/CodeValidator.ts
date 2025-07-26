@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
 import * as path from 'path';
+import * as fs from 'fs/promises';
 import { Logger } from '../utils/logger.js';
 
 interface ValidationStep {
@@ -26,9 +27,12 @@ export class CodeValidator {
     this.logger = new Logger('CodeValidator');
   }
 
-  async validateProject(projectPath: string, options: { runTests?: boolean } = {}): Promise<ValidationResult> {
+  async validateProject(
+    projectPath: string,
+    options: { runTests?: boolean } = {}
+  ): Promise<ValidationResult> {
     this.logger.info('Starting project validation...');
-    
+
     const steps: ValidationStep[] = [];
     let overallSuccess = true;
 
@@ -77,16 +81,20 @@ export class CodeValidator {
     };
   }
 
-  private async validatePackageJson(projectPath: string): Promise<ValidationStep> {
+  private async validatePackageJson(
+    projectPath: string
+  ): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
-      const packageJson = require(path.join(projectPath, 'package.json'));
-      
+      const packageJsonPath = path.join(projectPath, 'package.json');
+      const packageJsonContent = await fs.readFile(packageJsonPath, 'utf-8');
+      const packageJson = JSON.parse(packageJsonContent);
+
       // Check for required fields
       const required = ['name', 'version', 'scripts'];
-      const missing = required.filter(field => !packageJson[field]);
-      
+      const missing = required.filter((field) => !packageJson[field]);
+
       if (missing.length > 0) {
         return {
           name: 'Package.json Validation',
@@ -122,9 +130,11 @@ export class CodeValidator {
     }
   }
 
-  private async validateDependencies(projectPath: string): Promise<ValidationStep> {
+  private async validateDependencies(
+    projectPath: string
+  ): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
       // Check for missing dependencies
       execSync('npm ls --depth=0', {
@@ -142,11 +152,13 @@ export class CodeValidator {
       // Check if it's just warnings or actual errors
       const output = error.stdout?.toString() || '';
       const hasErrors = output.includes('npm ERR!');
-      
+
       return {
         name: 'Dependency Check',
         success: !hasErrors,
-        message: hasErrors ? 'Missing or invalid dependencies' : 'Dependencies OK (with warnings)',
+        message: hasErrors
+          ? 'Missing or invalid dependencies'
+          : 'Dependencies OK (with warnings)',
         duration: Date.now() - startTime,
       };
     }
@@ -154,7 +166,7 @@ export class CodeValidator {
 
   private async runLinter(projectPath: string): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
       const output = execSync('npm run lint', {
         cwd: projectPath,
@@ -170,8 +182,9 @@ export class CodeValidator {
       };
     } catch (error: any) {
       const output = error.stdout?.toString() || error.message;
-      const errorCount = (output.match(/\\d+ errors?/g) || [])[0] || 'Multiple errors';
-      
+      const errorCount =
+        (output.match(/\\d+ errors?/g) || [])[0] || 'Multiple errors';
+
       return {
         name: 'ESLint Check',
         success: false,
@@ -183,7 +196,7 @@ export class CodeValidator {
 
   private async runTypeCheck(projectPath: string): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
       execSync('npx tsc --noEmit', {
         cwd: projectPath,
@@ -200,7 +213,7 @@ export class CodeValidator {
       const output = error.stdout?.toString() || error.message;
       const errorMatch = output.match(/Found (\\d+) errors?/);
       const errorCount = errorMatch ? errorMatch[1] : 'Multiple';
-      
+
       return {
         name: 'TypeScript Check',
         success: false,
@@ -212,7 +225,7 @@ export class CodeValidator {
 
   private async runBuild(projectPath: string): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
       execSync('npm run build', {
         cwd: projectPath,
@@ -238,7 +251,7 @@ export class CodeValidator {
 
   private async runTests(projectPath: string): Promise<ValidationStep> {
     const startTime = Date.now();
-    
+
     try {
       const output = execSync('npm test -- --passWithNoTests', {
         cwd: projectPath,
@@ -249,7 +262,7 @@ export class CodeValidator {
 
       const testMatch = output.match(/Tests:\\s+(\\d+) passed/);
       const testCount = testMatch ? testMatch[1] : '0';
-      
+
       return {
         name: 'Tests',
         success: true,
@@ -297,16 +310,25 @@ export class CodeValidator {
 
       // Get type coverage if available
       try {
+        // First check if typescript is available
+        execSync('npx tsc --version', {
+          cwd: projectPath,
+          stdio: 'ignore',
+        });
+
+        // Only run type coverage if TypeScript is available
         const typeCoverageOutput = execSync('npx type-coverage --detail', {
           cwd: projectPath,
           encoding: 'utf-8',
+          stdio: 'pipe',
         });
         const coverageMatch = typeCoverageOutput.match(/(\\d+\\.\\d+)%/);
         if (coverageMatch) {
           metrics.typeCoverage = parseFloat(coverageMatch[1]);
         }
       } catch {
-        // Type coverage not available
+        // Type coverage not available - this is fine
+        metrics.typeCoverage = 0;
       }
     } catch (error) {
       this.logger.warn('Failed to collect some metrics');

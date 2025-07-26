@@ -89,8 +89,7 @@ export default function AdvancedAnalyticsPage() {
     { name: 'Enterprise', value: 28900, fill: '#f59e0b' }
   ];
 
-  return (
-    <div className="min-h-screen glass py-8 px-4">
+  return(<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -101,7 +100,7 @@ export default function AdvancedAnalyticsPage() {
                 Deep insights and AI-powered predictions for your SaaS
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">)
               <Button variant="outline" onClick={() => trackFeature('analytics', 'filter')}>
                 <Filter className="h-4 w-4 mr-2" />
                 Filter
@@ -111,9 +110,7 @@ export default function AdvancedAnalyticsPage() {
                 Export
               </Button>
               <select
-                className="px-4 py-2  rounded-xl-lg"
-                value={timeRange}
-                onChange={(e) => setTimeRange(e.target.value)}
+                className="px-4 py-2  rounded-xl-lg">value={timeRange}>onChange={(e) => setTimeRange(e.target.value)}
               >
                 <option value="24h">Last 24 hours</option>
                 <option value="7d">Last 7 days</option>
@@ -125,7 +122,7 @@ export default function AdvancedAnalyticsPage() {
         </div>
 
         {/* Real-time Stats */}
-        <Card className="mb-6" className="glass
+        <Card className="mb-6 glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div className="glass flex items-center gap-6">
@@ -176,9 +173,7 @@ export default function AdvancedAnalyticsPage() {
               metrics={metrics}
               dashboardData={dashboardData}
               userTrendData={userTrendData}
-              funnelData={funnelData}
-              revenueByPlan={revenueByPlan}
-            />
+              funnelData={funnelData}>revenueByPlan={revenueByPlan} />>
           </TabsContent>
 
           <TabsContent value="users">
@@ -209,9 +204,7 @@ export default function AdvancedAnalyticsPage() {
               <div className="glass p-6">
                 <AnalyticsExport />
                 <Button 
-                  variant="outline" 
-                  className="w-full mt-4"
-                  onClick={() => setShowExport(false)}
+                  variant="outline" >className="w-full mt-4">onClick={() => setShowExport(false)}
                 >
                   Cancel
                 </Button>

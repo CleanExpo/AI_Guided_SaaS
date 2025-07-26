@@ -26,8 +26,7 @@ export class UserQueries {
 
       // Apply search filter
       if (query) {
-        queryBuilder = queryBuilder.or(
-          `email.ilike.%${query}%,name.ilike.%${query}%`
+        queryBuilder = queryBuilder.or(`email.ilike.%${query}%,name.ilike.%${query}%`)
         );
       }
 
@@ -43,7 +42,7 @@ export class UserQueries {
       if (plan) {
         queryBuilder = queryBuilder
           .select(`
-            *,
+            *,)
             subscriptions!inner(plan)
           `)
           .eq('subscriptions.plan', plan);
@@ -87,7 +86,7 @@ export class UserQueries {
       if (!user) return null;
 
       // Get user stats in parallel
-      const [projectCount, apiCallCount, subscription, lastSession] = await Promise.all([
+      const [projectCount, apiCallCount, subscription, lastSession] = await Promise.all([)
         this.getUserProjectCount(userId),
         this.getUserApiCallCount(userId),
         this.getUserSubscription(userId),
@@ -127,8 +126,8 @@ export class UserQueries {
         .from('users')
         .update({
           name: updates.name,
-          role: updates.role,
-          status: updates.status,
+          role: updates.role)
+          status: updates.status,)
           updated_at: new Date().toISOString()
         })
         .eq('id', userId)
@@ -140,8 +139,8 @@ export class UserQueries {
       // Log the admin action
       await supabase.from('activity_logs').insert({
         user_id: userId,
-        action: 'admin_user_update',
-        details: { updates },
+        action: 'admin_user_update')
+        details: { updates },)
         created_at: new Date().toISOString()
       });
 
@@ -162,7 +161,7 @@ export class UserQueries {
       const { error } = await supabase
         .from('users')
         .update({
-          status: 'deleted',
+          status: 'deleted',)
           deleted_at: new Date().toISOString()
         })
         .eq('id', userId);
@@ -171,8 +170,8 @@ export class UserQueries {
 
       // Log the admin action
       await supabase.from('activity_logs').insert({
-        user_id: userId,
-        action: 'admin_user_delete',
+        user_id: userId)
+        action: 'admin_user_delete',)
         created_at: new Date().toISOString()
       });
 
@@ -248,7 +247,7 @@ export class UserQueries {
         .from('admin_sessions')
         .insert({
           admin_id: 'current-admin-id', // Would get from auth context
-          impersonated_user_id: userId,
+          impersonated_user_id: userId,)
           created_at: new Date().toISOString(),
           expires_at: new Date(Date.now() + 3600000).toISOString() // 1 hour
         })
@@ -260,8 +259,8 @@ export class UserQueries {
       // Log the impersonation
       await supabase.from('activity_logs').insert({
         user_id: userId,
-        action: 'admin_impersonation_start',
-        details: { session_id: session.id },
+        action: 'admin_impersonation_start')
+        details: { session_id: session.id },)
         created_at: new Date().toISOString()
       });
 
@@ -277,7 +276,7 @@ export class UserQueries {
 
   private static generateImpersonationToken(userId: string, sessionId: string): string {
     // In production, this would generate a proper JWT
-    return Buffer.from(
+    return Buffer.from()
       JSON.stringify({ userId, sessionId, type: 'impersonation' })
     ).toString('base64');
   }

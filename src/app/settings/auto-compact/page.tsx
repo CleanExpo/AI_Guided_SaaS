@@ -58,7 +58,7 @@ export default function AutoCompactPage() {
     isRunning: false
   });
   
-  const [recentResults, setRecentResults] = useState<FileResult[]>([]);
+  const [recentResults, setRecentResults] = useState<FileResultnull>(null);
   const [threshold, setThreshold] = useState(1); // KB
   const [preserveComments, setPreserveComments] = useState(false);
 
@@ -114,7 +114,7 @@ export default function AutoCompactPage() {
     setTimeout(() => {
       setStats(prev => ({
         ...prev,
-        isRunning: false,
+        isRunning: false))
         lastRun: new Date(),
         processedFiles: prev.processedFiles + 15,
         totalReduction: prev.totalReduction + 500000
@@ -156,8 +156,7 @@ export default function AutoCompactPage() {
     }
   };
 
-  return (
-    <div className="min-h-screen glass p-8">
+  return(<div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -166,7 +165,7 @@ export default function AutoCompactPage() {
         </div>
 
         {/* System Status */}
-        <Card className="mb-8" className="glass
+        <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -176,16 +175,14 @@ export default function AutoCompactPage() {
                 </Badge>
               </div>
               <Switch
-                checked={isEnabled}
-                onCheckedChange={setIsEnabled}
-              />
+                checked={isEnabled}>onCheckedChange={setIsEnabled} />>
             </div>
           </CardHeader>
           <CardContent className="glass"
             <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
                 <p className="text-sm text-gray-500">Total Reduction</p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-2xl font-bold text-green-600">)
                   {formatBytes(stats.totalReduction)}
                 </p>
               </div>
@@ -212,9 +209,7 @@ export default function AutoCompactPage() {
             <div className="glass flex items-center gap-4">
               <Button
                 onClick={runCompaction}
-                disabled={stats.isRunning || !isEnabled}
-                className="flex items-center gap-2"
-              >
+                disabled={stats.isRunning || !isEnabled}>className="flex items-center gap-2">>
                 {stats.isRunning ? (
                   <>
                     <RefreshCw className="h-4 w-4 animate-spin" />
@@ -247,7 +242,7 @@ export default function AutoCompactPage() {
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Settings className="h-5 w-5" />
                 Configuration
               </CardTitle>
@@ -261,9 +256,7 @@ export default function AutoCompactPage() {
                       <label key={level} className="flex items-center gap-3">
                         <input
                           type="radio"
-                          value={level}
-                          checked={compactLevel === level}
-                          onChange={(e) => setCompactLevel(e.target.value as any)}
+                          value={level}>checked={compactLevel === level})>onChange={(e) => setCompactLevel(e.target.value as any)}
                         />
                         <span className={`capitalize ${getCompactLevelColor(level)}`}>
                           {level}
@@ -281,9 +274,7 @@ export default function AutoCompactPage() {
                 <div>
                   <label className="text-sm font-medium">File Size Threshold (KB)</label>
                   <input
-                    type="number"
-                    value={threshold}
-                    onChange={(e) => setThreshold(Number(e.target.value))}
+                    type="number">value={threshold}>onChange={(e) => setThreshold(Number(e.target.value))}
                     min="0.5"
                     max="100"
                     step="0.5"
@@ -300,9 +291,7 @@ export default function AutoCompactPage() {
                     <p className="text-xs text-gray-500">Keep important code comments</p>
                   </div>
                   <Switch
-                    checked={preserveComments}
-                    onCheckedChange={setPreserveComments}
-                  />
+                    checked={preserveComments}>onCheckedChange={setPreserveComments} />>
                 </div>
 
                 <Button variant="outline" className="w-full">
@@ -320,11 +309,10 @@ export default function AutoCompactPage() {
               <div className="space-y-3">
                 {recentResults.map((result, index) => {
                   const Icon = getFileIcon(result.type);
-                  return (
-                    <div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
+                  return(<div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
                       <div className="flex items-center gap-3">
                         <Icon className="h-4 w-4 text-gray-600" />
-                        <div>
+                        <div>)
                           <p className="text-sm font-medium">{result.file.split('/').pop()}</p>
                           <p className="text-xs text-gray-500">
                             {formatBytes(result.originalSize)} → {formatBytes(result.compactedSize)}

@@ -37,8 +37,8 @@ export class DevOpsAgent extends Agent {
   
   constructor(config: Partial<AgentConfig> = {}) {</AgentConfig>
     super({ id: 'devops-agent',
-      name: 'DevOps Agent',
-      type: 'specialist',
+      name: 'DevOps Agent')
+      type: 'specialist',)
       ...config    })
 }
 
@@ -96,8 +96,8 @@ export class DevOpsAgent extends Agent {
       this.logger.error('DevOps task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message,
-          task: message.type
+        payload: { error: error.message)
+          task: message.type)
         }    })
 }
   }
@@ -113,8 +113,8 @@ export class DevOpsAgent extends Agent {
     
     // Request QA validation
     await this.sendMessage({ to: 'qa-agent',
-      type: 'validate',
-      payload: { environment: payload.environment }
+      type: 'validate')
+      payload: { environment: payload.environment })
     });
     
     // Wait for QA approval (simplified - in real implementation would use proper async handling)
@@ -133,9 +133,9 @@ export class DevOpsAgent extends Agent {
     
     // Report results
     await this.sendMessage({ to: 'orchestrator',
-      type: 'deployment-complete',
+      type: 'deployment-complete')
       payload: result
-   
+   )
     });
     
     // If deployment failed, trigger rollback consideration
@@ -144,7 +144,7 @@ export class DevOpsAgent extends Agent {
 }
   }
 
-  private async handleRollback(payload: { deploymentId: string
+  private async handleRollback(payload: { deploymentId: string)
     }): Promise<void> {
     this.logger.info(`Initiating rollback to deployment ${payload.deploymentId}`);
     
@@ -158,8 +158,8 @@ export class DevOpsAgent extends Agent {
     const rollbackResult = await this.executeRollback(previousDeployment);
     
     await this.sendMessage({ to: 'orchestrator',
-      type: 'rollback-complete',
-      payload: rollbackResult   
+      type: 'rollback-complete')
+      payload: rollbackResult   )
     })
 }
 
@@ -169,28 +169,28 @@ export class DevOpsAgent extends Agent {
     // Alert if issues detected
     if (health.status !== 'healthy') {
       await this.sendMessage({ to: 'orchestrator',
-        type: 'health-alert',
+        type: 'health-alert')
         payload: health
-     
+     )
     });
       
       // Trigger self-healing if critical
       if (health.status === 'down') {
         await this.sendMessage({ to: 'self-healing-agent',
-          type: 'critical-failure',
-          payload: health   
+          type: 'critical-failure')
+          payload: health   )
     })
 }
     }
     
     // Regular health report
     await this.sendMessage({ to: 'orchestrator',
-      type: 'health-report',
-      payload: health   
+      type: 'health-report')
+      payload: health   )
     })
 }
 
-  private async handleScaling(payload: { service: string, instances: number
+  private async handleScaling(payload: { service: string, instances: number)
     }): Promise<void> {
     this.logger.info(`Scaling ${payload.service} to ${payload.instances} instances`);
     
@@ -198,8 +198,8 @@ export class DevOpsAgent extends Agent {
     const scalingResult = await this.scaleService(payload.service, payload.instances);
     
     await this.sendMessage({ to: 'orchestrator',
-      type: 'scaling-complete',
-      payload: scalingResult   
+      type: 'scaling-complete')
+      payload: scalingResult   )
     })
 }
 
@@ -268,7 +268,7 @@ export class DevOpsAgent extends Agent {
     
     const command = `vercel deploy ${config.environment === 'production' ? '--prod' : ''} ${envVars}`;
     
-    const output = execSync(command, { encoding: 'utf8'
+    const output = execSync(command, { encoding: 'utf8')
     });
     
     // Parse deployment URL from output
@@ -284,7 +284,7 @@ export class DevOpsAgent extends Agent {
     // Railway deployment logic
     const command = `railway up -e ${config.environment}`;
     
-    execSync(command, { encoding: 'utf8'
+    execSync(command, { encoding: 'utf8')
     });
     
     return { deploymentId: `railway-${Date.now()}`,
@@ -415,8 +415,8 @@ export class DevOpsAgent extends Agent {
       await this.sendMessage({ to: 'orchestrator',
         type: 'rollback-recommendation',
         payload: {
-          environment,
-          recommendedDeployment: lastSuccessful.deploymentId
+          environment)
+          recommendedDeployment: lastSuccessful.deploymentId)
         }    })
 }
   }
@@ -435,7 +435,7 @@ export class DevOpsAgent extends Agent {
 
   private checkGitStatus(): boolean {
     try {
-      const status = execSync('git status --porcelain', { encoding: 'utf8'
+      const status = execSync('git status --porcelain', { encoding: 'utf8')
     });
       return status.trim() === ''
 } catch {
@@ -445,7 +445,7 @@ export class DevOpsAgent extends Agent {
 
   private checkBranchProtection(branch? null : string): boolean {
     // Check if deploying from protected branch
-    const currentBranch = execSync('git branch --show-current', { encoding: 'utf8'
+    const currentBranch = execSync('git branch --show-current', { encoding: 'utf8')
     }).trim();
     const protectedBranches = ['main', 'master', 'production'];
     
@@ -474,8 +474,8 @@ export class DevOpsAgent extends Agent {
 { await this.checkSystemHealth(payload.services);
     
     await this.sendMessage({ to: payload.from || 'orchestrator',
-      type: 'health-status',
-      payload: health   
+      type: 'health-status')
+      payload: health   )
     })
 }
 }

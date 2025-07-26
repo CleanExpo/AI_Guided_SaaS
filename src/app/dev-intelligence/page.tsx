@@ -3,7 +3,7 @@ import { DevelopmentIntelligence } from '@/components/dev-intelligence/Developme
 
 export const metadata: Metadata = {
   title: 'Development Intelligence - AI Guided SaaS',
-  description: 'Autonomous development lifecycle intelligence and project analysis',
+  description: 'Autonomous development lifecycle intelligence and project analysis'
 };
 
 export default function DevIntelligencePage() {

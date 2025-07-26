@@ -30,8 +30,8 @@ export class BackendMigrator {
   private targetAdapter: BackendAdapter
   private options: MigrationOptions
   private progress: MigrationProgress, constructor(sourceConfig,
-    targetConfig,
-    options: MigrationOptions = {}
+    targetConfig)
+    options: MigrationOptions = {})
   ) {
     this.sourceAdapter = createBackendAdapter(sourceConfig, this.targetAdapter = createBackendAdapter(targetConfig), this.options={ batchSize: 100;
     includeUsers: true;
@@ -49,7 +49,7 @@ export class BackendMigrator {
 }
   async migrate(): Promise<any> {
 { Date.now(, try {
-      // Count total records;
+      // Count total records;)
       await this.countRecords(); // Migrate users;
 if (this.options.includeUsers) {
         await this.migrateCollection('users', this.migrateUser.bind(this))
@@ -110,7 +110,7 @@ for (const record of batch.data) {
             await migrator(record)}
           this.progress.processedRecords++
         } catch (error) {
-          this.progress.errors.push({
+          this.progress.errors.push({)
             collection,; recordId: (record as any).id || 'unknown',
     error: error instanceof Error ? error.message : 'Unknown error'   
     })
@@ -152,20 +152,19 @@ const _newUser = await this.targetAdapter.create<User>('users', {</User>
 /**
  * Validate that source and target backends are compatible;
  */;
-export async function validateMigration(
-  sourceConfig,
+export async function validateMigration(sourceConfig,)
   targetConfig): Promise<any> {
   const issues: string[] = [], try {;
     const source  = createBackendAdapter(sourceConfig); const target = createBackendAdapter(targetConfig);
     // Test source connection
     try {
-      await source.list('users', { limit: 1   
+      await source.list('users', { limit: 1   )
     })
     } catch {
       issues.push('Cannot connect to source backend')}
     // Test target connection
     try {
-      await target.list('users', { limit: 1   
+      await target.list('users', { limit: 1   )
     })
     } catch {
       issues.push('Cannot connect to target backend')};
@@ -180,10 +179,9 @@ if (sourceConfig.type === targetConfig.type && sourceConfig.url === targetConfig
 /**
  * Export data from a backend;
  */;
-export async function exportBackendData(
-  config,
-  collections: string[] = ['users', 'projects']
-): Promise<Record<string any[]>> {</Record>
+export async function exportBackendData(config)
+  collections: string[] = ['users', 'projects'])
+): Promise<Record<string any[]> {</Record>
 { createBackendAdapter(config); const data: Record<string any[]> = {}</string>
   for (const collection of collections) {
     const records = []; let offset = 0; let hasMore = true;
@@ -202,10 +200,9 @@ hasMore = batch.hasMore
 /**
  * Import data to a backend
  */;
-export async function importBackendData(
-  config,
+export async function importBackendData(config)
   data: Record<string any[]>,</string>
-    options: { overwrite?: boolean } = {}
+    options: { overwrite?: boolean } = {})
 ): Promise<any> {
 { createBackendAdapter(config); const _startTime = Date.now(); let totalRecords = 0;
   let migratedRecords = 0;
@@ -226,9 +223,9 @@ const errors: MigrationError[] = [];
       } catch (error) {
         errors.push({
           collection,;
-          recordId: record.id || 'unknown',
+          recordId: record.id || 'unknown')
     error: error instanceof Error ? error.message : 'Unknown error'
-       
+       )
     })}
   return { success: errors.length === 0;
     totalRecords,

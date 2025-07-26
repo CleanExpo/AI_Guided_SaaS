@@ -48,8 +48,8 @@ export class AgentOrchestrator {
       ...config
 }
     this.runtime = new AgentRuntime({ enableLogging: this.config.enableLogging,
-    maxConcurrentAgents: this.config.maxConcurrentAgents,
-    timeoutMs: this.config.timeoutMs   
+    maxConcurrentAgents: this.config.maxConcurrentAgents)
+    timeoutMs: this.config.timeoutMs   )
     })
 }
   /**
@@ -101,7 +101,7 @@ const _recommendations = await this.generateRecommendations();
 
 const plan: ExecutionPlan={;
       tasks;
-      dependencies: new Map(
+      dependencies: new Map()
         tasks.filter((t) => t.dependencies!.length > 0)
           .map((t) => [t.id, t.dependencies!]), executionOrder: tasks.map((t) => [t.id], estimatedDuration: tasks.length * 30000
 };
@@ -142,7 +142,7 @@ if (request.constraints && request.constraints.length > 0) {
     const artifacts = new Map(, results.forEach((result) =>  {
       if (result.result.success && result.result.artifacts) {
         result.result.artifacts.forEach((value, key) => {
-          artifacts.set(`${result.agentType};-${key}`, value)``
+          artifacts.set(`${result.agentType}-${key}`, value)``
         })});
     return artifacts
 }
@@ -165,8 +165,8 @@ Create a summary, with:
 Format as JSON ProjectSummary object.`;
 
 const response = await generateAIResponse(summaryPrompt, { model: this.config.modelConfig?.model,
-    temperature: 0.3,
-    responseFormat: 'json'   
+    temperature: 0.3)
+    responseFormat: 'json'   )
     })
     return JSON.parse(response)
 }
@@ -188,8 +188,8 @@ Generate 5-7 specific, actionable recommendations, that:
 5. Are practical and implementable
 Return as a simple array of recommendation strings.`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.modelConfig?.model,
-    temperature: 0.4   
+const response = await generateAIResponse(recommendPrompt, { model: this.config.modelConfig?.model)
+    temperature: 0.4   )
     })
     return response.message.split('\n').filter((line: string) => line.trim().length > 0)
 }
@@ -225,20 +225,19 @@ export async function analyzeProject(description: string): Promise<any> {
 };
 export async function planProject(description: string, constraints? null : string[]): Promise<any> {
 { new AgentOrchestrator();
-        return orchestrator.processProject({ description: type, 'planning',
+        return orchestrator.processProject({ description: type, 'planning',)
     // constraints    })
 };
 export async function architectProject(description: string, priorities? null : string[]): Promise<any> {
 { new AgentOrchestrator();
-        return orchestrator.processProject({ description: type, 'architecture',
+        return orchestrator.processProject({ description: type, 'architecture',)
     // priorities    })
 };
-export async function fullStackProject(
-    description: string;
-  options? null : Partial<ProjectRequest></ProjectRequest>
+export async function fullStackProject(description: string;
+  options? null : Partial<ProjectRequest></ProjectRequest>)
 ): Promise<any> {
 { new AgentOrchestrator();
-        return orchestrator.processProject({ description: type, 'full-stack',
+        return orchestrator.processProject({ description: type, 'full-stack',)
     ...options    })
 }
 }}}}}}}}}}

@@ -43,8 +43,7 @@ export default function DataFlexibilityPage() {
     }
   ];
 
-  return (
-    <div className="min-h-screen glass py-8">
+  return(<div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -62,7 +61,7 @@ export default function DataFlexibilityPage() {
                 <CardTitle className="glass"Available Data Sources</CardTitle>
               </CardHeader>
               <CardContent className="glass"
-                <div className="space-y-4">
+                <div className="space-y-4">)
                   {dataSources.map((source) => (
                     <div key={source.id} className="glass flex items-center space-x-4 p-4  rounded-xl-lg">
                       <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center">
@@ -72,9 +71,7 @@ export default function DataFlexibilityPage() {
                         <h3 className="font-semibold text-gray-900">{source.name}</h3>
                         <p className="text-sm text-gray-600">{source.description}</p>
                       </div>
-                      <Badge 
-                        variant={source.status === 'connected' ? 'default' : 'secondary'}
-                      >
+                      <Badge >variant={source.status === 'connected' ? 'default' : 'secondary'}>
                         {source.status}
                       </Badge>
                     </div>

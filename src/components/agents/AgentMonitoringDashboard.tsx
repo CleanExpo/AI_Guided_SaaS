@@ -39,7 +39,7 @@ interface SystemMetrics { totalTasks: number
 }
 
 export function AgentMonitoringDashboard() {
-  const [agents, setAgents] = useState<AgentStatus[]>([]);</AgentStatus>
+  const [agents, setAgents] = useState<AgentStatusnull>(null);</AgentStatus>
   const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(null);</SystemMetrics>
   const [selectedAgent, setSelectedAgent] = useState<string | null>(null);</string>
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -111,26 +111,21 @@ export function AgentMonitoringDashboard() {
 }
 };
 
-  return (
-    <div className="w-full space-y-6">
+  return(<div className="w-full space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold">Agent Monitoring Dashboard</h2>
         <div className="glass flex items-center gap-4">
           <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={autoRefresh}
-              onChange={(e) => setAutoRefresh(e.target.checked)}</input>
+            <input)
+              type="checkbox">checked={autoRefresh}>onChange={(e) => setAutoRefresh(e.target.checked)}</input>
               className="rounded-lg";
             />
             <span className="text-sm">Auto-refresh</span>
           <Button
             size="sm";
             variant="outline";
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-          >
+            onClick={handleRefresh}>disabled={isRefreshing}>
           <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`/>
             Refresh
           </Button>
@@ -139,8 +134,8 @@ export function AgentMonitoringDashboard() {
       {/* System Overview */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card className="glass"</Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-          <CardTitle className="text-sm font-medium" className="glassSystem Health</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+          <CardTitle className="text-sm font-medium glassSystem Health</CardTitle>
             <Activity className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -151,8 +146,8 @@ export function AgentMonitoringDashboard() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassActive Agents</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassActive Agents</CardTitle>
             <Users className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -163,8 +158,8 @@ export function AgentMonitoringDashboard() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassTask Queue</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassTask Queue</CardTitle>
             <Clock className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -173,8 +168,8 @@ export function AgentMonitoringDashboard() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassSuccess Rate</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassSuccess Rate</CardTitle>
             <BarChart3 className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -231,17 +226,16 @@ export function AgentMonitoringDashboard() {
                   selectedAgent === agent.id ? 'border-primary' : ''
 }`}
                 onClick={() = className="glass setSelectedAgent(agent.id)}</Card>
-              >
                 <CardHeader className="glass"
           <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg" className="glass{agent.name}</CardTitle>
+                    <CardTitle className="text-lg glass{agent.name}</CardTitle>
                     <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`/>
                 </CardHeader>
                 <CardContent className="glass"
           <div className="space-y-2">
                     <div className="flex items-center justify-between">
           <span className="text-sm">Status</span>
-                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'}>/>
+                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'} />>
                         {agent.status}
                       />
                     </div>
@@ -332,9 +326,9 @@ export function AgentMonitoringDashboard() {
 
       {/* Alerts */}
       {systemMetrics?.systemHealth !== 'healthy' && (
-        <Card className="-yellow-500" className="glass
+        <Card className="-yellow-500 glass
           <CardHeader className="glass"</CardHeader>
-            <CardTitle className="flex items-center gap-2" className="glass
+            <CardTitle className="flex items-center gap-2 glass
           <AlertTriangle className="w-5 h-5 text-yellow-500"   />
               System Alerts
             </CardTitle>

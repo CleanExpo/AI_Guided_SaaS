@@ -5,7 +5,7 @@ import { logger } from '@/lib/logger';
   protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'system_design':
-      return this.designSystemArchitecture(task.payload, break, case 'technology_selection':;
+      return this.designSystemArchitecture(task.payload, break, case 'technology_selection':;)
       return this.selectTechnologies(task.payload);
     break;
       case 'scalability_planning':
@@ -116,8 +116,8 @@ if (require.main === module) {
       'security_design',
       'integration_architecture',
       'performance_optimization',
-      'cloud_architecture',
-      'microservices',
+      'cloud_architecture')
+      'microservices',)
       'best_practices'] });
   agent.start().catch ((error) => {
     logger.error('Failed to start, Architect: Agent:', error, process.exit(1)    })

@@ -135,7 +135,7 @@ export const KiroProjectSchema = z.object({ name: z.string().min(1).max(100, des
 export class KiroClient {
   private config: KiroConfig
   private ws: WebSocket | null = null
-  private eventHandlers: Map<string Set<Function>> = new Map(, constructor(config: KiroConfig) {</string>
+  private eventHandlers: Map<string Set<Function> = new Map(, constructor(config: KiroConfig) {</string>
     this.config = config
 }
   // Connection management
@@ -143,7 +143,7 @@ export class KiroClient {
 { this.config.apiUrl.replace(/^https?: /, 'ws:') + '/ws', return new Promise((resolve, reject) =>  { this.ws = new WebSocket(wsUrl, this.ws.onopen = () => {
         // Send authentication;
 if (this.config.apiKey) {
-          this.send('auth', { apiKey: this.config.apiKey   
+          this.send('auth', { apiKey: this.config.apiKey   )
     })
 }
         resolve()
@@ -160,9 +160,9 @@ if (this.config.apiKey) {
       this.ws.close(, this.ws = null
   }
 }
-  // Project management
+  // Project management)
   async createProject(project: Omit<KiroProject 'id' | 'createdAt' | 'updatedAt'>): Promise<any> {
-{ KiroProjectSchema.parse(project); const response = await this.request('/api/projects', { method: 'POST',
+{ KiroProjectSchema.parse(project); const response = await this.request('/api/projects', { method: 'POST',)
       body: JSON.stringify(validated)   
     })
     return response
@@ -174,7 +174,7 @@ if (this.config.apiKey) {
     return project
 }
   async saveProject(projectId: string): Promise<any> {
-    await this.request(`/api/projects/${projectId}/save`, {``, method: 'POST'   
+    await this.request(`/api/projects/${projectId}/save`, {``, method: 'POST'   )
     })
 }
   async listProjects(): Promise<any> {
@@ -204,38 +204,38 @@ if (this.config.apiKey) {
 }
   // Terminal operations
   async createTerminal(config? null : Partial<KiroTerminal>): Promise<any> {
-    return this.request('/api/terminals', { method: 'POST',
+    return this.request('/api/terminals', { method: 'POST',)
       body: JSON.stringify(config || {})}
   async executeCommand(terminalId: string, command: string): Promise<any> {
     this.send('terminal.execute', { terminalId, command    })
 }
   async closeTerminal(terminalId: string): Promise<any> {
-    await this.request(`/api/terminals/${terminalId}`, {``, method: 'DELETE'   
+    await this.request(`/api/terminals/${terminalId}`, {``, method: 'DELETE'   )
     })
 }
   // AI assistance
-  async getAISuggestions(file: string, position? null : { line: number, character: number
+  async getAISuggestions(file: string, position? null : { line: number, character: number)
     }): Promise<any> {
-    return this.request('/api/ai/assist', { method: 'POST',
+    return this.request('/api/ai/assist', { method: 'POST',)
       body: JSON.stringify({ file, position })}
   async applyAISuggestion(suggestionId: string): Promise<any> {
-    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``, method: 'POST'   
+    await this.request(`/api/ai/suggestions/${suggestionId}/apply`, {``, method: 'POST'   )
     })
 }
-  async getCompletions(file: string, position: { line: number, character: number
+  async getCompletions(file: string, position: { line: number, character: number)
     }): Promise<any> {
-    return this.request('/api/ai/completions', { method: 'POST',
+    return this.request('/api/ai/completions', { method: 'POST',)
       body: JSON.stringify({ file, position })}
   async runDiagnostics(projectId: string): Promise<any> {
     return this.request(`/api/projects/${projectId}/diagnostics`)``
 };
-  async applyQuickFix(file: string, line: number;
+  async applyQuickFix(file: string, line: number;)
   fixIndex: number): Promise<any> {
-    await this.request('/api/ai/quickfix', { method: 'POST',
+    await this.request('/api/ai/quickfix', { method: 'POST',)
       body: JSON.stringify({ file, line, fixIndex })}
   // Debugging
   async startDebugSession(config: Omit<KiroDebugSession 'id'>): Promise<any> {
-    return this.request('/api/debug/sessions', { method: 'POST',
+    return this.request('/api/debug/sessions', { method: 'POST',)
       body: JSON.stringify(config)   
     })
 }
@@ -255,7 +255,7 @@ if (this.config.apiKey) {
     this.send('debug.continue', { sessionId    })
 }
   async stopDebugSession(sessionId: string): Promise<any> {
-    await this.request(`/api/debug/sessions/${sessionId}`, {``, method: 'DELETE'   
+    await this.request(`/api/debug/sessions/${sessionId}`, {``, method: 'DELETE'   )
     })
 };
   // Event handling;
@@ -293,8 +293,8 @@ const headers: Record<string string> = {</string>
       headers['Authorization'] = `Bearer ${this.config.apiKey}`
 }
     const response = await fetch(url, {
-      ...options,
-      // headers
+      ...options)
+      // headers)
 });
 if (!response.ok) {
       const error = await response.json().catch(() => ({ message: response.statusText

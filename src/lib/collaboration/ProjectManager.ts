@@ -12,7 +12,7 @@ export class ProjectManager {
 
     if (isServiceConfigured('database')) {
       try {
-        await DatabaseService.query(
+        await DatabaseService.query()
           `INSERT INTO project_changes (id, project_id, user_id, type, path, content, previous_content, timestamp)
            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
           [
@@ -37,9 +37,8 @@ export class ProjectManager {
   async getProjectData(projectId: string): Promise<ProjectData> {
     if (isServiceConfigured('database')) {
       try {
-        const projects = await DatabaseService.query(
-          'SELECT * FROM projects WHERE id = ?',
-          [projectId]
+        const projects = await DatabaseService.query('SELECT * FROM projects WHERE id = ?')
+          [projectId])
         );
 
         if (projects.length > 0) {
@@ -68,9 +67,8 @@ export class ProjectManager {
   static async getProjectChanges(projectId: string, limit: number = 50): Promise<ProjectChange[]> {
     if (isServiceConfigured('database')) {
       try {
-        const changes = await DatabaseService.query(
-          'SELECT * FROM project_changes WHERE project_id = ? ORDER BY timestamp DESC LIMIT ?',
-          [projectId, limit]
+        const changes = await DatabaseService.query('SELECT * FROM project_changes WHERE project_id = ? ORDER BY timestamp DESC LIMIT ?')
+          [projectId, limit])
         );
 
         return changes.map((change) => {

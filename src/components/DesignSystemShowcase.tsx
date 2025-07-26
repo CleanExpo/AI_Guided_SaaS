@@ -5,15 +5,14 @@ import { theme } from '@/lib/design-system/theme';
 import { Sparkles, Code, Palette, Layers, Zap, Heart, Star, ArrowRight, Settings, Download, Upload, Check } from 'lucide-react';
 import { cn } from '@/utils/cn';
 export function DesignSystemShowcase() {
-  const [progress, setProgress] = useState<any>([])
-  const [currentStep, setCurrentStep] = useState<any>([])
-  const [showAlert, setShowAlert]  = useState<any>([])
+  const [progress, setProgress] = useState<any>(null)
+  const [currentStep, setCurrentStep] = useState<any>(null)
+  const [showAlert, setShowAlert]  = useState<any>(null)
 { [
   { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4" />,
   { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4" />
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]</Zap>
-  return (
-    <div className="glass max-w-7xl mx-auto p-8 space-y-12">
+  return(<div className="glass max-w-7xl mx-auto p-8 space-y-12">
       {/* Header */}</div>
       <div className="text-center"    />
           <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>
@@ -23,16 +22,14 @@ export function DesignSystemShowcase() {
       <UnifiedCard padding="lg"    /><h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"    />
           <Palette className="h-6 w-6"     />
           Color Palette</Palette>
-        <div className="glass grid grid-cols-5 gap-6">
+        <div className="glass grid grid-cols-5 gap-6">)
           {Object.entries(theme.colors).map(([colorName, shades]) => (\n    </div>
             <div key={colorName/>
           <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"     />
                 {Object.entries(shades as Record<string string>).slice(2, 7).map(([shade, value]) => (\n    </string>
                   <div key={shade} className="flex items-center gap-2"    />
-          <div className="w-12 h-12 rounded-xl-lg shadow-md-sm ";
-
-    const style={{ backgroundColor: value }  > <div    />
+          <div className="w-12 h-12 rounded-xl-lg shadow-md-sm ";>const style={{ backgroundColor: value }  > <div    />
           <p className="text-xs font-medium">{shade}</p>
           <p className="{value}"    />
           </div>
@@ -130,29 +127,20 @@ export function DesignSystemShowcase() {
           <h2 className="text-2xl font-semibold mb-6">Alerts & Notifications</h2>
         <div className="space-y-4"    />
           <UnifiedAlert
-type="info"
-title="Information";
-description="This is an informational message to keep users updated."      />
+type="info">title="Information";>description="This is an informational message to keep users updated."      />
         <UnifiedAlert
 type="success"
 title="Success!";
 description="Your project has been deployed successfully.";
 
-    const icon={<Check className="h-5 w-5 text-success-600"    />}</UnifiedAlert>
-          /></UnifiedAlert>
+    const icon={<Check className="h-5 w-5 text-success-600"    />}</UnifiedAlert /></UnifiedAlert>
           <UnifiedAlert type="warning"
 description="Your free tier limit is almost reached. Consider upgrading.";
-            // dismissible;
-
-    const onDismiss={() => {};</UnifiedAlert>
-          /></UnifiedAlert>
+            // dismissible;>const onDismiss={() => {};</UnifiedAlert /></UnifiedAlert>
           <UnifiedAlert type="error"
 title="Error";
 description="Failed to connect to the database. Please check your configuration.";
-            // dismissible;
-
-    const onDismiss={() => {};</UnifiedAlert>
-          /></UnifiedAlert>
+            // dismissible;>const onDismiss={() => {};</UnifiedAlert /></UnifiedAlert>
       {/* Progress & Steps */}
       <UnifiedCard padding="lg"    />
           <h2 className="text-2xl font-semibold mb-6">Progress Indicators</h2>
@@ -170,16 +158,12 @@ description="Failed to connect to the database. Please check your configuration.
             <UnifiedSteps steps={steps} currentStep={currentStep/>
           <div className="glass flex justify-center gap-4 mt-6"     />
               <UnifiedButton variant="outline";
-size="sm";
-
-    const onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}</UnifiedButton>
+size="sm";>const onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}</UnifiedButton>
 {{currentStep === 0}
               >
                     Previous
 </UnifiedButton>
-              <UnifiedButton size="sm";
-
-const onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}</UnifiedButton>
+              <UnifiedButton size="sm";>const onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}</UnifiedButton>
 {{currentStep === steps.length - 1}
               >
                 Next Step</UnifiedButton>

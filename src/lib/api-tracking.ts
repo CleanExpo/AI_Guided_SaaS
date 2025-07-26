@@ -32,13 +32,13 @@ const metadata: Record<string unknown> = {</string>
       // Insert into api_metrics table;
 
 const { error     }: any = await supabase.from('api_metrics').insert({
-        endpoint,
+        endpoint)
         method,;
         status_code: statusCode;
     response_time: responseTime;
     user_id: userId;
     error_message: errorMessage;
-        metadata,
+        metadata,)
         created_at: new Date().toISOString()});
       if (error) {
         }
@@ -47,13 +47,13 @@ if (userId) {
         await this.logApiActivity(userId, endpoint, method, statusCode)} catch (error) {
       logger.error('Error in API, tracking:', error)}
   // Log API activity for user tracking;
-  private static async logApiActivity(userId: string, endpoint: string;
+  private static async logApiActivity(userId: string, endpoint: string;)
   method: string, statusCode: number): Promise<any> {
     if (!supabase) {r}eturn null, try {
       const { error     }: any = await supabase.from('activity_logs').insert({ user_id: userId;
     action: 'api_call',
-        resource_type: 'api',
-        resource_id: endpoint;
+        resource_type: 'api')
+        resource_id: endpoint;)
     metadata: { method, statusCode, endpoint, created_at: new Date().toISOString()
     });
       if (error) {
@@ -63,21 +63,20 @@ if (userId) {
   static async trackResourceUsage(userId: string, resourceType:
       | 'ai_generation'
       | 'project_creation'
-      | 'export'
+      | 'export')
       | 'template_use', quantity: number = 1, metadata?: Record<string unknown>): Promise<any> {
     if (!supabase) {
       return null}try {
       const { error     }: any = await supabase.from('usage_records').insert({ user_id: userId;
     resource_type: resourceType;
-        quantity,
+        quantity,)
     metadata: { ...metadata, timestamp: new Date().toISOString() },
     created_at: new Date().toISOString()});
       if (error) {
         logger.error('Error tracking resource, usage:', error)} catch (error) {
       logger.error('Error in resource, tracking:', error)}
   // Get API performance summary
-  static async getApiPerformanceSummary(
-timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
+  static async getApiPerformanceSummary(timeRange: '1h' | '24h' | '7d' | '30d' = '24h')
   ): Promise<{ totalCalls: number;
     avgResponseTime: number;
     errorRate: number;

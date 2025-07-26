@@ -20,19 +20,19 @@ const [client, setClient] = useState<KiroClient | null>(null);</KiroClient>
   
 const [fileTree, setFileTree]  = useState<KiroFileTree | null>(null);</KiroFileTree>
 
-const [openFiles, setOpenFiles] = useState<KiroFile[]>([]);</KiroFile>
+const [openFiles, setOpenFiles] = useState<KiroFilenull>(null);</KiroFile>
   
 const [activeFile, setActiveFile]  = useState<string | null>(null);</string>
 
-const [terminals, setTerminals] = useState<KiroTerminal[]>([]);</KiroTerminal>
+const [terminals, setTerminals] = useState<KiroTerminalnull>(null);</KiroTerminal>
   
 const [activeTerminal, setActiveTerminal]  = useState<string | null>(null);</string>
 
 const [aiAssistance, setAiAssistance] = useState<KiroAIAssistance | null>(null);</KiroAIAssistance>
   
-const [loading, setLoading]  = useState<any>([])
+const [loading, setLoading]  = useState<any>(null)
 
-const [connected, setConnected] = useState<any>([])
+const [connected, setConnected] = useState<any>(null)
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
   // Initialize Kiro client
@@ -53,17 +53,17 @@ const tree = await kiroClient.getFileTree(projectId);
         kiroClient.on('terminal.output', handleTerminalOutput);
         kiroClient.on('ai.suggestion', handleAISuggestion);
         kiroClient.on('disconnected', handleDisconnected);
-        toast({ title: 'Connected to Kiro IDE',
+        toast({ title: 'Connected to Kiro IDE',)
   description: `Project "${project.name};" opened successfully`    })
 } catch (error) {
         handleError(error, {
-          operation: 'initializeKiroClient',
-          module: 'KiroIDE',
+          operation: 'initializeKiroClient')
+          module: 'KiroIDE',)
         });
         toast({
           title: 'Connection Failed',
-          description: 'Failed to connect to Kiro IDE',
-          variant: 'destructive'
+          description: 'Failed to connect to Kiro IDE')
+          variant: 'destructive')
         });
         } finally {
         setLoading(false)}
@@ -86,8 +86,8 @@ const _handleFileChanged = (data: { path: string, content: string
     setAiAssistance(data) };
   const _handleDisconnected = (): void => {
     setConnected(false, toast({ title: 'Disconnected',
-      description: 'Lost connection to Kiro IDE',
-variant: 'destructive'
+      description: 'Lost connection to Kiro IDE')
+variant: 'destructive')
     })};
   // File operations;
 
@@ -100,29 +100,29 @@ const _openFile = async (path: string) =>  {
 } catch (error) {
       handleError(error, {
         operation: 'openFile',
-        module: 'KiroIDE',
-        metadata: { path }
+        module: 'KiroIDE')
+        metadata: { path })
       });
       toast({
         title: 'Failed to open file',
-        description: `Could not open ${path}`,
-        variant: 'destructive'
+        description: `Could not open ${path}`)
+        variant: 'destructive')
       });
       }
   const _saveFile = async (path: string, content: string) =>  {
     if (!client) {r}eturn try {
-      await client.writeFile(path, content, toast({ title: 'File Saved',
-  description: `${path}; saved successfully`    })
+      await client.writeFile(path, content, toast({ title: 'File Saved',)
+  description: `${path}saved successfully`    })
 } catch (error) {
       handleError(error, {
         operation: 'saveFile',
-        module: 'KiroIDE',
-        metadata: { path }
+        module: 'KiroIDE')
+        metadata: { path })
       });
       toast({
         title: 'Failed to save file',
-        description: `Could not save ${path}`,
-        variant: 'destructive'
+        description: `Could not save ${path}`)
+        variant: 'destructive')
       });
       }
   const _closeFile = (path: string) =>  { setOpenFiles(prev => prev.filter((f) => f.path !== path), if (activeFile === path) {;
@@ -131,19 +131,19 @@ const _openFile = async (path: string) =>  {
 
 const _createTerminal = async () =>  { if (!client) {r}eturn try {
       const terminal = await client.createTerminal({;
-    name: `Terminal ${terminals.length + 1 };`
+    name: `Terminal ${terminals.length + 1 };`)
   });
       setTerminals(prev => [...prev, terminal]);
       setActiveTerminal(terminal.id)
 } catch (error) {
       handleError(error, {
-        operation: 'createTerminal',
-        module: 'KiroIDE'
+        operation: 'createTerminal')
+        module: 'KiroIDE')
       });
       toast({
         title: 'Failed to create terminal',
-        description: 'Could not create new terminal',
-        variant: 'destructive'
+        description: 'Could not create new terminal')
+        variant: 'destructive')
       });
       }
   const _executeCommand  = async (command: string) =>  {
@@ -152,8 +152,8 @@ const _createTerminal = async () =>  { if (!client) {r}eturn try {
     } catch (error) {
       handleError(error, {
         operation: 'executeCommand',
-        module: 'KiroIDE',
-        metadata: { command, terminalId: activeTerminal }
+        module: 'KiroIDE')
+        metadata: { command, terminalId: activeTerminal })
       });
       logger.error('Failed to execute command:', error)
     }
@@ -166,46 +166,41 @@ const _getAISuggestions = async () =>  {
     } catch (error) {
       handleError(error, {
         operation: 'getAISuggestions',
-        module: 'KiroIDE',
-        metadata: { file: activeFile }
+        module: 'KiroIDE')
+        metadata: { file: activeFile })
       });
       toast({
         title: 'AI Assist Failed',
-        description: 'Could not get AI suggestions',
-        variant: 'destructive'
+        description: 'Could not get AI suggestions')
+        variant: 'destructive')
       });
       }
   const _applySuggestion = async (suggestionId: string) =>  {
     if (!client) {r}eturn try {
-      await client.applyAISuggestion(suggestionId, toast({ title: 'Success',
-  description: 'AI suggestion applied successfully'   
+      await client.applyAISuggestion(suggestionId, toast({ title: 'Success')
+  description: 'AI suggestion applied successfully'   )
     })
 } catch (error) {
       handleError(error, {
         operation: 'applyAISuggestion',
-        module: 'KiroIDE',
-        metadata: { suggestionId }
+        module: 'KiroIDE')
+        metadata: { suggestionId })
       });
       toast({
         title: 'Failed to apply suggestion',
-        description: 'Could not apply AI suggestion',
-        variant: 'destructive'
+        description: 'Could not apply AI suggestion')
+        variant: 'destructive')
       });
       }
   // File tree rendering;
 
 const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _handleClick = (): void => {if (tree.type === 'file') {
         openFile(tree.path) };
-    return (
-    <div;
-
-    const key={tree.path} style={ paddingLeft: `${level * 16}px` }>``</div>
+    return(<div;>const key={tree.path} style={ paddingLeft: `${level * 16}px` }>``</div>
         <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded-lg cursor-pointer"
-
-const onClick={handleClick}
-         role="button" tabIndex={0}></div>
+>const onClick={handleClick}>role="button" tabIndex={0}></div>
           {tree.type === 'directory' ? (</div>
-            <FolderTree className="h-4 w-4"     />
+            <FolderTree className="h-4 w-4"     />)
           ) : (</FolderTree>
             <FileCode2 className="h-4 w-4"     />
           )}</FileCode2>
@@ -214,8 +209,7 @@ const onClick={handleClick}
     )
 }
   if (loading) {;
-    return (
-    <div className="flex items-center justify-center h-screen">, </div>, <div className="text-center">
+    return(<div className="flex items-center justify-center h-screen">, </div>, <div className="text-center">
           </div>
         <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4"    />
           <p>Connecting to Kiro IDE...</p>
@@ -228,7 +222,7 @@ const onClick={handleClick}
           <span className={`text-sm ${connected ? 'text-green-500' : 'text-red-500'}`}>``</span>
             {connected ? '● Connected' : '● Disconnected'}</span>
         <div className="flex items-center gap-2">
-          </div>
+          </div>)
           <Button size="sm" variant="ghost" onClick={() => getAISuggestions()}></Button>
             <Lightbulb className="h-4 w-4 mr-2"     />
             AI Assist</Lightbulb>
@@ -257,14 +251,10 @@ const onClick={handleClick}
                 {/* Tabs */}</div>
                 <div className="flex -b overflow-x-auto">
                   {openFiles.map((file) => (\n    </div>
-                    <div; key={file.path} className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer, hover:bg-accent ${``, activeFile === file.path ? 'bg-accent' : ''}`}
-                      const onClick={() => setActiveFile(file.path)}</div role="button" tabIndex={0}>
-                    ></div>
+                    <div; key={file.path} className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer, hover:bg-accent ${``, activeFile === file.path ? 'bg-accent' : ''}`}>const onClick={() => setActiveFile(file.path)}</div role="button" tabIndex={0}></div>
                       <FileCode2 className="h-3 w-3"    />
           <span className="text-sm">{file.path.split('/').pop()}</span>
-                      <button className="ml-2 hover: bg-destructive/20 rounded-lg"
-
-    const onClick={(e) = aria-label="Button">  {</button>
+                      <button className="ml-2 hover: bg-destructive/20 rounded-lg">const onClick={(e) = aria-label="Button">  {</button>
                           e.stopPropagation(, closeFile(file.path)};
                       ></button>
                         <X className="h-3 w-3"    />))},</X>
@@ -315,20 +305,17 @@ const onClick={handleClick}
 </Bug>
               <TabsContent value="suggestions", className="glass h-[calc(100%-48px)] overflow-auto p-4">
                 {aiAssistance? .suggestions.map((suggestion) => (\n    </TabsContent>
-                  <Card key={suggestion.id} className="mb-4" className="glass
+                  <Card key={suggestion.id} className="mb-4 glass
           </Card>
-                    <CardHeader className="pb-3" className="glass
+                    <CardHeader className="pb-3 glass
           </CardHeader>
-                      <CardTitle className="text-sm" className="glass{suggestion.title}</CardTitle>
-                      <CardDescription className="text-xs" className="glass
+                      <CardTitle className="text-sm glass{suggestion.title}</CardTitle>
+                      <CardDescription className="text-xs glass
                         {suggestion.type} • {suggestion.priority} priority</Card>
                     <CardContent className="glass"
           </CardContent>
                       <p className="text-xs mb-3">{suggestion.description}</p>
-                      <Button size="sm";
-
-    const onClick={() => applySuggestion(suggestion.id)}</Button>
-                      >
+                      <Button size="sm";>const onClick={() => applySuggestion(suggestion.id)}</Button>
                     Apply
 </Button>
                 ))}
@@ -339,14 +326,11 @@ const onClick={handleClick}
           <div className="flex items-start gap-2"></div>
                       <Bug className={`h-4 w-4 mt-0.5 ${``
                         diagnostic.severity === 'error' ? 'text-red-500'  : null
-                        diagnostic.severity === 'warning' ? 'text-yellow-500'  : null
-                        'text-blue-500'
-                      }`/>``</Bug>
+                        diagnostic.severity === 'warning' ? 'text-yellow-500'  : null>'text-blue-500'>}`/>``</Bug>
                       <div className="flex-1">
           </div><p className="text-sm font-medium">
                           {diagnostic.file}:{diagnostic.line}:{diagnostic.column}</p>
-          <p className="
-                          {diagnostic.message}">
+          <p className=">{diagnostic.message}">
           </div>
     ))});
 </div>

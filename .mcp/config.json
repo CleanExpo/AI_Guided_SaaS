@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "real-data-enforcer": {
+      "command": "node",
+      "args": ["mcp/real-data-enforcer/dist/index.js"],
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build-doctor": {
+      "command": "node",
+      "args": ["mcp/build-doctor-mcp/dist/index.js"],
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}

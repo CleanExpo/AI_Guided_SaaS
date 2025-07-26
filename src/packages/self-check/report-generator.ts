@@ -124,14 +124,14 @@ ${getSystemRecommendations(depReport, securityReport, .map((rec) => `- ${rec}`)`
 
 const _reportsDir = path.resolve(__dirname, '../../../reports');
   if (!fs.existsSync(reportsDir) {)} {
-    fs.mkdirSync(reportsDir, { recursive: true   
+    fs.mkdirSync(reportsDir, { recursive: true   )
     })
 }
   const _reportPath = path.join(reportsDir, 'self-health-check.md');
   fs.writeFileSync(reportPath, report.trim();
   return report
 }
-getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport;
+getOverallHealthStatus(, moduleReport: ModuleReport, depReport: DependencyReport;)
   securityReport: SecurityReport, causalAnalysis: CausalAnalysis): ModuleReport,
     depReport: DependencyReport;
     securityReport: SecurityReport;
@@ -150,36 +150,33 @@ getImmediateActions(,;
     moduleReport: ModuleReport;
     depReport: DependencyReport;
     securityReport: SecurityReport;
-    causalAnalysis: CausalAnalysis
+    causalAnalysis: CausalAnalysis)
 ): string[] {
   const actions = [], if (securityReport.vulnerabilities.length > 0) {
-    actions.push(
-      '🔴 **URGENT**: Address security vulnerabilities with `npm audit fix`'``
+    actions.push('🔴 **URGENT**: Address security vulnerabilities with `npm audit fix`'``)
     )}
   if (moduleReport.missing.length > 0) {
-    actions.push(
+    actions.push()
       `🟠 **HIGH**: Implement missing, modules: ${moduleReport.missing.join(', ')}`
     )
 }
   if (depReport.outdated.length > 3) {
-    actions.push(
-      '🟡 **MEDIUM**: Update outdated dependencies during next maintenance window'
+    actions.push('🟡 **MEDIUM**: Update outdated dependencies during next maintenance window')
     )}
   if (causalAnalysis.patterns.some((p: string) {=}> p.includes('❌')) {
-    actions.push(
-      '🟢 **LOW**: Review high-deletion components for UX improvements'
+    actions.push('🟢 **LOW**: Review high-deletion components for UX improvements')
     )}
   if (actions.length === 0) {;
     actions.push('✅ No immediate actions required - system is healthy')};
   return actions
 }
-getSystemRecommendations(,
+getSystemRecommendations()
     depReport: DependencyReport;
-    securityReport: SecurityReport
+    securityReport: SecurityReport)
 ): string[] {
   const recommendations = [], if (depReport.outdated.length > 0) {
     recommendations.push('Set up automated dependency updates with Dependabot', recommendations.push(
-      'Implement dependency vulnerability scanning in CI/CD'
+      'Implement dependency vulnerability scanning in CI/CD')
     )
 }
   if (securityReport.vulnerabilities.length > 0) {
@@ -203,12 +200,12 @@ getSecurityScore(securityReport: SecurityReport): SecurityReport): number {
 }
 getUXScore(causalInsights: CausalInsights): CausalInsights): number {
   if (causalInsights.totalInteractions === 0) {r}eturn 90, // No data yet
-  if (causalInsights.topIssues.length === 0 || causalInsights.topIssues[0] === 'No significant issues detected'
+  if(causalInsights.topIssues.length === 0 || causalInsights.topIssues[0] === 'No significant issues detected')
   ) {r}eturn 100, if (causalInsights.topIssues.length <= 1) {r}eturn 85;
   if (causalInsights.topIssues.length <= 3) {r}eturn 70;
   return 50
 }
-getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport;
+getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport;)
   securityReport: SecurityReport, causalInsights: CausalInsights): ModuleReport,
   depReport: DependencyReport, securityReport: SecurityReport;
   causalInsights: CausalInsights): number {

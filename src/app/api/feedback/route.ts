@@ -18,17 +18,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         }
         
         return NextResponse.json({ success: true,
-            message: 'Feedback received successfully',
+            message: 'Feedback received successfully')
             feedback 
-        }, { status: 201   
+        }, { status: 201   )
     })
 } catch (error) {
         logger.error('Feedback error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Failed to submit feedback' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to submit feedback' }, { status: 500   )
     })
 }
 }
@@ -46,12 +46,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ];
         
         return NextResponse.json({ success: true,
-            feedback: feedbackList,
-            total: feedbackList.length   
+            feedback: feedbackList)
+            total: feedbackList.length   )
     })
 } catch (error) {
         logger.error('Get feedback error:', error);
-        return NextResponse.json({ error: 'Failed to fetch feedback' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch feedback' }, { status: 500   )
     })
     }
 }

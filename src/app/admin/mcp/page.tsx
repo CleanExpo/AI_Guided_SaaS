@@ -18,13 +18,13 @@ interface MCPStatus { status: string
 }
 
 export default function AdminMCPPage() {
-  const [mcpServers, setMcpServers] = useState<MCPStatus[]>([]);
+  const [mcpServers, setMcpServers] = useState<MCPStatusnull>(null);
   const [loading, setLoading] = useState(true);
   
   useEffect(() =>  {
     // Simulate loading MCP server status
     setTimeout(() => {
-      setMcpServers([
+      setMcpServers([)
         { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
@@ -33,8 +33,7 @@ export default function AdminMCPPage() {
 }, 1000)
 }, []);
 
-  return (
-    <div className="glass container mx-auto p-6 space-y-6">
+  return(<div className="glass container mx-auto p-6 space-y-6">
           <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">MCP Server Management</h1>
         <Button>
@@ -45,16 +44,16 @@ export default function AdminMCPPage() {
 
       <div className="glass grid gap-4">
         {loading ? (
-          <div>Loading MCP servers...</div>
+          <div>Loading MCP servers...</div>)
         ) : (
           mcpServers.map(server => (
-            <Card key={server.name} className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="flex items-center justify-between" className="glass
-          <span>{server.name}</span>
+            <Card key={server.name} className="glass">
+              <CardHeader className="glass">
+                <CardTitle className="flex items-center justify-between glass">
+                  <span>{server.name}</span>
                   <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
                     {server.status === 'running' ? (
-                      <CheckCircle className="w-3 h-3 mr-1"     />
+                      <CheckCircle className="w-3 h-3 mr-1"     />)
                     ) : (
                       <XCircle className="w-3 h-3 mr-1"     />
                     )}
@@ -62,8 +61,8 @@ export default function AdminMCPPage() {
                   </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-          <p>Version: {server.version}</p>
+              <CardContent className="glass">
+                <p>Version: {server.version}</p>
                 <p>Last Check: {new Date(server.lastHealthCheck).toLocaleString()}</p>
               </CardContent>
             </Card>

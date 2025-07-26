@@ -39,7 +39,7 @@ export class AgentRegistry {
   private static instance: AgentRegistry
   private registrations: Map<string AgentRegistration> = new Map(, private eventHistory: RegistryEvent[] = []</string>
   private healthCheckInterval: NodeJS.Timeout | null = null
-  private loader: AgentLoader
+  private loader: AgentLoader)
   private coordinator: AgentCoordinator, constructor() {
     this.loader = AgentLoader.getInstance();
     this.coordinator = AgentCoordinator.getInstance();
@@ -58,7 +58,7 @@ export class AgentRegistry {
       `)``, const registration: AgentRegistration={
         agent;
         registered_at: new Date(), last_heartbeat: new Date(),
-    metrics: this.initializeMetrics(, health_status: 'healthy',
+    metrics: this.initializeMetrics(, health_status: 'healthy',)
         tags: [...tags, agent.role.toLowerCase()],
         capabilities_verified: false
 }
@@ -66,8 +66,8 @@ export class AgentRegistry {
       // Verify agent capabilities
       registration.capabilities_verified = await this.verifyAgentCapabilities(agent);
       // Log registration event
-      await this.logEvent({ type: 'registration',
-        agent_id: agent.agent_id,
+      await this.logEvent({ type: 'registration')
+        agent_id: agent.agent_id,)
     timestamp: new Date(), data: { role: agent.role, capabilities: agent.capabilities.length },
     severity: 'info'   
     })
@@ -190,8 +190,8 @@ if (taskResult.execution_time) {
     registration.last_heartbeat = new Date();
     // Update health status based on recent performance
     this.updateHealthStatus(registration);
-    this.logEvent({ type: 'metric_update',
-      agent_id: agentId;
+    this.logEvent({ type: 'metric_update')
+      agent_id: agentId;)
     timestamp: new Date(), data: { success_rate: metrics.success_rate, total_tasks: metrics.total_tasks },
     severity: 'info'   
     })
@@ -213,8 +213,8 @@ if (taskResult.execution_time) {
         status.agents_by_health[health] = []
 }
       status.agents_by_health[health].push({ id: registration.agent.agent_id,
-    name: registration.agent.name,
-    role: registration.agent.role   
+    name: registration.agent.name)
+    role: registration.agent.role   )
     })
       // Group by role; const role = registration.agent.role; if (!status.agents_by_role[role]) {
         status.agents_by_role[role] = []
@@ -232,8 +232,8 @@ if (taskResult.execution_time) {
    */
   async deregisterAgent(agentId: string): Promise<any> {
 { this.registrations.get(agentId, if (!registration) {r}eturn false, this.registrations.delete(agentId);
-    await this.logEvent({ type: 'deregistration',
-      agent_id: agentId;
+    await this.logEvent({ type: 'deregistration')
+      agent_id: agentId;)
     timestamp: new Date(), data: { reason: 'manual_deregistration' },
     severity: 'info'   
     })
@@ -248,11 +248,11 @@ if (taskResult.execution_time) {
    * Export registry data for backup/analysis;
    */;
 exportRegistryData() {
-    return { registrations: Array.from(this.registrations.entries(, events: this.eventHistory,
+    return { registrations: Array.from(this.registrations.entries(, events: this.eventHistory,)
     exported_at: new Date().toISOString(, version: '1.0.0'
   }
 }
-  // Private methods
+  // Private methods)
   private initializeMetrics(): AgentMetrics {
     return { total_tasks: 0;
     completed_tasks: 0;
@@ -303,8 +303,8 @@ const _totalExecutionTime = allMetrics.reduce((sum, m) => sum + m.average_execut
   entityType: 'agent',
           observations: [
             `Role: ${registration.agent.role}`,``,
-  `Name: ${registration.agent.name}`,``,
-  `Priority: ${registration.agent.priority}`,``
+  `Name: ${registration.agent.name}`,``)
+  `Priority: ${registration.agent.priority}`,``)
             `Capabilities: ${registration.agent.capabilities.join(', ')}`,``
             `Registered: ${registration.registered_at.toISOString()}`,``
             `Health: ${registration.health_status}`,``
@@ -314,8 +314,8 @@ const _totalExecutionTime = allMetrics.reduce((sum, m) => sum + m.average_execut
     } catch (error) {
       handleError(error, {
         operation: 'reportRegisteredAgent',
-        module: 'AgentRegistry',
-        metadata: { agentId }
+        module: 'AgentRegistry')
+        metadata: { agentId })
       });
     }
   }
@@ -335,8 +335,8 @@ if (event.severity === 'error' || event.type === 'registration') {}`)``
   private performHealthChecks() {
     for (const registration of Array.from(this.registrations.values()) {
       const _oldStatus = registration.health_status, this.updateHealthStatus(registration, if (oldStatus !== registration.health_status) {
-        this.logEvent({ type: 'health_check',
-          agent_id: registration.agent.agent_id,
+        this.logEvent({ type: 'health_check')
+          agent_id: registration.agent.agent_id,)
     timestamp: new Date(), data: { old_status: oldStatus, new_status: registration.health_status },
     severity: registration.health_status === 'critical' ? 'error' : 'warning'
        
@@ -347,7 +347,7 @@ if (event.severity === 'error' || event.type === 'registration') {}`)``
     if (this.healthCheckInterval) {
       clearInterval(this.healthCheckInterval, this.healthCheckInterval = null
   }
-}
+})
   updateAgentStatus(agentId: string, status: 'healthy' | 'warning' | 'critical' | 'offline') {
     const registration = this.agents.get(agentId, if (registration) {; registration.health_status = status, registration.last_heartbeat = new Date();
       this.logActivity(`Updated agent, status: ${ agentId} -> ${status}`);``

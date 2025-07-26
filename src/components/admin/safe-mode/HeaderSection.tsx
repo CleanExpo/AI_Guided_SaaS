@@ -40,17 +40,13 @@ export function HeaderSection({
       <div className="flex gap-3">
         <Button
           onClick={onScanForIssues}
-          disabled={isScanning || isProcessing}
-          className="glass-button primary "
-        >
+          disabled={isScanning || isProcessing}>className="glass-button primary ">>
           {isScanning ? '🔍 Scanning...' : '🔍 Scan for Issues'}
         </Button>
 
         {issues.length > 0 && !isProcessing && (
           <Button
-            onClick={onStartSafeProcessing}
-            className="bg-green-600 hover:bg-green-700"
-          >
+            onClick={onStartSafeProcessing}>className="bg-green-600 hover:bg-green-700">>
             🚀 Start Safe Processing
           </Button>
         )}
@@ -61,9 +57,7 @@ export function HeaderSection({
               ⏸️ Pause
             </Button>
             <Button
-              onClick={onPauseProcessing}
-              className="bg-red-600 hover:bg-red-700"
-            >
+              onClick={onPauseProcessing}>className="bg-red-600 hover:bg-red-700">>
               🛑 Stop
             </Button>
           </>
@@ -71,9 +65,7 @@ export function HeaderSection({
 
         {checkpoint && !isProcessing && (
           <Button
-            onClick={onResumeProcessing}
-            className="bg-orange-600 hover:bg-orange-700"
-          >
+            onClick={onResumeProcessing}>className="bg-orange-600 hover:bg-orange-700">>
             ▶️ Resume
           </Button>
         )}

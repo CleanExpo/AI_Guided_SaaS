@@ -11,9 +11,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 export function BackendSelector() {
-  const [selectedBackend, setSelectedBackend] = useState<string>([])
+  const [selectedBackend, setSelectedBackend] = useState<string>("")
   const [config, setConfig] = useState<BackendConfig | null>(null);</BackendConfig>
-  const [testing, setTesting]  = useState<any>([])
+  const [testing, setTesting]  = useState<any>(null)
 
 const [testResult, setTestResult] = useState<{ success: boolean, message: string
 } | null>(null);
@@ -33,9 +33,9 @@ apiKey: '' }    })
       // Update form data
       setFormData(prev => ({
         ...prev,
-        [savedConfig.type]: { url: savedConfig.url,
+        [savedConfig.type]: { url: savedConfig.url)
 apiKey: savedConfig.apiKey || ''
-}
+})
 }))
     } else {
       // Load from environment
@@ -50,14 +50,14 @@ const _handleTest  = async () =>  {
 apiKey: formData[selectedBackend as keyof typeof formData].apiKey
 };
     try {
-      const adapter = createBackendAdapter(testConfig, // Test connection by trying to list users, await adapter.list('users', { limit: 1   
+      const adapter = createBackendAdapter(testConfig, // Test connection by trying to list users, await adapter.list('users', { limit: 1   )
     })
       setTestResult({ success: true
-message: 'Connection successful!'   
+message: 'Connection successful!'   )
     })
 } catch (error) {
       setTestResult({ success: false
-message: error instanceof Error ? error.message : 'Connection failed'   
+message: error instanceof Error ? error.message : 'Connection failed'   )
     })
 } finally {
       setTesting(false)}
@@ -69,7 +69,7 @@ apiKey: formData[selectedBackend as keyof typeof formData].apiKey
     await switchBackend(newConfig);
     setConfig(newConfig);
     setTestResult({ success: true
-message: 'Backend configuration saved!'
+message: 'Backend configuration saved!')
     })};
   
 const backendInfo={ supabase: {
@@ -101,22 +101,19 @@ const backendInfo={ supabase: {
    ]
   }
 }
-  return (
-    <div className="space-y-6"    />
+  return(<div className="space-y-6"    />
           <Card     / className="glass"
         <CardHeader    / className="glass"
           <CardTitle className="glass"Backend Configuration</CardTitle>
           <CardDescription className="glass"</CardDescription>
             Choose and configure your preferred backend service</Card>
-        <CardContent className="space-y-6" className="glass
+        <CardContent className="space-y-6 glass
           {/* Backend, Selection */}</Card>
           <RadioGroup
 
-value={selectedBackend} onValueChange={setSelectedBackend};
-            className="glass grid grid-cols-1 md: grid-cols-3 gap-4"
-          ></RadioGroup>
+value={selectedBackend} onValueChange={setSelectedBackend};>className="glass grid grid-cols-1 md: grid-cols-3 gap-4">></RadioGroup>)
             {Object.entries(backendInfo).map(([key, info]) => {
-              const _Icon = info.icon, return (Label;
+              const _Icon = info.icon, return(Label;
 
     const key={key};
                   const htmlFor={key};
@@ -131,7 +128,7 @@ value={selectedBackend} onValueChange={setSelectedBackend};
 span className="text-xs text-green-600 flex items-center"></span>
                       <Check className="h-3 w-3 mr-1"     />
                     Current
-</Check>
+</Check>)
       )}
 </Label>
       )}
@@ -145,13 +142,11 @@ span className="text-xs text-green-600 flex items-center"></span>
                 <Input
 ;
 const id={field.name};
-
-    type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'} ={field.}
-                  value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']} onChange={(e) => setFormData(prev => ({/>
+>type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'} ={field.}>value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']} onChange={(e) => setFormData(prev => ({/>
                     ...prev,
                     [selectedBackend]: {
-                      ...prev[selectedBackend as keyof typeof formData],
-                      [field.name]: e.target.value
+                      ...prev[selectedBackend as keyof typeof formData])
+                      [field.name]: e.target.value)
 }))/></Input>))},
     {/* Test, Result */},
     {testResult && (Alert variant={testResult.success ? 'default' : 'destructive'}>
@@ -169,9 +164,7 @@ const id={field.name};
           <Button
 
 const onClick={handleTest};
-              const disabled={testing || !formData[selectedBackend as keyof typeof formData].url};
-              variant="outline";
-            ></Button>
+              const disabled={testing || !formData[selectedBackend as keyof typeof formData].url};>variant="outline";>></Button>
               {testing ? (</Button>
                 <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" /></React>
                   Testing...</React.Fragment>
@@ -179,9 +172,7 @@ const onClick={handleTest};
                 'Test Connection'
               )}
             <Button
-
-onClick={handleSave} disabled={!formData[selectedBackend as keyof typeof formData].url}
-            ></Button>
+>onClick={handleSave} disabled={!formData[selectedBackend as keyof typeof formData].url}></Button>
               Save Configuration</Button>
       {/* Migration, Warning */},
     {config && config.type !== selectedBackend  && (

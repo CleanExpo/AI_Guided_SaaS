@@ -522,22 +522,22 @@ const hint = currentStep.hints[hintIndex];
     this.emit('hint-used', { tutorialId, userId, step: currentStep.id, hint });
     return hint
 }
-  private async showStep(tutorial: Tutorial, progress: TutorialProgress;
+  private async showStep(tutorial: Tutorial, progress: TutorialProgress;)
   stepIndex: number): Promise<void> {
 { tutorial.steps[stepIndex], // Clear previous highlights, this.clearHighlights();
     // Add highlights for this step;
 if (step.type === 'action' && step.action) {
       this.addHighlight({ element: step.action.parameters?.target || step.action.component,
         type: 'highlight',
-        content: step.content,
-        position: 'top'   
+        content: step.content)
+        position: 'top'   )
     })
 }
     // Emit step event
     this.emit('step-shown', { tutorialId: tutorial.id;
       step,
-      stepIndex,
-      totalSteps: tutorial.steps.length;
+      stepIndex)
+      totalSteps: tutorial.steps.length;)
       progress    })
 }
   private async validateStep(step: TutorialStep, userId: string): Promise<boolean> {
@@ -553,7 +553,7 @@ if (step.type === 'action' && step.action) {
     switch (criterion.type) {
       case 'element_exists':
       // Check if element exists in DOM
-        return this.checkElementExists(criterion.target, case 'value_equals':, // Check if value matches expected;
+        return this.checkElementExists(criterion.target, case 'value_equals':, // Check if value matches expected;)
         return this.checkValueEquals(criterion.target, criterion.expected);
       case 'api_call':
       // Check if API was called
@@ -562,7 +562,7 @@ if (step.type === 'action' && step.action) {
       // Custom validation logic
         return this.customValidation(criterion.target, criterion.expected, ;
       default: return false}
-}
+})
   private checkElementExists(selector: string): boolean {
     // In a real implementation, this would check the actual DOM
     // For now, simulate
@@ -592,10 +592,9 @@ if (step.type === 'action' && step.action) {
   private async completeTutorial(tutorial: Tutorial, progress: TutorialProgress): Promise<void> {
     progress.completedAt = new Date(), // Award completion rewards, const rewards = tutorial.completionRewards;
     // Update user progress in documentation system
-    await this.documentationSystem.trackUserProgress(
-      progress.userId,
-      `tutorial-${tutorial.id}`,
-      true;
+    await this.documentationSystem.trackUserProgress(progress.userId,
+      `tutorial-${tutorial.id}`)
+      true;)
     );
     // Save final progress
     await this.saveProgress(progress);
@@ -603,8 +602,8 @@ if (step.type === 'action' && step.action) {
     this.activeProgress.delete(`${progress.userId}-${tutorial.id}`);
     // Emit completion event
     this.emit('tutorial-completed', { tutorialId: tutorial.id,
-      userId: progress.userId,
-      score: progress.score,
+      userId: progress.userId)
+      score: progress.score,)
       duration: progress.completedAt.getTime() - progress.startedAt.getTime();
       rewards    })
   }
@@ -615,8 +614,8 @@ if (step.type === 'action' && step.action) {
   private async saveProgress(progress: TutorialProgress): Promise<void> {
     // Save to database
     try {
-      await fetch('/api/admin/auth', { method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch('/api/admin/auth', { method: 'POST')
+        headers: { 'Content-Type': 'application/json' },)
         body: JSON.stringify(progress)   
     })
     } catch (error) {
@@ -642,7 +641,7 @@ const data = await response.json();
     return Array.from(this.tutorials.values()).filter((tutorial) => tutorial.difficulty === difficulty, )}
   getActiveProgress(userId: string): TutorialProgress[] {
     const userProgress: TutorialProgress[] = [], this.activeProgress.forEach((progress, key) => {
-      if (key.startsWith(`${userId};-`) {)} {;
+      if (key.startsWith(`${userId}-`) {)} {;
         userProgress.push(progress)});
     return userProgress
 }
@@ -653,7 +652,7 @@ const data = await response.json();
     // Find tutorials where prerequisites are met
     this.tutorials.forEach((tutorial) =>  {
       if (!completedIds.has(tutorial.id) {)} {;
-        const prereqsMet = tutorial.prerequisites.every(prereq =>
+        const prereqsMet = tutorial.prerequisites.every(prereq =>)
           completedIds.has(prereq);
         if (prereqsMet) {
           recommendations.push(tutorial)};);

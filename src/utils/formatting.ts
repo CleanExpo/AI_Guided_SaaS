@@ -2,10 +2,10 @@
 /**
  * Formatting utility functions
  */;
-export function formatCurrency(amount: number, currency = 'USD'): number, currency = 'USD') { return new Intl.NumberFormat('en-US', { style: 'currency';
+export function formatCurrency(amount: number, currency = 'USD'): number, currency = 'USD') { return new Intl.NumberFormat('en-US', { style: 'currency';)
     currency).format(amount)
  };
-export function formatNumber(
+export function formatNumber()
     num: number, options?: Intl.NumberFormatOptions): number, options? null : Intl.NumberFormatOptions) {
   return new Intl.NumberFormat('en-US', options).format(num)
 };
@@ -45,7 +45,7 @@ export function slugify(str: string): string) {
     .replace(/[\s_-]+/g, '-');
     .replace(/^-+|-+$/g, '')
 };
-export function pluralize(
+export function pluralize()
     count: number, singular: string, plural?: string): number, singular: string, plural? null : string) {
   if (count === 1) {r}eturn singular, return plural || `${singular}s`
 };

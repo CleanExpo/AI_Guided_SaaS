@@ -129,9 +129,9 @@ export class MasterDevAgent extends EventEmitter {
         stdio: ['pipe', 'pipe', 'pipe'],
         env: {
           ...process.env,
-          MCP_SERVER_MODE: 'embedded',
+          MCP_SERVER_MODE: 'embedded')
           PROJECT_PATH: this.config.projectPath
-        }
+        })
       });
 
       this.mcpProcess.on('error', (error) => {
@@ -190,8 +190,8 @@ export class MasterDevAgent extends EventEmitter {
       // Check for critical issues
       if (analysis.criticalIssues >= this.config.criticalIssueThreshold) {
         this.emit('critical-issues', {
-          count: analysis.criticalIssues,
-          analysis
+          count: analysis.criticalIssues)
+          analysis)
         });
       }
 
@@ -211,8 +211,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     const result = await this.mcpClient.callTool('full_analysis', {
-      projectPath: this.config.projectPath,
-      outputFormat: 'actionable'
+      projectPath: this.config.projectPath)
+      outputFormat: 'actionable')
     });
 
     return this.parseAnalysisResult(result);
@@ -224,8 +224,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     return await this.mcpClient.callTool('analyze_project', {
-      projectPath: this.config.projectPath,
-      depth: 'deep'
+      projectPath: this.config.projectPath)
+      depth: 'deep')
     });
   }
 
@@ -235,8 +235,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     const result = await this.mcpClient.callTool('generate_requirements', {
-      projectPath: this.config.projectPath,
-      format
+      projectPath: this.config.projectPath)
+      format)
     });
 
     return result.content[0].text;
@@ -249,8 +249,8 @@ export class MasterDevAgent extends EventEmitter {
 
     return await this.mcpClient.callTool('check_dependencies', {
       projectPath: this.config.projectPath,
-      checkSecurity: true,
-      checkUpdates: true
+      checkSecurity: true)
+      checkUpdates: true)
     });
   }
 
@@ -260,8 +260,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     return await this.mcpClient.callTool('validate_production', {
-      projectPath: this.config.projectPath,
-      environment: 'production'
+      projectPath: this.config.projectPath)
+      environment: 'production')
     });
   }
 
@@ -271,8 +271,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     const result = await this.mcpClient.callTool('get_todo_list', {
-      projectPath: this.config.projectPath,
-      priority
+      projectPath: this.config.projectPath)
+      priority)
     });
 
     return result.content[0].text;
@@ -284,8 +284,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     return await this.mcpClient.callTool('coordinate_agents', {
-      projectPath: this.config.projectPath,
-      activeAgents
+      projectPath: this.config.projectPath)
+      activeAgents)
     });
   }
 
@@ -371,7 +371,7 @@ export class MasterDevAgent extends EventEmitter {
     const autoFixableTodos = analysis.todoList.filter(todo => 
       todo.command && 
       todo.priority === 'critical' &&
-      !todo.completed
+      !todo.completed)
     );
 
     for (const todo of autoFixableTodos) {
@@ -382,13 +382,13 @@ export class MasterDevAgent extends EventEmitter {
           await this.executeCommand(todo.command);
           
           this.emit('auto-fix-applied', {
-            todo,
-            success: true
+            todo)
+            success: true)
           });
         } catch (error) {
           this.emit('auto-fix-failed', {
-            todo,
-            error
+            todo)
+            error)
           });
         }
       }
@@ -398,8 +398,8 @@ export class MasterDevAgent extends EventEmitter {
   private async executeCommand(command: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const child = spawn(command, [], {
-        shell: true,
-        cwd: this.config.projectPath
+        shell: true)
+        cwd: this.config.projectPath)
       });
 
       child.on('close', (code) => {
@@ -422,7 +422,7 @@ export class MasterDevAgent extends EventEmitter {
           content: [{
             type: 'text',
             text: JSON.stringify({
-              summary: {
+              summary: {)
                 timestamp: new Date().toISOString(),
                 projectPhase: 'development',
                 completionPercentage: 75,

@@ -14,14 +14,14 @@ const supabase = supabaseUrl && supabaseKey
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRE || ''
+      clientId: process.env.GOOGLE_CLIENT_ID || '')
+      clientSecret: process.env.GOOGLE_CLIENT_SECRE || '')
     })
   ],
   adapter: supabase
     ? SupabaseAdapter({
-        url: supabaseUrl!,
-        secret: supabaseKey!
+        url: supabaseUrl!)
+        secret: supabaseKey!)
       })
     : undefined,
   session: {

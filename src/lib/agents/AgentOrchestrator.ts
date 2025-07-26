@@ -24,7 +24,7 @@ export class AgentOrchestrator {
     this.communication = null;
     if (!this.isClient) {
       // SSR mode - return mock methods;
-      this.getSystemStatus = () => Promise.resolve({ status: 'loading', message: 'Initializing...'
+      this.getSystemStatus = () => Promise.resolve({ status: 'loading', message: 'Initializing...')
     });
       this.startMonitoring = () => Promise.resolve();
       this.stopMonitoring = () => Promise.resolve()}
@@ -44,7 +44,7 @@ export class AgentOrchestrator {
     
     return {}
   getSystemStatus(): Promise<any> {
-    return Promise.resolve({ status: 'active', message: 'System operational'   
+    return Promise.resolve({ status: 'active', message: 'System operational'   )
     })
   }
   startMonitoring(): Promise<any> {

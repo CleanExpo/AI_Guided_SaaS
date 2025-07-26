@@ -143,9 +143,7 @@ export function DevelopmentIntelligence() {
         <h2 className="text-3xl font-bold">Development Intelligence</h2>
         <div className="flex gap-2">
           <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setAutoAnalysis(!autoAnalysis)}
+            variant="outline">size="sm">onClick={() => setAutoAnalysis(!autoAnalysis)}
           >
             <Zap className={`h-4 w-4 mr-1 ${autoAnalysis ? 'text-green-500' : 'text-gray-400'}`} />
             Auto-Analysis {autoAnalysis ? 'ON' : 'OFF'}
@@ -160,8 +158,8 @@ export function DevelopmentIntelligence() {
       {/* Summary Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="glass"
-          <CardHeader className="pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassProject Phase</CardTitle>
+          <CardHeader className="pb-2 glass
+            <CardTitle className="text-sm font-medium glassProject Phase</CardTitle>
           </CardHeader>
           <CardContent className="glass"
             <Badge className={`${getPhaseColor(intelligence.phase)} text-white`}>
@@ -171,8 +169,8 @@ export function DevelopmentIntelligence() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassCompletion</CardTitle>
+          <CardHeader className="pb-2 glass
+            <CardTitle className="text-sm font-medium glassCompletion</CardTitle>
           </CardHeader>
           <CardContent className="glass"
             <div className="flex items-center space-x-2">
@@ -183,8 +181,8 @@ export function DevelopmentIntelligence() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassProduction Readiness</CardTitle>
+          <CardHeader className="pb-2 glass
+            <CardTitle className="text-sm font-medium glassProduction Readiness</CardTitle>
           </CardHeader>
           <CardContent className="glass"
             <div className={`text-2xl font-bold ${getScoreColor(intelligence.productionReadinessScore)}`}>
@@ -194,8 +192,8 @@ export function DevelopmentIntelligence() {
         </Card>
 
         <Card className="glass"
-          <CardHeader className="pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassIssues</CardTitle>
+          <CardHeader className="pb-2 glass
+            <CardTitle className="text-sm font-medium glassIssues</CardTitle>
           </CardHeader>
           <CardContent className="glass"
             <div className="flex space-x-4">
@@ -240,9 +238,7 @@ export function DevelopmentIntelligence() {
               {['all', 'critical', 'high', 'medium', 'low'].map(priority => (
                 <Button
                   key={priority}
-                  variant={selectedPriority === priority ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedPriority(priority)}
+                  variant={selectedPriority === priority ? 'default' : 'outline'}>size="sm">onClick={() => setSelectedPriority(priority)}
                 >
                   {priority === 'all' ? 'All' : getPriorityIcon(priority)} {priority}
                 </Button>

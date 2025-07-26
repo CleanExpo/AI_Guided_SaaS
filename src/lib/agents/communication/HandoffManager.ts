@@ -203,8 +203,8 @@ export class HandoffManager {
           entityName: `handoff_${fromAgent}_${toAgent}_${Date.now()}`,
           contents: [
             `Successful handoff completed at ${new Date().toISOString()}`,
-            `Protocol validation passed`,
-            `Data integrity confirmed`
+            'Protocol validation passed',
+            'Data integrity confirmed'
           ]
         }
       ]);

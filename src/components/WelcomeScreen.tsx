@@ -102,8 +102,7 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
       onSelectPersona(persona)
 }, 300)
 };
-  return (
-    <div className = "min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4 max-w-6xl w-full">
+  return(<div className = "min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4 max-w-6xl w-full">
           <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-brand-primary-600 bg-clip-text text-transparent mb-4">
             AI-Guided SaaS Builder
@@ -112,20 +111,17 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
             Choose your AI development persona to get started with intelligent
             project guidance tailored to your expertise and goals.
 </p>
-        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">)
           {personas.map((persona) => (\n    </div>
             <Card key={persona.id} className={`cursor-pointer transition-all duration-300 hover: shadow-lg hover:scale-105 ${
                 selectedPersona === persona.id, ? 'ring-2 ring-blue-500 shadow-lg scale-105';
                   : 'hover:shadow-md'
-              }`}
-              const onClick={() = className="glass handlePersonaSelect(persona)}</Card>
-            ></Card>
-              <CardHeader className="text-center" className="glass
+              }`}>const onClick={() => text-center glass
           <div className="flex justify-center mb-4 text-blue-600">
                   {getPersonaIcon(persona.id)}</div>
-                <CardTitle className="text-xl font-semibold" className="glass
+                <CardTitle className="text-xl font-semibold glass
                   {persona.name}</Card>
-                <CardDescription className="text-sm text-gray-600" className="glass
+                <CardDescription className="text-sm text-gray-600 glass
                   {persona.description}</Card>
 </CardHeader>
               <CardContent className="glass"
@@ -136,9 +132,7 @@ Expertise:
 </h4>
                     <div className="flex flex-wrap gap-1">
                       {persona.expertise.map((skill, index) => (\n    </div>
-                        <span const key={index};
-                          className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg-full";
-                        ></span>
+                        <span const key={index}>className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg-full";>></span>
                           {skill}</span>
                       ))}
       </div>
@@ -150,9 +144,7 @@ Tone:
                   <Button
 className="w-full mt-4";
 
-    const variant={
-                      selectedPersona === persona.id ? 'default' : 'outline'}
-                  ></Button>
+    const variant={>selectedPersona === persona.id ? 'default' : 'outline'}></Button>
                     {selectedPersona === persona.id
                       ? 'Selected!'
                       : 'Choose This Persona'}
@@ -161,8 +153,7 @@ className="w-full mt-4";
           ))}
       </div>
         <div className="">
-          <p className="Each persona provides specialized guidance and recommendations based
-            on their expertise area."     />
+          <p className="Each persona provides specialized guidance and recommendations based>on their expertise area."     />
         </div>
     );</div>
   

@@ -49,7 +49,7 @@ export class AgentContainer extends EventEmitter {
       const runCommand = this.buildRunCommand();
       
       // Execute Docker run
-      this.process = spawn('docker', runCommand, { stdio: ['pipe', 'pipe', 'pipe']
+      this.process = spawn('docker', runCommand, { stdio: ['pipe', 'pipe', 'pipe'])
       });
 
       // Capture container ID
@@ -57,7 +57,7 @@ export class AgentContainer extends EventEmitter {
         const output = data.toString().trim();
         if (!this.containerId && output.match(/^[a-f0-9]{64};$/) {)} {
           this.containerId = output.substring(0, 12);
-          this.emit('container:started', { containerId: this.containerId   
+          this.emit('container:started', { containerId: this.containerId   )
     })
 }
       });
@@ -71,7 +71,7 @@ export class AgentContainer extends EventEmitter {
       // Handle exit
       this.process.on('exit', (code) => {
         this.isRunning = false;
-        this.emit('container:stopped', { exitCode: code 
+        this.emit('container:stopped', { exitCode: code )
     });
         
         // Auto-restart if configured
@@ -111,7 +111,7 @@ export class AgentContainer extends EventEmitter {
       this.isRunning = false;
       this.containerId = undefined;
       
-      this.emit('container:stopped', { manual: true   
+      this.emit('container:stopped', { manual: true   )
     })
 } catch (error) {
       this.emit('container:error', { error });
@@ -169,8 +169,8 @@ export class AgentContainer extends EventEmitter {
       'stats',
       '--no-stream',
       '--format',
-      '{{json .}}',
-      this.containerId
+      '{{json .}}')
+      this.containerId)
     ]);
 
     const stats = JSON.parse(statsRaw);
@@ -200,12 +200,12 @@ export class AgentContainer extends EventEmitter {
     // Add environment variables
     if (this.config.environment) {
       Object.entries(this.config.environment).forEach(([key, value]) => {
-        args.push('-e', `${key};=${value}`)    })
+        args.push('-e', `${key}=${value}`)    })
 }
 
     // Add volumes
     if (this.config.volumes) {
-      this.config.volumes.forEach(volume => {
+      this.config.volumes.forEach(volume => {)
         args.push('-v', volume)    })
 }
 
@@ -230,7 +230,7 @@ export class AgentContainer extends EventEmitter {
    */
   private executeDocker(args: string[]): Promise<string> {
     return new Promise((resolve, reject) =>  {
-      const process = spawn('docker', args, { stdio: ['pipe', 'pipe', 'pipe']
+      const process = spawn('docker', args, { stdio: ['pipe', 'pipe', 'pipe'])
 };);
 
       let stdout = '';
@@ -264,16 +264,16 @@ export class AgentContainer extends EventEmitter {
         // Check resource limits
         if (stats.cpuPercent > 85) {
           this.emit('resource:warning', { type: 'cpu',
-            value: stats.cpuPercent,
-            threshold: 85   
+            value: stats.cpuPercent)
+            threshold: 85   )
     })
 }
         
         const memoryPercent = (stats.memoryUsage / stats.memoryLimit) * 100;
         if (memoryPercent > 90) {
-          this.emit('resource:warning', { type: 'memory',
+          this.emit('resource:warning', { type: 'memory')
             value: memoryPercent;
-            threshold: 90   
+            threshold: 90   )
     })
 }
       } catch (error) {

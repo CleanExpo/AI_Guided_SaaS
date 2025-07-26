@@ -21,15 +21,15 @@ endpoint: string;
       headers['Authorization'] = `Bearer ${this.apiToken}`
     }
     const response  = await fetch(`${this.baseUrl}/api${endpoint}`, {
-      ...options,
-      headers
+      ...options)
+      headers)
 });
 
 const data = await response.json();
     if (!response.ok) {
       throw new BackendError(, data.error?.message || 'Request failed', data.error?.name || 'API_ERROR',;
-        response.status,
-        data.error
+        response.status)
+        data.error)
       )
     };
     return data
@@ -41,8 +41,8 @@ const data = await response.json();
     }>('/auth/local/register', { method: 'POST',
       body: JSON.stringify({ username: email;
         email,
-        password,
-        ...metadata
+        password)
+        ...metadata)
       })};
     this.jwt = response.jwt;
     return this.mapStrapiUser(response.user)
@@ -52,12 +52,12 @@ const data = await response.json();
       user: any
     }>('/auth/local', { method: 'POST',
       body: JSON.stringify({ identifier: email;
-        password
+        password)
       })};
     this.jwt = response.jwt;
     return { user: this.mapStrapiUser(response.user, token: response.jwt
   }
-}
+})
   async signOut(): Promise<void> {
     this.jwt = undefined
   }
@@ -71,9 +71,9 @@ const data = await response.json();
   async updateUser(id: string, data: Partial<User>): Promise<User> {
 { await this.request<any>(`/users/${id}`, {</any>
       method: 'PUT',
-      body: JSON.stringify({ username: data.email,
+      body: JSON.stringify({ username: data.email)
         email: data.email;
-        ...data.metadata
+        ...data.metadata)
       })};
     return this.mapStrapiUser(response)
 }
@@ -99,10 +99,10 @@ const data = await response.json();
     return this.mapStrapiProject((response as any).data)
 }
   async deleteProject(id: string): Promise<void> {
-    await this.request(`/projects/${id}`, { method: 'DELETE'   
+    await this.request(`/projects/${id}`, { method: 'DELETE'   )
     })
   }
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {;</PaginatedResponse>
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;</PaginatedResponse>
 { new URLSearchParams(, // Filtering, params.append('filters[user][id][$eq]', userId);
     // Pagination;
 
@@ -128,11 +128,11 @@ const response = await this.request<{ data: [] as any[],
         }}>(`/projects?${params.toString()}`);
     return { data: (response as any).data.map(this.mapStrapiProject, total: response.meta.pagination.total,
       page: response.meta.pagination.page,
-      pageSize: response.meta.pagination.pageSize,
+      pageSize: response.meta.pagination.pageSize)
       hasMore: response.meta.pagination.page < response.meta.pagination.pageCount
   }
 }
-  // Generic CRUD
+  // Generic CRUD)
   async create<T>(collection: string, data: any): Promise<T> {
 { await this.request<{ data: any }>(`/${collection}`, { method: 'POST',
       body: JSON.stringify({ data })};
@@ -155,10 +155,10 @@ const response = await this.request<{ data: [] as any[],
     return this.mapStrapiRecord((response as any).data) as T
 }
   async delete(collection: string, id: string): Promise<void> {
-    await this.request(`/${collection}/${id}`, { method: 'DELETE'   
+    await this.request(`/${collection}/${id}`, { method: 'DELETE'   )
     })
   }
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {</PaginatedResponse>
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {</PaginatedResponse>
 { new URLSearchParams(, // Filters, if (options?.filters) {
       Object.entries(options.filters).forEach(([key, value]) => {
         params.append(`filters[${key};][$eq]`, value.toString())    })
@@ -201,12 +201,12 @@ collection: string;
     // Note: This requires additional WebSocket setup in Strapi
     => {};
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string;)
   file: File): Promise<string> {
 { new FormData(, formData.append('files', file), formData.append('path', path);
     formData.append('folder', bucket);
     
-const response = await fetch('/api/admin/auth', { method: 'POST',
+const response = await fetch('/api/admin/auth', { method: 'POST',)
       headers: { ...(this.jwt ? { Authorization: `Bearer ${this.jwt }` } : {}); ...(this.apiToken ? { Authorization: `Bearer ${this.apiToken}` } : {    })
 },
       body: formData
@@ -214,8 +214,8 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
     });
     if (!response.ok) {
       const error = await response.json(, throw new BackendError(, error.error?.message || 'Upload failed';
-        'UPLOAD_ERROR',
-        response.status
+        'UPLOAD_ERROR')
+        response.status)
       )
     }
     const data = await response.json();
@@ -237,10 +237,10 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       metadata: { blocked: user.blocked,
-        confirmed: user.confirmed,
+        confirmed: user.confirmed)
         provider: user.provider
   }
-}
+})
   private mapStrapiProject(data: any): Project {
     const attributes = data.attributes || data, return { id: data.id.toString(, userId: attributes.user?.data?.id?.toString() || attributes.user,
       name: attributes.name,
@@ -274,14 +274,14 @@ collection: string;
 // Strapi Query Builder implementation;
 class StrapiQueryBuilder<T> implements QueryBuilder<T> {</T>
   private params: URLSearchParams, private selectedFields: string[] = [], constructor(private adapter: StrapiAdapter;
-    private collection: string
+    private collection: string)
   ) {
     this.params = new URLSearchParams()
 }
   select(fields: string[]): QueryBuilder<T> {</T>
     this.selectedFields = fields, this.params.append('fields', fields.join(','); return this
 }
-  where(field: string, operator: string;
+  where(field: string, operator: string;)
   value: any): QueryBuilder<T> {</T>
     const operatorMap: Record<string string>  = {</string>
       '=': '$eq',
@@ -313,9 +313,8 @@ const strapiOperator = operatorMap[operator];
     return this
 }
   async execute(): Promise<T[]> {</T>
-    const { data } = await (this.adapter as any).executeQuery(
-      this.collection,
-      this.params;
+    const { data } = await (this.adapter as any).executeQuery(this.collection)
+      this.params;)
     );
     return data
 }
@@ -323,9 +322,8 @@ const strapiOperator = operatorMap[operator];
     this.limit(1, const results = await this.execute(); return results[0] || null
 }
   async count(): Promise<number> {
-    this.params.append('pagination[withCount]', 'true', const { meta } = await (this.adapter as any).executeQuery(
-      this.collection,
-      this.params
+    this.params.append('pagination[withCount]', 'true', const { meta } = await (this.adapter as any).executeQuery(this.collection)
+      this.params)
     );
     return meta.pagination.total
 }

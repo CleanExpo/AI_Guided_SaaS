@@ -22,19 +22,19 @@ m,
 
 export function DocumentationViewer({
   documentationSystem, tutorialSystem, userId, initialSectionId
-}: DocumentationViewerProps, tutorialSystem, userId, initialSectionId
+}: DocumentationViewerProps, tutorialSystem, userId, initialSectionId)
 }: DocumentationViewerProps) {
   const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null);</DocumentationSection>
-  const [searchQuery, setSearchQuery] = useState<any>([])
-  const [searchResults, setSearchResults]  = useState<DocumentationSection[]>([]);</DocumentationSection>
+  const [searchQuery, setSearchQuery] = useState<any>(null)
+  const [searchResults, setSearchResults]  = useState<DocumentationSectionnull>(null);</DocumentationSection>
 
-const [userProgress, setUserProgress] = useState<any>([])
+const [userProgress, setUserProgress] = useState<any>(null)
   
-const [isSearching, setIsSearching]  = useState<any>([])
+const [isSearching, setIsSearching]  = useState<any>(null)
 
-const [sidebarCollapsed, setSidebarCollapsed] = useState<any>([])
+const [sidebarCollapsed, setSidebarCollapsed] = useState<any>(null)
   
-const [activeTab, setActiveTab] = useState<any>([])
+const [activeTab, setActiveTab] = useState<any>(null)
   useEffect(() => {
     // Load initial section or first available;
 if (initialSectionId) {
@@ -71,7 +71,7 @@ const sections = results;
   const _startRelatedTutorial = async (tutorialId: string) =>  {
     try {
       await tutorialSystem.startTutorial(tutorialId, userId, // In a real app, this would start the tutorial overlay;
-      window.location.href = `/tutorials/${tutorialId};`
+      window.location.href = `/tutorials/${tutorialId};`)
   } catch (error) {
       logger.error('Failed to start, tutorial:', error)}
   const categories = [
@@ -94,28 +94,20 @@ break
       default: return 'text-gray-600 bg-gray-100'}}
   const _isCompleted = (sectionId: string) => {
     return userProgress?.sectionsCompleted?.includes(sectionId)};
-  return (
-    <div className="flex h-full">
-      {/* Sidebar */}</div>
-      <div className={cn(`
-        "border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80"
-      )`}>``</div>
+  return(<div className="flex h-full">
+      {/* Sidebar */}</div>)
+      <div className={cn(`>"border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80">)`}>``</div>
         {/* Search */}</div>
         <div className="glass p-4 -b">
           {!sidebarCollapsed  && (div className="relative">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
-          <input type="text", ="Search documentation...";
-
-    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
+          <input type="text", ="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
 {{(e) => e.key === 'Enter' && handleSearch()};
                 className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
         </div>
       )}
           <Button variant="ghost";
-size="sm";
-
-    className={`cn("mt-2" sidebarCollapsed && "w-full")} onClick={() => setSidebarCollapsed(!sidebarCollapsed)}</Button>
-          >
+size="sm";>className={`cn("mt-2" sidebarCollapsed && "w-full")} onClick={() => setSidebarCollapsed(!sidebarCollapsed)}</Button>
             {sidebarCollapsed ? <ChevronRight className="h-4 w-4"    /> : <ChevronLeft className="h-4 w-4"    />}</ChevronLeft>
 </Button>
         {/* Navigation */}
@@ -134,7 +126,7 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
                         setSelectedSection(section, setSearchResults([]); setSearchQuery('')
 };
                       const className={cn(`
-                        "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
+                        "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted")
                       )}
                     >
                       {sidebarCollapsed ? (</button>
@@ -158,19 +150,16 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
                   ))}
       </div>
             ) : (categories.map((category) => {
-                const sections = documentationSystem.getSectionsByCategory(category.id, if (sections.length === 0) {r}eturn null, return (
-    <div;
-
-    const key={category.id};></div>
+                const sections = documentationSystem.getSectionsByCategory(category.id, if (sections.length === 0) {r}eturn null, return(<div;>const key={category.id};></div>
                     {!sidebarCollapsed  && (
 div className="flex items-center gap-2 mb-2">
                         <category.icon className="h-4 w-4 text-muted-foreground"    />
-          <h3 className="text-sm font-semibold">{category.label}</h3>
+          <h3 className="text-sm font-semibold">{category.label}</h3>)
       )}
                     <div className="space-y-1">
                       {sections.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button"> setSelectedSection(section)}</button>
 {{cn(`
-                            "w-full text-left p-2 rounded-md text-sm, hover: bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
+                            "w-full text-left p-2 rounded-md text-sm, hover: bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted")
                           )}
                         >
                           {sidebarCollapsed ? (</button>
@@ -202,9 +191,7 @@ div className="flex items-center gap-2 mb-2">
           <span className="text-muted-foreground">Progress</span>
                 <span className="font-medium">
                   {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}</span>
-              <div className="w-full bg-muted rounded-lg-full h-2 glass-button primary rounded-lg-full h-2 transition-all duration-300";
-
-    const style={ width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%` } /   />
+              <div className="w-full bg-muted rounded-lg-full h-2 glass-button primary rounded-lg-full h-2 transition-all duration-300";>const style={ width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%` } /   />
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Star className="h-3 w-3"    />
           <span>{userProgress.totalPoints || 0} points</span>
@@ -219,7 +206,7 @@ div className="flex items-center gap-2 mb-2">
           <div></div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
                   <div className="glass flex items-center gap-4 text-sm text-muted-foreground">
-          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}>/>
+          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)} />>
                       {selectedSection.metadata.difficulty}
 />
                     <div className="flex items-center gap-1">
@@ -256,9 +243,7 @@ const components={{
                           <SyntaxHighlighter
 
 style={vscDarkPlus} language={match[1]};
-                            PreTag="div";
-    {...props}
-                          ></ReactMarkdown>
+                            PreTag="div";>{...props}></ReactMarkdown>
                             {String(children).replace(/\n$/, '')}
 </SyntaxHighlighter>
                         ) : (
@@ -275,10 +260,8 @@ style={vscDarkPlus} language={match[1]};
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;
-                              
-const key={relatedId};
-                              const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
+                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;)
+                              >const key={relatedId};>const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
                               className="text-sm text-primary hover: underline"
                             >
                               {related.title}</button>
@@ -295,9 +278,7 @@ const key={relatedId};
                         <SyntaxHighlighter
 
 const style={vscDarkPlus};
-                          const language={example.language};
-                          PreTag="div";
-                        ></SyntaxHighlighter>
+                          const language={example.language};>PreTag="div";>></SyntaxHighlighter>
                           {example.code}
 </SyntaxHighlighter>
                         {example.runnable  && (

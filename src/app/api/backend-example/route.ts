@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 
-const CreateProjectSchema = z.object({ 
+const CreateProjectSchema = z.object({ )
     name: z.string().min(1).max(200),
     description: z.string().max(1000),
     type: z.string(),
@@ -21,17 +21,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         }
         
         return NextResponse.json({ success: true,
-            message: 'Project created successfully',
+            message: 'Project created successfully')
             project 
-        }, { status: 201   
+        }, { status: 201   )
     })
 } catch (error) {
         logger.error('Create project error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
         }
-        return NextResponse.json({ error: 'Failed to create project' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to create project' }, { status: 500   )
     })
     }
 }
@@ -57,12 +57,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ]
         
         return NextResponse.json({ success: true,
-            projects,
-            total: projects.length   
+            projects)
+            total: projects.length   )
     })
 } catch (error) {
         logger.error('Get projects error:', error);
-        return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500   )
     })
     }
 }

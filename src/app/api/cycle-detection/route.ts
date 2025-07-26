@@ -15,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const body = await request.json(); 
     const { query, context }: { query: string; context?: Record<string, unknown> } = body
     if (!query) {
-      return NextResponse.json({ error: 'Query is required' }, { status: 400   
+      return NextResponse.json({ error: 'Query is required' }, { status: 400   )
     })
 };
     // Simulate cycle detection
@@ -36,13 +36,13 @@ const result: CycleDetectionResult= { hasCycle: false,
       }
     ];
     return NextResponse.json({ success: true, result,
-      searchResults,
-      query,
+      searchResults)
+      query,)
       timestamp: new Date().toISOString()   
     })
   } catch (error) {
     logger.error('Cycle detection error:', error);
-        return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500   
+        return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500   )
     })
 }};
 export const dynamic = "force-dynamic";

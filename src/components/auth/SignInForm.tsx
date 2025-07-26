@@ -14,18 +14,18 @@ export default function SignInForm() {
 
 const [error, setError] = useState<string | null>(null);</string>
   
-const [formData, setFormData] = useState({ email: '',
+const [formData, setFormData] = useState({ email: '')
 password: ''
- 
+ )
     });
   
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(, setIsLoading(true); setError(null);
     try {
       const result = await signIn('credentials', { email: formData.email,
-        password: formData.password,
+        password: formData.password)
 redirect: false
-     
+     )
     });
       if (result?.error) { setError('Invalid email or password')} else {
         const session = await getSession(, if (session) {
@@ -35,28 +35,25 @@ redirect: false
   
 const handleGoogleSignIn = async () =>  {
     setIsGoogleLoading(true, setError(null), try {;
-      await signIn('google', { callbackUrl: '/dashboard'   
+      await signIn('google', { callbackUrl: '/dashboard'   )
     })
     } catch {;
       setError('Failed to sign in with Google'); setIsGoogleLoading(false)};
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
-          <Card className="w-full max-w-md" className="glass
-        <CardHeader className="text-center" className="glass
-          <CardTitle className="text-2xl font-bold" className="glassWelcome Back</CardTitle>
+  return(<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
+          <Card className="w-full max-w-md glass
+        <CardHeader className="text-center glass
+          <CardTitle className="text-2xl font-bold glassWelcome Back</CardTitle>
           <CardDescription className="glass"</CardDescription>
             Sign in to your AI Guided SaaS account</Card>
 </CardHeader>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass
           {error && (</Card>
             <Alert variant="destructive">
-          <AlertDescription>{error}</AlertDescription>
+          <AlertDescription>{error}</AlertDescription>)
       )}
           <Button variant="outline";
 className="w-full";
-
-    onClick={handleGoogleSignIn} disabled={isGoogleLoading}
-          ></Button>
+>onClick={handleGoogleSignIn} disabled={isGoogleLoading}></Button>
             {isGoogleLoading ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin"     />
             ) : (
@@ -77,9 +74,7 @@ className="w-full";
           <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input id="email";
 type="email"
-="Enter your email";
-
-    value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value
+="Enter your email";>value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value)
     })};/>
                   className="pl-10";
                   required
@@ -92,9 +87,7 @@ type="email"
                 <Input
 id="password";
 type="password"
-="Enter your password";
-
-    value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value
+="Enter your password";>value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value)
     })};/>
                   className="pl-10";
                   required
@@ -110,10 +103,7 @@ type="password"
           <span className="text-gray-600">Don&apos;t have an account? </span>
             <Button
 variant="link";
-className="p-0 h-auto font-normal";
-
-    const onClick={() => router.push('/auth/signup')}</Button>
-            >
+className="p-0 h-auto font-normal";>const onClick={() => router.push('/auth/signup')}</Button>
               Sign up
 </Button>
 </CardContent>

@@ -8,14 +8,14 @@ import { logger } from '@/lib/logger';
 
 // Environment schema
 const envSchema = z.object({
-  // Core
-  NODE_ENV: z.enum(['development', 'test', 'production']).default('development', NEXT_PUBLIC_APP_URL: z.string().url().optional(, // Database
-  DATABASE_URL: z.string().min(1, DIRECT_URL: z.string().min(1).optional(, // Authentication
+  // Core)
+  NODE_ENV: z.enum(['development', 'test', 'production']).default('development', NEXT_PUBLIC_APP_URL: z.string().url().optional(, // Database)
+  DATABASE_URL: z.string().min(1, DIRECT_URL: z.string().min(1).optional(, // Authentication)
   NEXTAUTH_URL: z.string().url(, NEXTAUTH_SECRET: z.string().min(32, // OAuth (optional)
   GOOGLE_CLIENT_ID: z.string().optional(, GOOGLE_CLIENT_SECRET: z.string().optional(, GITHUB_CLIENT_ID: z.string().optional(, GITHUB_CLIENT_SECRET: z.string().optional(, // AI Services (at least one required)
   OPENAI_API_KEY: z.string().optional(, ANTHROPIC_API_KEY: z.string().optional(, // Supabase (optional)
   NEXT_PUBLIC_SUPABASE_URL: z.string().url().optional(, NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(, SUPABASE_SERVICE_ROLE_KEY: z.string().optional(, // Other services (optional)
-  REDIS_URL: z.string().optional(, RESEND_API_KEY: z.string().optional(, EMAIL_FROM: z.string().email().optional(, SENTRY_DSN: z.string().optional(, NEXT_PUBLIC_GA_ID: z.string().optional(, // Vercel specific
+  REDIS_URL: z.string().optional(, RESEND_API_KEY: z.string().optional(, EMAIL_FROM: z.string().email().optional(, SENTRY_DSN: z.string().optional(, NEXT_PUBLIC_GA_ID: z.string().optional(, // Vercel specific)
   VERCEL: z.string().optional(, VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(, VERCEL_URL: z.string().optional()
     });
 
@@ -60,7 +60,7 @@ class EnvironmentConfig {
 } catch (error) {
       if (error instanceof z.ZodError) {
         logger.error('❌ Environment validation failed: ');
-        error.errors.forEach(err => {
+        error.errors.forEach(err => {)
           logger.error(`   - ${err.path.join('.') };: ${err.message}`)
 });
         

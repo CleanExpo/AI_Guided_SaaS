@@ -3,8 +3,8 @@ import { z } from 'zod';
 import { handleError } from '@/lib/error-handling';
 // Environment variable schema with build-time safe defaults;
 
-const envSchema = z.object({
-  // Next.js: NODE_ENV: z.enum(['development', 'production', 'test']).default('development', ;
+const envSchema = z.object({)
+  // Next.js: NODE_ENV: z.enum(['development', 'production', 'test']).default('development', ;)
   NEXTAUTH_URL: z.string().default('http://localhost:3000', NEXTAUTH_SECRET: z.string().default('development-secret-that-is-at-least-32-characters-long-for-jwt-encryption', // Database, NEXT_PUBLIC_SUPABASE_URL: z.string().optional(, SUPABASE_SERVICE_ROLE_KEY: z.string().optional()
   // Authentication, GOOGLE_CLIENT_ID: z.string().optional(, GOOGLE_CLIENT_SECRET: z.string().optional()
   // AI Services, OPENAI_API_KEY: z.string().optional(, ANTHROPIC_API_KEY: z.string().optional(, PERPLEXITY_API_KEY: z.string().optional()
@@ -19,8 +19,8 @@ try {
   // During build time, use safe defaults
   handleError(error, {
     operation: 'parseEnvironmentVariables',
-    module: 'env',
-    metadata: { buildTime: true }
+    module: 'env')
+    metadata: { buildTime: true })
   });
   
   // Use parsed schema with defaults

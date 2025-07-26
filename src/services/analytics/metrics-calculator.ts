@@ -220,7 +220,7 @@ export class MetricsCalculator {
   }
 
   private getMetricCount(metric: string): number {
-    return this.events.filter(e => 
+    return this.events.filter(e => )
       e.type === 'performance' && e.metric === metric.replace('avg', '').toLowerCase()
     ).length;
   }
@@ -249,8 +249,8 @@ export class MetricsCalculator {
       
       funnel.steps.push({
         name: step,
-        users,
-        conversionRate
+        users)
+        conversionRate)
       });
 
       if (index > 0) {
@@ -273,7 +273,7 @@ export class MetricsCalculator {
 
   private getUsersAtStep(step: string): number {
     // Simplified: count unique users who triggered events related to this step
-    const stepEvents = this.events.filter(e => 
+    const stepEvents = this.events.filter(e => )
       (e.type === 'feature' && e.feature === step) ||
       (e.type === 'pageview' && e.url.includes(step)) ||
       (e.type === 'conversion' && e.goal === step)

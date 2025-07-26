@@ -5,7 +5,7 @@ import { logger } from '@/lib/logger';
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 
 // Request validation schemas
-const indexSchema = z.object({ 
+const indexSchema = z.object({ )
     id: z.string().min(1),
     content: z.string().min(1),
     metadata: z.record(z.unknown()).optional(),
@@ -28,11 +28,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   
+      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   )
     })
 }
     logger.error('Indexing error:', error);
-    return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
+    return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   )
     })
 }
 }
@@ -43,14 +43,14 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = url;
     const docId = searchParams.get('id');
     if (!docId) {
-      return NextResponse.json({ error: 'Document ID is required' }, { status: 400   
+      return NextResponse.json({ error: 'Document ID is required' }, { status: 400   )
     })
 }
     const result = await semanticSearch.deleteDocument(docId);
     return NextResponse.json(result)
 } catch (error) {
     logger.error('Delete error:', error);
-        return NextResponse.json({ error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
+        return NextResponse.json({ error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   )
     })
   }
 }

@@ -21,9 +21,9 @@ interface ProcessedRequirements { requirements: Array<{
   summary: { totalRequirements: number, complexity: string, estimatedDuration: string, assignedAgents: string[]
 };
     export function ClientRequirementsCapture() {
-  const [input, setInput] = useState<any>([])
-  const [projectName, setProjectName] = useState<any>([])
-  const [isProcessing, setIsProcessing]  = useState<any>([])
+  const [input, setInput] = useState<any>(null)
+  const [projectName, setProjectName] = useState<any>(null)
+  const [isProcessing, setIsProcessing]  = useState<any>(null)
 
 const [error, setError] = useState<string | null>(null);</string>
   
@@ -49,8 +49,8 @@ const _handleSubmit = async (e: React.FormEvent) => {
 headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input;
-          projectName,
-    metadata: { source: 'web_form',
+          projectName)
+    metadata: { source: 'web_form',)
 timestamp: new Date().toISOString()})}
       const data = await response.json();
       if (!response.ok) {
@@ -76,28 +76,23 @@ low: 'bg-gray-100 text-gray-800'
 };
     return colors[priority] || 'bg-gray-100 text-gray-800'
 }
-  return (
-    <div className="max-w-4xl mx-auto space-y-6"    />
+  return(<div className="max-w-4xl mx-auto space-y-6"    />
           <Card     / className="glass"
         <CardHeader    / className="glass"
-          <CardTitle className="text-2xl" className="glassDescribe Your Project</CardTitle>
+          <CardTitle className="text-2xl glassDescribe Your Project</CardTitle>
           <p className="text-muted-foreground">
             Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.</p>
         <CardContent    / className="glass"
           <form onSubmit={handleSubmit} className="space-y-4"     / role="form">
-            <div className="space-y-2"    />
+            <div className="space-y-2"    />)
           <Label htmlFor="projectName">Project Name (optional)</Label>
               <Input id="projectName";
-="My Awesome Project";
-
-    value={projectName} onChange={(e) => setProjectName(e.target.value)} />
+="My Awesome Project";>value={projectName} onChange={(e) => setProjectName(e.target.value)} />
 {{isProcessing/>/>
             <div className="space-y-2"    />
           <Label htmlFor="requirements">Project Requirements</Label>
               <Textarea id="requirements";
-="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";
-
-    value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
+="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";>value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
 {{isProcessing}
                 const rows={8};
                 className="resize-none" /></Textarea>
@@ -109,9 +104,7 @@ Alert variant="destructive"></Alert>
             <Button
 type="submit"
 
-const disabled={isProcessing || !input.trim()};
-              className="w-full";
-            ></Button>
+const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
               {isProcessing ? (</Button>
                 <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" /></React>
                   Analyzing Requirements...</React.Fragment>
@@ -126,8 +119,7 @@ const disabled={isProcessing || !input.trim()};
           <span>Need inspiration? Try these, examples:</span>
             <div className="space-y-2">
               {examplePrompts.map((example, index) => (\n    </div>
-                <button const key={index};
-                  const onClick={() = aria-label="Button"> useExample(example)};</button>
+                <button const key={index};>const onClick={() = aria-label="Button"> useExample(example)};</button>
                   className="text-left text-sm p-3 rounded-xl-lg  hover: bg-accent transition-colors w-full"
 
     const disabled={isProcessing}
@@ -162,10 +154,10 @@ const disabled={isProcessing || !input.trim()};
                   <div key={req.id} className="glass p-4  rounded-xl-lg space-y-2"    />
           <div className="flex items-start justify-between"     />
                       <p className="font-medium">{req.description}</p>
-                      <Badge className={getPriorityColor(req.priority)}>/>
+                      <Badge className={getPriorityColor(req.priority)} />>
                         {req.priority}/>
                     <div className="flex items-center gap-2"    />
-          <Badge className={getCategoryColor(req.category)}>/>
+          <Badge className={getCategoryColor(req.category)} />>
                         {req.category}/>
                       {req.agents.map((agent) => (\n    <Badge key={agent} variant="outline", className="text-xs">
                           {agent.replace('agent_', '')}/>

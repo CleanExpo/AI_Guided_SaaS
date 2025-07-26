@@ -63,8 +63,7 @@ import { RequirementAnalysisSchema } from '@/lib/validation/agent-schemas';
 import { generateAIResponse } from '@/lib/ai';
 export class ValidatedAnalystAgent extends ValidatedAgent {
   constructor() {
-    super(
-      { id: 'validated-analyst-agent',
+    super({ id: 'validated-analyst-agent',
         name: 'Validated Requirements Analyst',
         role: 'Analyze and document project requirements with validation',
         description: 'Expert in requirement gathering with built-in validation.',
@@ -74,10 +73,10 @@ export class ValidatedAnalystAgent extends ValidatedAgent {
           'Risk analysis',
           'Input/output validation'
    ],
-        tools: ['requirement-parser', 'user-story-generator'],
-        temperature: 0.3 }
+        tools: ['requirement-parser', 'user-story-generator'])
+        temperature: 0.3 })
       z.string().min(10, // Input must be at least 10 characters
-      RequirementAnalysisSchema // Output must match RequirementAnalysis schema
+      RequirementAnalysisSchema // Output must match RequirementAnalysis schema)
     )
 }
   @ValidateOutput(RequirementAnalysisSchema);
@@ -109,8 +108,8 @@ const _validatedAnalysis = this.validateOutput(analysis);
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: this.config.temperature,
-    responseFormat: 'json'   
+    temperature: this.config.temperature)
+    responseFormat: 'json'   )
     })
     return JSON.parse(response)
 }
@@ -139,7 +138,7 @@ export function createValidatedAgent<TInput TOutput>(</TInput>
     outputSchema: z.ZodSchema<TOutput></TOutput>
     executeFunction: (input: TInput) => Promise<TOutput></TOutput>
 ): ValidatedAgent {
-  return new (class extends ValidatedAgent {
+  return new(class extends ValidatedAgent {)
     constructor() {
       super(config, inputSchema, outputSchema)}
     protected async executeValidated(input: TInput): Promise<any> {

@@ -17,9 +17,7 @@ export class Logger {
         })
       ),
       defaultMeta: { component },
-      transports: [
-        new winston.transports.Console()
-      ]
+      transports: [new winston.transports.Console()],
     });
   }
 

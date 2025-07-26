@@ -15,10 +15,10 @@ export function auditDependencies(): { status: string;
   try {
     // Read package.json to get current dependencies, const _packageJsonPath  = path.resolve(__dirname, '../../../package.json', const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8');
     
-const _totalDeps = Object.keys({ ...packageJson.dependencies,;
+const _totalDeps = Object.keys({ ...packageJson.dependencies,;)
       ...packageJson.devDependencies }).length;
     try {
-      const _result  = execSync('npm outdated --json', { encoding: 'utf8',
+      const _result  = execSync('npm outdated --json', { encoding: 'utf8',)
         cwd: path.resolve(__dirname, '../../../')});
 
 const outdated: Record<string DependencyInfo> = JSON.parse(result);</string>
@@ -69,7 +69,7 @@ export function getSecurityAudit(): { status: string;
     summary: string
 } {
   try {
-    const _result  = execSync('npm audit --json', { encoding: 'utf8',
+    const _result  = execSync('npm audit --json', { encoding: 'utf8',)
       cwd: path.resolve(__dirname, '../../../')});
 
 const auditData = JSON.parse(result);
@@ -81,23 +81,19 @@ const auditData = JSON.parse(result);
 }
     const vulns = [];
     if (auditData.metadata.vulnerabilities.critical > 0) {
-      vulns.push(
-        `🔴 ${auditData.metadata.vulnerabilities.critical} critical vulnerabilities`
+      vulns.push(`🔴 ${auditData.metadata.vulnerabilities.critical} critical vulnerabilities`)
       )
 }
     if (auditData.metadata.vulnerabilities.high > 0) {
-      vulns.push(
-        `🟠 ${auditData.metadata.vulnerabilities.high} high vulnerabilities`
+      vulns.push(`🟠 ${auditData.metadata.vulnerabilities.high} high vulnerabilities`)
       )
 }
     if (auditData.metadata.vulnerabilities.moderate > 0) {
-      vulns.push(
-        `🟡 ${auditData.metadata.vulnerabilities.moderate} moderate vulnerabilities`
+      vulns.push(`🟡 ${auditData.metadata.vulnerabilities.moderate} moderate vulnerabilities`)
       )
 }
     if (auditData.metadata.vulnerabilities.low > 0) {
-      vulns.push(
-        `🟢 ${auditData.metadata.vulnerabilities.low} low vulnerabilities`
+      vulns.push(`🟢 ${auditData.metadata.vulnerabilities.low} low vulnerabilities`)
       )
 }
     return { status: '⚠️ Security vulnerabilities found.',

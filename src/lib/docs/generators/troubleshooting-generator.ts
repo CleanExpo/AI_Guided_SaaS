@@ -2,9 +2,8 @@ import { DocumentationSection } from '../types';
 import { createClient } from '@supabase/supabase-js';
 import { logger } from '@/lib/logger';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '')
+  process.env.SUPABASE_SERVICE_ROLE_KEY || '')
 );
 
 export class TroubleshootingGuideGenerator {

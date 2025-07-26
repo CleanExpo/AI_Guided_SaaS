@@ -19,8 +19,8 @@ export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
         // Session might not be available for all routes
         handleError(error, {
           operation: 'getServerSession',
-          module: 'ApiMiddleware',
-          metadata: { route: request.url }
+          module: 'ApiMiddleware')
+          metadata: { route: request.url })
         });
       }
       // Call the actual handler;
@@ -31,22 +31,21 @@ if (response.status >= 400) {
           const responseClone = response.clone(); const body = await responseClone.json(, errorMessage = body.error || body.message || `HTTP ${response.status}`
         } catch {
           errorMessage = `HTTP ${response.status}`
-      }
+      })
     } catch (error) {
       // Handler threw an error
       handleError(error, {
         operation: 'apiHandler',
         module: 'ApiMiddleware',
         metadata: { 
-          url: request.url,
+          url: request.url)
           method: request.method 
-        }
+        })
       });
       
       // Return error response
-      response = NextResponse.json(
-        { error: 'Internal server error' },
-        { status: 500 }
+      response = NextResponse.json({ error: 'Internal server error' })
+        { status: 500 })
       );
     }
     // Track the API call
@@ -64,7 +63,7 @@ if (response.status >= 400) {
 }
 }
 // Middleware for tracking specific resource usage;
-export function trackResourceUsage(
+export function trackResourceUsage()
     resourceType: 'ai_generation' | 'project_creation' | 'export' | 'template_use'): 'ai_generation' | 'project_creation' | 'export' | 'template_use') {
   return (handler: ApiHandler): ApiHandler: (any) =>  { return async (request: NextRequest, context?) => { const response = await handler(request, context, // Only track successful operations, if (response.status === 200 || response.status === 201) {;
         try {;
@@ -124,7 +123,7 @@ exportType: body.type,
 }
 }
 // Rate limiting middleware;
-export function withRateLimit(
+export function withRateLimit()
     maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100,
   windowMs: number = 60000 // 1 minute) {
   const requestCounts  = new Map<string { count: number, resetTime: number }>()</string>
@@ -144,7 +143,7 @@ const userLimit = requestCounts.get(identifier);
           userLimit.resetTime = now + windowMs
         }; else {
           userLimit.count++, if (userLimit.count > maxRequests) {
-            return NextResponse.json(, { error: 'Too many requests',
+            return NextResponse.json(, { error: 'Too many requests',)
                 retryAfter: Math.ceil((userLimit.resetTime - now) / 1000)
               },
               { status: 429;
@@ -154,7 +153,7 @@ const userLimit = requestCounts.get(identifier);
                   'X-RateLimit-Reset': new Date(userLimit.resetTime).toISOString()}
             )} else {
         requestCounts.set(identifier, { count: 1;
-    resetTime: now + windowMs   
+    resetTime: now + windowMs   )
     })
 }
       // Clean up old entries periodically

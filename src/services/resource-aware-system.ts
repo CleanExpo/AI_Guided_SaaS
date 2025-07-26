@@ -106,9 +106,9 @@ class ResourceAwareSystem extends EventEmitter {
       cpuLimit: 30,
       memoryLimit: 50,
       concurrentTasks: 1,
-      enableBackground: false,
+      enableBackground: false)
       throttleNetwork: true
-    }]
+    }])
   ]);
 
   constructor(thresholds?: Partial<ResourceThresholds>) {
@@ -321,30 +321,30 @@ class ResourceAwareSystem extends EventEmitter {
     this.currentProfile = strategy.profile;
     
     // Apply specific actions based on strategy
-    strategy.actions.forEach(action => {
+    strategy.actions.forEach(action => {)
       switch (action) {
         case 'throttle':
           this.emit('action:throttle', {
-            cpuLimit: strategy.profile.cpuLimit,
-            memoryLimit: strategy.profile.memoryLimit
+            cpuLimit: strategy.profile.cpuLimit)
+            memoryLimit: strategy.profile.memoryLimit)
           });
           break;
         
         case 'pause':
           this.emit('action:pause', {
-            pauseBackground: !strategy.profile.enableBackground
+            pauseBackground: !strategy.profile.enableBackground)
           });
           break;
         
         case 'reduce':
           this.emit('action:reduce', {
-            concurrentTasks: strategy.profile.concurrentTasks
+            concurrentTasks: strategy.profile.concurrentTasks)
           });
           break;
         
         case 'optimize':
           this.emit('action:optimize', {
-            throttleNetwork: strategy.profile.throttleNetwork
+            throttleNetwork: strategy.profile.throttleNetwork)
           });
           break;
         

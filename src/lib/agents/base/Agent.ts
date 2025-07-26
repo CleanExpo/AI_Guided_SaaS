@@ -84,8 +84,8 @@ export abstract class Agent extends EventEmitter {
   protected createEmptyContext(): AgentContext {
     return { projectId: '',
       userId: '',
-      sessionId: uuidv4(, requirements: '',
-      history: [],
+      sessionId: uuidv4(, requirements: '')
+      history: [],)
       sharedMemory: new Map(),
       artifacts: new Map()
     }
@@ -129,16 +129,15 @@ export abstract class Agent extends EventEmitter {
     return this.messages
 }
   
-  protected addMessage(
-    type: AgentMessage['type'],
+  protected addMessage(type: AgentMessage['type'])
     content: string;
-    metadata?: Record<string any></string>
+    metadata?: Record<string any></string>)
   ): AgentMessage {
     const message: AgentMessage={ id: uuidv4(, from: this.config.id,
       to: 'system',
       type,
-      content,
-      metadata,
+      content)
+      metadata,)
       timestamp: new Date()
     };
     
@@ -371,20 +370,20 @@ export abstract class Agent extends EventEmitter {
   // Agent lifecycle methods
   public async start(): Promise<void> {
     this.state.status = 'ready';
-    this.emit('agent:started', { agentId: this.config.id   
+    this.emit('agent:started', { agentId: this.config.id   )
     })
 }
   
   public async stop(): Promise<void> {
     this.state.status = 'shutting_down';
-    this.emit('agent:stopping', { agentId: this.config.id
+    this.emit('agent:stopping', { agentId: this.config.id)
     });
     
     // Clear task queue
     this.state.taskQueue = [];
     
     this.state.status = 'offline';
-    this.emit('agent:stopped', { agentId: this.config.id   
+    this.emit('agent:stopped', { agentId: this.config.id   )
     })
 }
   

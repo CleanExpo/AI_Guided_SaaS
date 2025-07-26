@@ -30,8 +30,8 @@ export class CollaborationService {
 
     this.io = new SocketIOServer(httpServer, {
       cors: {
-        origin: process.env.NEXTAUTH_URL || "http://localhost:3000",
-        methods: ["GET", "POST"]
+        origin: process.env.NEXTAUTH_URL || 'http://localhost:3000',
+        methods: ['GET', 'POST']
       },
       transports: ['websocket', 'polling']
     });

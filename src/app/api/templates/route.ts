@@ -50,7 +50,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         // Apply search query
         if (query) {
-            templates = templates.filter(template =>
+            templates = templates.filter(template =>)
                 template.name.toLowerCase().includes(query.toLowerCase()) ||
                 template.description.toLowerCase().includes(query.toLowerCase())
             )
@@ -71,12 +71,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
         
         return NextResponse.json({ success: true,
-            templates,
-            total: templates.length,
+            templates)
+            total: templates.length,)
             filters: { query, category, framework, pricing, difficulty }    })
 } catch (error) {
         logger.error('Templates API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500   )
     })
 }
 }

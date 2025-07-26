@@ -5,7 +5,7 @@ import type { SystemDebugInfo } from '../types';
 export class SystemQueries {
   static async getDebugInfo(): Promise<SystemDebugInfo> {
     try {
-      const [environment, database, cache, services, errors] = await Promise.all([
+      const [environment, database, cache, services, errors] = await Promise.all([)
         this.getEnvironmentInfo(),
         this.getDatabaseInfo(),
         this.getCacheInfo(),
@@ -133,9 +133,7 @@ export class SystemQueries {
       const errorGroups: Record<string, {
         timestamp: string;
         message: string;
-        stack?: string;
-        count: number;
-      }> = {};
+        stack?: string;>count: number;>}> = {};
 
       errorLogs?.forEach((log) => {
         const message = log.details?.message || log.action;
@@ -165,7 +163,7 @@ export class SystemQueries {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       await supabase?.from('activity_logs').insert({
-        action: 'admin_cache_clear',
+        action: 'admin_cache_clear',)
         created_at: new Date().toISOString()
       });
 
@@ -192,23 +190,23 @@ export class SystemQueries {
       const { data } = await supabase!.from('users').select('id').limit(1);
       diagnostics.checks.push({
         name: 'Database Connection',
-        status: 'pass',
-        message: 'Database is accessible'
+        status: 'pass')
+        message: 'Database is accessible')
       });
     } catch (error) {
       diagnostics.checks.push({
         name: 'Database Connection',
         status: 'fail',
-        message: 'Database connection failed',
-        details: error
+        message: 'Database connection failed')
+        details: error)
       });
     }
 
     // Check disk space (mock)
     const diskSpace = Math.random() * 100;
     diagnostics.checks.push({
-      name: 'Disk Space',
-      status: diskSpace < 10 ? 'warning' : 'pass',
+      name: 'Disk Space')
+      status: diskSpace < 10 ? 'warning' : 'pass',)
       message: `${diskSpace.toFixed(1)}% free space`,
       details: { freeSpace: diskSpace }
     });
@@ -216,8 +214,8 @@ export class SystemQueries {
     // Check memory usage (mock)
     const memoryUsage = Math.random() * 100;
     diagnostics.checks.push({
-      name: 'Memory Usage',
-      status: memoryUsage > 90 ? 'warning' : 'pass',
+      name: 'Memory Usage')
+      status: memoryUsage > 90 ? 'warning' : 'pass',)
       message: `${memoryUsage.toFixed(1)}% used`,
       details: { usage: memoryUsage }
     });
@@ -230,8 +228,8 @@ export class SystemQueries {
     diagnostics.checks.push({
       name: 'API Response Time',
       status: responseTime > 500 ? 'warning' : 'pass',
-      message: `${responseTime}ms average`,
-      details: { responseTime }
+      message: `${responseTime}ms average`)
+      details: { responseTime })
     });
 
     return diagnostics;
@@ -241,7 +239,7 @@ export class SystemQueries {
     startDate: string;
     endDate: string;
     types?: string[];
-    format?: 'json' | 'csv';
+    format?: 'json' | 'csv';)
   }) {
     const { startDate, endDate, types = [], format = 'json' } = params;
 
@@ -279,7 +277,7 @@ export class SystemQueries {
     
     const csvRows = logs.map(log => {
       return headers.map(header => {
-        const value = log[header];
+        const value = log[header];)
         if (typeof value === 'object') {
           return `"${JSON.stringify(value).replace(/"/g, '""')}"`;
         }

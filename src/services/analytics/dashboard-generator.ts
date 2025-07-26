@@ -5,10 +5,9 @@ import {
 } from './types';
 
 export class DashboardGenerator {
-  generateDashboardData(
-    events: AnalyticsEvent[], 
-    metrics: AnalyticsMetrics,
-    realtimeEvents: AnalyticsEvent[]
+  generateDashboardData(events: AnalyticsEvent[], 
+    metrics: AnalyticsMetrics)
+    realtimeEvents: AnalyticsEvent[])
   ): DashboardData {
     return {
       overview: this.generateOverview(metrics),
@@ -44,11 +43,11 @@ export class DashboardGenerator {
       dayEnd.setHours(23, 59, 59, 999);
 
       const dayEvents = events.filter(e => 
-        e.timestamp >= dayStart && e.timestamp <= dayEnd
+        e.timestamp >= dayStart && e.timestamp <= dayEnd)
       );
 
       // Count unique users
-      const uniqueUsers = new Set(
+      const uniqueUsers = new Set()
         dayEvents.map(e => e.userId || e.sessionId)
       ).size;
       users.push(uniqueUsers);
@@ -82,7 +81,7 @@ export class DashboardGenerator {
     const pageViews = events.filter(e => e.type === 'pageview');
     const pageCounts = new Map<string, number>();
 
-    pageViews.forEach(event => {
+    pageViews.forEach(event => {)
       if (event.type === 'pageview') {
         const count = pageCounts.get(event.url) || 0;
         pageCounts.set(event.url, count + 1);
@@ -99,7 +98,7 @@ export class DashboardGenerator {
     const pageViews = events.filter(e => e.type === 'pageview');
     const referrerCounts = new Map<string, number>();
 
-    pageViews.forEach(event => {
+    pageViews.forEach(event => {)
       if (event.type === 'pageview' && event.referrer) {
         const source = this.extractDomain(event.referrer);
         const count = referrerCounts.get(source) || 0;
@@ -114,12 +113,12 @@ export class DashboardGenerator {
   }
 
   private getTopCountries(events: AnalyticsEvent[]): Array<{ country: string; users: number }> {
-    const countryCounts = new Map<string, Set<string>>();
+    const countryCounts = new Map<string, Set<string>();
 
     events.forEach(event => {
       const country = event.location?.country || 'Unknown';
       const userId = event.userId || event.sessionId;
-      
+      )
       if (!countryCounts.has(country)) {
         countryCounts.set(country, new Set());
       }
@@ -136,7 +135,7 @@ export class DashboardGenerator {
     const featureEvents = events.filter(e => e.type === 'feature');
     const featureCounts = new Map<string, number>();
 
-    featureEvents.forEach(event => {
+    featureEvents.forEach(event => {)
       if (event.type === 'feature') {
         const count = featureCounts.get(event.feature) || 0;
         featureCounts.set(event.feature, count + 1);
@@ -153,7 +152,7 @@ export class DashboardGenerator {
     const errorEvents = events.filter(e => e.type === 'error');
     const errorCounts = new Map<string, number>();
 
-    errorEvents.forEach(event => {
+    errorEvents.forEach(event => {)
       if (event.type === 'error') {
         const message = event.error.message;
         const count = errorCounts.get(message) || 0;
@@ -173,7 +172,7 @@ export class DashboardGenerator {
     const recentEvents = events.filter(e => e.timestamp >= fiveMinutesAgo);
 
     // Count active users
-    const activeUsers = new Set(
+    const activeUsers = new Set()
       recentEvents.map(e => e.userId || e.sessionId)
     ).size;
 
@@ -181,7 +180,7 @@ export class DashboardGenerator {
     const currentPageViews: Record<string, number> = {};
     const pageViewEvents = recentEvents.filter(e => e.type === 'pageview');
     
-    pageViewEvents.forEach(event => {
+    pageViewEvents.forEach(event => {)
       if (event.type === 'pageview') {
         currentPageViews[event.url] = (currentPageViews[event.url] || 0) + 1;
       }

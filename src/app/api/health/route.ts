@@ -49,8 +49,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     logger.error('Health check error:', error);
     return NextResponse.json({
-      status: 'unhealthy',
-      error: 'Health check failed',
+      status: 'unhealthy')
+      error: 'Health check failed',)
       timestamp: new Date().toISOString()
     }, { status: 500 });
   }
@@ -63,14 +63,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     
     // Simulate service health action
     return NextResponse.json({
-      success: true,
-      message: `Health check action ${action} performed on ${service}`,
+      success: true)
+      message: `Health check action ${action} performed on ${service}`,)
       timestamp: new Date().toISOString()
     });
   } catch (error) {
     logger.error('Health action error:', error);
     return NextResponse.json({
-      error: 'Health action failed'
+      error: 'Health action failed')
     }, { status: 500 });
   }
 }

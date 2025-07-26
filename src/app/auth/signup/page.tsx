@@ -21,23 +21,23 @@ export default function SignUpPage() {
     e.preventDefault();
     setIsLoading(true);
     // Handle signup logic here
-    setTimeout(() => setIsLoading(false), 1000)
+    setTimeout(() => setIsLoading(false), 1000);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value    })
+      [e.target.name]: e.target.value    });
 };
 
   return (
     <div className="min-h-screen flex items-center justify-center glass">
-          <Card className="w-full max-w-md" className="glass
-        <CardHeader className="glass"
-          <CardTitle className="text-2xl text-center" className="glassCreate Account</CardTitle>
+      <Card className="w-full max-w-md glass">
+        <CardHeader className="glass">
+          <CardTitle className="text-2xl text-center glass">Create Account</CardTitle>
           <p className="text-center text-gray-600">Join AI Guided SaaS Platform</p>
         </CardHeader>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass">
           <form onSubmit={handleSubmit} className="space-y-4" role="form">
             <Input
               type="text"
@@ -70,14 +70,14 @@ export default function SignUpPage() {
           
           <div className="relative">
           <div className="absolute inset-0 flex items-center">
-              <Separator    />
+              <Separator />
           </div>
             <div className="relative flex justify-center text-xs uppercase">
           <span className="glass px-2 text-gray-500">Or continue with</span>
             </div>
           </div>
           <Button type="button" variant="outline" className="w-full">
-          <Github className="w-4 h-4 mr-2"     />
+            <Github className="w-4 h-4 mr-2" />
             Continue with GitHub
           </Button>
           

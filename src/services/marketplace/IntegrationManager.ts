@@ -31,7 +31,7 @@ export class IntegrationManager extends EventEmitter {
       
       // Save installation record
       this.installedItems.set(integrationId, {
-        type: 'integration',
+        type: 'integration',)
         installedAt: new Date(),
         version: '1.0.0'
       });
@@ -43,10 +43,9 @@ export class IntegrationManager extends EventEmitter {
     }
   }
 
-  async callIntegration(
-    integrationId: string, 
-    endpoint: string, 
-    params?: Record<string, any>
+  async callIntegration(integrationId: string, 
+    endpoint: string)
+    params?: Record<string, any>)
   ): Promise<any> {
     const integration = this.integrations.get(integrationId);
     if (!integration) throw new Error('Integration not found');
@@ -97,9 +96,8 @@ export class IntegrationManager extends EventEmitter {
     };
   }
 
-  private validateCredentials(
-    integration: Integration, 
-    credentials: Record<string, string>
+  private validateCredentials(integration: Integration)
+    credentials: Record<string, string>)
   ): void {
     for (const cred of integration.credentials) {
       if (cred.required && !credentials[cred.key]) {
@@ -108,24 +106,22 @@ export class IntegrationManager extends EventEmitter {
     }
   }
 
-  private async testIntegrationConnection(
-    integration: Integration, 
-    credentials: Record<string, string>
+  private async testIntegrationConnection(integration: Integration)
+    credentials: Record<string, string>)
   ): Promise<void> {
     // Test if credentials work
     console.log(`Testing connection for integration: ${integration.name}`);
   }
 
-  private async saveCredentials(
-    integrationId: string, 
-    credentials: Record<string, string>
+  private async saveCredentials(integrationId: string)
+    credentials: Record<string, string>)
   ): Promise<void> {
     // Save credentials securely (encrypted)
     const encryptedCredentials = this.encryptCredentials(credentials);
     localStorage.setItem(`integration_creds_${integrationId}`, encryptedCredentials);
   }
 
-  private async getCredentials(integrationId: string): Promise<Record<string, string>> {
+  private async getCredentials(integrationId: string): Promise<Record<string, string> {
     // Retrieve stored credentials
     const encrypted = localStorage.getItem(`integration_creds_${integrationId}`);
     if (!encrypted) return {};
@@ -151,11 +147,10 @@ export class IntegrationManager extends EventEmitter {
     }
   }
 
-  private async makeApiCall(
-    integration: Integration,
+  private async makeApiCall(integration: Integration,
     endpoint: IntegrationEndpoint,
-    credentials: Record<string, string>,
-    params?: Record<string, any>
+    credentials: Record<string, string>)
+    params?: Record<string, any>)
   ): Promise<any> {
     // Make actual API call
     const url = `${integration.provider}${endpoint.path}`;

@@ -22,8 +22,7 @@ export class AnalyticsWebSocket extends EventEmitter {
   private isConnected: boolean = false;
   private metrics: Map<string, RealtimeMetric> = new Map();
   
-  constructor(
-    private url: string = process.env.NEXT_PUBLIC_ANALYTICS_WS_URL || 'ws://localhost:3001'
+  constructor(private url: string = process.env.NEXT_PUBLIC_ANALYTICS_WS_URL || 'ws://localhost:3001')
   ) {
     super();
   }
@@ -35,8 +34,8 @@ export class AnalyticsWebSocket extends EventEmitter {
       transports: ['websocket'],
       reconnection: true,
       reconnectionAttempts: 5,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000
+      reconnectionDelay: 1000)
+      reconnectionDelayMax: 5000)
     });
     
     this.setupEventHandlers();
@@ -120,7 +119,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     // Handle incoming metrics
     this.socket.on('metric', (data: RealtimeMetric) => {
       this.metrics.set(data.name, {
-        ...data,
+        ...data))
         timestamp: new Date(data.timestamp)
       });
       this.emit('metric', data);
@@ -130,7 +129,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     this.socket.on('metrics_batch', (metrics: RealtimeMetric[]) => {
       metrics.forEach(metric => {
         this.metrics.set(metric.name, {
-          ...metric,
+          ...metric))
           timestamp: new Date(metric.timestamp)
         });
       });
@@ -140,7 +139,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     // Handle real-time events
     this.socket.on('event', (event: RealtimeEvent) => {
       this.emit('event', {
-        ...event,
+        ...event))
         timestamp: new Date(event.timestamp)
       });
     });
@@ -180,7 +179,7 @@ export function getAnalyticsWebSocket(): AnalyticsWebSocket {
 // React Hook for WebSocket
 export function useAnalyticsWebSocket() {
   const [connected, setConnected] = React.useState(false);
-  const [metrics, setMetrics] = React.useState<Map<string, RealtimeMetric>>(new Map());
+  const [metrics, setMetrics] = React.useState<Map<string, RealtimeMetric>(new Map());
   const ws = React.useRef<AnalyticsWebSocket | null>(null);
   
   React.useEffect(() => {
@@ -192,7 +191,7 @@ export function useAnalyticsWebSocket() {
       setMetrics(prev => new Map(prev).set(metric.name, metric));
     };
     const handleMetricsBatch = (batch: RealtimeMetric[]) => {
-      setMetrics(prev => {
+      setMetrics(prev => {)
         const updated = new Map(prev);
         batch.forEach(metric => updated.set(metric.name, metric));
         return updated;

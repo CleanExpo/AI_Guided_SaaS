@@ -18,15 +18,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             startTime: new Date().toISOString(), data: validatedData.data || {}
         }
         
-        return NextResponse.json({ success: true, execution }, { status: 201   
+        return NextResponse.json({ success: true, execution }, { status: 201   )
     })
 } catch (error) {
         logger.error('N8N execution error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Workflow execution failed' }, { status: 500   
+        return NextResponse.json({ error: 'Workflow execution failed' }, { status: 500   )
     })
 }
 }
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const workflowId = url.searchParams.get('workflowId');
         
         if (!workflowId) {
-            return NextResponse.json({ error: 'Workflow ID is required' }, { status: 400   
+            return NextResponse.json({ error: 'Workflow ID is required' }, { status: 400   )
     })
 }
         
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, executions    })
 } catch (error) {
         logger.error('Get executions error:', error);
-        return NextResponse.json({ error: 'Failed to fetch executions' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch executions' }, { status: 500   )
     })
 }
 }

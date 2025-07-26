@@ -55,9 +55,9 @@ export class BreadcrumbAgent {
 
     if (!this.vision || !this.index) {
       result.isValid = false, result.issues.push({ type: 'missing_purpose',
-        message: 'Breadcrumb configuration files not found',
+        message: 'Breadcrumb configuration files not found')
         severity: 'error'
-     
+     )
     });
       result.alignmentScore = 0;
       return result
@@ -84,11 +84,11 @@ export class BreadcrumbAgent {
    */
   private async validateFile(filePath: string, mapping: FileMapping, result: ValidationResult): Promise<void> {
     // Check if file exists, const absolutePath = path.join(process.cwd(, filePath), if (!fs.existsSync(absolutePath) {)} {
-      result.issues.push({ type: 'orphaned',
+      result.issues.push({ type: 'orphaned')
         file: filePath;
         message: `File ${filePath} is mapped but doesn't exist`;
         severity: 'error'
-     
+     )
     });
       result.isValid = false;
       return
@@ -98,9 +98,9 @@ export class BreadcrumbAgent {
 if (!mapping.purpose) {
       result.issues.push({ type: 'missing_purpose',
         file: filePath;
-        message: `File ${filePath} has no defined purpose`,
+        message: `File ${filePath} has no defined purpose`)
         severity: 'error'
-     
+     )
     });
       result.isValid = false
 }
@@ -109,8 +109,8 @@ if (!mapping.purpose) {
 if (!mapping.linked_to || mapping.linked_to.length === 0) {
       result.issues.push({ type: 'not_linked',
         file: filePath;
-        message: `File ${filePath} is not linked to any goal or module`,
-        severity: 'warning'   
+        message: `File ${filePath} is not linked to any goal or module`)
+        severity: 'warning'   )
     })
 }
 
@@ -120,8 +120,8 @@ if (mapping.linked_to) {
         if (!this.isValidLink(link) {)} {
           result.issues.push({ type: 'misaligned',
             file: filePath;
-            message: `File ${filePath} has invalid link: ${link}`,
-            severity: 'warning'   
+            message: `File ${filePath} has invalid link: ${link}`)
+            severity: 'warning'   )
     })
   }
 }
@@ -175,8 +175,8 @@ const indexedFiles = new Set();
 
         result.issues.push({ type: 'orphaned',
           file: relativePath;
-          message: `File ${relativePath} exists but is not mapped to any goal`,
-          severity: 'warning'   
+          message: `File ${relativePath} exists but is not mapped to any goal`)
+          severity: 'warning'   )
     })
   }
 }
@@ -188,14 +188,14 @@ const indexedFiles = new Set();
     if (!this.vision) {r}eturn, for (const module of this.vision.modules) {
       const hasImplementation = Object.values(this.index.files).some((mapping: any) =>, mapping.linked_to?.includes(`module: ${module.name}`)); if (!hasImplementation && module.priority === 'high') {
         result.issues.push({ type: 'misaligned',
-          message: `High priority module "${module.name}" has no implementation`,
+          message: `High priority module "${module.name}" has no implementation`)
           severity: 'error'
-       
+       )
     }); result.isValid = false
 } else if (!hasImplementation) {
         result.issues.push({ type: 'misaligned',
-          message: `Module "${module.name}" has no implementation`,
-          severity: 'warning'   
+          message: `Module "${module.name}" has no implementation`)
+          severity: 'warning'   )
     })
   }
 }
@@ -221,27 +221,26 @@ const indexedFiles = new Set();
 }
 
     if (issueCounts.get('orphaned') {)} {
-      suggestions.push(
+      suggestions.push()
         `Found ${issueCounts.get('orphaned')} orphaned files. ` +
         `Run 'npm run breadcrumb:sync' to update the index.`
       )
 }
 
     if (issueCounts.get('not_linked') {)} {
-      suggestions.push(
+      suggestions.push()
         `${issueCounts.get('not_linked')} files are not linked to project goals. ` +
         `Review their purpose or consider removing them.`
       )
 }
 
     if (issueCounts.get('misaligned') {)} {
-      suggestions.push(
-        `Some features lack implementation. ` +
-        `Prioritize building missing high-priority modules.`
+      suggestions.push(`Some features lack implementation. ` +
+        `Prioritize building missing high-priority modules.`)
       )}
 
     if (result.alignmentScore < 70) {
-      suggestions.push(
+      suggestions.push()
         `Low alignment score (${result.alignmentScore}%). ` +
         `The codebase may be drifting from the original vision.`
       )

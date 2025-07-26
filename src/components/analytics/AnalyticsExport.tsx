@@ -261,9 +261,7 @@ export default function AnalyticsExport() {
             <Label>Export Format</Label>
             <div className="grid grid-cols-4 gap-3 mt-2">
               {(['csv', 'json', 'pdf', 'excel'] as const).map((format) => (
-                <button
-                  key={format}
-                  onClick={() = aria-label="Button"> setOptions({ ...options, format })}
+                <button>key={format}>onClick={() = aria-label="Button"> setOptions({ ...options, format })}
                   className={`p-3 border rounded-lg flex flex-col items-center gap-2 transition-all ${
                     options.format === format
                       ? 'border-blue-500 bg-blue-50'
@@ -282,9 +280,7 @@ export default function AnalyticsExport() {
             <Label>Date Range</Label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
               {(['today', '7days', '30days', '90days'] as const).map((range) => (
-                <button
-                  key={range}
-                  onClick={() = aria-label="Button"> setOptions({ ...options, dateRange: range })}
+                <button>key={range}>onClick={() = aria-label="Button"> setOptions({ ...options, dateRange: range })}
                   className={`p-2 border rounded-lg text-sm transition-all ${
                     options.dateRange === range
                       ? 'border-blue-500 bg-blue-50'
@@ -307,9 +303,7 @@ export default function AnalyticsExport() {
               {['users', 'revenue', 'conversions', 'engagement', 'performance'].map((metric) => (
                 <label key={metric} className="flex items-center gap-2">
                   <input
-                    type="checkbox"
-                    checked={options.metrics.includes(metric)}
-                    onChange={(e) => {
+                    type="checkbox">checked={options.metrics.includes(metric)}>onChange={(e) => {
                       if (e.target.checked) {
                         setOptions({ ...options, metrics: [...options.metrics, metric] });
                       } else {
@@ -328,9 +322,7 @@ export default function AnalyticsExport() {
           <div className="space-y-2">
             <label className="flex items-center gap-2">
               <input
-                type="checkbox"
-                checked={options.includeRawData}
-                onChange={(e) => setOptions({ ...options, includeRawData: e.target.checked })}
+                type="checkbox">checked={options.includeRawData}>onChange={(e) => setOptions({ ...options, includeRawData: e.target.checked })}
                 className="rounded-lg text-blue-600"
               />
               <span>Include raw data</span>
@@ -338,9 +330,7 @@ export default function AnalyticsExport() {
             {(options.format === 'pdf' || options.format === 'excel') && (
               <label className="flex items-center gap-2">
                 <input
-                  type="checkbox"
-                  checked={options.includeCharts}
-                  onChange={(e) => setOptions({ ...options, includeCharts: e.target.checked })}
+                  type="checkbox">checked={options.includeCharts}>onChange={(e) => setOptions({ ...options, includeCharts: e.target.checked })}
                   className="rounded-lg text-blue-600"
                 />
                 <span>Include charts</span>
@@ -351,9 +341,7 @@ export default function AnalyticsExport() {
           {/* Export Button */}
           <Button 
             onClick={handleExport} 
-            disabled={isExporting || options.metrics.length === 0}
-            className="w-full"
-          >
+            disabled={isExporting || options.metrics.length === 0}>className="w-full">>
             {isExporting ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />

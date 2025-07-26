@@ -123,8 +123,8 @@ const _crossReferenceSystem = await this.establishCrossReferences(hierarchyResul
     const memoryFiles: MemoryFile[]  = [ { filename: 'CLAUDE.md',
         content: this.generateCoreMemoryFile(projectContext, tokens: 2000;
     priority: 'critical' as const
-      },
-      { filename: 'PROJECT_CONTEXT.md',
+      })
+      { filename: 'PROJECT_CONTEXT.md',)
         content: this.generateProjectContextFile(projectContext, discoveryResults),
         tokens: 1500;
     priority: 'high' as const
@@ -135,7 +135,7 @@ const _crossReferenceSystem = await this.establishCrossReferences(hierarchyResul
 }
     ]
     return memoryFiles
-}
+})
   private generateCoreMemoryFile(projectContext: ProjectConfig) {
     return `# CLAUDE.md - ${projectContext.name} Memory Core``;
 ## 🧠 PROJECT IDENTITY

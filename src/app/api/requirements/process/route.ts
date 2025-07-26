@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 
-const processSchema = z.object({ 
+const processSchema = z.object({ )
     requirements: z.string().min(1, 'Requirements are required'),
     projectType: z.enum(['web-app', 'api', 'mobile', 'desktop']),
     priority: z.enum(['low', 'medium', 'high']).optional()
@@ -29,15 +29,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             createdAt: new Date().toISOString()
         }
         
-        return NextResponse.json({ success: true, processed }, { status: 201   
+        return NextResponse.json({ success: true, processed }, { status: 201   )
     })
 } catch (error) {
         logger.error('Process requirements error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Failed to process requirements' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to process requirements' }, { status: 500   )
     })
 }
 }
@@ -55,12 +55,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ];
         
         return NextResponse.json({ success: true,
-            requirements,
-            total: requirements.length   
+            requirements)
+            total: requirements.length   )
     })
 } catch (error) {
         logger.error('Get requirements error:', error);
-        return NextResponse.json({ error: 'Failed to fetch requirements' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch requirements' }, { status: 500   )
     })
 }
 }

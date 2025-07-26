@@ -4,9 +4,8 @@ import { ChannelManager } from './ChannelManager';
 import { logger } from '@/lib/logger';
 
 export class MessageRouter {
-  constructor(
-    private queueManager: MessageQueueManager,
-    private channelManager: ChannelManager
+  constructor(private queueManager: MessageQueueManager)
+    private channelManager: ChannelManager)
   ) {}
 
   async routeMessage(message: AgentMessage): Promise<void> {

@@ -11,11 +11,10 @@ interface ConfigurationSectionProps {
 
 export function ConfigurationSection({
   batchConfig,
-  setBatchConfig,
-  isProcessing
+  setBatchConfig)
+  isProcessing)
 }: ConfigurationSectionProps) {
-  return (
-    <Card className="glass p-4">
+  return(<Card className="glass p-4">
       <h3 className="font-medium text-gray-700 mb-3">
         ⚙️ Batch Configuration
       </h3>
@@ -27,12 +26,10 @@ export function ConfigurationSection({
           </label>
           <input
             type="number"
-            min="1"
-            max="10"
-            value={batchConfig.maxIssuesPerBatch}
-            onChange={(e) =>
+            min="1")
+            max="10">value={batchConfig.maxIssuesPerBatch}>onChange={(e) =>
               setBatchConfig({
-                ...batchConfig,
+                ...batchConfig,)
                 maxIssuesPerBatch: parseInt(e.target.value) || 3
               })
             }
@@ -50,11 +47,9 @@ export function ConfigurationSection({
           <input
             type="number"
             min="1"
-            max="30"
-            value={Math.round(batchConfig.maxTimePerBatch / 60)}
-            onChange={(e) =>
+            max="30">value={Math.round(batchConfig.maxTimePerBatch / 60)}>onChange={(e) =>
               setBatchConfig({
-                ...batchConfig,
+                ...batchConfig,)
                 maxTimePerBatch: (parseInt(e.target.value) || 5) * 60
               })
             }
@@ -72,11 +67,9 @@ export function ConfigurationSection({
           <input
             type="number"
             min="10"
-            max="300"
-            value={batchConfig.pauseBetweenBatches}
-            onChange={(e) =>
+            max="300">value={batchConfig.pauseBetweenBatches}>onChange={(e) =>
               setBatchConfig({
-                ...batchConfig,
+                ...batchConfig,)
                 pauseBetweenBatches: parseInt(e.target.value) || 30
               })
             }
@@ -90,12 +83,10 @@ export function ConfigurationSection({
         <div className="flex items-center">
           <label className="flex items-center">
             <input
-              type="checkbox"
-              checked={batchConfig.requireConfirmation}
-              onChange={(e) =>
+              type="checkbox">checked={batchConfig.requireConfirmation}>onChange={(e) =>
                 setBatchConfig({
-                  ...batchConfig,
-                  requireConfirmation: e.target.checked
+                  ...batchConfig)
+                  requireConfirmation: e.target.checked)
                 })
               }
               className="mr-2"

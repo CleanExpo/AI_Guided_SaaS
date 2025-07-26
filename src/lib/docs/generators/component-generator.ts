@@ -58,7 +58,7 @@ export class ComponentDocumentationGenerator {
     return content;
   }
 
-  private async scanDirectory(dir: string): Promise<Record<string, any[]>> {
+  private async scanDirectory(dir: string): Promise<Record<string, any[]> {
     const categories: Record<string, any[]> = {};
     
     try {
@@ -89,7 +89,7 @@ export class ComponentDocumentationGenerator {
         if (file.endsWith('.tsx') && !file.includes('.test.')) {
           const componentName = file.replace('.tsx', '');
           components.push({
-            name: componentName,
+            name: componentName,)
             path: path.join(dir, file)
           });
         }
@@ -122,9 +122,7 @@ export class ComponentDocumentationGenerator {
         code: `import { Button } from '@/components/ui/button';
 
 <Button 
-  variant="primary"
-  size="medium"
-  onClick={() => console.log('Clicked!')}
+  variant="primary">size="medium">onClick={() => console.log('Clicked!')}
 >
   Click Me
 </Button>`,

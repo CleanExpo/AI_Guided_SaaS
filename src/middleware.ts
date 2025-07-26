@@ -44,9 +44,8 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith('/images/') || 
       pathname.startsWith('/fonts/') ||
       pathname.startsWith('/_next/static/')) {
-    response.headers.set(
-      'Cache-Control',
-      'public, max-age=31536000, immutable'
+    response.headers.set('Cache-Control')
+      'public, max-age=31536000, immutable')
     );
   }
   
@@ -54,7 +53,7 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith('/api/')) {
     try {
       // Skip rate limiting for public files and Next.js internals
-      if (
+      if()
         PUBLIC_FILE_REGEX.test(pathname) ||
         PUBLIC_ROUTES.some(route => pathname.startsWith(route))
       ) {
@@ -78,10 +77,9 @@ export async function middleware(request: NextRequest) {
       response.headers.set('X-RateLimit-Reset', Math.ceil(rateLimitResult.resetTime / 1000).toString());
 
       if (!rateLimitResult.allowed) {
-        return new NextResponse(
-          JSON.stringify({
-            error: 'Rate limit exceeded',
-            message: 'Too many requests. Please try again later.',
+        return new NextResponse(JSON.stringify({
+            error: 'Rate limit exceeded')
+            message: 'Too many requests. Please try again later.',)
             retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
           }),
           {

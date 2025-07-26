@@ -8,9 +8,8 @@ import SelfCheckTrigger from './SelfCheckTrigger';
 import SystemResourceMonitor from './SystemResourceMonitor';
 import SafeModeHealthCheck from './SafeModeHealthCheck';
 export default function EnhancedAdminPanel() {
-  const [activeTab, setActiveTab] = useState<any>([])
-        return (
-    <div className="min-h-screen glass">
+  const [activeTab, setActiveTab] = useState<any>(null)
+        return(<div className="min-h-screen glass">
       {/* Header */}</div>
       <div className="glass -b max-w-7xl mx-auto px-4, sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 flex items-center space-x-4"     />
@@ -47,11 +46,8 @@ export default function EnhancedAdminPanel() {
           <span>Active Sessions</span>
                     <span className="font-medium">3</span>
                 <Button
-className="w-full mt-4";
-variant="outline";
-
-    const onClick={() => setActiveTab('performance')}</Button>
-                >
+className="w-full mt-4";)
+variant="outline";>const onClick={() => setActiveTab('performance')}</Button>
                   View Details {/* Safe, Mode Status */}
               <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
@@ -68,10 +64,7 @@ variant="outline";
           <span>Safety Checks</span>
                     <span className="font-medium">Active</span>
                 <Button className="w-full mt-4";
-variant="outline";
-
-    const onClick={() => setActiveTab('safe-mode')}</Button>
-                >
+variant="outline";>const onClick={() => setActiveTab('safe-mode')}</Button>
                   Start Safe Check {/* System, Health */}
               <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
@@ -87,37 +80,23 @@ variant="outline";
           <span>Issues Found</span>
                     <span className="font-medium">3 minor</span>
                 <Button className="w-full mt-4";
-variant="outline";
-
-    const onClick={() => setActiveTab('system-check')}</Button>
-                >
+variant="outline";>const onClick={() => setActiveTab('system-check')}</Button>
                   Run Health Check {/* Quick, Actions */}
             <Card className="glass p-6">
           <h3 className="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
               <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4">
           <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";
-
-    const onClick={() => setActiveTab('performance')}</Button>
-                ></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('performance')}</Button></Button>
                   <span className="text-2xl mb-1">📊</span>
                   <span className="text-sm">Monitor Resources</span>
                 <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";
-
-    const onClick={() => setActiveTab('safe-mode')}</Button>
-                ></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('safe-mode')}</Button></Button>
                   <span className="text-2xl mb-1">🛡️</span>
                   <span className="text-sm">Safe Processing</span>
                 <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";
-
-    const onClick={() => setActiveTab('system-check')}</Button>
-                ></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('system-check')}</Button></Button>
                   <span className="text-2xl mb-1">🔍</span><span className="text-sm">System Check</span>
-                <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";
-                >
+                <Button variant="outline";>className="h-20 flex flex-col items-center justify-center";>>
           <span className="text-2xl mb-1">📋</span>
                   <span className="text-sm">View Logs</span>
             {/* Emergency, Procedures */}
@@ -134,9 +113,7 @@ className="h-20 flex flex-col items-center justify-center";
                   <div className="mt-2">
           <Button
 size="sm";
-variant="outline";
-className="text-orange-700 -orange-300";
-                    ></Button>
+variant="outline";>className="text-orange-700 -orange-300";>></Button>
                       📖 View Emergency Guide {/* Performance, Monitor Tab */}
           <TabsContent value="performance", className="space-y-6">
           <SystemResourceMonitor></TabsContent>

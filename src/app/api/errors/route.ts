@@ -15,9 +15,8 @@ export async function POST(request: NextRequest) {
     const { errors } = body;
 
     if (!Array.isArray(errors) || errors.length === 0) {
-      return NextResponse.json(
-        { error: 'Invalid error data' },
-        { status: 400 }
+      return NextResponse.json({ error: 'Invalid error data' })
+        { status: 400 })
       );
     }
 
@@ -31,7 +30,7 @@ export async function POST(request: NextRequest) {
       ...error,
       serverContext: {
         ip,
-        referer,
+        referer))
         receivedAt: new Date().toISOString()
       }
     }));
@@ -54,15 +53,14 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ 
-      success: true, 
-      received: errors.length 
+      success: true)
+      received: errors.length )
     });
 
   } catch (error) {
     logger.error('Failed to process error logs:', error);
-    return NextResponse.json(
-      { error: 'Failed to process error logs' },
-      { status: 500 }
+    return NextResponse.json({ error: 'Failed to process error logs' })
+      { status: 500 })
     );
   }
 }
@@ -106,14 +104,14 @@ async function sendCriticalErrorAlert(errors: Record<string, unknown>[]) {
     try {
       await fetch(discordWebhook, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' })
         body: JSON.stringify({
           content: `🚨 **Critical Errors Detected** 🚨\n\n${errors.map(e => 
             `**${e.message}**\n` +
             `Severity: ${e.severity}\n` +
             `URL: ${e.url}\n` +
             `Time: ${e.timestamp}\n` +
-            `User: ${e.userId || 'Anonymous'}\n`
+            `User: ${e.userId || 'Anonymous'}\n`)
           ).join('\n---\n')}`
         })
       });
@@ -129,9 +127,8 @@ export async function GET(request: NextRequest) {
     // Check authorization
     const authHeader = request.headers.get('authorization');
     if (!authHeader || !isAuthorized(authHeader)) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
+      return NextResponse.json({ error: 'Unauthorized' })
+        { status: 401 })
       );
     }
 
@@ -156,9 +153,8 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     logger.error('Failed to retrieve error logs:', error);
-    return NextResponse.json(
-      { error: 'Failed to retrieve error logs' },
-      { status: 500 }
+    return NextResponse.json({ error: 'Failed to retrieve error logs' })
+      { status: 500 })
     );
   }
 }

@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 export default function QuickStartPage() {
-  const [copiedSteps, setCopiedSteps] = useState<number[]>([]);
+  const [copiedSteps, setCopiedSteps] = useState<number>(0);
   const [activeTab, setActiveTab] = useState('instant');
 
   const copyToClipboard = async (text: string, stepId: number) => {
@@ -152,8 +152,8 @@ export default withAuth(async (req, res, session) => {
 import { createCheckoutSession } from '@/lib/stripe';
 
 const session = await createCheckoutSession({
-  priceId: 'price_xxx',
-  userId: user.id
+  priceId: 'price_xxx')
+  userId: user.id)
 });
 
 redirect(session.url);`,
@@ -162,12 +162,11 @@ redirect(session.url);`,
 import { prisma } from '@/lib/prisma';
 
 const user = await prisma.user.create({
-  data: { email, name }
+  data: { email, name })
 });`
   };
 
-  return (
-    <div className="min-h-screen glass py-12 px-4">
+  return(<div className="min-h-screen glass py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -199,7 +198,7 @@ const user = await prisma.user.create({
           <TabsContent value="instant" className="mt-8">
             <Card className="glass"
               <CardHeader className="glass"
-                <CardTitle className="flex items-center justify-between" className="glass
+                <CardTitle className="flex items-center justify-between glass
                   <span>5-Minute Setup</span>
                   <Badge variant="outline">
                     <Zap className="h-3 w-3 mr-1" />
@@ -208,7 +207,7 @@ const user = await prisma.user.create({
                 </CardTitle>
               </CardHeader>
               <CardContent className="glass"
-                <div className="space-y-6">
+                <div className="space-y-6">)
                   {instantSetupSteps.map((step, index) => (
                     <div key={step.id} className="glass flex gap-4">
                       <div className="flex-shrink-0">
@@ -231,9 +230,7 @@ const user = await prisma.user.create({
                           </pre>
                           <Button
                             size="sm"
-                            variant="ghost"
-                            className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                            onClick={() => copyToClipboard(step.code, step.id)}
+                            variant="ghost">className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">onClick={() => copyToClipboard(step.code, step.id)}
                           >
                             {copiedSteps.includes(step.id) ? (
                               <CheckCircle className="h-4 w-4 text-green-400" />
@@ -303,7 +300,7 @@ const user = await prisma.user.create({
         <div className="glass grid md:grid-cols-2 gap-6 mb-12">
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Bot className="h-5 w-5" />
                 AI Integration
               </CardTitle>
@@ -319,7 +316,7 @@ const user = await prisma.user.create({
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Users className="h-5 w-5" />
                 Authentication
               </CardTitle>
@@ -335,7 +332,7 @@ const user = await prisma.user.create({
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <CreditCard className="h-5 w-5" />
                 Payments
               </CardTitle>
@@ -351,7 +348,7 @@ const user = await prisma.user.create({
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Package className="h-5 w-5" />
                 Database
               </CardTitle>
@@ -367,7 +364,7 @@ const user = await prisma.user.create({
         </div>
 
         {/* Next Steps */}
-        <Card className="bg-blue-50 -blue-200" className="glass
+        <Card className="bg-blue-50 -blue-200 glass
           <CardContent className="glass p-8">
             <div className="text-center">
               <h2 className="text-2xl font-bold mb-4">Ready to build?</h2>

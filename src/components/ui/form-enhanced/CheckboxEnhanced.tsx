@@ -14,8 +14,8 @@ export function CheckboxEnhanced({
   description,
   indeterminate,
   id,
-  checked,
-  ...props
+  checked)
+  ...props)
 }: CheckboxProps) {
   const generatedId = React.useId();
   const checkboxId = id || generatedId;
@@ -29,8 +29,7 @@ export function CheckboxEnhanced({
     }
   }, [indeterminate]);
 
-  return (
-    <div className="flex items-start space-x-2">
+  return(<div className="flex items-start space-x-2">
       <div className="relative flex items-center justify-center">
         <input
           ref={checkboxRef}
@@ -42,17 +41,13 @@ export function CheckboxEnhanced({
             checkboxSizes[checkboxSize],
             hasError && 'border-red-500 focus:ring-red-500',
             state === 'success' && 'border-green-500 focus:ring-green-500',
-            state === 'warning' && 'border-yellow-500 focus:ring-yellow-500',
-            className
-          )}
-          {...props}
-        />
+            state === 'warning' && 'border-yellow-500 focus:ring-yellow-500')
+            className)
+          )}>{...props} />>
         
         {(checked || indeterminate) && (
-          <div className={cn(
-            'absolute inset-0 flex items-center justify-center pointer-events-none text-white',
-            checkboxSizes[checkboxSize]
-          )}>
+          <div className={cn()
+            'absolute inset-0 flex items-center justify-center pointer-events-none text-white',>checkboxSizes[checkboxSize]>)}>
             {indeterminate ? (
               <MinusIcon className="w-3 h-3" />
             ) : (
@@ -61,19 +56,15 @@ export function CheckboxEnhanced({
           </div>
         )}
         
-        <div className={cn(
-          'absolute inset-0 rounded peer-checked:bg-primary peer-checked:border-primary peer-indeterminate:bg-primary peer-indeterminate:border-primary',
-          checkboxSizes[checkboxSize]
-        )} />
+        <div className={cn()
+          'absolute inset-0 rounded peer-checked:bg-primary peer-checked:border-primary peer-indeterminate:bg-primary peer-indeterminate:border-primary',>checkboxSizes[checkboxSize]>)} />
       </div>
       
       {(label || description) && (
         <div className="flex flex-col">
           {label && (
             <label
-              htmlFor={checkboxId}
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+              htmlFor={checkboxId}>className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">>
               {label}
             </label>
           )}

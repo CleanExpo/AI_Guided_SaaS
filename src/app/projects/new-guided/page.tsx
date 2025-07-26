@@ -36,9 +36,7 @@ export default function NewGuidedProjectPage() {
               <div>
           <label className="block text-sm font-medium mb-2">Project Name</label>
                 <Input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  type="text">value={formData.name}>onChange={(e) => setFormData({...formData, name: e.target.value})}
                   ="Enter project name"
                   required
                 />
@@ -46,9 +44,7 @@ export default function NewGuidedProjectPage() {
               <div>
           <label className="block text-sm font-medium mb-2">Description</label>
                 <Input
-                  type="text"
-                  value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  type="text">value={formData.description}>onChange={(e) => setFormData({...formData, description: e.target.value})}
                   ="Describe your project"
                 />
               </div>

@@ -25,8 +25,7 @@ const cohortData = [
 ];
 
 export function UsersTab() {
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* User Acquisition */}
         <Card className="glass"
@@ -34,14 +33,12 @@ export function UsersTab() {
             <CardTitle className="glass"User Acquisition</CardTitle>
           </CardHeader>
           <CardContent className="glass"
-            <div className="space-y-4">
+            <div className="space-y-4">)
               {acquisitionChannels.map((channel) => (
                 <ProgressBar
                   key={channel.label}
                   label={channel.label}
-                  percentage={channel.percentage}
-                  color={channel.color}
-                />
+                  percentage={channel.percentage}>color={channel.color} />>
               ))}
             </div>
           </CardContent>
@@ -56,9 +53,7 @@ export function UsersTab() {
             <div className="space-y-3">
               {userSegments.map((segment) => (
                 <div 
-                  key={segment.name}
-                  className="flex items-center justify-between p-3 glass rounded-xl-lg"
-                >
+                  key={segment.name}>className="flex items-center justify-between p-3 glass rounded-xl-lg">>
                   <div>
                     <p className="font-medium">{segment.name}</p>
                     <p className="text-sm text-gray-600">{segment.description}</p>
@@ -84,9 +79,7 @@ export function UsersTab() {
                   <tr>
                     {cohortData[0].map((header, index) => (
                       <th 
-                        key={index}
-                        className="text-left p-2 font-medium text-gray-600"
-                      >
+                        key={index}>className="text-left p-2 font-medium text-gray-600">>
                         {header}
                       </th>
                     ))}
@@ -97,9 +90,7 @@ export function UsersTab() {
                     <tr key={rowIndex}>
                       {row.map((cell, cellIndex) => (
                         <td 
-                          key={cellIndex}
-                          className={`p-2 ${
-                            cellIndex > 0 && cell !== '-' 
+                          key={cellIndex}>className={`p-2 ${>cellIndex > 0 && cell !== '-' 
                               ? 'text-center font-medium' 
                               : ''
                           }`}

@@ -86,7 +86,7 @@ startMonitoring() {
   /**
    * Perform health checks on all registered agents
    */
-  async performHealthChecks(): Promise<Map<string HealthCheck>> {</Map>
+  async performHealthChecks(): Promise<Map<string HealthCheck> {</Map>
 { this.registry.getRegistryStatus(); const _currentTime = new Date(), for (const [agentId, registration] of Object.entries(registryStatus.agents_by_role)) {
       if (Array.isArray(registration) {)} continue // Skip role arrays
       try {
@@ -95,8 +95,8 @@ startMonitoring() {
         // Update agent status based on health check;
 if (healthCheck.status !== agentDetails.health_status) {
           await this.createAlert({ agent_id: agentId;
-    severity: this.getAlertSeverity(healthCheck.status, type: 'health',
-            message: `Agent health status changed from ${agentDetails.health_status} to ${healthCheck.status}`,
+    severity: this.getAlertSeverity(healthCheck.status, type: 'health')
+            message: `Agent health status changed from ${agentDetails.health_status} to ${healthCheck.status}`,)
 metadata: { previous_status: agentDetails.health_status, new_status: healthCheck.status }})} catch (error) {
         logger.error(`❌ Health check failed for agent ${agentId}:`, error)``;
 
@@ -107,7 +107,7 @@ const failedCheck: HealthCheck={ agent_id: agentId;
     error_rate: 100;
     last_activity: new Date(0, checks_passed: 0;
     checks_failed: 1;
-    details: { error: error.message }}
+    details: { error: error.message }})
         this.healthChecks.set(agentId, failedCheck)}
     return this.healthChecks
 }
@@ -184,7 +184,7 @@ if (agent.status === 'ERROR') {
   async collectMetrics(): Promise<any> {
 { this.coordinator.getCoordinationStatus(); const registryStatus = this.registry.getRegistryStatus(, for (const [agentId, healthCheck] of this.healthChecks) {
       const agentDetails = this.registry.getAgentDetails(agentId); if (!agentDetails) {c}ontinue; const metrics: MonitoringMetrics={ agent_id: agentId;
-    timestamp: new Date(), metrics: { uptime: Date.now() - agentDetails.registered_at.getTime(, response_time: healthCheck.response_time,
+    timestamp: new Date(), metrics: { uptime: Date.now() - agentDetails.registered_at.getTime(, response_time: healthCheck.response_time,)
     throughput: agentDetails.metrics.total_tasks / Math.max(1, (Date.now() - agentDetails.registered_at.getTime()) / (1000 * 60 * 60), // tasks per hour, error_rate: healthCheck.error_rate,
     memory_usage: healthCheck.memory_usage || 0,
     success_rate: agentDetails.metrics.success_rate,
@@ -208,29 +208,29 @@ if (this.metricsHistory.length > 1000) {
       // Critical response time, if (healthCheck.response_time > 2000) {
         await this.createAlert({ agent_id: agentId;
     severity: 'critical',
-          type: 'performance',
-          message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,
+          type: 'performance')
+          message: `Agent response time exceeded, threshold: ${healthCheck.response_time}ms`,)
 metadata: { response_time: healthCheck.response_time, threshold: 2000 }    })
 }
       // High error rate; if (healthCheck.error_rate > 30) {
         await this.createAlert({ agent_id: agentId;
-    severity: 'critical',
-          type: 'error',
+    severity: 'critical')
+          type: 'error',)
           message: `Agent error rate exceeded, threshold: ${healthCheck.error_rate.toFixed(1)}%`,
 metadata: { error_rate: healthCheck.error_rate, threshold: 30 }    })
 }
       // Agent offline; if (healthCheck.status === 'offline') {
         await this.createAlert({ agent_id: agentId;
     severity: 'emergency',
-          type: 'availability',
-          message: `Agent is offline and unresponsive`, ``,
+          type: 'availability')
+          message: `Agent is offline and unresponsive`, ``,)
   metadata: { last_activity: healthCheck.last_activity }    })
 }
       // Memory usage warning;
 if (healthCheck.memory_usage && healthCheck.memory_usage > 80) {
         await this.createAlert({ agent_id: agentId;
-    severity: 'warning',
-          type: 'performance',
+    severity: 'warning')
+          type: 'performance',)
           message: `Agent memory usage, high: ${healthCheck.memory_usage.toFixed(1)}%`,
 metadata: { memory_usage: healthCheck.memory_usage, threshold: 80 }})}
   /**
@@ -258,8 +258,8 @@ if (alert.severity === 'critical' || alert.severity === 'emergency') {
       await mcp__memory__add_observations({ observations: [{
   entityName: `Agent_${alert.agent_id}`,
   contents: [
-            `Alert: ${alert.severity} - ${alert.type}`,``,
-  `Message: ${alert.message}`,``,
+            `Alert: ${alert.severity} - ${alert.type}`,``)
+  `Message: ${alert.message}`,``,)
   `Timestamp: ${alert.timestamp.toISOString()}`,``
             `Metadata: ${JSON.stringify(alert.metadata)}`
           ]
@@ -316,7 +316,7 @@ const agentStatus: Record<string HealthCheck> = {}</string>
     return {
       overview,; recent_alerts: recentAlerts;
     performance_trends: this.metricsHistory.slice(-100, // Last 100 metrics, agent_status: agentStatus;
-    coordination_metrics: coordinationStatus;
+    coordination_metrics: coordinationStatus;)
     last_updated: new Date()}
   /**
    * Get agent-specific monitoring data
@@ -392,7 +392,7 @@ const _percentChange = ((secondAvg - firstAvg) / firstAvg) * 100;
 stopMonitoring() { if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval, this.monitoringInterval = null
 }
-// Convenience functions;
+// Convenience functions;)
 export function startAgentMonitoring(): AgentMonitor { return, AgentMonitor.getInstance()
 };
 export function getMonitoringDashboard(): MonitoringDashboard {

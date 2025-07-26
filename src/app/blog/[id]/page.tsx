@@ -145,16 +145,16 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               </div>
             </div>
             
-            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg mb-8"></div>
+            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mb-8"></div>
           </div>
           
-          <Card className="glass"
+          <Card className="glass">
             <CardContent className="glass prose prose-lg max-w-none p-8">
-              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content ) }} />
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }} />
             </CardContent>
           </Card>
           
-          <div className="mt-12 pt-8 -t">
+          <div className="mt-12 pt-8 border-t">
             <h3 className="text-2xl font-bold mb-4">Share this article</h3>
             <div className="glass flex gap-4">
               <Button variant="outline">Share on Twitter</Button>

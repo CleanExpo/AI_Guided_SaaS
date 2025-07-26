@@ -10,21 +10,21 @@ g,
 }
 const _generateProjectFiles = (config: ProjectConfig): ProjectFile[] => {
   const files: ProjectFile[] = [], // Generate package.json, files.push({ name: 'package.json',
-    path: 'package.json',
-    type: 'config',
+    path: 'package.json')
+    type: 'config',)
     content: JSON.stringify({ name: config.name.toLowerCase().replace(/\s+/g, '-', version: '1.0.0',
       description: config.description,
     main: 'index.js',
-    scripts: { dev: 'next dev', build: 'next build', start: 'next start',
-  lint: 'next lint' },
+    scripts: { dev: 'next dev', build: 'next build', start: 'next start')
+  lint: 'next lint' },)
     dependencies: { 'react': '^18.0.0', 'react-dom': '^18.0.0', 'next': '^14.0.0', 'typescript': '^5.0.0', '@types/react': '^18.0.0', '@types/node': '^20.0.0' }, null, 2)    })
   // Generate README.md
   files.push({ name: 'README.md',
     path: 'README.md',
-    type: 'documentation',
+    type: 'documentation')
 content: `# ${config.name}``
 ${config.description}
-## Features
+## Features)
 ${config.features.map((feature) => `- ${feature}`).join('\n')}``
 ## Technology Stack
 - **Frontend:** ${config.technology?.frontend || 'React'}
@@ -45,10 +45,10 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
 `    })
   // Generate main page component
   files.push({ name: 'page.tsx',
-    path: 'app/page.tsx',
-    type: 'page',
+    path: 'app/page.tsx')
+    type: 'page',)
 content: `export default function Home() {``
-  return (
+  return()
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    / role="main">);</main>
         <div className="text-center"    />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -65,27 +65,27 @@ content: `export default function Home() {``
   // Generate layout component
   files.push({ name: 'layout.tsx',
     path: 'app/layout.tsx',
-    type: 'component',
+    type: 'component')
 content: `import type {  Metadata  } from 'next'``;
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin']
+const inter = Inter({ subsets: ['latin'])
     });
 export const metadata: Metadata={ title: '${config.name}',
   description: '${config.description}'};
     export default function RootLayout() {
-  return (html lang="en"   />, <body className={inter.className}>{children}</body>
+  return(html lang="en"   />, <body className={inter.className}>{children}</body>)
   }`    })
   // Generate global CSS
   files.push({ name: 'globals.css',
     path: 'app/globals.css',
-    type: 'style',
+    type: 'style')
     content: `@tailwind base, ``
 @tailwind components, @tailwind utilities:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220
-  --background-end-rgb: 255, 255, 255}
+  --background-end-rgb: 255, 255, 255})
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255, --background-start-rgb: 0, 0, 0
@@ -94,7 +94,7 @@ export const metadata: Metadata={ title: '${config.name}',
 }
 body { color: rgb(var(--foreground-rgb, background: linear-gradient(
       to bottom;
-      transparent,
+      transparent,)
       rgb(var(--background-end-rgb))
     rgb(var(--background-start-rgb))
 }
@@ -105,17 +105,17 @@ body { color: rgb(var(--foreground-rgb, background: linear-gradient(
   if (config.features.some(f => f.includes('API') {|}| f.includes('Authentication')) {
     files.push({ name: 'route.ts',
       path: 'app/api/hello/route.ts',
-      type: 'api',
+      type: 'api')
 content: `import { NextRequest, NextResponse } from 'next/server';
-
+)
 export async function GET(request: NextRequest): Promise<any> {
-  return NextResponse.json({ message: 'Hello from ${config.name} API!',
+  return NextResponse.json({ message: 'Hello from ${config.name} API!',)
     timestamp: new Date().toISOString()
     })};
 export async function POST(request: NextRequest): Promise<any> {
 { await request.json();
-  return NextResponse.json({ message: 'Data received successfully',
-    data: body
+  return NextResponse.json({ message: 'Data received successfully')
+    data: body)
 timestamp: new Date().toISOString()   
     })
 }`
@@ -131,9 +131,9 @@ const generationSteps = [
   { id: 'deploy', label: 'Preparing for deployment', icon: Globe }
 ];
 export default function ProjectGenerator({ config, onFilesGenerated }: ProjectGeneratorProps, onFilesGenerated }: ProjectGeneratorProps) {
-  const [currentStep, setCurrentStep] = useState<any>([])
-  const [completedSteps, setCompletedSteps] = useState<string[]>([]);</string>
-  const [isGenerating, setIsGenerating] = useState<any>([])
+  const [currentStep, setCurrentStep] = useState<any>(null)
+  const [completedSteps, setCompletedSteps] = useState<string>("");</string>
+  const [isGenerating, setIsGenerating] = useState<any>(null)
   useEffect(() =>  {
     const _generateFiles = async () => {
       for (let i = 0; i < generationSteps.length, i++) {
@@ -152,16 +152,15 @@ const files = generateProjectFiles(config);
 }
     generateFiles()
 }, [config, onFilesGenerated])
-  return (
-    <div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+  return(<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
           <Card className="w-full max-w-2xl"     / className="glass
         <CardHeader className="text-center"    / className="glass
-          <CardTitle className="text-2xl font-bold" className="glass
+          <CardTitle className="text-2xl font-bold glass
             Generating Your Project</Card>
           <p className="text-gray-600 mt-2"     />
             Creating <span className="font-semibold">{config.name}</span> with your selected features...
 </p>
-        <CardContent className="space-y-6" className="glass
+        <CardContent className="space-y-6 glass
           {/* Project, Overview */}</Card>
           <div className="glass bg-blue-50 p-4 rounded-xl-lg"    />
           <h3 className="font-semibold text-blue-900 mb-2">Project Overview</h3>
@@ -179,31 +178,26 @@ const files = generateProjectFiles(config);
           <span className="text-blue-700 font-medium">Hosting:</span>
                 <span className ="ml-2">{config.technology?.hosting || 'Vercel'}</span>
           {/* Generation, Steps */}
-          <div className="space-y-3">
+          <div className="space-y-3">)
             {generationSteps.map((step, index) => {
               const _isCompleted = completedSteps.includes(step.id); const _isCurrent = currentStep === index && isGenerating; const _IconComponent = step.icon;
-              return (
-    </div>
+              return(</div>
         <div;
 
 const key={step.id};
                   const className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 ${``
                     // isCompleted
                       ? 'bg-green-50 border border-green-200'
-                      ?: isCurrent 'bg-blue-50 border border-blue-200'
-                      : 'bg-gray-50 border border-gray-200'
-                  }`/>
+                      ?: isCurrent 'bg-blue-50 border border-blue-200'>: 'bg-gray-50 border border-gray-200'>}`/>
           <div;
 
     const className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${``
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         ?: isCurrent 'bg-blue-500 text-white'
-                        : 'bg-gray-300 text-gray-600'
-                    }`}
-                  ></div>
+                        : 'bg-gray-300 text-gray-600'>}`}></div>
                     {isCompleted ? (</div>
-                      <CheckCircle className="w-5 h-5"     />
+                      <CheckCircle className="w-5 h-5"     />)
                     ) : (
                       <IconComponent className="w-4 h-4"     />
                     )}</IconComponent>
@@ -214,9 +208,7 @@ const key={step.id};
                         // isCompleted
                           ? 'text-green-800'
                           ?: isCurrent 'text-blue-800'
-                          : 'text-gray-600'
-                      }`}
-                    ></p>
+                          : 'text-gray-600'>}`}></p>
                       {step.label}</p>
                   {isCurrent && (
 div className="flex space-x-1"></div>

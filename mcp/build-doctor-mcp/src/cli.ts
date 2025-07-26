@@ -32,9 +32,11 @@ program
     console.log(`- JSX Errors: ${diagnosis.jsxErrors}`);
     console.log(`- Import Errors: ${diagnosis.importErrors}`);
     console.log(`- Config Errors: ${diagnosis.configErrors}`);
-    
+
     if (diagnosis.errors.length > 0) {
-      console.log(`\\nRun 'build-doctor fix' to automatically fix these issues.`);
+      console.log(
+        `\\nRun 'build-doctor fix' to automatically fix these issues.`
+      );
     }
   });
 
@@ -58,7 +60,7 @@ program
       projectPath: options.path,
     });
 
-    const validation = options.dryRun 
+    const validation = options.dryRun
       ? { success: true, message: 'Dry run - no validation performed' }
       : await validator.validateProject(options.path);
 
@@ -79,8 +81,8 @@ program
 
     console.log(`\\n🏥 BUILD VALIDATION\\n`);
     console.log(`Status: ${validation.success ? '✅ PASS' : '❌ FAIL'}\\n`);
-    
-    validation.steps.forEach(step => {
+
+    validation.steps.forEach((step) => {
       console.log(`${step.success ? '✓' : '✗'} ${step.name}: ${step.message}`);
     });
   });

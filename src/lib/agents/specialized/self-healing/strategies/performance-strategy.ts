@@ -148,7 +148,7 @@ export class PerformanceHealingStrategy {
 
       // Monitor memory usage after GC
       const memoryUsage = process.memoryUsage();
-      console.log('Memory usage after GC:', {
+      console.log('Memory usage after GC:', {)
         rss: Math.round(memoryUsage.rss / 1024 / 1024) + 'MB',
         heapUsed: Math.round(memoryUsage.heapUsed / 1024 / 1024) + 'MB',
         heapTotal: Math.round(memoryUsage.heapTotal / 1024 / 1024) + 'MB'
@@ -170,7 +170,7 @@ export class PerformanceHealingStrategy {
       // Browser-specific memory cleanup
       if ('caches' in window) {
         const cacheNames = await caches.keys();
-        await Promise.all(
+        await Promise.all()
           cacheNames.map(cacheName => caches.delete(cacheName))
         );
       }

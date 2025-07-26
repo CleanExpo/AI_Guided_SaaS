@@ -20,9 +20,8 @@ export class AuthenticationService {
   async getUserInfo(userId: string): Promise<CollaborationUser | null> {
     if (isServiceConfigured('database')) {
       try {
-        const users = await DatabaseService.query(
-          'SELECT id, name, email, avatar FROM users WHERE id = ?',
-          [userId]
+        const users = await DatabaseService.query('SELECT id, name, email, avatar FROM users WHERE id = ?')
+          [userId])
         );
 
         if (users.length > 0) {

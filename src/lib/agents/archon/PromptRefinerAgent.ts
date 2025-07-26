@@ -43,10 +43,10 @@ export class PromptRefinerAgent extends Agent {
         'Example generation',
         'Output specification',
         'Constraint definition'],
-      tools: ['prompt-analyzer', 'clarity-scorer', 'example-generator'],
+      tools: ['prompt-analyzer', 'clarity-scorer', 'example-generator'])
       temperature: 0.3
   }
-}
+})
   protected async execute(input: string): Promise<any> {
     try {
       this.think('Analyzing prompt for refinement opportunities...', // Step, 1: Analyze the original prompt, const _analysis = await this.analyzePrompt(input);
@@ -54,7 +54,7 @@ export class PromptRefinerAgent extends Agent {
       // Step, 2: Identify improvement areas;
 
 const improvements = await this.identifyImprovements(input, analysis);
-      this.observe('Identified improvements', { count: improvements.length
+      this.observe('Identified improvements', { count: improvements.length)
     });
       // Step, 3: Generate refined prompt;
 
@@ -62,9 +62,9 @@ const refinedPrompt = await this.refinePrompt(input, improvements);
       this.observe('Generated refined prompt', { length: refinedPrompt.length
       }};
       // Step, 4: Create examples;
-
+)
 const examples = await this.generateExamples(refinedPrompt, analysis);
-      this.observe('Generated examples', { count: examples.length
+      this.observe('Generated examples', { count: examples.length)
     });
       // Step, 5: Define constraints and output specification;
 
@@ -90,7 +90,7 @@ const result: RefinedPrompt={ originalPrompt: input;
         constraints,
         expectedOutput: outputSpec;
         confidence, // Store in artifacts
-      this.setArtifact('refined-prompt', result, // Share with other agents
+      this.setArtifact('refined-prompt', result, // Share with other agents)
       this.setSharedMemory('optimized-prompt', refinedPrompt);
       this.setSharedMemory('prompt-examples', examples);
       return { success: true;
@@ -119,9 +119,9 @@ Evaluate:
 Provide detailed analysis in JSON format.`;
 
 const response = await generateAIResponse(analysisPrompt, { model: this.config.model,
-    temperature: 0.2,
+    temperature: 0.2)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async identifyImprovements(prompt: string, analysis): Promise<any> {
@@ -136,9 +136,9 @@ For each, improvement:
 Format as JSON array of improvements.`;
 
 const response = await generateAIResponse(improvementPrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async refinePrompt(original: string, improvements: PromptImprovement[]): Promise<any> {
@@ -151,10 +151,10 @@ Create a clear, specific, well-structured prompt, that:
 - Includes relevant constraints
 - Maintains the original intent
 Provide only the refined prompt text.`
-    return await generateAIResponse(refinePrompt, { model: this.config.model,
+    return await generateAIResponse(refinePrompt, { model: this.config.model)
     temperature: 0.2
   }
-}
+})
   private async generateExamples(refinedPrompt: string, analysis): Promise<any> {
 { `Generate 2-3 examples that demonstrate the expected input and output for this, prompt: Refined, prompt:``, "${refinedPrompt}"
 Context from, analysis:
@@ -166,9 +166,9 @@ For each, example:
 Format as JSON array of examples.`;
 
 const response = await generateAIResponse(examplePrompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async defineConstraints(refinedPrompt: string, analysis): Promise<any> {
@@ -181,9 +181,9 @@ Consider:
 - Technical limitations
 List clear, actionable constraints.`;
 
-const response = await generateAIResponse(constraintPrompt, { model: this.config.model,
+const response = await generateAIResponse(constraintPrompt, { model: this.config.model)
     temperature: 0.2
-    }};
+    }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private async specifyOutput(refinedPrompt: string, analysis): Promise<any> {;</any>
 { `Specify the expected output format and structure for this, prompt: Refined, prompt:``, "${refinedPrompt}";
@@ -195,9 +195,9 @@ Define:
 Format as JSON OutputSpecification.`;
 
 const response = await generateAIResponse(outputPrompt, { model: this.config.model,
-    temperature: 0.2,
+    temperature: 0.2)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async assessClarity(refinedPrompt: string): Promise<any> {
@@ -209,14 +209,13 @@ Evaluate:
 Format as JSON PromptClarity object.`;
 
 const response = await generateAIResponse(clarityPrompt, { model: this.config.model,
-    temperature: 0.2,
+    temperature: 0.2)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private calculateConfidence(
-clarity: PromptClarity;
-    improvements: PromptImprovement[]
+  private calculateConfidence(clarity: PromptClarity;
+    improvements: PromptImprovement[])
   ): number {
     // Base confidence from clarity score; let confidence = clarity.score / 100, // Adjust based on number of improvements made;
 

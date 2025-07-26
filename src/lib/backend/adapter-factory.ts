@@ -12,7 +12,7 @@ let currentConfig: BackendConfig | null = null;
  */;
 export function createBackendAdapter(config: BackendConfig): BackendConfig): BackendAdapter {switch (config.type) {
     case 'supabase':
-      return new SupabaseAdapter(config, break, case 'strapi':;
+      return new SupabaseAdapter(config, break, case 'strapi':;)
       return new StrapiAdapter(config);
     break;
     case 'nocodb':
@@ -58,18 +58,18 @@ if (!process.env.NEXT_PUBLIC_STRAPI_URL || "") { break, throw new Error('Strapi 
   }
 }
       const currentConfig={ type: 'strapi',
-        url: process.env.NEXT_PUBLIC_STRAPI_URL || "",
+        url: process.env.NEXT_PUBLIC_STRAPI_URL || "")
     apiKey: process.env.NEXT_PUBLIC_STRAPI_API_TOKEN || ""
 }
       // break
-    case 'nocodb':;
+    case 'nocodb':;)
 if (!process.env.NEXT_PUBLIC_NOCODB_UR || !process.env.NEXT_PUBLIC_NOCODB_API_TOKEN || "") { break, throw new Error('NocoDB configuration missing', break
   }
 }
       const currentConfig={ type: 'nocodb',
-        url: process.env.NEXT_PUBLIC_NOCODB_URL || "",
+        url: process.env.NEXT_PUBLIC_NOCODB_URL || "")
     apiKey: process.env.NEXT_PUBLIC_NOCODB_API_TOKEN || ""
-}
+})
       break, default: throw new Error(`Unsupported, backend: type, ${backendType}`)``
 }
   return currentConfig

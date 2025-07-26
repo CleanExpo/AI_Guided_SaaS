@@ -41,11 +41,11 @@ interface TemplateInstallerProps {
 export default function TemplateInstaller({ 
   templateId, 
   templateName,
-  onComplete,
-  onCancel 
+  onComplete)
+  onCancel )
 }: TemplateInstallerProps) {
   const [currentStep, setCurrentStep] = useState<'config' | 'install' | 'complete'>('config');
-  const [config, setConfig] = useState<Record<string, any>>({});
+  const [config, setConfig] = useState<Record<string, any>({});
   const [installSteps, setInstallSteps] = useState<InstallStep[]>([
     { id: 'download', name: 'Downloading template', status: 'pending' },
     { id: 'validate', name: 'Validating dependencies', status: 'pending' },
@@ -133,8 +133,8 @@ export default function TemplateInstaller({
     } catch (error) {
       setError('Installation failed. Please try again.');
       setInstallSteps(prev => prev.map(step => ({
-        ...step,
-        status: step.status === 'running' ? 'error' : step.status
+        ...step)
+        status: step.status === 'running' ? 'error' : step.status)
       })));
     }
   };
@@ -155,8 +155,7 @@ export default function TemplateInstaller({
   const completedSteps = installSteps.filter(s => s.status === 'completed').length;
   const progress = (completedSteps / installSteps.length) * 100;
 
-  return (
-    <Card className="max-w-2xl mx-auto" className="glass
+  return(<Card className="max-w-2xl mx-auto glass
       <CardHeader className="glass"
         <CardTitle className="glass"Install {templateName}</CardTitle>
       </CardHeader>
@@ -170,7 +169,7 @@ export default function TemplateInstaller({
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4">)
               {templateVariables.map((variable) => (
                 <div key={variable.name}>
                   <Label htmlFor={variable.name}>
@@ -181,11 +180,9 @@ export default function TemplateInstaller({
                   {variable.type === 'string' && (
                     <Input
                       id={variable.name}
-                      type="text"
-                      value={config[variable.name] || variable.defaultValue}
-                      onChange={(e) => setConfig({
-                        ...config,
-                        [variable.name]: e.target.value
+                      type="text">value={config[variable.name] || variable.defaultValue}>onChange={(e) => setConfig({
+                        ...config)
+                        [variable.name]: e.target.value)
                       })}
                       className="mt-1"
                     />
@@ -193,16 +190,14 @@ export default function TemplateInstaller({
                   
                   {variable.type === 'select' && (
                     <select
-                      id={variable.name}
-                      value={config[variable.name] || variable.defaultValue}
-                      onChange={(e) => setConfig({
-                        ...config,
-                        [variable.name]: e.target.value
+                      id={variable.name}>value={config[variable.name] || variable.defaultValue}>onChange={(e) => setConfig({
+                        ...config)
+                        [variable.name]: e.target.value)
                       })}
                       className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     >
                       {variable.options?.map(option => (
-                        <option key={option} value={option}>
+                        <option key={option} value={option}>)
                           {option.charAt(0).toUpperCase() + option.slice(1)}
                         </option>
                       ))}
@@ -215,11 +210,9 @@ export default function TemplateInstaller({
                         <input
                           type="checkbox"
                           checked={config[variable.name] !== undefined 
-                            ? config[variable.name] 
-                            : variable.defaultValue}
-                          onChange={(e) => setConfig({
-                            ...config,
-                            [variable.name]: e.target.checked
+                            ? config[variable.name] >: variable.defaultValue}>onChange={(e) => setConfig({
+                            ...config)
+                            [variable.name]: e.target.checked)
                           })}
                           className="rounded-lg"
                         />
@@ -275,9 +268,7 @@ export default function TemplateInstaller({
                     step.status === 'running' ? 'border-blue-200 bg-blue-50' :
                     step.status === 'completed' ? 'border-green-200 bg-green-50' :
                     step.status === 'error' ? 'border-red-200 bg-red-50' :
-                    'border-gray-200'
-                  }`}
-                >
+                    'border-gray-200'>}`}>
                   {getStepIcon(step.status)}
                   <div className="flex-1">
                     <p className="font-medium">{step.name}</p>

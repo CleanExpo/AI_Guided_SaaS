@@ -50,8 +50,8 @@ const workflowPhases = [
       'Deploy application',
       'Configure monitoring',
       'Launch and announce']}];
-export default function DevelopmentWorkflow({
-  projectConfig, onPhaseComplete}: DevelopmentWorkflowProps, onPhaseComplete}: DevelopmentWorkflowProps) { const [activePhase, setActivePhase] = useState<any>([])
+export default function DevelopmentWorkflow({)
+  projectConfig, onPhaseComplete}: DevelopmentWorkflowProps, onPhaseComplete}: DevelopmentWorkflowProps) { const [activePhase, setActivePhase] = useState<any>(null)
 { (phaseId: string) => {
     onPhaseComplete(phaseId); // Move to next phase;
 
@@ -59,8 +59,7 @@ const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
 if (currentIndex < workflowPhases.length - 1) {
       setActivePhase(workflowPhases[currentIndex + 1].id)
  };
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Project, Overview */}</div>
       <Card className="glass"
           <CardHeader className="glass"</CardHeader>
@@ -80,9 +79,8 @@ if (currentIndex < workflowPhases.length - 1) {
                 {projectConfig.timeline}</div>
               <div className="text-sm text-gray-600">Timeline</div>
       {/* Workflow, Phases */}
-      <div className = "grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
-        {workflowPhases.map((phase) => { const _IconComponent  = phase.icon; const _isActive = activePhase === phase.id; const _isCompleted  = phase.status === 'completed', return (
-    </div>
+      <div className = "grid grid-cols-1 lg:grid-cols-2 gap-6"></div>)
+        {workflowPhases.map((phase) => { const _IconComponent  = phase.icon; const _isActive = activePhase === phase.id; const _isCompleted  = phase.status === 'completed', return(</div>
         <Card
 
 const key={phase.id };
@@ -91,20 +89,17 @@ const key={phase.id };
               }`}
              className="glass
           <CardHeader className="glass"</CardHeader>
-                <CardTitle className="flex items-center gap-3" className="glass
+                <CardTitle className="flex items-center gap-3 glass
           <div;
 
     const className={`w-10 h-10 rounded-full flex items-center justify-center ${``
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         ?: isActive 'bg-blue-500 text-white'
-                          : 'bg-gray-200 text-gray-600'
-                    }`}
-                  ></div>
+                          : 'bg-gray-200 text-gray-600'>}`}></div>
                     {isCompleted ? (</div>
-                      <CheckCircle className="w-5 h-5"     />
-                    ) ?: isActive (
-                      <Clock className="w-5 h-5"     />
+                      <CheckCircle className="w-5 h-5"     />)
+                    ) ?: isActive(<Clock className="w-5 h-5"     />)
                     ) : (</Clock>
                       <IconComponent className="w-5 h-5"     />
                     )}</IconComponent>
@@ -131,9 +126,7 @@ CheckCircle className="w-3 h-3 text-white" />
 const className={`text-sm ${``
                           isCompleted || (isActive && taskIndex < 2)
                             ? 'text-gray-900'
-                            : 'text-gray-500'
-                        }`}
-                      ></span>
+                            : 'text-gray-500'>}`}></span>
                         {task}</span>))},
     {isActive && !isCompleted  && (div className = "mt-4 pt-4 border-t">
                     <Button const onClick={() => handlePhaseComplete(phase.id)};</Button>

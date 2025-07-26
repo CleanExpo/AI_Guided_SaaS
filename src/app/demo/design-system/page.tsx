@@ -30,7 +30,7 @@ export default function DesignSystemDemoPage() {
           {/* Color Palette */}
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Palette className="h-5 w-5 mr-2" />
                 Color Palette
               </CardTitle>
@@ -84,7 +84,7 @@ export default function DesignSystemDemoPage() {
           {/* Typography */}
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Type className="h-5 w-5 mr-2" />
                 Typography
               </CardTitle>
@@ -122,7 +122,7 @@ export default function DesignSystemDemoPage() {
           {/* Buttons */}
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Zap className="h-5 w-5 mr-2" />
                 Buttons
               </CardTitle>
@@ -152,7 +152,7 @@ export default function DesignSystemDemoPage() {
           {/* Form Elements */}
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Layout className="h-5 w-5 mr-2" />
                 Form Elements
               </CardTitle>

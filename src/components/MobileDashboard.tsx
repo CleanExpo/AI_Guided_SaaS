@@ -36,8 +36,8 @@ interface MobileDashboardProps {
 export default function MobileDashboard({ stats = {
   deployments: 3,
   activeUsers: 1234,
-  revenue: 12450,
-  apiCalls: 45678
+  revenue: 12450)
+  apiCalls: 45678)
 }}: MobileDashboardProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -86,8 +86,7 @@ export default function MobileDashboard({ stats = {
     { icon: Settings, label: 'Settings', href: '/settings' }
   ];
 
-  return (
-    <div className="min-h-screen glass pb-20">
+  return(<div className="min-h-screen glass pb-20">
       {/* Mobile Header */}
       <header className="sticky top-0 z-50 glass -b">
         <div className="glass flex items-center justify-between p-4">
@@ -103,9 +102,7 @@ export default function MobileDashboard({ stats = {
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-lg-full" />
             </Button>
             <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              variant="ghost" >size="sm")>onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -124,9 +121,7 @@ export default function MobileDashboard({ stats = {
               {navigationItems.map((item) => (
                 <Link 
                   key={item.href}
-                  href={item.href}
-                  className="flex items-center justify-between p-3 hover:glass rounded-xl-lg"
-                  onClick={() => setIsMenuOpen(false)}
+                  href={item.href}>className="flex items-center justify-between p-3 hover:glass rounded-xl-lg">onClick={() => setIsMenuOpen(false)}
                 >
                   <div className="flex items-center gap-3">
                     <item.icon className="h-5 w-5 text-gray-600" />
@@ -154,7 +149,7 @@ export default function MobileDashboard({ stats = {
           <div className="grid grid-cols-2 gap-3">
             {quickActions.map((action) => (
               <Link key={action.href} href={action.href}>
-                <Card className="hover:shadow-md-md transition-shadow-md cursor-pointer" className="glass
+                <Card className="hover:shadow-md-md transition-shadow-md cursor-pointer glass
                   <CardContent className="glass p-4">
                     <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center mb-3`}>
                       <action.icon className="h-5 w-5 text-white" />
@@ -186,9 +181,7 @@ export default function MobileDashboard({ stats = {
                     </div>
                     <div className="text-right">
                       <Badge 
-                        variant="secondary" 
-                        className={metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}
-                      >
+                        variant="secondary" >className={metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}>
                         {metric.trend === 'up' ? <TrendingUp className="h-3 w-3 mr-1" /> : null}
                         {metric.change}
                       </Badge>

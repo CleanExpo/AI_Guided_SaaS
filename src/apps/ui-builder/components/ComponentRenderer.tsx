@@ -22,9 +22,7 @@ export default function ComponentRenderer({ type, props  = {}: Props) {switch (t
     break;
 
     <input type="text"
-
-    const placeholder={props.placeholder || 'Enter, text...'}
-          className="px-3 py-2  rounded-lg w-full max-w-sm"     />
+>const placeholder={props.placeholder || 'Enter, text...'}>className="px-3 py-2  rounded-lg w-full max-w-sm"     />
       );
     case 'hero':
       return (

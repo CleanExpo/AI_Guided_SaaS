@@ -32,7 +32,7 @@ export class TemplateManager extends EventEmitter {
       
       // Save installation record
       this.installedItems.set(templateId, {
-        type: 'template',
+        type: 'template',)
         installedAt: new Date(),
         config: finalConfig,
         version: template.metadata.version
@@ -82,9 +82,8 @@ export class TemplateManager extends EventEmitter {
     }
   }
 
-  private processTemplateConfig(
-    config: TemplateConfig, 
-    userConfig?: Record<string, any>
+  private processTemplateConfig(config: TemplateConfig)
+    userConfig?: Record<string, any>)
   ): Record<string, any> {
     const result: Record<string, any> = {};
     
@@ -101,9 +100,8 @@ export class TemplateManager extends EventEmitter {
     return result;
   }
 
-  private async installTemplateFiles(
-    files: TemplateFile[], 
-    config: Record<string, any>
+  private async installTemplateFiles(files: TemplateFile[])
+    config: Record<string, any>)
   ): Promise<void> {
     for (const file of files) {
       // Process file content with config variables

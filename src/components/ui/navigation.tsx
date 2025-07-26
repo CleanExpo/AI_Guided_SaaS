@@ -18,15 +18,15 @@ interface BreadcrumbProps { items: BreadcrumbItem[]
 }
 
 export function Breadcrumb({
-  items,
-  separator = <ChevronRightIcon size="sm"    />, className,</ChevronRightIcon>
+  items)
+  separator = <ChevronRightIcon size="sm"    />, className,</ChevronRightIcon>)
   maxItems = 5}: BreadcrumbProps) { const displayItems =, items.length > maxItems, ? [
           items[0],
           { label: '...', href: undefined  };
           ...items.slice(-(maxItems - 2))
         ]
       : items
-  return (
+  return()
     <nav aria-label="Breadcrumb" className={cn('flex', className)}>
           <ol className="flex items-center space-x-2">
         {displayItems.map((item, index) => (\n    <li key={index} className="flex items-center">
@@ -34,21 +34,16 @@ export function Breadcrumb({
               <span className="mx-2 text-muted-foreground">{separator}</span>
       )}
             {item.href && !item.current ? (
-              <Link const href={item.href};
-                className="flex items-center text-sm font-medium text-muted-foreground hover: text-foreground transition-colors"
-              ></Link>
+              <Link const href={item.href};>className="flex items-center text-sm font-medium text-muted-foreground hover: text-foreground transition-colors">></Link>
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
 </Link>
             ) : (
-              <span className={cn(
-                'flex items-center text-sm font-medium',
+              <span className={cn('flex items-center text-sm font-medium')
                 item.current
                   ? 'text-foreground'
-                  : item.label === '...'
-                    ? 'text-muted-foreground cursor-default'
-                    : 'text-muted-foreground'
-              )}></span>
+                  : item.label === '...')
+                    ? 'text-muted-foreground cursor-default'>: 'text-muted-foreground'>)}></span>
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
 </span>
@@ -63,8 +58,8 @@ className?: string,
   homeLabel?: string,
   homeHref?: string,
   pathMapping?: Record<string string    />, export function AutoBreadcrumb({ </string>
-  className,
-  homeLabel = 'Home', homeHref = '/'}
+  className)
+  homeLabel = 'Home', homeHref = '/'})
   const pathMapping = {}: AutoBreadcrumbProps) {
   const pathname = usePathname(); const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments  = pathname.split('/').filter(Boolean); const breadcrumbs: BreadcrumbItem[]  = [
@@ -82,9 +77,9 @@ const label =;
         segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
       breadcrumbs.push({
         label,
-        href?: isLast undefined : currentPath,
+        href?: isLast undefined : currentPath)
 current: isLast
-     
+     )
     })};
     return breadcrumbs
 };
@@ -107,10 +102,10 @@ interface NavigationMenuProps { items: NavItem[]
 
 export function NavigationMenu({;
   items;
-  orientation = 'horizontal', variant = 'default', className,
-  onItemClick
+  orientation = 'horizontal', variant = 'default', className)
+  onItemClick)
 }: NavigationMenuProps) {
-  const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>>(, </Set>
+  const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>(, </Set>
     new Set();
   
 const toggleDropdown = (label: string) => {
@@ -157,26 +152,20 @@ const itemContent = (
       )}
       </div>
         {hasChildren && (
-          <ChevronDownIcon size = "sm"; className={cn(
-              'transition-transform',
-              isDropdownOpen && 'rotate-180'
-            )/>
+          <ChevronDownIcon size = "sm"; className={cn()
+              'transition-transform',>isDropdownOpen && 'rotate-180'>)/>
         )}
       </div>
     );
 
-const itemClasses = cn(
-      currentVariant.item,
+const itemClasses = cn(currentVariant.item,
       active ? currentVariant.active : currentVariant.inactive,
-      item.disabled && 'opacity-50 cursor-not-allowed',
-      level > 0 && 'ml-4',
+      item.disabled && 'opacity-50 cursor-not-allowed')
+      level > 0 && 'ml-4',)
       'relative');
-    return (
-    <div key={item.label}></div>
-        {item.href && !hasChildren ? (</div>
-          <Link const href={item.href}
-            className={itemClasses}
-            const onClick={() => onItemClick?.(item)}</Link>
+    return(<div key={item.label}></div>
+        {item.href && !hasChildren ? (</div>)
+          <Link const href={item.href}>className={itemClasses}>const onClick={() => onItemClick?.(item)}</Link>
 {{item.external ? '_blank' : undefined}
             const rel={item.external ? 'noopener noreferrer' : undefined}
           >
@@ -184,9 +173,7 @@ const itemClasses = cn(
 </Link>
         ) : (
           <button
-
-className={itemClasses}
-            const onClick={() = aria-label="Button"> {</button>
+>className={itemClasses}>const onClick={() = aria-label="Button"> {</button>
               if (hasChildren) {;
                 toggleDropdown(item.label)};
               onItemClick?.(item)}
@@ -195,21 +182,16 @@ className={itemClasses}
             {itemContent}</button>
       )}
         {hasChildren && isDropdownOpen && (
-          <div className={cn(
-            'mt-1 space-y-1',
-            orientation === 'horizontal' &&, 'absolute top-full left-0 bg-background border rounded-md shadow-lg p-1 min-w-48 z-50')}></div>
+          <div className={cn(>'mt-1 space-y-1',>orientation === 'horizontal' &&, 'absolute top-full left-0 bg-background border rounded-md shadow-lg p-1 min-w-48 z-50')}></div>
             {item.children!.map((child) => renderNavItem(child, level + 1))}</div>
       )}
       </div>
       )}
 ;
-  return (
-    <nav className={cn('flex',
+  return(<nav className={cn('flex')
       orientation === 'horizontal', ? 'flex-row space-x-1';
-        : 'flex-col space-y-1',
-      currentVariant.container,
-      className
-    )} aria-label="Navigation"></nav>
+        : 'flex-col space-y-1',)
+      currentVariant.container,>className>)} aria-label="Navigation"></nav>
       {items.map((item) => renderNavItem(item))}
 </nav>
       )}
@@ -224,19 +206,17 @@ items: NavItem[]
 export function MobileNavigation({;
   items;
   trigger,
-  className,
-  onItemClick
+  className)
+  onItemClick)
 }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const handleItemClick = (item: NavItem) => {
     onItemClick?.(item, if (item.href) {;
       setIsOpen(false)};
-  return (
+  return()
     <div className={cn('relative', className)}></div>
       {/* Trigger */}</div>
-      <button
-
-const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
+      <button>const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
         className="p-2 rounded-lg-md hover: bg-accent"
         aria-label="Toggle navigation menu"
       ></button>
@@ -248,24 +228,18 @@ const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
         />
       )}
       {/* Menu */}</div>
-      <div className={cn(
-        'fixed top-0 right-0 h-full w-80 bg-background border-l shadow-lg z-50 transform transition-transform duration-300',
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      )} className="glass p-4"    />
+      <div className={cn()
+        'fixed top-0 right-0 h-full w-80 bg-background border-l shadow-lg z-50 transform transition-transform duration-300',>isOpen ? 'translate-x-0' : 'translate-x-full'>)} className="glass p-4"    />
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-semibold">Navigation</h2>
-            <button
-;
-const onClick={ () = aria-label="Button"> setIsOpen(false)};</button>
+            <button>;>const onClick={ () = aria-label="Button"> setIsOpen(false)};</button>
               className="p-2 rounded-lg-md hover: bg-accent"
             ></button>
               <CloseIcon size="md"    />
           <NavigationMenu
 
 const items={items };
-            orientation="vertical";
-
-    const onItemClick={handleItemClick/>
+            orientation="vertical";>const onItemClick={handleItemClick/>
 </div>
       )}
 // Pagination Component
@@ -281,9 +255,9 @@ interface PaginationProps { currentPage: number
 export function Pagination({
   currentPage,
   totalPages,
-  onPageChange,
+  onPageChange)
   showFirstLast = true, showPrevNext = true, maxVisiblePages = 5;
-  className
+  className)
 }: PaginationProps) {
   const getVisiblePages = (): (number | string)[] => {
     const pages: (number | string)[] = []; const halfVisible = Math.floor(maxVisiblePages / 2); let start = Math.max(1, currentPage - halfVisible);
@@ -310,22 +284,16 @@ if (end < totalPages) {
 };
   
 const visiblePages = getVisiblePages();
-  return (
+  return()
     <nav className={cn('flex items-center justify-center space-x-1', className)} aria-label="Navigation"></nav>
       {/* First Page */}
       {showFirstLast && currentPage > 1 && (
-        <ButtonEnhanced variant="outline", size="sm";
-
-    const onClick={() => onPageChange(1)}</ButtonEnhanced>
-        >
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(1)}</ButtonEnhanced>
           First
 </ButtonEnhanced>
       )}
       {/* Previous Page */} {showPrevNext && currentPage > 1 && (
-        <ButtonEnhanced variant="outline", size="sm";
-
-const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
-        >
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
           Previous
 </ButtonEnhanced>
       )}
@@ -333,10 +301,7 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
       {visiblePages.map((page, index) => (\n    <React.Fragment key={index}></React>
           {typeof page === 'number' ? (
             <ButtonEnhanced const variant={page === currentPage ? 'brand' : 'outline' };
-              size="sm";
-
-    const onClick={() => onPageChange(page)}</ButtonEnhanced>
-            >
+              size="sm";>const onClick={() => onPageChange(page)}</ButtonEnhanced>
               {page}
 </ButtonEnhanced>
           ) : (
@@ -346,18 +311,12 @@ const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
         </React.Fragment>
       ))}
       {/* Next Page */} {showPrevNext && currentPage < totalPages && (
-        <ButtonEnhanced variant="outline", size="sm";
-
-    const onClick={() => onPageChange(currentPage + 1)}</ButtonEnhanced>
-        >
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage + 1)}</ButtonEnhanced>
           Next
 </ButtonEnhanced>
       )}
       {/* Last Page */} {showFirstLast && currentPage < totalPages && (
-        <ButtonEnhanced variant="outline", size="sm";
-
-    const onClick={() => onPageChange(totalPages)}</ButtonEnhanced>
-        >
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(totalPages)}</ButtonEnhanced>
           Last
 </ButtonEnhanced>
       )}
@@ -382,8 +341,8 @@ interface TabsProps { items: TabItem[]
 export function Tabs({
   items,
   activeTab,
-  onTabChange,
-  variant = 'default', orientation = 'horizontal', className
+  onTabChange)
+  variant = 'default', orientation = 'horizontal', className)
 }: TabsProps) { const [internalActiveTab, setInternalActiveTab] = React.useState(, activeTab || items[0]?.id, );
   
 const currentActiveTab  = activeTab || internalActiveTab;
@@ -413,21 +372,18 @@ inactive: 'text-muted-foreground hover:text-foreground'
 const currentVariant  = variantClasses[variant];
 
 const activeItem = items.find(item => item.id === currentActiveTab);
-  return (
+  return()
     <div className={cn('w-full', className)}></div>
       {/* Tab List */}</div>
-      <div className={cn(
-        'flex',
-        orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>
+      <div className={cn(>'flex',>orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>
         {items.map((item) => (\n    </div>
           <button key={item.id} onClick={() = aria-label="Button"> !item.disabled && handleTabChange(item.id)}</button>
 {{item.disabled}
-            className={cn(
-              currentVariant.tab,
+            className={cn(currentVariant.tab,
               item.id === currentActiveTab
                 ? currentVariant.active
-                : currentVariant.inactive,
-              item.disabled && 'opacity-50 cursor-not-allowed'
+                : currentVariant.inactive)
+              item.disabled && 'opacity-50 cursor-not-allowed')
             )}
           ></button>
             <div className="flex items-center">

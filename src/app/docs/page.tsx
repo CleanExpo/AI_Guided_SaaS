@@ -101,9 +101,7 @@ export default function DocsPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              ="Search documentation..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              ="Search documentation...">value={searchQuery}>onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
             />
           </div>
@@ -113,7 +111,7 @@ export default function DocsPage() {
         <div className="glass grid gap-4 md:grid-cols-4 mb-12">
           {quickLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-              <Card className="hover:shadow-md-lg transition-shadow-md cursor-pointer" className="glass
+              <Card className="hover:shadow-md-lg transition-shadow-md cursor-pointer glass
                 <CardContent className="glass flex items-center p-6">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mr-4">
                     <link.icon className="h-6 w-6 text-blue-600" />
@@ -132,7 +130,7 @@ export default function DocsPage() {
           {docCategories.map((category) => (
             <Card key={category.title} className="glass"
               <CardHeader className="glass"
-                <CardTitle className="flex items-center" className="glass
+                <CardTitle className="flex items-center glass
                   <category.icon className="h-6 w-6 mr-3 text-blue-600" />
                   {category.title}
                 </CardTitle>
@@ -155,7 +153,7 @@ export default function DocsPage() {
         </div>
 
         {/* Help Section */}
-        <Card className="mt-12" className="glass
+        <Card className="mt-12 glass
           <CardContent className="glass p-8 text-center">
             <Book className="h-12 w-12 text-blue-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Need more help?</h3>

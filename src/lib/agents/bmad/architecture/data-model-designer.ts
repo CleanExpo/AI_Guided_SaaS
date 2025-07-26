@@ -3,17 +3,16 @@ import { generateAIResponse } from '@/lib/ai';
 import { architecturePrompts } from './prompts';
 
 export class DataModelDesigner {
-  async designDataModel(
-    components: Component[],
-    requirements: any[]
+  async designDataModel(components: Component[])
+    requirements: any[])
   ): Promise<DataModel> {
     const prompt = architecturePrompts.dataModel
       .replace('{components}', JSON.stringify(components, null, 2))
       .replace('{requirements}', JSON.stringify(requirements, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: 0.3,
-      model: 'gpt-4'
+      temperature: 0.3)
+      model: 'gpt-4')
     });
 
     try {
@@ -53,7 +52,7 @@ export class DataModelDesigner {
     dataModel.entities.forEach(entity => {
       diagram += `[${entity.name}]\n`;
       entity.attributes.forEach(attr => {
-        const markers = [];
+        const markers = [];)
         if (attr.required) markers.push('*');
         if (attr.unique) markers.push('U');
         if (attr.indexed) markers.push('I');
@@ -64,7 +63,7 @@ export class DataModelDesigner {
 
     // Add relationships
     diagram += 'Relationships:\n';
-    dataModel.relationships.forEach(rel => {
+    dataModel.relationships.forEach(rel => {)
       diagram += `  ${rel.from} ${this.getRelationSymbol(rel.type)} ${rel.to}: ${rel.description}\n`;
     });
 

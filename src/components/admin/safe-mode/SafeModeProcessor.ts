@@ -6,15 +6,15 @@ export class SafeModeProcessor {
   private pauseTimer: NodeJS.Timeout | null = null;
   private batchTimer: NodeJS.Timeout | null = null;
 
-  async scanForIssues(
+  async scanForIssues()
     setIsScanning: (value: boolean) => void,
     setIssues: (issues: HealthIssue[]) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void
   ): Promise<void> {
     setIsScanning(true);
     setProcessingLog(prev => [
-      ...prev,
-      '🔍 Starting comprehensive health scan...'
+      ...prev)
+      '🔍 Starting comprehensive health scan...')
     ]);
 
     // Simulate scanning delay
@@ -22,23 +22,22 @@ export class SafeModeProcessor {
 
     setIssues(mockIssues);
     setProcessingLog(prev => [
-      ...prev,
-      `✅ Scan complete: Found ${mockIssues.length} issues`
+      ...prev)
+      `✅ Scan complete: Found ${mockIssues.length} issues`)
     ]);
     setIsScanning(false);
   }
 
-  async startSafeProcessing(
-    issues: HealthIssue[],
-    batchConfig: BatchConfig,
+  async startSafeProcessing(issues: HealthIssue[])
+    batchConfig: BatchConfig,)
     setIsProcessing: (value: boolean) => void,
     setCheckpoint: (checkpoint: CheckpointState) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void
   ): Promise<void> {
     if (issues.length === 0) {
       setProcessingLog(prev => [
-        ...prev,
-        '❌ No issues to process. Run scan first.'
+        ...prev)
+        '❌ No issues to process. Run scan first.')
       ]);
       return;
     }
@@ -55,29 +54,27 @@ export class SafeModeProcessor {
     setCheckpoint(newCheckpoint);
     setIsProcessing(true);
     setProcessingLog(prev => [
-      ...prev,
-      `🚀 Starting safe processing: ${batches.length} batches`
+      ...prev)
+      `🚀 Starting safe processing: ${batches.length} batches`)
     ]);
 
-    await this.processBatch(
-      batches[0],
+    await this.processBatch(batches[0],
       0,
       batches,
       batchConfig,
       newCheckpoint,
       setCheckpoint,
-      setProcessingLog,
-      setIsProcessing,
+      setProcessingLog)
+      setIsProcessing,)
       () => {}
     );
   }
 
-  async processBatch(
-    batch: HealthIssue[],
+  async processBatch(batch: HealthIssue[],
     batchIndex: number,
     allBatches: HealthIssue[][],
-    batchConfig: BatchConfig,
-    checkpoint: CheckpointState,
+    batchConfig: BatchConfig)
+    checkpoint: CheckpointState,)
     setCheckpoint: (checkpoint: CheckpointState) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void,
     setIsProcessing: (value: boolean) => void,
@@ -85,7 +82,7 @@ export class SafeModeProcessor {
   ): Promise<void> {
     setCurrentBatch(batch);
     setProcessingLog(prev => [
-      ...prev,
+      ...prev,)
       `📦 Processing batch ${batchIndex + 1}/${allBatches.length} (${batch.length} issues)`
     ]);
 
@@ -105,7 +102,7 @@ export class SafeModeProcessor {
       setProcessingLog(prev => [...prev, `🔧 Fixing: ${issue.title}`]);
 
       // Simulate processing time
-      await new Promise(resolve =>
+      await new Promise(resolve =>)
         setTimeout(resolve, Math.min(issue.estimatedTime * 100, 3000))
       );
 
@@ -125,8 +122,8 @@ export class SafeModeProcessor {
     const nextBatchIndex = batchIndex + 1;
     if (nextBatchIndex < allBatches.length) {
       setProcessingLog(prev => [
-        ...prev,
-        `⏳ Pausing ${batchConfig.pauseBetweenBatches}s before next batch...`
+        ...prev)
+        `⏳ Pausing ${batchConfig.pauseBetweenBatches}s before next batch...`)
       ]);
 
       this.pauseTimer = setTimeout(() => {
@@ -136,16 +133,15 @@ export class SafeModeProcessor {
         };
         setCheckpoint(nextCheckpoint);
 
-        this.processBatch(
-          allBatches[nextBatchIndex],
+        this.processBatch(allBatches[nextBatchIndex],
           nextBatchIndex,
           allBatches,
           batchConfig,
           nextCheckpoint,
           setCheckpoint,
           setProcessingLog,
-          setIsProcessing,
-          setCurrentBatch
+          setIsProcessing)
+          setCurrentBatch)
         );
       }, batchConfig.pauseBetweenBatches * 1000);
     } else {
@@ -153,13 +149,13 @@ export class SafeModeProcessor {
       setIsProcessing(false);
       setCurrentBatch([]);
       setProcessingLog(prev => [
-        ...prev,
-        '🎉 All issues processed successfully!'
+        ...prev)
+        '🎉 All issues processed successfully!')
       ]);
     }
   }
 
-  pauseProcessing(
+  pauseProcessing()
     setIsProcessing: (value: boolean) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void
   ): void {
@@ -175,10 +171,9 @@ export class SafeModeProcessor {
     setProcessingLog(prev => [...prev, '⏸️ Processing paused']);
   }
 
-  async resumeProcessing(
-    checkpoint: CheckpointState | null,
-    issues: HealthIssue[],
-    batchConfig: BatchConfig,
+  async resumeProcessing(checkpoint: CheckpointState | null,
+    issues: HealthIssue[])
+    batchConfig: BatchConfig,)
     setIsProcessing: (value: boolean) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void,
     setCheckpoint: (checkpoint: CheckpointState) => void,
@@ -193,21 +188,20 @@ export class SafeModeProcessor {
       setIsProcessing(true);
       setProcessingLog(prev => [...prev, '▶️ Resuming processing...']);
 
-      await this.processBatch(
-        remainingBatches[0],
+      await this.processBatch(remainingBatches[0],
         checkpoint.currentBatch,
         batches,
         batchConfig,
         checkpoint,
         setCheckpoint,
         setProcessingLog,
-        setIsProcessing,
-        setCurrentBatch
+        setIsProcessing)
+        setCurrentBatch)
       );
     }
   }
 
-  resetProcessing(
+  resetProcessing()
     setIsProcessing: (value: boolean) => void,
     setCheckpoint: (checkpoint: CheckpointState | null) => void,
     setCurrentBatch: (batch: HealthIssue[]) => void,

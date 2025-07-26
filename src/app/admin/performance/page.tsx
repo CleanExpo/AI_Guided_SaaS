@@ -10,5 +10,5 @@ export default function PerformancePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

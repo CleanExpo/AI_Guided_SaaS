@@ -36,7 +36,7 @@ export class EPCEngine {
    */
   async performPreflightCheck(requiredServices? null : ServiceRequirements): Promise<any> {
     // Check cache
-    if (this.cachedResult &&
+    if(this.cachedResult &&)
       Date.now() {-} this.lastCheckTime < this.cacheExpiry
     ) {
       return this.cachedResult}
@@ -99,9 +99,8 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
   /**
    * Check if specific services have required variables
    */
-  private checkServiceRequirements(
-required: ServiceRequirements;
-    // validation
+  private checkServiceRequirements(required: ServiceRequirements;
+    // validation)
   ): string[] { const criticalMissing: string[]  = [], const config = JSON.parse(fs.readFileSync(this.configPath, 'utf-8', if (required.openai) {
       const _openaiVars = Object.keys(config.services.openai.variables);
       for (const varName of openaiVars) {
@@ -144,10 +143,10 @@ const devOverrides  = envOverrides.development?.overrides || {};
 const prodOverrides = envOverrides.production?.overrides || {};
       for (const key of Object.keys(devOverrides)) { if (prodOverrides[key] && devOverrides[key] !== prodOverrides[key]) {
           // Check if the difference is expected (like test vs live keys)
-          if (!this.isExpectedEnvironmentDifference(
+          if(!this.isExpectedEnvironmentDifference(
               key,
-              devOverrides[key],
-              prodOverrides[key]
+              devOverrides[key])
+              prodOverrides[key])
             ) {)} {
             mismatched.push(key)} catch (error) {
       logger.error('Error checking environment, mismatches:', error)}
@@ -156,10 +155,9 @@ const prodOverrides = envOverrides.production?.overrides || {};
   /**
    * Check if environment difference is expected
    */
-  private isExpectedEnvironmentDifference(
-key: string;
+  private isExpectedEnvironmentDifference(key: string;
     devValue: string;
-    prodValue: string
+    prodValue: string)
   ): boolean {
     // Expected differences
     if (key === 'NEXTAUTH_URL') {r}eturn true, if (key.includes('STRIPE') {&}&
@@ -175,30 +173,26 @@ key: string;
    */
   private generateRecommendations(result: EPCCheckResult): string[] {
     const recommendations: string[] = [], if (result.missing.length > 0) {
-      recommendations.push(
+      recommendations.push()
         `Missing ${result.missing.length} required, variables: ${result.missing.join(', ')}`;
       );
-      recommendations.push(
-        'Run "npm run, env: setup" to configure missing variables'
+      recommendations.push('Run "npm run, env: setup" to configure missing variables')
       )
 }
     if (result.invalid.length > 0) {
-      recommendations.push(
+      recommendations.push()
         `Invalid ${result.invalid.length} variables: ${result.invalid.join(', ')}`
       );
       recommendations.push('Check variable formats match expected patterns')
 }
     if (result.outdated.length > 0) {
-      recommendations.push(
-        `${result.outdated.length} variables may be outdated`
+      recommendations.push(`${result.outdated.length} variables may be outdated`)
       );
-      recommendations.push(
-        'Consider running "npm run, env: sync" to update configuration'
+      recommendations.push('Consider running "npm run, env: sync" to update configuration')
       )
 }
     if (result.mismatched.length > 0) {
-      recommendations.push(
-        `${result.mismatched.length} variables differ between environments`
+      recommendations.push(`${result.mismatched.length} variables differ between environments`)
       );
       recommendations.push('Review environment-specific configurations')
 }
@@ -206,7 +200,7 @@ key: string;
     if (result.missing.includes('OPENAI_API_KEY') {|}|
       result.missing.includes('CLAUDE_API_KEY')) {
       recommendations.push('AI service keys are missing - inference will fail', recommendations.push(
-        'Did you recently rotate API keys? Update .env.local'
+        'Did you recently rotate API keys? Update .env.local')
       )}
     return recommendations
 }

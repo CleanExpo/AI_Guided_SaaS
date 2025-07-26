@@ -520,7 +520,7 @@ export class MCPDesigner {
   private exportAsFigma(tokens: [string, DesignToken][]): string {
     // Figma token format
     return JSON.stringify({
-      version: '1.0',
+      version: '1.0',)
       tokens: tokens.map(([name, token]) => ({
         name: name.replace('--', ''),
         value: token.value,
@@ -577,7 +577,7 @@ interface InspirationItem {
 }
 
 interface StyleEngine {
-  generateDesignTokens(options?: any): Promise<Map<string, DesignToken>>;
+  generateDesignTokens(options?: any): Promise<Map<string, DesignToken>;
   styleComponent(component: UIComponent, tokens: Map<string, DesignToken>): Promise<StyledComponent>;
 }
 

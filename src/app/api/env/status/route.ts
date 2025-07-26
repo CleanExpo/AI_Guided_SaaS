@@ -11,12 +11,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       STRIPE_CONFIGURED: !!process.env.STRIPE_SECRET_KEY || "",
       timestamp: new Date().toISOString()
     };
-    return NextResponse.json({ success: true, data: status,
+    return NextResponse.json({ success: true, data: status,)
       timestamp: new Date().toISOString()   
     })
 } catch (error) {
     logger.error('Env status error:', error);
-        return NextResponse.json({ error: 'Failed to get environment status' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to get environment status' }, { status: 500   )
     })
 }
 }
@@ -27,11 +27,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { key, value } = body;
     // In a real implementation, you'd validate and update environment variables
     // For now, we'll just simulate success
-    return NextResponse.json({ success: true, message: `Environment variable ${key} updated`,
+    return NextResponse.json({ success: true, message: `Environment variable ${key} updated`,)
       timestamp: new Date().toISOString()   
     })
 } catch (error) {
-    return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500   
+    return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500   )
     })
 }
 }

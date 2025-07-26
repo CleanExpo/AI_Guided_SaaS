@@ -1,11 +1,10 @@
 import { MarketplaceItem, CategoryType, FilterType } from '../types';
 
-export function filterItems(
-  items: MarketplaceItem[],
-  searchQuery: string,
-  selectedCategory: CategoryType
+export function filterItems(items: MarketplaceItem[],
+  searchQuery: string)
+  selectedCategory: CategoryType)
 ): MarketplaceItem[] {
-  return items.filter(item => {
+  return items.filter(item => {)
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));

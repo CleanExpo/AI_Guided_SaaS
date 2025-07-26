@@ -26,13 +26,9 @@ export default function FoldersPage() {
         {folders.map((folder) => (
           <Card
             key={folder.id}
-            data-testid="folder-item"
-            className="glass p-4 hover:shadow-md-lg transition-shadow-md cursor-pointer"
-          >
+            data-testid="folder-item">className="glass p-4 hover:shadow-md-lg transition-shadow-md cursor-pointer">>
             <div 
-              data-testid="folder-drop-zone"
-              className="flex items-center justify-between"
-            >
+              data-testid="folder-drop-zone">className="flex items-center justify-between">>
               <div className="flex items-center space-x-3">
                 <Folder className="h-6 w-6 text-blue-500" />
                 <div>

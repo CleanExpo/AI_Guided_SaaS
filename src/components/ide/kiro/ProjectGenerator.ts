@@ -10,8 +10,7 @@ export class ProjectGenerator {
     };
 
     // Common files
-    structure.children!.push(
-      {
+    structure.children!.push({
         name: 'README.md',
         type: 'file',
         path: '/README.md',
@@ -19,8 +18,8 @@ export class ProjectGenerator {
       },
       {
         name: '.gitignore',
-        type: 'file',
-        path: '/.gitignore',
+        type: 'file')
+        path: '/.gitignore',)
         content: this.generateGitignore(data.type)
       }
     );
@@ -30,8 +29,8 @@ export class ProjectGenerator {
       structure.children!.push({
         name: 'package.json',
         type: 'file',
-        path: '/package.json',
-        content: JSON.stringify({
+        path: '/package.json')
+        content: JSON.stringify({)
           name: data.name.toLowerCase().replace(/\s+/g, '-'),
           version: '1.0.0',
           description: data.description,
@@ -49,8 +48,8 @@ export class ProjectGenerator {
     if (features.typescript) {
       structure.children!.push({
         name: 'tsconfig.json',
-        type: 'file',
-        path: '/tsconfig.json',
+        type: 'file')
+        path: '/tsconfig.json',)
         content: this.generateTsConfig(data.type)
       });
     }
@@ -59,8 +58,8 @@ export class ProjectGenerator {
     if (features.eslint) {
       structure.children!.push({
         name: '.eslintrc.json',
-        type: 'file',
-        path: '/.eslintrc.json',
+        type: 'file')
+        path: '/.eslintrc.json',)
         content: this.generateEslintConfig(data.type, features.typescript)
       });
     }
@@ -70,11 +69,10 @@ export class ProjectGenerator {
 
     // Docker files
     if (features.docker) {
-      structure.children!.push(
-        {
+      structure.children!.push({
           name: 'Dockerfile',
-          type: 'file',
-          path: '/Dockerfile',
+          type: 'file')
+          path: '/Dockerfile',)
           content: this.generateDockerfile(data.type, data.framework)
         },
         {
@@ -98,8 +96,8 @@ export class ProjectGenerator {
           path: '/.github/workflows',
           children: [{
             name: 'ci.yml',
-            type: 'file',
-            path: '/.github/workflows/ci.yml',
+            type: 'file')
+            path: '/.github/workflows/ci.yml',)
             content: this.generateGithubWorkflow(data.name)
           }]
         }]
@@ -112,8 +110,7 @@ export class ProjectGenerator {
   private static addFrameworkStructure(structure: ProjectStructure, data: ProjectData, features: ProjectFeatures) {
     switch (data.framework) {
       case 'nextjs':
-        structure.children!.push(
-          {
+        structure.children!.push({
             name: 'src',
             type: 'directory',
             path: '/src',
@@ -125,8 +122,8 @@ export class ProjectGenerator {
                 children: [
                   {
                     name: 'page.tsx',
-                    type: 'file',
-                    path: '/src/app/page.tsx',
+                    type: 'file')
+                    path: '/src/app/page.tsx',)
                     content: `export default function Home() {\n  return <h1>Welcome to ${data.name}</h1>\n}`
                   },
                   {
@@ -167,16 +164,15 @@ export class ProjectGenerator {
         break;
 
       case 'react':
-        structure.children!.push(
-          {
+        structure.children!.push({
             name: 'src',
             type: 'directory',
             path: '/src',
             children: [
               {
                 name: 'App.tsx',
-                type: 'file',
-                path: '/src/App.tsx',
+                type: 'file')
+                path: '/src/App.tsx',)
                 content: this.generateReactApp(data.name)
               },
               {
@@ -215,8 +211,8 @@ export class ProjectGenerator {
           children: [
             {
               name: 'index.ts',
-              type: 'file',
-              path: '/src/index.ts',
+              type: 'file')
+              path: '/src/index.ts',)
               content: this.generateExpressServer()
             },
             {
@@ -356,14 +352,13 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+  children)
 }: {
-  children: React.ReactNode
+  children: React.ReactNode)
 }) {
-  return (
-    <html lang="en">
+  return(<html lang="en">
       <body>{children}</body>
-    </html>
+    </html>)
   )
 }`;
   }
@@ -372,11 +367,10 @@ export default function RootLayout({
     return `import React from 'react'
 
 function App() {
-  return (
-    <div className="App">
+  return(<div className="App">
       <h1>Welcome to ${name}</h1>
       <p>Edit src/App.tsx to get started</p>
-    </div>
+    </div>)
   )
 }
 
@@ -388,13 +382,12 @@ export default App`;
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-const root = ReactDOM.createRoot(
+const root = ReactDOM.createRoot()
   document.getElementById('root') as HTMLElement
 )
-root.render(
-  <React.StrictMode>
+root.render(<React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>)
 )`;
   }
 

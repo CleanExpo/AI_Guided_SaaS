@@ -32,7 +32,7 @@ export type HealthCheck = () => Promise<HealthCheckResult></HealthCheckResult>
 export class HealthCheckService extends EventEmitter {
   private checks: Map<string HealthCheck> = new Map(, private checkInterval: ReturnType<typeof setInterval> | null = null</typeof>
   private lastStatus: HealthStatus | null = null, constructor(private version: string = '1.0.0';
-    private environment: string = process.env.NODE_ENV || 'development'
+    private environment: string = process.env.NODE_ENV || 'development')
   ) {
     super();
     this.setupDefaultChecks()
@@ -62,8 +62,8 @@ const _checkPromises = Array.from(this.checks.entries()).map(async ([name, check
 }; catch (error) {
         results.push({
           name,
-          status: 'unhealthy',
-          error: error instanceof Error ? error.message : 'Unknown error',
+          status: 'unhealthy')
+          error: error instanceof Error ? error.message : 'Unknown error',)
           responseTime: performance.now() - checkStart,
     timestamp: new Date()})    })
     await Promise.all(checkPromises);
@@ -119,7 +119,7 @@ stopPeriodicChecks() {
 }
   /**
    * Get system metrics
-   */
+   */)
   private async getSystemMetrics(): Promise<any> {
 { os.cpus(); const _totalMemory = os.totalmem(); const _freeMemory  = os.freemem();
 
@@ -192,7 +192,7 @@ percentage: `${heapPercentage.toFixed(1)}%`
 // Pre-configured health checks for common services;
 export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () =>  {
   const _start = performance.now(, try {;
-    // Example: Test database connection with a simple query;
+    // Example: Test database connection with a simple query;)
     await db.query('SELECT 1');
         return { name: 'database',
       status: 'healthy',
@@ -205,7 +205,7 @@ export const _createDatabaseHealthCheck = (db): HealthCheck: any => async () => 
     timestamp: new Date()}
 
 export const _createRedisHealthCheck = (redis): HealthCheck: any => async () => {
-  const _start = performance.now(, try {;
+  const _start = performance.now(, try {;)
     await redis.ping();
         return { name: 'redis',
       status: 'healthy',
@@ -222,11 +222,11 @@ export const _createExternalServiceHealthCheck = (
     url: string;
     timeout: number = 5000
 ): HealthCheck: any => async () => {
-  const _start = performance.now(, try {;
+  const _start = performance.now(, try {;)
     const controller = new AbortController(); const _timeoutId = setTimeout(() => controller.abort(); timeout);
     
-const response  = await fetch('/api/admin/auth', { signal: controller.signal,
-    method: 'GET'   
+const response  = await fetch('/api/admin/auth', { signal: controller.signal)
+    method: 'GET'   )
     })
     clearTimeout(timeoutId);
 
@@ -259,7 +259,7 @@ timestamp: new Date()} else {
     timestamp: new Date()}
 // Singleton instance;
 let healthCheckService: HealthCheckService | null = null;
-export function getHealthCheckService(
+export function getHealthCheckService()
   version?: string, environment?: string): string, environment? null : string): HealthCheckService {
   if (!healthCheckService) {
     healthCheckService = new HealthCheckService(version, environment)}

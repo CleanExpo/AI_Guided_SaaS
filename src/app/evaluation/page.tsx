@@ -43,7 +43,7 @@ interface HistoryEntry {
 
 export default function EvaluationDashboard() {
   const [latest, setLatest] = useState<EvaluationData | null>(null);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntrynull>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [lastRefresh, setLastRefresh] = useState(new Date());
 
@@ -120,8 +120,7 @@ export default function EvaluationDashboard() {
 
   const trend = calculateTrend();
 
-  return (
-    <div className="min-h-screen glass p-8">
+  return(<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -133,21 +132,17 @@ export default function EvaluationDashboard() {
             <div className="glass flex items-center gap-4">
               <Button
                 variant="outline"
-                onClick={loadEvaluationData}
-                disabled={isRunning}
-              >
+                onClick={loadEvaluationData}>disabled={isRunning}>
                 <RefreshCw className={`h-4 w-4 mr-2 ${isRunning ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
               <Button
-                onClick={handleRunEvaluation}
-                disabled={isRunning}
-              >
+                onClick={handleRunEvaluation}>disabled={isRunning}>
                 {isRunning ? (
                   <>
                     <StopCircle className="h-4 w-4 mr-2" />
                     Running...
-                  </>
+                  </>)
                 ) : (
                   <>
                     <PlayCircle className="h-4 w-4 mr-2" />
@@ -160,10 +155,10 @@ export default function EvaluationDashboard() {
         </div>
 
         {/* Overall Score Card */}
-        <Card className="mb-8" className="glass
+        <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl" className="glassOverall Score</CardTitle>
+              <CardTitle className="text-2xl glassOverall Score</CardTitle>
               {latest && getStatusBadge(latest.overall)}
             </div>
           </CardHeader>
@@ -197,7 +192,7 @@ export default function EvaluationDashboard() {
           {latest && Object.entries(latest.scores).map(([component, data]) => (
             <Card key={component} className="glass"
               <CardHeader className="glass"
-                <CardTitle className="capitalize" className="glass{component}</CardTitle>
+                <CardTitle className="capitalize glass{component}</CardTitle>
               </CardHeader>
               <CardContent className="glass"
                 <div className="space-y-4">
@@ -239,9 +234,7 @@ export default function EvaluationDashboard() {
                   <div className="w-full flex flex-col items-center">
                     <span className="text-sm font-medium mb-1">{entry.overall.toFixed(1)}</span>
                     <div
-                      className="w-full glass-button primary rounded-lg-t"
-                      style={ height: `${(entry.overall / 10) * 200}px` }
-                    />
+                      className="w-full glass-button primary rounded-lg-t">style={ height: `${(entry.overall / 10) * 200}px` } />>
                   </div>
                   <div className="text-xs text-gray-600">
                     Cycle {entry.cycle}
@@ -254,7 +247,7 @@ export default function EvaluationDashboard() {
 
         {/* Quick Actions */}
         <div className="glass mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md glass
             <CardContent className="glass p-6">
               <div className="glass flex items-center gap-4">
                 <Activity className="h-8 w-8 text-blue-600" />
@@ -266,7 +259,7 @@ export default function EvaluationDashboard() {
             </CardContent>
           </Card>
           
-          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md glass
             <CardContent className="glass p-6">
               <div className="glass flex items-center gap-4">
                 <TrendingUp className="h-8 w-8 text-green-600" />
@@ -278,7 +271,7 @@ export default function EvaluationDashboard() {
             </CardContent>
           </Card>
           
-          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md glass
             <CardContent className="glass p-6">
               <div className="glass flex items-center gap-4">
                 <BarChart3 className="h-8 w-8 text-purple-600" />

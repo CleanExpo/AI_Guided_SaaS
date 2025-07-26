@@ -275,10 +275,10 @@ export class ArchitectAgent extends Agent {
         'data-modeler',
         'api-designer',
         'threat-modeler',
-        'cost-estimator'],
+        'cost-estimator'])
       temperature: 0.4
   }
-}
+})
   protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting architecture design process...', // Get inputs from other agents, const requirements  = this.getSharedMemory('primary-requirements') || [];
@@ -290,11 +290,11 @@ constraints  = this.getSharedMemory('technical-constraints') || [];
 const _timeline = this.getSharedMemory('project-timeline');
       
 const qualityStandards = this.getSharedMemory('quality-standards') || [];
-      this.observe('Retrieved inputs from other agents', { requirementCount: requirements.length,
+      this.observe('Retrieved inputs from other agents', { requirementCount: requirements.length)
     constraintCount: constraints.length
       }};
       // Step, 1: Define architecture overview and style;
-
+)
 const overview = await this.defineArchitectureOverview();
         input,
         requirements,
@@ -312,7 +312,7 @@ const components = await this.designComponents();
       this.observe('Designed system components', { componentCount: components.length
       }};
       // Step, 3: Create data model;
-
+)
 const dataModel = await this.createDataModel();
         requirements,
         userStories,
@@ -321,7 +321,7 @@ const dataModel = await this.createDataModel();
       this.observe('Created data model', { entityCount: dataModel.entities.length
       }};
       // Step, 4: Design APIs;
-
+)
 const apiDesign = await this.designAPIs();
         components,
         dataModel,
@@ -330,7 +330,7 @@ const apiDesign = await this.designAPIs();
       this.observe('Designed APIs', { endpointCount: apiDesign.endpoints.length
       }};
       // Step, 5: Plan infrastructure;
-
+)
 const infrastructure = await this.planInfrastructure();
         components,
         overview,
@@ -347,12 +347,12 @@ const security = await this.designSecurity();
       this.observe('Designed security architecture', { threatCount: security.threats.length
       }};
       // Step, 7: Plan integrations;
-
+)
 const integrations = await this.planIntegrations(input, components);
       this.observe('Planned integrations', { integrationCount: integrations.length
       }};
       // Step, 8: Define deployment strategy;
-
+)
 const _deploymentStrategy = await this.defineDeploymentStrategy();
         infrastructure,
         components,
@@ -378,8 +378,8 @@ const architecture: SystemArchitecture={;
         infrastructure,
         security,
         integrations,
-        deploymentStrategy,
-        technicalDecisions,
+        deploymentStrategy)
+        technicalDecisions,)
         architecturalPatterns: this.identifyPatterns(components, overview)};
       // Store architecture in artifacts
       this.setArtifact('system-architecture', architecture);
@@ -403,7 +403,7 @@ const architecture: SystemArchitecture={;
       throw error
 }
 };
-  private async defineArchitectureOverview(input: string, requirements: string[],
+  private async defineArchitectureOverview(input: string, requirements: string[],)
   constraints: string[], qualityStandards: string[]): Promise<any> {
 { `Design the high-level architecture for this, project: Project, Description:``, ${input}
 Key: Requirements:
@@ -421,12 +421,12 @@ Provide:
 Format as JSON ArchitectureOverview object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async designComponents(requirements: string[], userStories: [] as any[],
+  private async designComponents(requirements: string[], userStories: [] as any[],)
   architectureStyle: string): Promise<any> {
 { `Design system components based, on: Architecture, Style: ${architectureStyle}``,
 Requirements:
@@ -445,17 +445,17 @@ Include frontend, backend, services, and data components as needed.;
 Format as JSON array of Component objects.`;
 
 const _response  = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
 }};
-
+)
 const components = JSON.parse(response);
     return components.map((c, index: number) => ({;
       ...c;
       id: `comp-${index + 1}`
     }    })
 }
-  private async createDataModel(requirements: string[], userStories: [] as any[],
+  private async createDataModel(requirements: string[], userStories: [] as any[],)
   components: Component[]): Promise<any> {
 { `Create a comprehensive data, model: ``, Requirements:, ${requirements.slice(0, 15).join('\n')}
 Components needing, data:
@@ -472,15 +472,14 @@ Consider scalability, performance, and data integrity.;
 Format as JSON DataModel object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async designAPIs(components: Component[], dataModel: DataModel;
+  private async designAPIs(components: Component[], dataModel: DataModel;)
   userStories: any[]): Promise<any> {
-{ `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(
-  // components
+{ `Design comprehensive API, architecture: Components with, APIs:``, ${JSON.stringify(// components)
     .filter((c) => c.interfaces.length > 0)
     .map((c) => ({ name: c.name,
     interfaces: c.interfaces
@@ -503,9 +502,9 @@ Design:
 Format as JSON APIDesign object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async planInfrastructure(components: Component[], overview: ArchitectureOverview, timeline): Promise<any> {
@@ -525,15 +524,15 @@ Consider cost, scalability, and operational complexity.;
 Format as JSON Infrastructure object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async designSecurity(requirements: string[], components: Component[],
+  private async designSecurity(requirements: string[], components: Component[],)
   dataModel: DataModel): Promise<any> {
 { `Design comprehensive security, architecture: Security-related, Requirements:``, ${requirements
-  .filter(, r: any =>
+  .filter(, r: any =>)
       r.toLowerCase().includes('security') ||
       r.toLowerCase().includes('auth') ||
       r.toLowerCase().includes('privacy'))
@@ -556,9 +555,9 @@ Include:
 Format as JSON SecurityArchitecture object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async planIntegrations(input: string, components: Component[]): Promise<any> {
@@ -576,9 +575,9 @@ Identify potential integrations, for:
 Format as JSON array of Integration objects.`;``;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async defineDeploymentStrategy(infrastructure: Infrastructure, components: Component[], timeline): Promise<any> {
@@ -596,12 +595,12 @@ Design : null
 Format as JSON DeploymentStrategy object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async documentDecisions(overview: ArchitectureOverview, components: Component[],
+  private async documentDecisions(overview: ArchitectureOverview, components: Component[],)
   infrastructure: Infrastructure): Promise<any> {
 { `Document key technical decisions, made: Architecture, Style: ${overview.style}``,
 Key: Technologies:
@@ -617,14 +616,13 @@ Focus on decisions that will significantly impact the project.
 Format as JSON array of TechnicalDecision objects.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private identifyPatterns(
-components: Component[],
-    overview: ArchitectureOverview
+  private identifyPatterns(components: Component[])
+    overview: ArchitectureOverview)
   ): string[] {
     const patterns = [], // Identify patterns based on architecture style, if (overview.style.includes('microservices') {)} {
       patterns.push('Service Discovery', 'API Gateway', 'Circuit Breaker')
@@ -635,7 +633,7 @@ const _hasDatabase  = components.some(c => c.type === 'database');
 
 const _hasCache = components.some(c =>
       c.technology.some(
-t: any =>
+t: any =>)
           t.toLowerCase().includes('redis') || t.toLowerCase().includes('cache'));
     if (hasDatabase && hasCache) {
       patterns.push('Cache-Aside Pattern')}

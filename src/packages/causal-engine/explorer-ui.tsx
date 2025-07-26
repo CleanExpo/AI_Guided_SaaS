@@ -12,7 +12,7 @@ interface CausalInsight { id: string;
 }
 
 export default function CausalExplorerUI() {
-  const [insights, setInsights] = useState<CausalInsight[]>([]);</CausalInsight>
+  const [insights, setInsights] = useState<CausalInsightnull>(null);</CausalInsight>
   const [topComponents, setTopComponents] = useState<CausalInsight[]>([], const [isLoading, setIsLoading] = useState(true);</CausalInsight>
   
   useEffect(() =>  {

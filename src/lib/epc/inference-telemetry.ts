@@ -31,8 +31,7 @@ export class InferenceTelemetry {
   private epcEngine: EPCEngine;
   constructor(projectRoot: string = process.cwd()) {
     this.telemetryDir = path.join(projectRoot, 'telemetry');
-    this.currentLog = path.join(
-      this.telemetryDir,
+    this.currentLog = path.join(this.telemetryDir,)
       `inference-log-${new Date().toISOString().split('T')[0]}.json`
     );
     this.epcEngine = new EPCEngine(projectRoot);
@@ -41,7 +40,7 @@ export class InferenceTelemetry {
 }
   private ensureTelemetryDir() {
     if (!fs.existsSync(this.telemetryDir) {)} {
-      fs.mkdirSync(this.telemetryDir, { recursive: true
+      fs.mkdirSync(this.telemetryDir, { recursive: true)
     })}
   private startAutoFlush() {
     // Flush buffer every 30 seconds
@@ -65,7 +64,7 @@ export class InferenceTelemetry {
         ],
     environmentSnapshot: { nodeEnv: process.env.NODE_ENV || 'development',
     activeServices: this.getActiveServices(),
-    memoryUsage: process.memoryUsage(, ;
+    memoryUsage: process.memoryUsage(, ;)
     uptime: process.uptime()};
     inference: { started: false;
     completed: false
@@ -94,7 +93,7 @@ logInferenceComplete(requestId: string;
     success: boolean;
     metadata? null : {
       tokensUsed?: number, cost?: number, error?: string
-}
+})
   ) {
     const entry = this.buffer.find(e => e.requestId === requestId, if (entry && entry.inference.startTime) {;
       entry.inference.completed = true, entry.inference.duration = Date.now() - entry.inference.startTime;
@@ -120,11 +119,11 @@ logInferenceComplete(requestId: string;
    */
   private logEvent(eventType: string, entry: TelemetryEntry) {
     const _event={ event: eventType;
-    timestamp: new Date().toISOString(, requestId: entry.requestId,
+    timestamp: new Date().toISOString(, requestId: entry.requestId)
     details: entry
     };
     // Write to event log;
-
+)
 const _eventLog = path.join();
       this.telemetryDir,
       `events-${new Date().toISOString().split('T')[0]}.log`;
@@ -148,7 +147,7 @@ const _eventLog = path.join();
   /**
    * Get telemetry statistics
    */
-  async getStatistics(timeRange? null : { start: Date, end: Date
+  async getStatistics(timeRange? null : { start: Date, end: Date)
     }): Promise<any> { </any>
 {{ totalInferences: 0;
     blocked: 0;

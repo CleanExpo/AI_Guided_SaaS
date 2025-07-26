@@ -10,8 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
 export default function CookiesPage() {
-  return (
-    <div className="min-h-screen glass py-12">
+  return(<div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Cookie Policy</h1>
@@ -50,7 +49,7 @@ export default function CookiesPage() {
                 <div>
                   <h3 className="font-semibold text-gray-900">Analytics Cookies</h3>
                   <p className="text-gray-600">
-                    We use these cookies to understand how visitors interact with our website, 
+                    We use these cookies to understand how visitors interact with our website)
                     helping us improve our service and user experience.
                   </p>
                 </div>
@@ -97,6 +96,6 @@ export default function CookiesPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }

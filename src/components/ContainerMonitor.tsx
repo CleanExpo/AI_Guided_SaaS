@@ -14,7 +14,7 @@ interface Container { id: string
 }
 
 export function ContainerMonitor() {
-  const [containers, setContainers] = useState<Container[]>([])
+  const [containers, setContainers] = useState<Containernull>(null)
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
@@ -48,7 +48,7 @@ export function ContainerMonitor() {
     <div className="space-y-4">
           <Card className="glass"
         <CardHeader className="glass"
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
             <Activity className="h-5 w-5"   />
             Container Status
           </CardTitle>
@@ -59,9 +59,7 @@ export function ContainerMonitor() {
               <div key={container.id} className="flex items-center justify-between p-3  rounded-lg">
           <div className="flex items-center gap-3">
                   <div className={`w-3 h-3 rounded-full ${
-                    container.status === 'running' ? 'bg-green-500' : 
-                    container.status === 'stopped' ? 'bg-gray-500' : 'bg-red-500'
-                  }`} />
+                    container.status === 'running' ? 'bg-green-500' : >container.status === 'stopped' ? 'bg-gray-500' : 'bg-red-500'>}`} />
                   <div>
                     <p className="font-medium">{container.name}</p>
                     <p className="text-sm text-gray-500">Uptime: {container.uptime}</p>

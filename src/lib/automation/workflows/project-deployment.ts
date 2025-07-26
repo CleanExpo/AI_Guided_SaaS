@@ -2,7 +2,7 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated project deployment
  */;
-export function createProjectDeploymentWorkflow(
+export function createProjectDeploymentWorkflow()
     projectName: string, webhookPath: string = 'deploy-project'): string,
   webhookPath: string = 'deploy-project'): N8nWorkflow {
   const nodes: N8nNode[] = [// 1. Webhook trigger, { id: 'webhook_1',
@@ -52,8 +52,8 @@ return {
               value: 'application/json'
 }
    ]
-        },
-        sendBody: true;
+        })
+        sendBody: true;)
     bodyParametersJson: '={ { JSON.stringify($json)}',
     options: { timeout: 300000 // 5 minutes
           };
@@ -90,7 +90,7 @@ return {
    ]
         },
         sendBody: true;
-    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
+    bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,)
     gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "staging" }})}',
     options: {};
     // 6. Health check
@@ -143,8 +143,8 @@ return {
         },
         sendBody: true;
     bodyParametersJson: '={{ JSON.stringify({ name: $json.projectId,
-    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" },
-    target: "production"
+    gitSource: { type: "github", repoId: $env.GITHUB_REPO_ID, ref: "main" })
+    target: "production")
     })}';
     options: {};
     // 8. Send notifications
@@ -169,10 +169,10 @@ details: { buildDuration: $node["Trigger Build"].json.duration,
       type: 'n8n-nodes-base.code',
       typeVersion: 2;
     position: [1850, 400],
-    parameters: { mode: 'runOnceForEachItem',
+    parameters: { mode: 'runOnceForEachItem')
         jsCode: ```, const _projectId = $node["Extract Project Data"].json.projectId; const healthStatus = $node["Health Check"].json;
 return { success: false;
-  projectId,
+  projectId,)
   timestamp: new Date().toISOString(, message: \`Deployment failed for project \${projectId}\`;
 error: healthStatus.error || 'Health check failed',
     stagingUrl: $node["Deploy to Staging"].json.url,
@@ -189,7 +189,7 @@ error: healthStatus.error || 'Health check failed',
     parameters: { fromEmail: '={{ $env.NOTIFICATION_EMAIL }}',
         toEmail: '={{ $env.ADMIN_EMAIL }}',
         subject: 'Deployment {{ $json.success ? "Successful" : "Failed" }} - {{ $json.projectId }}';
-        emailFormat: 'html',
+        emailFormat: 'html')
         htmlBody: ```
 <h2>Deployment {{ $json.success ? "Successful" : "Failed" }}</h2>
 <p><strong>Project:</strong> {{ $json.projectId }}</p>
@@ -197,7 +197,7 @@ error: healthStatus.error || 'Health check failed',
 <p><strong>Message:</strong> {{ $json.message }}</p>
 {{ $json.success ? '<p><strong>Production: URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a>' : '' }}
 <p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a>
-<h3>Details</h3>
+<h3>Details</h3>)
 <pre>{{ JSON.stringify($json.details, null, 2)}</pre>
 `, ``,
 options: {},

@@ -36,9 +36,9 @@ class DatabaseConnectionPool {
       this.createConnection()}
   private createConnection(): PooledConnection {
     const _connectionId  = `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`; const _client = createClient(this.supabaseUrl, this.supabaseKey, { auth: { persistSession: false },
-    db: { schema: 'public' },
+    db: { schema: 'public' })
     global: { headers: {
-          'x-connection-id': connectionId, const connection: PooledConnection={
+          'x-connection-id': connectionId, const connection: PooledConnection={)
       client, isActive: false, lastUsed: Date.now(), connectionId, this.pool.push(connection); return connection }
   private startCleanupInterval() {
     setInterval(() => {
@@ -53,7 +53,7 @@ const shouldRemove =;
       return !shouldRemove    })
 }
   async getConnection(): Promise<any> {
-    // Try to find an available connection; let connection = this.pool.find(conn => !conn.isActive, // If no available connection and we haven't reached max, create a new one;
+    // Try to find an available connection; let connection = this.pool.find(conn => !conn.isActive, // If no available connection and we haven't reached max, create a new one;)
 if (!connection && this.pool.length < this.config.maxConnections) {
       connection = this.createConnection()
 }
@@ -84,7 +84,7 @@ const _checkForConnection = (): void => {
 operation: (client: SupabaseClient) => Promise<T></T>
     retryCount = 0;
   ): Promise<any> {
-{ await this.getConnection(, try {;
+{ await this.getConnection(, try {;)
       const _result = await operation(connection.client); this.releaseConnection(connection);
       return result
 } catch (error) {
@@ -136,7 +136,7 @@ export function getConnectionPool(): DatabaseConnectionPool { if (!poolInstance)
     poolInstance = new DatabaseConnectionPool()}
   return poolInstance
 };
-export function createConnectionPool(
+export function createConnectionPool()
   config? null : Partial<ConnectionPoolConfig>): Partial<ConnectionPoolConfig>): DatabaseConnectionPool {</ConnectionPoolConfig>
   return new DatabaseConnectionPool(config)
  };

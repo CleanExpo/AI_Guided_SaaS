@@ -80,7 +80,7 @@ class RateLimiter {
       if (process.env.REDIS_URL) {
         const { createClient } = await import('redis');
         this.redisClient = createClient({
-          url: process.env.REDIS_URL
+          url: process.env.REDIS_URL)
         });
         await (this.redisClient as any).connect();
       } else {
@@ -103,11 +103,10 @@ class RateLimiter {
     }
   }
 
-  private async checkRateLimitRedis(
-    key: string,
+  private async checkRateLimitRedis(key: string,
     config: RateLimitConfig,
-    now: number,
-    windowStart: number
+    now: number)
+    windowStart: number)
   ): Promise<RateLimitResult> {
     const redisKey = `rate_limit:${key}`;
     
@@ -120,7 +119,7 @@ class RateLimiter {
       
       // Add current request
       pipeline.zAdd(redisKey, {
-        score: now,
+        score: now,)
         value: `${now}-${Math.random()}`
       });
       
@@ -150,11 +149,10 @@ class RateLimiter {
     }
   }
 
-  private checkRateLimitMemory(
-    key: string,
+  private checkRateLimitMemory(key: string,
     config: RateLimitConfig,
-    now: number,
-    windowStart: number
+    now: number)
+    windowStart: number)
   ): RateLimitResult {
     const stored = this.fallbackStore.get(key);
     
@@ -271,13 +269,11 @@ interface ApiResponse {
   setHeader: (name: string, value: string | number) => void;
 }
 
-export function createRateLimitMiddleware(
-  tier: keyof typeof RATE_LIMIT_TIERS,
-  customConfig?: Partial<RateLimitConfig>
+export function createRateLimitMiddleware(tier: keyof typeof RATE_LIMIT_TIERS)
+  customConfig?: Partial<RateLimitConfig>)
 ) {
-  return async function rateLimitMiddleware(
-    req: ApiRequest,
-    res: ApiResponse,
+  return async function rateLimitMiddleware(req: ApiRequest)
+    res: ApiResponse,)
     next?: () => void
   ) {
     const rateLimiter = getRateLimiter();
@@ -306,8 +302,8 @@ export function createRateLimitMiddleware(
       
       if (!result.allowed) {
         res.status(429).json({
-          error: 'Rate limit exceeded',
-          message: config.message,
+          error: 'Rate limit exceeded')
+          message: config.message,)
           retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000),
           limit: config.maxRequests,
           remaining: result.remaining,
@@ -330,9 +326,8 @@ export function createRateLimitMiddleware(
 }
 
 // Helper function for API route protection
-export async function checkApiRateLimit(
-  req: ApiRequest,
-  tier: keyof typeof RATE_LIMIT_TIERS = 'api'
+export async function checkApiRateLimit(req: ApiRequest)
+  tier: keyof typeof RATE_LIMIT_TIERS = 'api')
 ): Promise<RateLimitResult> {
   const rateLimiter = getRateLimiter();
   const tierConfig = RATE_LIMIT_TIERS[tier];
@@ -343,8 +338,8 @@ export async function checkApiRateLimit(
   const key = rateLimiter.generateKey(`${ip}:${userId}`, endpoint);
   
   return rateLimiter.checkRateLimit(key, {
-    windowMs: tierConfig.windowMs,
-    maxRequests: tierConfig.maxRequests
+    windowMs: tierConfig.windowMs)
+    maxRequests: tierConfig.maxRequests)
   });
 }
 

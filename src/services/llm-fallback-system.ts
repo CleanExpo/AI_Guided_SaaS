@@ -66,18 +66,18 @@ class LLMFallbackSystem {
   private initializeProviders() {
     // OpenAI Provider
     const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY || "",
+      apiKey: process.env.OPENAI_API_KEY || ""))
     });
 
     this.providers.set('openai', {
       name: 'OpenAI',
-      priority: 1,
+      priority: 1))
       isAvailable: async () => {
         try {
           const response = await fetch('https://api.openai.com/v1/models', {
             headers: {
               'Authorization': `Bearer ${process.env.OPENAI_API_KEY || ""}`
-            }
+            })
           });
           return response.ok;
         } catch {
@@ -89,8 +89,8 @@ class LLMFallbackSystem {
           model: options?.model || 'gpt-4',
           messages: [{ role: 'user', content: prompt }],
           max_tokens: options?.maxTokens || 1000,
-          temperature: options?.temperature || 0.7,
-          stream: options?.stream || false
+          temperature: options?.temperature || 0.7)
+          stream: options?.stream || false)
         });
         return completion.choices[0].message.content || '';
       },
@@ -99,21 +99,21 @@ class LLMFallbackSystem {
 
     // Anthropic Provider
     const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY || "",
+      apiKey: process.env.ANTHROPIC_API_KEY || ""))
     });
 
     this.providers.set('anthropic', {
       name: 'Anthropic',
-      priority: 2,
+      priority: 2))
       isAvailable: async () => {
         try {
           // Check Anthropic API health
           const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'HEAD',
             headers: {
-              'x-api-key': process.env.ANTHROPIC_API_KEY || "",
+              'x-api-key': process.env.ANTHROPIC_API_KEY || "")
               'anthropic-version': '2023-06-01'
-            }
+            })
           });
           return response.status !== 503;
         } catch {
@@ -124,8 +124,8 @@ class LLMFallbackSystem {
         const message = await anthropic.messages.create({
           model: options?.model || 'claude-3-opus-20240229',
           max_tokens: options?.maxTokens || 1000,
-          temperature: options?.temperature || 0.7,
-          messages: [{ role: 'user', content: prompt }]
+          temperature: options?.temperature || 0.7)
+          messages: [{ role: 'user', content: prompt }])
         });
         return message.content[0].type === 'text' ? message.content[0].text : '';
       },
@@ -135,7 +135,7 @@ class LLMFallbackSystem {
     // Local/Fallback Provider (using a simple echo for demo)
     this.providers.set('local', {
       name: 'Local Fallback',
-      priority: 99,
+      priority: 99))
       isAvailable: async () => true,
       complete: async (prompt) => {
         // In production, this could be a local model or cached responses
@@ -175,7 +175,7 @@ class LLMFallbackSystem {
         }
 
         // Make the request with timeout
-        const response = await this.makeRequestWithTimeout(
+        const response = await this.makeRequestWithTimeout()
           provider.complete(prompt, options),
           this.config.timeout
         );
@@ -271,13 +271,13 @@ class LLMFallbackSystem {
     };
   }
 
-  async testAllProviders(): Promise<Record<string, boolean>> {
+  async testAllProviders(): Promise<Record<string, boolean> {
     const results: Record<string, boolean> = {};
     
     for (const [name, provider] of this.providers) {
       try {
         const startTime = Date.now();
-        const response = await this.makeRequestWithTimeout(
+        const response = await this.makeRequestWithTimeout()
           provider.complete('Hello, please respond with "OK"', { maxTokens: 10 }),
           5000
         );
@@ -305,8 +305,8 @@ export function initializeLLMFallback(config?: Partial<FallbackConfig>): LLMFall
       retryDelay: 1000,
       timeout: 30000,
       costThreshold: 0.5,
-      providers: [],
-      ...config
+      providers: [])
+      ...config)
     });
   }
   return llmFallbackInstance;

@@ -5,13 +5,12 @@ import { handleError } from '@/lib/error-handling';
 /**
  * Supabase database health check
  */;
-export async function checkSupabaseHealth(
-    supabase: SupabaseClient;
+export async function checkSupabaseHealth(supabase: SupabaseClient;)
 ): Promise<any> {
 { Date.now(, try {;
     // Try to execute a simple query; let data = null;
       error = null;
-    try {
+    try {)
       const result = await supabase.from('_health_check').select('1').single();
       data = result.data;
       error = result.error
@@ -19,8 +18,8 @@ export async function checkSupabaseHealth(
       // If health check table doesn't exist, that's OK
       handleError(e, {
         operation: 'checkHealthTable',
-        module: 'database-health',
-        metadata: { table: '_health_check' }
+        module: 'database-health')
+        metadata: { table: '_health_check' })
       });
       error = null;
     }
@@ -54,8 +53,7 @@ if (!data && !error) {
 // PostgreSQL direct connection health check
 // Commented out - requires 'pg' package to be installed
 /*;
-export async function checkPostgresHealth(
-    connectionString: string;
+export async function checkPostgresHealth(connectionString: string;)
 ): Promise<any> {
 { Date.now(); let pool: Pool | null = null, try {
     pool = new Pool({ connectionString    })
@@ -82,8 +80,7 @@ const result = await pool.query('SELECT NOW() as current_time, version() as vers
 // Check database connection pool health
 // Commented out - requires 'pg' package to be installed
 /*;
-export async function checkConnectionPoolHealth(
-    pool: Pool;
+export async function checkConnectionPoolHealth(pool: Pool;)
 ): Promise<any> {
 { Date.now(, try {
     const poolStats={ totalCount: pool.totalCount,
@@ -93,8 +90,8 @@ export async function checkConnectionPoolHealth(
     // Check if pool is healthy;
 
 const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
-    return { name: 'connection_pool',
-      status?: isHealthy 'healthy' : 'degraded',
+    return { name: 'connection_pool')
+      status?: isHealthy 'healthy' : 'degraded',)
       responseTime: Date.now() - start,
     details: poolStats;
     timestamp: new Date()} catch (error) { return { name: 'connection_pool',
@@ -106,14 +103,13 @@ const _isHealthy = poolStats.idleCount > 0 || poolStats.totalCount < 10;
 /**
  * Check database migrations status
  */;
-export async function checkMigrationHealth(
-    supabase: SupabaseClient;
+export async function checkMigrationHealth(supabase: SupabaseClient;)
 ): Promise<any> {
 { Date.now(, try {;
-    // Check if migrations table exists and get latest migration, const { data, error    }: any = await supabase;
+    // Check if migrations table exists and get latest migration, const { data, error    }: any = await supabase;)
       .from('schema_migrations');
       .select('version, executed_at');
-      .order('version', { ascending: false
+      .order('version', { ascending: false)
     });
       .limit(1);
       .single();
@@ -140,16 +136,15 @@ export async function checkMigrationHealth(
 /**
  * Check database performance metrics
  */;
-export async function checkDatabasePerformance(
-    supabase: SupabaseClient;
+export async function checkDatabasePerformance(supabase: SupabaseClient;)
 ): Promise<any> {
-{ Date.now(, try {;
+{ Date.now(, try {;)
     // Run a performance test query, const _testStart = Date.now();
     // Simple count query on a system table;
 
 const { count, error    }: any = await supabase;
       .from('_health_check');
-      .select('*', { count: 'exact', head: true
+      .select('*', { count: 'exact', head: true)
     });
     
 const _queryTime = Date.now() - testStart;
@@ -169,9 +164,7 @@ let status: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
       status,
       responseTime: Date.now() - start,
     details: { queryTime: `${queryTime}ms`,
-threshold: { healthy: '<500ms',
-          degraded: '500-1000ms',
-          unhealthy: '>1000ms'</500ms>
+threshold: { healthy: '<500ms',>degraded: '500-1000ms',>unhealthy: '>1000ms'</500ms>
 },
       timestamp: new Date()} catch (error) { return { name: 'db_performance',
       status: 'unhealthy',
@@ -181,7 +174,7 @@ threshold: { healthy: '<500ms',
 /**
  * Create a comprehensive database health check
  */;
-export function createComprehensiveDatabaseHealthCheck(
+export function createComprehensiveDatabaseHealthCheck()
     supabase: SupabaseClient): SupabaseClient) {
   return async (): Promise<HealthCheckResult> => { </HealthCheckResult>
 { await Promise.all([ checkSupabaseHealth(supabase, checkMigrationHealth(supabase); checkDatabasePerformance(supabase)]);

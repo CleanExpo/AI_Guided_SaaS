@@ -17,9 +17,8 @@ type MethodDecorator = (
 
 // Validation error class
 export class ValidationError extends Error {
-  constructor(
-    public errors: z.ZodError,
-    message = 'Validation failed'
+  constructor(public errors: z.ZodError)
+    message = 'Validation failed')
   ) {
     super(message);
     this.name = 'ValidationError';
@@ -37,10 +36,9 @@ export class ValidationError extends Error {
 
 // Input validation decorator
 export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
-  return function (
-    target: object,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
+  return function(target: object,
+    propertyKey: string)
+    descriptor: PropertyDescriptor)
   ) {
     const originalMethod = descriptor.value;
     
@@ -77,10 +75,9 @@ export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = 
 
 // Output validation decorator
 export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
-  return function (
-    target: object,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
+  return function(target: object,
+    propertyKey: string)
+    descriptor: PropertyDescriptor)
   ) {
     const originalMethod = descriptor.value;
     
@@ -117,10 +114,9 @@ export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions =
 
 // Combined input/output validation decorator
 export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
-  return function (
-    target: object,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
+  return function(target: object,
+    propertyKey: string)
+    descriptor: PropertyDescriptor)
   ) {
     const originalMethod = descriptor.value;
     
@@ -165,10 +161,9 @@ export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, o
 
 // Parameter validation decorator (for multiple parameters)
 export function ValidateParams(...schemas: z.ZodSchema[]): MethodDecorator {
-  return function (
-    target: object,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
+  return function(target: object,
+    propertyKey: string)
+    descriptor: PropertyDescriptor)
   ) {
     const originalMethod = descriptor.value;
     
@@ -225,9 +220,8 @@ interface Response {
 
 type NextFunction = () => void;
 
-export function createValidationMiddleware(
-  schema: z.ZodSchema,
-  target: 'body' | 'query' | 'params' = 'body'
+export function createValidationMiddleware(schema: z.ZodSchema)
+  target: 'body' | 'query' | 'params' = 'body')
 ) {
   return async (req: Request, res: Response, next?: NextFunction) => {
     try {

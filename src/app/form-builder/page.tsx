@@ -54,9 +54,7 @@ export default function FormBuilderPage() {
                   {elementTypes.map((element) => (
                     <Button
                       key={element.type}
-                      variant="outline"
-                      className="w-full justify-start"
-                      onClick={() => addElement(element.type)}
+                      variant="outline">className="w-full justify-start">onClick={() => addElement(element.type)}
                     >
                       <span className="mr-2">{element.icon}</span>
                       {element.label}
@@ -88,13 +86,9 @@ export default function FormBuilderPage() {
                         </div>
                         {element.type === 'textarea' ? (
                           <textarea 
-                            className="w-full p-2  rounded-lg" 
-                            placeholder={`Enter ${element.label.toLowerCase()}`}
-                            rows={3} />
+                            className="w-full p-2  rounded-lg" >placeholder={`Enter ${element.label.toLowerCase()}`}>rows={3} />
                         ) : (
-                          <Input 
-                            type={element.type} 
-                            placeholder={`Enter ${element.label.toLowerCase()}`} />
+                          <Input >type={element.type} >placeholder={`Enter ${element.label.toLowerCase()}`} />
                         )}
                       </div>
                     ))
@@ -119,9 +113,7 @@ export default function FormBuilderPage() {
                   <div>
                     <label className="block text-sm font-medium mb-1">Description</label>
                     <textarea 
-                      className="w-full p-2  rounded-lg" 
-                      placeholder="Form description"
-                      rows={3} />
+                      className="w-full p-2  rounded-lg" >placeholder="Form description">rows={3} />
                   </div>
                   <Button className="w-full">Generate Form Code</Button>
                 </div>

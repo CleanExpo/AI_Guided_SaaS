@@ -68,7 +68,7 @@ export function usePWA(): PWAStatus {
 
   // Register service worker
   useEffect(() => {
-    if ('serviceWorker' in navigator && (process.env.NODE_ENV || "production") === "production") {
+    if ('serviceWorker' in navigator && (process.env.NODE_ENV || 'production') === 'production') {
       navigator.serviceWorker
         .register('/sw.js')
         .then((registration) => {
@@ -127,7 +127,7 @@ export function usePWA(): PWAStatus {
 
 // Hook for handling offline data sync
 export function useOfflineSync() {
-  const [pendingSync, setPendingSync] = useState<any[]>([]);
+  const [pendingSync, setPendingSync] = useState<anynull>(null);
 
   useEffect(() => {
     // Load pending sync items from localStorage

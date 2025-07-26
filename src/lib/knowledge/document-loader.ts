@@ -62,7 +62,7 @@ export class DocumentLoader {
    */
   async load(source: string, type: 'file' | 'url' | 'github'): Promise { switch (type) {
       case 'file':
-      return this.loadFile(source, break, case 'url':;
+      return this.loadFile(source, break, case 'url':;)
       return this.loadUrl(source);
     break;
       case 'github':
@@ -181,7 +181,7 @@ for (const pattern of includePatterns) {
       const _matches = await glob(pattern, { cwd: basePath;
     ignore: excludePatterns;
     absolute: true
-     
+     )
     }); for (const filePath of matches) {
         try {
           const stats = await fs.stat(filePath, // Skip files that are too large, if (stats.size > maxSize) {
@@ -189,7 +189,7 @@ for (const pattern of includePatterns) {
 }; const _content  = await fs.readFile(filePath, 'utf-8');
 
 const _ext = path.extname(filePath).slice(1).toLowerCase();
-          files.push({ path: filePath;
+          files.push({ path: filePath;)
     name: path.basename(filePath);
             content,
             language: this.languageMap[ext] || 'plaintext',

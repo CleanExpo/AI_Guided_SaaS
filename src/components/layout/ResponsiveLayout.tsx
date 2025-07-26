@@ -21,14 +21,11 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize)
 }, []);
-  return (
-    <div;
+  return(<div;
 
     const className={cn(``
-        "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",
-        viewport === 'laptop' && "px-8", viewport === 'desktop' && "px-12", className)}
-      data-viewport={viewport}
-    ></div>
+        "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",)
+        viewport === 'laptop' && "px-8", viewport === 'desktop' && "px-12", className)}>data-viewport={viewport}></div>
       {/* Mobile-first, responsive container */}</div>
       <div className="mx-auto max-w-[1920px]">
         {children });

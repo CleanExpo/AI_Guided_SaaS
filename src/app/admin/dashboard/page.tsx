@@ -34,20 +34,20 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="glass"
-            <CardHeader className="glass"
-          <CardTitle className="flex items-center" className="glass
-                <Shield className="w-5 h-5 mr-2"     />
+          <Card className="glass">
+            <CardHeader className="glass">
+              <CardTitle className="flex items-center glass">
+                <Shield className="w-5 h-5 mr-2" />
                 System Status
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-          <div className="text-2xl font-bold text-green-600">Operational</div>
+            <CardContent className="glass">
+              <div className="text-2xl font-bold text-green-600">Operational</div>
               <p className="text-gray-600">All systems running normally</p>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

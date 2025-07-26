@@ -33,8 +33,8 @@ export interface QAAnalysis { coverage: {
 export class QAAgent extends Agent {
   constructor(config: Partial<AgentConfig> = {}) {</AgentConfig>
     super({ id: 'qa-agent',
-      name: 'QA Agent',
-      type: 'specialist',
+      name: 'QA Agent')
+      type: 'specialist',)
       ...config    })
 }
 
@@ -81,8 +81,8 @@ export class QAAgent extends Agent {
       this.logger.error('QA task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message,
-          task: message.type
+        payload: { error: error.message)
+          task: message.type)
         }    })
 }
   }
@@ -98,7 +98,7 @@ export class QAAgent extends Agent {
         ? `npm test -- --coverage --testPathPattern=${testPath}`
         : `npm test -- --testPathPattern=${testPath}`;
       
-      const output = execSync(testCommand, { encoding: 'utf8'
+      const output = execSync(testCommand, { encoding: 'utf8')
     });
       
       // Parse test results
@@ -106,9 +106,9 @@ export class QAAgent extends Agent {
       
       // Send results
       await this.sendMessage({ to: 'orchestrator',
-        type: 'test-results',
+        type: 'test-results')
         payload: {
-          results,
+          results,)
           coverage?: coverage this.parseCoverage() : null
         }
       });
@@ -128,7 +128,7 @@ export class QAAgent extends Agent {
     
     this.logger.info(`Analyzing code quality for ${targetPath}...`);
     
-    const analysis: QAAnalysis={ coverage: await this.getCodeCoverage(, testResults: [],
+    const analysis: QAAnalysis={ coverage: await this.getCodeCoverage(, testResults: [],)
       codeQuality: await this.runCodeQualityChecks(targetPath),
       recommendations: []
     };
@@ -138,8 +138,8 @@ export class QAAgent extends Agent {
     
     // Send analysis results
     await this.sendMessage({ to: 'orchestrator',
-      type: 'quality-analysis',
-      payload: analysis   
+      type: 'quality-analysis')
+      payload: analysis   )
     })
 }
 
@@ -172,9 +172,9 @@ export class QAAgent extends Agent {
     await this.sendMessage({ to: 'orchestrator',
       type: 'deployment-validation',
       payload: {
-        environment,
+        environment)
         passed: allPassed;
-        checks: results
+        checks: results)
       }    })
 }
 
@@ -190,10 +190,10 @@ export class QAAgent extends Agent {
     const testMatch = output.match(testRegex);
     
     if (testMatch) {
-      results.push({ testSuite: 'All Tests',
+      results.push({ testSuite: 'All Tests',)
         passed: parseInt(testMatch[1], failed: parseInt(testMatch[2]),
         skipped: parseInt(testMatch[3], duration: 0, // Would need to parse time
-        failures: []   
+        failures: []   )
     })
 }
     
@@ -228,9 +228,9 @@ export class QAAgent extends Agent {
     
     try {
       // Run ESLint
-      const eslintOutput = execSync(`npx eslint ${targetPath} --format json`, { encoding: 'utf8',
+      const eslintOutput = execSync(`npx eslint ${targetPath} --format json`, { encoding: 'utf8')
         stdio: 'pipe'
-     
+     )
     });
       
       const eslintResults = JSON.parse(eslintOutput);
@@ -276,15 +276,15 @@ export class QAAgent extends Agent {
       await this.sendMessage({ to: 'self-healing-agent',
         type: 'test-failures',
         payload: {
-          failures,
-          request: 'analyze-and-fix'
+          failures)
+          request: 'analyze-and-fix')
         }    })
 }
   }
 
   private async checkBuildSuccess(): Promise<boolean> {
     try {
-      execSync('npm run build', { stdio: 'pipe'
+      execSync('npm run build', { stdio: 'pipe')
     });
       return true
 } catch {
@@ -294,7 +294,7 @@ export class QAAgent extends Agent {
 
   private async checkTestsPass(): Promise<boolean> {
     try {
-      execSync('npm test -- --passWithNoTests', { stdio: 'pipe'
+      execSync('npm test -- --passWithNoTests', { stdio: 'pipe')
     });
       return true
 } catch {
@@ -304,7 +304,7 @@ export class QAAgent extends Agent {
 
   private async checkTypeScript(): Promise<boolean> {
     try {
-      execSync('npx tsc --noEmit', { stdio: 'pipe'
+      execSync('npx tsc --noEmit', { stdio: 'pipe')
     });
       return true
 } catch {
@@ -314,7 +314,7 @@ export class QAAgent extends Agent {
 
   private async checkDependencies(): Promise<boolean> {
     try {
-      const output = execSync('npm audit --audit-level=high', { encoding: 'utf8'
+      const output = execSync('npm audit --audit-level=high', { encoding: 'utf8')
     });
       return !output.includes('found')
 } catch {
@@ -334,7 +334,7 @@ export class QAAgent extends Agent {
     
     if (fs.existsSync(envFile) {)} {
       const envContent = fs.readFileSync(envFile, 'utf8');
-      return requiredVars.every(varName =>
+      return requiredVars.every(varName =>)
         envContent.includes(`${varName}=`) && !envContent.includes(`${varName}=""`)
       )
 }

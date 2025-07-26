@@ -6,7 +6,7 @@ import { validateInput } from '@/lib/api/validation-middleware';
 export const runtime = 'nodejs';
 export const maxDuration = 300; // 5 minutes for agent processing
 
-const agentChatSchema = z.object({
+const agentChatSchema = z.object({)
   message: z.string().min(1, 'Message is required').max(2000, 'Message too long'),
   projectType: z.string().optional(),
   context: z.record(z.unknown()).optional(),
@@ -28,8 +28,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // Log the agent chat request for monitoring
       logger.info('Agent chat request', { 
         messageLength: message.length, 
-        projectType,
-        hasContext: !!context 
+        projectType)
+        hasContext: !!context )
       });
       
       // Simulate agent response
@@ -47,9 +47,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(response);
     } catch (error) {
       logger.error('Agent chat error:', error);
-      return NextResponse.json(
-        { error: 'Agent chat failed' },
-        { status: 500 }
+      return NextResponse.json({ error: 'Agent chat failed' })
+        { status: 500 })
       );
     }
   });

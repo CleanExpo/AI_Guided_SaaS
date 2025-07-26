@@ -58,24 +58,23 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
   
   const analyticsData = data || defaultData;
   
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Overview Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-          <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+          <CardTitle className="text-sm font-medium glassTotal Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass")
           <div className="text-2xl font-bold">{analyticsData.overview.totalUsers.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
         
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassActive Users</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassActive Users</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -85,8 +84,8 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
         </Card>
         
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassTotal Projects</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassTotal Projects</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -96,8 +95,8 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
         </Card>
         
         <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassRevenue</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassRevenue</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground"  />
           </CardHeader>
           <CardContent className="glass"
@@ -117,9 +116,7 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
             {analyticsData.userMetrics.activeUsers.map((day, index) => (
               <div key={index} className="flex-1 flex flex-col items-center gap-2">
                 <div 
-                  className="w-full glass-button primary rounded-lg-t"
-                  style={ height: `${(day.count / 150) * 100}%` }
-                />
+                  className="w-full glass-button primary rounded-lg-t">style={ height: `${(day.count / 150) * 100}%` } />>
                 <span className="text-xs text-gray-600">{day.date}</span>
               </div>
             ))}

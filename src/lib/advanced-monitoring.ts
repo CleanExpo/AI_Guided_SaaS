@@ -52,8 +52,8 @@ if (event.severity === 'critical' || event.severity === 'high') {
     // Log to production logger;
 if (typeof window === 'undefined') {
       logSecurity('Security event detected', { type: event.type,
-    severity: event.severity,
-    source: event.source,
+    severity: event.severity)
+    source: event.source,)
     details: event.details})}
   /**
    * Track performance metrics
@@ -67,8 +67,8 @@ trackPerformance(metric: Omit<PerformanceMetric 'timestamp' | 'memoryUsage' | 'c
     this.trimPerformanceHistory();
     // Check for performance alerts;
 if (metric.responseTime > this.alertThresholds.responseTime) {
-      this.triggerPerformanceAlert('High response time detected', { endpoint: metric.endpoint,
-    responseTime: metric.responseTime,
+      this.triggerPerformanceAlert('High response time detected', { endpoint: metric.endpoint)
+    responseTime: metric.responseTime,)
     threshold: this.alertThresholds.responseTime})}
   /**
    * Monitor system health
@@ -95,7 +95,7 @@ if (metric.responseTime > this.alertThresholds.responseTime) {
     topAttackTypes: Array<{ type: string, count: number }>;
     recentEvents: SecurityEvent[]
   } {
-    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentEvents = this.securityEvents.filter(, event: any => event.timestamp > last24Hours;
+    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentEvents = this.securityEvents.filter(, event: any => event.timestamp > last24Hours;)
     );
     
 const _attackTypes = recentEvents.reduce((acc: Record<string any>, event) =>  {</string>
@@ -119,7 +119,7 @@ const _attackTypes = recentEvents.reduce((acc: Record<string any>, event) =>  {<
     throughput: number;
     memoryTrend: Array<{ timestamp: Date, usage: number }>
   } {
-    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;
+    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;)
     );
     
 const _endpointTimes = recentMetrics.reduce((acc: Record<string number[]>, metric) =>  {</string>
@@ -144,7 +144,7 @@ const _memoryTrend = this.systemHealth;
       memoryTrend}}
   /**
    * Generate comprehensive monitoring report
-   */
+   */)
   generateMonitoringReport(): { timestamp: Date;
     systemHealth: SystemHealth;
     securityAnalytics: { totalEvents: number;
@@ -191,7 +191,7 @@ const recommendations = this.generateRecommendations();
     // In a real implementation, this would track actual connections
     return Math.floor(Math.random() * 100) + 50}
   private calculateErrorRate(): number {;
-    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;
+    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;)
     );
     if (recentMetrics.length === 0) {r}eturn 0;
     
@@ -201,7 +201,7 @@ const _errorCount = recentMetrics.filter();
     return errorCount / recentMetrics.length
 }
   private calculateAverageResponseTime(): number {
-    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;
+    const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;)
     );
     if (recentMetrics.length === 0) {r}eturn 0;
     
@@ -227,23 +227,22 @@ if (typeof window === 'undefined') {
       logWarn('Performance alert triggered', alert)}
   private checkHealthAlerts(health: SystemHealth) {
     if (health.memoryUsage.percentage > this.alertThresholds.memoryUsage) {
-      this.triggerPerformanceAlert('High memory usage detected', { usage: health.memoryUsage.percentage,
-    threshold: this.alertThresholds.memoryUsage   
+      this.triggerPerformanceAlert('High memory usage detected', { usage: health.memoryUsage.percentage)
+    threshold: this.alertThresholds.memoryUsage   )
     })
 }
     if (health.errorRate > this.alertThresholds.errorRate) {
-      this.triggerPerformanceAlert('High error rate detected', { errorRate: health.errorRate,
+      this.triggerPerformanceAlert('High error rate detected', { errorRate: health.errorRate,)
     threshold: this.alertThresholds.errorRate})}
-  private generateRecommendations(
-health: SystemHealth;
+  private generateRecommendations(health: SystemHealth;
     security: { totalEvents: number, criticalEvents: number, attackAttempts: number, topAttackTypes: Array<{ type: string, count: number }>;
     recentEvents: SecurityEvent[]
-    },
+    })
     performance: { averageResponseTime: number, slowestEndpoints: Array<{ endpoint: string, avgTime: number }>;
     errorRate: number;
     throughput: number;
     memoryTrend: Array<{ timestamp: Date, usage: number }>
-}
+})
   ): string[] {
     const recommendations: string[] = [], if (health.memoryUsage.percentage > 0.8) {
       recommendations.push('Consider optimizing memory usage or scaling resources')}

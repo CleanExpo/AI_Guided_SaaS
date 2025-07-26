@@ -11,15 +11,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             if (isValid) {
                 logger.info('Admin login successful', { email: data.email });
                 return NextResponse.json({ 
-                    success: true, 
-                    message: 'Login successful'
+                    success: true)
+                    message: 'Login successful')
                 });
             } else {
                 logger.warn('Admin login failed', { email: data.email });
                 return NextResponse.json({ 
                     error: 'Invalid credentials' 
                 }, { 
-                    status: 401
+                    status: 401)
                 });
             }
         } catch (error) {
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Authentication failed' 
             }, { 
-                status: 500
+                status: 500)
             });
         }
     });

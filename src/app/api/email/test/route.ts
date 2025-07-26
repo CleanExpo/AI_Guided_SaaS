@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { handleError } from '@/lib/error-handling';
 
 // Schema for email test
-const emailTestSchema = z.object({
+const emailTestSchema = z.object({)
   to: z.string().email('Invalid email address'),
   subject: z.string().optional().default('Test Email'),
   template: z.enum(['test', 'welcome', 'notification']).optional().default('test')
@@ -19,10 +19,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // Check if email is configured
       if (!process.env.SMTP_HOST) {
         return NextResponse.json({
-          success: false,
+          success: false)
           error: 'Email service not configured'
         }, {
-          status: 503
+          status: 503)
         });
       }
       
@@ -34,22 +34,22 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         message: 'Test email sent successfully',
         details: {
           to,
-          subject,
-          template,
+          subject)
+          template,)
           sentAt: new Date().toISOString()
         }
       });
     } catch (error) {
       handleError(error, {
         operation: 'sendTestEmail',
-        module: 'email/test',
-        metadata: { to: data.to }
+        module: 'email/test')
+        metadata: { to: data.to })
       });
       
       return NextResponse.json({
         error: 'Email test failed'
       }, {
-        status: 500
+        status: 500)
       });
     }
   });
@@ -64,14 +64,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: true, status    })
   } catch (error) {
     handleError(error, {
-      operation: 'getEmailStatus',
-      module: 'email/test'
+      operation: 'getEmailStatus')
+      module: 'email/test')
     });
     
     return NextResponse.json({
       error: 'Failed to get email status'
     }, {
-      status: 500
+      status: 500)
     });
   }
 }

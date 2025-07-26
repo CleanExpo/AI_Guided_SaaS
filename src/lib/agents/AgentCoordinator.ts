@@ -45,7 +45,7 @@ export class AgentCoordinator {
   private static instance: AgentCoordinator
   private loader: AgentLoader
   private activePlans: Map<string CoordinationPlan> = new Map(, private handoffHistory: AgentHandoff[] = []</string>
-  private actionLogPath: string
+  private actionLogPath: string)
   private errorLogPath: string, constructor() {
     this.loader = AgentLoader.getInstance();
     this.actionLogPath = join(process.cwd(, 'ACTION_LOG.md')
@@ -59,7 +59,7 @@ export class AgentCoordinator {
   /**
    * Create coordination plan for project execution
    */
-  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform',
+  async createCoordinationPlan(projectRequirements: string, projectType: string = 'saas_platform',)
   stage: string = 'full_stack'): Promise<any> { </any>
     const, planId = `plan_${Date.now()}`;
 
@@ -80,9 +80,9 @@ const plan: CoordinationPlan={ id: planId, project_type: projectType;
       tasks,
       execution_order: executionOrder;
       dependencies,
-      estimated_duration: this.estimateDuration(tasks, executionOrder, status: 'planning',
+      estimated_duration: this.estimateDuration(tasks, executionOrder, status: 'planning')
       progress: 0
-}
+})
     this.activePlans.set(planId, plan);
     await this.logPlanCreation(plan);
     return plan
@@ -171,28 +171,25 @@ const result: CoordinationResult={;
     `)``;
     task.status = 'in_progress'task.started_at = new Date();
     // Update agent status
-    this.loader.updateAgentStatus(
-      agent.agent.agent_id,'BUSY',
-      task.action,
+    this.loader.updateAgentStatus(agent.agent.agent_id,'BUSY')
+      task.action,)
       'Processing task');
     try {
       // Simulate agent execution (in real implementation, this would call actual agent, const result = await this.simulateAgentExecution(agent.agent, task), // Update agent status
-      this.loader.updateAgentStatus(
-        agent.agent.agent_id,'STANDBY',
-        task.action + ' completed',
+      this.loader.updateAgentStatus(agent.agent.agent_id,'STANDBY')
+        task.action + ' completed',)
         'Awaiting next task');
       return result
 } catch (error) {
       // Update agent status
-      this.loader.updateAgentStatus(
-        agent.agent.agent_id,'ERROR',
-        task.action + ' failed',
+      this.loader.updateAgentStatus(agent.agent.agent_id,'ERROR',
+        task.action + ' failed')
         'Error resolution needed'
       , throw error}
 }
   /**
    * Get coordination status for active plans
-   */
+   */)
   getCoordinationStatus(): Record {
     const status: Record<string any> = {</string>
       active_plans: this.activePlans.size,
@@ -212,10 +209,9 @@ const result: CoordinationResult={;
   /**
    * Handle agent-to-agent handoffs
    */
-  private createHandoff(
-completedTask: CoordinationTask;
+  private createHandoff(completedTask: CoordinationTask;
     plan: CoordinationPlan;
-    phaseIndex: number
+    phaseIndex: number)
   ): AgentHandoff | null {
     const nextPhase = plan.execution_order[phaseIndex + 1], if (!nextPhase || nextPhase.length === 0) {r}eturn null, // Find the next task that depends on this one;
 
@@ -236,10 +232,9 @@ const handoff: AgentHandoff={ from_agent: completedTask.agent_id,
     return handoff
 }
   // Private helper methods
-  private createTasksForAgent(
-agent: AgentConfig;
+  private createTasksForAgent(agent: AgentConfig;
     requirements: string;
-    startIndex: number
+    startIndex: number)
   ): CoordinationTask[] {
     const tasks: CoordinationTask[] = [], // Create tasks based on agent's workflow patterns, if (agent.workflow_patterns) { Object.entries(agent.workflow_patterns).forEach(([patternName, pattern], index) =>  {
         const task: CoordinationTask={;
@@ -255,9 +250,8 @@ priority: agent.priority <= 2 ? 'high' : 'medium',
 }
     return tasks
 }
-  private buildExecutionGraph(
-tasks: CoordinationTask[],
-    agents: AgentConfig[]
+  private buildExecutionGraph(tasks: CoordinationTask[])
+    agents: AgentConfig[])
   ): { executionOrder: string[][], dependencies: Map<string string[]  /> {</string>
 { new Map<string string[]>(, // Build dependency map, tasks.forEach((task) =>  { if (task.dependencies.length > 0) {</string>
         dependencies.set(task.id, task.dependencies)};);
@@ -305,7 +299,7 @@ if (readyTasks.length > 0) {
       output: `${agent.role} completed ${task.action}`,
 timestamp: new Date().toISOString(, artifacts: [`${task.action}_output.json`]``
   }
-}
+})
   private shouldStopExecution(failedTasks: CoordinationTask[]): boolean {
     // Stop if any critical priority task fails
     return failedTasks.some(task => task.priority === 'critical')}
@@ -357,8 +351,8 @@ timestamp: new Date().toISOString(, artifacts: [`${task.action}_output.json`]``
     } catch (error) {
       handleError(error, {
         operation: 'appendToActionLog',
-        module: 'AgentCoordinator',
-        metadata: { entry }
+        module: 'AgentCoordinator')
+        metadata: { entry })
       });
     }
   private async appendToErrorLog(entry: string): Promise<any> {
@@ -369,16 +363,15 @@ timestamp: new Date().toISOString(, artifacts: [`${task.action}_output.json`]``
     } catch (error) {
       handleError(error, {
         operation: 'appendToErrorLog',
-        module: 'AgentCoordinator',
-        metadata: { entry }
+        module: 'AgentCoordinator')
+        metadata: { entry })
       });
     }
   }
 // Convenience functions;
-export async function createProjectCoordination(
-    requirements: string;
-  projectType?: string,
-  stage?: string;
+export async function createProjectCoordination(requirements: string;
+  projectType?: string)
+  stage?: string;)
 ): Promise<any> { </any>
 { AgentCoordinator.getInstance();
         return coordinator.createCoordinationPlan(requirements, projectType, stage)

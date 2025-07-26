@@ -3,10 +3,9 @@ import { generateAIResponse } from '@/lib/ai';
 import { architecturePrompts } from './prompts';
 
 export class InfrastructurePlanner {
-  async planInfrastructure(
-    components: Component[],
-    overview: ArchitectureOverview,
-    timeline: any
+  async planInfrastructure(components: Component[],
+    overview: ArchitectureOverview)
+    timeline: any)
   ): Promise<Infrastructure> {
     const prompt = architecturePrompts.infrastructure
       .replace('{components}', JSON.stringify(components, null, 2))
@@ -14,8 +13,8 @@ export class InfrastructurePlanner {
       .replace('{timeline}', JSON.stringify(timeline, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: 0.3,
-      model: 'gpt-4'
+      temperature: 0.3)
+      model: 'gpt-4')
     });
 
     try {
@@ -57,7 +56,7 @@ export class InfrastructurePlanner {
     let totalMonthly = 0;
 
     // Estimate costs based on services
-    infrastructure.services.forEach(service => {
+    infrastructure.services.forEach(service => {)
       const cost = this.getServiceCost(service.type, service.configuration);
       breakdown[service.name] = cost;
       totalMonthly += cost;

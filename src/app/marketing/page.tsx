@@ -101,8 +101,7 @@ export default function MarketingPage() {
     return ((campaign.revenue - cost) / cost * 100).toFixed(0);
   };
 
-  return (
-    <div className="min-h-screen glass p-8">
+  return(<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -111,15 +110,15 @@ export default function MarketingPage() {
         </div>
 
         {/* Funnel Visualization */}
-        <Card className="mb-8" className="glass
+        <Card className="mb-8 glass
           <CardHeader className="glass"
-            <CardTitle className="flex items-center gap-2" className="glass
+            <CardTitle className="flex items-center gap-2 glass
               <Target className="h-5 w-5" />
               Conversion Funnel
             </CardTitle>
           </CardHeader>
           <CardContent className="glass"
-            <div className="space-y-6">
+            <div className="space-y-6">)
               {funnelStages.map((stage, index) => (
                 <div key={stage.name}>
                   <div className="flex items-center justify-between mb-2">
@@ -160,7 +159,7 @@ export default function MarketingPage() {
                     </div>
                     <div className="glass grid grid-cols-3 gap-4 text-sm">
                       <div>
-                        <p className="text-gray-500">Leads</p>
+                        <p className="text-gray-500">Leads</p>)
                         <p className="font-bold">{campaign.leads.toLocaleString()}</p>
                       </div>
                       <div>
@@ -195,17 +194,13 @@ export default function MarketingPage() {
                 <form onSubmit={handleEmailSubmit} className="space-y-3" role="form">
                   <Input
                     type="email"
-                    ="Enter your email"
-                    value={emailCapture}
-                    onChange={(e) => setEmailCapture(e.target.value)}
+                    ="Enter your email">value={emailCapture}>onChange={(e) => setEmailCapture(e.target.value)}
                     className="glass/20 -white/30 text-white :text-white/70"
                     required
                   />
                   <Button 
                     type="submit" 
-                    className="w-full glass text-blue-600 hover:glass"
-                    disabled={isSubmitting}
-                  >
+                    className="w-full glass text-blue-600 hover:glass">disabled={isSubmitting}>
                     {isSubmitting ? 'Subscribing...' : 'Get Early Access'}
                   </Button>
                 </form>

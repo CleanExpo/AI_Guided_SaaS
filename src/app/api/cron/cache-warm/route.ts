@@ -26,21 +26,21 @@ export async function GET(request: NextRequest) {
       });
       
       results.push({
-        path,
-        status: response.status,
+        path)
+        status: response.status,)
         cached: response.headers.get('x-vercel-cache') || 'MISS'
       });
     } catch (error) {
       results.push({
         path,
-        status: 500,
-        error: error.message
+        status: 500)
+        error: error.message)
       });
     }
   }
   
   return NextResponse.json({
-    warmed: results,
+    warmed: results,)
     timestamp: new Date().toISOString()
   });
 }

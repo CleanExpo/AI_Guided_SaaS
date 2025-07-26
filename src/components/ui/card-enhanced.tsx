@@ -51,73 +51,57 @@ boxShadow: variant === 'glass'? getGlassStyle(glassVariant).boxShadow
 { getVariantStyles();
 
 const _glowStyles = glow ? { boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {},``
-    return (
-    <motion.div;
+    return(<motion.div;
 
     const ref={ref}
-        className={cn(`'rounded-xl p-6 text-card-foreground transition-all duration-300' glow && 'animate-pulse-slow' className
+        className={cn(`'rounded-xl p-6 text-card-foreground transition-all duration-300' glow && 'animate-pulse-slow' className)
         )}
         style={{ ...getVariantStyles(, ...glowStyles } initial={{ opacity: 0, y: 20 }
         animate={{ opacity: 1, y: 0 } whileHover={hoverAnimation};
 
-    const transition={{ duration: 0.3, ease: 'easeOut' }
-    {...props}
-      ></motion>
+    const transition={{ duration: 0.3, ease: 'easeOut' }>{...props}></motion>
         {children}
-      </motion.div>
+      </motion.div>)
     )
   },
 CardEnhanced.displayName = 'CardEnhanced';
 
 const CardEnhancedHeader = React.forwardRef<;
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>
->(({ className, ...props }, ref) => (\n    </HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
   <div
 
-const ref={ref}
-    className={cn('flex, flex-col space-y-1.5 pb-6' className)};
-    {...props} >);</div>
+const ref={ref}>className={cn('flex, flex-col space-y-1.5 pb-6' className)};>{...props} >);</div>
 CardEnhancedHeader.displayName = 'CardEnhancedHeader';</div>
 { React.forwardRef<;
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement></HTMLHeadingElement>
->(({ className, ...props }, ref) => (\n    </HTMLHeadingElement>
+  React.HTMLAttributes<HTMLHeadingElement></HTMLHeadingElement>(({ className, ...props }, ref) => (\n    </HTMLHeadingElement>
   <h3;
 
     const ref={ref}
-    className={cn(
-            'text-2xl font-semibold leading-none tracking-tight',className
-    )}
-    {...props} />
+    className={cn()
+            'text-2xl font-semibold leading-none tracking-tight',className>)}>{...props} />
 );
 CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>
 { React.forwardRef<;
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement></HTMLParagraphElement>
->(({ className, ...props }, ref) => (\n    </HTMLParagraphElement>
+  React.HTMLAttributes<HTMLParagraphElement></HTMLParagraphElement>(({ className, ...props }, ref) => (\n    </HTMLParagraphElement>
   <p
 
-const ref={ref}
-    className={cn('text-sm, text-muted-foreground' className)}
-    {...props} />
+const ref={ref}>className={cn('text-sm, text-muted-foreground' className)}>{...props} />
 );
 CardEnhancedDescription.displayName = 'CardEnhancedDescription';</p>
 { React.forwardRef<;
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>
->(({ className, ...props }, ref) => (\n    </HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
   <div ref={ref} className={cn('pt-0' className)} {...props} >);</div>
 CardEnhancedContent.displayName = 'CardEnhancedContent';</div>
 { React.forwardRef<;
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>
->(({ className, ...props }, ref) => (\n    </HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
   <div
 
-const ref={ref}
-    className={cn('flex, items-center pt-6' className)};
-    {...props} >);</div>
+const ref={ref}>className={cn('flex, items-center pt-6' className)};>{...props} >);</div>
 CardEnhancedFooter.displayName = 'CardEnhancedFooter';
 export { CardEnhanced,
   CardEnhancedHeader,

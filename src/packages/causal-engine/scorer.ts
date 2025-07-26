@@ -84,9 +84,8 @@ export class CausalScorer {
   /**
    * Get confidence level based on sample size
    */
-  getConfidence(
-    page: string,
-    componentType: string
+  getConfidence(page: string)
+    componentType: string)
   ): 'low' | 'medium' | 'high' {
     const map = this.getComponentScoreMap();
     const key = `${page}:${componentType}`;

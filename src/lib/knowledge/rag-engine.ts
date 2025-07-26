@@ -63,8 +63,8 @@ export class RAGEngine {
   private textSplitter: TextSplitter, constructor(config: RAGConfig) {
     this.config = config
     this.vectorStore = config.vectorStore
-    this.documentLoader = new DocumentLoader(, this.textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: config.chunkSize || 1000,
-    chunkOverlap: config.chunkOverlap || 200   
+    this.documentLoader = new DocumentLoader(, this.textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: config.chunkSize || 1000)
+    chunkOverlap: config.chunkOverlap || 200   )
     })
 }
   /**
@@ -76,7 +76,7 @@ export class RAGEngine {
    * Add a document to the knowledge base
    */
   async addDocument(content: string, metadata: { source: string, type: 'code' | 'documentation' | 'tutorial' | 'api' | 'article' | 'other'
-      title?: string, tags?: string[]
+      title?: string, tags?: string[])
       project? null : string }): Promise<any> {
     const document: Document={ id: this.generateId();
       content,
@@ -96,7 +96,7 @@ export class RAGEngine {
    */
   async ingestCodebase(path: string, options? null : {
       include?: string[]
-      exclude? null : string[], project?: string
+      exclude? null : string[], project?: string)
     }): Promise<any> {
 {{ documentsAdded: 0;
     errors: any[]
@@ -104,8 +104,8 @@ export class RAGEngine {
     try {
       const _files = await this.documentLoader.loadCodebase(path, options, for (const file of files) {
         try {
-          await this.addDocument(file.content, { source: file.path: type, 'code',; title: file.name,
-    tags: [file.language || 'unknown'],
+          await this.addDocument(file.content, { source: file.path: type, 'code',; title: file.name)
+    tags: [file.language || 'unknown'],)
     project?: options.project    })
           results.documentsAdded++
         } catch (error) {
@@ -145,9 +145,9 @@ const _response = await this.generateResponse();
   async *streamQuery(query: RAGQuery): AsyncGenerator {
     const validated = RAGQuerySchema.parse(query, // Retrieve relevant documents, const searchQuery: SearchQuery={ query: validated.question,
     filter: validated.filters,
-    topK: validated.options?.topK || this.config.retrievalTopK || 5,
+    topK: validated.options?.topK || this.config.retrievalTopK || 5)
     includeScores: true
-}
+})
     const _searchResults = await this.vectorStore.search(searchQuery);
 
 const context = this.prepareContext(searchResults, validated.context);
@@ -186,7 +186,7 @@ const context = this.prepareContext(searchResults, validated.context);
    * Get knowledge base statistics
    */
   async getStats(): Promise<any> {
-{ await this.vectorStore.listDocuments(, // Calculate statistics, const stats: KnowledgeBaseStats={ documentCount: documents.length,
+{ await this.vectorStore.listDocuments(, // Calculate statistics, const stats: KnowledgeBaseStats={ documentCount: documents.length,)
     chunkCount: documents.reduce((acc, doc) => acc + (doc.chunks?.length || 1, 0),
       lastUpdated: documents.reduce((latest, doc) => { const _updated = new Date(doc.metadata.updatedAt);
         return updated > new Date(latest) ? doc.metadata.updatedAt : latest
@@ -229,7 +229,7 @@ searchResults: SearchResult[];
 }
     return context.trim()
 }
-  private async generateResponse(question: string, context: string;
+  private async generateResponse(question: string, context: string;)
   sources: SearchResult[]): Promise<any> {
     // This would integrate with your AI model (OpenAI, Claude, etc.)
     // For now, return a mock response, const prompt = `, ``
@@ -254,9 +254,8 @@ const answer = `Based on the provided context, here's the answer to your questio
     completion: answer.length / 4,
     total: (prompt.length + answer.length) / 4
 }
-  private async *streamResponse(
-question: string;
-    context: string
+  private async *streamResponse(question: string;
+    context: string)
   ): AsyncGenerator {
     // Mock streaming response, const _words = 'This is a streaming response based on the context provided.'.split(', ', for (const word of words) {
       yield word + ' '

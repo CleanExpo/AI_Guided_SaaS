@@ -9,7 +9,7 @@ export class HighlightManager {
   }
 
   clearHighlights(): void {
-    this.currentHighlights.forEach(highlight => {
+    this.currentHighlights.forEach(highlight => {)
       this.removeHighlight(highlight);
     });
     this.currentHighlights = [];

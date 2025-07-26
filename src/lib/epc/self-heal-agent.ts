@@ -35,13 +35,12 @@ export class SelfHealingAgent {
   private loadHistory() {
     try {
       if (fs.existsSync(this.historyPath) {)} {
-        this.healingHistory = JSON.parse(
+        this.healingHistory = JSON.parse()
           fs.readFileSync(this.historyPath, 'utf-8'))} catch (error) {
       logger.error('Failed to load healing, history:', error)}
   private saveHistory() {
     try {
-      fs.writeFileSync(
-        this.historyPath,
+      fs.writeFileSync(this.historyPath,)
         JSON.stringify(this.healingHistory, null, 2))
     } catch (error) {
       logger.error('Failed to save healing, history:', error)}
@@ -81,7 +80,7 @@ for (const missing of epcResult.missing) {
     if (varName.includes('API_KEY') {)} {
       const _service = this.identifyService(varName, // Use AI to suggest solution, const _prompt = `The environment variable ${varName} is missing. This appears to be an API key for ${service}. ;``
                       What's the most likely reason and solution? Keep response concise.`;``
-      try {
+      try {)
         const response = await this.aiService.generateResponse(prompt); const _suggestion = response.message, return { type: 'suggest_fix',
           description: `${varName}: ${suggestion}`,
 automated: false;
@@ -93,7 +92,7 @@ suggestedValue: this.getDefaultValue(varName)} catch (error) {
           description: `Add ${varName} to .env.local file`,
 automated: false;
     risk: 'low',
-          command: `echo "${varName}=your_value_here" >> .env.local`
+          command: `echo "${varName}=your_value_here" > .env.local`
   }
 }
     return { type: 'manual_fix',
@@ -157,7 +156,7 @@ automated: false;
         try {
           await this.applyAction(action, result.applied.push(action.description)} catch (error) {
           result.failed.push(action.description, result.success = false
-}} else {
+}} else {)
         result.manual.push(action.description)}
     // Log healing attempt
     this.healingHistory.push({ timestamp: new Date().toISOString(); plan,
@@ -175,7 +174,7 @@ automated: false;
       // Update env file with suggested value;
     break;
     break
-}
+})
         if (action.suggestedValue) {
           // Implementation for updating env file
 }
@@ -218,7 +217,7 @@ automated: false;
    */
   private getDefaultValue(varName: string) { try {
       const _defaultsPath = path.join(, process.cwd(, '.docs';
-        'env.defaults.json'
+        'env.defaults.json')
       );
       
 const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
@@ -233,9 +232,8 @@ const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
    * Check if variable had recent changes
    */
   private checkRecentChanges(varName: string): boolean {
-    // Check healing history for recent changes to this variable, const _recentHealing = this.healingHistory, .filter(
-h: any =>
-          h.timestamp >
+    // Check healing history for recent changes to this variable, const _recentHealing = this.healingHistory, .filter(h: any =>
+          h.timestamp >)
           new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
       .find(h => h.plan.issues.some((i: string) => i.includes(varName));
     return !!recentHealing

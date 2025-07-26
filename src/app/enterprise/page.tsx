@@ -66,8 +66,7 @@ export default function EnterprisePage() {
     }
   ];
 
-  return (
-    <div className="min-h-screen glass py-12">
+  return(<div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4 max-w-6xl">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -82,7 +81,7 @@ export default function EnterprisePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
+        <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">)
           {enterpriseFeatures.map((feature) => (
             <Card key={feature.title} className="glass"
               <CardContent className="glass p-6 text-center">
@@ -126,9 +125,7 @@ export default function EnterprisePage() {
                     ))}
                   </ul>
                   <Button 
-                    className="w-full" 
-                    variant={tier.recommended ? 'default' : 'outline'}
-                  >
+                    className="w-full" >variant={tier.recommended ? 'default' : 'outline'}>
                     Contact Sales
                   </Button>
                 </CardContent>
@@ -139,7 +136,7 @@ export default function EnterprisePage() {
 
         {/* CTA Section */}
         <Card className="glass-button primary text-white">
-          <CardContent className="p-12 text-center" className="glass
+          <CardContent className="p-12 text-center glass
             <Building className="h-12 w-12 mx-auto mb-6 text-blue-100" />
             <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Development?</h3>
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">

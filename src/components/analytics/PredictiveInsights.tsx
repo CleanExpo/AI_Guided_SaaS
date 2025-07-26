@@ -41,9 +41,9 @@ interface Insight {
 }
 
 export default function PredictiveInsights() {
-  const [predictions, setPredictions] = useState<Prediction[]>([]);
-  const [insights, setInsights] = useState<Insight[]>([]);
-  const [anomalies, setAnomalies] = useState<any[]>([]);
+  const [predictions, setPredictions] = useState<Predictionnull>(null);
+  const [insights, setInsights] = useState<Insightnull>(null);
+  const [anomalies, setAnomalies] = useState<anynull>(null);
 
   useEffect(() => {
     // Simulate AI-powered predictions
@@ -195,25 +195,21 @@ export default function PredictiveInsights() {
           {predictions.map((prediction) => {
             const Icon = getPredictionIcon(prediction.type);
             return (
-              <Card key={prediction.id} className="hover:shadow-md-lg transition-shadow-md" className="glass
-                <CardHeader className="pb-3" className="glass
+              <Card key={prediction.id} className="hover:shadow-md-lg transition-shadow-md glass
+                <CardHeader className="pb-3 glass
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                         prediction.type === 'revenue' ? 'bg-green-100' :
                         prediction.type === 'churn' ? 'bg-red-100' :
-                        prediction.type === 'growth' ? 'bg-blue-100' :
-                        'bg-orange-100'
-                      }`}>
+                        prediction.type === 'growth' ? 'bg-blue-100' :>'bg-orange-100'>}`}>
                         <Icon className={`h-5 w-5 ${
                           prediction.type === 'revenue' ? 'text-green-600' :
                           prediction.type === 'churn' ? 'text-red-600' :
-                          prediction.type === 'growth' ? 'text-blue-600' :
-                          'text-orange-600'
-                        }`} />
+                          prediction.type === 'growth' ? 'text-blue-600' :>'text-orange-600'>}`} />
                       </div>
                       <div>
-                        <CardTitle className="text-lg" className="glass{prediction.title}</CardTitle>
+                        <CardTitle className="text-lg glass{prediction.title}</CardTitle>
                         <p className="text-sm text-gray-500">{prediction.timeframe}</p>
                       </div>
                     </div>
@@ -233,8 +229,7 @@ export default function PredictiveInsights() {
                       </span>
                     </div>
                     {prediction.value && (
-                      <span className={`font-semibold ${
-                        prediction.value > 0 ? 'text-green-600' : 'text-red-600'
+                      <span className={`font-semibold ${>prediction.value > 0 ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {prediction.value > 0 ? '+' : ''}${Math.abs(prediction.value).toLocaleString()}
                       </span>
@@ -273,9 +268,7 @@ export default function PredictiveInsights() {
                       <Badge variant="secondary">{insight.category}</Badge>
                       <Badge className={
                         insight.priority === 'high' ? 'bg-red-100 text-red-700' :
-                        insight.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
-                      }>
+                        insight.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :>'bg-green-100 text-green-700'>}>
                         {insight.priority} priority
                       </Badge>
                     </div>
@@ -307,22 +300,18 @@ export default function PredictiveInsights() {
         </div>
 
         <Card className="glass"
-          <CardContent className="p-0" className="glass
+          <CardContent className="p-0 glass
             <div className="divide-y">
               {anomalies.map((anomaly, index) => (
                 <div key={index} className="p-4 flex items-center justify-between hover:glass">
                   <div className="glass flex items-center gap-4">
                     <div className={`w-2 h-2 rounded-full ${
                       anomaly.status === 'positive' ? 'bg-green-500' :
-                      anomaly.status === 'warning' ? 'bg-yellow-500' :
-                      'bg-blue-500'
-                    }`} />
+                      anomaly.status === 'warning' ? 'bg-yellow-500' :>'bg-blue-500'>}`} />
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-medium">{anomaly.metric}</span>
-                        <Badge variant="outline" className={
-                          anomaly.change.startsWith('+') ? 'text-green-600' : 'text-red-600'
-                        }>
+                        <Badge variant="outline" className={>anomaly.change.startsWith('+') ? 'text-green-600' : 'text-red-600'>}>
                           {anomaly.change}
                         </Badge>
                       </div>

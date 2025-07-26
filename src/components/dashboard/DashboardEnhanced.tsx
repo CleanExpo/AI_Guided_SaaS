@@ -30,25 +30,22 @@ e,
   delay: number
    }
 MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, value, change, trend, icon: Icon, delay }: MetricCardProps) {
-  const [ref, inView] = useInView({ threshold: 0.1 triggerOnce: true
+  const [ref, inView] = useInView({ threshold: 0.1 triggerOnce: true)
     });
-  return (
-    <motion.div;
+  return(<motion.div;
 
     ref={ref} initial={{ opacity: 0, y: 20 }
-      const animate={inView ? { opacity: 1, y: 0 } : {}
-      const transition={{ duration: 0.6, delay }
-    >
+      const animate={inView ? { opacity: 1, y: 0 } : {}>const transition={{ duration: 0.6, delay }>
           <CardEnhanced variant="glass" hover className="relative overflow-hidden"     />
         <CardEnhancedHeader className="flex flex-row items-center justify-between space-y-0 pb-2"    / className="glass
-          <CardEnhancedTitle className="text-sm font-medium" className="glass
+          <CardEnhancedTitle className="text-sm font-medium glass
             {title}</Card>
           <Icon className="h-4 w-4 text-muted-foreground"    />
           <CardEnhancedContent     / className="glass"
           <div className="text-2xl font-bold">{value}</div>
           <div className="flex items-center text-xs text-muted-foreground">
             {trend === 'up' ? (</div>
-              <ArrowUpRight className="mr-1 h-3 w-3 text-green-500"     />
+              <ArrowUpRight className="mr-1 h-3 w-3 text-green-500"     />)
             ) : (</ArrowUpRight>
               <ArrowDownRight className="mr-1 h-3 w-3 text-red-500"     />
             )}</ArrowDownRight>
@@ -62,16 +59,14 @@ MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, 
   )}
 SimpleChart({ data }: { data }): { data }) {;
   const _maxValue = Math.max(...data.map((d) => d.users);
-        return (
+        return()
     <div className="flex items-end justify-between h-32 gap-2">, {data.map((item, index) => (\n    </div>
         <motion.div;
 
 const key={item.day};
           className="flex flex-col items-center flex-1";
 
-    initial={{ height: 0 } animate={{ height: 'auto' }
-          const transition={ { duration: 0.8 delay: index * 0.1  };
-            />.div;</motion>
+    initial={{ height: 0 } animate={{ height: 'auto' }>const transition={ { duration: 0.8 delay: index * 0.1  }; />>.div;</motion>
 className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg-t-sm";
 
 initial={{ height: 0 } animate={ height: `${(item.users / maxValue) * 100}%` }``;
@@ -111,18 +106,17 @@ break
 break
 };
     default: return 'text-gray-500'}}
-  return (
-    <div className="space-y-4"    />
-          <AnimatePresence></AnimatePresence>
+  return(<div className="space-y-4"    />
+          <AnimatePresence></AnimatePresence>)
         {activities.map((activity, index) => {
           const _Icon = getActivityIcon(activity.type);
-        return (motion.div;
+        return(motion.div;
 
     const key={activity.id};
               initial={{ opacity: 0, x: -20 } animate={{ opacity: 1, x: 0 }
               exit={{ opacity: 0, x: 20 } transition={ { duration: 0.3 delay: index * 0.1  };
               className="flex items-center space-x-3 p-3 rounded-xl-lg glass/50 dark: glass-navbar/50 glass-modal-backdrop-blur-sm"
-            >
+            >)
               <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>``</div>
                 <Icon className="h-4 w-4"    />
           <div className="flex-1"     />
@@ -135,9 +129,9 @@ break
       )}
 
 export default function DashboardEnhanced() {
-  const [data, setData] = useState<any>([])
-  const [isRefreshing, setIsRefreshing] = useState<any>([])
-  const [lastUpdated, setLastUpdated] = useState<any>([])
+  const [data, setData] = useState<any>(null)
+  const [isRefreshing, setIsRefreshing] = useState<any>(null)
+  const [lastUpdated, setLastUpdated] = useState<any>(null)
   // Simulate real-time updates
   useEffect(() =>  {
     const _interval = setInterval(() => {
@@ -147,7 +141,7 @@ export default function DashboardEnhanced() {
 }, []);
   
 const _handleRefresh = async () => {
-    setIsRefreshing(true, // Simulate API call delay;
+    setIsRefreshing(true, // Simulate API call delay;)
     await new Promise(resolve => setTimeout(resolve, 1000); setData(generateMockData();
     setLastUpdated(new Date();
     setIsRefreshing(false)
@@ -157,8 +151,8 @@ const metrics = [
   { title: 'Total Users',
       value: data.metrics.totalUsers.toLocaleString(, change: '+12.5%',
       trend: data.trends.users,
-icon: Users},
-    { title: 'Revenue',
+icon: Users})
+    { title: 'Revenue',)
 value: `$${data.metrics.revenue.toLocaleString()}`,
 change: '+8.2%',
       trend: data.trends.revenue,
@@ -168,7 +162,7 @@ change: '+2.1%',
       trend: data.trends.conversion,
     icon: TrendingUp} { title: 'Active Projects',
       value: data.metrics.activeProjects.toString(, change: '+15.3%',
-      trend: data.trends.projects,
+      trend: data.trends.projects)
 icon: Target}];
   return (
     <div className="glass min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900 p-6">
@@ -180,7 +174,7 @@ icon: Target}];
                     Dashboard
 </h1>
             <p className="text-muted-foreground mt-1">
-              Last,
+              Last,)
     updated: { lastUpdated.toLocaleTimeString() }</p>
           <div className="glass flex items-center gap-4"    />
           <ButtonPremium
@@ -206,15 +200,12 @@ size="sm";
 variant="outline";
 size="sm";
 
-const icon={<Settings className="h-4 w-4"    />}</ButtonPremium>
-            /></ButtonPremium>
+const icon={<Settings className="h-4 w-4"    />}</ButtonPremium /></ButtonPremium>
       {/* Metrics, Grid */}
       <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {metrics.map((metric, index) => (\n    </div>
           <MetricCard key={metric.title} title={metric.title}
-            value={metric.value} change={metric.change}
-            trend={metric.trend, as 'up' | 'down'} icon={metric.icon}
-            const delay={index * 0.1/>
+            value={metric.value} change={metric.change}>trend={metric.trend, as 'up' | 'down'} icon={metric.icon}>const delay={index * 0.1/>
         ))}</MetricCard>
       {/* Charts, and Activity */}
       <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">{/* Chart */}</div>
@@ -230,13 +221,11 @@ const icon={<Settings className="h-4 w-4"    />}</ButtonPremium>
           <ButtonPremium variant="outline";
 size="sm";
 
-    const icon={<Filter className="h-4 w-4"    />}</ButtonPremium>
-                  /></ButtonPremium>
+    const icon={<Filter className="h-4 w-4"    />}</ButtonPremium /></ButtonPremium>
                   <ButtonPremium variant="outline";
 size="sm";
 
-    const icon={<Calendar className="h-4 w-4"    />}</ButtonPremium>
-                  /></ButtonPremium>
+    const icon={<Calendar className="h-4 w-4"    />}</ButtonPremium /></ButtonPremium>
             <CardEnhancedContent    / className="glass"
           <SimpleChart data={data.chartData/>
         {/* Activity, Feed */}
@@ -248,8 +237,7 @@ size="sm";
                 <ButtonPremium variant="outline";
 size="sm";
 
-    const icon={<Bell className="h-4 w-4"    />}</ButtonPremium>
-                /></ButtonPremium>
+    const icon={<Bell className="h-4 w-4"    />}</ButtonPremium /></ButtonPremium>
             <CardEnhancedContent    / className="glass"
           <ActivityFeed activities={data.recentActivity/>
       {/* Quick, Actions */

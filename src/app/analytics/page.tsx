@@ -11,7 +11,7 @@ interface AnalyticsData { totalUsers: number
   bounceRate: number
   topPages: Array<{ path: string
     views: number
-    percentage: number
+    percentage: number;
   }>
   userActivity: Array<{ date: string
     users: number}>
@@ -24,9 +24,9 @@ export default function AnalyticsPage() {
   useEffect(() =>  {
     // Simulate loading analytics data
     setTimeout(() => {
-      setData({ totalUsers: 1247,
+      setData({ totalUsers: 1247;
         activeUsers: 89,
-        pageViews: 5643,
+        pageViews: 5643;
         bounceRate: 34.2,
         topPages: [
           { path: '/', views: 1543, percentage: 27.3 },
@@ -49,36 +49,38 @@ export default function AnalyticsPage() {
         <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
       </div>
-    )
-  }
+    </div>
+  );
+}
 
   return (
     <div className="glass container mx-auto p-6 space-y-6">
           <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
       
       <div className="glass grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-          <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground"    />
+        <Card className="glass">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+            <CardTitle className="text-sm font-medium glass">Total Users</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent className="glass"
-          <div className="text-2xl font-bold">{data?.totalUsers}</div>
+          <CardContent className="glass">
+            <div className="text-2xl font-bold">{data?.totalUsers}</div>
             <p className="text-xs text-muted-foreground">Total registered users</p>
           </CardContent>
         </Card>
         
-        <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassActive Users</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground"    />
+        <Card className="glass">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+            <CardTitle className="text-sm font-medium glass">Active Users</CardTitle>
+            <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent className="glass"
-          <div className="text-2xl font-bold">{data?.activeUsers}</div>
+          <CardContent className="glass">
+            <div className="text-2xl font-bold">{data?.activeUsers}</div>
             <p className="text-xs text-muted-foreground">Active in last 24h</p>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+    </div>
+  );
 }

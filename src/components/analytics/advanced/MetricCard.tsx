@@ -15,18 +15,15 @@ interface MetricCardProps {
 }
 
 export function MetricCard({ icon: Icon, iconColor, title, value, trend }: MetricCardProps) {
-  return (
-    <Card className="glass"
+  return(<Card className="glass"
       <CardContent className="glass p-6">
         <div className="flex items-center justify-between mb-2">
           <Icon className={`h-5 w-5 ${iconColor}`} />
           {trend && (
             <Badge 
-              variant="secondary" 
-              className={trend.isPositive ? 'text-green-600' : 'text-red-600'}
-            >
+              variant="secondary" >className={trend.isPositive ? 'text-green-600' : 'text-red-600'}>
               {trend.isPositive ? (
-                <ArrowUpRight className="h-3 w-3 mr-1" />
+                <ArrowUpRight className="h-3 w-3 mr-1" />)
               ) : (
                 <ArrowDownRight className="h-3 w-3 mr-1" />
               )}

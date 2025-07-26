@@ -169,13 +169,13 @@ const steps: Step[]  = [
 }
 ];
 export function GuidedProjectBuilder({ onComplete, initialData  = {}: GuidedProjectBuilderProps, initialData  = {}: GuidedProjectBuilderProps) {
-  const [currentStep, setCurrentStep] = useState<any>([])
-  const [formData, setFormData] = useState<any>([])
-  const [errors, setErrors]  = useState<Record<string string>>({});</Record>
+  const [currentStep, setCurrentStep] = useState<any>(null)
+  const [formData, setFormData] = useState<any>(null)
+  const [errors, setErrors]  = useState<Record<string string>({});</Record>
 
-const [isProcessing, setIsProcessing] = useState<any>([])
+const [isProcessing, setIsProcessing] = useState<any>(null)
   
-const [aiSuggestions, setAiSuggestions]  = useState<string[]>([]);</string>
+const [aiSuggestions, setAiSuggestions]  = useState<string>("");</string>
 
 const { messages, append, isLoading     }: any = useChat({ api: '/api/ai/guided-builder', onResponse: (response) => { // Handle AI suggestions
 }
@@ -188,7 +188,7 @@ const _progress = ((currentStep + 1) / steps.length) * 100;
 const _validateStep = (): void => { const stepErrors: Record<string string> = { };</string>
     step.fields.forEach((field) =>  {
       if (field.required && !formData[field.name]) {;
-        stepErrors[field.name] = `${field.label}; is required`
+        stepErrors[field.name] = `${field.label}is required`
   }
       if (field.validation) { const _error = field.validation(formData[field.name], if (error) {s}tepErrors[field.name] = error
 }});
@@ -197,9 +197,9 @@ const _validateStep = (): void => { const stepErrors: Record<string string> = { 
 }
   const _handleNext = async () =>  {
     if (!validateStep() {)} return if (currentStep === steps.length - 1) {
-      setIsProcessing(true, // Process and complete;
+      setIsProcessing(true, // Process and complete;)
       await processProjectData()}; else {
-      setCurrentStep(prev => prev + 1, // Get AI suggestions for next step
+      setCurrentStep(prev => prev + 1, // Get AI suggestions for next step)
       await getAiSuggestions()}
   const _handleBack = (): void => { if (currentStep > 0) {
       setCurrentStep(prev => prev - 1, setErrors({})}
@@ -211,7 +211,7 @@ if (errors[fieldName]) {
     const _stepData = step.fields.reduce((acc, field) => {
       acc[field.name] = formData[field.name];
       return acc}, {} as any)
-    await append({ role: 'user',
+    await append({ role: 'user',)
       content: `Based on the project data so far: ${JSON.stringify(formData)}, suggest helpful tips, for: ${step.title}`
   })};
   
@@ -233,11 +233,10 @@ integrations: formData.integrations || []
 } catch (error) {
       logger.error('Error processing, project:', error)} finally {
       setIsProcessing(false)}
-  return (
-    <div className="glass max-w-4xl mx-auto p-6">
+  return(<div className="glass max-w-4xl mx-auto p-6">
       {/* Progress, Bar */}</div>
       <div className="mb-8 flex items-center justify-between mb-2"    />
-          <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>
+          <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>)
           <span className="text-sm font-medium">{Math.round(progress)}% Complete</span>
         <Progress value={progress} className="h-2"    />
           </div>
@@ -246,9 +245,7 @@ integrations: formData.integrations || []
           <motion.div;
 
 key={currentStep} initial={{ opacity: 0, x: 20 }
-          animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }
-          const transition={{ duration: 0.3 }
-        ></motion>
+          animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }>const transition={{ duration: 0.3 }></motion>
           <Card className="glass p-8">
           <div className="glass flex items-center gap-4 mb-6">
               <div className="h-12 w-12 rounded-lg-full glass-button primary/10 flex items-center justify-center">
@@ -282,20 +279,15 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
                       {field.options?.map((option) => (\n    </div>
                         <label; key={option.value} className={cn(`
                             "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors" formData[field.name] === option.value
-                              ? "border-primary bg-primary/5"
-                              : "border-border, hover:border-primary/50"
-                          )}
-                        >
+                              ? "border-primary bg-primary/5")
+                              : "border-border, hover:border-primary/50">)}>
           <input type="radio"
-
-name={field.name} value={option.value}
-                            checked={formData[field.name] === option.value} onChange={() =    /> handleFieldChange(field.name, option.value)}</input>
+>name={field.name} value={option.value}>checked={formData[field.name] === option.value} onChange={() =    /> handleFieldChange(field.name, option.value)}</input>
                             className="sr-only" /></input>
         <span className="text-sm font-medium">{option.label}</span>))}
                   )},
     {field.type = == 'select'  && (select; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                      const className={cn(
-            'w-full p-2 border rounded-md',errors[field.name] && 'border-red-500'
+                      const className={cn('w-full p-2 border rounded-md',errors[field.name] && 'border-red-500')
                       )}
                     ></select>
                       <option value="">Select an option {field.options?.map((option) => (\n    <option key={option.value} value={option.value}></option>
@@ -305,14 +297,10 @@ name={field.name} value={option.value}
                   )},
     {field.type = == 'multiselect'  && (div className="grid grid-cols-2 gap-3">{field.options?.map((option) => (\n    </div>
                         <label; key={option.value} className={cn(`
-                            "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors" formData[field.name]?.includes(option.value, ? "border-primary bg-primary/5"
-                              : "border-border, hover:border-primary/50"
-                          )}
-                        >
+                            "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors" formData[field.name]?.includes(option.value, ? "border-primary bg-primary/5")
+                              : "border-border, hover:border-primary/50">)}>
           <input type="checkbox"
-
-    value={ option.value} checked={formData[field.name]?.includes(option.value) || false}
-                            const onChange={(e) =    /> {</input>
+>value={ option.value} checked={formData[field.name]?.includes(option.value) || false}>const onChange={(e) =    /> {</input>
 { formData[field.name] || [], if (e.target.checked) {
                                 handleFieldChange(field.name, [...values, option.value])} else { handleFieldChange(field.name, values.filter((v: string) => v !== option.value))
  };
@@ -332,15 +320,11 @@ name={field.name} value={option.value}
     {/* Navigation */}
             <div className="flex justify-between mt-8">
           <Button variant="outline";
-
-onClick={handleBack} disabled={currentStep === 0}
-              ></Button>
+>onClick={handleBack} disabled={currentStep === 0}></Button>
                 <ArrowLeft className="h-4 w-4 mr-2"     />
                 Back</ArrowLeft>
               <Button
-
-onClick={handleNext} disabled={isProcessing || isLoading}
-              ></Button>
+>onClick={handleNext} disabled={isProcessing || isLoading}></Button>
                 {isProcessing ? (</Button>
                   <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" /></React>
                     Processing...</React.Fragment>

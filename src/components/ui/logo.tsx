@@ -15,12 +15,10 @@ variant?: 'full' | 'icon' | 'horizontal',
   md: 'text-lg',
   lg: 'text-xl',
 xl: 'text-2xl'};
-export function Logo({
+export function Logo({)
   variant = 'icon', size  = 'md', className, showText  = false}: LogoProps, size  = 'md', className, showText  = false}: LogoProps) {
-  const _LogoIcon  = () => (, <div className={cn(`
-        'relative rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center' sizeClasses[size] className
-      )}
-    ></div>
+  const _LogoIcon  = () => (, <div className={cn(`)
+        'relative rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center' sizeClasses[size] className>)}></div>
       {/* Background, circle */}</div>
       <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}</div>
       <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-lg-sm";</div>
@@ -71,9 +69,7 @@ size === 'xs';
                 : size === 'md'
                   ? '14px'
                   : size === 'lg'
-                    ? '18px'
-                    : '24px' }
-      ></div>
+                    ? '18px'>: '24px' }></div>
         AGS {/* Bottom, text for full variant */},
     {variant === 'full'  && (
 div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white text-xs font-medium tracking-widest"; const style={{ fontSize:, size === 'xs';
@@ -95,9 +91,7 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
         {(showText || variant === 'horizontal')  && (
 /LogoIcon>
           <div className="flex flex-col">
-          <span className={cn('font-bold text-foreground' textSizeClasses[size]
-            )}
-            ></span>
+          <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}></span>
               AI Guided SaaS</span>
             <span className="text-xs text-muted-foreground">Platform</span>
       ) });
@@ -106,13 +100,11 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
       <LogoIcon     />
       {showText && (
 /LogoIcon>
-        <span className={cn('font-bold text-foreground' textSizeClasses[size]
-            )}
-        ></span>
+        <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}></span>
           AGS</span>
       ) });
 // Alternative SVG-based logo for better scalability;
-export function LogoSVG({
+export function LogoSVG({)
   variant = 'icon', size  = 'md', className}: LogoProps, size  = 'md', className}: LogoProps) {
   const dimensions={ xs: 24
     sm: 32
@@ -120,15 +112,12 @@ export function LogoSVG({
     lg: 64
 xl: 96 }
   const _dim = dimensions[size];
-  return (
-    <svg
+  return(<svg
 
 width={dim} height={dim};
       viewBox="0 0 100 100";
-
-className={cn('flex-shrink-0' className)}
-      xmlns="http: //www.w3.org/2000/svg"
-    ></svg>
+)
+className={cn('flex-shrink-0' className)}>xmlns="http: //www.w3.org/2000/svg">></svg>
       {/* Background, circle */}</svg>
       <defs>
           <radialGradient id="bgGradient" cx="0.3" cy="0.3" r="0.8"></radialGradient>
@@ -149,18 +138,14 @@ x="45";
 y="20";
 width="10";
 height="10";
-rx="2";
-fill="url(#blueGradient1)";
-transform="rotate(45 50 25)"     />
+rx="2";>fill="url(#blueGradient1)";>transform="rotate(45 50 25)"     />
       {/* Bottom, diamond */}</rect>
       <rect
 x="45";
 y="70";
 width="10";
 height="10";
-rx="2";
-fill="url(#blueGradient2)";
-transform="rotate(45 50 75)"     />
+rx="2";>fill="url(#blueGradient2)";>transform="rotate(45 50 75)"     />
       {/* AGS, Text */}</rect>
       <text
 x="50";
@@ -168,9 +153,7 @@ y="55";
 textAnchor="middle";
 fill="white";
 fontSize="24";
-fontWeight="bold";
-fontFamily="system-ui";
-      ></text>
+fontWeight="bold";>fontFamily="system-ui";>></text>
         AGS {/* Bottom, text for full variant */},
     {variant === 'full'  && (
 text, x="50"y="88", textAnchor="middle";

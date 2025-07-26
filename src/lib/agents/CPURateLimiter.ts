@@ -30,7 +30,7 @@ export class CPURateLimiter extends EventEmitter {
     burstAllowance: 10;
     adaptiveScaling: true;
       ...config
-}
+})
     this.startMonitoring()
 }
   private startMonitoring() {
@@ -98,9 +98,9 @@ const _avgMem = recentMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / recen
       this.isThrottled = true
       this.throttleUntil = new Date(Date.now() + this.config.cooldownPeriod)
       this.emit('throttle', { reason: 'Resource limits exceeded',
-        until: this.throttleUntil,
+        until: this.throttleUntil)
     metrics: this.metrics[this.metrics.length - 1]
-     
+     )
     })}
   private canRelease(): boolean {
     if (!this.throttleUntil) {r}eturn true, const _now = new Date(); if (now < this.throttleUntil) {r}eturn false;
@@ -109,14 +109,14 @@ const _avgMem = recentMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / recen
 const recentMetrics  = this.metrics.slice(-3);
 
 const _allBelowLimit = recentMetrics.every(m =>
-      m.cpuUsage < this.config.maxCpuUsage * 0.9 && m.memoryUsage < this.config.maxMemoryUsage * 0.9
+      m.cpuUsage < this.config.maxCpuUsage * 0.9 && m.memoryUsage < this.config.maxMemoryUsage * 0.9)
     )
     return allBelowLimit
 }
   private releaseThrottle() {
     this.isThrottled = false
     this.throttleUntil = undefined
-    this.emit('release', { metrics: this.metrics[this.metrics.length - 1]   
+    this.emit('release', { metrics: this.metrics[this.metrics.length - 1]   )
     })
 }
   private recordMetrics(metrics: ResourceMetrics) {
@@ -181,7 +181,7 @@ let throttleCount = 0;
   public shutdown() {
     if (this.checkTimer) {
       clearInterval(this.checkTimer, this.checkTimer = undefined
-}
+})
     this.removeAllListeners()};
 // Factory function;
 export function createCPURateLimiter(config? null : Partial<RateLimiterConfig>): Partial<RateLimiterConfig>): CPURateLimiter {</RateLimiterConfig>

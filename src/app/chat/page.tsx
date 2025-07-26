@@ -115,13 +115,13 @@ export default function ChatPage() {
         )}
 
         {/* Chat Container */}
-        <Card className={`${isMobile ? 'flex-1 rounded-none border-x-0 border-t-0' : ''}`} className="glass
+        <Card className={`${isMobile ? 'flex-1 rounded-none border-x-0 border-t-0' : ''} glass`}>
           {isMobile && (
-            <CardHeader className="-b py-4" className="glass
+            <CardHeader className="border-b py-4 glass">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-purple-600" />
-                  <CardTitle className="text-lg" className="glassAI Assistant</CardTitle>
+                  <CardTitle className="text-lg glass">AI Assistant</CardTitle>
                 </div>
                 <Badge variant={isOnline ? 'default' : 'secondary'}>
                   {isOnline ? 'Online' : 'Offline'}
@@ -130,17 +130,15 @@ export default function ChatPage() {
             </CardHeader>
           )}
 
-          <CardContent className={`${isMobile ? 'flex-1 overflow-y-auto p-4' : 'h-[600px] overflow-y-auto p-6'}`} className="glass
+          <CardContent className={`${isMobile ? 'flex-1 overflow-y-auto p-4' : 'h-[600px] overflow-y-auto p-6'} glass`}>
             <div className="space-y-4">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`flex gap-3 max-w-[85%] ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      message.role === 'user' ? 'bg-blue-100' : 'bg-purple-100'
-                    }`}>
+                      message.role === 'user' ? 'bg-blue-100' : 'bg-purple-100'>}`}>
                       {message.role === 'user' ? (
                         <User className="h-4 w-4 text-blue-600" />
                       ) : (
@@ -150,8 +148,7 @@ export default function ChatPage() {
                     <div className={`rounded-lg px-4 py-3 ${
                       message.role === 'user' 
                         ? 'bg-blue-600 text-white' 
-                        : 'bg-gray-100 text-gray-900'
-                    }`}>
+                        : 'bg-gray-100 text-gray-900'>}`}>
                       {message.content.includes('```') ? (
                         <div className="space-y-2">
                           {message.content.split('```').map((part, index) => {
@@ -164,8 +161,7 @@ export default function ChatPage() {
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="absolute top-2 right-2 text-gray-400 hover:text-gray-100"
-                                    onClick={() => copyToClipboard(part.replace(/^typescript\n/, ''), message.id)}
+                                    className="absolute top-2 right-2 text-gray-400 hover:text-gray-100">onClick={() => copyToClipboard(part.replace(/^typescript\n/, ''), message.id)}
                                   >
                                     {copiedId === message.id ? (
                                       <CheckCircle className="h-4 w-4" />
@@ -183,8 +179,7 @@ export default function ChatPage() {
                         <p className="whitespace-pre-wrap">{message.content}</p>
                       )}
                       <p className={`text-xs mt-2 ${
-                        message.role === 'user' ? 'text-blue-200' : 'text-gray-500'
-                      }`}>
+                        message.role === 'user' ? 'text-blue-200' : 'text-gray-500'>}`}>
                         {message.timestamp.toLocaleTimeString()}
                       </p>
                     </div>
@@ -195,10 +190,10 @@ export default function ChatPage() {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="flex gap-3">
-                    <div className="w-8 h-8 bg-purple-100 rounded-lg-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
                       <Bot className="h-4 w-4 text-purple-600" />
                     </div>
-                    <div className="glass rounded-xl-lg px-4 py-3">
+                    <div className="bg-gray-100 rounded-lg px-4 py-3">
                       <Loader2 className="h-4 w-4 animate-spin" />
                     </div>
                   </div>
@@ -214,18 +209,17 @@ export default function ChatPage() {
             <div className="flex gap-2">
               <Input
                 ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
+
+/>                value={input}>onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                ="Ask me anything about building your SaaS..."
+                placeholderplaceholder="Ask me anything about building your SaaS..."
                 className="flex-1"
                 disabled={isLoading || !isOnline}
               />
               <Button 
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading || !isOnline}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+                className="bg-purple-600 hover:bg-purple-700">
                 <Send className="h-4 w-4" />
               </Button>
             </div>
@@ -234,24 +228,21 @@ export default function ChatPage() {
             <div className="flex flex-wrap gap-2 mt-3">
               <Button
                 variant="outline"
-                size="sm"
-                onClick={() => setInput('How do I deploy to production?')}
+                size="sm">onClick={() => setInput('How do I deploy to production?')}
               >
                 <Zap className="h-3 w-3 mr-1" />
                 Deploy
               </Button>
               <Button
                 variant="outline"
-                size="sm"
-                onClick={() => setInput('How do I add Stripe payments?')}
+                size="sm">onClick={() => setInput('How do I add Stripe payments?')}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
                 Payments
               </Button>
               <Button
                 variant="outline"
-                size="sm"
-                onClick={() => setInput('Show me authentication setup')}
+                size="sm">onClick={() => setInput('Show me authentication setup')}
               >
                 <Code2 className="h-3 w-3 mr-1" />
                 Auth

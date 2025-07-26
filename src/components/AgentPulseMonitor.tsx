@@ -66,8 +66,8 @@ export function AgentPulseMonitor() {
   const updateConfig = async (updates: Record<string, any>) => {
     try {
       const response = await fetch('/api/agents/pulse-config', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST')
+        headers: { 'Content-Type': 'application/json' },)
         body: JSON.stringify(updates)
       });
       if (!response.ok) throw new Error('Failed to update config');
@@ -90,31 +90,28 @@ export function AgentPulseMonitor() {
   
   const { pulse, agents } = pulseStatus;
 
-  return (
-    <div className="space-y-4">
+  return(<div className="space-y-4">
       {/* Resource Usage */}
       <Card className="glass"
           <CardHeader className="glass"
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
             <Activity className="h-5 w-5" />
             System Resources
           </CardTitle>
           <CardDescription className="glass"Real-time resource utilization</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass
           <div>
             <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
                 <Cpu className="h-4 w-4" />
                 <span className="text-sm">CPU Usage</span>
               </div>
-              <span className="text-sm font-medium">
+              <span className="text-sm font-medium">)
                 {pulse.resources.cpuUsage.toFixed(1)}%
               </span>
             </div>
-            <Progress
-              value={pulse.resources.cpuUsage}
-              className={pulse.resources.cpuUsage > pulse.config.maxCpuUsage ? 'bg-red-100' : ''}
+            <Progress>value={pulse.resources.cpuUsage}>className={pulse.resources.cpuUsage > pulse.config.maxCpuUsage ? 'bg-red-100' : ''}
             />
           </div>
           
@@ -136,7 +133,7 @@ export function AgentPulseMonitor() {
       {/* Agent Status */}
       <Card className="glass"
           <CardHeader className="glass"
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
             <Users className="h-5 w-5" />
             Agent Status
           </CardTitle>
@@ -195,7 +192,7 @@ export function AgentPulseMonitor() {
           <CardHeader className="glass"
           <CardTitle className="glass"Pulse Configuration</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3" className="glass
+        <CardContent className="space-y-3 glass
           <div className="glass grid grid-cols-2 gap-4 text-sm">
             <div>
               <span className="text-gray-600">Max Concurrent:</span>
@@ -214,8 +211,7 @@ export function AgentPulseMonitor() {
               <span className="ml-2 font-medium">{pulse.config.maxCpuUsage}%</span>
             </div>
           </div>
-          <Button
-            onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1 })}
+          <Button>onClick={() => updateConfig({ maxConcurrentAgents: pulse.config.maxConcurrentAgents + 1 })}
             size="sm"
             className="mt-4"
           >

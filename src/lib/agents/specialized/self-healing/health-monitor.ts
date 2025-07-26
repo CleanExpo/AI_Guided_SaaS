@@ -4,7 +4,7 @@ import { HealthIssue, SystemHealth, ComponentType } from './types';
 export class HealthMonitor extends EventEmitter {
   private isMonitoring: boolean = false;
   private monitoringInterval?: NodeJS.Timeout;
-  private healthChecks: Map<string, () => Promise<boolean>> = new Map();
+  private healthChecks: Map<string, () => Promise<boolean> = new Map();
   private lastHealthStatus: SystemHealth;
 
   constructor(private checkInterval: number = 30000) { // 30 seconds default
@@ -71,9 +71,8 @@ export class HealthMonitor extends EventEmitter {
         }
 
         // Update response time metric
-        healthStatus.metrics.responseTime = Math.max(
-          healthStatus.metrics.responseTime,
-          checkDuration
+        healthStatus.metrics.responseTime = Math.max(healthStatus.metrics.responseTime)
+          checkDuration)
         );
       } catch (error) {
         healthStatus.components[component] = {
@@ -115,7 +114,7 @@ export class HealthMonitor extends EventEmitter {
       try {
         // Check if API endpoints are responding
         const response = await fetch('http://localhost:3000/api/health', {
-          timeout: 5000
+          timeout: 5000)
         } as any);
         return response.ok;
       } catch (error) {
@@ -179,7 +178,7 @@ export class HealthMonitor extends EventEmitter {
   private async updateSystemMetrics(healthStatus: SystemHealth): Promise<void> {
     // Update memory usage
     const memoryUsage = process.memoryUsage();
-    healthStatus.metrics.memoryUsage = Math.round(
+    healthStatus.metrics.memoryUsage = Math.round()
       (memoryUsage.heapUsed / memoryUsage.heapTotal) * 100
     );
 
@@ -195,12 +194,12 @@ export class HealthMonitor extends EventEmitter {
       Math.round((failedChecks / totalChecks) * 100) : 0;
 
     // Set overall status based on metrics
-    if (healthStatus.metrics.memoryUsage > 90 || 
-        healthStatus.metrics.cpuUsage > 90 || 
+    if(healthStatus.metrics.memoryUsage > 90 || 
+        healthStatus.metrics.cpuUsage > 90 || )
         healthStatus.metrics.errorRate > 20) {
       healthStatus.overall = 'critical';
-    } else if (healthStatus.metrics.memoryUsage > 70 || 
-               healthStatus.metrics.cpuUsage > 70 || 
+    } else if(healthStatus.metrics.memoryUsage > 70 || 
+               healthStatus.metrics.cpuUsage > 70 || )
                healthStatus.metrics.errorRate > 10) {
       healthStatus.overall = 'warning';
     }
@@ -227,8 +226,8 @@ export class HealthMonitor extends EventEmitter {
     // Check for overall status change
     if (currentHealth.overall !== this.lastHealthStatus.overall) {
       this.emit('health-status-changed', {
-        from: this.lastHealthStatus.overall,
-        to: currentHealth.overall,
+        from: this.lastHealthStatus.overall)
+        to: currentHealth.overall,)
         timestamp: new Date()
       });
     }
@@ -258,7 +257,7 @@ export class HealthMonitor extends EventEmitter {
         } else if (status.status === 'operational' && lastStatus?.status === 'down') {
           // Component recovered
           this.emit('component-recovered', {
-            component,
+            component,)
             timestamp: new Date(),
             downDuration: Date.now() - lastStatus.lastCheck.getTime()
           });
@@ -269,21 +268,21 @@ export class HealthMonitor extends EventEmitter {
     // Check for critical metrics
     if (currentHealth.metrics.memoryUsage > 85) {
       this.emit('high-memory-usage', {
-        usage: currentHealth.metrics.memoryUsage,
+        usage: currentHealth.metrics.memoryUsage,)
         timestamp: new Date()
       });
     }
 
     if (currentHealth.metrics.cpuUsage > 85) {
       this.emit('high-cpu-usage', {
-        usage: currentHealth.metrics.cpuUsage,
+        usage: currentHealth.metrics.cpuUsage,)
         timestamp: new Date()
       });
     }
 
     if (currentHealth.metrics.errorRate > 15) {
       this.emit('high-error-rate', {
-        rate: currentHealth.metrics.errorRate,
+        rate: currentHealth.metrics.errorRate,)
         timestamp: new Date()
       });
     }

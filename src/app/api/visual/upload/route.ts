@@ -7,7 +7,7 @@ import { validateInput, sanitize } from '@/lib/api/validation-middleware';
 export const dynamic = 'force-dynamic';
 
 // Validation schemas
-const uploadQuerySchema = z.object({
+const uploadQuerySchema = z.object({)
   uploadId: z.string().min(1, 'Upload ID is required'),
 });
 
@@ -21,29 +21,26 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const file = formData.get('file') as File;
     
     if (!file) {
-      return NextResponse.json(
-        { error: 'No file provided' },
-        { status: 400 }
+      return NextResponse.json({ error: 'No file provided' })
+        { status: 400 })
       );
     }
     
     // Validate file type
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      return NextResponse.json(
-        { 
+      return NextResponse.json({ 
           error: 'Invalid file type',
           message: 'Only JPEG, PNG, GIF, and WebP files are allowed',
           allowedTypes: ALLOWED_FILE_TYPES
-        },
-        { status: 400 }
+        })
+        { status: 400 })
       );
     }
     
     // Validate file size
     if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { 
-          error: 'File size too large',
+      return NextResponse.json({ 
+          error: 'File size too large',)
           message: `Maximum file size is ${MAX_FILE_SIZE / (1024 * 1024)}MB`,
           fileSize: file.size,
           maxSize: MAX_FILE_SIZE
@@ -58,8 +55,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Log upload attempt
     logger.info('File upload attempt', {
       filename: sanitizedFilename,
-      size: file.size,
-      type: file.type,
+      size: file.size)
+      type: file.type,)
     });
     
     // TODO: Implement actual file upload to storage (S3, Cloudinary, etc.)
@@ -76,17 +73,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
     
     return NextResponse.json({
-      success: true,
-      upload: uploadResult
+      success: true)
+      upload: uploadResult)
     });
   } catch (error) {
     logger.error('Upload error:', error);
-    return NextResponse.json(
-      { 
+    return NextResponse.json({ 
         error: 'Upload failed',
         message: error instanceof Error ? error.message : 'An unexpected error occurred'
-      },
-      { status: 500 }
+      })
+      { status: 500 })
     );
   }
 }
@@ -109,17 +105,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       };
       
       return NextResponse.json({
-        success: true,
-        upload
+        success: true)
+        upload)
       });
     } catch (error) {
       logger.error('Get upload error:', error);
-      return NextResponse.json(
-        { 
+      return NextResponse.json({ 
           error: 'Failed to get upload',
           message: error instanceof Error ? error.message : 'An unexpected error occurred'
-        },
-        { status: 500 }
+        })
+        { status: 500 })
       );
     }
   });

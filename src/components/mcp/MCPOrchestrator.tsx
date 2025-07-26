@@ -33,18 +33,18 @@ const { servers,
     executePlan,
     loading,
     // initialized
-      }: any = useMCP({ autoConnect: ['filesystem'] // Auto-connect filesystem by default
+      }: any = useMCP({ autoConnect: ['filesystem'] // Auto-connect filesystem by default)
     });
   
 const [selectedTool, setSelectedTool]  = useState<MCPTool | null>(null);</MCPTool>
 
-const [toolArguments, setToolArguments] = useState<Record<string any>>({});</Record>
+const [toolArguments, setToolArguments] = useState<Record<string any>({});</Record>
   
-const [executionResults, setExecutionResults]  = useState<any[]>([]);</any>
+const [executionResults, setExecutionResults]  = useState<anynull>(null);</any>
 
-const [planSteps, setPlanSteps] = useState<any[]>([]);</any>
+const [planSteps, setPlanSteps] = useState<anynull>(null);</any>
   
-const [planDescription, setPlanDescription] = useState<any>([])
+const [planDescription, setPlanDescription] = useState<any>(null)
   // Server categories;
 
 const categories  = ['development', 'data', 'automation', 'ai', 'integration'] as const;
@@ -78,8 +78,8 @@ const _getServerStatus = (serverId: string) => {
 const _handleExecuteTool = async () =>  {
     if (!selectedTool) {
       toast({ title: 'Error',
-        description: 'Please select a tool to execute',
-variant: 'destructive'
+        description: 'Please select a tool to execute')
+variant: 'destructive')
     });
       return null
 }try {
@@ -92,7 +92,7 @@ const result = await callTool(call);
       setExecutionResults(prev => [result, ...prev]);
       if (onToolResult) {
         onToolResult(result)}
-      toast({ title: 'Tool Executed',
+      toast({ title: 'Tool Executed',)
   description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``    })
 } catch (error) {
     logger.error('Tool execution, failed:', error)}
@@ -105,7 +105,7 @@ type: 'tool' as const,
     arguments: { ...toolArguments }
     setPlanSteps(prev => [...prev, step]);
     setToolArguments({});
-    toast({ title: 'Step Added',
+    toast({ title: 'Step Added',)
   description: `Added ${selectedTool.name} to orchestration plan``    })
 };
   // Execute orchestration plan;
@@ -113,8 +113,8 @@ type: 'tool' as const,
 const _handleExecutePlan = async () =>  {
     if (planSteps.length === 0) {
       toast({ title: 'Error',
-        description: 'Plan has no steps to execute',
-variant: 'destructive'
+        description: 'Plan has no steps to execute')
+variant: 'destructive')
     });
       return null
 }try {
@@ -127,7 +127,7 @@ const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
       setExecutionResults(prev => [...resultsArray, ...prev]);
       setPlanSteps([]); // Clear plan after execution
       setPlanDescription('');
-      toast({ title: 'Plan Executed',
+      toast({ title: 'Plan Executed',)
   description: `Completed ${resultsArray.length} steps``    })
 } catch (error) {
     logger.error('Plan execution, failed:', error)}
@@ -137,8 +137,7 @@ const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string
     if (!tool.inputSchema || !tool.inputSchema.properties) {r}eturn [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({ name: type: schema.type || 'string',
 required: required.includes(name)}))
   };
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Server, Management */}</div>
       <Card className="glass"
           <CardHeader className="glass"</CardHeader>
@@ -148,18 +147,15 @@ required: required.includes(name)}))
 </CardHeader>
         <CardContent className="glass"
           <Tabs defaultValue = "development" className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-5">)
               {categories.map((category) => (\n    <TabsTrigger key={category} value={category} className="flex items-center gap-2">
                   {getCategoryIcon(category)}
                   <span className="hidden md:inline">{ category}</span>
               ))}
 </TabsList>
             {categories.map((category) => (\n    <TabsContent key={category} value={category} className="space-y-2">
-                {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return (
-    <div;
-
-const key={server.id };
-                      className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
+                {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return(<div;
+>const key={server.id };>className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
           <Server className="h-5 w-5 text-muted-foreground"     />
                         <div>
           <p className="font-medium">{server.name}</p>
@@ -169,15 +165,11 @@ const key={server.id };
                       <div className="flex items-center gap-2">
           <Badge
 
-const variant={isConnected ? 'default' : 'secondary' };
-                          className="capitalize";
-                        >/>
+const variant={isConnected ? 'default' : 'secondary' };>className="capitalize";> />>
                           {status}
 />
-                        <Button
-size="sm";
-
-variant={isConnected ? 'destructive' : 'default'} onClick={() => </Button>
+                        <Button)
+size="sm";>variant={isConnected ? 'destructive' : 'default'} onClick={() => </Button>
                             // isConnected
                               ? disconnectServer(server.id, : connectServer(server.id)}
                           const disabled={loading}
@@ -218,9 +210,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                             selectedTool?.name === tool.name && selectedTool?.server === server.id
                               ? 'bg-primary text-primary-foreground'
                               : 'hover:bg-accent'
-                          }`}`;
-
-    const onClick={() =>  {</div>
+                          }`}`;>const onClick={() =>  {</div>
                             setSelectedTool(tool, setToolArguments({})}
                         ></div>
                           <div className="flex items-center gap-2">
@@ -233,7 +223,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                 ))}
       </div>
         {/* Tool, Configuration */}
-        <Card className="h-[600px]" className="glass
+        <Card className="h-[600px] glass
           <CardHeader className="glass"</CardHeader>
             <CardTitle className="glass"Tool Configuration</CardTitle>
             <CardDescription className="glass"</CardDescription>
@@ -241,22 +231,22 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
 </CardHeader>
           <CardContent className="glass"</CardContent>
             {selectedTool ? (</Card>
-              <div className="space-y-4" >></div>
+              <div className="space-y-4" ></div>
                   <h4 className="font-medium mb-2">Arguments {getToolInputFields(selectedTool).map((field) => (\n    <div key={field.name} className="space-y-2 mb-4">
           <Label htmlFor={field.name}></Label>
                         {field.name}, {field.required && <span className = "text-red-500 ml-1">*</span>
                       {field.type === 'string'  && (Input; id={field.name} value={toolArguments[field.name] || ''}
                           const onChange={(e) => setToolArguments({
-                            ...toolArguments,
-                            [field.name]: e.target.value
+                            ...toolArguments)
+                            [field.name]: e.target.value)
                           })}
                           const ={`Enter ${field.name}`}`
                         />
                       )},
     {field.type = == 'object'  && (Textarea; id={field.name} value={toolArguments[field.name] || '{}'}
                           const onChange={(e) => setToolArguments({
-                            ...toolArguments,
-                            [field.name]: e.target.value
+                            ...toolArguments)
+                            [field.name]: e.target.value)
                           })}
                           ="Enter JSON object"rows={3/>
                       )}
@@ -267,17 +257,13 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
           <Button
 
 const onClick={handleExecuteTool};
-                    const disabled={loading};
-                    className="flex-1";
-                  ></Button>
+                    const disabled={loading};>className="flex-1";>></Button>
                     {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin"    />}</Loader2>
                     Execute Tool
 </Button>
                   <Button
 variant="outline";
-
-    onClick={addPlanStep} disabled={loading}
-                  ></Button>
+>onClick={addPlanStep} disabled={loading}></Button>
                     Add to Plan
 </Button>
             ) : (
@@ -293,20 +279,17 @@ variant="outline";
           <CardDescription className="glass"</CardDescription>
             Build complex workflows by combining multiple tools</Card>
 </CardHeader>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass
           <div className="space-y-2">
             <Label htmlFor="plan-description">Plan Description</Label>
-            <Input id="plan-description";
-
-value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};/>
+            <Input id="plan-description";>value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};/>
               ="Describe what this plan does...";
             />
 </div>
           {planSteps.length > 0  && (div className="space-y-2">
               <Label>Steps ({planSteps.length})</Label>
               <div className="space-y-2">
-                {planSteps.map((step, index) => (\n    <div const key={step.id};
-                    className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
+                {planSteps.map((step, index) => (\n    <div const key={step.id};>className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
           <Badge>{index + 1}/>
                       <div>
           <p className="font-medium">{step.operation}</p>
@@ -315,9 +298,7 @@ Server: { step.server }
 </p>
                     <Button
 size="sm";
-variant="ghost";
-
-const onClick={() => setPlanSteps(prev =></Button>
+variant="ghost";>const onClick={() => setPlanSteps(prev =></Button>)
                         prev.filter((s) => s.id !== step.id))}
                     >
                       <XCircle className="h-4 w-4"     />
@@ -327,9 +308,7 @@ const onClick={() => setPlanSteps(prev =></Button>
           <Button
 
 const onClick={handleExecutePlan};
-            const disabled={loading || planSteps.length === 0};
-            className="w-full";
-          ></Button>
+            const disabled={loading || planSteps.length === 0};>className="w-full";>></Button>
             {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin"    />}</Loader2>
             Execute Plan ({planSteps.length} steps)
 </Button>
@@ -346,8 +325,7 @@ const onClick={handleExecutePlan};
           <ScrollArea className="h-[300px]">
               <div className="space-y-3">
                 {executionResults.map((result, index) => (\n    </div>
-                  <div const key={index};
-                    className="p-3  rounded-xl-lg space-y-2 flex items-center justify-between"    />
+                  <div const key={index};>className="p-3  rounded-xl-lg space-y-2 flex items-center justify-between"    />
           <div className="flex items-center gap-2">
                         {result.error ? (</div>
                           <XCircle className="h-4 w-4 text-red-500"     />
@@ -366,7 +344,7 @@ div className="text-sm text-red-500">, Error: { result.error }
     {result.result  && (
 div className="text-sm bg-muted p-2 rounded-lg">
                         <pre className="whitespace-pre-wrap">
-                          {JSON.stringify(result.result, null, 2
+                          {JSON.stringify(result.result, null, 2)
             )}
 </pre>
       )}

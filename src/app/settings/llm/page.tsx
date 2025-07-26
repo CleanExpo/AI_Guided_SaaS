@@ -79,8 +79,7 @@ export default function LLMSettingsPage() {
     return available ? CheckCircle : AlertCircle;
   };
 
-  return (
-    <div className="min-h-screen glass p-8">
+  return(<div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -118,7 +117,7 @@ export default function LLMSettingsPage() {
             <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Total Cost</p>
+                  <p className="text-sm text-gray-500">Total Cost</p>)
                   <p className="text-2xl font-bold">${metrics.totalCost.toFixed(2)}</p>
                 </div>
                 <DollarSign className="h-8 w-8 text-purple-600" />
@@ -140,15 +139,13 @@ export default function LLMSettingsPage() {
         </div>
 
         {/* Provider Status */}
-        <Card className="mb-8" className="glass
+        <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <CardTitle className="glass"Provider Status</CardTitle>
               <Button
                 onClick={testProviders}
-                disabled={isTestingProviders}
-                variant="outline"
-              >
+                disabled={isTestingProviders}>variant="outline">>
                 <RefreshCw className={`h-4 w-4 mr-2 ${isTestingProviders ? 'animate-spin' : ''}`} />
                 Test All Providers
               </Button>
@@ -158,8 +155,7 @@ export default function LLMSettingsPage() {
             <div className="space-y-4">
               {providers.map((provider) => {
                 const StatusIcon = getProviderStatusIcon(provider.available);
-                return (
-                  <div key={provider.name} className="glass  rounded-xl-lg p-4">
+                return(<div key={provider.name} className="glass  rounded-xl-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
                         <Brain className="h-5 w-5 text-gray-600" />
@@ -168,7 +164,7 @@ export default function LLMSettingsPage() {
                           Priority {provider.priority}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2">)
                         <StatusIcon className={`h-5 w-5 ${getProviderStatusColor(provider.available)}`} />
                         <span className={`font-medium ${getProviderStatusColor(provider.available)}`}>
                           {provider.available ? 'Available' : 'Unavailable'}
@@ -200,9 +196,7 @@ export default function LLMSettingsPage() {
                           <span>{provider.latency}ms</span>
                         </div>
                         <Progress 
-                          value={(1000 - provider.latency) / 10} 
-                          className="h-2"
-                        />
+                          value={(1000 - provider.latency) / 10} >className="h-2" />>
                       </div>
                     )}
                   </div>
@@ -223,9 +217,7 @@ export default function LLMSettingsPage() {
                 <div>
                   <label className="text-sm font-medium text-gray-700">Provider Selection</label>
                   <select 
-                    className="mt-1 w-full px-3 py-2  rounded-xl-lg"
-                    value={selectedProvider}
-                    onChange={(e) => setSelectedProvider(e.target.value)}
+                    className="mt-1 w-full px-3 py-2  rounded-xl-lg">value={selectedProvider}>onChange={(e) => setSelectedProvider(e.target.value)}
                   >
                     <option value="auto">Automatic (Recommended)</option>
                     <option value="openai">OpenAI Only</option>
@@ -241,9 +233,7 @@ export default function LLMSettingsPage() {
                     type="number" 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="3"
-                    min="1"
-                    max="5"
-                  />
+                    min="1">max="5" />>
                 </div>
 
                 <div>
@@ -253,9 +243,7 @@ export default function LLMSettingsPage() {
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="30000"
                     min="5000"
-                    max="60000"
-                    step="1000"
-                  />
+                    max="60000">step="1000" />>
                 </div>
 
                 <div>
@@ -265,9 +253,7 @@ export default function LLMSettingsPage() {
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="0.50"
                     min="0.01"
-                    max="10"
-                    step="0.01"
-                  />
+                    max="10">step="0.01" />>
                 </div>
 
                 <Button className="w-full">Save Configuration</Button>
@@ -297,9 +283,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={metrics.successRate} 
-                    className="h-2 bg-green-100"
-                  />
+                    value={metrics.successRate} >className="h-2 bg-green-100" />>
                 </div>
 
                 <div>
@@ -310,9 +294,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={(metrics.failedRequests / metrics.totalRequests) * 100} 
-                    className="h-2 bg-red-100"
-                  />
+                    value={(metrics.failedRequests / metrics.totalRequests) * 100} >className="h-2 bg-red-100" />>
                 </div>
 
                 <div>
@@ -323,9 +305,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={metrics.fallbackRate} 
-                    className="h-2 bg-yellow-100"
-                  />
+                    value={metrics.fallbackRate} >className="h-2 bg-yellow-100" />>
                 </div>
 
                 <div className="pt-4 -t">

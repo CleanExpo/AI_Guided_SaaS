@@ -10,7 +10,7 @@ export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
   private dockerManager: DockerAgentManager
   private containerizedConfig: ContainerizedPulseConfig
   private lastScaleCheck: Date = new Date(), private scaleCheckInterval: number = 60000 // 1 minute, constructor(config: Partial<OrchestratorConfig> = {},</OrchestratorConfig>
-    pulseConfig: Partial<ContainerizedPulseConfig> = {}</ContainerizedPulseConfig>
+    pulseConfig: Partial<ContainerizedPulseConfig> = {}</ContainerizedPulseConfig>)
   ) {
     super(config, pulseConfig, this.dockerManager = DockerAgentManager.getInstance(), this.containerizedConfig={ useContainers: true;
     autoScaling: true, minAgentsPerType: 1, maxAgentsPerType: 3;
@@ -36,7 +36,7 @@ for (const agent of agents) {
   protected async executeAgentTask(agentId: string, task): Promise<any> {
     if (this.containerizedConfig.useContainers) {
       // Check if agent container is healthy, const status = await this.dockerManager.getContainerStatus(agentId, if (!status || status.status !== 'running' || status.health !== 'healthy') {; ``; const agent = this.loader.getLoadedAgents().find(a => a.agent_id === agentId);
-        if (agent) { await this.dockerManager.startAgentContainer(agent, // Wait for container to be ready
+        if (agent) { await this.dockerManager.startAgentContainer(agent, // Wait for container to be ready)
           await new Promise(resolve => setTimeout(resolve, 5000))
 }
     // Execute task using parent method
@@ -127,7 +127,7 @@ scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
           logger.error(`Failed to stop container for ${agent.agent_id}:`, error)``
   }
 }
-    await super.shutdown()}; // Factory function; export function createContainerizedOrchestrator(
+    await super.shutdown()}; // Factory function; export function createContainerizedOrchestrator()
   config?: Partial<OrchestratorConfig>, pulseConfig?: Partial<ContainerizedPulseConfig>): Partial<OrchestratorConfig>, pulseConfig? null : Partial<ContainerizedPulseConfig>): ContainerizedPulseOrchestrator {</ContainerizedPulseConfig>
   return new ContainerizedPulseOrchestrator(config, pulseConfig)}
 }}}}}}}}}}}}}}}}

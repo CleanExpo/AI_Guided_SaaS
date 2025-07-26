@@ -10,7 +10,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(authStatus)
 } catch (error) {
         logger.error('Admin auth status error:', error);
-        return NextResponse.json({ error: 'Failed to get auth status' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to get auth status' }, { status: 500   )
     })
     }
 }
@@ -20,21 +20,21 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         const body = await request.json();
         const { password } = body;
         if (!password) {
-            return NextResponse.json({ error: 'Password required' }, { status: 400   
+            return NextResponse.json({ error: 'Password required' }, { status: 400   )
     })
         }
         // Simple password check
         const isValid = password === process.env.ADMIN_PASSWORD || ""
         if (isValid) {
-            return NextResponse.json({ success: true, message: 'Authentication successful'   
+            return NextResponse.json({ success: true, message: 'Authentication successful'   )
     })
 } else {
-            return NextResponse.json({ error: 'Invalid password' }, { status: 401   
+            return NextResponse.json({ error: 'Invalid password' }, { status: 401   )
     })
         }
     } catch (error) {
         logger.error('Direct auth error:', error);
-        return NextResponse.json({ error: 'Authentication failed' }, { status: 500   
+        return NextResponse.json({ error: 'Authentication failed' }, { status: 500   )
     })
     }
 }

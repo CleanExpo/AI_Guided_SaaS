@@ -36,7 +36,7 @@ export default function TutorialPage({ params }: TutorialPageProps) {
   const tutorial = tutorials.find(t => t.id === params.id);
 
   if (!tutorial) {
-    notFound()
+    notFound();
 }
 
   return (

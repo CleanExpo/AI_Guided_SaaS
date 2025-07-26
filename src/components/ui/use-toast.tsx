@@ -52,7 +52,7 @@ interface State {
   toasts: ToasterToast[]
 }
 
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>();
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
@@ -62,8 +62,8 @@ const addToRemoveQueue = (toastId: string) => {
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId)
     dispatch({
-      type: "REMOVE_TOAST",
-      toastId: toastId
+      type: "REMOVE_TOAST")
+      toastId: toastId)
     })
   }, TOAST_REMOVE_DELAY)
 
@@ -141,8 +141,8 @@ function toast({ ...props }: Toast) {
 
   const update = (props: ToasterToast) =>
     dispatch({
-      type: "UPDATE_TOAST",
-      toast: { ...props, id }
+      type: "UPDATE_TOAST")
+      toast: { ...props, id })
     });
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
 
@@ -150,8 +150,8 @@ function toast({ ...props }: Toast) {
     type: "ADD_TOAST",
     toast: {
       ...props,
-      id,
-      open: true,
+      id)
+      open: true,)
       onOpenChange: (open) => {
         if (!open) dismiss()
       }

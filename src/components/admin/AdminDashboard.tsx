@@ -57,44 +57,41 @@ const getActivityIcon = (type: string) =>  {
 };</AlertCircle>
 { (timestamp: string) => {
     const seconds = Math.floor((new Date().getTime() - new Date(timestamp).getTime()) / 1000, if (seconds < 60) {r}eturn 'Just now', const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) {r}eturn `${minutes};m ago`;
+    if (minutes < 60) {r}eturn `${minutes}m ago`;
     
 const hours = Math.floor(minutes / 60);
     if (hours < 24) {r}eturn `${hours}h ago`;
     return `${Math.floor(hours / 24)}d ago`
 };
-  return (
-    <div className="space-y-8">
+  return(<div className="space-y-8">
       {/* Key Metrics */}</div>
         <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-          <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
+          <Card className="hover:shadow-md-lg transition-shadow-md glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+          <CardTitle className="text-sm font-medium glassTotal Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass")
           <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
           <TrendingUp className="h-3 w-3 text-green-500 mr-1"     />
               <span className="text-green-600">+{stats.newUsersToday} today</span>
 </CardContent>
-        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassActive Users</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassActive Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
           <CardContent className="glass"
           <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}</div>
             <div className="flex items-center mt-1">
           <Progress
-
-const value={(stats.activeUsers / stats.totalUsers) * 100}
-                className="h-2"    />
+>const value={(stats.activeUsers / stats.totalUsers) * 100}>className="h-2"    />
         <span className="ml-2 text-xs text-muted-foreground">
                 {((stats.activeUsers / stats.totalUsers) * 100).toFixed(1)}%</span>
-        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassTotal Projects</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassTotal Projects</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
           <CardContent className="glass"
@@ -102,9 +99,9 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
             <div className="flex items-center text-xs text-muted-foreground mt-1">
           <span className="text-purple-600">{stats.activeProjects} active</span>
 </CardContent>
-        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-            <CardTitle className="text-sm font-medium" className="glassAPI Calls Today</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
+            <CardTitle className="text-sm font-medium glassAPI Calls Today</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
           <CardContent className="glass"
@@ -118,18 +115,18 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
       <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="glass"</Card>
           <CardHeader className="glass"
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
               <Server className="h-5 w-5"     />
               System Health
 </CardTitle>
             <CardDescription className="glass"Real-time system performance metrics</CardDescription>
-          <CardContent className="space-y-4" className="glass
+          <CardContent className="space-y-4 glass
           <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Status</span>
               <div className={cn("flex items-center gap-2", getHealthColor(stats.systemHealth))}>
           <CheckCircle2 className="h-4 w-4"     />
                 <span className="font-semibold capitalize">{stats.systemHealth}</span>
-            <div className="space-y-3" >></div>
+            <div className="space-y-3" ></div>
                 <div className="flex items-center justify-between mb-1">
           <span className="text-sm text-muted-foreground flex items-center gap-1">
                     <Cpu className="h-3 w-3"     />
@@ -152,7 +149,7 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
         {/* Recent Activity */}
         <Card className="glass"
           <CardHeader className="glass"</CardHeader>
-            <CardTitle className="flex items-center gap-2" className="glass
+            <CardTitle className="flex items-center gap-2 glass
           <Clock className="h-5 w-5"     />
               Recent Activity
 </CardTitle>
@@ -170,20 +167,14 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
           </div>
     ))}
               <Button variant="ghost";
-className="w-full mt-4";
-
-    const onClick={() => onNavigate('activity')}</Button>
-              >
+className="w-full mt-4";>const onClick={() => onNavigate('activity')}</Button>
                 View All Activity
                 <ArrowUpRight className="h-4 w-4 ml-2" /   />
           </div>
       {/* Quick Actions Grid */}
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-blue-500"
-
-    const onClick={() = className="glass onNavigate('users')}</Card>
-        ></Card>
-          <CardContent className="glass p-6">
+>const onClick={() => glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">Manage</p>
@@ -192,8 +183,7 @@ className="w-full mt-4";
           </Card>
         <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-purple-500"
 
-    const onClick={() = className="glass onNavigate('analytics')}</Card>
-        ></Card>
+    const onClick={() = className="glass onNavigate('analytics')}</Card></Card>
           <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
@@ -203,8 +193,7 @@ className="w-full mt-4";
           </Card>
         <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-green-500"
 
-    const onClick={() = className="glass onNavigate('database')}</Card>
-        ></Card>
+    const onClick={() = className="glass onNavigate('database')}</Card></Card>
           <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
@@ -214,14 +203,13 @@ className="w-full mt-4";
           </Card>
         <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-orange-500"
 
-    const onClick={() = className="glass onNavigate('logs')}</Card>
-        ></Card>
+    const onClick={() = className="glass onNavigate('logs')}</Card></Card>
           <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">Check</p>
                 <p className="text-xl font-semibold">Logs</p>
               <Activity className="h-8 w-8 text-orange-500" /    />
-  );
+  )
 </div>
   }    }

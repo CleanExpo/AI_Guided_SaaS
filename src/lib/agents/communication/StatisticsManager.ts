@@ -73,8 +73,7 @@ export class StatisticsManager {
   }
 
   getMessagesForAgent(agentId: string, limit?: number): AgentMessage[] {
-    const agentMessages = this.messageHistory.filter(
-      m => m.from_agent === agentId || m.to_agent === agentId
+    const agentMessages = this.messageHistory.filter(m => m.from_agent === agentId || m.to_agent === agentId)
     );
     return limit ? agentMessages.slice(-limit) : agentMessages;
   }
@@ -100,13 +99,13 @@ export class StatisticsManager {
         const response = this.messageHistory.find(m => 
           m.type === 'response' && 
           m.correlation_id === request.correlation_id &&
-          m.timestamp > request.timestamp
+          m.timestamp > request.timestamp)
         );
 
         if (response) {
           pairs.push({
-            request,
-            response,
+            request)
+            response,)
             responseTime: response.timestamp.getTime() - request.timestamp.getTime()
           });
         }
@@ -125,8 +124,7 @@ export class StatisticsManager {
   }
 
   private getLastActivityForAgent(agentId: string): Date | null {
-    const agentMessages = this.messageHistory.filter(
-      m => m.from_agent === agentId || m.to_agent === agentId
+    const agentMessages = this.messageHistory.filter(m => m.from_agent === agentId || m.to_agent === agentId)
     );
 
     if (agentMessages.length === 0) return null;

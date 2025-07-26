@@ -79,7 +79,7 @@ export class DynamicDocumentationSystem extends EventEmitter {
       }
     ];
 
-    staticSections.forEach(section => {
+    staticSections.forEach(section => {)
       this.sections.set(section.id, section);
     });
   }
@@ -192,8 +192,7 @@ Serve static assets through a CDN for faster global access.
   }
 
   getSectionsByCategory(category: string): DocumentationSection[] {
-    return this.getAllSections().filter(
-      section => section.metadata.category === category
+    return this.getAllSections().filter(section => section.metadata.category === category)
     );
   }
 
@@ -249,7 +248,7 @@ Serve static assets through a CDN for faster global access.
 
   // Auto-update functionality
   private startAutoUpdate(): void {
-    this.updateInterval = setInterval(
+    this.updateInterval = setInterval()
       () => this.refreshDynamicContent(),
       300000 // 5 minutes
     );
@@ -281,12 +280,12 @@ Serve static assets through a CDN for faster global access.
     switch (format) {
       case 'markdown':
         sections.forEach(section => {
-          output += `# ${section.title}\n\n${section.content}\n\n---\n\n`;
+          output += `# ${section.title}\n\n${section.content}\n\n---\n\n`;)
         });
         break;
       case 'html':
         output = '<html><body>';
-        sections.forEach(section => {
+        sections.forEach(section => {)
           output += `<h1>${section.title}</h1>${marked(section.content)}`;
         });
         output += '</body></html>';

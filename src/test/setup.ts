@@ -11,8 +11,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(),
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+    dispatchEvent: jest.fn()
+  }))
 });
 
 // Mock IntersectionObserver
@@ -27,5 +27,5 @@ global.IntersectionObserver = class IntersectionObserver {
 global.console = {
   ...console,
   error: jest.fn(),
-  warn: jest.fn(),
+  warn: jest.fn()
 };

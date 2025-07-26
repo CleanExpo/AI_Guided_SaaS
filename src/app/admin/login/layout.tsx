@@ -5,5 +5,5 @@ import '@/styles/glass-theme.css';
 export default function AdminLoginLayout({
   children
 }: { children: React.ReactNode}) {
-  return <React.Fragment>{children}</React.Fragment>
+  return <React.Fragment>{children}</React.Fragment>;
 };

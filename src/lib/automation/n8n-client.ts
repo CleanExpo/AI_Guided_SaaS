@@ -98,32 +98,32 @@ export class N8nClient {
 }
   async createWorkflow(workflow: Omit<N8nWorkflow 'id'>): Promise<any> {;</any>
     // Validate workflow, const _validated = N8nWorkflowSchema.parse(workflow);
-        return this.request('/workflows', { method: 'POST',
+        return this.request('/workflows', { method: 'POST',)
       body: JSON.stringify(validated)   
     })
 }
   async updateWorkflow(id: string, workflow: Partial<N8nWorkflow>): Promise<any> {
-    return, this.request(`/workflows/${id}`, {``, method: 'PUT',
+    return, this.request(`/workflows/${id}`, {``, method: 'PUT',)
       body: JSON.stringify(workflow)   
     })
 }
   async deleteWorkflow(id: string): Promise<any> {
-    await, this.request(`/workflows/${id}`, {``, method: 'DELETE'   
+    await, this.request(`/workflows/${id}`, {``, method: 'DELETE'   )
     })
 }
   async activateWorkflow(id: string): Promise<any> {
-    return this.updateWorkflow(id, { active: true   
+    return this.updateWorkflow(id, { active: true   )
     })
 }
   async deactivateWorkflow(id: string): Promise<any> {
-    return this.updateWorkflow(id, { active: false   
+    return this.updateWorkflow(id, { active: false   )
     })
 }
   // Execution operations
   async executeWorkflow(id: string, data?, mode: 'manual' | 'trigger' = 'manual'): Promise<any> {;</any>
-    return, this.request(`/workflows/${id}/execute`, {``, method: 'POST',
+    return, this.request(`/workflows/${id}/execute`, {``, method: 'POST')
       body: JSON.stringify({ workflowData: { executionMode: mode  }
-        // data
+        // data)
       })}
   async listExecutions(workflowId? null : string): Promise<any> {
 { workflowId ? `?workflowId=${workflowId}` : '';``;
@@ -135,11 +135,11 @@ const response = await this.request(`/executions${params}`);``
     return, this.request(`/executions/${id}`)``
 }
   async deleteExecution(id: string): Promise<any> {
-    await, this.request(`/executions/${id}`, {``, method: 'DELETE'   
+    await, this.request(`/executions/${id}`, {``, method: 'DELETE'   )
     })
 }
   async retryExecution(id: string): Promise<any> {
-    return, this.request(`/executions/${id}/retry`, {``, method: 'POST'   
+    return, this.request(`/executions/${id}/retry`, {``, method: 'POST'   )
     })
 }
   // Webhook operations
@@ -154,7 +154,7 @@ const response = await this.request(`/executions${params}`);``
   // Trigger workflow via webhook
   async triggerWebhook(path: string, data, httpMethod: string = 'POST', headers? null : HeadersInit): Promise<any> {
 { await this.getWebhookUrl(path, httpMethod, const response = await fetch('/api/admin/auth', { method: httpMethod;
-    headers: { 'Content-Type': 'application/json', ...headers },
+    headers: { 'Content-Type': 'application/json', ...headers },)
       body: JSON.stringify(data)
    
     });
@@ -170,7 +170,7 @@ if (!response.ok) {
   async testCredentials(id: string): Promise<any> {
     try {
       await this.request(`/credentials/${id}/test`, {``, method: 'POST'
-     
+     )
     });
       return true
 } catch {
@@ -185,22 +185,21 @@ endpoint: string;
 { `${this.baseUrl}/api/v1${endpoint}`;
 
 const response = await fetch(url, {
-      ...options,;
+      ...options,;)
     headers: { ...this.headers, ...options.headers }});
 
 const data = await response.json();
     if (!response.ok) {
-      throw new Error(, data.message || data.error || `Request, failed: ${response.statusText}`
+      throw new Error(, data.message || data.error || `Request, failed: ${response.statusText}`)
       )
 }
     return data
 }
   // Workflow builder helpers
-  createWebhookNode(
-name: string;
+  createWebhookNode(name: string;
     path: string;
-    httpMethod: string = 'POST',
-    position: [number, number] = [250, 300]
+    httpMethod: string = 'POST')
+    position: [number, number] = [250, 300])
   ): N8nNode { return { id: this.generateNodeId(, name: type: 'n8n-nodes-base.webhook',
       typeVersion: 1;
       position,
@@ -213,8 +212,8 @@ name: string;
   createHttpRequestNode(
 name: string;
     url: string;
-    method: string = 'POST',
-    position: [number, number] = [450, 300]
+    method: string = 'POST')
+    position: [number, number] = [450, 300])
   ): N8nNode {
     return { id: this.generateNodeId(, name: type: 'n8n-nodes-base.httpRequest',
       typeVersion: 4.1,
@@ -233,12 +232,12 @@ name: string;
         },
         sendBody: true;
     bodyParameters: { parameters: any[]
-        },
+        })
     options: {}
   createCodeNode(
 name: string;
     code: string;
-    position: [number, number] = [650, 300]
+    position: [number, number] = [650, 300])
   ): N8nNode { return { id: this.generateNodeId(, name: type: 'n8n-nodes-base.code',
       typeVersion: 2;
       position,
@@ -248,8 +247,8 @@ name: string;
   connectNodes(
 fromNode: string;
     toNode: string;
-    fromOutput: string = 'main',
-    toInput: number = 0
+    fromOutput: string = 'main')
+    toInput: number = 0)
   ): N8nConnection {
     return {
       [fromNode]: {

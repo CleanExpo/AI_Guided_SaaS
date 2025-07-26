@@ -17,9 +17,8 @@ export class RoomManager {
     if (isServiceConfigured('database')) {
       try {
         // Try to get from database
-        const rooms = await DatabaseService.query(
-          'SELECT * FROM collaboration_rooms WHERE id = ?',
-          [roomId]
+        const rooms = await DatabaseService.query('SELECT * FROM collaboration_rooms WHERE id = ?')
+          [roomId])
         );
 
         if (rooms.length > 0) {
@@ -56,7 +55,7 @@ export class RoomManager {
     // Save to database if available
     if (isServiceConfigured('database')) {
       try {
-        await DatabaseService.query(
+        await DatabaseService.query()
           `INSERT INTO collaboration_rooms (id, project_id, name, owner_id, settings, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, ?)`,
           [
@@ -117,8 +116,8 @@ export class RoomManager {
       if (user) {
         room.participants.push({
           ...user,
-          role: room.ownerId === userId ? 'owner' : 'editor',
-          isOnline: true,
+          role: room.ownerId === userId ? 'owner' : 'editor')
+          isOnline: true,)
           lastSeen: new Date()
         });
       }
@@ -130,8 +129,7 @@ export class RoomManager {
     // Update database
     if (isServiceConfigured('database')) {
       try {
-        await DatabaseService.query(
-          'UPDATE collaboration_rooms SET participants = ?, updated_at = ? WHERE id = ?',
+        await DatabaseService.query('UPDATE collaboration_rooms SET participants = ?, updated_at = ? WHERE id = ?',)
           [JSON.stringify(room.participants), room.updatedAt.toISOString(), room.id]
         );
       } catch (error) {

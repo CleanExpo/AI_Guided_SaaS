@@ -56,8 +56,8 @@ export class SemanticSearchService {
         body: JSON.stringify({
           id: request.id,
           content: request.content,
-          metadata: request.metadata || {},
-          type: request.type || 'document'
+          metadata: request.metadata || {})
+          type: request.type || 'document')
         })
       });
       
@@ -78,8 +78,8 @@ export class SemanticSearchService {
   async indexBatch(requests: IndexRequest[]): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/api/index/batch`, {
-        method: 'POST',
-        headers: this.headers,
+        method: 'POST')
+        headers: this.headers,)
         body: JSON.stringify(requests)
       });
       
@@ -105,8 +105,8 @@ export class SemanticSearchService {
         body: JSON.stringify({
           query: request.query,
           filters: request.filters || {},
-          size: request.size || 7,
-          include_source: request.includeSource !== false
+          size: request.size || 7)
+          include_source: request.includeSource !== false)
         })
       });
       
@@ -127,8 +127,8 @@ export class SemanticSearchService {
   async deleteDocument(docId: string): Promise<any> {
     try {
       const response = await fetch(`${this.baseUrl}/api/index/${docId}`, {
-        method: 'DELETE',
-        headers: this.headers
+        method: 'DELETE')
+        headers: this.headers)
       });
       
       if (!response.ok) {
@@ -205,8 +205,8 @@ export class SemanticSearchService {
     
     return this.search({
       query,
-      filters,
-      size: 10
+      filters)
+      size: 10)
     });
   }
 
@@ -216,8 +216,8 @@ export class SemanticSearchService {
   async searchDocumentation(query: string): Promise<SearchResponse> {
     return this.search({
       query,
-      filters: { type: 'document' },
-      size: 5
+      filters: { type: 'document' })
+      size: 5)
     });
   }
 
@@ -233,8 +233,8 @@ export class SemanticSearchService {
     
     return this.search({
       query,
-      filters,
-      size: 5
+      filters)
+      size: 5)
     });
   }
 }

@@ -38,15 +38,21 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center glass">
-          <Card className="w-full max-w-md" className="glass
-        <CardHeader className="glass"
-          <CardTitle className="text-2xl text-center" className="glassWelcome Back</CardTitle>
+      <Card className="w-full max-w-md glass">
+        <CardHeader className="glass">
+
+
+          <CardTitle className="text-2xl text-center glass">Welcome Back</CardTitle>
           <p className="text-center text-gray-600">Sign in to your account</p>
         </CardHeader>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass">
+
+
           <form onSubmit={handleEmailSignIn} className="space-y-4" role="form">
             <Input
               type="email"
+
+
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -58,18 +64,20 @@ export default function SignInPage() {
           </form>
           
           <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-              <span className="w-full -t" />
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
           </div>
             <div className="relative flex justify-center text-xs uppercase">
-          <span className="glass px-2 text-gray-500">Or continue with</span>
+
+
+              <span className="glass px-2 text-gray-500">Or continue with</span>
             </div>
           </div>
           <Button type="button"
             variant="outline"
             onClick={handleGithubSignIn}
-            className="w-full"
-          >
+            className="w-full">
+
             <Github className="w-4 h-4 mr-2" />
             GitHub
           </Button>
@@ -82,6 +90,7 @@ export default function SignInPage() {
           </p>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

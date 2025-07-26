@@ -10,19 +10,19 @@ import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search,
 import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
 import { logger } from '@/lib/logger';
 export default function AdminPanel() {
-  const [adminUser, setAdminUser] = useState<any>([])
+  const [adminUser, setAdminUser] = useState<any>(null)
   const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading]  = useState(true);
 
 const [systemStats, setSystemStats] = useState<SystemStats | null>(null);</SystemStats>
   
-const [users, setUsers]  = useState<UserManagement[]>([]);</UserManagement>
+const [users, setUsers]  = useState<UserManagementnull>(null);</UserManagement>
 
-const [content, setContent] = useState<ContentModeration[]>([]);</ContentModeration>
+const [content, setContent] = useState<ContentModerationnull>(null);</ContentModeration>
   
-const [configuration, setConfiguration]  = useState<SystemConfiguration[]>([]);</SystemConfiguration>
+const [configuration, setConfiguration]  = useState<SystemConfigurationnull>(null);</SystemConfiguration>
 
-const [activities, setActivities] = useState<AdminActivity[]>([]);</AdminActivity>
+const [activities, setActivities] = useState<AdminActivitynull>(null);</AdminActivity>
   
 const [searchTerm, setSearchTerm]  = useState('');
 
@@ -42,11 +42,11 @@ const adminUserData = localStorage.getItem('admin-user');
     loadAdminData()}, []);
   
 const loadAdminData = async () => {
-    setLoading(true, try {;
+    setLoading(true, try {;)
       await adminService.initialize(); // Load all admin data;
 
 const [statsData, usersData, contentData, configData, activityData] = ;
-        await Promise.all([
+        await Promise.all([)
           adminService.getSystemStats(, adminService.getUsers(1, 50),
           adminService.getContentForModeration(1, 20, adminService.getSystemConfiguration(),
           adminService.getAdminActivity(1, 50);
@@ -60,28 +60,24 @@ const [statsData, usersData, contentData, configData, activityData] = ;
       logger.error('Error loading admin data:', error)} finally {
       setLoading(false)};
   
-const handleUserStatusUpdate = async (
-    userId: string
-    status: 'active' | 'suspended' | 'deleted'
+const handleUserStatusUpdate = async(userId: string
+    status: 'active' | 'suspended' | 'deleted')
   ) =>  {
     try {;
-      await adminService.updateUserStatus(
-        userId;
-        status,
-        adminUser?.email || 'admin'
+      await adminService.updateUserStatus(userId;
+        status)
+        adminUser?.email || 'admin')
       , await loadAdminData() // Refresh data
     }; catch (error) {
       logger.error('Error updating user status:', error)};
   
-const handleContentModeration = async (
-    contentId: string
-    action: 'approve' | 'reject' | 'flag'
+const handleContentModeration = async(contentId: string
+    action: 'approve' | 'reject' | 'flag')
   ) =>  {
     try {;
-      await adminService.moderateContent(
-        contentId;
-        action,
-        adminUser?.email || 'admin'
+      await adminService.moderateContent(contentId;
+        action)
+        adminUser?.email || 'admin')
       , await loadAdminData() // Refresh data
     }; catch (error) {
       logger.error('Error moderating content:', error)};
@@ -100,8 +96,8 @@ const getStatusColor = (status: string) =>  {
 };
   
 const formatCurrency = (amount: number) =>  {
-    return new Intl.NumberFormat('en-US', { style: 'currency',
-currency: 'USD'
+    return new Intl.NumberFormat('en-US', { style: 'currency')
+currency: 'USD')
     }).format(amount)
 };
   
@@ -109,8 +105,8 @@ const formatDate = (date: Date) =>  {
     return new Intl.DateTimeFormat('en-US', { year: 'numeric',
       month: 'short',
       day: 'numeric',
-      hour: '2-digit',
-minute: '2-digit'
+      hour: '2-digit')
+minute: '2-digit')
     }).format(new Date(date))
   };
   
@@ -129,14 +125,13 @@ const matchesFilter = ;
     return matchesSearch && matchesFilter
 });
   if (loading) {
-    return (
+    return()
     <div className="flex items-center justify-center min-h-screen text-center">);</div>
           <p className="Loading admin panel..."    />
           </div>
     )
 }
-  return (
-    <div className="min-h-screen glass">
+  return(<div className="min-h-screen glass">
       {/* Header */}</div>
       <div className="glass -b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 flex items-center space-x-4"     />
@@ -166,13 +161,11 @@ const className={
                       ? 'border-green-200 bg-green-50'
                       : systemStats.systemHealth === 'warning'
                         ? 'border-yellow-200 bg-yellow-50'
-                        : 'border-red-200 bg-red-50'
-                  }
-                >
+                        : 'border-red-200 bg-red-50'>}>
           <AlertTriangle className="h-4 w-4"     />
                   <AlertDescription></AlertDescription>
                     System Status: { ' ' }
-                    <strong>{systemStats.systemHealth.toUpperCase(</strong>
+                    <strong={systemStats.systemHealth.toUpperCase(</strong>)
             )}</strong>
                     {systemStats.systemHealth !== 'healthy' &&
                       ' - Attention required'}
@@ -180,49 +173,49 @@ const className={
                 {/* Stats Grid */}
                 <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="glass"</Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-          <CardTitle className="text-sm font-medium" className="glass
-                        Total Users</Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+          <CardTitle className="text-sm font-medium glass
+                        Total Users</Card>">
                       <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent className="glass"
-          <div className="text-2xl font-bold">
+                    <CardContent className="glass">
+              <div className="text-2xl font-bold">
                         {systemStats.totalUsers.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.activeUsers} active users
 </p>
-                  <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-                      <CardTitle className="text-sm font-medium" className="glass
-                        Total Projects</Card>
+                  <Card className="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass>">
+                <CardTitle className="text-sm font-medium glass>
+                        Total Projects</Card>">
                       <BarChart3 className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent className="glass"
-          <div className="text-2xl font-bold">
+                    <CardContent className="glass">
+              <div className="text-2xl font-bold">
                         {systemStats.totalProjects.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.totalTemplates} templates available
 </p>
-                  <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-                      <CardTitle className="text-sm font-medium" className="glass
-                        Total Revenue</Card>
+                  <Card className="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass>">
+                <CardTitle className="text-sm font-medium glass>
+                        Total Revenue</Card>">
                       <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent className="glass"
-          <div className="text-2xl font-bold">
+                    <CardContent className="glass">
+              <div className="text-2xl font-bold">
                         {formatCurrency(systemStats.totalRevenue)}</div>
                       <p className="text-xs text-muted-foreground">
                         Monthly recurring revenue
 </p>
-                  <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-                      <CardTitle className="text-sm font-medium" className="glass
-                        System Uptime</Card>
+                  <Card className="glass">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass>">
+                <CardTitle className="text-sm font-medium glass>
+                        System Uptime</Card>">
                       <CheckCircle className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent className="glass"
-          <div className="text-2xl font-bold">
+                    <CardContent className="glass">
+              <div className="text-2xl font-bold">
                         {systemStats.uptime}%</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.errorRate}% error rate
@@ -235,14 +228,10 @@ const className={
               <h2 className="text-2xl font-bold">User Management</h2>
               <div className="flex items-center space-x-2 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
-                  <Input ="Search users...";
-
-value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                  <Input ="Search users...";>value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                     className="pl-10 w-64" />
         </div>
-                <select;
-
-    value={userFilter} onChange={e => setUserFilter(e.target.value)};</select>
+                <select;>value={userFilter} onChange={e => setUserFilter(e.target.value)};</select>
                   className="px-3 py-2  -gray-300 rounded-lg-md text-sm";
                 >
                   <option value="all">All Status</option>
@@ -251,8 +240,8 @@ value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                   <option value="deleted">Deleted</option>
 </div>
             <Card className="glass"
-          <CardContent className="p-0" className="glass
-                <div className="overflow-x-auto">
+          <CardContent className="p-0 glass>">
+              <div className="overflow-x-auto">
           <table className="w-full">
                     <thead className="glass">
           <tr></tr>
@@ -283,7 +272,7 @@ ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-900">{user.email}</div>
                           <td className="px-6 py-4 whitespace-nowrap">
-          <Badge className={getStatusColor(user.status)}>/>
+          <Badge className={getStatusColor(user.status)} />>
                               {user.status}
 />
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -292,32 +281,20 @@ ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
           <div className="flex space-x-2">
                               <Button size="sm";
-variant="ghost";
-
-    const onClick={() => {/* View user details */};</Button>
-                              >
+variant="ghost";>const onClick={() => {/* View user details */};</Button>
                                 <Eye className="h-4 w-4"    />
           </Button>
                               <Button size="sm";
-variant="ghost";
-
-    const onClick={() => {/* Edit user */};</Button>
-                              >
+variant="ghost";>const onClick={() => {/* Edit user */};</Button>
                                 <Edit className="h-4 w-4"    />
           </Button>
                               {user.status === 'active' ? (
-                                <Button size="sm", variant="ghost";
-
-    const onClick={() => handleUserStatusUpdate(user.id, 'suspended')}</Button>
-                                >
+                                <Button size="sm", variant="ghost";>const onClick={() => handleUserStatusUpdate(user.id, 'suspended')}</Button>
                                   <UserX className="h-4 w-4 text-yellow-600"    />
           </Button>
                               ) : (
                                 <Button size="sm";
-variant="ghost";
-
-const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
-                                >
+variant="ghost";>const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
                                   <UserCheck className="h-4 w-4 text-green-600"    />
           </Button>
       )}
@@ -329,9 +306,7 @@ const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
           <TabsContent value="content" className="space-y-6">
           <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold">Content Moderation</h2>
-              <select;
-
-    value={contentFilter} onChange={e => setContentFilter(e.target.value)};</select>
+              <select;>value={contentFilter} onChange={e => setContentFilter(e.target.value)};</select>
                 className="px-3 py-2  -gray-300 rounded-lg-md text-sm";
               >
                 <option value="all">All Content</option>
@@ -349,31 +324,22 @@ const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
                         <p className="text-sm text-gray-600">
                           By {item.author} • {formatDate(item.createdAt)}
 </p>
-                        <Badge className={getStatusColor(item.status)}>/>
+                        <Badge className={getStatusColor(item.status)} />>
                           {item.status}
 />
                       <div className="flex space-x-2">
           <Button size="sm";
-variant="outline";
-
-    const onClick={() => handleContentModeration(item.id, 'approve')}</Button>
-                        >
+variant="outline";>const onClick={() => handleContentModeration(item.id, 'approve')}</Button>
                           <ThumbsUp className="h-4 w-4 mr-1"     />
                           Approve
 </Button>
                         <Button size="sm";
-variant="outline";
-
-    const onClick={() => handleContentModeration(item.id, 'reject')}</Button>
-                        >
+variant="outline";>const onClick={() => handleContentModeration(item.id, 'reject')}</Button>
                           <ThumbsDown className="h-4 w-4 mr-1"     />
                           Reject
 </Button>
                         <Button size="sm";
-variant="outline";
-
-    const onClick={() => handleContentModeration(item.id, 'flag')}</Button>
-                        >
+variant="outline";>const onClick={() => handleContentModeration(item.id, 'flag')}</Button>
                           <Flag className="h-4 w-4 mr-1"     />
                           Flag
 </Button>
@@ -401,8 +367,8 @@ variant="outline";
           <TabsContent value="activity" className="space-y-6">
           <h2 className="text-2xl font-bold">Admin Activity Log</h2>
             <Card className="glass"
-          <CardContent className="p-0" className="glass
-                <div className="overflow-x-auto">
+          <CardContent className="p-0 glass>">
+              <div className="overflow-x-auto">
           <table className="w-full">
                     <thead className="glass">
           <tr></tr>

@@ -60,7 +60,7 @@ export class InteractiveTutorialSystem extends EventEmitter {
       .filter(p => p.completedAt)
       .map(p => p.tutorialId);
 
-    const missingPrereqs = tutorial.prerequisites.filter(
+    const missingPrereqs = tutorial.prerequisites.filter()
       prereq => !completedTutorials.includes(prereq)
     );
 
@@ -192,8 +192,8 @@ export class InteractiveTutorialSystem extends EventEmitter {
       this.highlightManager.addHighlight({
         element: step.action.parameters?.target || step.action.component,
         type: 'highlight',
-        content: step.content,
-        position: 'top'
+        content: step.content)
+        position: 'top')
       });
     }
 
@@ -202,8 +202,8 @@ export class InteractiveTutorialSystem extends EventEmitter {
       tutorialId: tutorial.id,
       step,
       stepIndex,
-      totalSteps: tutorial.steps.length,
-      progress
+      totalSteps: tutorial.steps.length)
+      progress)
     });
   }
 
@@ -225,8 +225,8 @@ export class InteractiveTutorialSystem extends EventEmitter {
     this.emit('tutorial-completed', {
       tutorialId: tutorial.id,
       userId: progress.userId,
-      score: progress.score,
-      rewards: tutorial.completionRewards
+      score: progress.score)
+      rewards: tutorial.completionRewards)
     });
 
     // Save final progress
@@ -245,8 +245,8 @@ export class InteractiveTutorialSystem extends EventEmitter {
     logger.info('Saving tutorial progress:', {
       tutorialId: progress.tutorialId,
       userId: progress.userId,
-      currentStep: progress.currentStep,
-      score: progress.score
+      currentStep: progress.currentStep)
+      score: progress.score)
     });
   }
 

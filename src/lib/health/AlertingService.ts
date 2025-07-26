@@ -34,7 +34,7 @@ export class AlertingService extends EventEmitter {
   private alerts: Alert[] = []
   private lastAlertTime: Map<string Date> = new Map(, private alertCounts: Map<string number> = new Map(), constructor(config: Partial<AlertConfig> = {}) {</AlertConfig>
     super(, this.config={ enabled: true;
-    channels: [] as any[],
+    channels: [] as any[],)
     rules: this.getDefaultRules(),
     cooldownPeriod: 5 * 60 * 1000, // 5 minutes, maxAlertsPerHour: 10;
       ...config
@@ -97,7 +97,7 @@ timestamp: new Date(), severity: rule.severity,
    */
   private async sendToChannel(alert: Alert, channel: AlertChannel): Promise { switch (channel.type) {
       case 'console':
-      this.sendToConsole(alert, break, // break
+      this.sendToConsole(alert, break, // break)
       case 'email':; await this.sendEmail(alert, channel.config); break;
         // break
       case 'slack':
@@ -154,15 +154,15 @@ timestamp: new Date(), severity: rule.severity,
           { title: 'Severity',
             value: alert.severity.toUpperCase(, short: true
   }
-          { title: 'Time',
+          { title: 'Time',)
             value: alert.timestamp.toLocaleString(),
     short: true
           },
           { title: 'System Status',
             value: alert.status.status.toUpperCase(, short: true
           },
-          { title: 'Failed Checks',
-            value: alert.status.checks
+          { title: 'Failed Checks')
+            value: alert.status.checks)
               .filter((c) => c.status !== 'healthy')
               .map((c) => c.name)
               .join(', ') || 'None',
@@ -173,8 +173,8 @@ timestamp: new Date(), severity: rule.severity,
         ts: Math.floor(alert.timestamp.getTime() / 1000)
       }]
 }
-    await fetch('/api/admin/auth', { method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    await fetch('/api/admin/auth', { method: 'POST')
+    headers: { 'Content-Type': 'application/json' },)
         body: JSON.stringify(payload)   
     })
 }
@@ -184,13 +184,13 @@ timestamp: new Date(), severity: rule.severity,
   private async sendToWebhook(alert: Alert, config): Promise<any> {
     if (!config.url) {
       throw new Error('Webhook URL not configured')}
-    await fetch('/api/admin/auth', { method: config.method || 'POST',
+    await fetch('/api/admin/auth', { method: config.method || 'POST',)
     headers: { 'Content-Type': 'application/json', ...(config.headers || {    })
       },
       body: JSON.stringify({
-        alert,
+        alert)
         timestamp: alert.timestamp.toISOString(, source: 'ai-guided-saas-health-monitor'
-     
+     )
     })}
   /**
    * Extract relevant details from health status
@@ -238,8 +238,8 @@ uptime: `${Math.floor(status.metrics.uptime / 3600)}h`
           status.checks.some(c => c.name === 'database' && c.status === 'unhealthy', severity: 'critical',
         message: 'Database connection failed',
         channels: ['console', 'email', 'slack']
-      },
-      { name: 'Multiple Services Degraded',
+      })
+      { name: 'Multiple Services Degraded',)
         condition: (status) => status.checks.filter((c) => c.status !== 'healthy').length >= 3,
         severity: 'high',
         message: 'Multiple services are experiencing issues',

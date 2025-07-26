@@ -35,7 +35,7 @@ const defaultThresholds = {
 };
 
 export function WebVitalsMonitor({
-  onReport,
+  onReport))
   enableLogging = (process.env.NODE_ENV || "development") === "development",
   enableAnalytics = true,
   thresholds = defaultThresholds,
@@ -70,7 +70,7 @@ export function WebVitalsMonitor({
           value: metric.value,
           rating,
           delta: metric.delta,
-          id: metric.id,
+          id: metric.id))
         });
       }
 
@@ -91,10 +91,9 @@ export function WebVitalsMonitor({
   return null;
 }
 
-function getRating(
-  name: string,
-  value: number,
-  thresholds: WebVitalsConfig['thresholds'] = defaultThresholds
+function getRating(name: string,
+  value: number)
+  thresholds: WebVitalsConfig['thresholds'] = defaultThresholds)
 ): 'good' | 'needs-improvement' | 'poor' {
   const threshold = thresholds[name as keyof typeof thresholds];
   
@@ -109,10 +108,9 @@ async function sendToMonitoring(metric: WebVitalsMetric) {
   try {
     // Use sendBeacon for reliability
     if (navigator.sendBeacon) {
-      navigator.sendBeacon(
-        '/api/monitoring/vitals',
+      navigator.sendBeacon('/api/monitoring/vitals',
         JSON.stringify({
-          metric,
+          metric))
           timestamp: new Date().toISOString(),
           url: window.location.href,
         })
@@ -123,7 +121,7 @@ async function sendToMonitoring(metric: WebVitalsMetric) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          metric,
+          metric))
           timestamp: new Date().toISOString(),
           url: window.location.href,
         }),

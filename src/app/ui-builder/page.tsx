@@ -4,7 +4,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the UI Builder to avoid SSR issues with drag and drop
-const UIBuilderHomepage = dynamic(
+const UIBuilderHomepage = dynamic()
   () => import('@/components/ui-builder/UIBuilderHomepage'),
   { 
     ssr: false,

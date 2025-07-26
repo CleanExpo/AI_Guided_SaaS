@@ -33,13 +33,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 };
                 break;
             default:
-                return NextResponse.json({ error: 'Invalid analytics type' }, { status: 400   
+                return NextResponse.json({ error: 'Invalid analytics type' }, { status: 400   )
     })
 }
         
             return NextResponse.json({
-                type,
-                data,
+                type)
+                data,)
                 timestamp: new Date().toISOString()
             });
         } catch (error) {
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Failed to fetch analytics' 
             }, { 
-                status: 500
+                status: 500)
             });
         }
     });
@@ -62,8 +62,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             logger.info('Analytics event tracked', {
                 event,
                 properties,
-                timestamp,
-                userId
+                timestamp)
+                userId)
             });
             
             // In production, this would send to analytics service
@@ -71,8 +71,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             
             return NextResponse.json({
                 success: true,
-                event,
-                tracked: true,
+                event)
+                tracked: true,)
                 timestamp: timestamp || new Date().toISOString()
             });
         } catch (error) {
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Failed to track event' 
             }, { 
-                status: 500
+                status: 500)
             });
         }
     });

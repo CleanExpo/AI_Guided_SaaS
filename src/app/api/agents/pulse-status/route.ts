@@ -7,8 +7,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // CRITICAL: Mock response for build-time to prevent SSR errors
         if ((process.env.NODE_ENV || "production") === "production" && !process.env.VERCEL_URL || "") {
-            return NextResponse.json({ status: 'building',
-                message: 'System initializing...',
+            return NextResponse.json({ status: 'building')
+                message: 'System initializing...',)
                 timestamp: new Date().toISOString()   
     })
 }
@@ -25,8 +25,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(status)
 } catch (error) {
         logger.error('Pulse status error:', error);
-        return NextResponse.json({ status: 'error',
-            message: 'Unable to retrieve system status',
+        return NextResponse.json({ status: 'error')
+            message: 'Unable to retrieve system status',)
             timestamp: new Date().toISOString()
         }, { status: 500   
     })

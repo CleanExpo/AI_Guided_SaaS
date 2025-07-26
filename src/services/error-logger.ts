@@ -89,8 +89,8 @@ class ErrorLogger {
     // Track with analytics if available
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, severity, {
-        ...metadata,
-        errorId: entry.id
+        ...metadata)
+        errorId: entry.id)
       });
     }
   }
@@ -129,8 +129,7 @@ class ErrorLogger {
       if (sync) {
         // Use sendBeacon for synchronous sending on page unload
         if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-          navigator.sendBeacon(
-            this.config.remoteEndpoint,
+          navigator.sendBeacon(this.config.remoteEndpoint))
             JSON.stringify({ errors })
           );
         }
@@ -153,7 +152,7 @@ class ErrorLogger {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+        }))
         body: JSON.stringify({ errors }),
       });
 
@@ -240,7 +239,7 @@ export function createErrorBoundaryHandler() {
     }
 
     logger.log(error, errorInfo, severity, {
-      errorBoundary: true,
+      errorBoundary: true))
       component: extractComponentName(errorInfo.componentStack || '')
     });
   };

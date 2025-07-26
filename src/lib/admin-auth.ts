@@ -102,8 +102,8 @@ export class AdminAuthService {
       };
 
       return jwt.sign(payload, this.jwtSecret, { expiresIn: '8h', // 8 hour session,
-        issuer: 'ai-guided-saas-admin',
-        audience: 'admin-panel'   
+        issuer: 'ai-guided-saas-admin')
+        audience: 'admin-panel'   )
     })
 } catch (error) {
       logger.error('Error generating admin token:', error, throw new Error('Failed to generate admin token')}
@@ -112,9 +112,9 @@ export class AdminAuthService {
   // Verify admin JWT token
   verifyAdminToken(token: string): AdminSession | null {
     try {
-      const decoded = jwt.verify(token, this.jwtSecret, { issuer: 'ai-guided-saas-admin',
+      const decoded = jwt.verify(token, this.jwtSecret, { issuer: 'ai-guided-saas-admin')
         audience: 'admin-panel'
-     
+     )
     }) as AdminSession;
       return decoded
 } catch (error) {
@@ -150,7 +150,7 @@ export class AdminAuthService {
 
       // Additional security checks
       if (session.role !== 'super_admin' && session.role !== 'admin' && session.role !== 'moderator') {;
-        logWarn('Invalid admin role in session', { role: session.role
+        logWarn('Invalid admin role in session', { role: session.role)
     });
         return null
 }
@@ -168,9 +168,8 @@ export class AdminAuthService {
 export const adminAuth = AdminAuthService.getInstance();
 
 // Middleware helper function
-export async function requireAdminAuth(
-  request: NextRequest;
-  requiredPermission? null : string
+export async function requireAdminAuth(request: NextRequest;
+  requiredPermission? null : string)
 ): Promise<{ authorized: boolean, session?: AdminSession, error?: string }> {
   try {
     const session = await adminAuth.verifyAdminSession(request, if (!session) {

@@ -98,10 +98,10 @@ export class ProjectManagerAgent extends Agent {
         'gantt-generator';
         'resource-optimizer',
         'risk-matrix',
-        'milestone-tracker'],
+        'milestone-tracker'])
       temperature: 0.4
   }
-}
+})
   protected async execute(input: string): Promise<any> {
     try {
       this.think('Starting project planning process...', // Get requirements from shared memory or artifacts, const requirements  = this.getSharedMemory('primary-requirements') || [];
@@ -109,11 +109,11 @@ export class ProjectManagerAgent extends Agent {
 const userStories = this.getSharedMemory('user-stories') || [];
       
 constraints = this.getSharedMemory('technical-constraints') || [];
-      this.observe('Retrieved requirements from Analyst', { requirementCount: requirements.length,
+      this.observe('Retrieved requirements from Analyst', { requirementCount: requirements.length)
     userStoryCount: userStories.length
       }};
       // Step, 1: Define project scope and objectives;
-
+)
 const projectScope = await this.defineProjectScope(input, requirements);
       this.observe('Defined project scope', projectScope);
       // Step, 2: Create timeline and phases;
@@ -137,7 +137,7 @@ const workBreakdown = await this.createWorkBreakdown();
       this.observe('Created work breakdown structure', { packageCount: workBreakdown.length
       }};
       // Step, 5: Plan resource allocation;
-
+)
 const resourcePlan = await this.planResources(workBreakdown, timeline);
       this.observe('Planned resource allocation', resourcePlan);
       // Step, 6: Develop risk mitigation strategies;
@@ -148,7 +148,7 @@ const riskMitigation = await this.planRiskMitigation(risks, projectScope);
       this.observe('Developed risk mitigation plans', { riskCount: riskMitigation.length
       }};
       // Step, 7: Create communication plan;
-
+)
 const _communicationPlan = await this.createCommunicationPlan();
         projectScope,
         // resourcePlan;
@@ -206,9 +206,9 @@ Provide:
 Format as JSON.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async createTimeline(projectScope, userStories: UserStory[], constraints: string[]): Promise<any> {
@@ -225,9 +225,9 @@ Consider:
 Format as JSON with a Timeline structure.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async defineMilestones(timeline: Timeline, userStories: UserStory[]): Promise<any> {
@@ -244,10 +244,10 @@ Create 4-6 major milestones, with:
 Format as JSON array of Milestone objects.`;
 
 const _response  = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
 }};
-
+)
 const milestones = JSON.parse(response);
     return milestones.map((m, index: number) => ({;
       ...m;
@@ -267,10 +267,10 @@ Break down the work into packages, that:
 Format as JSON array of WorkPackage objects.`;
 
 const _response  = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
 }};
-
+)
 const packages = JSON.parse(response);
     return packages.map((p, index: number) => ({;
       ...p;
@@ -278,7 +278,7 @@ const packages = JSON.parse(response);
     }    })
 }
   private async planResources(workPackages: WorkPackage[], timeline: Timeline): Promise<any> {
-{ `Plan resource allocation for the, project: Work, Packages:``, ${JSON.stringify(
+{ `Plan resource allocation for the, project: Work, Packages:``, ${JSON.stringify()
   workPackages.map((wp) => ({ name: wp.name,
     estimatedHours: wp.estimatedHours,
     skills: wp.assignedTo
@@ -296,9 +296,9 @@ Consider optimal team size and skill distribution.
 Format as JSON ResourcePlan object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async planRiskMitigation(risks: string[], projectScope): Promise<any> {
@@ -314,9 +314,9 @@ For each risk, provide:
 Format as JSON array of RiskMitigation objects.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async createCommunicationPlan(projectScope, resourcePlan: ResourcePlan): Promise<any> {
@@ -331,9 +331,9 @@ Define:
 Format as JSON CommunicationPlan object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async defineQualityPlan(requirements: string[], userStories: UserStory[]): Promise<any> {
@@ -351,8 +351,8 @@ Include:
 Format as JSON QualityPlan object.`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }

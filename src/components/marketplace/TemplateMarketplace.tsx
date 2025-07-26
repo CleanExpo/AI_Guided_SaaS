@@ -30,7 +30,7 @@ initialTemplates?: Template[]
 }
 
 export default function TemplateMarketplace({
-  const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps, initialCategories  = []
+  const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps, initialCategories  = [])
 }: TemplateMarketplaceProps) {
   const [templates] = useState<Template[]>([ </Template>, { id: '1',
       name: 'E-commerce Pro',
@@ -64,13 +64,13 @@ price: 0
 }
   ]);
   
-const [searchQuery, setSearchQuery]  = useState<any>([])
+const [searchQuery, setSearchQuery]  = useState<any>(null)
 
-const [selectedCategory, setSelectedCategory] = useState<any>([])
+const [selectedCategory, setSelectedCategory] = useState<any>(null)
   
 const [viewMode, setViewMode]  = useState<'grid' | 'list'>('grid');
 
-const [isLoading] = useState<any>([])
+const [isLoading] = useState<any>(null)
   
 const categories: TemplateCategory[]   = [
   { id: 'all' , name: 'All Templates', count: templates.length },
@@ -84,20 +84,17 @@ const filteredTemplates = templates.filter((template) => {
     return matchesSearch && matchesCategory
 });
   if (isLoading) {
-    return (
+    return()
     <div className="glass flex items-center justify-center p-8">);</div>
         <span className="ml-2">Loading templates...</span>
       )}
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Search, and Filters */}</div>
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
           <Input
-type="text"
-="Search templates...";
-
-value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+type="text")
+="Search templates...";>value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             className="pl-9" />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -114,27 +111,21 @@ value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           <Button
 ;
 const variant={viewMode === 'grid' ? 'default' : 'ghost' };
-            size="sm";
-
-const onClick={ () => setViewMode('grid')}</Button>
-          >
+            size="sm";>const onClick={ () => setViewMode('grid')}</Button>
             <Grid className="h-4 w-4"    />
           </Button>
           <Button
 ;
 const variant={viewMode === 'list' ? 'default' : 'ghost' };
-            size="sm";
-
-    const onClick={() => setViewMode('list')}</Button>
-          >
+            size="sm";>const onClick={() => setViewMode('list')}</Button>
             <List className="h-4 w-4"     />
       {/* Templates */}
       <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}></div>
         {filteredTemplates.map((template) => (\n    </div>
-          <Card key={template.id} className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <Card key={template.id} className="hover:shadow-md-lg transition-shadow-md glass
           <CardHeader className="glass"</CardHeader>
-              <div className="flex items-start justify-between" >></div>
-                  <CardTitle className="text-lg flex items-center" className="glass
+              <div className="flex items-start justify-between" ></div>
+                  <CardTitle className="text-lg flex items-center glass
                     {template.name},
     {template.featured  && (</Card>
 Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured/>

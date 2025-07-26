@@ -54,11 +54,11 @@ export default function FeaturesPage() {
 
         <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
-            <Card key={feature.title} className="hover:shadow-md-lg transition-shadow-md" className="glass
+            <Card key={feature.title} className="hover:shadow-md-lg transition-shadow-md glass
               <CardHeader className="glass"
                 <div className="flex items-center mb-4">
                   <span className="text-3xl mr-4">{feature.icon}</span>
-                  <CardTitle className="text-lg" className="glass{feature.title}</CardTitle>
+                  <CardTitle className="text-lg glass{feature.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="glass"

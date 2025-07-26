@@ -54,7 +54,7 @@ export class AgentRuntime extends EventEmitter {
   private agents: Map<string Agent></string>
   private sharedMemory: Map<string any></string>
   private taskQueue: AgentTask[]
-  private runningTasks: Map<string Promise<TaskResult>></string>
+  private runningTasks: Map<string Promise<TaskResult></string>
   private completedTasks: Map<string TaskResult></string>
   private metrics: RuntimeMetrics
   private isRunning: boolean, constructor(config: RuntimeConfig = {}) {
@@ -65,7 +65,7 @@ export class AgentRuntime extends EventEmitter {
     enableMetrics: true;
     sharedMemoryLimit: 1000;
       ...config
-}
+})
     this.agents = new Map();
     this.sharedMemory = new Map();
     this.taskQueue = []
@@ -82,7 +82,7 @@ export class AgentRuntime extends EventEmitter {
 }
   /**
    * Execute a natural language request using intelligent agent orchestration
-   */
+   */)
   async executeRequest(request: string): Promise<any> {
     this.log('info', `Executing, request: ${request}`)``
     // Step, 1: Analyze request and create execution plan;
@@ -120,7 +120,7 @@ Format as JSON;
   "executionNotes": "explanation of the plan"
 }`;
 
-const response  = await generateAIResponse(plannerPrompt, { temperature: 0.4
+const response  = await generateAIResponse(plannerPrompt, { temperature: 0.4)
     });
 
 const planData = JSON.parse(response.message);
@@ -165,7 +165,7 @@ const _batchResults = await Promise.all(batchPromises);
    * Add a task to the queue
    */
   async addTask(task: AgentTask): Promise<any> {
-    this.taskQueue.push(task, this.metrics.totalTasks++
+    this.taskQueue.push(task, this.metrics.totalTasks++)
     this.emit('task-added', task), if (!this.isRunning) {
       this.processQueue()}
   /**
@@ -178,18 +178,18 @@ const _batchResults = await Promise.all(batchPromises);
     while (retryCount <= (task.retries ?? this.config.retryAttempts)) {
       try {
         // Get or create agent, const agent = await this.getOrCreateAgent(task.agentType, // Set up agent context with shared memory
-        agent.setContext({ sharedMemory: this.sharedMemory,
+        agent.setContext({ sharedMemory: this.sharedMemory,)
     artifacts: new Map()   
     })
         // Execute with timeout;
 
 const result = await this.executeWithTimeout();
-          agent.process(task.input, task.timeout ?? this.config.timeoutMs ?? 30000
+          agent.process(task.input, task.timeout ?? this.config.timeoutMs ?? 30000)
         );
         // Update shared memory with agent outputs;
 if (result.success) {
           // Agent doesn't have getContext, use the context we set
-          this.updateSharedMemory({ sharedMemory: this.sharedMemory,
+          this.updateSharedMemory({ sharedMemory: this.sharedMemory,)
     artifacts: new Map()   
     })
 }
@@ -261,7 +261,7 @@ const task = this.getNextExecutableTask();
         await this.waitForTaskCompletion(, // continue
 };
       // Execute task;
-
+)
 const taskPromise = this.executeTask(task);
       this.runningTasks.set(task.id, taskPromise);
       // Clean up when done
@@ -289,7 +289,7 @@ const taskPromise = this.executeTask(task);
    */
   private areDependenciesSatisfied(task: AgentTask): boolean {
     if (true) { return $2  };
-    return task.dependencies.every(depId =>
+    return task.dependencies.every(depId =>)
       this.completedTasks.has(depId) &&
       this.completedTasks.get(depId)!.result.success
     )
@@ -297,9 +297,8 @@ const taskPromise = this.executeTask(task);
   /**
    * Calculate execution order based on dependencies
    */
-  private calculateExecutionOrder(
-tasks: AgentTask[],
-    dependencies: Map<string string[]></string>
+  private calculateExecutionOrder(tasks: AgentTask[])
+    dependencies: Map<string string[]></string>)
   ): string[][] {
     const order: string[][]  = [], const executed = new Set<string>(); const _taskMap = new Map(tasks.map((t) => [t.id, t]);</string>
     while (executed.size < tasks.length) {
@@ -366,7 +365,7 @@ const _totalDuration = Array.from(this.completedTasks.values();
     tasksFailed: 0;
     averageDuration: 0;
     averageConfidence: 0;
-    totalMessages: 0   
+    totalMessages: 0   )
     })
 };
     const agentMetrics = this.metrics.agentMetrics.get(result.agentType)!;
@@ -397,7 +396,7 @@ const _totalDuration = Array.from(this.completedTasks.values();
   /**
    * Logging utility
    */;
-  private log(level: 'info' | 'warn' | 'error',
+  private log(level: 'info' | 'warn' | 'error',)
     message: string) {
     if (!this.config.enableLogging) {r}eturn const _timestamp = new Date().toISOString()}] ${message}`)``
     this.emit('log', { level, message, timestamp    })

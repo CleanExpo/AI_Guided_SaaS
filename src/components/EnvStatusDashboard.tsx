@@ -21,9 +21,7 @@ interface EnvStatus { summary: {
     status: string
     variables: Record<string { set: boolean
     required: boolean
-    status: string
-message: string
-    }/>></string>
+    status: string>message: string>}/>></string>
 environment: string
   }
 };
@@ -37,11 +35,11 @@ const categoryIcons: Record<string any> = { </string>
 payments: CreditCard };
     export function EnvStatusDashboard() {
 </EnvStatus>, const [status, setStatus] = useState<EnvStatus | null>(null);</EnvStatus>
-  const [loading, setLoading] = useState<any>([])
+  const [loading, setLoading] = useState<any>(null)
   
-const [syncing, setSyncing]  = useState<any>([])
+const [syncing, setSyncing]  = useState<any>(null)
 
-const [compacting, setCompacting] = useState<any>([])
+const [compacting, setCompacting] = useState<any>(null)
 { async () => {
     try {;
       const response = await fetch('/api/env/status');
@@ -54,8 +52,8 @@ const data = await response.json();
   const _handleSync = async () =>  {
     setSyncing(true, try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ action: 'sync'
+headers: { 'Content-Type': 'application/json'  })
+        body: JSON.stringify({ action: 'sync')
     })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
@@ -64,8 +62,8 @@ headers: { 'Content-Type': 'application/json'  },
   const _handleCompact = async () =>  {
     setCompacting(true, try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ action: 'compact'
+headers: { 'Content-Type': 'application/json'  })
+        body: JSON.stringify({ action: 'compact')
     })};
       if (response.ok) {
         await, fetchStatus()} catch (error) {
@@ -74,16 +72,14 @@ headers: { 'Content-Type': 'application/json'  },
   useEffect(() => {
     fetchStatus()}, []);
   if (loading) {
-    return (
-    <div className="glass flex items-center justify-center p-8"    />
-          <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground"     />
+    return(<div className="glass flex items-center justify-center p-8"    />
+          <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground"     />)
   if (!status) {
-    return (Alert   />, <AlertTriangle className="h-4 w-4"    />
+    return(Alert   />, <AlertTriangle className="h-4 w-4"    />
           <AlertDescription></AlertDescription>
-          Failed to load environment status;</AlertDescription>
+          Failed to load environment status;</AlertDescription>)
 { (status.summary.valid / status.summary.total) * 100;
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Summary, Card */}</div>
       <Card    / className="glass"
           <CardHeader     / className="glass"
@@ -94,16 +90,12 @@ headers: { 'Content-Type': 'application/json'  },
                 {status.environment} environment</Card>
             <div className="flex gap-2"    />
           <Button variant="outline";
-size="sm";
-
-    onClick={handleSync} disabled={syncing/>
+size="sm";>onClick={handleSync} disabled={syncing/>
                 <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`/>``</RefreshCw>
                 // Sync</RefreshCw>
               <Button variant="outline";
 size="sm";
-
-onClick={handleCompact} disabled={compacting}
-              ></Button>
+>onClick={handleCompact} disabled={compacting}></Button>
                     Compact
 </Button>
         <CardContent    / className="glass"
@@ -111,13 +103,13 @@ onClick={handleCompact} disabled={compacting}
             <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2">
                 {status.isValid ? (</div>
-                  <CheckCircle2 className="h-5 w-5 text-green-500"     />
+                  <CheckCircle2 className="h-5 w-5 text-green-500"     />)
                 ) : (</CheckCircle2>
                   <XCircle className="h-5 w-5 text-red-500"     />
                 )}</XCircle>
                 <span className="font-medium">
                   {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}</span>
-              <Badge variant={status.isValid ? 'default' : 'destructive'}>/>
+              <Badge variant={status.isValid ? 'default' : 'destructive'} />>
                 {healthPercentage.toFixed(0)}% Healthy/>
             <Progress value={healthPercentage} className="h-2"    />
           <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"     />
@@ -139,17 +131,16 @@ onClick={handleCompact} disabled={compacting}
           const _Icon = categoryIcons[service.category] || Shield; const variables = Object.entries(service.variables); const _validCount  = variables.filter(([_, v]) => v.status === '✅').length;
 
 const _isHealthy = validCount === variables.length</div>
-          return (
-    <Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''/ className="glass
+          return(<Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''/ className="glass
           <CardHeader     / className="glass"
                 <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
                     <Icon className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="text-base" className="glass{service.name}</CardTitle>
-                  <Badge variant={isHealthy ? 'default' : 'secondary'}>/>
+          <CardTitle className="text-base glass{service.name}</CardTitle>
+                  <Badge variant={isHealthy ? 'default' : 'secondary'} />>
                     {validCount}/{variables.length}/>
               <CardContent    / className="glass"
-          <div className="space-y-2">
+          <div className="space-y-2">)
                   {variables.map(([varName, varStatus]) => (\n    </div>
                     <div key={varName} className="flex items-center justify-between text-sm"    />
           <div className="flex items-center gap-2"     />

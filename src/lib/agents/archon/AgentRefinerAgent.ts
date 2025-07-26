@@ -97,21 +97,20 @@ export class AgentRefinerAgent extends Agent {
         'agent-analyzer';
         'performance-profiler',
         'collaboration-designer',
-        'orchestration-planner'],
+        'orchestration-planner'])
       temperature: 0.4
   }
-}
+})
   protected async execute(input: string): Promise<any> {
     try {
-      this.think(
-        'Analyzing agent team configuration and collaboration patterns...'
-      , // Parse input to extract current agents and requirements, const { currentAgents, requirements, constraints } =;
+      this.think('Analyzing agent team configuration and collaboration patterns...'
+      , // Parse input to extract current agents and requirements, const { currentAgents, requirements, constraints } =;)
         await this.parseInput(input);
-      this.observe('Parsed agent configuration', { agentCount: currentAgents.length,
+      this.observe('Parsed agent configuration', { agentCount: currentAgents.length)
     requirementCount: requirements.length
       }};
       // Step, 1: Analyze current agent configuration;
-
+)
 const analysis = await this.analyzeAgentTeam(currentAgents, requirements);
       this.observe('Agent team analysis complete', analysis);
       // Step, 2: Profile agent performance;
@@ -129,7 +128,7 @@ const improvements = await this.identifyImprovements();
         performanceProfiles,
         // requirements;
       );
-      this.observe('Identified improvements', { count: improvements.length
+      this.observe('Identified improvements', { count: improvements.length)
     });
       // Step, 4: Refine agent configurations;
 
@@ -141,7 +140,7 @@ const refinedAgents = await this.refineAgents();
       this.observe('Refined agent configurations', { count: refinedAgents.length
       }};
       // Step, 5: Design collaboration strategy;
-
+)
 const collaborationStrategy = await this.designCollaboration();
         refinedAgents,
         requirements,
@@ -170,7 +169,7 @@ const result: AgentRefinement={ originalAgents: currentAgents;
         collaborationStrategy,
         performanceMetrics,
         recommendations, // Store in artifacts
-      this.setArtifact('agent-refinement', result, // Share with other agents
+      this.setArtifact('agent-refinement', result, // Share with other agents)
       this.setSharedMemory('refined-agents', refinedAgents);
       this.setSharedMemory('collaboration-strategy', collaborationStrategy);
       return { success: true;
@@ -198,9 +197,9 @@ If agents are not explicitly defined, infer reasonable defaults.
 Format as JSON with arrays for each category.`;
 
 const response = await generateAIResponse(parsePrompt, { model: this.config.model,
-    temperature: 0.2,
+    temperature: 0.2)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async analyzeAgentTeam(agents: AgentConfiguration[], requirements: string[]): Promise<any> {
@@ -217,15 +216,14 @@ Evaluate:
 Format as detailed JSON analysis.`;
 
 const response = await generateAIResponse(analysisPrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async profileAgentPerformance(
-agents: AgentConfiguration[];
-    // analysis
-  ): Promise<Map<string PerformanceProfile>> {</Map>
+  private async profileAgentPerformance(agents: AgentConfiguration[];
+    // analysis)
+  ): Promise<Map<string PerformanceProfile> {</Map>
 { new Map<string PerformanceProfile>(, for (const agent of agents) {</string>
 { `Profile the performance characteristics of this, agent: ``, Agent: ${JSON.stringify(agent, null, 2)}
 Context from, analysis:
@@ -237,9 +235,9 @@ Determine:
 4. Specialty areas
 5. Weaknesses
 Consider the agent's role, capabilities, and tools.; Format as JSON PerformanceProfile.`; const response = await generateAIResponse(profilePrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
       profiles.set(agent.id, JSON.parse(response))
 }
     return profiles
@@ -261,12 +259,12 @@ Suggest improvements, for:
 Format as JSON array of AgentImprovement objects.`;
 
 const response = await generateAIResponse(improvementPrompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async refineAgents(agents: AgentConfiguration[], improvements: AgentImprovement[],
+  private async refineAgents(agents: AgentConfiguration[], improvements: AgentImprovement[],)
   performanceProfiles: Map<string PerformanceProfile>): Promise<any> {
     const refinedAgents: RefinedAgent[] = [], for (const agent of agents) {; const _agentImprovements = improvements.filter(, i: any => i.agentId === agent.id;  );
       
@@ -287,16 +285,16 @@ Create a refined version, with:
 Format as JSON RefinedAgent object.`;
 
 const response = await generateAIResponse(refinePrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
       refinedAgents.push(JSON.parse(response))
 }
     return refinedAgents
 }
-  private async designCollaboration(agents: RefinedAgent[], requirements: string[],
+  private async designCollaboration(agents: RefinedAgent[], requirements: string[],)
   constraints: string[]): Promise<any> {
-{ `Design optimal collaboration strategy for these, agents: Refined, Agents:``, ${JSON.stringify(
+{ `Design optimal collaboration strategy for these, agents: Refined, Agents:``, ${JSON.stringify()
   agents.map((a) => ({ id: a.id,
     name: a.name,
     role: a.role,
@@ -319,12 +317,12 @@ Consider efficiency, scalability, and fault tolerance.
 Format as JSON CollaborationStrategy object.`;
 
 const response = await generateAIResponse(collaborationPrompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async calculateMetrics(originalAgents: AgentConfiguration[], refinedAgents: RefinedAgent[],
+  private async calculateMetrics(originalAgents: AgentConfiguration[], refinedAgents: RefinedAgent[],)
   collaborationStrategy: CollaborationStrategy): Promise<any> {
 { `Calculate performance metrics for the refined agent, system: Original, System: - Agent, count: ${originalAgents.length}``
 - Total, capabilities: ${originalAgents.flatMap(a => a.capabilities).length}
@@ -342,12 +340,12 @@ Calculate:
 Format as JSON PerformanceMetrics object.`;
 
 const response = await generateAIResponse(metricsPrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async generateRecommendations(refinedAgents: RefinedAgent[], collaborationStrategy: CollaborationStrategy;
+  private async generateRecommendations(refinedAgents: RefinedAgent[], collaborationStrategy: CollaborationStrategy;)
   performanceMetrics: PerformanceMetrics): Promise<any> {
 { `Generate actionable recommendations for implementing this refined agent, system: Refined Agents, Summary:``, ${refinedAgents.map((a) => `${a.name}: ${a.specializations.join(', ')}`).join('\n')}``;
 Collaboration: Strategy: ${collaborationStrategy.orchestration.type}
@@ -360,7 +358,7 @@ Provide 5-7 specific recommendations, for:
 4. Optimization opportunities
 5. Future enhancements`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.model,
+const response = await generateAIResponse(recommendPrompt, { model: this.config.model)
     temperature: 0.4
-    }};
+    }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};))))))))))))))))

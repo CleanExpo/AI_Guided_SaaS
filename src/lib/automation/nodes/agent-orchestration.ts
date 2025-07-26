@@ -12,8 +12,7 @@ export interface AgentNodeConfig { agentType: 'architect' | 'frontend' | 'backen
 /**
  * Create an agent execution node
  */;
-export function createAgentNode(
-    id: string, name: string;
+export function createAgentNode(id: string, name: string;)
   config: AgentNodeConfig, position: [number, number]): string, name: string, config: AgentNodeConfig;
   position: [number, number]): N8nNode {
   return {
@@ -28,8 +27,8 @@ export function createAgentNode(
       sendBody: true;
     bodyParametersJson: JSON.stringify({ agentType: config.agentType: taskType, config.taskType,
         parameters: config.parameters || {},
-    executionId: '{{ $execution.id }}',
-        workflowId: '{{ $workflow.id }}'
+    executionId: '{{ $execution.id }}')
+        workflowId: '{{ $workflow.id }}')
       });
     options: { timeout: config.timeout || 300000, // 5 minutes default, retry: config.retryConfig || { maxRetries: 3;
     waitBetweenRetries: 5000
@@ -38,8 +37,7 @@ export function createAgentNode(
 /**
  * Create a parallel agent coordination node
  */;
-export function createParallelAgentNode(
-    id: string, name: string;
+export function createParallelAgentNode(id: string, name: string;)
   agents: AgentNodeConfig[], position: [number, number]): string, name: string, agents: AgentNodeConfig[],
   position: [number, number]): N8nNode {
   return {
@@ -70,7 +68,7 @@ return tasks;`
 /**
  * Create an agent coordination workflow
  */;
-export function createAgentOrchestrationWorkflow(
+export function createAgentOrchestrationWorkflow()
     projectName: string, workflowType: 'simple' | 'complex' | 'enterprise'): string,
   workflowType: 'simple' | 'complex' | 'enterprise'): N8nWorkflow {
   const nodes: N8nNode[]  = [], const connections: N8nConnection = {};
@@ -150,9 +148,9 @@ const _architectNode = createAgentNode();
     // Simple, workflow: Architect → Frontend → QA, const _frontendNode = createAgentNode(, 'agent_frontend',
       'Frontend Agent',
       { agentType: 'frontend',
-        taskType: 'implement_ui',
+        taskType: 'implement_ui')
     parameters: { framework: 'nextjs', styling: 'tailwind' };
-      [850, 400]
+      [850, 400])
     )
     nodes.push(frontendNode);
 
@@ -212,8 +210,8 @@ const _qaNode = createAgentNode('agent_qa',;
       'QA Agent',
       { agentType: 'qa',
         taskType: 'test_full_stack',
-    parameters: { testTypes: ['unit', 'integration', 'e2e', 'performance'] },
-      [1450, 400]
+    parameters: { testTypes: ['unit', 'integration', 'e2e', 'performance'] })
+      [1450, 400])
     )
     nodes.push(qaNode);
 
@@ -299,8 +297,7 @@ active: false;
 /**
  * Create custom agent task node
  */;
-export function createCustomAgentNode(
-    id: string, name: string;
+export function createCustomAgentNode(id: string, name: string;)
   agentCode: string, position: [number, number]): string, name: string, agentCode: string;
   position: [number, number]): N8nNode { return {
     id,

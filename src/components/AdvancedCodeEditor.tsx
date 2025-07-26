@@ -34,8 +34,7 @@ const defaultFiles: FileNode[]  = [
             type: 'file',
             language: 'typescript',
 content: `export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24" role="main">, <h1>Welcome to your app</h1>
+  return(<main className="flex min-h-screen flex-col items-center justify-between p-24" role="main">, <h1>Welcome to your app</h1>)
   )
 }`
   }
@@ -70,21 +69,21 @@ content: `{
   }
 ];
 export function AdvancedCodeEditor({
-  projectId,
-  initialFiles = defaultFiles, onSave,
+  projectId)
+  initialFiles = defaultFiles, onSave,)
   readOnly = false}: AdvancedCodeEditorProps) {
   const [files, setFiles] = useState<FileNode[]>(initialFiles);</FileNode>
   const [activeFile, setActiveFile] = useState<FileNode | null>(null);</FileNode>
   
-const [openFiles, setOpenFiles]  = useState<FileNode[]>([]);</FileNode>
+const [openFiles, setOpenFiles]  = useState<FileNodenull>(null);</FileNode>
 
-const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['src']);</Set>
+const [expandedFolders, setExpandedFolders] = useState<Set<string>(new Set(['src']);</Set>
   
 const [searchQuery, setSearchQuery]  = useState('');
 
 const [isSearching, setIsSearching] = useState(false);
   
-const [terminalOutput, setTerminalOutput]  = useState<string[]>([]);</string>
+const [terminalOutput, setTerminalOutput]  = useState<string>("");</string>
 
 const [isSaving, setIsSaving] = useState(false);
   
@@ -136,7 +135,7 @@ const handleEditorChange = (value: string | undefined) => {
 };
   
 const handleSave = async () =>  {
-    if (readOnly || !hasChanges) {r}eturn null, setIsSaving(true, try {
+    if (readOnly || !hasChanges) {r}eturn null, setIsSaving(true, try {)
       if (onSave) {
         await onSave(files)
 };
@@ -156,13 +155,9 @@ const addTerminalOutput  = (line: string) => {
 };
 
 const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
-    return nodes.map((node) => (\n    <div key={node.path}; className={cn(
-            "flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm"
-            activeFile?.path === node.path && "bg-primary/10 text-primary"
-          )}
-          const style={ paddingLeft: `${level * 16 + 8}px` }
-          const onClick={() => handleFileClick(node)}</div role="button" tabIndex={0}>
-        >
+    return nodes.map((node) => (\n    <div key={node.path}; className={cn("flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm"
+            activeFile?.path === node.path && "bg-primary/10 text-primary")
+          )}>const style={ paddingLeft: `${level * 16 + 8}px` }>const onClick={() => handleFileClick(node)}</div role="button" tabIndex={0}>
           {node.type === 'folder' ? (</div>
             <any>
               {expandedFolders.has(node.path) ? (
@@ -176,15 +171,14 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
           )}
           <span>{node.name}</span>
         {node.type === 'folder' && expandedFolders.has(node.path) && node.children && (
-          <div>{renderFileTree(node.children, level + 1</div>
+          <div>{renderFileTree(node.children, level + 1</div>)
       )}
       </div>
       )}
       </div>
     ))
 };
-  return (
-    <div className="h-full flex flex-col glass">
+  return(<div className="h-full flex flex-col glass">
       {/* Header */}</div>
       <div className="glass -b px-4 py-2 flex items-center justify-between flex items-center gap-4"    />
           <h2 className="text-lg font-semibold flex items-center gap-2">
@@ -195,19 +189,15 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
         <div className="flex items-center gap-2">
           <Button size="sm";
 variant="outline";
-
-    const onClick={handleRun}
-          ></Button>
+>const onClick={handleRun}></Button>
             <Play className="h-4 w-4 mr-1"     />
             Run
 </Button>
           <Button size="sm";
 
-    variant={hasChanges ? 'default' : 'outline'} onClick={handleSave}
-            const disabled={readOnly || isSaving}
-          ></Button>
+    variant={hasChanges ? 'default' : 'outline'} onClick={handleSave}>const disabled={readOnly || isSaving}></Button>
             {isSaving ? (
-              <Loader2 className="h-4 w-4 mr-1 animate-spin"     />
+              <Loader2 className="h-4 w-4 mr-1 animate-spin"     />)
             ) : (
               <Save className="h-4 w-4 mr-1"     />
             )}
@@ -220,10 +210,7 @@ variant="outline";
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
           <input type="text"
 ="Search files...";
-className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";
-
-    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
-              />
+className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input />
 </div>
           <div className="flex-1 overflow-y-auto">
             {renderFileTree(files)}</div>
@@ -232,19 +219,13 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";
           {/* Tabs */}</div>
           <div className="glass -b flex items-center gap-1 px-2 py-1 overflow-x-auto">
             {openFiles.map((file) => (\n    </div>
-              <div; key={file.path} className={cn(
-                  "flex items-center gap-2 px-3 py-1 text-sm border rounded-t cursor-pointer",
+              <div; key={file.path} className={cn("flex items-center gap-2 px-3 py-1 text-sm border rounded-t cursor-pointer")
                   activeFile?.path === file.path
-                    ? "bg-white border-b-white"
-                    : "bg-gray-100 hover:bg-gray-200"
-                )}
-                const onClick={() => setActiveFile(file)}</div role="button" tabIndex={0}>
-              ></div>
+                    ? "bg-white border-b-white")
+                    : "bg-gray-100 hover:bg-gray-200">)}>const onClick={() => setActiveFile(file)}</div role="button" tabIndex={0}></div>
                 <FileCode className="h-3 w-3"    />
           <span>{file.name}</span>
-                <button className="ml-2 hover: bg-gray-300 rounded-lg p-0.5"
-
-    const onClick={(e) = aria-label="Button">  {</button>
+                <button className="ml-2 hover: bg-gray-300 rounded-lg p-0.5">const onClick={(e) = aria-label="Button">  {</button>
                     e.stopPropagation(, handleCloseFile(file)};
                 ></button>
                   <X className="h-3 w-3"     />
@@ -263,9 +244,7 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";
                   readOnly: readOnly
                   wordWrap: 'on',
                   automaticLayout: true
-  }
-}
-                const onMount={(editor) =>  {</Editor>
+  }>}>const onMount={(editor) =>  {</Editor>
                   editorRef.current = editor
 };
               />
@@ -281,10 +260,7 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";
           <span className="text-sm font-medium">Terminal</span>
           <Button size="sm";
 variant="ghost";
-className="text-gray-400 hover: text-gray-100"
-
-    const onClick={() => setTerminalOutput([])}</Button>
-          >
+className="text-gray-400 hover: text-gray-100">const onClick={() => setTerminalOutput([])}</Button>
             Clear
 </Button>
         <div className="glass p-4 font-mono text-sm overflow-y-auto h-full">

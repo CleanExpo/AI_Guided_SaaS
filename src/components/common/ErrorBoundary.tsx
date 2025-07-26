@@ -42,9 +42,9 @@ export class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="glass min-h-screen flex items-center justify-center p-4">
-          <Card className="max-w-md w-full" className="glass
+          <Card className="max-w-md w-full glass
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 text-red-600" className="glass
+              <CardTitle className="flex items-center gap-2 text-red-600 glass
                 <AlertCircle className="h-5 w-5" />
                 Something went wrong
               </CardTitle>

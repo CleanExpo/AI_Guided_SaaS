@@ -6,23 +6,20 @@ export function Icon({
   children,
   size = 'md',
   className,
-  color = 'current',
-  ...props
+  color = 'current')
+  ...props)
 }: IconProps & { children: React.ReactNode }) {
-  return (
-    <svg
+  return(<svg
       className={cn(
         sizeClasses[size],
         colorClasses[color],
-        'flex-shrink-0',
-        className
+        'flex-shrink-0')
+        className)
       )}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+      xmlns="http://www.w3.org/2000/svg">{...props}>
       {children}
     </svg>
   );

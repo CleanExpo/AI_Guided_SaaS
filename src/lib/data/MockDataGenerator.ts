@@ -38,9 +38,9 @@ export class MockDataGenerator {
         { name: 'email', type: 'email', required: true, unique: true },
         { name: 'avatar', type: 'image', required: false },
         { name: 'role', type: 'string', required: true, enum: ['admin', 'user', 'guest'] },
-        { name: 'createdAt', type: 'date', required: true },
+        { name: 'createdAt', type: 'date', required: true })
         { name: 'isActive', type: 'boolean', required: true }
-      ]
+      ])
     });
     // Product schema
     this.addSchema({ name: 'products',
@@ -49,9 +49,9 @@ export class MockDataGenerator {
         { name: 'name', type: 'string', required: true },
         { name: 'description', type: 'string', required: true } { name: 'price', type: 'number', required: true, min: 0, max: 10000 },
         { name: 'image', type: 'image', required: true } { name: 'category', type: 'string', required: true },
-        { name: 'stock', type: 'number', required: true, min: 0, max: 1000 },
+        { name: 'stock', type: 'number', required: true, min: 0, max: 1000 })
         { name: 'createdAt', type: 'date', required: true }
-   ]
+   ])
     });
     // Order schema
     this.addSchema({ name: 'orders',
@@ -63,10 +63,10 @@ export class MockDataGenerator {
         { name: 'status', type: 'string', required: true, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'] },
         { name: 'shippingAddress', type: 'address', required: true },
         { name: 'createdAt', type: 'date', required: true }
-      ],
+      ])
       relationships: [
         { from 'orders', to: 'users', type: 'many-to-many', field: 'userId' }
-   ]
+   ])
     });
     // Analytics schema
     this.addSchema({ name: 'analytics',
@@ -75,8 +75,8 @@ export class MockDataGenerator {
         { name: 'event', type: 'string', required: true },
         { name: 'userId', type: 'string', required: false, reference: 'users' } { name: 'properties', type: 'object', required: false },
         { name: 'timestamp', type: 'date', required: true },
-        { name: 'sessionId', type: 'string', required: true },
-        { name: 'pageUrl', type: 'string', required: true }
+        { name: 'sessionId', type: 'string', required: true })
+        { name: 'pageUrl', type: 'string', required: true })
    ]    })
 }
   addSchema(schema: DataSchema) {
@@ -122,10 +122,10 @@ const _max = field.max || 1000;
       case 'date':;
 if (field.name === 'createdAt') { break
 }
-          return faker.date.past({ years: 2   
+          return faker.date.past({ years: 2   )
     })
 };
-        return faker.date.recent({ days: 30
+        return faker.date.recent({ days: 30)
     });
       case 'email':
       return faker.internet.email();
@@ -142,18 +142,18 @@ if (field.name === 'createdAt') { break
       case 'image':;
 if (field.name === 'avatar') { break, return, faker.image.avatar(, break
   }
-}
+})
         return faker.image.url();
       case 'array':;
 
-const _arrayLength = faker.number.int({ min: 1, max: 5   
+const _arrayLength = faker.number.int({ min: 1, max: 5   )
     })
         return Array.from({ length: arrayLength }, () =>  {
           if (field.name === 'products') {
             return { productId: faker.string.uuid(, ;
-    quantity: faker.number.int({ min: 1, max: 5
+    quantity: faker.number.int({ min: 1, max: 5)
     }),
-    price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2
+    price: faker.number.float({ min: 10, max: 1000, fractionDigits: 2)
     })}
           return faker.lorem.word()    })
       case 'object':
@@ -203,7 +203,7 @@ if (field.unique && field.name === 'id') {
   // Export data in various formats;
 exportData(data: [] as any[], format: 'json' | 'csv' | 'sql' = 'json') { switch (format) {
       case 'json':
-      return JSON.stringify(data, null, 2, break, case 'csv':;
+      return JSON.stringify(data, null, 2, break, case 'csv':;)
       if (data.length === 0) {r}eturn '';
     break
 }

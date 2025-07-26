@@ -13,7 +13,7 @@ import { WebVitalsMonitor } from '@/components/monitoring/WebVitals';
 import { AgentInitializer } from '@/components/agents/AgentInitializer';
 import { MCPDesignerIntegration } from '@/components/MCPDesignerIntegration';
 
-const inter = Inter({ subsets: ['latin']
+const inter = Inter({ subsets: ['latin'])
     });
 
 export const metadata: Metadata = {
@@ -83,10 +83,9 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode;)
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
+  return(<html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <WhiteLabelProvider>
           <WhiteLabelHead />
@@ -105,6 +104,6 @@ export default function RootLayout({
           </Providers>
         </WhiteLabelProvider>
       </body>
-    </html>
+    </html>)
   );
 }

@@ -82,8 +82,7 @@ const status = this.containerMap.get(containerName);
   async getContainerStatus(agentId: string): Promise<any> {
     const, containerName = `ai-saas-${agentId}`
     try {;
-      // Get container stats; const { stdout    }: any  = await execAsync(
-        `docker stats ${containerName} --no-stream --format "{{json .}}"`
+      // Get container stats; const { stdout    }: any  = await execAsync(`docker stats ${containerName} --no-stream --format "{{json .}}"`)
       );
 
 const stats = JSON.parse(stdout.trim();
@@ -112,8 +111,7 @@ const status: ContainerStatus={ id: stats.ID || 'unknown',
    */
   async getAllContainerStatuses(): Promise<any> {
     try {
-      const { stdout    }: any  = await execAsync(
-        `docker ps --filter "name=ai-saas-" --format "{{.Names}}"```;
+      const { stdout    }: any  = await execAsync(`docker ps --filter "name=ai-saas-" --format "{{.Names}}"```;)
       );
 
 const _containerNames = stdout.trim().split('\n').filter(Boolean);
@@ -147,7 +145,7 @@ const _containersToStop = currentContainers.slice(-toRemove);
    */
   async cleanupStoppedContainers(): Promise<any> {
     try {
-      const { stdout    }: any  = await execAsync(
+      const { stdout    }: any  = await execAsync()
         `docker ps -a --filter "name=ai-saas-" --filter "status=exited" --format "{{.Names}}"```; ); const _stoppedContainers = stdout.trim().split('\n').filter(Boolean);
       for (const container of stoppedContainers) {
         await, execAsync(`docker rm ${container}`)``
@@ -228,8 +226,7 @@ const _command = `docker run -d \;``
       default: return 'unknown'}}
   private async getContainersByType(agentType: string): Promise<any> {
     try {
-      const { stdout    }: any = await execAsync(
-        `docker ps --filter "name=ai-saas-${agentType}" --format "{{json .}}"`
+      const { stdout    }: any = await execAsync(`docker ps --filter "name=ai-saas-${agentType}" --format "{{json .}}"`)
       );
       return stdout.trim().split('\n');
         .filter(Boolean);

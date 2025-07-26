@@ -39,9 +39,7 @@ const mockMetrics: HealthMetrics={ moduleScore: 85
       </div>
       <button;
 
-    onClick={runSelfCheck} disabled={isRunning};
-        className="mt-4 px-4 py-2 glass-button primary text-white rounded-lg hover: bg-blue-700 disabled:opacity-50"
-       aria-label="Button"></button>
+    onClick={runSelfCheck} disabled={isRunning};>className="mt-4 px-4 py-2 glass-button primary text-white rounded-lg hover: bg-blue-700 disabled:opacity-50">aria-label="Button"></button>
         {isRunning ? 'Running Check...' : 'Run Self Check'}
       </button>
       

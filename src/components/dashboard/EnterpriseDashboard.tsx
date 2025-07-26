@@ -10,410 +10,296 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, DollarSign, TrendingUp, Activity, Server, Database, BarChart3, Globe, Zap, Shield, Package } from 'lucide-react';
 import { AnalyticsService, PlatformMetrics, UserMetrics, RevenueMetrics, SystemMetrics, ContentMetrics } from '@/lib/analytics';
 import { logger } from '@/lib/logger';
+
 interface EnterpriseDashboardProps {
-userRole?: 'admin' | 'user'
- };
+  userRole?: 'admin' | 'user';
+}
+
 export default function EnterpriseDashboard({
-  userRole = 'user'}: EnterpriseDashboardProps): EnterpriseDashboardProps) {
-  const { data: session    }: any = useSession()
-  void session; // Mark as used for future auth implementation;
+  userRole = 'user')
+}: EnterpriseDashboardProps) {
+  const { data: session }: any = useSession();
+  void session; // Mark as used for future auth implementation
 
-const [loading, setLoading]  = useState<any>([])
-
-const [timeRange, setTimeRange] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false);
+  const [timeRange, setTimeRange] = useState<string>('7d');
   
-const [platformMetrics, setPlatformMetrics] =;
-</PlatformMetrics>
-    useState<PlatformMetrics | null>(null);</PlatformMetrics>
-</UserMetrics>
+  const [platformMetrics, setPlatformMetrics] = useState<PlatformMetrics | null>(null);
+  const [userMetrics, setUserMetrics] = useState<UserMetrics | null>(null);
+  const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(null);
+  const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(null);
+  const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(null);
+  const [testMode, setTestMode] = useState<boolean>(false);
 
-const [userMetrics, setUserMetrics]  = useState<UserMetrics | null>(null);</UserMetrics>
-
-const [revenueMetrics, setRevenueMetrics] = useState<RevenueMetrics | null>(</RevenueMetrics>
-    // null;
-</RevenueMetrics>
-
-const [systemMetrics, setSystemMetrics] = useState<SystemMetrics | null>(</SystemMetrics>
-    // null;
-</SystemMetrics>
-
-const [contentMetrics, setContentMetrics] = useState<ContentMetrics | null>(</ContentMetrics>
-    // null;
-</ContentMetrics>
-
-const [testMode, setTestMode] = useState<any>([])
   useEffect(() => {
-    loadDashboardData()}, [timeRange]);
+    loadDashboardData();
+  }, [timeRange]);
   
-const _loadDashboardData = async () => {
-    setLoading(true, try {;
-      const [platform, users, revenue, system, content] = await Promise.all([ AnalyticsService.getPlatformMetrics();
-        AnalyticsService.getUserMetrics(timeRange, AnalyticsService.getRevenueMetrics(timeRange),
-        AnalyticsService.getSystemMetrics(); AnalyticsService.getContentMetrics()]);
+  const loadDashboardData = async () => {
+    setLoading(true);
+    try {
+      const [platform, users, revenue, system, content] = await Promise.all([)
+        AnalyticsService.getPlatformMetrics(),
+        AnalyticsService.getUserMetrics(timeRange),
+        AnalyticsService.getRevenueMetrics(timeRange),
+        AnalyticsService.getSystemMetrics(),
+        AnalyticsService.getContentMetrics()
+      ]);
       setPlatformMetrics(platform);
       setUserMetrics(users);
       setRevenueMetrics(revenue);
       setSystemMetrics(system);
       setContentMetrics(content);
-      setTestMode(!AnalyticsService.isConfigured())
-    }; catch (error) {
-      logger.error('Error loading dashboard, data:', error)} finally {
-    setLoading(false)}
-  const _formatCurrency = (amount: number) =>  {
-    return new Intl.NumberFormat('en-US', { style: 'currency',
-currency: 'USD'}).format(amount)
-};
+      setTestMode(!AnalyticsService.isConfigured());
+    } catch (error) {
+      logger.error('Error loading dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency')
+      currency: 'USD')
+    }).format(amount);
+  };
+
+  const formatNumber = (num: number) => {
+    return new Intl.NumberFormat('en-US').format(num);
+  };
   
-const _formatNumber = (num: number) => { return new Intl.NumberFormat('en-US').format(num)
-};
-  
-const _formatPercentage = (num: number) => {
-    return `${num.toFixed(1) };%`
-};
-  // Utility function for future use
-  // const _formatTime = (seconds: number) => {
-  //   const _minutes = Math.floor(seconds / 60); //   return `${minutes};m ${seconds % 60}s`;
-  // }
+  const formatPercentage = (num: number) => {
+    return `${num.toFixed(1)}%`;
+  };
+
   if (loading) {
-    return (
-    <div className="flex items-center justify-center min-h-screen text-center">);</div>
+    return(<div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
           <p className="text-gray-600">Loading enterprise dashboard...</p>
-  return (
-    <div className="space-y-6">
-      {/* Header */}</div>
-      <div className="flex flex-col space-y-4 flex items-center justify-between"    />
-          <div></div>
-            <h1 className="text-3xl font-bold">Enterprise Dashboard</h1>
-            <p className="text-gray-600">
-              Comprehensive analytics and system monitoring</p>
-          <div className="flex items-center space-x-2">
-          <select;
+        </div>
+      </div>)
+    );
+  }
 
-    value={timeRange} onChange={e => setTimeRange(e.target.value)};</select>
-              className="px-3 py-2  rounded-lg-md";
-            ></select>
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
-            <Button onClick={loadDashboardData} variant="outline"></Button>
-              Refresh {testMode && (
-Alert>
-            <AlertDescription></AlertDescription>
-              Enterprise dashboard is running in demo mode with mock data. In
-              production, this would display real-time analytics from your
-              database and monitoring systems.</AlertDescription>
-            )},
-    {/* Platform, Overview */},
-    {platformMetrics && (
-div className="glass grid grid-cols-1, md: grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-              <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground"    />
-          </CardHeader>
-            <CardContent className="glass"
-          <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalUsers
-            )}</div>
-              <p className="text-xs text-muted-foreground">
-                {formatNumber(platformMetrics.activeUsers)} active this month</p>
-          <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-              <CardTitle className="text-sm font-medium" className="glass
-                Total Revenue</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground"    />
-          </CardHeader>
-            <CardContent className="glass"
-          <div className="text-2xl font-bold">
-                {formatCurrency(platformMetrics.totalRevenue)}</div>
-              <p className="text-xs text-muted-foreground">
-                {formatCurrency(platformMetrics.monthlyRevenue)} this month</p>
-          <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-              <CardTitle className="text-sm font-medium" className="glass
-                Projects Created</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground"    />
-          </CardHeader>
-            <CardContent className="glass"
-          <div className="text-2xl font-bold">
-                {formatNumber(platformMetrics.totalProjects)}</div>
-              <p className="text-xs text-muted-foreground">
-                AI-generated projects</p>
-          <Card className="glass"
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
-              <CardTitle className="text-sm font-medium" className="glass
-                Conversion Rate</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground"    />
-          </CardHeader>
-            <CardContent className="glass"
-          <div className="text-2xl font-bold">
-                {formatPercentage(platformMetrics.conversionRate)}</div>
-          <p className="
-                Free to paid conversion"    />
-          </div>
-    )
-} {/* System, Health */},
-    {systemMetrics && (
-Card>
-          <CardHeader className="glass"
-          <CardTitle className="flex items-center space-x-2" className="glass
-              <Activity className="h-5 w-5"    />
-          <span>System Health</span>
-            <CardDescription className="glass"</CardDescription>
-              Real-time system performance and health metrics</CardDescription>
-          <CardContent className="glass"
-          <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="space-y-2 flex items-center justify-between"    />
-          <span className="text-sm font-medium">Uptime</span>
-                  <Badge variant="secondary", className="bg-green-100 text-green-800";
-                  >/>
-                    {formatPercentage(systemMetrics.uptime
-            )}/>
-                <Progress value={systemMetrics.uptime} className="h-2"    />
-          </div>
-              <div className="space-y-2 flex items-center justify-between"    />
-          <span className="text-sm font-medium">Cache Hit Rate</span>
-                  <Badge variant="secondary">/>
-                    {formatPercentage(systemMetrics.cacheHitRate)}/>
-                <Progress value={systemMetrics.cacheHitRate} className="h-2"    />
-          </div>
-              <div className="space-y-2 flex items-center justify-between"    />
-          <span className="text-sm font-medium">Error Rate</span>
-                  <Badge
-variant="secondary";
-className="bg-yellow-100 text-yellow-800";
-                  >/>
-                    {formatPercentage(systemMetrics.errorRate * 100)}/>
-                <Progress
+  return(<div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold">Enterprise Dashboard</h1>
+          <p className="text-gray-600">
+            Comprehensive analytics and system monitoring
+          </p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <select)
+            value={timeRange}>onChange={(e) => setTimeRange(e.target.value)}
+            className="px-3 py-2 border rounded-md"
+          >
+            <option value="7d">Last 7 days</option>
+            <option value="30d">Last 30 days</option>
+            <option value="90d">Last 90 days</option>
+          </select>
+          <Button onClick={loadDashboardData} variant="outline">
+            Refresh
+          </Button>
+        </div>
+      </div>
 
-const value={systemMetrics.errorRate * 100}
-                  className="h-2"    />
-          </div>
-              <div className="space-y-2 flex items-center justify-between"    />
-          <span className="text-sm font-medium">Response Time</span>
-                  <Badge variant="secondary">/>
-                    {systemMetrics.averageResponseTime}ms/>
-                <div className="text-xs text-gray-500">
-                  Average API response</div>
-            <div className="glass mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 flex items-center space-x-2"    />
-          <Server className="h-4 w-4 text-blue-500"     />
-                <span className="text-sm">
-Active: Connections: {systemMetrics.activeConnections}</span>
-              <div className="flex items-center space-x-2">
-          <Database className="h-4 w-4 text-green-500"     />
-                <span className="text-sm">
-DB: Connections: {systemMetrics.databaseConnections}</span>
-              <div className="flex items-center space-x-2">
-          <Zap className="h-4 w-4 text-brand-primary-500"     />
-                <span className="text-sm">
-Storage: {systemMetrics.storageUsed}GB used</span>
-      )} {/* Revenue, Analytics */},
-    {revenueMetrics && (
-div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="flex items-center space-x-2" className="glass
-          <DollarSign className="h-5 w-5"     />
-                <span>Revenue Breakdown</span>
-            <CardContent className="glass"
-          <div className="space-y-4">
-                <div className="flex justify-between items-center">
-          <span className="text-sm font-medium">
-                    Monthly Recurring Revenue</span>
-                  <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.monthlyRecurringRevenue
-</span>
-            )}</span>
-                <div className="flex justify-between items-center">
-          <span className="text-sm font-medium">
-                    Average Revenue Per User</span>
-                  <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.averageRevenuePerUser)}</span>
-                <div className="flex justify-between items-center">
-          <span className="text-sm font-medium">
-                    Customer Lifetime Value</span>
-                  <span className="text-lg font-bold">
-                    {formatCurrency(revenueMetrics.lifetimeValue)}</span>
-                <div className="flex justify-between items-center">
-          <span className="text-sm font-medium">Churn Rate</span>
-                  <Badge
-variant="secondary";
-className="bg-red-100 text-red-800";
-                  >/>
-                    {formatPercentage(revenueMetrics.churnRate)}/>
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="glass"Subscription Tiers</CardTitle>
-            <CardContent className="glass"
-          <div className="space-y-4">
-                {revenueMetrics.subscriptionBreakdown.map((tier) => (\n    </div>
-                  <div key={tier.tier} className="space-y-2 flex justify-between items-center"    />
-          <span className="text-sm font-medium capitalize">
-                        {tier.tier}</span>
-                      <div className="text-right text-sm font-bold"     />
-                          {formatNumber(tier.count)} users</div>
-                        <div className="text-xs text-gray-500">
-                          {formatCurrency(tier.revenue)}</div>
-                    <Progress
-
-const value={(tier.count /
-                          revenueMetrics.subscriptionBreakdown.reduce((sum, t) => sum + t.count,/>
-                            0
-                          )) *
-                        100
-}
-                      className="h-2" /></Progress>))}
-          </Card>)},
-    {/* User, Analytics */},
-    {userMetrics && (
-div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="flex items-center space-x-2" className="glass
-          <Users className="h-5 w-5"     />
-                <span>User Retention</span>
-            <CardContent className="glass"
-          <div className="space-y-4">
-                <div className="space-y-2 flex justify-between items-center"    />
-          <span className="text-sm font-medium">Day 1 Retention</span>
-                    <Badge variant="secondary", className="bg-green-100 text-green-800";
-                    >/>
-                      {formatPercentage(userMetrics.retention.day1
-            )}/>
-                  <Progress
-
-const value={userMetrics.retention.day1}
-                    className="h-2"    />
-          </div>
-                <div className="space-y-2 flex justify-between items-center"    />
-          <span className="text-sm font-medium">Day 7 Retention</span>
-                    <Badge variant="secondary";
-className="bg-blue-100 text-blue-800";
-                    >/>
-                      {formatPercentage(userMetrics.retention.day7)}/>
-                  <Progress
-
-const value={userMetrics.retention.day7}
-                    className="h-2"    />
-          </div>
-                <div className="space-y-2 flex justify-between items-center"    />
-          <span className="text-sm font-medium">
-                      Day 30 Retention</span>
-                    <Badge variant="secondary";
-className="bg-brand-primary-100 text-brand-primary-800";
-                    >/>
-                      {formatPercentage(userMetrics.retention.day30)}/>
-                  <Progress
-
-const value={userMetrics.retention.day30}
-                    className="h-2"    />
-          </div>
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="glass"Top Countries</CardTitle>
-            <CardContent className="glass"
-          <div className="space-y-3">
-                {userMetrics.topCountries.slice(0, 5).map((country) => (\n    </div>
-                  <div const key={country.country};
-                    className="flex items-center justify-between flex items-center space-x-2"    />
-          <Globe className="h-4 w-4 text-gray-400"     />
-                      <span className="text-sm font-medium">
-                        {country.country}</span>
-                    <div className="text-right text-sm font-bold">
-                        {formatNumber(country.users)}</div>
-                      <div className="text-xs text-gray-500">
-                        {formatPercentage((country.users /
-                            userMetrics.topCountries.reduce((sum, c) => sum + c.users,
-                              0
-                            )) *
-                            100
-                        )}
-                ))}</div>
+      {testMode && (
+        <Alert>
+          <AlertDescription>
+            Enterprise dashboard is running in demo mode with mock data. In
+            production, this would display real-time analytics from your
+            database and monitoring systems.
+          </AlertDescription>
+        </Alert>
       )}
 
-    {/* Content, Analytics */},
-    {contentMetrics && (
-div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="flex items-center space-x-2" className="glass
-          <Package className="h-5 w-5"     />
-                <span>Template Marketplace</span>
-            <CardContent className="glass"
-          <div className="glass grid grid-cols-2 gap-4">
-                <div className="text-center text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalTemplates
-            )}</div>
-                  <div className="text-xs text-gray-500">Total Templates</div>
-                <div className="text-center text-2xl font-bold">
-                    {formatNumber(contentMetrics.totalDownloads)}</div>
-                  <div className="text-xs text-gray-500">Total Downloads</div>
-                <div className="text-center text-2xl font-bold">
-                    {contentMetrics.pendingReviews}</div>
-                  <div className="text-xs text-gray-500">Pending Reviews</div>
-                <div className="text-center text-2xl font-bold">
-                    {contentMetrics.averageRating}</div>
-                  <div className="text-xs text-gray-500">Average Rating</div>
-          <Card className="glass"
-          <CardHeader className="glass"</CardHeader>
-              <CardTitle className="glass"Popular Frameworks</CardTitle>
-            <CardContent className="glass"
-          <div className="space-y-3">
-                {contentMetrics.topFrameworks.slice(0, 5).map((framework) => (\n    </div>
-                  <div key={framework.framework} className="space-y-1 flex justify-between items-center"    />
-          <span className="text-sm font-medium capitalize">
-                        {framework.framework}</span>
-                      <span className="text-sm font-bold">
-                        {framework.count}</span>
-                    <Progress
+      {/* Platform Overview */}
+      {platformMetrics && (
+        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="glass">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+              <CardTitle className="text-sm font-medium glass">
+                Total Users
+              </CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent className="glass">
+              <div className="text-2xl font-bold">
+                {formatNumber(platformMetrics.totalUsers)}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {formatNumber(platformMetrics.activeUsers)} active this month
+              </p>
+            </CardContent>
+          </Card>
 
-const value={(framework.count /
-                          contentMetrics.topFrameworks.reduce((sum, f) => sum + f.count,/>
-                            0
-                          )) *
-                        100
-}
-                      className="h-2" /></Progress>))}
-          </Card>)},
-    {/* Admin, Actions */},
-    {userRole === 'admin'  && (
-Card>
-          <CardHeader className="glass"
-          <CardTitle className="flex items-center space-x-2" className="glass<Shield className="h-5 w-5"    />
-          <span>Admin Actions</span>
-            <CardDescription className="glass"</CardDescription>
-              Administrative tools and system management</CardDescription>
-          <CardContent className="glass"
-          <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button variant="outline", className="justify-start">
-          <Users className="h-4 w-4 mr-2"     />
-                Manage Users</Users>
-              <Button variant="outline", className="justify-start">
-          <Package className="h-4 w-4 mr-2"     />
-                Review Templates</Package>
-              <Button variant="outline", className="justify-start">
-          <BarChart3 className="h-4 w-4 mr-2"     />
-                Export Analytics</BarChart3>
-      ) });
-</Button>
-</CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card></CardContent>
-</Card>
-</Card>
-</Alert>
-  
-</Button>
-</any>
-    
-    </Button>
+          <Card className="glass">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+              <CardTitle className="text-sm font-medium glass">
+                Total Revenue
+              </CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent className="glass">
+              <div className="text-2xl font-bold">
+                {formatCurrency(platformMetrics.totalRevenue)}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {formatCurrency(platformMetrics.monthlyRevenue)} this month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="glass">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+              <CardTitle className="text-sm font-medium glass">
+                Projects Created
+              </CardTitle>
+              <Package className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent className="glass">
+              <div className="text-2xl font-bold">
+                {formatNumber(platformMetrics.totalProjects)}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                AI-generated projects
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="glass">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
+              <CardTitle className="text-sm font-medium glass">
+                Conversion Rate
+              </CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent className="glass">
+              <div className="text-2xl font-bold">
+                {formatPercentage(platformMetrics.conversionRate)}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Free to paid conversion
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* System Health */}
+      {systemMetrics && (
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center space-x-2 glass">
+              <Activity className="h-5 w-5" />
+              <span>System Health</span>
+            </CardTitle>
+            <CardDescription className="glass">
+              Real-time system performance and health metrics
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="glass">
+            <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Uptime</span>
+                  <Badge variant="secondary" className="bg-green-100 text-green-800">
+                    {formatPercentage(systemMetrics.uptime)}
+                  </Badge>
+                </div>
+                <Progress value={systemMetrics.uptime} className="h-2" />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Cache Hit Rate</span>
+                  <Badge variant="secondary">
+                    {formatPercentage(systemMetrics.cacheHitRate)}
+                  </Badge>
+                </div>
+                <Progress value={systemMetrics.cacheHitRate} className="h-2" />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Error Rate</span>
+                  <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+                    {formatPercentage(systemMetrics.errorRate * 100)}
+                  </Badge>
+                </div>
+                <Progress value={systemMetrics.errorRate * 100} className="h-2" />
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">Response Time</span>
+                  <Badge variant="secondary">
+                    {systemMetrics.averageResponseTime}ms
+                  </Badge>
+                </div>
+                <div className="text-xs text-gray-500">
+                  Average API response
+                </div>
+              </div>
+            </div>
+
+            <div className="glass mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex items-center space-x-2">
+                <Server className="h-4 w-4 text-blue-500" />
+                <span className="text-sm">
+                  Active Connections: {systemMetrics.activeConnections}
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Database className="h-4 w-4 text-green-500" />
+                <span className="text-sm">
+                  DB Connections: {systemMetrics.databaseConnections}
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Zap className="h-4 w-4 text-brand-primary-500" />
+                <span className="text-sm">
+                  Storage: {systemMetrics.storageUsed}GB used
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Admin Actions */}
+      {userRole === 'admin' && (
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center space-x-2 glass">
+              <Shield className="h-5 w-5" />
+              <span>Admin Actions</span>
+            </CardTitle>
+            <CardDescription className="glass">
+              Administrative tools and system management
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="glass">
+            <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Button variant="outline" className="justify-start">
+                <Users className="h-4 w-4 mr-2" />
+                Manage Users
+              </Button>
+              <Button variant="outline" className="justify-start">
+                <Package className="h-4 w-4 mr-2" />
+                Review Templates
+              </Button>
+              <Button variant="outline" className="justify-start">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Export Analytics
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
-  }
-</PlatformMetrics>
-
-}}
+  );
+}

@@ -147,7 +147,7 @@ export class ContentCompressor {
 
   private isStructuralElement(line: string): boolean {
     const trimmed = line.trim();
-    return (
+    return()
       trimmed.startsWith('#') ||
       trimmed.startsWith('-') ||
       trimmed.startsWith('*') ||

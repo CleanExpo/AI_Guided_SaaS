@@ -38,9 +38,7 @@ export interface SystemHealth {
   overall: 'healthy' | 'warning' | 'critical';
   components: Record<string, {
     status: 'operational' | 'degraded' | 'down';
-    lastCheck: Date;
-    issues: string[];
-  }>;
+    lastCheck: Date;>issues: string[];>}>;
   metrics: {
     uptime: number;
     responseTime: number;

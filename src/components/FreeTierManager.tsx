@@ -32,8 +32,8 @@ interface FreeTierProps {
 
 export default function FreeTierManager({ 
   userId = 'user123',
-  currentPlan = 'free',
-  onUpgrade 
+  currentPlan = 'free')
+  onUpgrade )
 }: FreeTierProps) {
   const [projects, setProjects] = useState<Project[]>([
     {
@@ -84,7 +84,7 @@ export default function FreeTierManager({
 
   const archiveProject = (projectId: string) => {
     setProjects(projects.map(p => 
-      p.id === projectId ? { ...p, status: 'archived' as const } : p
+      p.id === projectId ? { ...p, status: 'archived' as const } : p)
     ));
   };
 
@@ -92,18 +92,17 @@ export default function FreeTierManager({
     setProjects(projects.filter(p => p.id !== projectId));
   };
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Free Tier Status Card */}
-      <Card className="-2 -blue-200 bg-blue-50/50" className="glass
+      <Card className="-2 -blue-200 bg-blue-50/50 glass
         <CardHeader className="glass"
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2" className="glass
+            <CardTitle className="flex items-center gap-2 glass
               <Sparkles className="h-5 w-5 text-blue-600" />
               Free Tier Status
             </CardTitle>
             {currentPlan === 'free' && (
-              <Badge className="bg-blue-100 text-blue-700">FREE PLAN</Badge>
+              <Badge className="bg-blue-100 text-blue-700">FREE PLAN</Badge>)
             )}
           </div>
         </CardHeader>
@@ -118,9 +117,7 @@ export default function FreeTierManager({
                 </span>
               </div>
               <Progress 
-                value={(projectsUsed / MAX_FREE_PROJECTS) * 100} 
-                className="h-2"
-              />
+                value={(projectsUsed / MAX_FREE_PROJECTS) * 100} >className="h-2" />>
               {projectsRemaining === 0 && currentPlan === 'free' && (
                 <p className="text-xs text-orange-600 mt-1">
                   You've reached the free tier limit
@@ -137,9 +134,7 @@ export default function FreeTierManager({
                 </span>
               </div>
               <Progress 
-                value={storagePercentage} 
-                className="h-2"
-              />
+                value={storagePercentage} >className="h-2" />>
             </div>
 
             {/* Free Tier Benefits */}
@@ -175,9 +170,7 @@ export default function FreeTierManager({
             <CardTitle className="glass"Your Projects</CardTitle>
             <Button
               onClick={createNewProject}
-              disabled={!canCreateNewProject && currentPlan === 'free'}
-              size="sm"
-            >
+              disabled={!canCreateNewProject && currentPlan === 'free'}>size="sm">>
               <Plus className="h-4 w-4 mr-2" />
               New Project
             </Button>
@@ -205,9 +198,7 @@ export default function FreeTierManager({
                       </Badge>
                     )}
                     <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => archiveProject(project.id)}
+                      variant="outline" >size="sm">onClick={() => archiveProject(project.id)}
                     >
                       Archive
                     </Button>
@@ -229,7 +220,7 @@ export default function FreeTierManager({
 
       {/* Upgrade Prompt */}
       {currentPlan === 'free' && projectsRemaining <= 1 && (
-        <Card className="-2 -purple-200 bg-purple-50/50" className="glass
+        <Card className="-2 -purple-200 bg-purple-50/50 glass
           <CardContent className="glass p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -242,9 +233,7 @@ export default function FreeTierManager({
                 </p>
               </div>
               <Button 
-                onClick={onUpgrade}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+                onClick={onUpgrade}>className="bg-purple-600 hover:bg-purple-700">>
                 Upgrade to Pro
               </Button>
             </div>

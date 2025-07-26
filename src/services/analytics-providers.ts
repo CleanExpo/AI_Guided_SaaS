@@ -16,19 +16,19 @@ export class GoogleAnalyticsProvider {
     switch (event.type) {
       case 'pageview':
         this.gtag('event', 'page_view', {
-          page_path: event.url,
-          page_referrer: event.referrer
+          page_path: event.url)
+          page_referrer: event.referrer)
         });
         break;
         
       case 'user':
         if (event.action === 'signup') {
           this.gtag('event', 'sign_up', {
-            method: event.metadata?.method || 'email'
+            method: event.metadata?.method || 'email')
           });
         } else if (event.action === 'login') {
           this.gtag('event', 'login', {
-            method: event.metadata?.method || 'email'
+            method: event.metadata?.method || 'email')
           });
         }
         break;
@@ -37,8 +37,8 @@ export class GoogleAnalyticsProvider {
         this.gtag('event', 'conversion', {
           send_to: this.measurementId,
           value: event.value,
-          currency: event.currency || 'USD',
-          transaction_id: event.id
+          currency: event.currency || 'USD')
+          transaction_id: event.id)
         });
         break;
         
@@ -84,8 +84,8 @@ export class MixpanelProvider {
         this.mixpanel.track('Page View', {
           ...properties,
           url: event.url,
-          referrer: event.referrer,
-          duration: event.duration
+          referrer: event.referrer)
+          duration: event.duration)
         });
         break;
         
@@ -95,8 +95,8 @@ export class MixpanelProvider {
           this.mixpanel.people.set(event.metadata);
         }
         this.mixpanel.track(`User ${event.action}`, {
-          ...properties,
-          ...event.metadata
+          ...properties)
+          ...event.metadata)
         });
         break;
         
@@ -104,8 +104,8 @@ export class MixpanelProvider {
         this.mixpanel.track('Feature Usage', {
           ...properties,
           feature: event.feature,
-          action: event.action,
-          value: event.value
+          action: event.action)
+          value: event.value)
         });
         break;
         
@@ -113,16 +113,16 @@ export class MixpanelProvider {
         this.mixpanel.track('Conversion', {
           ...properties,
           goal: event.goal,
-          value: event.value,
-          currency: event.currency
+          value: event.value)
+          currency: event.currency)
         });
         this.mixpanel.people.track_charge(event.value || 0);
         break;
         
       case 'custom':
         this.mixpanel.track(event.name, {
-          ...properties,
-          ...event.data
+          ...properties)
+          ...event.data)
         });
         break;
     }
@@ -165,15 +165,15 @@ export class AmplitudeProvider {
       case 'pageview':
         this.amplitude.track('Page View', {
           ...eventProperties,
-          url: event.url,
-          referrer: event.referrer
+          url: event.url)
+          referrer: event.referrer)
         });
         break;
         
       case 'user':
         this.amplitude.track(`User ${event.action}`, {
-          ...eventProperties,
-          ...event.metadata
+          ...eventProperties)
+          ...event.metadata)
         });
         if (event.action === 'signup' && event.metadata) {
           this.amplitude.setUserProperties(event.metadata);
@@ -184,8 +184,8 @@ export class AmplitudeProvider {
         this.amplitude.track('Feature Usage', {
           ...eventProperties,
           feature: event.feature,
-          action: event.action,
-          value: event.value
+          action: event.action)
+          value: event.value)
         });
         break;
         
@@ -193,15 +193,15 @@ export class AmplitudeProvider {
         this.amplitude.track('Conversion', {
           ...eventProperties,
           goal: event.goal,
-          revenue: event.value,
-          revenueType: event.goal
+          revenue: event.value)
+          revenueType: event.goal)
         });
         break;
         
       case 'custom':
         this.amplitude.track(event.name, {
-          ...eventProperties,
-          ...event.data
+          ...eventProperties)
+          ...event.data)
         });
         break;
     }
@@ -220,7 +220,7 @@ export class PostHogProvider {
     if (typeof window !== 'undefined' && (window as any).posthog) {
       this.posthog = (window as any).posthog;
       this.posthog.init(apiKey, {
-        api_host: apiHost || 'https://app.posthog.com'
+        api_host: apiHost || 'https://app.posthog.com')
       });
     }
   }
@@ -241,8 +241,8 @@ export class PostHogProvider {
       case 'pageview':
         this.posthog.capture('$pageview', {
           ...properties,
-          $current_url: event.url,
-          $referrer: event.referrer
+          $current_url: event.url)
+          $referrer: event.referrer)
         });
         break;
         
@@ -251,8 +251,8 @@ export class PostHogProvider {
           this.posthog.identify(event.userId, event.metadata);
         }
         this.posthog.capture(`user_${event.action}`, {
-          ...properties,
-          ...event.metadata
+          ...properties)
+          ...event.metadata)
         });
         break;
         
@@ -260,8 +260,8 @@ export class PostHogProvider {
         this.posthog.capture('feature_usage', {
           ...properties,
           feature: event.feature,
-          action: event.action,
-          value: event.value
+          action: event.action)
+          value: event.value)
         });
         break;
         
@@ -269,15 +269,15 @@ export class PostHogProvider {
         this.posthog.capture('conversion', {
           ...properties,
           goal: event.goal,
-          value: event.value,
-          currency: event.currency
+          value: event.value)
+          currency: event.currency)
         });
         break;
         
       case 'custom':
         this.posthog.capture(event.name, {
-          ...properties,
-          ...event.data
+          ...properties)
+          ...event.data)
         });
         break;
     }
@@ -285,9 +285,8 @@ export class PostHogProvider {
 }
 
 // Factory function to create providers
-export function createAnalyticsProvider(
-  name: string, 
-  config: Record<string, unknown>
+export function createAnalyticsProvider(name: string)
+  config: Record<string, unknown>)
 ) {
   switch (name) {
     case 'google':

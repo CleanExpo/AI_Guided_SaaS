@@ -11,23 +11,18 @@ interface PreviewPanelProps {
 export function PreviewPanel({ config }: PreviewPanelProps) {
   const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
 
-  return (
-    <Card className="glass sticky top-4">
+  return(<Card className="glass sticky top-4">
       <CardHeader className="glass"
         <div className="flex items-center justify-between">
           <CardTitle className="glass"Live Preview</CardTitle>
           <div className="flex gap-2">
-            <Button
-              variant={previewMode === 'desktop' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setPreviewMode('desktop')}
+            <Button)
+              variant={previewMode === 'desktop' ? 'default' : 'outline'}>size="sm">onClick={() => setPreviewMode('desktop')}
             >
               <Monitor className="h-4 w-4" />
             </Button>
             <Button
-              variant={previewMode === 'mobile' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setPreviewMode('mobile')}
+              variant={previewMode === 'mobile' ? 'default' : 'outline'}>size="sm">onClick={() => setPreviewMode('mobile')}
             >
               <Smartphone className="h-4 w-4" />
             </Button>
@@ -35,26 +30,18 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
         </div>
       </CardHeader>
       <CardContent className="glass"
-        <div className={`border rounded-lg overflow-hidden ${
-          previewMode === 'mobile' ? 'max-w-xs mx-auto' : ''
-        }`}>
+        <div className={`border rounded-lg overflow-hidden ${>previewMode === 'mobile' ? 'max-w-xs mx-auto' : ''>}`}>
           {/* Preview Header */}
           <div 
-            className="glass p-4 text-white"
-            style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}
-          >
+            className="glass p-4 text-white">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}>
             <div className="flex items-center justify-between">
               <div>
                 <h3 
-                  className="text-lg font-bold"
-                  style={{ fontFamily: config.headerFont }}
-                >
+                  className="text-lg font-bold">style={{ fontFamily: config.headerFont }}>
                   {config.companyName}
                 </h3>
                 <p 
-                  className="text-sm opacity-90"
-                  style={{ fontFamily: config.bodyFont }}
-                >
+                  className="text-sm opacity-90">style={{ fontFamily: config.bodyFont }}>
                   {config.tagline}
                 </p>
               </div>
@@ -69,30 +56,22 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
                 className="font-semibold mb-2"
                 style={{ 
                   fontFamily: config.headerFont,
-                  color: config.primaryColor 
-                }}
-              >
+                  color: config.primaryColor >}}>
                 Welcome to Your Dashboard
               </h4>
               <p 
-                className="text-sm text-gray-600"
-                style={{ fontFamily: config.bodyFont }}
-              >
+                className="text-sm text-gray-600">style={{ fontFamily: config.bodyFont }}>
                 {config.description}
               </p>
             </div>
             
             <div className="flex gap-2">
               <button
-                className="px-4 py-2 text-white rounded-lg text-sm"
-                style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}
-              >
+                className="px-4 py-2 text-white rounded-lg text-sm">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}>
                 Primary Button
               </button>
               <button
-                className="px-4 py-2 text-white rounded-lg text-sm"
-                style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}}
-              >
+                className="px-4 py-2 text-white rounded-lg text-sm">style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}}>
                 Accent Button
               </button>
             </div>
@@ -111,17 +90,11 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
             <span className="text-gray-600">Colors</span>
             <div className="flex gap-2">
               <div 
-                className="w-6 h-6 rounded-lg"
-                style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}
-              />
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}} />>
               <div 
-                className="w-6 h-6 rounded-lg"
-                style={{ backgroundColor: config.secondaryColor , backdropFilter: "blur(var(--glass-blur))"}}
-              />
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.secondaryColor , backdropFilter: "blur(var(--glass-blur))"}} />>
               <div 
-                className="w-6 h-6 rounded-lg"
-                style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}}
-              />
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}} />>
             </div>
           </div>
           <div className="flex items-center justify-between text-sm">

@@ -3,7 +3,7 @@
 import React from 'react';
 
 export default function AdminDebugPage() {
-  const debugInfo = { timestamp: new Date().toISOString(), environment: process.env.NODE_ENV || "development",
+  const debugInfo = { timestamp: new Date().toISOString(), environment: process.env.NODE_ENV || 'development',
     urls: { api: '/api',
       admin: '/admin'
     }
@@ -16,5 +16,5 @@ export default function AdminDebugPage() {
         {JSON.stringify(debugInfo, null, 2)}
       </pre>
     </div>
-  )
+  );
 }

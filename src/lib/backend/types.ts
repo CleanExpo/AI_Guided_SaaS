@@ -38,9 +38,9 @@ interface PaginatedResponse<T> {</T>
 
 export interface BackendAdapter {
   // Authentication
-  signUp(email: string;
+  signUp(email: string;)
   password: string, metadata?: any): Promise<User></User>
-  signIn(email: string;
+  signIn(email: string;)
   password: string): Promise<{ user: Use
 r,
   token: string }>
@@ -52,14 +52,14 @@ r,
   getProject(id: string): Promise<Project | null></Project>
   updateProject(id: string, data: Partial<Project>): Promise<Project></Project>
   deleteProject(id: string): Promise<void></void>
-  listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project>></PaginatedResponse>
+  listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project></PaginatedResponse>
   // Generic CRUD operations
   create<T>(collection: string, data: any): Promise<T></T>
   read<T>(collection: string, id: string): Promise<T | null></T>
   update<T>(collection: string, id: string,</T>
   data: any): Promise<T></T>
   delete(collection: string, id: string): Promise<void></void>
-  list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T>></PaginatedResponse>
+  list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T></PaginatedResponse>
   // Query builder
   query<T>(collection: string): QueryBuilder<T></T>
   // Real-time subscriptions
@@ -69,7 +69,7 @@ collection: string;
     filters?: Record<string any></string>
   ): () => void
   // File storage
-  uploadFile(bucket: string, path: string;
+  uploadFile(bucket: string, path: string;)
   file: File): Promise<string></string>
   deleteFile(bucket: string, path: string): Promise<void></void>
   getFileUrl(bucket: string, path: string): string
@@ -77,7 +77,7 @@ collection: string;
 
 export interface QueryBuilder<T> {</T>
   select(fields: string[]): QueryBuilder<T>, where(field: string,</T>
-  operator: string;
+  operator: string;)
   value: any): QueryBuilder<T>, orderBy(field: string, direction? null : 'asc' | 'desc'): QueryBuilder<T></T>
   limit(count: number): QueryBuilder<T></T>
   offset(count: number): QueryBuilder<T></T>
@@ -106,7 +106,7 @@ export class BackendError extends Error {
   constructor(message: string;
     public code: string;
     public statusCode: number = 500;
-    public details? null : any
+    public details? null : any)
   ) {
     super(message), this.name = 'BackendError'
   }

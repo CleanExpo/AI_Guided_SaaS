@@ -135,7 +135,7 @@ export function useWhiteLabelFavicon() {
   useEffect(() => {
     if (!config) return;
 
-    const link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
+    const link = document.querySelector('link[rel~=\'icon\']') as HTMLLinkElement;
     if (link) {
       link.href = config.favicon;
     } else {

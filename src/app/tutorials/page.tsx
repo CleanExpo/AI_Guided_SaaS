@@ -25,13 +25,12 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
     advanced: 'bg-red-100 text-red-700'
   };
 
-  return (
-    <Card className="h-full" className="glass
+  return(<Card className="h-full glass
           <CardHeader className="glass"
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg" className="glass{tutorial.title}</CardTitle>
+          <CardTitle className="text-lg glass{tutorial.title}</CardTitle>
           {isCompleted ? (
-            <CheckCircle className="w-5 h-5 text-green-600" />
+            <CheckCircle className="w-5 h-5 text-green-600" />)
           ) : isLocked ? (
             <Clock className="w-5 h-5 text-gray-400" />
           ) : (
@@ -46,8 +45,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           <p className="text-gray-600 mb-4">{tutorial.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">{tutorial.duration}</span>
-          <Button 
-            onClick={() => onStart(tutorial.id)}
+          <Button >onClick={() => onStart(tutorial.id)}
             disabled={isLocked}
             variant={isCompleted ? "outline" : "default"}
           >
@@ -82,8 +80,8 @@ const tutorials: Tutorial[] = [
 ];
 
 export default function TutorialsPage() {
-  const [userProgress] = useState({ completedTutorials: ['1'],
-    unlockedTutorials: ['1', '2']
+  const [userProgress] = useState({ completedTutorials: ['1'])
+    unlockedTutorials: ['1', '2'])
   });
 
   const handleStartTutorial = (id: string) => {
@@ -91,26 +89,22 @@ export default function TutorialsPage() {
     // Navigate to tutorial detail page
   };
 
-  return (
-    <div className="container mx-auto max-w-6xl py-12 px-4">
+  return(<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Learn & Master</h1>
         <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development</p>
       </div>
 
-      <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">)
         {tutorials.map((tutorial, index) => {
           const isCompleted = userProgress.completedTutorials.includes(tutorial.id);
           const isLocked = !userProgress.unlockedTutorials.includes(tutorial.id);
           
-          return (
-    <TutorialCard
+          return(<TutorialCard
               key={tutorial.id}
               tutorial={tutorial}
               isCompleted={isCompleted}
-              isLocked={isLocked}
-              onStart={handleStartTutorial}
-            />
+              isLocked={isLocked}>onStart={handleStartTutorial} />>)
           );
         })}
       </div>

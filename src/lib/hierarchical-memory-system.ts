@@ -283,7 +283,7 @@ if ('project') { return $2 }
     break;
 break
 }
-  private updateTierUsage(tierName: 'user' | 'project' | 'modular',
+  private updateTierUsage(tierName: 'user' | 'project' | 'modular',)
     delta: number) {
     const tier = this.getTier(tierName, tier.currentTokens = Math.max(0, tier.currentTokens + delta)}
   private generateEntryId() {
@@ -292,7 +292,7 @@ break
   private logAccess(entryId: string, operation: 'create' | 'read' | 'update' | 'delete') {
     this.accessLog.push({;
       entryId;
-      operation,
+      operation,)
       timestamp: new Date()   
     })
     // Keep only recent access logs (last 1000 operations);

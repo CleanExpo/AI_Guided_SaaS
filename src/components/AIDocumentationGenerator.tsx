@@ -11,7 +11,7 @@ g,
 export default function AIDocumentationGenerator() {
   return (Card></Card>, <CardHeader className="glass"
           </CardHeader>
-        <CardTitle className="flex items-center gap-2" className="glass
+        <CardTitle className="flex items-center gap-2 glass
           </CardTitle><FileText className="w-5 h-5 text-blue-600"     />
           AI Documentation Generator</FileText>
       <CardContent className="glass"

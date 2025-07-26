@@ -92,21 +92,21 @@ export class ToolsRefinerAgent extends Agent {
         'tool-analyzer';
         'performance-profiler',
         'cost-calculator',
-        'integration-planner'],
+        'integration-planner'])
       temperature: 0.4
     }};
-    // Initialize with common tools
+    // Initialize with common tools)
     this.toolLibrary = this.initializeToolLibrary()
 }
   protected async execute(input: string): Promise<any> {
     try {
-      this.think('Analyzing current tool configuration and requirements...', // Parse input to extract current tools and requirements, const { currentTools, requirements, constraints } =;
+      this.think('Analyzing current tool configuration and requirements...', // Parse input to extract current tools and requirements, const { currentTools, requirements, constraints } =;)
         await this.parseInput(input);
-      this.observe('Parsed input', { toolCount: currentTools.length,
+      this.observe('Parsed input', { toolCount: currentTools.length)
     requirementCount: requirements.length
       }};
       // Step, 1: Analyze current tools;
-
+)
 const _toolAnalysis = await this.analyzeCurrentTools();
         currentTools,
         // requirements;
@@ -127,7 +127,7 @@ const additions = await this.recommendAdditions();
         constraints,
         // currentTools;
       );
-      this.observe('Recommended tool additions', { count: additions.length
+      this.observe('Recommended tool additions', { count: additions.length)
     });
       // Step, 4: Optimize configurations;
 
@@ -139,13 +139,13 @@ const modifications = await this.optimizeConfigurations();
       this.observe('Configuration optimizations', { count: modifications.length
       }};
       // Step, 5: Identify redundancies;
-
+)
 const removals = await this.identifyRedundancies();
         currentTools,
         additions,
         // requirements;
       );
-      this.observe('Identified redundant tools', { count: removals.length
+      this.observe('Identified redundant tools', { count: removals.length)
     });
       // Step, 6: Plan integrations;
 
@@ -153,7 +153,7 @@ const integrations = await this.planIntegrations();
         [...currentTools, ...additions.map((a) => a.tool)],;
         // requirements;
       );
-      this.observe('Planned tool integrations', { count: integrations.length
+      this.observe('Planned tool integrations', { count: integrations.length)
     });
       // Step, 7: Analyze performance;
 
@@ -190,7 +190,7 @@ const result: ToolRefinement={ originalTools: currentTools;
         integrations,
         performance,
         recommendations, // Store in artifacts
-      this.setArtifact('tool-refinement', result, // Share with other agents
+      this.setArtifact('tool-refinement', result, // Share with other agents)
       this.setSharedMemory('optimized-tools', refinedTools);
       this.setSharedMemory('tool-integrations', integrations);
       return { success: true;
@@ -257,10 +257,10 @@ const result: ToolRefinement={ originalTools: currentTools;
 Format as JSON with arrays for each category.`;
 
 const response  = await generateAIResponse(parsePrompt, { model: this.config.model,
-    temperature: 0.2,
+    temperature: 0.2)
     responseFormat: 'json'
 }};
-
+)
 const parsed = JSON.parse(response);
     // Convert tool names to Tool objects;
 
@@ -280,8 +280,8 @@ const currentTools =;
     reliability: 70;
     scalability: 'medium' as any,
     resourceUsage: { cpu: 'medium' as any,
-    memory: 'medium' as any,
-    network: 'medium' as any
+    memory: 'medium' as any)
+    network: 'medium' as any)
 }}) || [];
     return {
       currentTools,;
@@ -302,9 +302,9 @@ Evaluate:
 Format as detailed JSON analysis.`;
 
 const response = await generateAIResponse(analysisPrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async identifyGaps(currentTools: Tool[], requirements: string[], analysis): Promise<any> {
@@ -315,11 +315,11 @@ Analysis, insights:
 ${JSON.stringify(analysis, null, 2)}
 List specific capabilities that are missing or insufficient.`;
 
-const response = await generateAIResponse(gapPrompt, { model: this.config.model,
+const response = await generateAIResponse(gapPrompt, { model: this.config.model)
     temperature: 0.3
-    }};
+    }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
-  private async recommendAdditions(gaps: string[], constraints: string[],
+  private async recommendAdditions(gaps: string[], constraints: string[],)
   currentTools: Tool[]): Promise<any> {
 { `Recommend tools to fill these capability, gaps: Missing, capabilities:``, ${gaps.join('\n')}
 Constraints:
@@ -335,10 +335,10 @@ Consider compatibility, cost, and performance.;
 Format as JSON array of ToolAddition objects.`;
 
 const response  = await generateAIResponse(recommendPrompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
 }};
-
+)
 const additions = JSON.parse(response);
     // Enrich with tool details from library or create new
     return additions.map((addition) =>  {
@@ -361,8 +361,8 @@ const additions = JSON.parse(response);
       return {
         tool;
         rationale: addition.rationale,
-    alternatives: addition.alternatives || [],
-    integrationPlan: addition.integrationPlan
+    alternatives: addition.alternatives || [])
+    integrationPlan: addition.integrationPlan)
 }    })
 }
   private async optimizeConfigurations(tools: Tool[], requirements: string[], analysis): Promise<any> {
@@ -379,12 +379,12 @@ Suggest configuration changes, to:
 Format as JSON array of ToolModification objects.`;
 
 const response = await generateAIResponse(optimizePrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async identifyRedundancies(currentTools: Tool[], additions: ToolAddition[],
+  private async identifyRedundancies(currentTools: Tool[], additions: ToolAddition[],)
   requirements: string[]): Promise<any> {
 { `Identify redundant tools that can be, removed: Current, tools:``, ${currentTools.map((t) => `${t.name}: ${t.capabilities.join(', ')}`).join('\n')}``;
 Planned, additions:;
@@ -399,9 +399,9 @@ Identify tools, that:
 Format as JSON array of ToolRemoval objects.`;
 
 const response = await generateAIResponse(redundancyPrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
   private async planIntegrations(allTools: Tool[], requirements: string[]): Promise<any> {
@@ -417,18 +417,18 @@ Consider sequential, parallel, conditional, and fallback patterns.
 Format as JSON array of ToolIntegration objects.`;
 
 const response = await generateAIResponse(integrationPrompt, { model: this.config.model,
-    temperature: 0.4,
+    temperature: 0.4)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async analyzePerformance(currentTools: Tool[], additions: ToolAddition[],
+  private async analyzePerformance(currentTools: Tool[], additions: ToolAddition[],)
   modifications: ToolModification[], removals: ToolRemoval[]): Promise<any> {
 { `Analyze the overall performance impact of tool, changes: Current, tools: ${currentTools.length}``,
 Additions: ${additions.length}
 Modifications: ${modifications.length}
 Removals: ${removals.length}
-Tool, details: ${JSON.stringify(
+Tool, details: ${JSON.stringify()
   { current: currentTools.map((t) => ({
   name: t.name,
     performance: t.performance
@@ -447,13 +447,13 @@ Calculate:
 Format as JSON ToolPerformanceAnalysis object.`;
 
 const response = await generateAIResponse(performancePrompt, { model: this.config.model,
-    temperature: 0.3,
+    temperature: 0.3)
     responseFormat: 'json'
-}};
+}};)
     return JSON.parse(response)
 }
-  private async generateRecommendations(additions: ToolAddition[], modifications: ToolModification[],
-  removals: ToolRemoval[], integrations: ToolIntegration[],
+  private async generateRecommendations(additions: ToolAddition[], modifications: ToolModification[])
+  removals: ToolRemoval[], integrations: ToolIntegration[],)
   performance: ToolPerformanceAnalysis): Promise<any> {
 { `Generate actionable recommendations based on the tool refinement, analysis: Changes, summary:``, - ${additions.length} tools to add
 - ${modifications.length} configurations to modify
@@ -463,9 +463,9 @@ Performance, analysis:
 ${JSON.stringify(performance, null, 2)};
 Provide 5-7 specific, actionable recommendations prioritized by impact.`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.model,
+const response = await generateAIResponse(recommendPrompt, { model: this.config.model)
     temperature: 0.4
-    }};
+    }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private compileRefinedTools();
 currentTools: Tool[],

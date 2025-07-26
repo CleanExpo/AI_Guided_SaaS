@@ -5,37 +5,37 @@
 import { DesignToken, UIComponent, ThemeOptions } from '../types';
 
 export class RetroEngine {
-  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken>> {
+  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken> {
     const tokens = new Map<string, DesignToken>();
     
     // 60s psychedelic colors
     tokens.set('--retro-orange', {
       name: '--retro-orange',
-      value: '#FF6B35',
-      category: 'color'
+      value: '#FF6B35')
+      category: 'color')
     });
     
     tokens.set('--retro-pink', {
       name: '--retro-pink',
-      value: '#F71735',
-      category: 'color'
+      value: '#F71735')
+      category: 'color')
     });
     
     tokens.set('--retro-yellow', {
       name: '--retro-yellow',
-      value: '#FCAB10',
-      category: 'color'
+      value: '#FCAB10')
+      category: 'color')
     });
     
     tokens.set('--retro-green', {
       name: '--retro-green',
-      value: '#8FE1A5',
-      category: 'color'
+      value: '#8FE1A5')
+      category: 'color')
     });
     
     // Groovy patterns
     tokens.set('--pattern-circles', {
-      name: '--pattern-circles',
+      name: '--pattern-circles',)
       value: 'radial-gradient(circle, transparent 20%, var(--retro-orange) 20.5%, var(--retro-orange) 30%, transparent 30.5%)',
       category: 'gradient'
     });
@@ -43,15 +43,15 @@ export class RetroEngine {
     // Bold typography
     tokens.set('--font-display', {
       name: '--font-display',
-      value: '"Bebas Neue", Impact, sans-serif',
-      category: 'typography'
+      value: '"Bebas Neue", Impact, sans-serif')
+      category: 'typography')
     });
     
     // Rounded corners (very 60s)
     tokens.set('--radius-pill', {
       name: '--radius-pill',
-      value: '50px',
-      category: 'spacing'
+      value: '50px')
+      category: 'spacing')
     });
     
     return tokens;

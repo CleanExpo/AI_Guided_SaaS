@@ -46,7 +46,7 @@ export default function LandingPageProduction() {
   // Countdown timer for urgency
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft(prev => {)
         if (prev.seconds > 0) {
           return { ...prev, seconds: prev.seconds - 1 };
         } else if (prev.minutes > 0) {
@@ -128,13 +128,10 @@ export default function LandingPageProduction() {
     }
   ];
 
-  return (
-    <div className="min-h-screen glass">
+  return(<div className="min-h-screen glass">
       {/* Header */}
-      <header className={cn(
-        "fixed top-0 w-full z-50 transition-all border-b",
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent border-transparent"
-      )}>
+      <header className={cn()
+        "fixed top-0 w-full z-50 transition-all border-b",>scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent border-transparent">)}>
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between" aria-label="Navigation">
             <div className="flex items-center gap-2">
@@ -154,9 +151,7 @@ export default function LandingPageProduction() {
               <Button 
                 onClick={handleGetStarted}
                 size="sm" 
-                className="bg-orange-500 hover:bg-orange-600"
-                disabled={isLoading}
-              >
+                className="bg-orange-500 hover:bg-orange-600">disabled={isLoading}>
                 Start Building →
               </Button>
             </div>
@@ -206,17 +201,13 @@ export default function LandingPageProduction() {
           <div className="glass flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button 
               size="lg" 
-              className="bg-orange-500 hover:bg-orange-600 text-lg px-8"
-              onClick={handleGetStarted}
-            >
+              className="bg-orange-500 hover:bg-orange-600 text-lg px-8">onClick={handleGetStarted}>
               Get Instant Access
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
-              className="text-lg px-8"
-              onClick={() => window.open('https://demo.ai-guided-saas.com', '_blank')}
+              variant="outline">className="text-lg px-8">onClick={() => window.open('https://demo.ai-guided-saas.com', '_blank')}
             >
               <Code2 className="w-5 h-5 mr-2" />
               View Live Demo
@@ -258,9 +249,8 @@ export default function LandingPageProduction() {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className={cn(
-                  "p-8 hover:shadow-lg transition-all",
-                  feature.highlight && "border-orange-200 bg-orange-50"
+                className={cn("p-8 hover:shadow-lg transition-all")
+                  feature.highlight && "border-orange-200 bg-orange-50")
                 )}
                className="glass
                 <feature.icon className="w-12 h-12 text-orange-500 mb-4" />
@@ -276,8 +266,8 @@ export default function LandingPageProduction() {
       <section className="py-20 px-4 glass">
         <div className="container mx-auto max-w-6xl">
           <Card className="glass"
-            <CardHeader className="text-center pb-8" className="glass
-              <CardTitle className="text-3xl" className="glassOut-of-the-Box Features</CardTitle>
+            <CardHeader className="text-center pb-8 glass
+              <CardTitle className="text-3xl glassOut-of-the-Box Features</CardTitle>
               <p className="text-gray-600 mt-2">Stop rebuilding the same features. Focus on your unique value.</p>
             </CardHeader>
             <CardContent className="glass"
@@ -311,12 +301,9 @@ import { useAIChat } from '@/hooks/useAIChat';
 export default function ChatInterface() {
   const { messages, sendMessage, isLoading } = useAIChat();
   
-  return (
-    <ChatUI 
+  return(<ChatUI 
       messages={messages}
-      onSend={sendMessage}
-      loading={isLoading}
-    />
+      onSend={sendMessage}>loading={isLoading} />>)
   );
 }`}</code>
               </pre>
@@ -357,15 +344,15 @@ export default function ChatInterface() {
             <p className="text-xl text-gray-600">No subscriptions. No hidden fees. Just ship.</p>
           </div>
           
-          <Card className="-2 -orange-500" className="glass
-            <CardHeader className="text-center pb-8" className="glass
+          <Card className="-2 -orange-500 glass
+            <CardHeader className="text-center pb-8 glass
               <Badge className="bg-orange-100 text-orange-700 mb-4">LAUNCH OFFER - 40% OFF</Badge>
               <div className="text-5xl font-bold">
                 <span className="line-through text-gray-400 text-3xl">$299</span> $179
               </div>
               <p className="text-gray-600 mt-2">One-time payment • Lifetime updates</p>
             </CardHeader>
-            <CardContent className="space-y-4 pb-8" className="glass
+            <CardContent className="space-y-4 pb-8 glass
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-green-600" />
@@ -388,9 +375,7 @@ export default function ChatInterface() {
               <div className="pt-6">
                 <Button 
                   size="lg" 
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-lg"
-                  onClick={handleGetStarted}
-                >
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-lg">onClick={handleGetStarted}>
                   Get Instant Access
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
@@ -413,17 +398,13 @@ export default function ChatInterface() {
           <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-orange-500 hover:bg-orange-600 text-lg px-8"
-              onClick={handleGetStarted}
-            >
+              className="bg-orange-500 hover:bg-orange-600 text-lg px-8">onClick={handleGetStarted}>
               Start Building Now
               <Rocket className="w-5 h-5 ml-2" />
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
-              className="text-lg px-8"
-            >
+              variant="outline">className="text-lg px-8">>
               <Github className="w-5 h-5 mr-2" />
               View on GitHub
             </Button>

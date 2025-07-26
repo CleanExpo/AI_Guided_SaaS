@@ -38,10 +38,9 @@ export class TokenOptimizationEngine {
     const distribution = this.tokenAnalyzer.analyzeTokenDistribution(content);
     const efficiency = this.tokenAnalyzer.calculateEfficiencyMetrics(content, distribution);
     const fragmentation = this.tokenAnalyzer.analyzeFragmentation(content);
-    const recommendations = this.tokenAnalyzer.generateOptimizationRecommendations(
-      distribution,
-      efficiency,
-      fragmentation
+    const recommendations = this.tokenAnalyzer.generateOptimizationRecommendations(distribution,
+      efficiency)
+      fragmentation)
     );
 
     const analysis: TokenAnalysis = {
@@ -61,9 +60,8 @@ export class TokenOptimizationEngine {
     return analysis;
   }
 
-  async optimizeTokenUsage(
-    content: Map<string, string>,
-    strategyName: string = 'balanced'
+  async optimizeTokenUsage(content: Map<string, string>)
+    strategyName: string = 'balanced')
   ): Promise<OptimizationResult> {
     const strategy = this.strategyManager.getStrategy(strategyName);
     if (!strategy) {
@@ -81,10 +79,9 @@ export class TokenOptimizationEngine {
       let processedContent = fileContent;
 
       // Apply preservation rules
-      const preservationLevel = this.strategyManager.determinePreservationLevel(
-        filename,
-        fileContent,
-        strategy
+      const preservationLevel = this.strategyManager.determinePreservationLevel(filename,
+        fileContent)
+        strategy)
       );
 
       switch (preservationLevel) {
@@ -94,8 +91,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'preserve',
             originalTokens,
-            newTokens: originalTokens,
-            reason: 'Always preserve rule applied'
+            newTokens: originalTokens)
+            reason: 'Always preserve rule applied')
           });
           break;
 
@@ -108,8 +105,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'light_compress',
             originalTokens,
-            newTokens: lightTokens,
-            reason: 'Conditional preservation with light compression'
+            newTokens: lightTokens)
+            reason: 'Conditional preservation with light compression')
           });
           break;
 
@@ -122,8 +119,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'moderate_compress',
             originalTokens,
-            newTokens: moderateTokens,
-            reason: 'Applied moderate compression'
+            newTokens: moderateTokens)
+            reason: 'Applied moderate compression')
           });
           break;
 
@@ -136,8 +133,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'heavy_compress',
             originalTokens,
-            newTokens: heavyTokens,
-            reason: 'Applied heavy compression or archival'
+            newTokens: heavyTokens)
+            reason: 'Applied heavy compression or archival')
           });
           break;
       }

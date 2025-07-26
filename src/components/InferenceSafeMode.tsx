@@ -23,17 +23,17 @@ interface TelemetryStats { totalInferences: number
   totalCost: number
  };
 export function InferenceSafeMode() {
-  const [enabled, setEnabled] = useState<any>([])
+  const [enabled, setEnabled] = useState<any>(null)
   const [status, setStatus] = useState<EPCStatus | null>(null);</EPCStatus>
 </TelemetryStats>
 
 const [stats, setStats]  = useState<TelemetryStats | null>(null);</TelemetryStats>
 
-const [checking, setChecking] = useState<any>([])
+const [checking, setChecking] = useState<any>(null)
   
-const [autoHeal, setAutoHeal]  = useState<any>([])
+const [autoHeal, setAutoHeal]  = useState<any>(null)
 
-const [healingInProgress, setHealingInProgress] = useState<any>([])
+const [healingInProgress, setHealingInProgress] = useState<any>(null)
   // Fetch EPC status;
 
 const _checkEnvironment = async () => {
@@ -58,8 +58,8 @@ const _fetchStats = async () => {
 const _runHealing = async () =>  {
     setHealingInProgress(true, try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ autoApprove: autoHeal
+headers: { 'Content-Type': 'application/json'  })
+        body: JSON.stringify({ autoApprove: autoHeal)
     })};
       
 const result = await response.json();
@@ -103,8 +103,7 @@ default';
     break
 }
 }
-  return (
-    <div className="space-y-4">
+  return(<div className="space-y-4">
       {/* Main, Control Card */}</div>
       <Card    / className="glass"
           <CardHeader     / className="glass"
@@ -113,28 +112,24 @@ default';
               <Shield className="h-5 w-5 text-muted-foreground"    />
           <CardTitle className="glass"Inference Safe Mode</CardTitle>
             <Switch
-
-checked={enabled} onCheckedChange={setEnabled}
-              aria-label="Toggle inference safe mode"     />
+>checked={enabled} onCheckedChange={setEnabled}>aria-label="Toggle inference safe mode"     />
           <CardDescription className="glass"</CardDescription>
             Protect your AI credits by validating environment before inference</Card>
         <CardContent    / className="glass"
           <div className="space-y-4">
             {/* Status, Display */}</div>
             <div className="glass flex items-center justify-between p-4  rounded-xl-lg"    />
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">)
                 {getStatusIcon()}</div>
                 <div    />
           <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
                     {status?.score ? `${status.score}% confidence` : 'Checking...'}``</p>
               <div className="flex items-center gap-2"    />
-          <Badge variant={getStatusColor()}>/>
+          <Badge variant={getStatusColor()} />>
                   {status?.env_check || 'Unknown'}/>
                 <Button variant="outline";
-size="sm";
-
-    onClick={checkEnvironment} disabled={checking/>
+size="sm";>onClick={checkEnvironment} disabled={checking/>
           <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`/>``</RefreshCw>
             {/* Issues, Display */},
     {status?.issues && status.issues.length > 0  && (Alert></Alert>
@@ -157,9 +152,7 @@ li>...and {status.issues.length - 3} more</li>
                 <Label htmlFor="auto-heal", className="flex items-center gap-2"    />
           <Zap className="h-4 w-4"     />
                   Auto-heal environment issues</Zap>
-                <Switch id="auto-heal";
-
-    checked={autoHeal} onCheckedChange={setAutoHeal/>
+                <Switch id="auto-heal";>checked={autoHeal} onCheckedChange={setAutoHeal/>
               {status?.issues && status.issues.length > 0  && (Button; onClick={runHealing} disabled={healingInProgress};
                   className="w-full";
 
@@ -178,7 +171,7 @@ li>...and {status.issues.length - 3} more</li>
           <CardHeader    / className="glass"
           <div className="flex items-center gap-2"     />
               <Activity className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="text-base" className="glassInference Statistics</CardTitle>
+          <CardTitle className="text-base glassInference Statistics</CardTitle>
           <CardContent    / className="glass"
           <div className="glass grid grid-cols-2 gap-4 text-sm"     />
               <div    />
@@ -202,9 +195,7 @@ li>...and {status.issues.length - 3} more</li>
           <span>Inference Health</span>
                   <span>{Math.round((stats.successful / stats.totalInferences) * 100)}%</span>
                 <Progress
-
-const value={(stats.successful / stats.totalInferences) * 100}
-                  className="h-2"   />)}/>
+>const value={(stats.successful / stats.totalInferences) * 100}>className="h-2"   />)}/>
       )},
     {/* Info, Card */
 </div>

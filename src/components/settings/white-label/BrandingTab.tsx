@@ -19,18 +19,14 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
         <div className="space-y-4">
           <div>
             <Label>Company Name</Label>
-            <Input
-              value={config.companyName}
-              onChange={(e) => updateConfig('companyName', e.target.value)}
+            <Input>value={config.companyName}>onChange={(e) => updateConfig('companyName', e.target.value)}
               placeholder="Your Company Name"
             />
           </div>
           
           <div>
             <Label>Tagline</Label>
-            <Input
-              value={config.tagline}
-              onChange={(e) => updateConfig('tagline', e.target.value)}
+            <Input>value={config.tagline}>onChange={(e) => updateConfig('tagline', e.target.value)}
               placeholder="Your inspiring tagline"
             />
           </div>
@@ -39,9 +35,7 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
             <Label>Description</Label>
             <textarea
               className="w-full px-3 py-2  rounded-xl-lg"
-              rows={3}
-              value={config.description}
-              onChange={(e) => updateConfig('description', e.target.value)}
+              rows={3}>value={config.description}>onChange={(e) => updateConfig('description', e.target.value)}
               placeholder="Brief description of your platform"
             />
           </div>
@@ -89,9 +83,7 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
           <div>
             <Label>Header Font</Label>
             <select
-              className="w-full px-3 py-2  rounded-xl-lg"
-              value={config.headerFont}
-              onChange={(e) => updateConfig('headerFont', e.target.value)}
+              className="w-full px-3 py-2  rounded-xl-lg">value={config.headerFont}>onChange={(e) => updateConfig('headerFont', e.target.value)}
             >
               {fontOptions.map(font => (
                 <option key={font} value={font}>{font}</option>
@@ -102,9 +94,7 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
           <div>
             <Label>Body Font</Label>
             <select
-              className="w-full px-3 py-2  rounded-xl-lg"
-              value={config.bodyFont}
-              onChange={(e) => updateConfig('bodyFont', e.target.value)}
+              className="w-full px-3 py-2  rounded-xl-lg">value={config.bodyFont}>onChange={(e) => updateConfig('bodyFont', e.target.value)}
             >
               {fontOptions.map(font => (
                 <option key={font} value={font}>{font}</option>

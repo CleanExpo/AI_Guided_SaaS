@@ -81,14 +81,14 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Update state with error info
     this.setState({
-      errorInfo
+      errorInfo)
     });
 
     // Track error in analytics (if available)
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
-        componentStack: errorInfo.componentStack,
-        errorBoundary: true
+        componentStack: errorInfo.componentStack)
+        errorBoundary: true)
       });
     }
   }
@@ -98,14 +98,14 @@ export class ErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      showDetails: false,
-      copied: false
+      showDetails: false)
+      copied: false)
     });
   };
 
   toggleDetails = () => {
     this.setState(prevState => ({
-      showDetails: !prevState.showDetails
+      showDetails: !prevState.showDetails)
     }));
   };
 
@@ -140,23 +140,22 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
       const { error, errorInfo, showDetails, copied } = this.state;
       const isDevelopment = (process.env.NODE_ENV || "development") === "development";
 
-      return (
-        <div className="min-h-screen glass flex items-center justify-center p-4">
-          <Card className="max-w-2xl w-full" className="glass
+      return(<div className="min-h-screen glass flex items-center justify-center p-4">
+          <Card className="max-w-2xl w-full glass
             <CardHeader className="glass"
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-red-100 rounded-xl-lg flex items-center justify-center">
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl" className="glassSomething went wrong</CardTitle>
+                  <CardTitle className="text-2xl glassSomething went wrong</CardTitle>
                   <p className="text-gray-600 text-sm mt-1">
                     We encountered an unexpected error. Please try again.
                   </p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4" className="glass
+            <CardContent className="space-y-4 glass
               {/* Error Message */}
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
@@ -172,9 +171,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Try Again
                 </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => window.location.href = '/'}
+                <Button >variant="outline" )>onClick={() => window.location.href = '/'}
                   className="flex-1"
                 >
                   <Home className="h-4 w-4 mr-2" />
@@ -187,9 +184,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                 <div className="-t pt-4">
                   <div className="flex items-center justify-between mb-3">
                     <button
-                      onClick={this.toggleDetails}
-                      className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                     aria-label="Button">
+                      onClick={this.toggleDetails}>className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">aria-label="Button">
                       <Bug className="h-4 w-4" />
                       Developer Details
                       {showDetails ? (
@@ -200,9 +195,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                     </button>
                     <Button
                       variant="ghost"
-                      size="sm"
-                      onClick={this.copyErrorDetails}
-                    >
+                      size="sm">onClick={this.copyErrorDetails}>
                       {copied ? (
                         <>
                           <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
@@ -267,19 +260,19 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
 // Functional component wrapper for easier use with hooks
 export function ErrorBoundaryWrapper({ 
   children, 
-  fallback,
+  fallback)
   onError 
 }: { 
   children: ReactNode;
-  fallback?: ReactNode;
+  fallback?: ReactNode;)
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }) {
   const handleError = (error: Error, errorInfo: ErrorInfo) => {
     // Track error with analytics if available
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
-        errorBoundary: true,
-        componentStack: errorInfo.componentStack
+        errorBoundary: true)
+        componentStack: errorInfo.componentStack)
       });
     }
     
@@ -289,18 +282,15 @@ export function ErrorBoundaryWrapper({
     }
   };
 
-  return (
-    <ErrorBoundary fallback={fallback} onError={handleError}>
+  return(<ErrorBoundary fallback={fallback} onError={handleError}>
       {children}
-    </ErrorBoundary>
+    </ErrorBoundary>)
   );
 }
 
 // Page-level error boundary with custom styling
 export function PageErrorBoundary({ children }: { children: ReactNode }) {
-  return (
-    <ErrorBoundaryWrapper
-      onError={(error, errorInfo) => {
+  return(<ErrorBoundaryWrapper)>onError={(error, errorInfo) => {
         
       }}
     >
@@ -311,14 +301,13 @@ export function PageErrorBoundary({ children }: { children: ReactNode }) {
 
 // Component-level error boundary with inline fallback
 export function ComponentErrorBoundary({ 
-  children,
+  children)
   fallbackText = 'Unable to load this component'
 }: { 
   children: ReactNode;
-  fallbackText?: string;
+  fallbackText?: string;)
 }) {
-  return (
-    <ErrorBoundaryWrapper
+  return(<ErrorBoundaryWrapper
       fallback={
         <Alert>
           <AlertTriangle className="h-4 w-4" />
@@ -327,6 +316,6 @@ export function ComponentErrorBoundary({
       }
     >
       {children}
-    </ErrorBoundaryWrapper>
+    </ErrorBoundaryWrapper>)
   );
 }

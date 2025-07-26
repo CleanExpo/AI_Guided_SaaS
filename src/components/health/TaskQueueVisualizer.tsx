@@ -15,7 +15,7 @@ export function TaskQueueVisualizer() {
   return (
     <Card className="glass"
       <CardHeader className="glass"
-        <CardTitle className="flex items-center gap-2" className="glass
+        <CardTitle className="flex items-center gap-2 glass
           <Clock className="h-5 w-5" />
           Task Queue
         </CardTitle>

@@ -56,5 +56,5 @@ export default function AgentMonitorPage() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

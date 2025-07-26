@@ -37,17 +37,16 @@ export default function TemplatesPage() {
   ];
 
   const handleUseTemplate = (templateId) =>  {
-    toast({ title: 'Template Selected',
-      description: 'Template has been added to your project.'   
+    toast({ title: 'Template Selected')
+      description: 'Template has been added to your project.'   )
     })
 };
 
-  const filteredTemplates = templates.filter(template =>
+  const filteredTemplates = templates.filter(template =>)
     template.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="container mx-auto max-w-6xl py-12 px-4">
+  return(<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Template Marketplace</h1>
         <p className="text-xl text-gray-600">Start your project with professional templates</p>
@@ -55,10 +54,8 @@ export default function TemplatesPage() {
 
       <div className="mb-8">
         <Input
-          type="text"
-          ="Search templates..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          type="text")
+          ="Search templates...">value={searchTerm}>onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-md mx-auto"
         />
       </div>
@@ -74,9 +71,9 @@ export default function TemplatesPage() {
         <TabsContent value="all" className="mt-8">
           <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (
-              <Card key={template.id} className="overflow-hidden" className="glass
+              <Card key={template.id} className="overflow-hidden glass
                 <CardHeader className="glass"
-                  <CardTitle className="text-lg" className="glass{template.name}</CardTitle>
+                  <CardTitle className="text-lg glass{template.name}</CardTitle>
                   <p className="text-sm text-gray-600">{template.description}</p>
                 </CardHeader>
                 <CardContent className="glass"
@@ -85,8 +82,7 @@ export default function TemplatesPage() {
                       <Badge key={tag} variant="secondary">{tag}</Badge>
                     ))}
                   </div>
-                  <Button 
-                    onClick={() => handleUseTemplate(template.id)}
+                  <Button >onClick={() => handleUseTemplate(template.id)}
                     className="w-full bg-orange-500 hover:bg-orange-600"
                   >
                     Use Template

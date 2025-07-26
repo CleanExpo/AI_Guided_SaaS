@@ -47,8 +47,8 @@ export class AdvisorAgent extends Agent {
         'risk-assessor',
         'decision-matrix',
         'action-planner'
-      ],
-      temperature: 0.5
+      ])
+      temperature: 0.5)
     });
 
     this.situationAnalyzer = new SituationAnalyzer();
@@ -69,73 +69,66 @@ export class AdvisorAgent extends Agent {
       const constraints = this.getSharedMemory('constraints') || [];
       const currentChallenges = this.getSharedMemory('challenges') || [];
 
-      this.observe('Retrieved context', {
+      this.observe('Retrieved context', {)
         hasProjectContext: Object.keys(projectContext).length > 0,
         requirementCount: requirements.length,
         constraintCount: constraints.length
       });
 
       // Step 1: Analyze the situation
-      const situation = await this.situationAnalyzer.analyzeSituation(
-        input,
+      const situation = await this.situationAnalyzer.analyzeSituation(input,
         projectContext,
         requirements,
-        constraints,
-        currentChallenges
+        constraints)
+        currentChallenges)
       );
       this.observe('Situation analysis complete', situation);
 
       // Step 2: Generate strategic recommendations
-      const recommendations = await this.recommendationGenerator.generateRecommendations(
-        situation,
-        input,
-        requirements
+      const recommendations = await this.recommendationGenerator.generateRecommendations(situation,
+        input)
+        requirements)
       );
       this.observe('Generated recommendations', { count: recommendations.length });
 
       // Step 3: Develop strategies
-      const strategies = await this.strategyDeveloper.developStrategies(
-        situation,
-        recommendations,
-        constraints
+      const strategies = await this.strategyDeveloper.developStrategies(situation,
+        recommendations)
+        constraints)
       );
       this.observe('Developed strategies', { count: strategies.length });
 
       // Step 4: Assess risks
-      const risks = await this.riskAssessor.assessRisks(
-        situation,
-        recommendations,
-        strategies
+      const risks = await this.riskAssessor.assessRisks(situation,
+        recommendations)
+        strategies)
       );
       this.observe('Risk assessment complete', { riskCount: risks.length });
 
       // Step 5: Evaluate alternatives
-      const alternatives = await this.alternativeEvaluator.evaluateAlternatives(
-        input,
-        situation,
-        recommendations
+      const alternatives = await this.alternativeEvaluator.evaluateAlternatives(input,
+        situation)
+        recommendations)
       );
       this.observe('Evaluated alternatives', { count: alternatives.length });
 
       // Step 6: Create decision matrix
-      const decisionMatrix = await this.decisionMatrixCreator.createDecisionMatrix(
-        recommendations,
-        alternatives,
-        situation
+      const decisionMatrix = await this.decisionMatrixCreator.createDecisionMatrix(recommendations,
+        alternatives)
+        situation)
       );
       this.observe('Decision matrix created', decisionMatrix);
 
       // Step 7: Develop action plan
-      const actionPlan = await this.actionPlanner.developActionPlan(
-        recommendations,
+      const actionPlan = await this.actionPlanner.developActionPlan(recommendations,
         strategies,
-        risks,
-        decisionMatrix
+        risks)
+        decisionMatrix)
       );
       this.observe('Action plan developed', {
         immediateActions: actionPlan.immediateActions.length,
-        shortTermActions: actionPlan.shortTermActions.length,
-        longTermActions: actionPlan.longTermActions.length
+        shortTermActions: actionPlan.shortTermActions.length)
+        longTermActions: actionPlan.longTermActions.length)
       });
 
       // Calculate overall confidence
@@ -179,10 +172,9 @@ export class AdvisorAgent extends Agent {
       throw error;
     }
   }
-  private calculateConfidence(
-    situation: SituationAnalysis,
-    recommendations: Recommendation[],
-    risks: RiskAssessment[]
+  private calculateConfidence(situation: SituationAnalysis,
+    recommendations: Recommendation[])
+    risks: RiskAssessment[])
   ): number {
     // Base confidence from situation clarity
     let confidence = 0.7;
@@ -193,7 +185,7 @@ export class AdvisorAgent extends Agent {
     }
 
     // Adjust based on high-priority recommendations
-    const highPriorityCount = recommendations.filter(
+    const highPriorityCount = recommendations.filter()
       (r) => r.priority === 'critical' || r.priority === 'high'
     ).length;
     if (highPriorityCount > 3) {

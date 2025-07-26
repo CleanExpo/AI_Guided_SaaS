@@ -12,23 +12,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, AlertCircle } from 'lucide-react';
 
-const _ExtendedProjectSchema = CreateProjectSchema.extend({ config: z.object({
+const _ExtendedProjectSchema = CreateProjectSchema.extend({ config: z.object({)
   database: z.string().optional(, hosting: z.string().optional(, authentication: z.string().optional(, api_style: z.string().optional(, framework: z.string().optional(, language: z.string().optional(, features: z.array(z.string()).optional()
     }).optional()    })
 // Type-safe form data
 type CreateProjectForm = z.infer<typeof ExtendedProjectSchema></typeof>
 export function ValidatedProjectForm() {
-</typeof>, const router = useRouter(); const [isSubmitting, setIsSubmitting] = useState<any>([])
+</typeof>, const router = useRouter(); const [isSubmitting, setIsSubmitting] = useState<any>(null)
   
-const [errors, setErrors]  = useState<Record<string string>>({});</Record>
+const [errors, setErrors]  = useState<Record<string string>({});</Record>
 
 const [generalError, setGeneralError] = useState<string | null>(null);</string>
   
 const [formData, setFormData]  = useState<CreateProjectForm>({</CreateProjectForm>
     name: '',
     description: '',
-    type: "fullstack"
-    , status: 'planning',
+    type: "fullstack",
+    status: 'planning',
     config: { features: any[] }
 </CreateProjectForm>
   });
@@ -47,8 +47,8 @@ const validation = validateSafe(ExtendedProjectSchema, formData);
 };
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json' },
+      const response = await fetch('/api/admin/auth', { method: 'POST')
+headers: { 'Content-Type': 'application/json' },)
         body: JSON.stringify(validation.data)
      
     });
@@ -71,12 +71,11 @@ const _updateField = <K extends keyof CreateProjectForm>(_;</K>
   
 const _updateConfig = (key: string, value) =>  {
     setFormData(prev => ({
-      ...prev,
-    config: { ...prev.config, [key]: value }
+      ...prev)
+    config: { ...prev.config, [key]: value })
 }))
 }
-  return (
-    <Card className="w-full max-w-2xl"    / className="glass
+  return(<Card className="w-full max-w-2xl"    / className="glass
           <CardHeader     / className="glass"
         <CardTitle className="glass"Create New Project</CardTitle>
         <CardDescription className="glass"</CardDescription>
@@ -87,13 +86,11 @@ const _updateConfig = (key: string, value) =>  {
 /form>
             <Alert variant="destructive"    />
           <AlertCircle className="h-4 w-4"     />
-              <AlertDescription>{generalError}</AlertDescription>
+              <AlertDescription>{generalError}</AlertDescription>)
       )}
           <div className="space-y-2"    />
           <Label htmlFor="name">Project Name *</Label>
-            <Input id="name";
-
-    value={formData.name} onChange={(e) => updateField('name', e.target.value)};/>
+            <Input id="name";>value={formData.name} onChange={(e) => updateField('name', e.target.value)};/>
               ="My Awesome Project";
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined/>
@@ -103,9 +100,7 @@ const _updateConfig = (key: string, value) =>  {
           <div className="space-y-2"    />
           <Label htmlFor="description">Description *</Label>
             <Textarea
-id="description";
-
-value={formData.description} onChange={(e) => updateField('description', e.target.value)};</Textarea>
+id="description";>value={formData.description} onChange={(e) => updateField('description', e.target.value)};</Textarea>
               ="Describe your project...";
 
     const rows={4}
@@ -117,10 +112,7 @@ value={formData.description} onChange={(e) => updateField('description', e.targe
           <div className="glass grid grid-cols-2 gap-4"    />
           <div className="space-y-2"     />
               <Label htmlFor="type">Project Type *</Label>
-              <Select
-
-value={formData.type} onValueChange={(value) => updateField('type', value as any)}</Select>
-              ></Select>
+              <Select>value={formData.type} onValueChange={(value) => updateField('type', value as any)}</Select></Select>
                 <SelectTrigger id="type"    />
           <SelectValue><SelectContent></SelectContent>
                   {ProjectTypeSchema.options.map((type) => (\n    </SelectContent>
@@ -131,10 +123,7 @@ value={formData.type} onValueChange={(value) => updateField('type', value as any
               {errors.type  && (p className="text-sm text-destructive">{errors.type}</p>
             <div className="space-y-2"    />
           <Label htmlFor="framework">Framework (Optional)</Label>
-              <Select
-
-value={formData.config?.framework || ''} onValueChange={(value) => updateConfig('framework', value)}</Select>
-              ></Select>
+              <Select>value={formData.config?.framework || ''} onValueChange={(value) => updateConfig('framework', value)}</Select></Select>
                 <SelectTrigger id="framework"    />
           <SelectValue ="Select framework"      />
                 <SelectContent    />
@@ -149,10 +138,7 @@ value={formData.config?.framework || ''} onValueChange={(value) => updateConfig(
           <div className="glass grid grid-cols-2 gap-4"    />
           <div className="space-y-2"     />
               <Label htmlFor="language">Language (Optional)</Label>
-              <Select
-
-value={formData.config?.language || ''} onValueChange={(value) => updateConfig('language', value)}</Select>
-              ></Select>
+              <Select>value={formData.config?.language || ''} onValueChange={(value) => updateConfig('language', value)}</Select></Select>
                 <SelectTrigger id="language"    />
           <SelectValue ="Select language"      />
                 <SelectContent    />
@@ -166,10 +152,7 @@ value={formData.config?.language || ''} onValueChange={(value) => updateConfig('
                   <SelectItem value="php">PHP</SelectItem>
             <div className="space-y-2"    />
           <Label htmlFor="database">Database (Optional)</Label>
-              <Select
-
-value={formData.config?.database || ''} onValueChange={(value) => updateConfig('database', value)}</Select>
-              ></Select>
+              <Select>value={formData.config?.database || ''} onValueChange={(value) => updateConfig('database', value)}</Select></Select>
                 <SelectTrigger id="database"    />
           <SelectValue ="Select database"      />
                 <SelectContent    />
@@ -195,9 +178,7 @@ value={formData.config?.database || ''} onValueChange={(value) => updateConfig('
                 'Analytics'
    ].map((feature) => (\n    </div>
                 <label key={feature} className="flex items-center space-x-2"    />
-          <input aria-label="checkbox" type="checkbox"
-
-    checked={formData.config?.features?.includes(feature) || false} onChange={(e) =    /> {</input>
+          <input aria-label="checkbox" type="checkbox">checked={formData.config?.features?.includes(feature) || false} onChange={(e) =    /> {</input>
 { formData.config?.features || [], if (e.target.checked) {
                         updateConfig('features', [...features, feature])} else { updateConfig('features', features.filter((f) => f !== feature))
 }
@@ -205,9 +186,7 @@ value={formData.config?.database || ''} onValueChange={(value) => updateConfig('
         <span className="text-sm">{feature}</span>))}
           <div className="flex justify-end space-x-4"    />
           <Button type="button"
-variant="outline";
-
-    const onClick={() => router.back()}</Button>
+variant="outline";>const onClick={() => router.back()}</Button>
 {{isSubmitting}
             >
                     Cancel
@@ -223,10 +202,10 @@ variant="outline";
 /**;
  * Example of a custom hook for form validation;
  */;
-export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T>, const [data, setData] = useState<T>([])
-  const [errors, setErrors] = useState<Record<string string>>({});</Record>
+export function useValidatedForm<T>(schema: z.ZodSchema<T>, initialData: T) {</T>, const [data, setData] = useState<T>(null)
+  const [errors, setErrors] = useState<Record<string string>({});</Record>
   
-const [touched, setTouched] = useState<Set<string>>(new Set();</Set>
+const [touched, setTouched] = useState<Set<string>(new Set();</Set>
 { <K extends keyof T>(field: K, value: T[K]) =>  { </K>
     setData(prev => ({ ...prev, [field]: value  }))
     setTouched(prev => new Set(prev).add(String(field));
@@ -236,8 +215,8 @@ const fieldSchema = (schema as any).shape[field as string];
     if (fieldSchema) {
       const result = fieldSchema.safeParse(value, if (!result.success) {
         setErrors(prev => ({
-          ...prev,
-          [field]: result.error.errors[0].message
+          ...prev)
+          [field]: result.error.errors[0].message)
         }))
       } else {
         setErrors((prev) => { const newErrors={ ...prev };
@@ -248,7 +227,7 @@ const fieldSchema = (schema as any).shape[field as string];
 </T>
 }
   const _validate = (): void => { const result = schema.safeParse(data, if (!result.success) {</K>, const fieldErrors: Record<string string>  = { };</string>
-      (result.error.errors as any[]).forEach((err) =>  { const _field = err.path.join('.', fieldErrors[field] = err.message
+      (result.error.errors as any[]).forEach((err) =>  { const _field = err.path.join('.', fieldErrors[field] = err.message)
 });
       setErrors(fieldErrors);
       return false

@@ -14,7 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         staleTime: 60 * 1000, // 1 minute
         refetchOnWindowFocus: false
       }
-    }
+    })
   }));
 
   const [mounted, setMounted] = useState(false);
@@ -32,35 +32,29 @@ export function Providers({ children }: { children: React.ReactNode }) {
   // CRITICAL FIX: Exclude admin routes from SessionProvider to prevent auth conflicts
   // Admin routes use custom admin-token authentication, NOT NextAuth
   if (pathname?.startsWith('/admin')) {
-    return (
-      <QueryClientProvider client={queryClient}>
+    return(<QueryClientProvider client={queryClient}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+          enableSystem>disableTransitionOnChange>
           {children}
           <PWAInstallPrompt />
         </ThemeProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>)
     );
   }
 
   // Regular user routes use NextAuth SessionProvider
-  return (
-    <SessionProvider>
+  return(<SessionProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+          enableSystem>disableTransitionOnChange>
           {children}
           <PWAInstallPrompt />
         </ThemeProvider>
       </QueryClientProvider>
-    </SessionProvider>
+    </SessionProvider>)
   );
 }

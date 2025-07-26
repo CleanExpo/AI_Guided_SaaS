@@ -74,7 +74,7 @@ export class TemplateMarketplace {
         JOIN users u ON t.author_id = u.id
         WHERE t.featured = true AND t.status = 'approved'
         ORDER BY t.downloads DESC
-        LIMIT 12;
+        LIMIT 12;)
       `);``
       return templates.map(this.formatTemplate)
 } catch (error) {
@@ -93,7 +93,7 @@ export class TemplateMarketplace {
         ORDER BY t.downloads DESC
         LIMIT ?
       `,``
-        [category, limit]
+        [category, limit])
       );
       return templates.map(this.formatTemplate)
 } catch (error) {
@@ -103,7 +103,7 @@ export class TemplateMarketplace {
   // Search templates
   static async searchTemplates(query: string, filters? null : {;
       category?: string, framework?: string, pricing?: string;
-      difficulty?: string
+      difficulty?: string)
     }): Promise<any> {
     if (!this.isConfigured() {)} {
       return this.getMockSearchResults(query)}
@@ -142,7 +142,7 @@ const templates = await DatabaseService.query(sql, params);
         JOIN users u ON t.author_id = u.id
         WHERE t.id = ? AND t.status = 'approved'
       `,``
-        [id]
+        [id])
       );
       if (!template[0]) {r}eturn null;
       return this.formatTemplate(template[0])
@@ -166,12 +166,11 @@ template_data: templateData;
       );
       // Log the submission;
 if (submission) {
-        await DatabaseService.logActivity(
-          userId,
+        await DatabaseService.logActivity(userId,
           'template_submission',
           'marketplace',
-          submission.id,
-          { templateName: templateData.name 
+          submission.id)
+          { templateName: templateData.name )
     });
         return { success: true;
     submissionId: submission.id
@@ -214,11 +213,10 @@ user_id: userId;
     currency: 'USD',
           purchased_at: new Date().toISOString(, created_at: new Date().toISOString()});
         // Update download count
-        await DatabaseService.query(
-          ```
+        await DatabaseService.query(```
           UPDATE templates SET downloads = downloads + 1 WHERE id = ?
         `,``
-          [templateId];
+          [templateId];)
         );
         return { success: true;
     downloadUrl: `/api/templates/${templateId}/download`
@@ -244,7 +242,7 @@ user_id: userId;
         WHERE tp.user_id = ?
         ORDER BY tp.purchased_at DESC
       `,``
-        [userId]
+        [userId])
       );
       return templates.map(this.formatTemplate)
 } catch (error) {
@@ -257,7 +255,7 @@ user_id: userId;
       return this.getMockCategories()}
     try {;
       const categories = await DatabaseService.query(`, ``, // SELECT;
-          c.*,
+          c.*,)
           COUNT(t.id) as template_count
         FROM template_categories c
         LEFT JOIN templates t ON c.id = t.category AND t.status = 'approved'
@@ -280,7 +278,7 @@ user_id: userId;
     name: data.name,
     description: data.description,
     category: data.category,
-    tags: Array.isArray(data.tags, ? data.tags
+    tags: Array.isArray(data.tags, ? data.tags)
         : JSON.parse(data.tags || '[]'),
       framework: data.framework,
     difficulty: data.difficulty,

@@ -69,13 +69,13 @@ export class SocketEventHandler {
           
           // Notify other participants
           socket.to(roomId).emit('user_joined', {
-            user: socket.data.user,
+            user: socket.data.user,)
             room: this.roomManager.sanitizeRoom(room)
           });
           
           // Send room state to new user
           const projectData = await this.projectManager.getProjectData(projectId);
-          socket.emit('room_joined', {
+          socket.emit('room_joined', {)
             room: this.roomManager.sanitizeRoom(room),
             project: projectData
           });
@@ -95,8 +95,8 @@ export class SocketEventHandler {
         const { roomId, position } = data;
         socket.to(roomId).emit('cursor_update', {
           userId: socket.data.userId,
-          user: socket.data.user,
-          position
+          user: socket.data.user)
+          position)
         });
       });
 
@@ -111,15 +111,15 @@ export class SocketEventHandler {
           // Validate and save change
           const savedChange = await this.projectManager.saveProjectChange({
             ...change,
-            userId,
-            projectId: change.projectId!,
+            userId)
+            projectId: change.projectId!,)
             timestamp: new Date()
           } as ProjectChange);
 
           // Broadcast to other users in room
           socket.to(roomId).emit('project_updated', {
-            change: savedChange,
-            user: socket.data.user
+            change: savedChange)
+            user: socket.data.user)
           });
         } catch (error) {
           logger.error('Error handling project change:', error);
@@ -135,8 +135,8 @@ export class SocketEventHandler {
           if (!userId) return;
 
           const savedComment = await this.commentManager.saveComment({
-            ...comment,
-            userId,
+            ...comment)
+            userId,)
             createdAt: new Date(),
             updatedAt: new Date(),
             replies: [],
@@ -145,8 +145,8 @@ export class SocketEventHandler {
 
           // Broadcast to room
           io.to(roomId).emit('comment_added', {
-            comment: savedComment,
-            user: socket.data.user
+            comment: savedComment)
+            user: socket.data.user)
           });
         } catch (error) {
           logger.error('Error adding comment:', error);
@@ -187,8 +187,8 @@ export class SocketEventHandler {
     if (room) {
       // Notify other participants
       socket.to(roomId).emit('user_left', {
-        userId,
-        user: socket.data.user
+        userId)
+        user: socket.data.user)
       });
     }
   }

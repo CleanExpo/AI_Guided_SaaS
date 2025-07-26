@@ -12,9 +12,8 @@ interface IssuesListProps {
 export function IssuesList({ issues, checkpoint }: IssuesListProps) {
   if (issues.length === 0) return null;
 
-  return (
-    <Card className="glass p-4">
-      <h3 className="font-medium text-gray-700 mb-3">
+  return(<Card className="glass p-4">
+      <h3 className="font-medium text-gray-700 mb-3">)
         📋 Detected Issues ({issues.length})
       </h3>
       <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -24,9 +23,7 @@ export function IssuesList({ issues, checkpoint }: IssuesListProps) {
             className={`flex items-center gap-3 p-2 rounded ${
               checkpoint?.completedIssues.includes(issue.id)
                 ? 'bg-green-50'
-                : 'bg-gray-50'
-            }`}
-          >
+                : 'bg-gray-50'>}`}>
             <span className="text-lg">
               {getCategoryIcon(issue.category)}
             </span>
@@ -42,9 +39,7 @@ export function IssuesList({ issues, checkpoint }: IssuesListProps) {
                 )}
               </div>
             </div>
-            <div
-              className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}
-            >
+            <div>className={`px-2 py-1 rounded text-xs font-medium ${getIssueTypeColor(issue.type)}`}>
               {issue.type.toUpperCase()}
             </div>
             {checkpoint?.completedIssues.includes(issue.id) && (

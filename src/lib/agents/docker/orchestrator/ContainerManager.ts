@@ -54,8 +54,8 @@ export class ContainerManager extends EventEmitter {
   }
 
   async stopAllContainers(): Promise<void> {
-    await Promise.all(
-      Array.from(this.containers.keys()).map(agentId => 
+    await Promise.all()
+      Array.from(this.containers.keys()).map(agentId => )
         this.stopContainer(agentId)
       )
     );
@@ -127,8 +127,8 @@ export class ContainerManager extends EventEmitter {
     const AgentClass = agent.constructor as new (config: any) => any;
     
     return new AgentClass({
-      ...config,
-      id: newId
+      ...config)
+      id: newId)
     });
   }
 }

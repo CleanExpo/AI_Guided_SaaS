@@ -12,20 +12,20 @@ a,
 };
 const chatQuestions = [
   { id: 'project-name',
-    question: "What would you like to name your project?"
-    , type: 'text' as const
+    question: "What would you like to name your project?",
+    type: 'text' as const
   },
   { id: 'project-description',
-    question: "Can you describe what your project will do?"
-    , type: 'text' as const
+    question: "Can you describe what your project will do?",
+    type: 'text' as const
   },
   { id: 'target-audience',
-    question: "Who is your target audience?"
-    , type: 'text' as const
+    question: "Who is your target audience?",
+    type: 'text' as const
   },
   { id: 'features',
-    question: "What key features would you like to include?"
-    , type: 'features' as const options: [ 'User Authentication',
+    question: "What key features would you like to include?",
+    type: 'features' as const options: [ 'User Authentication',
       'Payment Processing',
       'Real-time Chat',
       'File Upload',
@@ -38,12 +38,12 @@ const chatQuestions = [
    ]
   },
   { id: 'technology',
-    question: "What's your preferred technology stack?"
-    , type: 'technology' as const
+    question: "What's your preferred technology stack?",
+    type: 'technology' as const
   },
   { id: 'timeline',
-    question: "What's your target timeline for this project?"
-    , type: 'select' as const options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']}
+    question: "What's your target timeline for this project?",
+    type: 'select' as const options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']}
 ];
 export default function AIChat({ persona, onProjectConfigReady }: AIChatProps, onProjectConfigReady }: AIChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([ {</ChatMessage>
@@ -57,7 +57,7 @@ content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS appl
 
 const [currentQuestionIndex, setCurrentQuestionIndex]  = useState(0);
 
-const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({</Partial>
+const [projectData, setProjectData] = useState<Partial<ProjectConfig>({</Partial>
     persona: persona
     features: [] as any[],
     technology: { frontend: 'React', backend: 'Node.js', database: 'PostgreSQL', hosting: 'Vercel' }
@@ -66,19 +66,19 @@ const [projectData, setProjectData] = useState<Partial<ProjectConfig>>({</Partia
 
 const [userInput, setUserInput]  = useState('');
 
-const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);</string>
+const [selectedFeatures, setSelectedFeatures] = useState<string>("");</string>
   
 const [isTyping, setIsTyping]  = useState(false);
 
 const messagesEndRef = useRef<HTMLDivElement>(null);</HTMLDivElement>
-{ (): void => {messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' 
+{ (): void => {messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' )
     })};
 
 const _askNextQuestion = useCallback(() =>  {
     if (currentQuestionIndex >= chatQuestions.length) {r}eturn setIsTyping(true, setTimeout(() => {
       const question = chatQuestions[currentQuestionIndex]; const newMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant',
-        sender: 'assistant',
-        content: question.question,
+        sender: 'assistant')
+        content: question.question,)
 timestamp: new Date()};
       setMessages(prev => [...prev, newMessage]);
       setIsTyping(false)
@@ -93,8 +93,8 @@ timestamp: new Date()};
 
 const _handleUserResponse = (response: string) => {
     // Add user message; const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
-      sender: 'user',
-      content: response
+      sender: 'user')
+      content: response)
 timestamp: new Date()};
     setMessages(prev => [...prev, userMessage]);
     // Update project data based on current question;
@@ -132,8 +132,8 @@ if (currentQuestionIndex < chatQuestions.length - 1) {
   const _completeConfiguration = (finalData: Partial<ProjectConfig>) =>  {</ProjectConfig>
     setIsTyping(true, setTimeout(() => {
       const completionMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant',
-        sender: 'assistant',
-        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',
+        sender: 'assistant')
+        content: 'I understand you want to generate code. This feature will be implemented to integrate with your development workflow.',)
 timestamp: new Date()};
       setMessages(prev => [...prev, completionMessage]);
       setIsTyping(false);
@@ -156,8 +156,7 @@ timestamp: new Date()};
       handleUserResponse(userInput)}
   const currentQuestion = chatQuestions[currentQuestionIndex];</ProjectConfig>
 { currentQuestionIndex < chatQuestions.length && !isTyping;
-  return (
-    <div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+  return(<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
           <Card className="w-full max-w-4xl h-[80vh] flex flex-col"     / className="glass
         <CardHeader className="-b"    / className="glass
           <CardTitle className="flex items-center gap-3"     / className="glass
@@ -166,12 +165,11 @@ timestamp: new Date()};
             <div    />
           <h2 className="text-xl font-semibold">{persona.name}</h2>
               <p className="text-sm text-gray-600 font-normal">{persona.tone}</p>
-        <CardContent className="flex-1 flex flex-col p-0" className="glass
+        <CardContent className="flex-1 flex flex-col p-0 glass
           {/* Messages, Area */}</Card>
-          <div className = "flex-1 overflow-y-auto p-6 space-y-4"></div>
+          <div className = "flex-1 overflow-y-auto p-6 space-y-4"></div>)
             {messages.map((message) => (\n    </div>
-              <div; key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              ></div>
+              <div; key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}></div>
                 {message.role === 'assistant'  && (
 /div></div>
                   <div className="w-8 h-8 bg-blue-100 rounded-lg-full flex items-center justify-center flex-shrink-0"    />
@@ -181,9 +179,7 @@ timestamp: new Date()};
 
     const className={`max-w-[70%] p-3 rounded-lg ${``
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-900'
-                  }`/>
+                      ? 'bg-blue-600 text-white'>: 'bg-gray-100 text-gray-900'>}`/>
           <p className="text-sm">{message.content}</p>
                   <p className="text-xs opacity-70 mt-1">
                     {message.timestamp.toLocaleTimeString()}</p>
@@ -211,9 +207,7 @@ div className="flex gap-3 justify-start"></div>
                     {currentQuestion.options?.map((feature) => (\n    </div>
                       <Button const key={feature };
                         const variant={ selectedFeatures.includes(feature) ? "default" : "outline" };
-                        size="sm";
-
-    const onClick={() => handleFeatureToggle(feature)};</Button>
+                        size="sm";>const onClick={() => handleFeatureToggle(feature)};</Button>
                         className="text-xs";
                       >
                         {feature}</Button>
@@ -223,9 +217,7 @@ div className="flex gap-3 justify-start"></div>
                   <div className="grid grid-cols-2 gap-2">
                     {currentQuestion.options?.map((option) => (\n    </div>
                       <Button const key={option};
-                        variant="outline";
-
-    const onClick={() => handleUserResponse(option)};</Button>
+                        variant="outline";>const onClick={() => handleUserResponse(option)};</Button>
                         className="text-sm";
                       >
                         {option}</Button>

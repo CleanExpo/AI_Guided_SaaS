@@ -11,10 +11,10 @@ interface UseSemanticSearchOptions {
   cacheResults?: boolean
 }
 
-export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSemanticSearchOptions = { }) { const [isSearching, setIsSearching] = useState<any>([])
+export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSemanticSearchOptions = { }) { const [isSearching, setIsSearching] = useState<any>(null)
   const [isIndexing, setIsIndexing] = useState<any>(false, const [searchResults, setSearchResults]  = useState<SearchResponse | null>(null);</SearchResponse>
 
-const [context7, setContext7] = useState<string[]>([]);</string>
+const [context7, setContext7] = useState<string>("");</string>
   
 const [error, setError] = useState<string | null>(null);</string>
   // Cache for search results;
@@ -43,10 +43,10 @@ if (options.cacheResults) {
         cache.set(cacheKey, response)}
       return response
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage, toast({ title: 'Search Error',
+      const _errorMessage = err instanceof Error ? err.message : 'Search failed', setError(errorMessage, toast({ title: 'Search Error')
         description: errorMessage;
         variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {;
@@ -71,15 +71,15 @@ const _indexDocument = useCallback(async (request: IndexRequest) => { setIsIndex
       // Clear cache as index has changed
       cache.clear()
 };
-      toast({ title: 'Document Indexed',
-        description: `Successfully indexed document: ${request.id}`
+      toast({ title: 'Document Indexed')
+        description: `Successfully indexed document: ${request.id}`)
       });
       return result
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage, toast({ title: 'Indexing Error',
+      const _errorMessage = err instanceof Error ? err.message : 'Indexing failed', setError(errorMessage, toast({ title: 'Indexing Error')
         description: errorMessage;
         variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {;
@@ -93,15 +93,15 @@ const _indexBatch = useCallback(async (requests: IndexRequest[]) => { setIsIndex
       // Clear cache as index has changed
       cache.clear()
 };
-      toast({ title: 'Batch Indexed',
-        description: `Successfully indexed ${requests.length} documents`
+      toast({ title: 'Batch Indexed')
+        description: `Successfully indexed ${requests.length} documents`)
       });
       return result
 } catch (err) {
-      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage, toast({ title: 'Indexing Error',
+      const _errorMessage = err instanceof Error ? err.message : 'Batch indexing failed', setError(errorMessage, toast({ title: 'Indexing Error')
         description: errorMessage;
         variant: 'destructive'
-     
+     )
     });
       throw err
 } finally {;
@@ -122,7 +122,7 @@ const _clearResults = useCallback(() => {
         const _content = document.body.innerText; const _path = window.location.pathname};
         try {
           await indexDocument({ id: path;
-            content,
+            content,)
             metadata: { url: window.location.href, title: document.title, timestamp: new Date().toISOString() },
             type: 'document'   
     })

@@ -37,8 +37,8 @@ const buttonSizes={ xs: 'h-7 px-2 text-xs',
   sm: 'h-8 px-3 text-sm',
   md: 'h-9 px-4 text-sm',
   lg: 'h-10 px-6 text-base',
-  xl: 'h-12 px-8 text-lg'
-  , icon: 'h-9 w-9'
+  xl: 'h-12 px-8 text-lg',
+    icon: 'h-9 w-9'
 };
 
     const buttonRounded={ none: 'rounded-none',
@@ -70,10 +70,10 @@ export function ButtonEnhanced({
   shadow = 'none';
   animation = 'hover';
   disabled,
-  children,
-  ...props
+  children)
+  ...props)
 }: ButtonProps) {
-  return (button, className={cn(
+  return(button, className={cn(
         'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
         buttonVariants[variant],
         buttonSizes[size],
@@ -81,8 +81,8 @@ export function ButtonEnhanced({
         buttonShadows[shadow],
         buttonAnimations[animation],
         fullWidth && 'w-full',
-        loading && 'cursor-not-allowed',
-        className
+        loading && 'cursor-not-allowed')
+        className)
       )}
       const disabled={disabled || loading}
       {...props}
@@ -101,8 +101,8 @@ interface FABProps extends Omit<ButtonProps 'size'> {</ButtonProps>
 
 export function FloatingActionButton({;
   className;
-  size = 'md', position = 'bottom-right', icon,
-  ...props
+  size = 'md', position = 'bottom-right', icon)
+  ...props)
 }: FABProps) {
   const fabSizes={ sm: 'h-12 w-12',
     md: 'h-14 w-14',
@@ -112,18 +112,15 @@ lg: 'h-16 w-16'};
     'bottom-left': 'fixed bottom-6 left-6',
     'top-right': 'fixed top-6 right-6',
     'top-left': 'fixed top-6 left-6'};
-  return (
-    <ButtonEnhanced
+  return(<ButtonEnhanced
 
 className={cn(
-        fabSizes[size],
+        fabSizes[size])
         fabPositions[position],'rounded-full shadow-lg hover: shadow-xl z-50'
-        className
+        className)
       )}
       variant="brand";
-animation="glow";
-      {...props}
-    ></ButtonEnhanced>
+animation="glow";>{...props}></ButtonEnhanced>
       {icon}
 </ButtonEnhanced>
       )}
@@ -139,15 +136,15 @@ e;
 export function ButtonGroup({
   children,
   className,
-  orientation = 'horizontal', size,
-  variant
+  orientation = 'horizontal', size)
+  variant)
 }: ButtonGroupProps) {
-  return (div, className={cn(
-        'inline-flex',
+  return(div, className={cn(
+        'inline-flex')
         orientation === 'horizontal' ? 'flex-row' : 'flex-col'
         '[&>button]: rounded-none [&>button: first-child]:rounded-l-md [&>button:last-child]:rounded-r-md'
         orientation === 'vertical' &&;
-          '[&>button: first-child]:rounded-t-md [&>button:first-child]:rounded-l-none [&>button:last-child]:rounded-b-md [&>button:last-child]:rounded-r-none'
+          '[&>button: first-child]:rounded-t-md [&>button:first-child]:rounded-l-none [&>button:last-child]:rounded-b-md [&>button:last-child]:rounded-r-none')
         '[&>button: not(:first-child)]:border-l-0'
         orientation === 'vertical' &&;
           '[&>button: not(:first-child)]:border-l [&>button:not(:first-child)]:border-t-0'
@@ -156,7 +153,7 @@ export function ButtonGroup({
     >
       {React.Children.map(children, (child) =>  {
         if (React.isValidElement(child) {)} {</div>
-          return React.cloneElement(child as React.ReactElement<ButtonProps>, {</ButtonProps>
+          return React.cloneElement(child as React.ReactElement<ButtonProps>, {</ButtonProps>)
             size: size || (child.props as ButtonProps)?.size,
 variant: variant || (child.props as ButtonProps)?.variant   
     })
@@ -173,10 +170,10 @@ interface IconButtonProps extends Omit<ButtonProps 'children'> {</ButtonProps>
 
 export function IconButton({
   icon;
-  className,
-  ...props
+  className)
+  ...props)
 }: IconButtonProps) {
-  return (
+  return()
     <ButtonEnhanced className={cn('p-0', className)} size="icon" {...props}></ButtonEnhanced>
       {icon}
 </ButtonEnhanced>
@@ -190,8 +187,8 @@ interface ToggleButtonProps extends Omit<ButtonProps 'onClick'> {</ButtonProps>
 export function ToggleButton({;
   pressed = false, onPressedChange,
   className,
-  children,
-  ...props
+  children)
+  ...props)
 }: ToggleButtonProps) {
   return (ButtonEnhanced, className={cn(pressed && 'bg-accent text-accent-foreground', className)}
       variant={pressed ? 'default' : 'outline'} onClick={() => onPressedChange?.(!pressed)}
@@ -216,40 +213,30 @@ export function SplitButton({;
   children;
   dropdownItems,
   dropdownOpen = false, onDropdownToggle,
-  className,
-  ...props
+  className)
+  ...props)
 }: SplitButtonProps) {
-  return (
-    <div className="relative inline-flex">, <ButtonEnhanced className={cn('rounded-r-none border-r-0', className)}
-        {...props}
-      ></ButtonEnhanced>
+  return()
+    <div className="relative inline-flex">, <ButtonEnhanced className={cn('rounded-r-none border-r-0', className)}>{...props}></ButtonEnhanced>
         {children}
 </ButtonEnhanced>
       <ButtonEnhanced className="rounded-lg-l-none px-2";
-
-    variant={props.variant} size={props.size}
-        const onClick={() => onDropdownToggle?.(!dropdownOpen)}</ButtonEnhanced>
+>variant={props.variant} size={props.size}>const onClick={() => onDropdownToggle?.(!dropdownOpen)}</ButtonEnhanced>
         aria-expanded={dropdownOpen}
       >
         <svg className="h-4 w-4";
 fill="none";
-stroke="currentColor";
-viewBox="0 0 24 24";
-        >
+stroke="currentColor";>viewBox="0 0 24 24";>>
           <path
 strokeLinecap="round";
 strokeLinejoin="round";
-
-const strokeWidth={2}
-            d="M19 9l-7 7-7-7"     />
+>const strokeWidth={2}>d="M19 9l-7 7-7-7"     />
       {dropdownOpen && (
         <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background  rounded-lg-md shadow-md-lg z-50">
           {dropdownItems.map((item, index) => (\n    </div>
             <button const key={index};
               className="w-full px-3 py-2 text-left text-sm hover: bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-
-onClick={ item.onClick} disabled={item.disabled}
-             aria-label="Button"></button>
+>onClick={ item.onClick} disabled={item.disabled}>aria-label="Button"></button>
               {item.icon && <span className="mr-2">{item.icon}</span>}
               {item.label}
 </button>
@@ -266,8 +253,8 @@ interface CopyButtonProps extends Omit<ButtonProps 'onClick'> {</ButtonProps>
  };
 export function CopyButton({;
   text;
-  onCopy,
-  successMessage = 'Copied!', children = 'Copy', ...props
+  onCopy)
+  successMessage = 'Copied!', children = 'Copy', ...props)
 }: CopyButtonProps) {
   const [copied, setCopied] = React.useState(false);
   const handleCopy = async () => {
@@ -277,14 +264,11 @@ export function CopyButton({;
       setTimeout(() => setCopied(false, 2000)
 }; catch (err) {
       logger.error('Failed to copy text: ', err)};
-  return (
-    <ButtonEnhanced
+  return(<ButtonEnhanced
 
-onClick={handleCopy} variant={copied ? 'success' : 'outline'}
-      {...props}
-    ></ButtonEnhanced>
+onClick={handleCopy} variant={copied ? 'success' : 'outline'}>{...props}></ButtonEnhanced>
       {copied ? successMessage : children}
-</ButtonEnhanced>
+</ButtonEnhanced>)
       )}
 // Social Login Buttons
 interface SocialButtonProps extends Omit<ButtonProps 'leftIcon'> {</ButtonProps>
@@ -294,20 +278,17 @@ interface SocialButtonProps extends Omit<ButtonProps 'leftIcon'> {</ButtonProps>
 export function SocialButton({;
   provider;
   children,
-  className,
-  ...props
+  className)
+  ...props)
 }: SocialButtonProps) {
   const providerConfig={ google: {
       icon: (
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path fill="currentColor", d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"     />
-        <path fill="currentColor";
-d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /    />
+        <path fill="currentColor";>d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /    />
 fill="currentColor";
 d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-        <path
-fill="currentColor";
-d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"    />
+        <path>fill="currentColor";>d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"    />
           </svg>
       , className: 'border-gray-300 hover:bg-gray-50'
     }
@@ -339,13 +320,10 @@ d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.9
     }};
   
 const config = providerConfig[provider];
-  return (
-    <ButtonEnhanced variant="outline";
+  return(<ButtonEnhanced variant="outline";
 
-    const leftIcon={config.icon}
-      className={cn('w-full', config.className, className)}
-      {...props}
-    ></ButtonEnhanced>
+    const leftIcon={config.icon})
+      className={cn('w-full', config.className, className)}>{...props}></ButtonEnhanced>
       {children ||
         `Continue with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}
 </ButtonEnhanced>

@@ -1,5 +1,5 @@
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
 import { validateInput } from '@/lib/api/validation-middleware';
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             metadata: { ip_address: request.headers.get('x-forwarded-for') || 'unknown',
                 user_agent: request.headers.get('user-agent') || 'unknown'
             }
-        }
+        };
             return NextResponse.json(analyticsData);
         } catch (error) {
             logger.error('Analytics API error:', error);

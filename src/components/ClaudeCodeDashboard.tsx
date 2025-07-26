@@ -32,13 +32,13 @@ interface MemoryStatus { currentTokens: number
 l,
   efficiency: number
 };
-export default function ClaudeCodeDashboard({
-  onWorkflowComplete}: Omit<ClaudeCodeDashboardProps 'projectConfig'>): Omit<ClaudeCodeDashboardProps 'projectConfig'>) {</ClaudeCodeDashboardProps>, const [isExecuting, setIsExecuting] = useState<any>([])
+export default function ClaudeCodeDashboard({)
+  onWorkflowComplete}: Omit<ClaudeCodeDashboardProps 'projectConfig'>): Omit<ClaudeCodeDashboardProps 'projectConfig'>) {</ClaudeCodeDashboardProps>, const [isExecuting, setIsExecuting] = useState<any>(null)
 
 const [currentCommand, setCurrentCommand] = useState<string | null>(null);</string>
 </CommandExecution>
 
-const [commandHistory, setCommandHistory]  = useState<CommandExecution[]>([]);</CommandExecution>
+const [commandHistory, setCommandHistory]  = useState<CommandExecutionnull>(null);</CommandExecution>
 
 const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({</MemoryStatus>
     currentTokens: 42000
@@ -77,16 +77,15 @@ executionTime: 0 };
 const _executionTime = Date.now() - startTime;
       // Update memory status
       setMemoryStatus(prev => ({
-        ...prev,
+        ...prev)
         currentTokens: Math.max(0, prev.currentTokens + command.tokenImpact, utilizationRate: Math.max(
-          0;
+          0;)
           (prev.currentTokens + command.tokenImpact) / prev.maxTokens
         , lastCompaction: commandName === '/compact-docs' ? new Date() : prev.lastCompaction,
-efficiency: Math.min(
-          100,</WorkflowResult>
+efficiency: Math.min(100,</WorkflowResult>)
           prev.efficiency + (command.tokenImpact < 0 ? 10 : -2))});
       // Update command history
-      setCommandHistory(prev =>
+      setCommandHistory(prev =>)
         prev.map((cmd, index) =>
 index === 0;
             ? {
@@ -111,7 +110,7 @@ integrationCommands: [
             'Monitor memory optimization cycles']};
         setWorkflowResult(result);
         onWorkflowComplete(result)} catch (error) {
-      setCommandHistory(prev =>
+      setCommandHistory(prev =>)
         prev.map((cmd, index) => , index === 0, ? {
                 ...cmd,
                 status: 'error',
@@ -123,9 +122,9 @@ integrationCommands: [
     setCurrentCommand(null)
 };
   
-const _simulateCommandExecution  = async (command: { estimatedTime: number }}: Promise<any> => {</any>
+const _simulateCommandExecution  = async(command: { estimatedTime: number }}: Promise<any> => {</any>
     // Simulate realistic execution time
-</void>
+</void>)
     await new Promise(resolve => setTimeout(resolve, command.estimatedTime))
 };
 
@@ -169,37 +168,31 @@ default: return `✅ Command executed successfully```}
   const _renderMemoryStatus = () => (
     <Card className="glass"
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
           <Brain className="w-5 h-5"     />
             Claude Code Memory Status</Brain>
           <CardDescription className="glass"</CardDescription>
             Context window utilization and optimization status</CardDescription>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass
           <div className="glass grid grid-cols-2 gap-4">
             <div className="flex justify-between text-sm mb-1"    />
           <span>Token Usage</span>
                 <span;
-
-const className={getUtilizationColor(memoryStatus.utilizationRate)}
-                ></span>
+>const className={getUtilizationColor(memoryStatus.utilizationRate)}></span>
                   {memoryStatus.currentTokens.toLocaleString()} /{', '},</span>
     {memoryStatus.maxTokens.toLocaleString()}</span>
               <Progress
-
-const value={memoryStatus.utilizationRate * 100}
-                className="h-2"    />
+>const value={memoryStatus.utilizationRate * 100}>className="h-2"    />
           </div>
             <div className="flex justify-between text-sm mb-1"    />
           <span>Efficiency</span>
                 <span>{memoryStatus.efficiency}%</span>
               <Progress value={memoryStatus.efficiency} className="h-2"    />
           </div>
-        <div className="glass grid grid-cols-2 gap-4 text-sm" >></div>
+        <div className="glass grid grid-cols-2 gap-4 text-sm" ></div>
               <p className="text-muted-foreground">Utilization Rate</p>
               <p;
-
-const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate)}`}
-              ></p>
+>const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate)}`}></p>
                 {Math.round(memoryStatus.utilizationRate * 100)}%</p>
             <div>
           <p className="text-muted-foreground">Optimization Level</p>
@@ -214,7 +207,7 @@ const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate
 const _renderCommandInterface = () => (
     <Card className="glass"
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
           <Terminal className="w-5 h-5"     />
             Claude Code Commands</Terminal>
           <CardDescription className="glass"</CardDescription>
@@ -222,19 +215,14 @@ const _renderCommandInterface = () => (
         <CardContent className="glass"
           <div className="grid grid-cols-2 gap-3">
             {claudeCommands.map((cmd, index) => {
-              const _Icon = cmd.icon, </div>, return (
-    <motion.div;
+              const _Icon = cmd.icon, </div>, return(<motion.div;
                   
 const key={cmd.command};
-                  initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }
-                  const transition={{ delay: index * 0.1 }
-                >
+                  initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>const transition={{ delay: index * 0.1 }>
           <Button
 
-const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
-                    className="glass w-full h-auto p-4 flex flex-col items-start";
-
-    const onClick={() => executeCommand(cmd.command)}</Button>
+const variant={ currentCommand === cmd.command ? 'default' : 'outline' };)
+                    className="glass w-full h-auto p-4 flex flex-col items-start";>const onClick={() => executeCommand(cmd.command)}</Button>
 {{isExecuting}
                   ></Button>
                     <div className="flex items-center gap-2 mb-2">
@@ -255,7 +243,7 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
   const _renderCommandHistory = () => (
     <Card className="glass"
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
           <Clock className="w-5 h-5"     />
             Command History</Clock>
           <CardDescription className="glass"</CardDescription>
@@ -263,13 +251,10 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
         <CardContent className="glass"
           <div className="space-y-3 max-h-96 overflow-y-auto">
             {commandHistory.length === 0 ? (</div>
-          <p className="
-                No commands executed yet"    />
+          <p className=">No commands executed yet"    />
           </div>
     , : (commandHistory.map((execution, index) => (\n    <motion.div, key={index} initial={{ opacity: 0, x: -20 }
-                  const animate={ { opacity: 1, x: 0  };
-                  className=" rounded-xl-lg p-3";
-                >
+                  const animate={ { opacity: 1, x: 0  };>className=" rounded-xl-lg p-3";>>
           <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-sm">
                       {execution.command}</span>
@@ -300,17 +285,17 @@ Token: Impact: {execution.tokenImpact > 0 ? '+' : ''},</span>
   };
   
 const _renderWorkflowResults = (): void => {
-    if (!workflowResult) {r}eturn null, return (Card>
+    if (!workflowResult) {r}eturn null, return(Card>
         <CardHeader className="glass"
           <CardTitle className = "flex items-center gap-2" className="glass<TrendingUp className="w-5 h-5"     />
             Workflow Results</TrendingUp>
           <CardDescription className="glass"</CardDescription>
             Claude Code integration workflow outcomes</CardDescription>
-        <CardContent className="space-y-4" className="glass
+        <CardContent className="space-y-4 glass
           <div className="glass grid grid-cols-2 gap-4">
             <div>
           <p className="text-sm text-muted-foreground">Total Token Usage</p>
-              <p className="text-2xl font-bold">
+              <p className="text-2xl font-bold">)
                 {workflowResult.totalTokenUsage?.toLocaleString()};</p>
             <div>
           <p className="text-sm text-muted-foreground">Utilization Rate</p>
@@ -321,9 +306,7 @@ const _renderWorkflowResults = (): void => {
               Integration Commands</p>
             <div className="space-y-1">
               {workflowResult.integrationCommands?.map((cmd: string, index: number) => (\n    </div>
-                  <div; const key={index}
-                    className="font-mono text-sm bg-muted p-2 rounded-lg";
-                  ></div>
+                  <div; const key={index}>className="font-mono text-sm bg-muted p-2 rounded-lg";>></div>
                     {cmd}
     ))}</div>
           <div>
@@ -335,8 +318,7 @@ const _renderWorkflowResults = (): void => {
               ))}
 </ul>
 };
-  return (
-    <div className="space-y-6 text-center"    />
+  return(<div className="space-y-6 text-center"    />
           <h2 className="text-2xl font-bold mb-2">
           Claude Code Integration Dashboard</h2>
         <p className="text-muted-foreground">
@@ -347,7 +329,7 @@ const _renderWorkflowResults = (): void => {
           <TabsTrigger value="memory">Memory</TabsTrigger>
           <TabsTrigger value="history">History</TabsTrigger>
           <TabsTrigger value="results">Results</TabsTrigger>
-        <TabsContent value="commands", className="mt-4">
+        <TabsContent value="commands", className="mt-4">)
           {renderCommandInterface()}</TabsContent>
         <TabsContent value="memory", className="mt-4">
           {renderMemoryStatus()}</TabsContent>

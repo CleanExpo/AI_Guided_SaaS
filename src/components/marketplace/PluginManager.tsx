@@ -34,8 +34,8 @@ interface InstalledPlugin {
 }
 
 export default function PluginManager() {
-  const [plugins, setPlugins] = useState<InstalledPlugin[]>([]);
-  const [loading, setLoading] = useState<Record<string, boolean>>({});
+  const [plugins, setPlugins] = useState<InstalledPluginnull>(null);
+  const [loading, setLoading] = useState<Record<string, boolean>({});
   const [selectedPlugin, setSelectedPlugin] = useState<string | null>(null);
   const marketplace = getMarketplace();
 
@@ -105,13 +105,13 @@ export default function PluginManager() {
 
   const handlePluginActivated = (pluginId: string) => {
     setPlugins(prev => prev.map(p => 
-      p.id === pluginId ? { ...p, active: true } : p
+      p.id === pluginId ? { ...p, active: true } : p)
     ));
   };
 
   const handlePluginDeactivated = (pluginId: string) => {
     setPlugins(prev => prev.map(p => 
-      p.id === pluginId ? { ...p, active: false } : p
+      p.id === pluginId ? { ...p, active: false } : p)
     ));
   };
 
@@ -138,7 +138,7 @@ export default function PluginManager() {
       // Simulate plugin update
       await new Promise(resolve => setTimeout(resolve, 2000));
       setPlugins(prev => prev.map(p => 
-        p.id === pluginId ? { ...p, hasUpdate: false } : p
+        p.id === pluginId ? { ...p, hasUpdate: false } : p)
       ));
     } catch (error) {
       logger.error('Failed to update plugin:', error);
@@ -163,8 +163,7 @@ export default function PluginManager() {
     }
   };
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -195,7 +194,7 @@ export default function PluginManager() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Active</p>
-                <p className="text-2xl font-bold">
+                <p className="text-2xl font-bold">)
                   {plugins.filter(p => p.active).length}
                 </p>
               </div>
@@ -225,16 +224,12 @@ export default function PluginManager() {
             <CardHeader className="glass"
               <div className="flex items-start justify-between">
                 <div className="glass flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                    plugin.active ? 'bg-green-100' : 'bg-gray-100'
-                  }`}>
-                    <Package className={`h-6 w-6 ${
-                      plugin.active ? 'text-green-600' : 'text-gray-400'
-                    }`} />
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${>plugin.active ? 'bg-green-100' : 'bg-gray-100'>}`}>
+                    <Package className={`h-6 w-6 ${>plugin.active ? 'text-green-600' : 'text-gray-400'>}`} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <CardTitle className="text-lg" className="glass{plugin.name}</CardTitle>
+                      <CardTitle className="text-lg glass{plugin.name}</CardTitle>
                       <Badge variant="secondary">v{plugin.version}</Badge>
                       {plugin.hasUpdate && (
                         <Badge className="bg-blue-100 text-blue-700">
@@ -246,9 +241,7 @@ export default function PluginManager() {
                     <p className="text-xs text-gray-500 mt-1">by {plugin.author}</p>
                   </div>
                 </div>
-                <Switch
-                  checked={plugin.active}
-                  onCheckedChange={(checked) => togglePlugin(plugin.id, checked)}
+                <Switch>checked={plugin.active}>onCheckedChange={(checked) => togglePlugin(plugin.id, checked)}
                   disabled={loading[plugin.id]}
                 />
               </div>
@@ -257,10 +250,7 @@ export default function PluginManager() {
               <div className="flex items-center justify-between">
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSelectedPlugin(
-                      selectedPlugin === plugin.id ? null : plugin.id
+                    variant="outline">size="sm">onClick={() => setSelectedPlugin(selectedPlugin === plugin.id ? null : plugin.id)
                     )}
                   >
                     <Settings className="h-4 w-4 mr-2" />
@@ -268,9 +258,7 @@ export default function PluginManager() {
                   </Button>
                   {plugin.hasUpdate && (
                     <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => updatePlugin(plugin.id)}
+                      variant="outline">size="sm">onClick={() => updatePlugin(plugin.id)}
                       disabled={loading[`update-${plugin.id}`]}
                     >
                       {loading[`update-${plugin.id}`] ? (
@@ -284,9 +272,7 @@ export default function PluginManager() {
                     </Button>
                   )}
                   <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => uninstallPlugin(plugin.id)}
+                    variant="outline">size="sm">onClick={() => uninstallPlugin(plugin.id)}
                     disabled={loading[`uninstall-${plugin.id}`]}
                   >
                     {loading[`uninstall-${plugin.id}`] ? (
@@ -329,9 +315,7 @@ export default function PluginManager() {
                         ) : (
                           <input
                             type="text"
-                            className="px-3 py-1  rounded-lg-md text-sm"
-                            defaultValue={value}
-                          />
+                            className="px-3 py-1  rounded-lg-md text-sm">defaultValue={value} />>
                         )}
                       </div>
                     ))}
@@ -349,7 +333,7 @@ export default function PluginManager() {
 
       {/* Empty State */}
       {plugins.length === 0 && (
-        <Card className="text-center py-12" className="glass
+        <Card className="text-center py-12 glass
           <CardContent className="glass"
             <Package className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No plugins installed</h3>

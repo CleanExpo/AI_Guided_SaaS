@@ -5,50 +5,50 @@
 import { DesignToken, UIComponent, ThemeOptions } from '../types';
 
 export class GradientEngine {
-  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken>> {
+  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken> {
     const tokens = new Map<string, DesignToken>();
     
     // Vibrant gradients
     tokens.set('--gradient-sunset', {
-      name: '--gradient-sunset',
+      name: '--gradient-sunset',)
       value: 'linear-gradient(135deg, #FA709A 0%, #FEE140 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-ocean', {
-      name: '--gradient-ocean',
+      name: '--gradient-ocean',)
       value: 'linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-forest', {
-      name: '--gradient-forest',
+      name: '--gradient-forest',)
       value: 'linear-gradient(135deg, #0BA360 0%, #3CBA92 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-lavender', {
-      name: '--gradient-lavender',
+      name: '--gradient-lavender',)
       value: 'linear-gradient(135deg, #C471F5 0%, #FA71CD 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-flame', {
-      name: '--gradient-flame',
+      name: '--gradient-flame',)
       value: 'linear-gradient(135deg, #FF512F 0%, #F09819 100%)',
       category: 'gradient'
     });
     
     // Animated gradients
     tokens.set('--gradient-animated', {
-      name: '--gradient-animated',
+      name: '--gradient-animated',)
       value: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
       category: 'gradient'
     });
     
     // Mesh gradients
     tokens.set('--gradient-mesh-vibrant', {
-      name: '--gradient-mesh-vibrant',
+      name: '--gradient-mesh-vibrant',)
       value: 'radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0, transparent 50%), radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0, transparent 50%), radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0, transparent 50%), radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0, transparent 50%), radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0, transparent 50%)',
       category: 'gradient'
     });

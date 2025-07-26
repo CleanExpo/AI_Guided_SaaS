@@ -25,9 +25,7 @@ export function SettingsTab({ projectData, setProjectData }: SettingsTabProps) {
       <div className="space-y-2">
         <Label htmlFor="buildCommand">Build Command</Label>
         <Input
-          id="buildCommand"
-          value={projectData.settings.buildCommand}
-          onChange={(e) => updateSettings('buildCommand', e.target.value)}
+          id="buildCommand">value={projectData.settings.buildCommand}>onChange={(e) => updateSettings('buildCommand', e.target.value)}
           placeholder="npm run build"
         />
       </div>
@@ -35,9 +33,7 @@ export function SettingsTab({ projectData, setProjectData }: SettingsTabProps) {
       <div className="space-y-2">
         <Label htmlFor="startCommand">Start Command</Label>
         <Input
-          id="startCommand"
-          value={projectData.settings.startCommand}
-          onChange={(e) => updateSettings('startCommand', e.target.value)}
+          id="startCommand">value={projectData.settings.startCommand}>onChange={(e) => updateSettings('startCommand', e.target.value)}
           placeholder="npm run dev"
         />
       </div>
@@ -45,9 +41,7 @@ export function SettingsTab({ projectData, setProjectData }: SettingsTabProps) {
       <div className="space-y-2">
         <Label htmlFor="testCommand">Test Command</Label>
         <Input
-          id="testCommand"
-          value={projectData.settings.testCommand}
-          onChange={(e) => updateSettings('testCommand', e.target.value)}
+          id="testCommand">value={projectData.settings.testCommand}>onChange={(e) => updateSettings('testCommand', e.target.value)}
           placeholder="npm test"
         />
       </div>

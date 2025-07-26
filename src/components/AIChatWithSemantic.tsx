@@ -25,20 +25,20 @@ enableSemanticSearch?: boolean
 }
 
 export function AIChatWithSemantic({
-  enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved}: AIChatWithSemanticProps, maxContextSize  = 7, onContextRetrieved
-}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessage[]>([])</ChatMessage>
-const [input, setInput] = useState<any>([])
-  const [isLoading, setIsLoading]  = useState<any>([])
+  enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved}: AIChatWithSemanticProps, maxContextSize  = 7, onContextRetrieved)
+}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessagenull>(null)</ChatMessage>
+const [input, setInput] = useState<any>(null)
+  const [isLoading, setIsLoading]  = useState<any>(null)
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
 }
   const { searchContext7,
     isSearching,
     context7,
     // indexDocument
-}: any = useSemanticSearch({ cacheResults: true
+}: any = useSemanticSearch({ cacheResults: true)
     });
   // Scroll to bottom when new messages arrive
-  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'   
+  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'   )
     })
   }, [messages]);
   // Index conversation for future retrieval;
@@ -46,14 +46,14 @@ const [input, setInput] = useState<any>([])
 const _indexConversation = useCallback(async (message: ChatMessage) => { if (!enableSemanticSearch) {r}eturn null};try {
       await indexDocument({ id: `conversation-${message.id}`,
         content: message.content,
-        metadata: { role: message.role, timestamp: message.timestamp.toISOString(, conversationId: 'current' // In production, use actual conversation ID },
-        type: 'conversation'   
+        metadata: { role: message.role, timestamp: message.timestamp.toISOString(, conversationId: 'current' // In production, use actual conversation ID })
+        type: 'conversation'   )
     })
     } catch (error) {
       logger.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
-const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
-      content: input
+const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user')
+      content: input)
 timestamp: new Date()
 };
     setMessages(prev => [...prev, userMessage]);
@@ -78,8 +78,8 @@ const contextMessage: ChatMessage={ id: `context-${Date.now()}`,
       // Send to AI with context;
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input
+headers: { 'Content-Type': 'application/json' })
+        body: JSON.stringify({ message: input)
           context: relevantContext.slice(0, maxContextSize, // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
        
     })};
@@ -87,8 +87,8 @@ headers: { 'Content-Type': 'application/json' },
       
 const data  = await response.json();
 
-const assistantMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant',
-        content: data.response,
+const assistantMessage: ChatMessage={ id: Date.now().toString(, role: 'assistant')
+        content: data.response,)
 timestamp: new Date()
 };
       setMessages(prev => [...prev, assistantMessage]);
@@ -97,14 +97,14 @@ timestamp: new Date()
 } catch (error) {
       handleError(error, {
         operation: 'sendMessage',
-        module: 'AIChatWithSemantic',
-        metadata: { input }
+        module: 'AIChatWithSemantic')
+        metadata: { input })
       });
       
       toast({
         title: 'Failed to send message',
-        description: 'Could not get AI response. Please try again.',
-        variant: 'destructive'
+        description: 'Could not get AI response. Please try again.')
+        variant: 'destructive')
       });
       
       // Add error message to chat
@@ -117,10 +117,9 @@ timestamp: new Date()
       setMessages(prev => [...prev, errorMessage]);
       } finally {
     setIsLoading(false)}
-  return (
-    <Card className = "w-full max-w-4xl mx-auto" className="glass
+  return(<Card className = "w-full max-w-4xl mx-auto" className="glass
           <CardHeader className="glass"</CardHeader>
-        <CardTitle className="flex items-center justify-between" className="glass
+        <CardTitle className="flex items-center justify-between glass
           <span className="flex items-center gap-2">
             <Sparkles className="h-5 w-5"     />
             AI Assistant with Semantic Search
@@ -129,7 +128,7 @@ timestamp: new Date()
 Badge variant="secondary" className="flex items-center gap-1">
               <Search className="h-3 w-3"     />
               Context7 Active
-/>
+/>)
       )}
 </CardTitle>
       <CardContent className="glass"
@@ -141,9 +140,7 @@ Badge variant="secondary" className="flex items-center gap-1">
                const className={`max-w-[80%] p-3 rounded-lg ${message.role === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : message.role === 'system'
-                      ? 'bg-muted text-muted-foreground'
-                      : 'bg-secondary'
-                  }`/>
+                      ? 'bg-muted text-muted-foreground'>: 'bg-secondary'>}`/>
           <div className="flex items-center gap-2 mb-1">
                     {message.role === 'user' ? (</div>
                       <User className="h-4 w-4"     />
@@ -178,9 +175,7 @@ div className="flex justify-start">
             <div ref={messagesEndRef}  >
           </ScrollArea>
         <div className="flex gap-2">
-          <Input
-
-value={input} onChange={(e) => setInput(e.target.value)} />
+          <Input>value={input} onChange={(e) => setInput(e.target.value)} />
 {{(e) => e.key === 'Enter' && sendMessage()}
             ={
               // isSearching
@@ -190,9 +185,7 @@ value={input} onChange={(e) => setInput(e.target.value)} />
             className="flex-1" />
         <Button
 
-onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};
-            size="icon";
-          >
+onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};>size="icon";>>
           <Send className="h-4 w-4"     />
         {enableSemanticSearch && context7.length > 0  && (div className="mt-4 p-3 bg-muted rounded-xl-lg">
             <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded</p>

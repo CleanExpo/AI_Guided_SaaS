@@ -10,7 +10,7 @@ g,
 export default function MDFolderAgent() {
   return (Card></Card>, <CardHeader className="glass"
           </CardHeader>
-        <CardTitle className="flex items-center gap-2" className="glass
+        <CardTitle className="flex items-center gap-2 glass
           </CardTitle><FolderOpen className="w-5 h-5 text-orange-600"     />
           MD Folder Agent</FolderOpen>
       <CardContent className="glass"

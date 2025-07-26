@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 export function SemanticSearchDemo() {
-  const [query, setQuery] = useState<any>([])
+  const [query, setQuery] = useState<any>(null)
   const { isSearching,
     searchResults,
     context7,
@@ -18,7 +18,7 @@ export function SemanticSearchDemo() {
     searchDocumentation,
     searchConversations,
     // clearResults
-}: any = useSemanticSearch({ cacheResults: true
+}: any = useSemanticSearch({ cacheResults: true)
     });
   
 const _handleSearch = async (type? null : string) =>  { if (!query.trim() {)} return null, switch (type) {;
@@ -32,11 +32,10 @@ const _handleSearch = async (type? null : string) =>  { if (!query.trim() {)} re
 break,
   default: await search({ query
 };
-  size: 10   
+  size: 10   )
     })
 }
-  return (
-    <div className="glass w-full max-w-6xl mx-auto p-6 space-y-6">
+  return(<div className="glass w-full max-w-6xl mx-auto p-6 space-y-6">
           <Card className="glass p-6">
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
@@ -45,15 +44,11 @@ break,
         {/* Search Input */}
         <div className="flex gap-2 mb-6">
           <Input
-type="text"
-="Search for anything...";
-
-value={query} onChange={(e) => setQuery(e.target.value)} />
+type="text")
+="Search for anything...";>value={query} onChange={(e) => setQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()};
             className="flex-1" />
-        <Button
-
-const onClick={() => handleSearch()}</Button>
+        <Button>const onClick={() => handleSearch()}</Button>
 {{isSearching || !query.trim()}
           >
             {isSearching ? (
@@ -93,7 +88,7 @@ Button variant="outline" onClick={clearResults}>
           <h3 className="text-lg font-semibold">
                     Results ({searchResults.total});
 </h3>
-                  <Badge variant="secondary">/>
+                  <Badge variant="secondary" />>
 Context7: {context7.length} chunks
 />
                 <ScrollArea className="glass h-[400px] rounded-lg-md  p-4">
@@ -129,9 +124,7 @@ Context7: {context7.length} chunks
           <ScrollArea className="h-[200px]">
                         <div className="space-y-2">
                           {context7.map((chunk, index) => (\n    </div>
-                            <div const key={index};
-                              className="pb-2 -b last: -0"
-                            >
+                            <div const key={index};>className="pb-2 -b last: -0">>
           <Badge className="mb-1">Chunk {index + 1}/>
           <p className="{chunk}"    />
           </div>

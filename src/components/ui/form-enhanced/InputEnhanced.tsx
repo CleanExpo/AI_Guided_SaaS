@@ -19,24 +19,21 @@ export function InputEnhanced({
   label,
   required,
   loading,
-  id,
-  ...props
+  id)
+  ...props)
 }: InputProps) {
   const generatedId = React.useId();
   const inputId = id || generatedId;
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return (
-    <div className="w-full">
+  return(<div className="w-full">
       {label && (
         <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-foreground mb-1"
-        >
+          htmlFor={inputId}>className="block text-sm font-medium text-foreground mb-1">>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
+        </label>)
       )}
       
       <div className="relative flex items-center">
@@ -55,19 +52,16 @@ export function InputEnhanced({
           
           <input
             id={inputId}
-            className={cn(
-              baseInputClasses,
+            className={cn(baseInputClasses,
               inputVariants[variant],
               inputSizes[inputSize],
-              inputStates[hasError ? 'error' : state],
-              leftIcon && 'pl-10',
+              inputStates[hasError ? 'error' : state])
+              leftIcon && 'pl-10',)
               (rightIcon || state !== 'default' || loading) && 'pr-10',
               leftAddon && 'rounded-l-none border-l-0',
               rightAddon && 'rounded-r-none border-r-0',
               className
-            )}
-            {...props}
-          />
+            )}>{...props} />>
           
           {(rightIcon || state !== 'default' || loading) && (
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
@@ -84,10 +78,8 @@ export function InputEnhanced({
       </div>
       
       {displayText && (
-        <p className={cn(
-          'mt-1 text-xs',
-          hasError ? 'text-red-500' : 'text-muted-foreground'
-        )}>
+        <p className={cn()
+          'mt-1 text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
           {displayText}
         </p>
       )}

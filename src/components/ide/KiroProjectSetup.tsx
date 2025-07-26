@@ -54,8 +54,8 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     if (!projectData.name) {
       toast({
         title: 'Error',
-        description: 'Project name is required',
-        variant: 'destructive'
+        description: 'Project name is required')
+        variant: 'destructive')
       });
       return;
     }
@@ -71,13 +71,13 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
 
       // Create the project
       const project = await createProject({
-        ...projectData,
-        structure: projectStructure
+        ...projectData)
+        structure: projectStructure)
       });
 
       toast({
-        title: 'Project Created',
-        description: `Successfully created project "${project.name}"`
+        title: 'Project Created')
+        description: `Successfully created project "${project.name}"`)
       });
 
       // Callback with project ID
@@ -88,14 +88,13 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
       logger.error('Error creating project:', error);
       toast({
         title: 'Error',
-        description: 'Failed to create project',
-        variant: 'destructive'
+        description: 'Failed to create project')
+        variant: 'destructive')
       });
     }
   };
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       <Card className="glass"
         <CardHeader className="glass"
           <CardTitle className="glass"Create New Kiro Project</CardTitle>
@@ -103,11 +102,9 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
             Set up a new project with Kiro IDE integration
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6" className="glass
+        <CardContent className="space-y-6 glass
           <BasicInfoForm
-            projectData={projectData}
-            setProjectData={setProjectData}
-          />
+            projectData={projectData}>setProjectData={setProjectData} />>
 
           <Tabs defaultValue="features" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
@@ -135,7 +132,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 <Badge variant="outline" className="text-green-500">
                   <CheckCircle className="h-3 w-3 mr-1" />
                   Connected
-                </Badge>
+                </Badge>)
               ) : (
                 <Badge variant="outline" className="text-yellow-500">
                   Disconnected
@@ -144,9 +141,7 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
             </div>
 
             <Button
-              onClick={handleCreateProject}
-              disabled={loading || !projectData.name}
-            >
+              onClick={handleCreateProject}>disabled={loading || !projectData.name}>
               <Rocket className="h-4 w-4 mr-2" />
               Create Project
             </Button>

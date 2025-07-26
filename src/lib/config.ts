@@ -186,8 +186,7 @@ value = this.substituteEnvironmentVariables(value);
   /**
    * Transform flat properties to typed configuration object
    */
-  private transformToTypedConfig(
-properties: Record<string string></string>
+  private transformToTypedConfig(properties: Record<string string></string>)
   ): PlatformConfig {
     return { aiProvider: {
   primary: properties['ai.provider.primary'] || 'openai',
@@ -201,19 +200,16 @@ properties: Record<string string></string>
     codeGeneration: properties['openai.model.code_generation'] || 'gpt-4',
     documentation: properties['openai.model.documentation'] || 'gpt-3.5-turbo',
     analysis: properties['openai.model.analysis'] || 'gpt-4',
-    tokensMax: parseInt(properties['openai.tokens.max'] || '4096', tokensContext: parseInt(properties['openai.tokens.context'] || '8192'), temperatureDefault: parseFloat(
-          properties['openai.temperature.default'] || '0.7'
+    tokensMax: parseInt(properties['openai.tokens.max'] || '4096', tokensContext: parseInt(properties['openai.tokens.context'] || '8192'), temperatureDefault: parseFloat(properties['openai.temperature.default'] || '0.7'
         , temperatureCode: parseFloat(
-          properties['openai.temperature.code'] || '0.2'
+          properties['openai.temperature.code'] || '0.2')
         );
-        temperatureCreative: parseFloat(
-          properties['openai.temperature.creative'] || '0.9'
-        , displayName: properties['openai.display_name'] || 'OpenAI GPT-4',
+        temperatureCreative: parseFloat(properties['openai.temperature.creative'] || '0.9'
+        , displayName: properties['openai.display_name'] || 'OpenAI GPT-4')
     rateLimitRequestsPerMinute: parseInt(
-          properties['openai.rate_limit.requests_per_minute'] || '60'
+          properties['openai.rate_limit.requests_per_minute'] || '60')
         ),
-        rateLimitTokensPerMinute: parseInt(
-          properties['openai.rate_limit.tokens_per_minute'] || '90000'
+        rateLimitTokensPerMinute: parseInt(properties['openai.rate_limit.tokens_per_minute'] || '90000')
         )};
     anthropic: { apiKey: properties['anthropic.api.key'] || '',
     baseUrl: properties['anthropic.api.base_url'] || 'https: //api.anthropic.com',
@@ -222,17 +218,15 @@ properties: Record<string string></string>
     codeGeneration: properties['anthropic.model.code_generation'] ||
           'claude-3-opus-20240229',
         tokensMax: parseInt(properties['anthropic.tokens.max'] || '4096', tokensContext: parseInt(
-          properties['anthropic.tokens.context'] || '200000'
-        ), temperatureDefault: parseFloat(
-          properties['anthropic.temperature.default'] || '0.7'
+          properties['anthropic.tokens.context'] || '200000')
+        ), temperatureDefault: parseFloat(properties['anthropic.temperature.default'] || '0.7'
         , temperatureCode: parseFloat(
-          properties['anthropic.temperature.code'] || '0.1'
+          properties['anthropic.temperature.code'] || '0.1')
         );
         displayName: properties['anthropic.display_name'] || 'Claude 3 Opus',
-    rateLimitRequestsPerMinute: parseInt(
-          properties['anthropic.rate_limit.requests_per_minute'] || '50'
+    rateLimitRequestsPerMinute: parseInt(properties['anthropic.rate_limit.requests_per_minute'] || '50'
         , rateLimitTokensPerMinute: parseInt(
-          properties['anthropic.rate_limit.tokens_per_minute'] || '80000'
+          properties['anthropic.rate_limit.tokens_per_minute'] || '80000')
         )};
     google: { apiKey: properties['google.api.key'] || '',
     baseUrl: properties['google.api.base_url'] ||
@@ -240,16 +234,14 @@ properties: Record<string string></string>
     primary: properties['google.model.primary'] || 'gemini-pro',
     fallback: properties['google.model.fallback'] || 'gemini-pro-vision',
     codeGeneration: properties['google.model.primary'] || 'gemini-pro',
-    tokensMax: parseInt(properties['google.tokens.max'] || '2048', tokensContext: parseInt(properties['google.tokens.context'] || '32768'), temperatureDefault: parseFloat(
-          properties['google.temperature.default'] || '0.8'
+    tokensMax: parseInt(properties['google.tokens.max'] || '2048', tokensContext: parseInt(properties['google.tokens.context'] || '32768'), temperatureDefault: parseFloat(properties['google.temperature.default'] || '0.8'
         , temperatureCode: parseFloat(
-          properties['google.temperature.default'] || '0.8'
+          properties['google.temperature.default'] || '0.8')
         );
         displayName: properties['google.display_name'] || 'Google Gemini Pro',
-    rateLimitRequestsPerMinute: parseInt(
-          properties['google.rate_limit.requests_per_minute'] || '60'
+    rateLimitRequestsPerMinute: parseInt(properties['google.rate_limit.requests_per_minute'] || '60'
         , rateLimitTokensPerMinute: parseInt(
-          properties['google.rate_limit.tokens_per_minute'] || '120000'
+          properties['google.rate_limit.tokens_per_minute'] || '120000')
         )};
     framework: { primary: properties['framework.primary'] || 'nextjs',
     version: properties['framework.version'] || '14.2.0',
@@ -276,51 +268,44 @@ properties: Record<string string></string>
     agents: { enabled: properties['agents.enabled'] === 'true',
     maxConcurrent: parseInt(properties['agents.max_concurrent'] || '5', timeout: parseInt(properties['agents.timeout'] || '30000'),
     retryAttempts: parseInt(properties['agents.retry_attempts'] || '3', parallelExecution: properties['agents.parallel_execution'] === 'true',
-    codeGenerator: { model: properties['agent.code_generator.model'] || 'openai.gpt-4',
+    codeGenerator: { model: properties['agent.code_generator.model'] || 'openai.gpt-4')
     temperature: parseFloat(
-            properties['agent.code_generator.temperature'] || '0.2'
+            properties['agent.code_generator.temperature'] || '0.2')
           ),
-          maxTokens: parseInt(
-            properties['agent.code_generator.max_tokens'] || '4096'
+          maxTokens: parseInt(properties['agent.code_generator.max_tokens'] || '4096')
           )};
     documentation: { model: properties['agent.documentation.model'] || 'openai.gpt-3.5-turbo',
-    temperature: parseFloat(
-            properties['agent.documentation.temperature'] || '0.5'
+    temperature: parseFloat(properties['agent.documentation.temperature'] || '0.5'
           , maxTokens: parseInt(
-            properties['agent.documentation.max_tokens'] || '2048'
+            properties['agent.documentation.max_tokens'] || '2048')
           )};
     testing: { model: properties['agent.testing.model'] || 'anthropic.claude-3-sonnet',
-    temperature: parseFloat(
-            properties['agent.testing.temperature'] || '0.3'
+    temperature: parseFloat(properties['agent.testing.temperature'] || '0.3')
           , maxTokens: parseInt(properties['agent.testing.max_tokens'] || '3072')},
     review: { model: properties['agent.review.model'] || 'google.gemini-pro',
-    temperature: parseFloat(
-            properties['agent.review.temperature'] || '0.4'
+    temperature: parseFloat(properties['agent.review.temperature'] || '0.4')
           , maxTokens: parseInt(properties['agent.review.max_tokens'] || '2048')},
     optimization: { model: properties['agent.optimization.model'] || 'openai.gpt-4',
-    temperature: parseFloat(
-            properties['agent.optimization.temperature'] || '0.1'
+    temperature: parseFloat(properties['agent.optimization.temperature'] || '0.1'
           , maxTokens: parseInt(
-            properties['agent.optimization.max_tokens'] || '4096'
+            properties['agent.optimization.max_tokens'] || '4096')
           )};
     security: { rateLimitEnabled: properties['rate_limit.enabled'] === 'true',
     rateLimitWindow: parseInt(properties['rate_limit.window'] || '60000', rateLimitMaxRequests: parseInt(
-          properties['rate_limit.max_requests'] || '100'
+          properties['rate_limit.max_requests'] || '100')
         ),
         authProvider: properties['auth.provider'] || 'nextauth',
-    sessionStrategy: properties['auth.session_strategy'] || 'jwt', sessionMaxAge: parseInt(
-          properties['auth.session_max_age'] || '2592000'
+    sessionStrategy: properties['auth.session_strategy'] || 'jwt', sessionMaxAge: parseInt(properties['auth.session_max_age'] || '2592000'
         , cspEnabled: properties['security.csp.enabled'] === 'true',
     hstsEnabled: properties['security.hsts.enabled'] === 'true',
     xssProtection: properties['security.xss_protection'] === 'true',
     ddosProtection: properties['security.ddos_protection'] === 'true',
     suspiciousActivityDetection: properties['security.suspicious_activity_detection'] === 'true'
-    },
-    performance: { cacheStrategy: properties['cache.strategy'] || 'redis',
-    cacheTtlDefault: parseInt(properties['cache.ttl.default'] || '3600'), cacheTtlStaticAssets: parseInt(
-          properties['cache.ttl.static_assets'] || '86400'
+    })
+    performance: { cacheStrategy: properties['cache.strategy'] || 'redis',)
+    cacheTtlDefault: parseInt(properties['cache.ttl.default'] || '3600'), cacheTtlStaticAssets: parseInt(properties['cache.ttl.static_assets'] || '86400'
         , cacheTtlApiResponses: parseInt(
-          properties['cache.ttl.api_responses'] || '300'
+          properties['cache.ttl.api_responses'] || '300')
         );
         cdnEnabled: properties['cdn.enabled'] === 'true',
     cdnProvider: properties['cdn.provider'] || 'vercel',

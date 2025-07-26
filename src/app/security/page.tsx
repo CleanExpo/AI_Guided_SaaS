@@ -45,7 +45,7 @@ export default function SecurityPage() {
             <CardHeader className="glass"
               <div className="flex items-center gap-3">
                 <feature.icon className="w-8 h-8 text-green-600" />
-                <CardTitle className="text-xl" className="glass{feature.title}</CardTitle>
+                <CardTitle className="text-xl glass{feature.title}</CardTitle>
                 <Badge className="bg-green-100 text-green-800">{feature.status}</Badge>
               </div>
             </CardHeader>

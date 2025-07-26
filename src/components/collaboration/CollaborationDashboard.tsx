@@ -20,11 +20,11 @@ interface CollaborationSession { id: string
   createdAt: Date
  };
 export default function CollaborationDashboard() {
-</CollaborationSession>, const [sessions, setSessions]  = useState<CollaborationSession[]>([])</CollaborationSession>
+</CollaborationSession>, const [sessions, setSessions]  = useState<CollaborationSessionnull>(null)</CollaborationSession>
 
-const [loading, setLoading] = useState<any>([])
+const [loading, setLoading] = useState<any>(null)
   
-const [searchTerm, setSearchTerm]  = useState<any>([])
+const [searchTerm, setSearchTerm]  = useState<any>(null)
 
 const [filter, setFilter] = useState<'all' | 'active' | 'recent'>('all');
   useEffect(() => {
@@ -36,8 +36,8 @@ const _loadCollaborationSessions = async () =>  {
       // Simulate API call - in production this would fetch real data, const mockSessions: CollaborationSession[]  = [
   { id: 'session-1',
           projectId: 'project-1',
-          name: 'E-commerce Website Redesign',
-          participants: 4,
+          name: 'E-commerce Website Redesign')
+          participants: 4,)
     lastActivity: new Date(Date.now() - 1000 * 60 * 15)
   // 15 minutes ago, isActive: true
     isPublic: true
@@ -93,7 +93,7 @@ const _oneDayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
 const _formatTimeAgo = (date: Date) => {
     const now = new Date(); const _diffInMinutes = Math.floor(, (now.getTime() - date.getTime()) / (1000 * 60);
     if (diffInMinutes < 1) {r}eturn 'Just now';
-    if (diffInMinutes < 60) {r}eturn `${diffInMinutes};m ago`;
+    if (diffInMinutes < 60) {r}eturn `${diffInMinutes}m ago`;
     
 const _diffInHours = Math.floor(diffInMinutes / 60);
     if (diffInHours < 24) {r}eturn `${diffInHours}h ago`;
@@ -106,11 +106,10 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
     if (totalActivity > 15) { r}eturn { level: 'Medium', color: 'bg-yellow-500'  };
     return { level: 'Low', color: 'bg-gray-400' }};
   if (loading) {
-    return (
+    return()
     <div className="glass flex items-center justify-center p-8 text-center">);</div>
           <p className="text-gray-600">Loading collaboration sessions...</p>
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Header */}</div>
       <div className="flex items-center justify-between"     />
           <h1 className="text-2xl font-bold text-gray-900">
@@ -128,7 +127,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
           <div></div>
                 <p className="text-sm font-medium text-gray-600">
                   Active Sessions</p>
-                <p className="text-2xl font-bold">
+                <p className="text-2xl font-bold">)
                   {sessions.filter((s) => s.isActive).length}</p>
         <Card className="glass"
           <CardContent className="glass p-4">
@@ -159,26 +158,18 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
                   {sessions.reduce((sum, s) => sum + s.changes, 0)}</p>
       {/* Filters, and Search */}
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1"    />
-          <Input ="Search collaboration sessions...";
-
-value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-          />/>
+          <Input ="Search collaboration sessions...";>value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+          / />>
         <div className="flex space-x-2">
-          <Button
-
-variant={filter === 'all' ? 'default' : 'outline'} onClick={() => setFilter('all')};</Button>
+          <Button>variant={filter === 'all' ? 'default' : 'outline'} onClick={() => setFilter('all')};</Button>
             size="sm";
           >
             All</Button>
-          <Button
-
-variant={filter === 'active' ? 'default' : 'outline'} onClick={() => setFilter('active')};</Button>
+          <Button>variant={filter === 'active' ? 'default' : 'outline'} onClick={() => setFilter('active')};</Button>
             size="sm";
           >
             Active</Button>
-          <Button
-
-variant={filter === 'recent' ? 'default' : 'outline'} onClick={() => setFilter('recent')};</Button>
+          <Button>variant={filter === 'recent' ? 'default' : 'outline'} onClick={() => setFilter('recent')};</Button>
             size="sm";
           >
             Recent {/* Sessions, List */}
@@ -196,7 +187,7 @@ variant={filter === 'recent' ? 'default' : 'outline'} onClick={() => setFilter('
               <Button>
           <Plus className="h-4 w-4 mr-2"    />Create Session</Plus>
         ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session)
-        return (Card;
+        return(Card;
 
     const key={session.id };
                 className="hover: shadow-md-md transition-shadow-md"
@@ -210,7 +201,7 @@ variant={filter === 'recent' ? 'default' : 'outline'} onClick={() => setFilter('
 Badge, variant="default", className="bg-green-100 text-green-800";
                           >
                             <Activity className="h-3 w-3 mr-1"     />
-                            Live</Activity>
+                            Live</Activity>)
             )},
     {session.isPublic ? (
                           <Globe className="h-4 w-4 text-gray-400"     />
@@ -231,9 +222,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
                           <span></span>
                             Last active {formatTimeAgo(session.lastActivity)}</span>
                       <div className="flex items-center space-x-4 flex items-center space-x-2"    />
-          <div;
-
-    const className={`w-2, h-2 rounded-full ${activity.color}`/>
+          <div;>const className={`w-2, h-2 rounded-full ${activity.color}`/>
                           <span className="text-xs text-gray-500">
                             {activity.level} Activity</span>
                         <div className="flex items-center space-x-1 text-xs text-gray-500">
@@ -251,9 +240,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
           <Settings className="h-4 w-4"     />
 </Button>
                       <Button variant="outline";
-size="sm";
-className="text-red-600 hover: text-red-700"
-                      >
+size="sm";>className="text-red-600 hover: text-red-700">>
           <Trash2 className="h-4 w-4" /    />
 </CardContent>
 </Card>

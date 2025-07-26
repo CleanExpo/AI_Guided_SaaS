@@ -2,7 +2,7 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for automated testing
  */;
-export function createTestingAutomationWorkflow(
+export function createTestingAutomationWorkflow()
     projectName: string, webhookPath: string = 'run-tests'): string,
   webhookPath: string = 'run-tests'): N8nWorkflow {
   const nodes: N8nNode[] = [// 1. Webhook or Schedule trigger, { id: 'trigger_1',
@@ -63,7 +63,7 @@ const config = isScheduled ? defaultConfig : { ...defaultConfig,
  };
 return {
   ...config,;
-  timestamp: new Date().toISOString(, triggeredBy?: isScheduled 'schedule' : 'webhook',
+  timestamp: new Date().toISOString(, triggeredBy?: isScheduled 'schedule' : 'webhook',)
   runId: Math.random().toString(36).substring(7)
 };`
 },
@@ -81,9 +81,9 @@ return {
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $json.projectId,
     coverage: $json.coverage,
-    reporters: $json.reporters,
+    reporters: $json.reporters)
     runId: $json.runId
-         
+         )
     })}`, ``,
 options: { timeout: 120000 // 2 minutes
           };
@@ -100,9 +100,9 @@ options: { timeout: 120000 // 2 minutes
         sendBody: true;
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $json.projectId,
-    reporters: $json.reporters,
+    reporters: $json.reporters)
     runId: $json.runId
-         
+         )
     })}`, ``,
 options: { timeout: 180000 // 3 minutes
           };
@@ -120,9 +120,9 @@ options: { timeout: 180000 // 3 minutes
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $json.projectId,
     baseUrl: $json.baseUrl || $env.STAGING_URL,
-    browsers: $json.browsers || ['chromium', 'firefox'],
+    browsers: $json.browsers || ['chromium', 'firefox'])
             runId: $json.runId
-         
+         )
     })}`, ``,
 options: { timeout: 300000 // 5 minutes
           };
@@ -176,8 +176,8 @@ return [{ json: {
      };
     coverage,
     duration: { unit: unitTests.duration || 0,
-    integration: integrationTests.duration || 0,
-    e2e: e2eTests.duration || 0,
+    integration: integrationTests.duration || 0)
+    e2e: e2eTests.duration || 0,)
     total: (unitTests.duration || 0) + (integrationTests.duration || 0) + (e2eTests.duration || 0)
      }];```
 },
@@ -243,11 +243,11 @@ return [{ json: {
     <div className="coverage"  /> className="coverage-item"></div>
         <div>Lines: {{ $json.coverage.lines }}%</div>
         <div className="bar"  /> className="bar-fill" style="width: {{ $json.coverage.lines }}%"></div>
-      <div className="coverage-item"  />>Statements: {{ $json.coverage.statements }}%</div>
+      <div className="coverage-item"  />Statements: {{ $json.coverage.statements }}%</div>
         <div className="bar"  /> className="bar-fill" style="width: {{ $json.coverage.statements }}%"></div>
-      <div className="coverage-item"  />>Functions: {{ $json.coverage.functions }}%</div>
+      <div className="coverage-item"  />Functions: {{ $json.coverage.functions }}%</div>
         <div className="bar"  /> className="bar-fill" style="width: {{ $json.coverage.functions }}%"></div>
-      <div className="coverage-item"  />>Branches: {{ $json.coverage.branches }}%</div>
+      <div className="coverage-item"  />Branches: {{ $json.coverage.branches }}%</div>
         <div className="bar"  /> className="bar-fill" style="width: {{ $json.coverage.branches }}%"></div>
   <div className="suite"></div>
     <h2>Test Suites</h2>
@@ -293,9 +293,9 @@ return [{ json: {
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $node["Aggregate Results"].json.projectId,
     runId: $node["Aggregate Results"].json.runId: type, 'test-report',
-            format: 'html',
+            format: 'html')
             content: $json.html
-         
+         )
     })}`, ``,
 options: {};
     // 12. Handle test failures
@@ -310,9 +310,9 @@ options: {};
 const failedTests = [];
 Object.entries(results.suites).forEach(([suite, data]) =>  { if (data.failures && data.failures.length > 0) {
     failedTests.push({
-      suite,
+      suite)
       failures: data.failures
-
+)
     })});
 return { projectId: results.projectId,
     runId: results.runId,

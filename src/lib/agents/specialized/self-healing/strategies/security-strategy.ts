@@ -44,8 +44,8 @@ export class SecurityHealingStrategy {
     try {
       // Run npm audit to identify vulnerabilities
       const auditResult = execSync('npm audit --json', { 
-        stdio: 'pipe',
-        encoding: 'utf8'
+        stdio: 'pipe')
+        encoding: 'utf8')
       });
       
       const audit = JSON.parse(auditResult);
@@ -61,8 +61,8 @@ export class SecurityHealingStrategy {
         
         // Verify fixes
         const postFixAudit = execSync('npm audit --json', { 
-          stdio: 'pipe',
-          encoding: 'utf8'
+          stdio: 'pipe')
+          encoding: 'utf8')
         });
         
         const postAudit = JSON.parse(postFixAudit);
@@ -106,7 +106,7 @@ export class SecurityHealingStrategy {
         
         // Replace dangerouslySetInnerHTML with safer alternatives
         if (content.includes('dangerouslySetInnerHTML')) {
-          content = content.replace(
+          content = content.replace()
             /dangerouslySetInnerHTML=\{\{__html:\s*([^}]+)\}\}/g,
             (match, htmlVar) => {
               // Add DOMPurify if not present
@@ -145,7 +145,7 @@ export class SecurityHealingStrategy {
         }
         
         // Ensure parameterized queries
-        content = content.replace(
+        content = content.replace()
           /query\(['"`]([^'"`]*)\$\{([^}]+)\}([^'"`]*?)['"`]\)/g,
           'query($1$2$3, [parameterizedValues])'
         );
@@ -179,7 +179,7 @@ if (!isValidCSRF) {
   return new Response('CSRF token invalid', { status: 403 });
 }`;
           
-          content = content.replace(
+          content = content.replace()
             /(export async function POST[^{]*{)/,
             `$1${csrfMiddleware}`
           );
@@ -208,7 +208,7 @@ if (!isValidCSRF) {
           }
           
           // Replace plain password storage with hashed
-          content = content.replace(
+          content = content.replace()
             /password:\s*([^,}\n]+)/g,
             'password: await bcrypt.hash($1, 12)'
           );
@@ -230,7 +230,7 @@ if (!isValidCSRF) {
     return new Response('Too many attempts', { status: 429 });
   }`;
             
-            content = content.replace(
+            content = content.replace()
               /(export async function POST[^{]*{)/,
               `$1${rateLimitCheck}`
             );
@@ -269,7 +269,7 @@ if (!isValidCSRF) {
     }
   }
 
-  private static async generateNewSecrets(): Promise<Record<string, string>> {
+  private static async generateNewSecrets(): Promise<Record<string, string> {
     return {
       JWT_SECRET: crypto.randomBytes(64).toString('hex'),
       ENCRYPTION_KEY: crypto.randomBytes(32).toString('hex'),
@@ -337,8 +337,8 @@ if (!isValidCSRF) {
       // Continue even if some scans fail
       handleError(error, {
         operation: 'runESLintSecurityScan',
-        module: 'SecurityHealingStrategy',
-        metadata: { tool: 'eslint' }
+        module: 'SecurityHealingStrategy')
+        metadata: { tool: 'eslint' })
       });
     }
     
@@ -349,8 +349,8 @@ if (!isValidCSRF) {
       // Audit may exit with non-zero if issues found
       handleError(error, {
         operation: 'runNpmAudit',
-        module: 'SecurityHealingStrategy',
-        metadata: { tool: 'npm-audit' }
+        module: 'SecurityHealingStrategy')
+        metadata: { tool: 'npm-audit' })
       });
     }
   }
@@ -412,7 +412,7 @@ if (!isValidCSRF) {
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 `;
         
-        content = content.replace(
+        content = content.replace()
           /(return response)/,
           `${securityHeaders}  $1`
         );

@@ -18,7 +18,7 @@ interface CollaborationWorkspaceProps { projectId: string
 }
 export default function CollaborationWorkspace({
   projectId, roomId, onRoomCreated
-}: CollaborationWorkspaceProps, roomId, onRoomCreated
+}: CollaborationWorkspaceProps, roomId, onRoomCreated)
 }: CollaborationWorkspaceProps) {
   const { data: session    }: any  = useSession()
 
@@ -26,40 +26,40 @@ const [socket, setSocket] = useState<Socket | null>(null);</Socket>
   
 const [room, setRoom]  = useState<CollaborationRoom | null>(null);</CollaborationRoom>
 
-const [participants, setParticipants] = useState<CollaborationUser[]>([]);</CollaborationUser>
+const [participants, setParticipants] = useState<CollaborationUsernull>(null);</CollaborationUser>
   
-const [comments, setComments]  = useState<Comment[]>([]);</Comment>
+const [comments, setComments]  = useState<Commentnull>(null);</Comment>
 
-const [changes, setChanges] = useState<ProjectChange[]>([]);</ProjectChange>
+const [changes, setChanges] = useState<ProjectChangenull>(null);</ProjectChange>
   
-const [connected, setConnected]  = useState<any>([])
+const [connected, setConnected]  = useState<any>(null)
 
-const [loading, setLoading] = useState<any>([])
+const [loading, setLoading] = useState<any>(null)
   
-const [newComment, setNewComment]  = useState<any>([])
+const [newComment, setNewComment]  = useState<any>(null)
 
-const [showComments, setShowComments] = useState<any>([])
+const [showComments, setShowComments] = useState<any>(null)
   
-const [showParticipants, setShowParticipants]  = useState<any>([])
+const [showParticipants, setShowParticipants]  = useState<any>(null)
 
-const [cursors, setCursors] = useState<Map<string { user: CollaborationUser, position: CursorPosition }>>(new Map());</Map>
+const [cursors, setCursors] = useState<Map<string { user: CollaborationUser, position: CursorPosition }>(new Map());</Map>
 
-const [inviteLink, setInviteLink]  = useState<any>([])
+const [inviteLink, setInviteLink]  = useState<any>(null)
 
-const [testMode, setTestMode] = useState<any>([])
+const [testMode, setTestMode] = useState<any>(null)
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
 { useRef<{ x: number, y: number }>({ x: 0, y: 0
     });
 
 const _initializeCollaboration = useCallback(async () =>  {
-    setLoading(true, try {
+    setLoading(true, try {)
       // Initialize Socket.IO connection, const newSocket = io({ transports: ['websocket', 'polling']    })
       // Set up event listeners;
       setupSocketListeners(newSocket);
       // Authenticate with the server
       newSocket.emit('authenticate', {
-        userId: session.user?.email || 'anonymous',
-        token: process.env.NEXT_PUBLIC_COLLABORATION_TOKEN || session.token || ''
+        userId: session.user?.email || 'anonymous')
+        token: process.env.NEXT_PUBLIC_COLLABORATION_TOKEN || session.token || '')
       });
       setSocket(newSocket)
 } catch (error) {
@@ -76,43 +76,43 @@ const _setupSocketListeners = (socket: Socket) =>  {
       setConnected(true)    })
     socket.on('disconnect', () => {
       setConnected(false)    })
-    socket.on('authenticated', (data: { user: CollaborationUser
+    socket.on('authenticated', (data: { user: CollaborationUser)
     }) =>  {
       // Join or create room, if (roomId) {;
         socket.emit('join_room', { roomId, projectId    })
 } else {
         // Create new room
         createNewRoom(socket)    })
-    socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown
+    socket.on('room_joined', (data: { room: CollaborationRoom, project: unknown)
     }) => {
       setRoom(data.room, setParticipants(data.room.participants || []), setInviteLink(`${window.location.origin}/collaborate/${data.room.id}`)``;
       setTestMode(true) // Since we're using mock data;
 if (!roomId && onRoomCreated) {
         onRoomCreated(data.room.id)    })
-    socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom
+    socket.on('user_joined', (data: { user: CollaborationUser, room: CollaborationRoom)
     }) => {
       setParticipants(data.room.participants || [])    })
-    socket.on('user_left', (data: { userId: string, user: CollaborationUser
+    socket.on('user_left', (data: { userId: string, user: CollaborationUser)
     }) =>  {
       setParticipants(prev => prev.filter((p) => p.id !== data.userId))
       // Remove cursor
       setCursors((prev) => {
         const newCursors = new Map(prev, newCursors.delete(data.userId); return newCursors
 })}
-    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser, position: CursorPosition
+    socket.on('cursor_update', (data: { userId: string, user: CollaborationUser, position: CursorPosition)
     }) =>  { if (data.userId !== (session?.user as any) {?}.id) {
         setCursors((prev) => {
-          const newCursors = new Map(prev, newCursors.set(data.userId, { user: data.user position: data.position 
+          const newCursors = new Map(prev, newCursors.set(data.userId, { user: data.user position: data.position )
     });
           return newCursors
 })}
-    socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser
+    socket.on('project_updated', (data: { change: ProjectChange, user: CollaborationUser)
     }) =>  {
       setChanges(prev => [data.change, ...prev.slice(0, 49)]) // Keep last 50 changes    })
-    socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser
+    socket.on('comment_added', (data: { comment: Comment, user: CollaborationUser)
     }) => {
       setComments(prev => [data.comment, ...prev])    })
-    socket.on('error', (data: { message: string
+    socket.on('error', (data: { message: string)
     }) =>  {
       })}
   
@@ -120,8 +120,8 @@ const _createNewRoom = async (socket: Socket) =>  {
     try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ projectId,
-    settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true
+        body: JSON.stringify({ projectId)
+    settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true)
     })}
       const data = await response.json();
       if (data.success) {
@@ -135,7 +135,7 @@ y: e.clientY - rect.top
     // Throttle cursor updates
     if (Date.now() {%} 100 === 0) {
       socket.emit('cursor_move', { roomId: room.id
-        // position
+        // position)
     })}
   const _handleAddComment = (): void => {
     if (!socket || !room || !newComment.trim() {)} return const comment={;
@@ -147,7 +147,7 @@ y: mousePosition.current.y
 }
     socket.emit('add_comment', { roomId: room.id
       // comment
-   
+   )
     });
     setNewComment('')
 }
@@ -169,18 +169,17 @@ break
 }
       default: return null}}
   if (loading) {;
-    return (
+    return()
     <div className="glass flex items-center justify-center p-8" />);</div>
           <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto mb-4" />
           <p className="text-gray-600">Initializing collaboration...</p>
-  return (
-    <div className="h-full flex flex-col">
+  return(<div className="h-full flex flex-col">
       {/* Header */}</div>
       <div className="glass flex items-center justify-between p-4 -b" />
           <div className="flex items-center space-x-4" />
           <div className="flex items-center space-x-2">
             {connected ? (</div>
-              <Wifi className="h-4 w-4 text-green-500" />
+              <Wifi className="h-4 w-4 text-green-500" />)
             ) : (</Wifi>
               <WifiOff className="h-4 w-4 text-red-500" />
             )}</WifiOff>
@@ -192,18 +191,12 @@ Badge variant="outline">
       )}
         <div className="flex items-center space-x-2" />
           <Button variant="outline";
-size="sm";
-
-    const onClick={() => setShowParticipants(!showParticipants)}</Button>
-          ></Button>
+size="sm";>const onClick={() => setShowParticipants(!showParticipants)}</Button></Button>
             <Users className="h-4 w-4 mr-1" />
                     Participants
 </Users>
           <Button variant="outline";
-size="sm";
-
-const onClick={() => setShowComments(!showComments)}</Button>
-          ></Button>
+size="sm";>const onClick={() => setShowComments(!showComments)}</Button></Button>
             <MessageCircle className="h-4 w-4 mr-1" />
             Comments ({comments.length    })</MessageCircle>
           {inviteLink && (
@@ -222,9 +215,7 @@ Alert className="m-4"></Alert>
 
     const ref={workspaceRef}
           className="flex-1 relative glass overflow-hidden";
-
-const onMouseMove={handleMouseMove}
-        ></div>
+>const onMouseMove={handleMouseMove}></div>
           {/* Collaboration, cursors */},
     {Array.from(cursors.entries()).map(([userId, { user, position }]) => (\n    </div>
             <div;
@@ -232,9 +223,7 @@ const onMouseMove={handleMouseMove}
     const key={userId}
               className="absolute pointer-events-none z-50";
 
-    const style={{ left: position.x,
-    top: position.y,
-transform: 'translate(-2px, -2px)' />
+    const style={{ left: position.x,>top: position.y,>transform: 'translate(-2px, -2px)' />
           <div className="flex items-center space-x-1" />
                 <div className="w-4 h-4 glass-button primary rounded-lg-full -2 -white shadow-md-lg">
           <div className="glass-button primary text-white text-xs px-2 py-1 rounded-lg shadow-md-lg">
@@ -243,9 +232,7 @@ transform: 'translate(-2px, -2px)' />
     {/* Comments, overlay */},
     {comments.map((comment) => (\n    </div>
             <div const key={comment.id}
-              className="absolute z-40";
-
-    const style={{ left: comment.position.x, top: comment.position.y />
+              className="absolute z-40";>const style={{ left: comment.position.x, top: comment.position.y />
           <div className="bg-yellow-100  -yellow-300 rounded-xl-lg p-2 shadow-md-lg max-w-xs" />
                 <div className="text-xs font-medium text-yellow-800 mb-1">
                     Comment</div>
@@ -295,9 +282,7 @@ div className="text-sm text-gray-500">No recent changes</div>
                     Click anywhere on the workspace and add a comment</Card>
                 <CardContent / className="glass"
           <div className="flex space-x-2" />
-                    <Input ="Type your comment...";
-
-value={newComment} onChange={(e) => setNewComment(e.target.value)} />
+                    <Input ="Type your comment...";>value={newComment} onChange={(e) => setNewComment(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleAddComment()/>/>
                     <Button onClick={handleAddComment} disabled={!newComment.trim()/>
           <MessageCircle className="h-4 w-4 mr-1" />Comment</MessageCircle>
@@ -311,15 +296,12 @@ value={newComment} onChange={(e) => setNewComment(e.target.value)} />
           <div className="relative" />
                     <div className="w-8 h-8 glass-sidebar rounded-lg-full flex items-center justify-center">
                       {participant.avatar ? (</div>
-                        <img; src={participant.avatar} alt={participant.name}
-                          className="w-full h-full rounded-lg-full" />
+                        <img; src={participant.avatar} alt={participant.name}>className="w-full h-full rounded-lg-full" />
                       ) : (</img>
                         <span className="text-sm font-medium">
                           {participant.name.charAt(0)}</span>
       )}
-                    <div;
-
-    const className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`/>
+                    <div;>const className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`/>
           <div className="flex-1" />
                     <div className="flex items-center space-x-1" />
           <span className="font-medium">{participant.name}</span>

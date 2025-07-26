@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 
-const WebhookPayloadSchema = z.object({ 
+const WebhookPayloadSchema = z.object({ )
     action: z.enum(['deploy', 'test', 'notify', 'custom']),
     projectId: z.string(),
     data: z.record(z.unknown()).optional(),
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
                 }
         }
         
-        return NextResponse.json({ success: true,
+        return NextResponse.json({ success: true,)
             webhook: { id: 'webhook_' + Math.random().toString(36).substr(2, 9), projectId: validatedData.projectId,
                 ...result,
                 processedAt: new Date().toISOString()
@@ -51,10 +51,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 } catch (error) {
         logger.error('Webhook processing error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400   
+            return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   )
     })
 }
 }
@@ -72,7 +72,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(webhookInfo)
 } catch (error) {
         logger.error('Webhook info error:', error);
-        return NextResponse.json({ error: 'Failed to get webhook info' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to get webhook info' }, { status: 500   )
     })
 }
 }

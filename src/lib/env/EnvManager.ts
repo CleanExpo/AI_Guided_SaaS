@@ -56,7 +56,7 @@ export class EnvManager {
     if (!fs.existsSync(this.envPath) {)} {
       this.envPath = path.join(projectRoot, '.env')
 }
-    this.ajv = new Ajv({ allErrors: true
+    this.ajv = new Ajv({ allErrors: true)
     });
     this.loadConfig()
 }
@@ -103,24 +103,24 @@ const errors: ValidationResult['errors'] = [];
         summary.total++, const value = env[varName]; // Check if required variable is missing; if (varConfig.required && !value) {
           errors.push({ service: serviceKey;
     variable: varName;
-    message: `Required variable is missing`;``,
+    message: `Required variable is missing`;``)
   severity: 'error'
 }};
           summary.missing++;
           continue
 }
         // Check optional variables if warnOnMissing is true;
-if (!varConfig.required &&
+if (!varConfig.required &&)
           !value && this.config.validation.warnOnMissing) {
           errors.push({ service: serviceKey;
     variable: varName;
-    message: `Optional variable is not set`, ``,
+    message: `Optional variable is not set`, ``)
   severity: 'warning'
 }};
           summary.warnings++;
           continue
 }
-        // Validate value if present;
+        // Validate value if present;)
 if (value) {
           let isValid = true; let errorMessage = '', // Check pattern;
 if (varConfig.pattern) {
@@ -146,13 +146,13 @@ if (varConfig.minLength && value.length < varConfig.minLength) {
     message: errorMessage;
     severity: this.config.validation.errorOnInvalid
                 ? 'error'
-                : 'warning'
+                : 'warning')
     });
             summary.invalid++
   }
 }
     // Check for extra variables if strictMode is enabled;
-if (this.config.validation.strictMode &&
+if(this.config.validation.strictMode &&)
       !this.config.validation.allowExtraVars) {
       const definedVars = new Set<string>(, for (const service of Object.values(this.config.services)) {</string>
         Object.keys(service.variables).forEach((v) => definedVars.add(v))
@@ -161,11 +161,11 @@ if (this.config.validation.strictMode &&
         if (!definedVars.has(envVar) {&}& envVar.startsWith('NEXT_PUBLIC_')) {
           errors.push({ service: 'unknown',
             variable: envVar;
-    message: 'Variable not defined in configuration',
+    message: 'Variable not defined in configuration')
             severity: 'warning'
 }}; summary.warnings++
   }
-}
+})
     return { isValid: errors.filter((e)  = > e.severity === 'error').length === 0;
       errors,
       summary
@@ -175,8 +175,8 @@ if (this.config.validation.strictMode &&
     // Update config with current environment;
 if (this.config) {
       for (const [key, value] of Object.entries(env)) {
-        let found = false; for (const [serviceKey, service] of Object.entries(
-          this.config.services
+        let found = false; for(const [serviceKey, service] of Object.entries(
+          this.config.services)
         )) {
           if (service.variables[key]) {
             found = true; break
@@ -199,7 +199,7 @@ const _serviceKey = this.guessService(key);
               key.includes('KEY') ||
               key.includes('PASSWORD') }
       if (changes.length > 0) { // Update config file
-        this.config.lastUpdated = timestamp, fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2, // Update history
+        this.config.lastUpdated = timestamp, fs.writeFileSync(this.configPath, JSON.stringify(this.config, null, 2, // Update history)
         this.logChange('SYNC', changes.join(', '))
 }
   private guessService(varName: string) {
@@ -232,18 +232,18 @@ if (history.length > 100) {
   public getStatus(): Record {
     const validation = this.validate(); const env = this.loadEnvFile(); const status: Record<string any> = { };</string>
     if (this.config) {
-      for (const [serviceKey, service] of Object.entries(, this.config.services
+      for(const [serviceKey, service] of Object.entries(, this.config.services)
       )) {
         status[serviceKey]  = { name: service.name,
     category: service.category,
     status: service.status,
     variables: {}
-        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName, status[serviceKey].variables[varName] = { set: !!value,
+        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName, status[serviceKey].variables[varName] = { set: !!value)
     required: varConfig.required, status?: error error.severity === 'error'
                 ? '❌'
                 : '⚠️'
               ?: value '✅'
-                : '',
+                : '',)
             message?: error.message || (value ? 'Valid' : 'Not set')}
     return { summary: validation.summary,
     isValid: validation.isValid,

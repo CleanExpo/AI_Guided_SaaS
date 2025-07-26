@@ -5,80 +5,80 @@
 import { DesignToken, UIComponent, ThemeOptions } from '../types';
 
 export class GlassmorphismEngine {
-  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken>> {
+  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken> {
     const tokens = new Map<string, DesignToken>();
     
     // Glass effects
     tokens.set('--glass-bg', {
-      name: '--glass-bg',
+      name: '--glass-bg',)
       value: 'rgba(255, 255, 255, 0.1)',
       category: 'color'
     });
     
     tokens.set('--glass-bg-hover', {
-      name: '--glass-bg-hover',
+      name: '--glass-bg-hover',)
       value: 'rgba(255, 255, 255, 0.15)',
       category: 'color'
     });
     
     tokens.set('--glass-border', {
-      name: '--glass-border',
+      name: '--glass-border',)
       value: 'rgba(255, 255, 255, 0.2)',
       category: 'color'
     });
     
     tokens.set('--glass-blur', {
       name: '--glass-blur',
-      value: '16px',
-      category: 'effect'
+      value: '16px')
+      category: 'effect')
     });
     
     tokens.set('--glass-blur-heavy', {
       name: '--glass-blur-heavy',
-      value: '24px',
-      category: 'effect'
+      value: '24px')
+      category: 'effect')
     });
     
     // Shadows
     tokens.set('--shadow-sm', {
-      name: '--shadow-sm',
+      name: '--shadow-sm',)
       value: '0 2px 8px rgba(0, 0, 0, 0.04)',
       category: 'shadow'
     });
     
     tokens.set('--shadow-md', {
-      name: '--shadow-md',
+      name: '--shadow-md',)
       value: '0 8px 32px rgba(0, 0, 0, 0.08)',
       category: 'shadow'
     });
     
     tokens.set('--shadow-lg', {
-      name: '--shadow-lg',
+      name: '--shadow-lg',)
       value: '0 16px 48px rgba(0, 0, 0, 0.12)',
       category: 'shadow'
     });
     
     tokens.set('--shadow-xl', {
-      name: '--shadow-xl',
+      name: '--shadow-xl',)
       value: '0 24px 64px rgba(0, 0, 0, 0.16)',
       category: 'shadow'
     });
     
     // Gradients
     tokens.set('--gradient-primary', {
-      name: '--gradient-primary',
+      name: '--gradient-primary',)
       value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-secondary', {
-      name: '--gradient-secondary',
+      name: '--gradient-secondary',)
       value: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
       category: 'gradient'
     });
     
     tokens.set('--gradient-mesh', {
-      name: '--gradient-mesh',
+      name: '--gradient-mesh',)
       value: 'radial-gradient(at 47% 33%, hsl(162, 77%, 78%) 0, transparent 59%), radial-gradient(at 82% 65%, hsl(218, 80%, 71%) 0, transparent 55%)',
       category: 'gradient'
     });
@@ -86,55 +86,55 @@ export class GlassmorphismEngine {
     // Border radius
     tokens.set('--radius-sm', {
       name: '--radius-sm',
-      value: '12px',
-      category: 'spacing'
+      value: '12px')
+      category: 'spacing')
     });
     
     tokens.set('--radius-md', {
       name: '--radius-md',
-      value: '16px',
-      category: 'spacing'
+      value: '16px')
+      category: 'spacing')
     });
     
     tokens.set('--radius-lg', {
       name: '--radius-lg',
-      value: '24px',
-      category: 'spacing'
+      value: '24px')
+      category: 'spacing')
     });
     
     tokens.set('--radius-xl', {
       name: '--radius-xl',
-      value: '32px',
-      category: 'spacing'
+      value: '32px')
+      category: 'spacing')
     });
     
     tokens.set('--radius-full', {
       name: '--radius-full',
-      value: '9999px',
-      category: 'spacing'
+      value: '9999px')
+      category: 'spacing')
     });
     
     // Animation
     tokens.set('--transition-fast', {
       name: '--transition-fast',
-      value: 'all 0.15s ease',
-      category: 'animation'
+      value: 'all 0.15s ease')
+      category: 'animation')
     });
     
     tokens.set('--transition-smooth', {
-      name: '--transition-smooth',
+      name: '--transition-smooth',)
       value: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       category: 'animation'
     });
     
     tokens.set('--transition-bounce', {
-      name: '--transition-bounce',
+      name: '--transition-bounce',)
       value: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       category: 'animation'
     });
     
     tokens.set('--transition-spring', {
-      name: '--transition-spring',
+      name: '--transition-spring',)
       value: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
       category: 'animation'
     });
@@ -142,20 +142,20 @@ export class GlassmorphismEngine {
     // Colors
     tokens.set('--color-primary', {
       name: '--color-primary',
-      value: '#667eea',
-      category: 'color'
+      value: '#667eea')
+      category: 'color')
     });
     
     tokens.set('--color-secondary', {
       name: '--color-secondary',
-      value: '#764ba2',
-      category: 'color'
+      value: '#764ba2')
+      category: 'color')
     });
     
     tokens.set('--color-accent', {
       name: '--color-accent',
-      value: '#f093fb',
-      category: 'color'
+      value: '#f093fb')
+      category: 'color')
     });
     
     // Apply customizations

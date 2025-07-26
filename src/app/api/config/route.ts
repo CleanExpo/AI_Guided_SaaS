@@ -22,7 +22,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         if (feature) {
             const enabled = getFeatureStatus(feature)
             return NextResponse.json({
-                feature,
+                feature,)
                 enabled    })
 }
         
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(config)
 } catch (error) {
         logger.error('Config API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500   
+        return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500   )
     })
 }
 }

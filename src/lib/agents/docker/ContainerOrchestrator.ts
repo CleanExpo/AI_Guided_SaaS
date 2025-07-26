@@ -37,7 +37,7 @@ export class ContainerOrchestrator extends EventEmitter {
     this.imageBuilder = new DockerImageBuilder(this.config.baseImage);
     this.networkManager = new NetworkManager(this.config.networkName);
     this.containerManager = new ContainerManager(this.config);
-    this.healthCheckManager = new HealthCheckManager(
+    this.healthCheckManager = new HealthCheckManager()
       this.containerManager.getAllContainers(),
       this.config.healthCheckInterval
     );
@@ -212,7 +212,7 @@ export class ContainerOrchestrator extends EventEmitter {
   /**
    * Get container statistics
    */
-  public async getContainerStats(): Promise<Map<string, ContainerStats>> {
+  public async getContainerStats(): Promise<Map<string, ContainerStats> {
     const stats = new Map<string, ContainerStats>();
     
     for (const [agentId, containerizedAgent] of this.containerManager.getAllContainers()) {

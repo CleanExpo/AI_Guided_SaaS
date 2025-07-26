@@ -6,7 +6,7 @@ import { validateInput } from '@/lib/api/validation-middleware';
 import { z } from 'zod';
 import { handleError } from '@/lib/error-handling';
 
-const supportChatSchema = z.object({ 
+const supportChatSchema = z.object({ )
     message: z.string().min(1, 'Message is required').max(1000, 'Message too long'),
     context: z.record(z.unknown()).optional(),
     sessionId: z.string().optional(),
@@ -25,8 +25,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       logger.info('Support chat request', {
         sessionId: chatSessionId,
         userId,
-        category,
-        messageLength: message.length
+        category)
+        messageLength: message.length)
       });
       
       // Simulate AI support response based on category
@@ -72,23 +72,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       };
       
       return NextResponse.json({
-        success: true,
-        response
+        success: true)
+        response)
       });
     } catch (error) {
       handleError(error, {
         operation: 'processSupportChat',
         module: 'support/chat',
         metadata: { 
-          sessionId: data.sessionId,
+          sessionId: data.sessionId)
           category: data.category
-        }
+        })
       });
       
       return NextResponse.json({
         error: 'Support chat failed'
       }, {
-        status: 500
+        status: 500)
       });
     }
   });
@@ -104,19 +104,19 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         type: 'bot',
         timestamp: new Date().toISOString()}
     ];
-    return NextResponse.json({ success: true, chatHistory,
-      sessionId: sessionId || 'session_new'   
+    return NextResponse.json({ success: true, chatHistory)
+      sessionId: sessionId || 'session_new'   )
     })
   } catch (error) {
     handleError(error, {
-      operation: 'getChatHistory',
-      module: 'support/chat'
+      operation: 'getChatHistory')
+      module: 'support/chat')
     });
     
     return NextResponse.json({
       error: 'Failed to get chat history'
     }, {
-      status: 500
+      status: 500)
     });
   }
 }

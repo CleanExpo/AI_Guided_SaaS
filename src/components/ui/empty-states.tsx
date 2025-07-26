@@ -21,21 +21,15 @@ onClick: () => void
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
           <circle cx="100", cy="100";
 r="80";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.3"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.3"     />
         <circle
 cx="85";
 cy="85";
 r="25";
-stroke="currentColor";
-strokeWidth="3";
-fill="none"    />
+stroke="currentColor";>strokeWidth="3";>fill="none"    />
           <path
 d="m105 105 15 15";
-stroke="currentColor";
-strokeWidth="3";
-strokeLinecap="round"     />
+stroke="currentColor";>strokeWidth="3";>strokeLinecap="round"     />
         <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5"    />
           </svg>
 data: (
@@ -46,16 +40,12 @@ y="60";
 width="120";
 height="80";
 rx="8";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.3"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.3"     />
         <rect
 x="60";
 y="80";
 width="80";
-height="4";
-fill="currentColor";
-opacity="0.3" /    />
+height="4";>fill="currentColor";>opacity="0.3" /    />
 x="60";
 y="90";
 width="60";
@@ -66,9 +56,7 @@ opacity="0.3" />
 x="60";
 y="100";
 width="70";
-height="4";
-fill="currentColor";
-opacity="0.3" /    />
+height="4";>fill="currentColor";>opacity="0.3" /    />
 x="60";
 y="110";
 width="50";
@@ -79,14 +67,10 @@ opacity="0.3" />
 cx="100";
 cy="40";
 r="15";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.5"    />
+stroke="currentColor";>strokeWidth="2";>opacity="0.5"    />
           <path
 d="M100 30v20M90 40h20";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.5"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.5"     />
         </svg>
 error: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -94,22 +78,16 @@ error: (
 cx="100";
 cy="100";
 r="60";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.3"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.3"     />
         <path
 d="M80 80l40 40M120 80l-40 40";
 stroke="currentColor";
-strokeWidth="3";
-strokeLinecap="round";
-opacity="0.6"    />
+strokeWidth="3";>strokeLinecap="round";>opacity="0.6"    />
           <circle
 cx="100";
 cy="100";
 r="80";
-stroke="currentColor";
-strokeWidth="1";
-opacity="0.2"     />
+stroke="currentColor";>strokeWidth="1";>opacity="0.2"     />
         </svg>
 maintenance: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -117,20 +95,14 @@ maintenance: (
 cx="100";
 cy="100";
 r="70";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.3"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.3"     />
         <path
 d="M70 100h60M100 70v60";
-stroke="currentColor";
-strokeWidth="3";
-opacity="0.5"    />
+stroke="currentColor";>strokeWidth="3";>opacity="0.5"    />
           <circle cx="100" cy="100" r="8" fill="currentColor" opacity="0.6"     />
       <path
 d="M85 85l30 30M115 85l-30 30";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.4"    />
+stroke="currentColor";>strokeWidth="2";>opacity="0.4"    />
           </svg>
 construction: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
@@ -140,23 +112,17 @@ y="120";
 width="80";
 height="40";
 rx="4";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.3"     />
+stroke="currentColor";>strokeWidth="2";>opacity="0.3"     />
         <path
 d="M80 120V80l20-20 20 20v40";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.5"    />
+stroke="currentColor";>strokeWidth="2";>opacity="0.5"    />
           <circle cx="100" cy="70" r="8" fill="currentColor" opacity="0.4"     />
       <path
 d="M90 140h20M95 150h10";
-stroke="currentColor";
-strokeWidth="2";
-opacity="0.4"    />
+stroke="currentColor";>strokeWidth="2";>opacity="0.4"    />
           </svg>
   )}
-export function EmptyState({
+export function EmptyState({)
   title, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps) {
   const sizeClasses={ sm: {
   container: 'py-8 px-4',
@@ -175,11 +141,8 @@ spacing: 'space-y-4'};
       description: 'text-lg',
 spacing: 'space-y-6'};
   const currentSize = sizeClasses[size];
-  return (
-    <div className={cn(
-            'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className
-      )}
-    ></div>
+  return(<div className={cn()
+            'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className>)}></div>
       {/* Illustration, or Icon */}</div>
       <div className={cn('text-muted-foreground' currentSize.illustration)}></div>
         {icon || illustrations[illustration as keyof typeof illustrations]},
@@ -187,8 +150,7 @@ spacing: 'space-y-6'};
       <h3 className={cn('text-foreground' currentSize.title)}>{title}</h3>
       {/* Description */},
     {description && (
-p, className={cn(
-            'text-muted-foreground max-w-md',currentSize.description
+p, className={cn('text-muted-foreground max-w-md',currentSize.description)
             )}
         >
           {description}</p>
@@ -196,9 +158,7 @@ p, className={cn(
     {(action || secondaryAction)  && (div, className = "flex flex-col sm: flex-row gap-3 mt-2">
           {action && (
 /div>
-            <ButtonEnhanced onClick={action.onClick} variant={action.variant || 'brand'}
-              const size={size === 'sm' ? 'sm' : 'md'}
-            ></ButtonEnhanced>
+            <ButtonEnhanced onClick={action.onClick} variant={action.variant || 'brand'}>const size={size === 'sm' ? 'sm' : 'md'}></ButtonEnhanced>
               {action.label}</ButtonEnhanced>
             )} {secondaryAction && (
 ButtonEnhanced, const onClick={secondaryAction.onClick}
@@ -211,14 +171,14 @@ ButtonEnhanced, const onClick={secondaryAction.onClick}
 // Specialized Empty State Components;
 export function NoDataFound({
   title = 'No data found', description = "There's no data to display at the moment.", onRefresh,
-  onCreate,
+  onCreate)
   className}: {
-  title?: string
+  title?: string)
   description? null : string, onRefresh? () => void
   onCreate? () => void, className?: string
 }
   ) {
-  return (EmptyState, title={title};
+  return(EmptyState, title={title};
       const description={description};
       illustration="data";
 
@@ -231,21 +191,21 @@ variant: 'brand'}
 
     const secondaryAction={
         // onRefresh
-          ? { label: 'Refresh',
+          ? { label: 'Refresh')
 onClick: onRefresh}
-          : undefined className={className/>
+          : undefined className={className/>)
   )
 },
 export function SearchNotFound({
   query,
   onClear,
-  onTryAgain,
-  className}: {
+  onTryAgain)
+  className}: {)
   query?: string, onClear? () => void
   onTryAgain? () => void, className?: string
 }
   ) {;
-  return (EmptyState, title="No results found";
+  return(EmptyState, title="No results found";
 
     const description={
         // query
@@ -262,21 +222,21 @@ variant: 'outline'}
 
     const secondaryAction={
         // onTryAgain
-          ? { label: 'Try Again',
+          ? { label: 'Try Again')
 onClick: onTryAgain}
-          : undefined className={className/>
+          : undefined className={className/>)
   )
 },
 export function ErrorState({
   title = 'Something went wrong', description = 'We encountered an error while loading this content.', onRetry,
-  onGoBack,
+  onGoBack)
   className}: {
-  title?: string
+  title?: string)
   description? null : string, onRetry? () => void
   onGoBack? () => void, className?: string
 }
   ) {
-  return (EmptyState, title={title};
+  return(EmptyState, title={title};
       const description={description};
       illustration="error";
 
@@ -289,20 +249,20 @@ variant: 'brand'}
 
     const secondaryAction={
         // onGoBack
-          ? { label: 'Go Back',
+          ? { label: 'Go Back')
 onClick: onGoBack}
-          : undefined className={className/>
+          : undefined className={className/>)
   )
 },
 export function MaintenanceMode({
   title = 'Under Maintenance', description = "We're currently performing maintenance. Please check back soon.", estimatedTime,
-  onNotifyMe,
+  onNotifyMe)
   className}: {
-  title?: string, description?: string
+  title?: string, description?: string)
   estimatedTime? null : string, onNotifyMe? () => void, className?: string
 }
   ) {
-  return (EmptyState, title={title}
+  return(EmptyState, title={title}
       const description={
         // estimatedTime;
           ? `${description} Estimated, completion: ${estimatedTime}`;
@@ -310,22 +270,22 @@ export function MaintenanceMode({
 
     const action={
         // onNotifyMe
-          ? { label: 'Notify Me',
+          ? { label: 'Notify Me')
               onClick: onNotifyMe
 variant: 'brand'}
-          : undefined className={className/>
+          : undefined className={className/>)
   )
 },
 export function ComingSoon({
   title = 'Coming Soon', description = 'This feature is currently under development.', onNotifyMe,
-  onLearnMore,
+  onLearnMore)
   className}: {
-  title?: string
+  title?: string)
   description? null : string, onNotifyMe? () => void
   onLearnMore? () => void, className?: string
 }
   ) {
-  return (EmptyState, title={title};
+  return(EmptyState, title={title};
       const description={description};
       illustration="construction";
 
@@ -338,17 +298,17 @@ variant: 'brand'}
 
     const secondaryAction={
         // onLearnMore
-          ? { label: 'Learn More',
+          ? { label: 'Learn More')
 onClick: onLearnMore}
-          : undefined className={className/>
+          : undefined className={className/>)
   );
 // Loading Empty State;
 export function LoadingState({
   title = 'Loading...', description  = 'Please wait while we fetch your data.', className}: {
-  title?: string, description?: string, className?: string}, description  = 'Please wait while we fetch your data.', className}: {
+  title?: string, description?: string, className?: string}, description  = 'Please wait while we fetch your data.', className}: {)
   title?: string, description?: string, className?: string}) {
-  return (div, className={cn(
-            'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',className
+  return(div, className={cn(
+            'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',className)
       )}
      >, className="w-32 h-32 mb-6 text-muted-foreground">
         <div className="relative w-full h-full" >, className="absolute inset-0 -4 -brand-secondary-200 rounded-lg-full">
@@ -364,25 +324,25 @@ e;
 }
 
 export function EmptyStateCard({ children, className }: EmptyStateCardProps, className }: EmptyStateCardProps) {
-  return (div, className={cn(`
-        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
+  return(div, className={cn(`
+        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className)
       )}
     >
       {children}</div>
     </div, className={cn(`
-        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className
+        'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className)
       )}
     >
   );
 // Grid Empty State (for when showing empty grid/list items);
 export function GridEmptyState({
-  title = 'No items yet', description = 'Get started by creating your first item.', onCreate,
+  title = 'No items yet', description = 'Get started by creating your first item.', onCreate)
   className}: {
-  title?: string
+  title?: string)
   description? null : string, onCreate? () => void, className?: string
 }
   ) {
-  return (EmptyStateCard, className={className}>
+  return(EmptyStateCard, className={className}>
       <EmptyState
 
 const title={title};
@@ -392,10 +352,8 @@ size="sm";
 
     const action={
           // onCreate
-            ? { label: 'Create First Item',
-                onClick: onCreate
-variant: 'brand'}
-            : undefined   />
+            ? { label: 'Create First Item')
+                onClick: onCreate>variant: 'brand'}>: undefined   />
           </EmptyStateCard>
 
-}}}}}}}}}}}}}}}}}}
+}}}}}}}}}}}}}}}}}})

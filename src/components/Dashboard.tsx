@@ -54,7 +54,7 @@ export default function Dashboard() {
   // Real-time data updates
   useEffect(() => {
     const updateData = () => {
-      setMetrics({
+      setMetrics({)
         deployTime: Math.floor(Math.random() * 2) + 3,
         activeFeatures: 24,
         apiLatency: Math.floor(Math.random() * 20) + 35,
@@ -186,8 +186,7 @@ export default function Dashboard() {
     }, 3000);
   };
 
-  return (
-    <div className="min-h-screen glass">
+  return(<div className="min-h-screen glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header - Developer focused */}
         <div className="mb-8">
@@ -210,14 +209,12 @@ export default function Dashboard() {
                 Terminal
               </Button>
               <Button 
-                data-testid="refresh-button" 
-                variant="outline" 
-                size="sm"
-                onClick={() => {
+                data-testid="refresh-button" )
+                variant="outline" >size="sm">onClick={() => {
                   setIsLoading(true);
                   setLastRefresh(new Date());
                   // Refresh metrics data
-                  setMetrics({
+                  setMetrics({)
                     deployTime: Math.floor(Math.random() * 2) + 3,
                     activeFeatures: 24,
                     apiLatency: Math.floor(Math.random() * 20) + 35,
@@ -239,9 +236,7 @@ export default function Dashboard() {
         {/* Filter Dropdown */}
         <div className="mb-6">
           <select
-            data-testid="filter-dropdown"
-            value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
+            data-testid="filter-dropdown">value={selectedFilter}>onChange={(e) => setSelectedFilter(e.target.value)}
             className="px-4 py-2  rounded-xl-lg glass"
           >
             <option value="all">All Activities</option>
@@ -260,7 +255,7 @@ export default function Dashboard() {
 
         {/* Deployment Status Banner */}
         {deploymentStatus === 'deploying' && (
-          <Card className="mb-6 -blue-500 bg-blue-50" className="glass
+          <Card className="mb-6 -blue-500 bg-blue-50 glass
             <CardContent className="glass p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -274,7 +269,7 @@ export default function Dashboard() {
         )}
 
         {deploymentStatus === 'deployed' && (
-          <Card className="mb-6 -green-500 bg-green-50" className="glass
+          <Card className="mb-6 -green-500 bg-green-50 glass
             <CardContent className="glass p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -400,12 +395,8 @@ export default function Dashboard() {
               {recentActivity.map((activity) => (
                 <div key={activity.id} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      activity.status === 'success' ? 'bg-green-100' : 'bg-gray-100'
-                    }`}>
-                      <activity.icon className={`h-4 w-4 ${
-                        activity.status === 'success' ? 'text-green-600' : 'text-gray-600'
-                      }`} />
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${>activity.status === 'success' ? 'bg-green-100' : 'bg-gray-100'>}`}>
+                      <activity.icon className={`h-4 w-4 ${>activity.status === 'success' ? 'text-green-600' : 'text-gray-600'>}`} />
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">{activity.action}</p>

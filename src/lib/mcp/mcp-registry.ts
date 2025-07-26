@@ -138,8 +138,7 @@ export function getServerConfig(id: string): MCPServerConfig | undefined {
 /**
  * Get servers by category;
  */;
-export function getServersByCategory(
-    category: MCPServerConfig['category']
+export function getServersByCategory(category: MCPServerConfig['category'])
 ): MCPServerConfig[] {
   return MCPServerRegistry.filter((server) => server.category === category)}
 /**;

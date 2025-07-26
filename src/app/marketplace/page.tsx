@@ -34,13 +34,12 @@ export default function MarketplacePage() {
     trackConversion('marketplace_install', item.price === 'free' ? 0 : (item.price as number));
     // Simulate installation
     toast({ 
-      title: "Success", 
-      description: `Installing ${item.name}... This will take ${item.timeToImplement}` 
+      title: "Success")
+      description: `Installing ${item.name}... This will take ${item.timeToImplement}` )
     });
   };
 
-  return (
-    <div className="min-h-screen glass py-8 px-4">
+  return(<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="flex items-center justify-between mb-8">
@@ -63,9 +62,7 @@ export default function MarketplacePage() {
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
           selectedFilter={selectedFilter}
-          onFilterChange={setSelectedFilter}
-          stats={stats}
-        />
+          onFilterChange={setSelectedFilter}>stats={stats} />>
 
         {/* Stats */}
         <MarketplaceStats stats={stats} />
@@ -76,6 +73,6 @@ export default function MarketplacePage() {
         {/* Developer CTA */}
         <MarketplaceCTA />
       </div>
-    </div>
+    </div>)
   );
 }

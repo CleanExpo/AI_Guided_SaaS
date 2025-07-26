@@ -55,9 +55,7 @@ export function MarketplaceHeader({
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="Search templates, plugins, and integrations..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Search templates, plugins, and integrations...">value={searchQuery}>onChange={(e) => onSearchChange(e.target.value)}
             className="pl-10"
           />
         </div>
@@ -97,9 +95,7 @@ export function MarketplaceHeader({
         {(['popular', 'newest', 'rating', 'price'] as FilterType[]).map((filter) => (
           <Button
             key={filter}
-            variant={selectedFilter === filter ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => onFilterChange(filter)}
+            variant={selectedFilter === filter ? 'default' : 'outline'}>size="sm">onClick={() => onFilterChange(filter)}
           >
             {filter === 'popular' && 'Popular'}
             {filter === 'newest' && 'Newest'}

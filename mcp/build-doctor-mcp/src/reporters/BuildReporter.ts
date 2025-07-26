@@ -72,7 +72,10 @@ export class BuildReporter {
     return report;
   }
 
-  async generateFullReport(projectPath: string, options: ReportOptions): Promise<string> {
+  async generateFullReport(
+    projectPath: string,
+    options: ReportOptions
+  ): Promise<string> {
     const report = {
       title: 'Build Doctor Comprehensive Report',
       timestamp: new Date().toISOString(),
@@ -84,10 +87,10 @@ export class BuildReporter {
     switch (options.format) {
       case 'json':
         return JSON.stringify(report, null, 2);
-      
+
       case 'html':
         return this.generateHTMLReport(report);
-      
+
       case 'markdown':
       default:
         return this.generateMarkdownReport(report);
@@ -100,7 +103,7 @@ export class BuildReporter {
     md += `**Project:** ${report.projectPath}\\n\\n`;
 
     md += `## Fix History\\n\\n`;
-    
+
     if (report.history.length === 0) {
       md += `*No fixes recorded yet*\\n\\n`;
     } else {
@@ -173,7 +176,9 @@ export class BuildReporter {
     </div>
     
     <h2>Fix History</h2>
-    ${report.history.map((entry: any, index: number) => `
+    ${report.history
+      .map(
+        (entry: any, index: number) => `
         <div class="fix-entry">
             <h3>Session ${index + 1} - ${new Date(entry.timestamp).toLocaleString()}</h3>
             <p class="${entry.validation.success ? 'success' : 'error'}">
@@ -181,7 +186,9 @@ export class BuildReporter {
             </p>
             <p>Fixed: ${entry.fixes.fixed.length} | Failed: ${entry.fixes.failed.length}</p>
         </div>
-    `).join('')}
+    `
+      )
+      .join('')}
     
     <h2>Recommendations</h2>
     <ul>
@@ -203,11 +210,21 @@ export class BuildReporter {
     ];
 
     // Add specific recommendations based on fix history
-    if (this.fixHistory.some(h => h.fixes.fixed.some((f: any) => f.description.includes('JSX')))) {
-      recommendations.unshift('Consider using React.FC for consistent component typing');
+    if (
+      this.fixHistory.some((h) =>
+        h.fixes.fixed.some((f: any) => f.description.includes('JSX'))
+      )
+    ) {
+      recommendations.unshift(
+        'Consider using React.FC for consistent component typing'
+      );
     }
 
-    if (this.fixHistory.some(h => h.fixes.fixed.some((f: any) => f.description.includes('import')))) {
+    if (
+      this.fixHistory.some((h) =>
+        h.fixes.fixed.some((f: any) => f.description.includes('import'))
+      )
+    ) {
       recommendations.unshift('Configure module resolution in tsconfig.json');
     }
 
@@ -223,14 +240,18 @@ export class BuildReporter {
     return history[history.length - 1].validation.success;
   }
 
-  async saveReportToFile(report: string, projectPath: string, format: string): Promise<string> {
+  async saveReportToFile(
+    report: string,
+    projectPath: string,
+    format: string
+  ): Promise<string> {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const filename = `build-doctor-report-${timestamp}.${format}`;
     const filepath = path.join(projectPath, filename);
-    
+
     await fs.writeFile(filepath, report);
     this.logger.success(`Report saved to ${filename}`);
-    
+
     return filepath;
   }
 }

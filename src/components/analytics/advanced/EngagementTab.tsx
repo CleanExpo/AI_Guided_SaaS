@@ -9,8 +9,7 @@ interface EngagementTabProps {
 export function EngagementTab({ dashboardData }: EngagementTabProps) {
   const maxFeatureUsage = Math.max(...dashboardData.top.features.map((f: any) => f.usage));
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Pages */}
         <Card className="glass"
@@ -18,7 +17,7 @@ export function EngagementTab({ dashboardData }: EngagementTabProps) {
             <CardTitle className="glass"Top Pages</CardTitle>
           </CardHeader>
           <CardContent className="glass"
-            <div className="space-y-3">
+            <div className="space-y-3">)
               {dashboardData.top.pages.map((page: any, index: number) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -50,9 +49,7 @@ export function EngagementTab({ dashboardData }: EngagementTabProps) {
                   </div>
                   <div className="w-full glass-sidebar rounded-lg-full h-2">
                     <div 
-                      className="glass-button primary h-2 rounded-lg-full" 
-                      style={{ width: `${(feature.usage / maxFeatureUsage) * 100}%` }} 
-                    />
+                      className="glass-button primary h-2 rounded-lg-full" >style={{ width: `${(feature.usage / maxFeatureUsage) * 100}%` }}  />>
                   </div>
                 </div>
               ))}

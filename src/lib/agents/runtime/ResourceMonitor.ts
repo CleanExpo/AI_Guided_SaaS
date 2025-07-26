@@ -145,7 +145,7 @@ export class ResourceMonitor extends EventEmitter {
         free: freeMemory;
         percentage: memoryPercentage
       },
-      process: { cpu: this.calculateProcessCpu(processCpu, memory: processMemory.heapUsed + processMemory.external,
+      process: { cpu: this.calculateProcessCpu(processCpu, memory: processMemory.heapUsed + processMemory.external,)
         uptime: process.uptime()
       },
       alerts: []
@@ -210,16 +210,16 @@ export class ResourceMonitor extends EventEmitter {
     
     // Check CPU
     if (snapshot.cpu.usage >= this.thresholds.cpu.critical) {
-      alerts.push({ type: 'cpu',
-        level: 'critical',
+      alerts.push({ type: 'cpu')
+        level: 'critical',)
         message: `CPU usage critical: ${snapshot.cpu.usage.toFixed(1)}%`,
         value: snapshot.cpu.usage,
         threshold: this.thresholds.cpu.critical,
         timestamp: new Date()   
     })
 } else if (snapshot.cpu.usage >= this.thresholds.cpu.warning) {
-      alerts.push({ type: 'cpu',
-        level: 'warning',
+      alerts.push({ type: 'cpu')
+        level: 'warning',)
         message: `CPU usage high: ${snapshot.cpu.usage.toFixed(1)}%`,
         value: snapshot.cpu.usage,
         threshold: this.thresholds.cpu.warning,
@@ -229,16 +229,16 @@ export class ResourceMonitor extends EventEmitter {
     
     // Check Memory
     if (snapshot.memory.percentage >= this.thresholds.memory.critical) {
-      alerts.push({ type: 'memory',
-        level: 'critical',
+      alerts.push({ type: 'memory')
+        level: 'critical',)
         message: `Memory usage critical: ${snapshot.memory.percentage.toFixed(1)}%`,
         value: snapshot.memory.percentage,
         threshold: this.thresholds.memory.critical,
         timestamp: new Date()   
     })
 } else if (snapshot.memory.percentage >= this.thresholds.memory.warning) {
-      alerts.push({ type: 'memory',
-        level: 'warning',
+      alerts.push({ type: 'memory')
+        level: 'warning',)
         message: `Memory usage high: ${snapshot.memory.percentage.toFixed(1)}%`,
         value: snapshot.memory.percentage,
         threshold: this.thresholds.memory.warning,
@@ -250,7 +250,7 @@ export class ResourceMonitor extends EventEmitter {
     snapshot.alerts = alerts;
     
     // Emit alerts
-    alerts.forEach(alert => {
+    alerts.forEach(alert => {)
       this.emit('alert', alert)    })
 }
 

@@ -7,9 +7,8 @@ export class DocumentationSearchEngine {
     this.searchIndex.clear();
     
     sections.forEach((section, id) => {
-      const tokens = this.tokenize(
-        section.title + ' ' + 
-        section.content + ' ' + 
+      const tokens = this.tokenize(section.title + ' ' + 
+        section.content + ' ' + )
         section.metadata.tags.join(' ')
       );
       
@@ -17,10 +16,9 @@ export class DocumentationSearchEngine {
     });
   }
 
-  search(
-    query: string, 
-    sections: Map<string, DocumentationSection>,
-    limit: number = 10
+  search(query: string, 
+    sections: Map<string, DocumentationSection>)
+    limit: number = 10)
   ): DocumentationSearchResult[] {
     const queryTokens = this.tokenize(query.toLowerCase());
     const results: DocumentationSearchResult[] = [];
@@ -32,8 +30,8 @@ export class DocumentationSearchEngine {
       const score = this.calculateRelevance(queryTokens, tokens);
       if (score > 0) {
         results.push({
-          sectionId,
-          title: section.title,
+          sectionId)
+          title: section.title,)
           snippet: this.generateSnippet(section.content, queryTokens),
           relevanceScore: score,
           context: [section.metadata.category, ...section.metadata.tags]
@@ -58,13 +56,13 @@ export class DocumentationSearchEngine {
     let score = 0;
     const documentSet = new Set(documentTokens);
 
-    queryTokens.forEach(queryToken => {
+    queryTokens.forEach(queryToken => {)
       if (documentSet.has(queryToken)) {
         score += 1;
       }
       
       // Partial matches
-      documentTokens.forEach(docToken => {
+      documentTokens.forEach(docToken => {)
         if (docToken.includes(queryToken) || queryToken.includes(docToken)) {
           score += 0.5;
         }
@@ -79,7 +77,7 @@ export class DocumentationSearchEngine {
     let bestSentence = '';
     let bestScore = 0;
 
-    sentences.forEach(sentence => {
+    sentences.forEach(sentence => {)
       const sentenceTokens = this.tokenize(sentence);
       const score = this.calculateRelevance(queryTokens, sentenceTokens);
       
@@ -94,9 +92,8 @@ export class DocumentationSearchEngine {
       : bestSentence;
   }
 
-  async searchWithAI(
-    query: string,
-    sections: Map<string, DocumentationSection>
+  async searchWithAI(query: string)
+    sections: Map<string, DocumentationSection>)
   ): Promise<DocumentationSearchResult[]> {
     // Placeholder for AI-enhanced search
     // Would integrate with embedding-based search

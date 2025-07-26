@@ -79,10 +79,10 @@ export class AgentMCPBridge extends EventEmitter {
       const cachedResult = this.getCachedResult(cacheKey);
       if (cachedResult) {
         agent.emit('mcp:response', {
-          capability,
+          capability)
           result: cachedResult;
           cached: true
-       
+       )
     });
         return
 }
@@ -102,13 +102,13 @@ export class AgentMCPBridge extends EventEmitter {
       // Send response to agent
       agent.emit('mcp:response', {
         capability,
-        result,
-        cached: false   
+        result)
+        cached: false   )
     })
 } catch (error) {
       agent.emit('mcp:error', {
-        capability,
-        error: error.message   
+        capability)
+        error: error.message   )
     })
 }
   }
@@ -124,8 +124,8 @@ export class AgentMCPBridge extends EventEmitter {
       for (const serverId of this.config.enabledServers) {
         const serverCapabilities = await this.mcpIntegration.getCapabilities(serverId); if (serverCapabilities.includes(capability) {)} {
           mappedCapabilities.push({
-            serverId,
-            capability,
+            serverId)
+            capability,)
             description: `${capability} provided by ${serverId}`    })
 }
 }
@@ -199,8 +199,8 @@ export class AgentMCPBridge extends EventEmitter {
     
     // Add new capability
     capabilities.push({
-      serverId,
-      capability
+      serverId)
+      capability)
     });
     
     this.capabilityMap.set(agentId, capabilities);
@@ -220,8 +220,8 @@ export class AgentMCPBridge extends EventEmitter {
         // Request MCP capability
         this.emit('mcp:request', {
           capability,
-          method,
-          params
+          method)
+          params)
 };);
         
         // Wait for response
@@ -281,7 +281,7 @@ export class AgentMCPBridge extends EventEmitter {
    */
   private cacheResult(key: string, result: any): void {
     this.responseCache.set(key, {
-      result,
+      result,)
       timestamp: Date.now()
    
     });
@@ -325,10 +325,9 @@ export class AgentMCPBridge extends EventEmitter {
 /**
  * Enhance an agent with MCP capabilities
  */
-export function enhanceAgentWithMCP(
-  agent: Agent;
+export function enhanceAgentWithMCP(agent: Agent;
   bridge: AgentMCPBridge;
-  capabilities: Record<string { serverId: string, methods: string[] }></string>
+  capabilities: Record<string { serverId: string, methods: string[] }></string>)
 ): void {
   // Register agent with bridge
   bridge.registerAgent(agent, Object.keys(capabilities));

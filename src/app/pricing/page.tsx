@@ -91,8 +91,8 @@ export default function PricingPage() {
                 </div>
               )}
               
-              <CardHeader className="text-center pb-8" className="glass
-                <CardTitle className="text-2xl" className="glass{plan.name}</CardTitle>
+              <CardHeader className="text-center pb-8 glass
+                <CardTitle className="text-2xl glass{plan.name}</CardTitle>
                 <div className="flex items-baseline justify-center">
                   <span className="text-4xl font-bold">
                     ${plan.price}
@@ -114,9 +114,7 @@ export default function PricingPage() {
                 
                 <Button
                   className="w-full"
-                  variant={plan.popular ? 'default' : 'outline'}
-                  size="lg"
-                >
+                  variant={plan.popular ? 'default' : 'outline'}>size="lg">>
                   {plan.buttonText}
                 </Button>
               </CardContent>

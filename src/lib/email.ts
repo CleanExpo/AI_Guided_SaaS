@@ -37,8 +37,8 @@ class EmailService {
     try {;
       const response = await fetch(`${this.baseUrl}/emails`, {`, `, method: 'POST',
     headers: { Authorization: `Bearer ${this.apiKey }`,``
-          'Content-Type': 'application/json',
-        body: JSON.stringify({ from: options.from || this.defaultFrom,
+          'Content-Type': 'application/json')
+        body: JSON.stringify({ from: options.from || this.defaultFrom,)
     to: Array.isArray(options.to) ? options.to: [options.to],
     subject: options.subject,
     html: options.html,
@@ -105,9 +105,9 @@ const _text = `;``
       If you have any questions, feel free to reach out to our support team.
       Happy building!
     `
-    return this.sendEmail({ to: data.userEmail,
+    return this.sendEmail({ to: data.userEmail)
     subject: 'Welcome to AI Guided SaaS Builder! 🚀';
-      html,
+      html,)
       text    })
 }
   /**
@@ -155,13 +155,13 @@ const _text = `;``
       The AI Guided SaaS Builder Team
     `;``
     return this.sendEmail({ to: data.userName, // This should be the email address, subject: data.title;
-      html,
+      html,)
       text    })
 }
   /**
    * Send password reset email
    */
-  async sendPasswordResetEmail(email: string, resetUrl: string;
+  async sendPasswordResetEmail(email: string, resetUrl: string;)
   userName: string): Promise<any> {
 { `, ``, <!DOCTYPE html>
         <html></html>
@@ -215,7 +215,7 @@ const _text = `;``
     `
     return this.sendEmail({ to: email;
     subject: 'Reset Your Password - AI Guided SaaS Builder';
-      html,
+      html,)
       text    })
 }
   /**
@@ -225,8 +225,8 @@ const _text = `;``
     if (!this.apiKey) {
       return { success: false, error: 'Resend API key not configured' }}
     try {;
-      // Test with a simple API call to verify the key, const response = await fetch(`${this.baseUrl}/domains`, {`, `, method: 'GET',
-    headers: { Authorization: `Bearer ${this.apiKey }`,``
+      // Test with a simple API call to verify the key, const response = await fetch(`${this.baseUrl}/domains`, {`, `, method: 'GET')
+    headers: { Authorization: `Bearer ${this.apiKey }`,``)
           'Content-Type': 'application/json');
       if (response.ok) {
         return { success: true }} else {

@@ -18,18 +18,14 @@ export function AdvancedTab({ config, updateConfig }: AdvancedTabProps) {
           <div>
             <Label>Support Email</Label>
             <Input
-              type="email"
-              value={config.supportEmail}
-              onChange={(e) => updateConfig('supportEmail', e.target.value)}
+              type="email">value={config.supportEmail}>onChange={(e) => updateConfig('supportEmail', e.target.value)}
               placeholder="support@example.com"
             />
           </div>
           
           <div>
             <Label>Support URL</Label>
-            <Input
-              value={config.supportUrl}
-              onChange={(e) => updateConfig('supportUrl', e.target.value)}
+            <Input>value={config.supportUrl}>onChange={(e) => updateConfig('supportUrl', e.target.value)}
               placeholder="https://support.example.com"
             />
           </div>
@@ -37,18 +33,14 @@ export function AdvancedTab({ config, updateConfig }: AdvancedTabProps) {
           <div className="glass grid grid-cols-2 gap-4">
             <div>
               <Label>Privacy Policy URL</Label>
-              <Input
-                value={config.privacyUrl}
-                onChange={(e) => updateConfig('privacyUrl', e.target.value)}
+              <Input>value={config.privacyUrl}>onChange={(e) => updateConfig('privacyUrl', e.target.value)}
                 placeholder="/privacy"
               />
             </div>
             
             <div>
               <Label>Terms of Service URL</Label>
-              <Input
-                value={config.termsUrl}
-                onChange={(e) => updateConfig('termsUrl', e.target.value)}
+              <Input>value={config.termsUrl}>onChange={(e) => updateConfig('termsUrl', e.target.value)}
                 placeholder="/terms"
               />
             </div>
@@ -62,36 +54,28 @@ export function AdvancedTab({ config, updateConfig }: AdvancedTabProps) {
         <div className="glass grid grid-cols-2 gap-4">
           <div>
             <Label>Twitter/X</Label>
-            <Input
-              value={config.twitter || ''}
-              onChange={(e) => updateConfig('twitter', e.target.value)}
+            <Input>value={config.twitter || ''}>onChange={(e) => updateConfig('twitter', e.target.value)}
               placeholder="@yourhandle"
             />
           </div>
           
           <div>
             <Label>LinkedIn</Label>
-            <Input
-              value={config.linkedin || ''}
-              onChange={(e) => updateConfig('linkedin', e.target.value)}
+            <Input>value={config.linkedin || ''}>onChange={(e) => updateConfig('linkedin', e.target.value)}
               placeholder="company/yourcompany"
             />
           </div>
           
           <div>
             <Label>GitHub</Label>
-            <Input
-              value={config.github || ''}
-              onChange={(e) => updateConfig('github', e.target.value)}
+            <Input>value={config.github || ''}>onChange={(e) => updateConfig('github', e.target.value)}
               placeholder="yourusername"
             />
           </div>
           
           <div>
             <Label>Discord</Label>
-            <Input
-              value={config.discord || ''}
-              onChange={(e) => updateConfig('discord', e.target.value)}
+            <Input>value={config.discord || ''}>onChange={(e) => updateConfig('discord', e.target.value)}
               placeholder="Discord invite link"
             />
           </div>
@@ -106,9 +90,7 @@ export function AdvancedTab({ config, updateConfig }: AdvancedTabProps) {
             <Label>Custom CSS</Label>
             <textarea
               className="w-full px-3 py-2  rounded-xl-lg font-mono text-sm"
-              rows={6}
-              value={config.customCSS || ''}
-              onChange={(e) => updateConfig('customCSS', e.target.value)}
+              rows={6}>value={config.customCSS || ''}>onChange={(e) => updateConfig('customCSS', e.target.value)}
               placeholder="/* Your custom CSS */"
             />
           </div>
@@ -117,9 +99,7 @@ export function AdvancedTab({ config, updateConfig }: AdvancedTabProps) {
             <Label>Custom Head Tags</Label>
             <textarea
               className="w-full px-3 py-2  rounded-xl-lg font-mono text-sm"
-              rows={4}
-              value={config.customHead || ''}
-              onChange={(e) => updateConfig('customHead', e.target.value)}
+              rows={4}>value={config.customHead || ''}>onChange={(e) => updateConfig('customHead', e.target.value)}
               placeholder="<!-- Analytics, fonts, etc -->"
             />
           </div>

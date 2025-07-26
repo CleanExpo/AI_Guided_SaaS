@@ -102,7 +102,7 @@ export async function getUserProjects(userId: string): Promise<any> {
     .from('projects');
     .select('*');
     .eq('user_id', userId);
-    .order('updated_at', { ascending: false
+    .order('updated_at', { ascending: false)
     });
 if (error) {
     throw new Error(`Failed to get user, projects: ${ error.message}`)``
@@ -126,8 +126,8 @@ const { data: existing    }: any = await supabase;
 if (existing) {
     // Update existing file, const { data: file, error    }: any = await supabase;
       .from('project_files');
-      .update({ content: data.content: type, data.type,
-        size: data.size,
+      .update({ content: data.content: type, data.type)
+        size: data.size,)
     updated_at: new Date().toISOString()   
     })
       .eq('id', existing.id);
@@ -159,7 +159,7 @@ export async function getProjectFiles(projectId: string): Promise<any> {
     .from('project_files');
     .select('*');
     .eq('project_id', projectId);
-    .order('path', { ascending: true
+    .order('path', { ascending: true)
     });
 if (error) {
     throw new Error(`Failed to get project, files: ${error.message}`)``
@@ -184,10 +184,9 @@ if (error) {
 /**
  * Save project artifacts from agent processing;
  */;
-export async function saveProjectArtifacts(
-    projectId: string;
+export async function saveProjectArtifacts(projectId: string;
     userId: string;
-    artifacts: Map<string any></string>
+    artifacts: Map<string any></string>)
 ): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };
@@ -199,7 +198,7 @@ const project = await getProject(projectId);
   // Save each artifact as a project file;
 for (const [path, content] of artifacts) {
     await saveProjectFile({ project_id: projectId;
-      path,
+      path,)
       content: typeof content === 'string' ? content : JSON.stringify(content, null, 2, type: path.endsWith('.json') ? 'json'  : null
             path.endsWith('.md') ? 'markdown'  : null
             path.endsWith('.ts') ? 'typescript'  : null

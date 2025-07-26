@@ -34,10 +34,9 @@ export function validateRequired(value: unknown, fieldName: string): string | nu
   return null;
 }
 
-export function validateMinLength(
-  value: string,
-  minLength: number,
-  fieldName: string
+export function validateMinLength(value: string,
+  minLength: number)
+  fieldName: string)
 ): string | null {
   if (value.length < minLength) {
     return `${fieldName} must be at least ${minLength} characters`;
@@ -45,10 +44,9 @@ export function validateMinLength(
   return null;
 }
 
-export function validateMaxLength(
-  value: string,
-  maxLength: number,
-  fieldName: string
+export function validateMaxLength(value: string,
+  maxLength: number)
+  fieldName: string)
 ): string | null {
   if (value.length > maxLength) {
     return `${fieldName} must be no more than ${maxLength} characters`;
@@ -56,11 +54,10 @@ export function validateMaxLength(
   return null;
 }
 
-export function validateRange(
-  value: number,
+export function validateRange(value: number,
   min: number,
-  max: number,
-  fieldName: string
+  max: number)
+  fieldName: string)
 ): string | null {
   if (value < min || value > max) {
     return `${fieldName} must be between ${min} and ${max}`;
@@ -86,9 +83,8 @@ interface ValidationRule {
   custom?: (value: unknown, data: Record<string, unknown>) => string | null;
 }
 
-export function validateForm(
-  data: Record<string, unknown>,
-  rules: Record<string, ValidationRule>
+export function validateForm(data: Record<string, unknown>)
+  rules: Record<string, ValidationRule>)
 ): ValidationResult {
   const errors: Record<string, string> = {};
   

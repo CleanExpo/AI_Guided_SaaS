@@ -110,7 +110,7 @@ export default function PressPage() {
             </Card>
 
             {/* Contact */}
-            <Card className="mt-6" className="glass
+            <Card className="mt-6 glass
               <CardHeader className="glass"
                 <CardTitle className="glass"Media Contact</CardTitle>
               </CardHeader>

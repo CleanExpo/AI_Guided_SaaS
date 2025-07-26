@@ -9,10 +9,10 @@ g,
   onUIGenerated: (ui: unknown) => void
 };
 export default function EnhancedUIGenerator() {
-  return (
+  return()
     <div className="space-y-6">);</div>
         <CardHeader className="glass"
-          <CardTitle className="flex items-center gap-2" className="glass
+          <CardTitle className="flex items-center gap-2 glass
             <Wand2 className="w-5 h-5 text-brand-primary-600"     />
             100x UI Enhancement Generator</Wand2>
         <CardContent className="glass"
@@ -49,9 +49,7 @@ export default function EnhancedUIGenerator() {
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="glass"Coming Soon</CardTitle>
         <CardContent className="glass"
-          <p className="
-            Advanced UI generation features will be available in the next
-            update."     />
+          <p className=">Advanced UI generation features will be available in the next>update."     />
     );</CardContent>
 </Card>
 </CardContent>

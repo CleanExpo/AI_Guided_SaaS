@@ -51,9 +51,9 @@ export class AgentSystem extends EventEmitter {
 
   private initialize(): void {
     this.orchestrator = new EnhancedAgentOrchestrator({ maxConcurrentTasks: this.config.maxConcurrentTasks || 5,
-      enableMonitoring: this.config.enableMonitoring ?? true,
+      enableMonitoring: this.config.enableMonitoring ?? true)
       enableSelfHealing: this.config.enableSelfHealing ?? true
-   
+   )
     });
 
     this.setupWorkflows();
@@ -120,10 +120,10 @@ export class AgentSystem extends EventEmitter {
         { id: 'deploy',
           agent: 'devops-agent',
           task: 'deploy',
-          dependsOn: ['testing'],
+          dependsOn: ['testing'])
           parameters: { environment: 'staging' }
         }
-      ]
+      ])
     });
 
     // Bug Fix Workflow
@@ -149,10 +149,10 @@ export class AgentSystem extends EventEmitter {
         },
         { id: 'verify-fix',
           agent: 'qa-agent',
-          task: 'test',
+          task: 'test')
           dependsOn: ['apply-fix']
         }
-      ]
+      ])
     });
 
     // Deployment Workflow
@@ -190,10 +190,10 @@ export class AgentSystem extends EventEmitter {
         },
         { id: 'rollback',
           agent: 'devops-agent',
-          task: 'rollback',
+          task: 'rollback')
           condition: 'context.deploymentFailed === true'
         }
-      ]
+      ])
     });
 
     // Code Quality Improvement Workflow
@@ -220,9 +220,9 @@ export class AgentSystem extends EventEmitter {
         },
         { id: 'final-test',
           agent: 'qa-agent',
-          task: 'test',
+          task: 'test')
           dependsOn: ['refactor']
-        }
+        })
       ]    })
 }
 
@@ -303,30 +303,30 @@ export class AgentSystem extends EventEmitter {
   // Convenience methods for common operations
   public async developFeature(description: string, requirements: any = {}): Promise<any> {
     return this.executeWorkflow('feature-development', {
-      description,
-      requirements,
+      description)
+      requirements,)
       timestamp: new Date()   
     })
 }
 
   public async fixBug(bugReport: any): Promise<any> {
     return this.executeWorkflow('bug-fix', {
-      bugReport,
+      bugReport,)
       timestamp: new Date()   
     })
 }
 
   public async deployToProduction(version: string, config: any = {}): Promise<any> {
     return this.executeWorkflow('deployment', {
-      version,
-      config,
+      version)
+      config,)
       timestamp: new Date()   
     })
 }
 
   public async improveCodeQuality(targetPath: string = 'src'): Promise<any> {
     return this.executeWorkflow('code-quality', {
-      targetPath,
+      targetPath,)
       timestamp: new Date()   
     })
 }
@@ -334,10 +334,10 @@ export class AgentSystem extends EventEmitter {
   // Initialize MCP integration
   private initializeMCP(): void {
     this.mcpIntegration = createMCPIntegration();
-    this.mcpBridge = new AgentMCPBridge(this.mcpIntegration, { enabledServers: this.config.mcp?.servers || ['context7', 'sequential-thinking', 'serena'],
+    this.mcpBridge = new AgentMCPBridge(this.mcpIntegration, { enabledServers: this.config.mcp?.servers || ['context7', 'sequential-thinking', 'serena'])
       autoConnect: true;
       cacheResponses: true
-   
+   )
     });
     
     // Enhance agents with MCP capabilities
@@ -374,12 +374,12 @@ export class AgentSystem extends EventEmitter {
       maxInterval: 3000;
       adaptiveScaling: true;
       maxExecutionTime: 500
-   
+   )
     });
     
     // Register all agents with pulsed executor
     const agents = this.orchestrator.getAgents();
-    agents.forEach(agent => {
+    agents.forEach(agent => {)
       this.pulsedExecutor!.registerAgent(agent)
 };);
     
@@ -392,8 +392,8 @@ export class AgentSystem extends EventEmitter {
   // Initialize resource monitoring
   private initializeResourceMonitoring(): void {
     this.resourceMonitor = new ResourceMonitor({ cpu: { warning: 70, critical: 85 },
-      memory: { warning: 75, critical: 90 },
-      diskSpace: { warning: 80, critical: 95 }
+      memory: { warning: 75, critical: 90 })
+      diskSpace: { warning: 80, critical: 95 })
     });
     
     this.resourceMonitor.start();
@@ -415,9 +415,9 @@ export class AgentSystem extends EventEmitter {
   private async initializeContainerization(): Promise<void> {
     this.containerOrchestrator = new ContainerOrchestrator({ maxContainers: 10;
       baseImage: 'node:20-alpine',
-      networkName: 'agent-network',
+      networkName: 'agent-network')
       enableHealthChecks: true
-   
+   )
     });
     
     await this.containerOrchestrator.start();
@@ -430,7 +430,7 @@ export class AgentSystem extends EventEmitter {
     if (alert.type === 'cpu' && this.pulsedExecutor) {
       // Increase pulse intervals to reduce CPU load
       this.pulsedExecutor.updateConfig({ minInterval: 2000;
-        maxInterval: 5000   
+        maxInterval: 5000   )
     })
 }
     

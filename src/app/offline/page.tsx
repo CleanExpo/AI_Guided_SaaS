@@ -28,7 +28,7 @@ export default function OfflinePage() {
 
   return (
     <div className="min-h-screen glass flex items-center justify-center p-4">
-      <Card className="max-w-md w-full" className="glass
+      <Card className="max-w-md w-full glass
         <CardContent className="glass p-8 text-center">
           <div className="flex justify-center mb-6">
             <div className="w-20 h-20 bg-orange-100 rounded-lg-full flex items-center justify-center">
@@ -45,9 +45,7 @@ export default function OfflinePage() {
 
           <div className="space-y-3 mb-8">
             <Button 
-              onClick={handleRetry}
-              className="w-full bg-orange-500 hover:bg-orange-600"
-            >
+              onClick={handleRetry}>className="w-full bg-orange-500 hover:bg-orange-600">>
               <RefreshCw className="h-4 w-4 mr-2" />
               Try Again
             </Button>
@@ -61,9 +59,7 @@ export default function OfflinePage() {
               {cachedPages.map((page) => (
                 <a
                   key={page.url}
-                  href={page.url}
-                  className="flex items-center justify-between p-3  rounded-xl-lg hover:glass transition-colors"
-                >
+                  href={page.url}>className="flex items-center justify-between p-3  rounded-xl-lg hover:glass transition-colors">>
                   <div className="flex items-center gap-3">
                     <page.icon className="h-5 w-5 text-gray-600" />
                     <span className="font-medium">{page.name}</span>

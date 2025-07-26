@@ -4,10 +4,9 @@ import { logger } from '@/lib/logger';
 export class ChannelManager {
   private channels: Map<string, CommunicationChannel> = new Map();
 
-  createChannel(
-    name: string,
-    participants: string[],
-    type: CommunicationChannel['type'] = 'multicast'
+  createChannel(name: string,
+    participants: string[])
+    type: CommunicationChannel['type'] = 'multicast')
   ): string {
     const channelId = this.generateChannelId();
     const channel: CommunicationChannel = {
@@ -105,7 +104,7 @@ export class ChannelManager {
   }
 
   getChannelsForAgent(agentId: string): CommunicationChannel[] {
-    return this.getAllChannels().filter(channel => 
+    return this.getAllChannels().filter(channel => )
       channel.participants.includes(agentId) && channel.status === 'active'
     );
   }

@@ -5,7 +5,7 @@ import { logger } from '@/lib/logger';
   protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
       case 'api_endpoint':
-      return this.createAPIEndpoint(task.payload, break, case 'database_schema':;
+      return this.createAPIEndpoint(task.payload, break, case 'database_schema':;)
       return this.designDatabaseSchema(task.payload);
     break;
       case 'authentication':
@@ -84,8 +84,8 @@ if (require.main === module) {
       'authentication',
       'authorization',
       'data_validation',
-      'background_jobs',
-      'caching',
+      'background_jobs')
+      'caching',)
       'performance_optimization'] });
   agent.start().catch ((error) => {
     logger.error('Failed to start, Backend: Agent:', error, process.exit(1)    })

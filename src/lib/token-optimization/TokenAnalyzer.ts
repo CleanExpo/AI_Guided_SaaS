@@ -89,9 +89,8 @@ export class TokenAnalyzer {
     return match ? match[1] : 'unknown';
   }
 
-  calculateEfficiencyMetrics(
-    content: Map<string, string>,
-    distribution: TokenDistribution
+  calculateEfficiencyMetrics(content: Map<string, string>)
+    distribution: TokenDistribution)
   ): EfficiencyMetrics {
     const totalTokens = Object.values(distribution.files).reduce((sum, tokens) => sum + tokens, 0);
     const targetTokens = 150000; // 75% of 200K
@@ -148,7 +147,7 @@ export class TokenAnalyzer {
     
     for (const [filename, fileContent] of content) {
       patterns.push({
-        content: filename,
+        content: filename,)
         accessCount: this.estimateAccessFrequency(filename),
         lastAccessed: new Date(),
         importance: this.calculateImportance(filename, fileContent)
@@ -253,9 +252,9 @@ export class TokenAnalyzer {
       if (files.length > 3 && category !== 'code') {
         opportunities.push({
           target: `${category} files`,
-          method: 'consolidate',
+          method: 'consolidate')
           savings: files.length * 100, // Estimated token savings
-          effort: files.length * 2
+          effort: files.length * 2)
         });
       }
     }
@@ -263,18 +262,17 @@ export class TokenAnalyzer {
     return opportunities;
   }
 
-  generateOptimizationRecommendations(
-    distribution: TokenDistribution,
-    efficiency: EfficiencyMetrics,
-    fragmentation: FragmentationAnalysis
+  generateOptimizationRecommendations(distribution: TokenDistribution,
+    efficiency: EfficiencyMetrics)
+    fragmentation: FragmentationAnalysis)
   ): OptimizationRecommendation[] {
     const recommendations: OptimizationRecommendation[] = [];
 
     // High token usage recommendation
     if (efficiency.utilizationScore > 0.8) {
       recommendations.push({
-        type: 'compress',
-        target: 'High token usage files',
+        type: 'compress')
+        target: 'High token usage files',)
         estimatedSavings: Math.floor(efficiency.compressionPotential * 10000),
         riskLevel: 'medium',
         description: 'Apply compression to reduce token usage'
@@ -287,16 +285,16 @@ export class TokenAnalyzer {
         type: 'consolidate',
         target: 'Fragmented content',
         estimatedSavings: 5000,
-        riskLevel: 'low',
-        description: 'Consolidate related files to reduce fragmentation'
+        riskLevel: 'low')
+        description: 'Consolidate related files to reduce fragmentation')
       });
     }
 
     // Redundancy recommendation
     if (efficiency.redundancyLevel > 0.3) {
       recommendations.push({
-        type: 'prioritize',
-        target: 'Redundant content',
+        type: 'prioritize')
+        target: 'Redundant content',)
         estimatedSavings: Math.floor(efficiency.redundancyLevel * 8000),
         riskLevel: 'low',
         description: 'Remove or deduplicate redundant content'

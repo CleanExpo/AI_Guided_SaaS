@@ -27,32 +27,29 @@ danger: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800 shadow-s
       lg: 'px-6 py-3 text-lg',
 xl: 'px-8 py-4 text-xl'
 }
-    return (
-    <motion.button;
+    return(<motion.button;
 
     const ref={ref};
 
     className={cn("inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200", 'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2', 'disabled: opacity-50 disabled:cursor-not-allowed';
           variants[variant],
-          sizes[size],
-          fullWidth && 'w-full', className
+          sizes[size])
+          fullWidth && 'w-full', className)
         )} disabled={ disabled || loading}
         const whileHover={{ scale: disabled || loading ? 1 : 1.02  };
 
-    const whileTap={{ scale: disabled || loading ? 1 : 0.98 }
-    { ...props}
-      ></motion>
+    const whileTap={{ scale: disabled || loading ? 1 : 0.98 }>{ ...props}></motion>
         {loading && (
-Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2"
+Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2")
             )}   />
         )},
     {!loading && icon && iconPosition === 'left'  && (
-span className={cn(children && "mr-2"
+span className={cn(children && "mr-2")
             )}>{icon}</span>
         )},
     {children},
     {!loading && icon && iconPosition === 'right'  && (
-span className={cn(children && "ml-2"
+span className={cn(children && "ml-2")
             )}>{icon}</span>
       )}
       </motion.button>
@@ -79,16 +76,13 @@ gradient: 'bg-gradient-to-br from-primary-50 to-secondary-50 border border-prima
       lg: 'p-8',
 xl: 'p-10'
 }
-    return (
-    <motion.div;
+    return(<motion.div;
 
-    ref={ ref} className={cn("rounded-xl transition-all duration-200", variants[variant], paddings[padding],
-          interactive && 'cursor-pointer hover: shadow-xl hover:-translate-y-1' className
+    ref={ ref} className={cn("rounded-xl transition-all duration-200", variants[variant], paddings[padding])
+          interactive && 'cursor-pointer hover: shadow-xl hover:-translate-y-1' className)
         ) };
 
-    const whileHover={interactive ? { y: -4 } : {},
-    {...props}
-      ></motion>
+    const whileHover={interactive ? { y: -4 } : {},>{...props}></motion>
         {children}
       </motion.div>
     ))
@@ -105,7 +99,7 @@ type?: 'info' | 'success' | 'warning' | 'error',
 };
 export function UnifiedAlert({
   type = 'info', title, description, dismissible  = false, onDismiss, icon, className
-}: UnifiedAlertProps, title, description, dismissible  = false, onDismiss, icon, className
+}: UnifiedAlertProps, title, description, dismissible  = false, onDismiss, icon, className)
 }: UnifiedAlertProps) {
   const types={ info: {
   bg: 'bg-blue-50 border-blue-200',
@@ -128,20 +122,16 @@ export function UnifiedAlert({
       title: 'text-red-900',
   description: 'text-red-700'}}
   const config = types[type];
-  return (
-    <motion.div;
+  return(<motion.div;
 
-    initial={{ opacity: 0, y: -10 } animate={{ opacity: 1, y: 0 }
-      exit={{ opacity: 0, y: -10 } className={cn(`'flex items-start p-4 rounded-lg border' config.bg className
-      )}
-    >
+    initial={{ opacity: 0, y: -10 } animate={{ opacity: 1, y: 0 })
+      exit={{ opacity: 0, y: -10 } className={cn(`'flex items-start p-4 rounded-lg border' config.bg className>)}>
           <div className="flex-shrink-0">
         {icon || config.icon}</div>
       <div className="ml-3 flex-1">
         {title && (
 /div></div>
-          <h3 className={cn('text-sm font-medium mb-1' config.title
-            )}></h3>
+          <h3 className={cn('text-sm font-medium mb-1' config.title>)}></h3>
             {title}</h3>
       )}
         <p className={cn('text-sm' config.description)}></p>
@@ -166,7 +156,7 @@ interface UnifiedProgressProps { value: number;
 };
 export function UnifiedProgress({
   value, max  = 100, size  = 'md', variant  = 'primary', showValue  = false, animated  = true, className
-}: UnifiedProgressProps, max  = 100, size = 'md', variant = 'primary', showValue = false, animated = true, className
+}: UnifiedProgressProps, max  = 100, size = 'md', variant = 'primary', showValue = false, animated = true, className)
 }: UnifiedProgressProps) {
   const percentage  = Math.min(Math.max((value / max) * 100, 0, 100), sizes={ sm: 'h-1',
     md: 'h-2',
@@ -177,22 +167,20 @@ lg: 'h-3'
     warning: 'bg-warning-600',
 error: 'bg-error-600'
 }
-  return (
+  return()
     <div className={cn('w-full' className)}></div>
       {showValue && (
 /div></div>
         <div className="flex justify-between mb-1"    />
           <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-neutral-600">{percentage.toFixed(0</span>
+          <span className="text-sm text-neutral-600">{percentage.toFixed(0</span>)
             )}%</span>
       )}
       <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}    />
           <motion.div;
 
 className={cn('h-full rounded-full' variants[variant])} initial={{ width: 0 }
-          const animate={ width: `${percentage}%` }``;
-
-    const transition={{ duration?: animated 0.5 : 0 ease: "easeOut" }    />}</motion>
+          const animate={ width: `${percentage}%` }``;>const transition={{ duration?: animated 0.5 : 0 ease: "easeOut" }    />}</motion>
 // Unified Badge Component
 interface UnifiedBadgeProps {;
 variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'outline';
@@ -204,7 +192,7 @@ e;
   className?: string
 };
 export function UnifiedBadge({
-  variant = 'default', size  = 'sm', icon, dot  = false, children, className}: UnifiedBadgeProps, size  = 'sm', icon, dot  = false, children, className
+  variant = 'default', size  = 'sm', icon, dot  = false, children, className}: UnifiedBadgeProps, size  = 'sm', icon, dot  = false, children, className)
 }: UnifiedBadgeProps) {
   variants={ default: 'bg-neutral-100 text-neutral-700',
     primary: 'bg-primary-100 text-primary-700',
@@ -217,9 +205,8 @@ outline: 'bg-transparent border border-neutral-300 text-neutral-700'
     sm: 'px-2 py-0.5 text-sm',
     md: 'px-2.5 py-1 text-base',
 lg: 'px-3 py-1.5 text-lg'}
-  return (
-    <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className
-    )`}>``</span>
+  return()
+    <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className>)`}>``</span>
       {dot && (
 /span></span>
         <span className="w-1.5 h-1.5 bg-current rounded-lg-full"     />
@@ -240,25 +227,22 @@ interface UnifiedStepsProps { steps: Step[],
 };
 export function UnifiedSteps({
   steps, currentStep, variant  = 'linear', size  = 'md', className
-}: UnifiedStepsProps, currentStep, variant  = 'linear', size = 'md', className
+}: UnifiedStepsProps, currentStep, variant  = 'linear', size = 'md', className)
 }: UnifiedStepsProps) {
-  return (
+  return()
     <div className={cn('w-full' className)}></div>
       {variant === 'linear' ? (</div>
         <div className="flex items-center justify-between">
           {steps.map((step, index) => {
             const _isActive = index === currentStep, </div>, const _isCompleted = index < currentStep;
-            return (
-    <React.Fragment key={step.id};>
+            return(<React.Fragment key={step.id};>
           <div className="flex flex-col items-center flex-1"     />
                   <motion.div;
 
     className={cn("w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors", isCompleted ? 'bg-primary-600 text-white'  : null
                       isActive ? 'bg-primary-600 text-white ring-4 ring-primary-100'  : null
-                      'bg-neutral-200 text-neutral-600'
-                    )} initial={{ scale: 0.8 }
-                    animate={{ scale?: isActive 1.1 : 1 } transition={{ duration: 0.2 }
-                  ></motion>
+                      'bg-neutral-200 text-neutral-600')
+                    )} initial={{ scale: 0.8 }>animate={{ scale?: isActive 1.1 : 1 } transition={{ duration: 0.2 }></motion>
                     {isCompleted ? (
                       <CheckCircle className="h-5 w-5"     />
                     ) : step.icon ? (
@@ -268,8 +252,7 @@ export function UnifiedSteps({
                     )}
                   </motion.div>
                   <div className="text-center mt-2"    />
-          <p className={cn("text-sm font-medium", isActive ? 'text-primary-700' : 'text-neutral-600'
-                    )}></p>
+          <p className={cn("text-sm font-medium", isActive ? 'text-primary-700' : 'text-neutral-600'>)}></p>
                       {step.title}</p>
                     {step.description  && (
 p className="text-xs text-neutral-500 mt-1">
@@ -277,9 +260,7 @@ p className="text-xs text-neutral-500 mt-1">
   },
     {index < steps.length - 1  && (div className="flex-1 max-w-[100px]"></div>
                     <div className="h-1 bg-neutral-200 rounded-lg-full overflow-hidden"    />
-          <motion.div, className = "h-full bg-primary-600"; initial={{ width: 0 } animate={{ width?: isCompleted '100%' : '0%' }
-                        const transition={{ duration: 0.5 delay: 0.2 }
-                            />
+          <motion.div, className = "h-full bg-primary-600"; initial={{ width: 0 } animate={{ width?: isCompleted '100%' : '0%' }>const transition={{ duration: 0.5 delay: 0.2 } />>
             )}
               </React.Fragment>
             )

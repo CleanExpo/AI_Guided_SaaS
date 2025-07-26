@@ -20,16 +20,16 @@ export class AIService {
   constructor(config: AIServiceConfig) {
     this.config = config;
     if (config.provider === 'openai' && config.apiKey) {
-      this.openai = new OpenAI({ apiKey: config.apiKey   
+      this.openai = new OpenAI({ apiKey: config.apiKey   )
     })
 }
     if (config.provider === 'anthropic' && config.apiKey) {
-      this.anthropic = new Anthropic({ apiKey: config.apiKey
+      this.anthropic = new Anthropic({ apiKey: config.apiKey)
     })}
   async generateResponse(prompt: string, systemPrompt? null : string): Promise { try {
       switch (this.config.provider) {
         case 'openai':
-      return await this.generateOpenAIResponse(prompt, systemPrompt, break, case 'anthropic':;
+      return await this.generateOpenAIResponse(prompt, systemPrompt, break, case 'anthropic':;)
       return await this.generateAnthropicResponse(prompt, systemPrompt);
     break;
         case 'fallback':
@@ -47,10 +47,10 @@ break
       throw new Error('OpenAI client not initialized')};
     const messages = [];
     if (systemPrompt) {
-      messages.push({ role: 'system', content: systemPrompt   
+      messages.push({ role: 'system', content: systemPrompt   )
     })
 }
-    messages.push({ role: 'user', content: prompt
+    messages.push({ role: 'user', content: prompt)
     });
     
 const completion  = await this.openai.chat.completions.create({ model: this.config.model || 'gpt-4-turbo-preview';
@@ -69,10 +69,10 @@ const usage = completion.usage;
   }
 }
         : undefined,
-      model: completion.model,
+      model: completion.model)
     provider: 'openai'
   }
-}
+})
   private async generateAnthropicResponse(prompt: string, systemPrompt? null : string): Promise<any> {
     if (!this.anthropic) {
       throw new Error('Anthropic client not initialized')}
@@ -88,10 +88,10 @@ const content = response.content[0];
 const text = content.type === 'text' ? content.text : '';
     return { message: text;
     usage: { promptTokens: response.usage.input_tokens, completionTokens: response.usage.output_tokens, totalTokens: response.usage.input_tokens + response.usage.output_tokens },
-      model: response.model,
+      model: response.model)
     provider: 'anthropic'
   }
-}
+})
   private async generateFallbackResponse(prompt: string, systemPrompt? null : string): Promise<any> { </any>
     // Simple pattern-based responses for common requests, const lowerPrompt = prompt.toLowerCase(); let message = '';
     if (lowerPrompt.includes('create') {&}& lowerPrompt.includes('component')) {
@@ -101,8 +101,8 @@ import React from 'react';
 interface ComponentProps {
   // Add your props here
  };
-export function Component({}: ComponentProps): ComponentProps) {
-  return (div>, {/* Your component content */}</div>
+export function Component({  }) {
+  return(div>, {/* Your component content */}</div>)
       )}
 \`\`\```;
 This is a fallback response. For better results, please configure an AI provider API key.`;``

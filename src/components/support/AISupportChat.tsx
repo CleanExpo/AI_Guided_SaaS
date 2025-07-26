@@ -29,10 +29,10 @@ m,
 };
 export function AISupportChat({
   documentationSystem, tutorialSystem, userId, projectId
-}: AISupportChatProps, tutorialSystem, userId, projectId
+}: AISupportChatProps, tutorialSystem, userId, projectId)
 }: AISupportChatProps) {
-  const [isOpen, setIsOpen] = useState<any>([])
-  const [isMinimized, setIsMinimized] = useState<any>([])
+  const [isOpen, setIsOpen] = useState<any>(null)
+  const [isMinimized, setIsMinimized] = useState<any>(null)
   const [messages, setMessages] = useState<Message[]>([</Message>
   { id: '1',
       role: 'system',
@@ -40,24 +40,24 @@ content: 'Hi! I\'m your AI support assistant. I can help you with documentation,
 timestamp: new Date()}
   ]);
 
-const [input, setInput]  = useState<any>([])
+const [input, setInput]  = useState<any>(null)
 
-const [isLoading, setIsLoading] = useState<any>([])
+const [isLoading, setIsLoading] = useState<any>(null)
   
-const [searchQuery, setSearchQuery]  = useState<any>([])
+const [searchQuery, setSearchQuery]  = useState<any>(null)
 
-const [showQuickActions, setShowQuickActions] = useState<any>([])
+const [showQuickActions, setShowQuickActions] = useState<any>(null)
 { useRef<HTMLDivElement>(null)</HTMLDivElement>
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
   useEffect(() => {
     scrollToBottom()}, [messages]);
 
-const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' 
+const _scrollToBottom  = (): void => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' )
     })};
 
 const _handleSendMessage = async () =>  {
-    if (!input.trim() {|}| isLoading) return const userMessage: Message={ id: Date.now().toString(, role: 'user',
-      content: input,
+    if (!input.trim() {|}| isLoading) return const userMessage: Message={ id: Date.now().toString(, role: 'user')
+      content: input,)
 timestamp: new Date()};
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -70,13 +70,13 @@ const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
       // Send to AI for enhanced response;
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input
+headers: { 'Content-Type': 'application/json' })
+        body: JSON.stringify({ message: input)
     context: { userId, projectId, documentationResults: docResults.slice(0, 3, availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title }, conversationHistory: messages.slice(-5)})};
       const data  = await response.json();
 
-const assistantMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant',
-        content: data.response,
+const assistantMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant')
+        content: data.response,)
     timestamp: new Date(),
     metadata: { suggestedDocs: data.suggestedDocs,
     suggestedTutorials: data.suggestedTutorials,
@@ -86,8 +86,8 @@ actionButtons: data.actionButtons
 }
       setMessages(prev => [...prev, assistantMessage])
 } catch (error) {
-      logger.error('Failed to get AI, response:', error, const errorMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant',
-content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
+      logger.error('Failed to get AI, response:', error, const errorMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant')
+content: 'I apologize, but I encountered an error. Please try again or check the documentation.',)
         timestamp: new Date()}
       setMessages(prev => [...prev, errorMessage])
 } finally {
@@ -95,17 +95,17 @@ content: 'I apologize, but I encountered an error. Please try again or check the
   const _handleQuickAction  = async (action: string) =>  { switch (action) {
       case 'browse-docs':
       setSearchQuery('', break;
-    break};
+    break};)
         setShowQuickActions(false);
         // Show documentation categories;
 
 const categories = ['getting-started', 'api-reference', 'tutorials', 'troubleshooting'];
         
-const docsMessage: Message={ id: Date.now().toString(, role: 'assistant',
-          content: 'Here are the main documentation, categories: ',
+const docsMessage: Message={ id: Date.now().toString(, role: 'assistant')
+          content: 'Here are the main documentation, categories: ',)
           timestamp: new Date(),
     metadata: { actionButtons: categories.map((cat) => ({
-  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase(, action: 'browse-category',
+  label: cat.replace('-', ', ').replace(/\b\w/g, l: any => l.toUpperCase(, action: 'browse-category',)
 data: { category: cat }}))};
         setMessages(prev => [...prev, docsMessage]);
         // break
@@ -114,8 +114,8 @@ data: { category: cat }}))};
 const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
     break;
         
-const tutorialMessage: Message={ id: Date.now().toString(, role: 'assistant',
-          content: 'Here are some recommended tutorials for, you: ',
+const tutorialMessage: Message={ id: Date.now().toString(, role: 'assistant')
+          content: 'Here are some recommended tutorials for, you: ',)
           timestamp: new Date(),
 metadata: { suggestedTutorials: tutorials.slice(0, 3).map((t) => t.id, actionButtons: tutorials.slice(0, 3).map((t) => ({ label: `Start: ${t.title}`,
 action: 'start-tutorial',
@@ -127,7 +127,7 @@ action: 'start-tutorial',
         // break
       case 'get-help':;
 
-const helpMessage: Message={ id: Date.now().toString(, role: 'assistant',
+const helpMessage: Message={ id: Date.now().toString(, role: 'assistant',)
           content: 'I can help you, with: \n\n• Finding documentation\n• Starting tutorials\n• Troubleshooting errors\n• Understanding features\n• Getting code examples\n\nWhat would you like help with?', timestamp: new Date()}
         setMessages(prev => [...prev, helpMessage]);
         // break
@@ -136,9 +136,9 @@ const helpMessage: Message={ id: Date.now().toString(, role: 'assistant',
   const _handleActionButton  = async (action: string, data?) =>  { switch (action) {
       case 'browse-category':, const sections = documentationSystem.getSectionsByCategory(data.category, break
     break
-};
-        const categoryMessage: Message={ id: Date.now().toString(, role: 'assistant',
-content: `Here are the ${data.category} documentation; sections: `,
+};)
+        const categoryMessage: Message={ id: Date.now().toString(, role: 'assistant')
+content: `Here are the ${data.category} documentation; sections: `,)
   timestamp: new Date(),
     metadata: { suggestedDocs: sections.map((s) => s.id, actionButtons: sections.slice(0, 5).map((s) => ({ label: s.title,
     action: 'open-doc',
@@ -167,8 +167,8 @@ const _section = documentationSystem.getSection(data.sectionId);
   }
 }
   const _handleSearch = async () => {
-    if (!searchQuery.trim() {)} return null; const results = await documentationSystem.searchDocumentation(searchQuery); const searchMessage: Message={ id: Date.now().toString(, role: 'assistant',
-content: `Found ${results.length}; results for "${searchQuery}":`,
+    if (!searchQuery.trim() {)} return null; const results = await documentationSystem.searchDocumentation(searchQuery); const searchMessage: Message={ id: Date.now().toString(, role: 'assistant')
+content: `Found ${results.length}; results for "${searchQuery}":`,)
 timestamp: new Date(),
     metadata: { suggestedDocs: results.slice(0, 5).map((r) => r.sectionId, actionButtons: results.slice(0, 5).map((r) => ({ label: r.title,
     action: 'open-doc',
@@ -182,20 +182,15 @@ data: { sectionId: r.sectionId }}))};
     { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
    ];
 if (!isOpen) {
-    return (
-    <Button className = "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"; const onClick={() => setIsOpen(true)}</Button>
-      ></Button>
+    return()
+    <Button className = "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"; const onClick={() => setIsOpen(true)}</Button></Button>
         <MessageCircle className="h-6 w-6"    />
           </Button>
-  return (
-    <div;
+  return(<div;
 
-    ref={chatContainerRef} className={cn(
-            'fixed bottom-6 right-6 z-50 transition-all duration-300',isMinimized ? "h-14" : "h-[600px]"
-      )}
-    >
-          <Card className={cn(
-            'w-[400px] flex flex-col shadow-xl',isMinimized ? "h-14" : "h-full"
+    ref={chatContainerRef} className={cn()
+            'fixed bottom-6 right-6 z-50 transition-all duration-300',isMinimized ? "h-14" : "h-[600px]">)}>
+          <Card className={cn('w-[400px] flex flex-col shadow-xl',isMinimized ? "h-14" : "h-full")
       )} className="glass</Card>
         {/* Header */}</Card>
         <div className="glass flex items-center justify-between p-4 -b flex items-center gap-2">
@@ -205,19 +200,11 @@ if (!isOpen) {
             <div>
           <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help</p>
           <div className="flex gap-1">
-          <Button size="sm", variant="ghost";
-
-    const onClick={() => setIsMinimized(!isMinimized)}</Button>
-            ></Button>
-              <ChevronDown className={cn(
-            'h-4 w-4 transition-transform',isMinimized && "rotate-180"
-              )/>
+          <Button size="sm", variant="ghost";>const onClick={() => setIsMinimized(!isMinimized)}</Button></Button>
+              <ChevronDown className={cn(>'h-4 w-4 transition-transform',isMinimized && "rotate-180">)/>
           </Button>
             <Button size="sm";
-variant="ghost";
-
-    const onClick={() => setIsOpen(false)}</Button>
-            ></Button>
+variant="ghost";>const onClick={() => setIsOpen(false)}</Button></Button>
               <X className="h-4 w-4"    />
           </Button>
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
@@ -225,9 +212,7 @@ variant="ghost";
           <div className="flex-1 relative">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
           <input type="text"
-="Search documentation...";
-
-value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
+="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
 {{(e) => e.key === 'Enter' && handleSearch()};
                     className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md, focus:outline-none focus:ring-2 focus:ring-primary/20" /></input>
         <Button size = "sm" onClick={handleSearch}></Button>
@@ -235,24 +220,17 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
             <ScrollArea className="glass flex-1 p-4">
           <div className="space-y-4">
                 {messages.map((message) => (\n    </div>
-                  <div; key={message.id} className={cn(
-            'flex gap-3',message.role === 'user' && "flex-row-reverse"
+                  <div; key={message.id} className={cn('flex gap-3',message.role === 'user' && "flex-row-reverse")
                     )}
-                   const className={cn(
-            'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted"
-                    )/>
+                   const className={cn(>'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted">)/>
                       {message.role === 'user' ? (</div>
                         <User className="h-4 w-4"     />
                       ) : (</User>
                         <Bot className="h-4 w-4"     />
                       )}</Bot>
-                    <div className={cn(
-            'flex-1 space-y-2',message.role === 'user' && "flex flex-col items-end"
-                    )} className={cn(
-            'rounded-lg px-3 py-2 max-w-[85%] text-sm',message.role === 'user'
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted"
-                      )/>
+                    <div className={cn('flex-1 space-y-2',message.role === 'user' && "flex flex-col items-end")
+                    )} className={cn('rounded-lg px-3 py-2 max-w-[85%] text-sm',message.role === 'user')
+                          ? "bg-primary text-primary-foreground">: "bg-muted">)/>
           <p className="whitespace-pre-wrap">{ message.content}</p>
                       {/* Code, blocks */},
     {message.metadata?.codeBlocks?.map((block, index) => (\n    <div key={index} className="max-w-[85%]">
@@ -263,9 +241,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
                           <p className="text-xs text-muted-foreground">Related, documentation: </p>
                           {message.metadata.suggestedDocs.map((docId) => {
                             const doc = documentationSystem.getSection(docId);
-        return doc ? (<button const key={docId };
-
-    const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};</button>
+        return doc ? (<button const key={docId };>const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};</button>
                                 className="text-xs text-primary hover: underline block text-left"
                               ></button>
                                 📄 {doc.title}</button>
@@ -275,9 +251,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
     {message.metadata?.actionButtons && message.metadata.actionButtons.length > 0  && (div className="flex flex-wrap gap-2 max-w-[85%]">
                           {message.metadata.actionButtons.map((button, index) => (\n    <Button const key={index};
                               size="sm";
-variant="outline";
-
-const onClick={() => handleActionButton(button.action, button.data)};</Button>
+variant="outline";>const onClick={() => handleActionButton(button.action, button.data)};</Button>
                               className="text-xs";
                             >
                               {button.label}</Button>
@@ -298,18 +272,13 @@ div className="flex gap-3">
                   {quickActions.map((action) => (\n    <Button const key={action.action };
                       variant="outline";
 size="sm";
-className="flex flex-col gap-1 h-auto py-2";
-
-const onClick={() => handleQuickAction(action.action)}</Button>
-                    ></Button>
+className="flex flex-col gap-1 h-auto py-2";>const onClick={() => handleQuickAction(action.action)}</Button></Button>
                       <action.icon className="h-4 w-4"    />
           <span className="text-xs">{action.label}</span>))}
             )},
     {/* Input */}
             <div className="p-3 -t flex gap-2"    />
-          <Textarea
-
-value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
+          <Textarea>value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
 {{ (e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {;
                       e.preventDefault(, handleSendMessage()};
@@ -318,9 +287,7 @@ value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
     const rows={1/></Textarea>
                 <Button
 
-onClick={handleSendMessage} disabled={!input.trim() || isLoading};
-                  size="sm";
-                ></Button>
+onClick={handleSendMessage} disabled={!input.trim() || isLoading};>size="sm";>></Button>
                   {isLoading ? (</Button>
                     <Loader2 className="h-4 w-4 animate-spin"     />
                   ) : (
@@ -328,8 +295,7 @@ onClick={handleSendMessage} disabled={!input.trim() || isLoading};
                   )}</Send>
               <div className="flex items-center gap-1 mt-2">
           <Sparkles className="h-3 w-3 text-primary"     />
-          <p className="
-                  AI-powered support with real-time documentation"    />
+          <p className=">AI-powered support with real-time documentation"    />
           </div>
     )
 }

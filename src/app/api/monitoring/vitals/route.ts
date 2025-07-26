@@ -27,9 +27,8 @@ export async function POST(request: NextRequest) {
 
     // Validate data
     if (!metric || !metric.name || typeof metric.value !== 'number') {
-      return NextResponse.json(
-        { error: 'Invalid metric data' },
-        { status: 400 }
+      return NextResponse.json({ error: 'Invalid metric data' })
+        { status: 400 })
       );
     }
 
@@ -53,7 +52,7 @@ export async function POST(request: NextRequest) {
         metric,
         url,
         timestamp,
-        userAgent,
+        userAgent))
       });
     }
 
@@ -67,9 +66,8 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     logger.error('Failed to process Web Vitals:', error);
-    return NextResponse.json(
-      { error: 'Failed to process metrics' },
-      { status: 500 }
+    return NextResponse.json({ error: 'Failed to process metrics' })
+      { status: 500 })
     );
   }
 }
@@ -101,15 +99,14 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       date,
-      metrics: results,
+      metrics: results))
       summary: generateSummary(results),
     });
 
   } catch (error) {
     logger.error('Failed to retrieve Web Vitals:', error);
-    return NextResponse.json(
-      { error: 'Failed to retrieve metrics' },
-      { status: 500 }
+    return NextResponse.json({ error: 'Failed to retrieve metrics' })
+      { status: 500 })
     );
   }
 }
@@ -128,7 +125,7 @@ function calculateStats(metrics: VitalMetric[]) {
   }
 
   const values = metrics.map(m => m.value).sort((a, b) => a - b);
-  const ratings = metrics.reduce(
+  const ratings = metrics.reduce()
     (acc, m) => {
       acc[m.rating]++;
       return acc;
@@ -204,7 +201,7 @@ async function sendPerformanceAlert(data: PerformanceAlertData) {
         body: JSON.stringify({
           text: `⚠️ Poor Web Vital detected: ${data.metric.name} = ${data.metric.value} on ${data.url}`,
           metric: data.metric,
-          url: data.url,
+          url: data.url))
         }),
       });
     } catch (error) {

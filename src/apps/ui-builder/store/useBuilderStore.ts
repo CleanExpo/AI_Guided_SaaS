@@ -78,8 +78,8 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
   
   addComponent: (type: string) => set(state => ({
     components: [
-      ...state.components,
-      {
+      ...state.components)
+      {)
         id: `${type}-${Date.now()}`,
         type,
         props: getDefaultProps(type),
@@ -90,7 +90,7 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
   
   selectComponent: (id: string) => set({ selectedId: id }),
   
-  updateComponentProps: (id, newProps) => set(state => ({
+  updateComponentProps: (id, newProps) => set(state => ({)
     components: state.components.map((c) =>
       c.id === id ? { ...c, props: { ...c.props, ...newProps } } : c
     )
@@ -101,8 +101,8 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
     if (typeof window !== 'undefined') {
       localStorage.setItem('ai_builder_project', JSON.stringify(components));
       toast({ 
-        title: "Success", 
-        description: "Project saved successfully!" 
+        title: "Success")
+        description: "Project saved successfully!" )
       });
     }
   },
@@ -114,20 +114,20 @@ export const useBuilderStore = create<BuilderStore>((set, get) => ({
         const parsed = JSON.parse(saved);
         set({ components: parsed, selectedId: null });
         toast({ 
-          title: "Success", 
-          description: "Project loaded successfully!" 
+          title: "Success")
+          description: "Project loaded successfully!" )
         });
       } else {
         toast({ 
-          title: "Info", 
-          description: "No saved project found!" 
+          title: "Info")
+          description: "No saved project found!" )
         });
       }
     }
   },
   
   reset: () => set({ 
-    components: [], 
-    selectedId: null 
+    components: [])
+    selectedId: null )
   })
 }));

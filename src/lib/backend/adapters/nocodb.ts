@@ -42,15 +42,15 @@ endpoint: string;
       : `${this.baseUrl}${endpoint}`;
     
 const response  = await fetch(url, {
-      ...options,
-      headers
+      ...options)
+      headers)
 });
 
 const data = await response.json();
     if (!response.ok) {
       throw new BackendError(, data.msg || data.message || 'Request failed', 'API_ERROR',;
-        response.status,
-        data
+        response.status)
+        data)
       )
     };
     return data
@@ -67,7 +67,7 @@ const data = await response.json();
     // Hash password, const hashedPassword = await bcrypt.hash(password, 10); // Create user in users table;
 
 const user = await this.request<any>(this.getTableEndpoint('users', {</any>
-      method: 'POST',
+      method: 'POST',)
       body: JSON.stringify({ id: uuidv4();
         email,
         password: hashedPassword;
@@ -131,7 +131,7 @@ const user = await this.request<any>();</any>
   // Projects
   async createProject(data: Omit<Project 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> {
 { await this.request<any>(this.getTableEndpoint('projects', {</any>
-      method: 'POST',
+      method: 'POST',)
       body: JSON.stringify({ id: uuidv4(),
         user_id: data.userId,
         name: data.name,
@@ -173,7 +173,7 @@ const project = await this.request<any>();</any>
     await this.request(`${this.getTableEndpoint('projects')}/${id}`, { method: 'DELETE'   
     })
   }
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project>> {</PaginatedResponse>
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {</PaginatedResponse>
 { new URLSearchParams(, // Filtering, params.append('where', `(user_id,eq,${userId})`);
     // Sorting;
 if (options?.orderBy) {
@@ -199,11 +199,11 @@ const page = Math.floor((options?.offset || 0) / (options?.limit || 25)) + 1;
 const pageSize = options?.limit || 25;
     return { data: response.list.map(this.mapNocoDBProject, total: response.pageInfo.totalRows;
       page,
-      pageSize,
+      pageSize)
       hasMore: !response.pageInfo.isLastPage
   }
 }
-  // Generic CRUD
+  // Generic CRUD)
   async create<T>(collection: string, data: any): Promise<T> {
     // Add metadata fields
         const createData={;
@@ -212,7 +212,7 @@ const pageSize = options?.limit || 25;
 };
 
 const result = await this.request<any>(this.getTableEndpoint(collection, {</any>
-      method: 'POST',
+      method: 'POST',)
       body: JSON.stringify(createData)
     });
     return this.mapNocoDBRecord(result) as T
@@ -246,7 +246,7 @@ const result = await this.request<any>();</any>
     await this.request(`${this.getTableEndpoint(collection)}/${id}`, { method: 'DELETE'   
     })
   }
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T>> {</PaginatedResponse>
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {</PaginatedResponse>
 { new URLSearchParams(, // Filters, if (options?.filters) {;
       const whereConditions = Object.entries(options.filters);
         .map(([key, value]) => `(${key},eq,${value})`);
@@ -294,19 +294,19 @@ collection: string;
     
         return () => {};
   // File storage;
-  async uploadFile(bucket: string, path: string;
+  async uploadFile(bucket: string, path: string;)
   file: File): Promise<string> {
 { new FormData(, formData.append('file', file), formData.append('path', path);
     
 const response = await fetch('/api/admin/auth', { method: 'POST',
-      headers: { 'xc-token': this.apiToken },
+      headers: { 'xc-token': this.apiToken })
       body: formData
-   
+   )
     });
     if (!response.ok) {
       const error = await response.json(, throw new BackendError(, error.msg || 'Upload failed';
-        'UPLOAD_ERROR',
-        response.status
+        'UPLOAD_ERROR')
+        response.status)
       )
     }
     const data = await response.json();
@@ -358,7 +358,7 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
   // Internal method for query builder
   async executeQuery<T>(</T>:
 collection: string;
-    params: URLSearchParams
+    params: URLSearchParams)
   ): Promise<{ list: T[], pageInfo: any }> {
     const response = await this.request<{ list: [] as any[],
       pageInfo: any
@@ -370,14 +370,14 @@ collection: string;
 // NocoDB Query Builder implementation;
 class NocoDBQueryBuilder<T> implements QueryBuilder<T> {</T>
   private params: URLSearchParams, private whereConditions: string[] = [], constructor(private adapter: NocoDBAdapter;
-    private collection: string
+    private collection: string)
   ) {
     this.params = new URLSearchParams()
 }
   select(fields: string[]): QueryBuilder<T> {</T>
     this.params.append('fields', fields.join(',');
         return this};
-  where(field: string, operator: string;
+  where(field: string, operator: string;)
   value: any): QueryBuilder<T> {</T>
     const operatorMap: Record<string string>  = {</string>
       '=': 'eq',

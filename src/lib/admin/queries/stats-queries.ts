@@ -20,7 +20,7 @@ export class StatsQueries {
         apiCallsThisWeek,
         apiCallsThisMonth,
         recentActivity
-      ] = await Promise.all([
+      ] = await Promise.all([)
         this.getTotalUsers(),
         this.getActiveUsers(),
         this.getNewUsersToday(),
@@ -166,9 +166,7 @@ export class StatsQueries {
 
   private static async getRecentActivity(): Promise<Array<{
     type: string;
-    message: string;
-    timestamp: string;
-  }>> {
+    message: string;>timestamp: string;>}> {
     const { data: recentActivityData } = await supabase
       .from('activity_logs')
       .select('*')

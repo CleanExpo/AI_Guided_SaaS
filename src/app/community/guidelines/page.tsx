@@ -32,14 +32,14 @@ export default function CommunityGuidelinesPage() {
         </div>
 
         <div className="space-y-8">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+          <Card className="glass">
+            <CardHeader className="glass">
+              <CardTitle className="flex items-center gap-2 glass">
                 <Heart className="h-5 w-5 text-red-500" />
                 Our Community Values
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
+            <CardContent className="glass">
               <p className="text-gray-600 mb-4">
                 AI Guided SaaS is built on the principles of collaboration, innovation, and mutual respect.
                 Our community guidelines ensure everyone can participate in a safe and productive environment.
@@ -53,14 +53,14 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
           
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+          <Card className="glass">
+            <CardHeader className="glass">
+              <CardTitle className="flex items-center gap-2 glass">
                 <Shield className="h-5 w-5 text-blue-500" />
                 Code of Conduct
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
+            <CardContent className="glass">
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">✅ Encouraged Behavior</h3>
@@ -86,14 +86,14 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+          <Card className="glass">
+              <CardHeader className="glass">
+                <CardTitle className="flex items-center gap-2 glass">
                 <Users className="h-5 w-5 text-green-500" />
                 How to Participate
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
+            <CardContent className="glass">
               <div className="glass grid gap-6 md:grid-cols-2">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Asking Questions</h3>
@@ -117,14 +117,14 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+          <Card className="glass">
+              <CardHeader className="glass">
+                <CardTitle className="flex items-center gap-2 glass">
                 <AlertTriangle className="h-5 w-5 text-yellow-500" />
                 Reporting Issues
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
+            <CardContent className="glass">
               <p className="text-gray-600 mb-4">
                 If you encounter behavior that violates our community guidelines, please report it to our moderation team.
               </p>
@@ -139,8 +139,8 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="pt-6" className="glass
+          <Card className="glass">
+            <CardContent className="pt-6 glass">
               <p className="text-center text-gray-600 text-sm">
                 These guidelines are subject to change as our community grows.
                 Last updated: January 2025

@@ -14,8 +14,8 @@ export class MessageQueueManager {
       this.queues.set(agentId, {
         agent_id: agentId,
         queue: [],
-        processing: false,
-        max_size: maxSize,
+        processing: false)
+        max_size: maxSize,)
         last_processed: new Date()
       });
     }
@@ -92,7 +92,7 @@ export class MessageQueueManager {
     const now = new Date();
     
     for (const queue of this.queues.values()) {
-      queue.queue = queue.queue.filter(message => {
+      queue.queue = queue.queue.filter(message => {)
         if (message.expires_at && message.expires_at <= now) {
           logger.debug(`Removing expired message ${message.id} from queue ${queue.agent_id}`);
           return false;

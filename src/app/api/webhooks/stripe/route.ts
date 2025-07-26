@@ -3,14 +3,14 @@ import { headers } from 'next/headers';
 import Stripe from 'stripe';
 import { logger } from '@/lib/logger';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: '2023-08-16'
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: '2023-08-16')
     });
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.text();
     const signature = headers().get('stripe-signature');
     if (!signature) {
-      return NextResponse.json({ error: 'Missing stripe signature' }, { status: 400   
+      return NextResponse.json({ error: 'Missing stripe signature' }, { status: 400   )
     })
 }
     // Simulate webhook event processing
@@ -33,11 +33,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         break;
       default:
         }
-    return NextResponse.json({ received: true   
+    return NextResponse.json({ received: true   )
     })
 } catch (error) {
     logger.error('Stripe webhook error:', error);
-        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   )
     })
 }
 }

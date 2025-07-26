@@ -28,44 +28,35 @@ export function OverviewTab({
   metrics, 
   dashboardData, 
   userTrendData, 
-  funnelData, 
-  revenueByPlan 
+  funnelData)
+  revenueByPlan )
 }: OverviewTabProps) {
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       {/* Key Metrics */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
         <MetricCard
           icon={Users}
           iconColor="text-blue-600"
           title="Total Users"
-          value="24,567"
-          trend={{ value: 12, isPositive: true }}
-        />
+          value="24,567">trend={{ value: 12, isPositive: true }} />>
         
         <MetricCard
           icon={DollarSign}
           iconColor="text-green-600"
           title="MRR"
-          value="$45,678"
-          trend={{ value: 23, isPositive: true }}
-        />
+          value="$45,678">trend={{ value: 23, isPositive: true }} />>
         
         <MetricCard
           icon={ShoppingCart}
           iconColor="text-purple-600"
           title="Conversion Rate"
-          value="3.4%"
-          trend={{ value: 8, isPositive: true }}
-        />
+          value="3.4%">trend={{ value: 8, isPositive: true }} />>
         
         <MetricCard
           icon={Clock}
           iconColor="text-orange-600"
           title="Avg Session"
-          value="4m 32s"
-          trend={{ value: 5, isPositive: false }}
-        />
+          value="4m 32s">trend={{ value: 5, isPositive: false }} />>
       </div>
 
       {/* Trends Chart */}
@@ -85,23 +76,17 @@ export function OverviewTab({
                 type="monotone" 
                 dataKey="users" 
                 stroke="#3b82f6" 
-                strokeWidth={2}
-                name="Users"
-              />
+                strokeWidth={2}>name="Users" />>
               <Line 
                 type="monotone" 
                 dataKey="revenue" 
                 stroke="#10b981" 
-                strokeWidth={2}
-                name="Revenue"
-              />
+                strokeWidth={2}>name="Revenue" />>
               <Line 
                 type="monotone" 
                 dataKey="conversions" 
                 stroke="#8b5cf6" 
-                strokeWidth={2}
-                name="Conversions"
-              />
+                strokeWidth={2}>name="Conversions" />>
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -122,9 +107,7 @@ export function OverviewTab({
                   cy="50%"
                   innerRadius={60}
                   outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
+                  paddingAngle={5}>dataKey="value">>)
                   {funnelData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
@@ -149,9 +132,7 @@ export function OverviewTab({
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  dataKey="value"
-                  label
-                >
+                  dataKey="value">label>
                   {revenueByPlan.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}

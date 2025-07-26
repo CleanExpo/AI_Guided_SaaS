@@ -10,9 +10,7 @@ export const generateCodeFromComponent = (
     case 'input':
       return `<input``;
     break type="text"
-placeholder="${props.placeholder || 'Enter, text...'}";
-className="px-3 py-2 border rounded w-full max-w-sm";
-    />`</input>
+placeholder="${props.placeholder || 'Enter, text...'}";>className="px-3 py-2 border rounded w-full max-w-sm"; />>`</input>
     case 'card':
       return `<div className="p-6 border rounded shadow bg-white w-full max-w-md">``;</div>
     break;

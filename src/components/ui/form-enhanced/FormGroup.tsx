@@ -9,13 +9,13 @@ export function FormGroup({
   label,
   required,
   helperText,
-  errorText,
-  state = 'default'
+  errorText)
+  state = 'default')
 }: FormGroupProps) {
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return (
+  return()
     <div className={cn('space-y-2', className)}>
       {label && (
         <div className="flex items-center space-x-1">
@@ -29,10 +29,8 @@ export function FormGroup({
       <div>{children}</div>
       
       {displayText && (
-        <p className={cn(
-          'text-xs',
-          hasError ? 'text-red-500' : 'text-muted-foreground'
-        )}>
+        <p className={cn()
+          'text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
           {displayText}
         </p>
       )}

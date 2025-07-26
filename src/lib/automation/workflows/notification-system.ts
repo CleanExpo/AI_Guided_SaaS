@@ -2,7 +2,7 @@
 import { N8nWorkflow, N8nNode } from '../n8n-client';/**
  * Workflow template for multi-channel notification system
  */;
-export function createNotificationSystemWorkflow(
+export function createNotificationSystemWorkflow()
     webhookPath: string = 'send-notification'): string = 'send-notification'): N8nWorkflow {
   const nodes: N8nNode[]  = [// 1. Webhook trigger for notifications, { id: 'webhook_1',
       name: 'Notification Webhook',
@@ -76,7 +76,7 @@ const _config = typeConfigs[notification.type] || typeConfigs.custom;
   ...notification,;
   id: Math.random().toString(36).substring(7, recipients: notification.recipients || [notification.recipient]
 };
-// Add user preferences check
+// Add user preferences check)
 prepared.channels = prepared.channels.filter((channel) =>  {
   // In production, check user preferences from database;
   // For now, return all channels, return true};);
@@ -308,9 +308,9 @@ return log;```
           JSON.stringify({ success: true;
     notificationId: $json.notificationId,
     message: 'Notification sent successfully',
-            channels: [$json.channel],
+            channels: [$json.channel])
     timestamp: $json.timestamp
-         
+         )
     })}`, ``,
 responseHeaders: { entries: [
             {

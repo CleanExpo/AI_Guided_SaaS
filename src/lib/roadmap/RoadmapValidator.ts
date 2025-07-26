@@ -82,20 +82,20 @@ break
 default: return 7}}
   private generateCompletionCriteria(phase: RoadmapPhase): CompletionCriterion[] {
     const criteria: CompletionCriterion[] = [], // Feature completion criteria, phase.tasks.forEach((task, index) =>  { criteria.push({;
-        id: `${phase.id };_feature_${index}`,
+        id: `${phase.id }_feature_${index}`,
 description: task, type: 'feature',
     validation: { method: 'automated', script: `validate_feature_${phase.id }_${index}`
-        },
+        })
         status: 'pending'
-     
+     )
     })}
     // Test criteria based on phase type
     if (phase.name.toLowerCase() {.}includes('development')) {
       criteria.push({ id: `${phase.id}_test_coverage`,
 description: 'Unit test coverage > 80%',
         type: 'test',
-    validation: { method: 'automated', threshold: 80 },
-        status: 'pending'   
+    validation: { method: 'automated', threshold: 80 })
+        status: 'pending'   )
     })
 }
     // Performance criteria for certain phases
@@ -103,17 +103,17 @@ description: 'Unit test coverage > 80%',
       criteria.push({ id: `${phase.id}_performance`,
 description: 'API response time < 200ms',
         type: 'performance',
-    validation: { method: 'automated', threshold: 200 },
-        status: 'pending'   
+    validation: { method: 'automated', threshold: 200 })
+        status: 'pending'   )
     })
 }
     // Documentation criteria
     criteria.push({ id: `${phase.id}_documentation`,
 description: 'Technical documentation complete',
       type: 'documentation',
-    validation: { method: 'manual' },
+    validation: { method: 'manual' })
       status: 'pending'
-   
+   )
     });
     return criteria
 }
@@ -200,7 +200,7 @@ if (blockedByIncomplete) { milestone.status = 'blocked'
 }
   private async validateCriterion(criterion: CompletionCriterion): Promise { switch (criterion.validation.method) {
       case 'automated':
-      return this.runAutomatedValidation(criterion, break, case 'manual':;
+      return this.runAutomatedValidation(criterion, break, case 'manual':;)
       return this.checkManualValidation(criterion);
     break;
       case 'hybrid':;

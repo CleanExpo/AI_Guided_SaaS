@@ -239,9 +239,8 @@ if (!agent.agent_id || !agent.name || !agent.role) {
 }
   private buildDependencyGraph() { for (const agent of Array.from(this.loadedAgents.values()) {
       if (agent.coordination_protocols?.coordinates_with) {
-        this.agentDependencies.set(
-          agent.agent_id,
-          agent.coordination_protocols.coordinates_with
+        this.agentDependencies.set(agent.agent_id)
+          agent.coordination_protocols.coordinates_with)
         )}
   private async storeInMemory(result: AgentDiscoveryResult): Promise<any> {
     try {
@@ -250,17 +249,17 @@ if (!agent.agent_id || !agent.name || !agent.role) {
           entityType: 'session',
           observations: [
             `Discovered ${result.total_agents} agents`,``,
-  `Core, agents: ${result.core_agents.length}`,``,
+  `Core, agents: ${result.core_agents.length}`,``)
   `Orchestration, agents: ${result.orchestration_agents.length}`,``
             `Specialist, agents: ${result.specialist_agents.length}`,``
-            `Load, errors: ${result.load_errors.length}`,``
+            `Load, errors: ${result.load_errors.length}`,``)
             `Missing critical, agents: ${ result.missing_agents.join(', ') || 'none'}`
           ]
         }])
     } catch (error) {
       handleError(error, {
-        operation: 'reportLoadStatus',
-        module: 'AgentLoader'
+        operation: 'reportLoadStatus')
+        module: 'AgentLoader')
       });
     }
   }

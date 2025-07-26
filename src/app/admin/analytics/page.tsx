@@ -5,43 +5,46 @@ import React, { useState, useEffect } from 'react';
 import { AdminAnalytics } from '@/components/admin/AdminAnalytics';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-interface AdminUser { id: string
-  email: string
-  name: string
-  lastActive: Date
-  role: string
+interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  lastActive: Date;
+  role: string;
 }
 
 export default function AdminAnalyticsPage() {
-  const [users, setUsers] = useState<AdminUser[]>([])
+  const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  useEffect(() =>  {
+  useEffect(() => {
     // Simulate loading analytics data
     setTimeout(() => {
       setUsers([
-        { id: '1',
+        {
+          id: '1',
           email: 'admin@example.com',
           name: 'Admin User',
-          lastActive: new Date(), role: 'admin' 
-}
+          lastActive: new Date(),
+          role: 'admin'
+        }
       ]);
-      setIsLoading(false)
-}, 1000)
-}, []);
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <div className="glass container mx-auto p-6">
           <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
       
       <div className="glass grid gap-6">
-          <AdminAnalytics />
+        <AdminAnalytics />
         
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Active Users</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Active Users</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             {isLoading ? (
               <p>Loading users...</p>
             ) : (
@@ -63,5 +66,5 @@ export default function AdminAnalyticsPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

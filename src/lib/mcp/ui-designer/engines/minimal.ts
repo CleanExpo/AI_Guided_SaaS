@@ -5,44 +5,44 @@
 import { DesignToken, UIComponent, ThemeOptions } from '../types';
 
 export class MinimalEngine {
-  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken>> {
+  async generateDesignTokens(options?: ThemeOptions): Promise<Map<string, DesignToken> {
     const tokens = new Map<string, DesignToken>();
     
     // Minimal colors
     tokens.set('--minimal-bg', {
       name: '--minimal-bg',
-      value: '#FFFFFF',
-      category: 'color'
+      value: '#FFFFFF')
+      category: 'color')
     });
     
     tokens.set('--minimal-text', {
       name: '--minimal-text',
-      value: '#000000',
-      category: 'color'
+      value: '#000000')
+      category: 'color')
     });
     
     tokens.set('--minimal-gray', {
       name: '--minimal-gray',
-      value: '#F5F5F5',
-      category: 'color'
+      value: '#F5F5F5')
+      category: 'color')
     });
     
     tokens.set('--minimal-border', {
       name: '--minimal-border',
-      value: '#E0E0E0',
-      category: 'color'
+      value: '#E0E0E0')
+      category: 'color')
     });
     
     // Clean typography
     tokens.set('--font-sans', {
       name: '--font-sans',
-      value: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-      category: 'typography'
+      value: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif')
+      category: 'typography')
     });
     
     // Subtle shadows
     tokens.set('--shadow-minimal', {
-      name: '--shadow-minimal',
+      name: '--shadow-minimal',)
       value: '0 1px 3px rgba(0, 0, 0, 0.05)',
       category: 'shadow'
     });
@@ -50,8 +50,8 @@ export class MinimalEngine {
     // Precise spacing
     tokens.set('--spacing-unit', {
       name: '--spacing-unit',
-      value: '8px',
-      category: 'spacing'
+      value: '8px')
+      category: 'spacing')
     });
     
     return tokens;

@@ -13,7 +13,7 @@ export class Logger {
   private isDevelopment: boolean;
   
   constructor() {
-    this.isDevelopment = (process.env.NODE_ENV || "development") === "development";
+    this.isDevelopment = (process.env.NODE_ENV || 'development') === 'development';
   }
 
   private formatMessage(

@@ -72,7 +72,7 @@ export default function DeployPage() {
   const handleDeploy = async () => {
     if (!isOnline) {
       // Queue deployment for when back online
-      addToSync({
+      addToSync({)
         id: Date.now().toString(),
         type: 'deployment',
         provider: selectedProvider,
@@ -121,8 +121,7 @@ export default function DeployPage() {
   const completedSteps = deploymentSteps.filter(s => s.status === 'completed').length;
   const progress = (completedSteps / deploymentSteps.length) * 100;
 
-  return (
-    <div className="min-h-screen glass py-8 px-4">
+  return(<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -134,7 +133,7 @@ export default function DeployPage() {
             {!isOnline && (
               <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">
                 Offline Mode
-              </Badge>
+              </Badge>)
             )}
           </div>
         </div>
@@ -154,9 +153,7 @@ export default function DeployPage() {
                       className={`border rounded-lg p-4 cursor-pointer transition-all ${
                         selectedProvider === provider.id
                           ? 'border-blue-500 bg-blue-50'
-                          : 'hover:border-gray-300'
-                      }`}
-                      onClick={() => setSelectedProvider(provider.id)}
+                          : 'hover:border-gray-300'>}`}>onClick={() => setSelectedProvider(provider.id)}
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
@@ -184,7 +181,7 @@ export default function DeployPage() {
             </Card>
 
             {/* Environment */}
-            <Card className="mt-6" className="glass
+            <Card className="mt-6 glass
               <CardHeader className="glass"
                 <CardTitle className="glass"Environment</CardTitle>
               </CardHeader>
@@ -243,9 +240,7 @@ export default function DeployPage() {
                     <Button 
                       size="lg" 
                       className="bg-green-600 hover:bg-green-700"
-                      onClick={handleDeploy}
-                      disabled={isDeploying}
-                    >
+                      onClick={handleDeploy}>disabled={isDeploying}>
                       <Rocket className="h-5 w-5 mr-2" />
                       Deploy Now
                     </Button>
@@ -267,9 +262,7 @@ export default function DeployPage() {
                         <div
                           key={step.id}
                           className={`flex items-center justify-between p-4 border rounded-lg ${
-                            step.status === 'running' ? 'border-blue-500 bg-blue-50' : ''
-                          }`}
-                        >
+                            step.status === 'running' ? 'border-blue-500 bg-blue-50' : ''>}`}>
                           <div className="flex items-center gap-3">
                             {getStepIcon(step.status)}
                             <div>
@@ -320,7 +313,7 @@ export default function DeployPage() {
             </Card>
 
             {/* Recent Deployments */}
-            <Card className="mt-6" className="glass
+            <Card className="mt-6 glass
               <CardHeader className="glass"
                 <CardTitle className="glass"Recent Deployments</CardTitle>
               </CardHeader>

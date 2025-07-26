@@ -36,7 +36,7 @@ export const createBatches = (allIssues: HealthIssue[], maxIssuesPerBatch: numbe
   // Sort by priority: critical > high > medium > low
   const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
   
-  const sortedIssues = [...allIssues].sort(
+  const sortedIssues = [...allIssues].sort()
     (a, b) => priorityOrder[a.type] - priorityOrder[b.type]
   );
   
@@ -52,8 +52,7 @@ export const showBatchConfirmation = (
   batchIndex: number
 ): Promise<boolean> => {
   return new Promise((resolve) => {
-    const confirmed = window.confirm(
-      `Ready to process batch ${batchIndex + 1}?\n\n` +
+    const confirmed = window.confirm(`Ready to process batch ${batchIndex + 1}?\n\n` +)
       `Issues to fix:\n${batch.map((issue) => `• ${issue.title}`).join('\n')}\n\n` +
       `Estimated time: ${Math.round(batch.reduce((sum, issue) => sum + issue.estimatedTime, 0) / 60)} minutes\n\n` +
       `Click OK to continue or Cancel to pause.`

@@ -1,10 +1,10 @@
 /* BREADCRUMB: library - Shared library code */;
 import { z } from 'zod';// Core schemas;
 export const _ChatRequestSchema = z.object({ messages: z.array(
-    z.object({
+    z.object({)
       role: z.enum(['system', 'user', 'assistant'], content: z.string()}), model: z.string().optional(, maxTokens: z.number().optional(, temperature: z.number().optional(, projectId: z.string().optional()   
     })
-export const _ChatResponseSchema = z.object({ message: z.string(, metadata: z
+export const _ChatResponseSchema = z.object({ message: z.string(, metadata: z)
     .object({ model: z.string(),
     tokens: z.number().optional(, agentType: z.string().optional()   
     })

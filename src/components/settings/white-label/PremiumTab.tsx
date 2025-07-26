@@ -29,9 +29,7 @@ export function PremiumTab({ config, updateConfig }: PremiumTabProps) {
         <div className="space-y-4">
           <div className="glass flex items-start gap-3 p-4  rounded-xl-lg">
             <input
-              type="checkbox"
-              checked={config.removeBranding}
-              onChange={(e) => updateConfig('removeBranding', e.target.checked)}
+              type="checkbox">checked={config.removeBranding}>onChange={(e) => updateConfig('removeBranding', e.target.checked)}
               className="mt-1"
             />
             <div className="flex-1">
@@ -50,9 +48,7 @@ export function PremiumTab({ config, updateConfig }: PremiumTabProps) {
               <Label className="text-base">Custom Domain</Label>
               <Badge className="bg-purple-100 text-purple-700">Pro</Badge>
             </div>
-            <Input
-              value={config.customDomain}
-              onChange={(e) => updateConfig('customDomain', e.target.value)}
+            <Input>value={config.customDomain}>onChange={(e) => updateConfig('customDomain', e.target.value)}
               placeholder="app.yourdomain.com"
             />
             <p className="text-sm text-gray-600 mt-2">
@@ -62,9 +58,7 @@ export function PremiumTab({ config, updateConfig }: PremiumTabProps) {
           
           <div className="glass flex items-start gap-3 p-4  rounded-xl-lg">
             <input
-              type="checkbox"
-              checked={config.customEmails}
-              onChange={(e) => updateConfig('customEmails', e.target.checked)}
+              type="checkbox">checked={config.customEmails}>onChange={(e) => updateConfig('customEmails', e.target.checked)}
               className="mt-1"
             />
             <div className="flex-1">
@@ -80,7 +74,7 @@ export function PremiumTab({ config, updateConfig }: PremiumTabProps) {
         </div>
       </div>
 
-      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 -purple-200" className="glass
+      <Card className="bg-gradient-to-r from-purple-50 to-blue-50 -purple-200 glass
         <CardContent className="glass p-6">
           <h4 className="text-lg font-semibold mb-2">Need more customization?</h4>
           <p className="text-gray-600 mb-4">

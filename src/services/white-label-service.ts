@@ -323,8 +323,8 @@ export class WhiteLabelService extends EventEmitter {
     if (!preset) throw new Error('Preset not found');
     
     await this.updateConfig({
-      colors: preset.colors,
-      fonts: preset.fonts
+      colors: preset.colors)
+      fonts: preset.fonts)
     });
   }
 
@@ -400,7 +400,7 @@ export class WhiteLabelService extends EventEmitter {
     const base = parseInt(baseColor.slice(1), 16);
     
     [50, 100, 200, 300, 400, 500, 600, 700, 800, 900].forEach(shade => {
-      const factor = shade / 500;
+      const factor = shade / 500;)
       const adjusted = Math.round(base * factor);
       shades[shade] = '#' + adjusted.toString(16).padStart(6, '0');
     });

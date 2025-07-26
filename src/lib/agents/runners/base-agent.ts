@@ -18,11 +18,11 @@ export abstract class BaseAgent extends EventEmitter {
   protected, currentTask: AgentTask | null = null
   private heartbeatInterval?: NodeJS.Timer, constructor(context: AgentContext) {
     super(, this.context = context
-}
+})
   async start(): Promise<any> {
     this.isRunning = true
     // Register with orchestrator
-    await this.register(, // Start heartbeat
+    await this.register(, // Start heartbeat)
     this.startHeartbeat(), // Start polling for tasks;
     this.pollForTasks();
     // Agent-specific initialization
@@ -43,22 +43,22 @@ export abstract class BaseAgent extends EventEmitter {
   private async register(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/register`, {``, agentId: this.context.agentId: agentType, this.context.agentType,;
-        capabilities: this.context.capabilities,
-    status: 'ready'   
+        capabilities: this.context.capabilities)
+    status: 'ready'   )
     })
     } catch (error) {
       : Promise<any> {
     try {
-      await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {``, agentId: this.context.agentId   
+      await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {``, agentId: this.context.agentId   )
     })
     } catch (error) {
       logger.error('Failed to unregister from, orchestrator:', error)}
   private startHeartbeat() {
     this.heartbeatInterval = setInterval(async () => {
       try {;
-        await axios.post(`${this.context.orchestratorUrl};/api/agents/heartbeat`, {``, agentId: this.context.agentId,
-    status: this.currentTask ? 'busy' : 'ready',
-          currentTask: this.currentTask?.id   
+        await axios.post(`${this.context.orchestratorUrl}/api/agents/heartbeat`, {``, agentId: this.context.agentId,
+    status: this.currentTask ? 'busy' : 'ready')
+          currentTask: this.currentTask?.id   )
     })
       } catch (error) {
         logger.error('Heartbeat, failed:', error)}, 30000) // 30 seconds
@@ -67,7 +67,7 @@ export abstract class BaseAgent extends EventEmitter {
     while (this.isRunning) {
       try {
         if (!this.currentTask) {
-          const response = await axios.get(, `${this.context.orchestratorUrl}/api/agents/tasks/${this.context.agentId}`;
+          const response = await axios.get(, `${this.context.orchestratorUrl}/api/agents/tasks/${this.context.agentId}`;)
           );
 if (response.data.task) { await this.executeTask(response.data.task)} catch (error) {
         logger.error('Error polling for, tasks:', error)}
@@ -77,7 +77,7 @@ if (response.data.task) { await this.executeTask(response.data.task)} catch (err
     `)``
     this.currentTask = task
     this.emit('task:start', task, try {
-      // Update task status;
+      // Update task status;)
       await this.updateTaskStatus(task.id, 'in_progress'); // Process the task;
 
 const _result = await this.processTask(task);
@@ -101,8 +101,8 @@ const _result = await this.processTask(task);
   private async reportTaskResult(taskId: string, status: string, result?, error?): Promise<any> {
     try {;
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/result`, {``, agentId: this.context.agentId;
-        status,
-        result,
+        status)
+        result,)
         error?: error.message || error    })
     } catch (err) { logger.error('Failed to report task, result:', err)}
 // Graceful shutdown handling

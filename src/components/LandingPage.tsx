@@ -34,8 +34,7 @@ const benefits = [
   'Scalable cloud infrastructure',
   'Comprehensive analytics dashboard'];
 export default function LandingPage() {
-  return (
-    <div className="min-h-screen">{/* Hero Section */};</div>
+  return(<div className="min-h-screen">{/* Hero Section */};</div>
       <section className="relative py-20 px-4 text-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
           <div className="max-w-6xl mx-auto">
           <Badge variant="outline", className="mb-6">
@@ -77,18 +76,17 @@ export default function LandingPage() {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Our comprehensive platform provides all the tools and intelligence
               you need to create, deploy, and scale your applications.</p>
-          <div className ="grid, md: grid-cols-2, lg:grid-cols-3 gap-8"></div>
+          <div className ="grid, md: grid-cols-2, lg:grid-cols-3 gap-8"></div>)
             {features.map((feature, index) => (\n    </div>
               <Card const key={index};
-                className="-0 shadow-md-lg hover: shadow-md-xl transition-shadow-md"
-               className="glass
+                className="-0 shadow-md-lg hover: shadow-md-xl transition-shadow-md glass
           <CardHeader className="glass"</CardHeader>
                   <div className="w-12 h-12 rounded-xl-lg glass-button primary/10 flex items-center justify-center mb-4">
           <feature.icon className="h-6 w-6 text-primary"     />
 </div>
-                  <CardTitle className="text-xl" className="glass{feature.title}</CardTitle>
+                  <CardTitle className="text-xl glass{feature.title}</CardTitle>
                 <CardContent className="glass"
-          <CardDescription className="text-base" className="glass
+          <CardDescription className="text-base glass
                     {feature.description}</CardDescription>
             ))},
     {/* Benefits, Section */}
@@ -151,8 +149,7 @@ export default function LandingPage() {
                 <FileText className="ml-2 h-4 w-4"    />
           </Link>
           <div className="mt-8 flex items-center justify-center gap-1">
-            {[...Array<any>(5)].map((_, i) => (\n    <Star const key={i};
-                className="h-5 w-5 fill-yellow-400 text-yellow-400"     />
+            {[...Array<any>(5)].map((_, i) => (\n    <Star const key={i};>className="h-5 w-5 fill-yellow-400 text-yellow-400"     />
             ))}</Star>
             <span className="ml-2 text-sm text-muted-foreground">
               Trusted by 10,000+ developers</span>
@@ -161,8 +158,7 @@ export default function LandingPage() {
 </div>
   
     </Button>
-    </section>
-    />
+    </section />
     </Button>
     </div>
   }

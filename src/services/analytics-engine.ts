@@ -67,46 +67,40 @@ export class AnalyticsEngine extends EventEmitter {
         event = this.eventTracker.trackPageView(eventData.url, eventData.referrer);
         break;
       case 'feature':
-        event = this.eventTracker.trackFeature(
-          eventData.feature, 
+        event = this.eventTracker.trackFeature(eventData.feature, 
           eventData.action, 
-          eventData.value, 
-          eventData.metadata
+          eventData.value)
+          eventData.metadata)
         );
         break;
       case 'conversion':
-        event = this.eventTracker.trackConversion(
-          eventData.goal, 
+        event = this.eventTracker.trackConversion(eventData.goal, 
           eventData.value, 
-          eventData.currency, 
-          eventData.metadata
+          eventData.currency)
+          eventData.metadata)
         );
         break;
       case 'performance':
-        event = this.eventTracker.trackPerformance(
-          eventData.metric, 
+        event = this.eventTracker.trackPerformance(eventData.metric, 
           eventData.value, 
-          eventData.unit, 
-          eventData.metadata
+          eventData.unit)
+          eventData.metadata)
         );
         break;
       case 'error':
-        event = this.eventTracker.trackError(
-          eventData.error, 
-          eventData.severity, 
-          eventData.context
+        event = this.eventTracker.trackError(eventData.error, 
+          eventData.severity)
+          eventData.context)
         );
         break;
       case 'user':
-        event = this.eventTracker.trackUser(
-          eventData.action, 
-          eventData.metadata
+        event = this.eventTracker.trackUser(eventData.action)
+          eventData.metadata)
         );
         break;
       case 'custom':
-        event = this.eventTracker.trackCustom(
-          eventData.name, 
-          eventData.data
+        event = this.eventTracker.trackCustom(eventData.name)
+          eventData.data)
         );
         break;
       default:
@@ -135,11 +129,10 @@ export class AnalyticsEngine extends EventEmitter {
     this.track({ type: 'error', error, severity, context });
   }
 
-  trackPerformance(
-    metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
+  trackPerformance(metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
     value: number,
-    unit: 'ms' | 's' = 'ms',
-    metadata?: Record<string, any>
+    unit: 'ms' | 's' = 'ms')
+    metadata?: Record<string, any>)
   ): void {
     this.track({ type: 'performance', metric, value, unit, metadata });
   }
@@ -148,8 +141,8 @@ export class AnalyticsEngine extends EventEmitter {
     this.eventTracker.setUserId(userId);
     this.track({
       type: 'user',
-      action: 'profile_update',
-      metadata: traits
+      action: 'profile_update')
+      metadata: traits)
     });
   }
 
@@ -181,7 +174,7 @@ export class AnalyticsEngine extends EventEmitter {
     endDate: Date;
     metrics?: string[];
     groupBy?: 'hour' | 'day' | 'week' | 'month';
-    filters?: Record<string, any>;
+    filters?: Record<string, any>;)
   }): Promise<any> {
     // This would query from your analytics database
     // For now, return mock data
@@ -194,10 +187,9 @@ export class AnalyticsEngine extends EventEmitter {
   getDashboardData(): DashboardData {
     const allEvents = this.eventTracker.getQueue();
     const metrics = this.getMetrics();
-    return this.dashboardGenerator.generateDashboardData(
-      allEvents,
-      metrics,
-      this.realtimeEvents
+    return this.dashboardGenerator.generateDashboardData(allEvents,
+      metrics)
+      this.realtimeEvents)
     );
   }
 
@@ -211,8 +203,7 @@ export class AnalyticsEngine extends EventEmitter {
     
     // Clean up old events (older than 5 minutes)
     const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    this.realtimeEvents = this.realtimeEvents.filter(
-      e => e.timestamp >= fiveMinutesAgo
+    this.realtimeEvents = this.realtimeEvents.filter(e => e.timestamp >= fiveMinutesAgo)
     );
   }
 
@@ -261,7 +252,7 @@ export class AnalyticsEngine extends EventEmitter {
 
     // Errors
     window.addEventListener('error', (event) => {
-      this.trackError(
+      this.trackError()
         new Error(event.message),
         'high',
         {
@@ -307,8 +298,8 @@ export function initializeAnalytics(config?: Partial<AnalyticsConfig>): Analytic
       retention: {
         raw: 90,
         aggregated: 365
-      },
-      ...config
+      })
+      ...config)
     });
     analyticsInstance.initialize();
   }

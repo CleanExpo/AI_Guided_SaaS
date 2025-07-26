@@ -135,13 +135,13 @@ const _averageSessionTime = await this.getAverageSessionTime();
 }
       // Get new users in time range;
 
-const newUsers = await DatabaseService.query(`;``
+const newUsers = await DatabaseService.query(`;``)
         SELECT COUNT(*) as count FROM users
         WHERE created_at >= ? AND created_at <= ?
       `, [startDate.toISOString(, endDate.toISOString()]) as unknown as CountResult[]``
       // Get active users (users with activity in last 30 days);
 
-const activeUsers = await DatabaseService.query(`;``
+const activeUsers = await DatabaseService.query(`;``)
         SELECT COUNT(DISTINCT user_id) as count FROM activity_logs
         WHERE created_at >= ?
       `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as CountResult[]``
@@ -166,13 +166,13 @@ const _userGrowth = await this.getUserGrowthData(startDate, endDate);
     if (!this.isConfigured() {)} {
       return this.getMockRevenueMetrics()}
     try {
-      // Get total revenue, const totalRevenue = await DatabaseService.query(`, ``
+      // Get total revenue, const totalRevenue = await DatabaseService.query(`, ``)
         SELECT SUM(amount) as total FROM payments
         WHERE status = 'succeeded'
       `) as unknown as SumResult[]``;
       // Get monthly recurring revenue;
 
-const monthlyRevenue = await DatabaseService.query(`;``
+const monthlyRevenue = await DatabaseService.query(`;``)
         SELECT SUM(amount) as total FROM payments
         WHERE status = 'succeeded'
         AND created_at >= ?
@@ -181,7 +181,7 @@ const monthlyRevenue = await DatabaseService.query(`;``
 
 const _subscriptionBreakdown = await DatabaseService.query(`;``
         // SELECT
-          tier,
+          tier,)
           COUNT(*) as count,
           SUM(CASE WHEN tier = 'pro' THEN 29 WHEN tier = 'enterprise' THEN 99 ELSE 0 END) as revenue
         FROM subscriptions
@@ -209,7 +209,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
     if (!this.isConfigured() {)} {
       return this.getMockSystemMetrics()}
     try {
-      // Get API call count, const apiCalls = await DatabaseService.query(`, ``
+      // Get API call count, const apiCalls = await DatabaseService.query(`, ``)
         SELECT COUNT(*) as count FROM activity_logs
         WHERE action LIKE '%api%'
         AND created_at >= ?
@@ -233,7 +233,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
     try {
       // Get template counts by status, const templateStats = await DatabaseService.query(`, ``
         // SELECT
-          status,
+          status,)
           COUNT(*) as count
         FROM templates
         GROUP BY status
@@ -242,7 +242,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
 
 const _categoryStats = await DatabaseService.query(`;``
         // SELECT
-          category,
+          category,)
           COUNT(*) as count
         FROM templates
         WHERE status = 'approved'
@@ -254,7 +254,7 @@ const _categoryStats = await DatabaseService.query(`;``
 
 const _frameworkStats = await DatabaseService.query(`;``
         // SELECT
-          framework,
+          framework,)
           COUNT(*) as count
         FROM templates
         WHERE status = 'approved'
@@ -300,7 +300,7 @@ const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected
 { await DatabaseService.query(`, ``, SELECT SUM(amount) as total FROM payments WHERE status = 'succeeded';
     `) as unknown as SumResult[]``;
 
-const monthlyResult = await DatabaseService.query(`;``
+const monthlyResult = await DatabaseService.query(`;``)
       SELECT SUM(amount) as total FROM payments
       WHERE status = 'succeeded' AND created_at >= ?
     `, [new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()]) as unknown as SumResult[]``
@@ -309,7 +309,7 @@ const monthlyResult = await DatabaseService.query(`;``
   }
 }
   private static async getConversionRate(): Promise<any> {
-    // Calculate conversion from free to paid users, const _totalUsers  = await this.getTotalUsers(); const paidUsers = await DatabaseService.query(`;``
+    // Calculate conversion from free to paid users, const _totalUsers  = await this.getTotalUsers(); const paidUsers = await DatabaseService.query(`;``)
       SELECT COUNT(DISTINCT user_id) as count FROM subscriptions
       WHERE status = 'active' AND tier != 'free'
     `) as unknown as CountResult[]``;
@@ -326,7 +326,7 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     day7: 62.8,
     day30: 45.1
       } as const }
-  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }>> {</Array>
+  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }> {</Array>
     // Mock implementation - would generate daily user counts, const data = []; const current = new Date(startDate);
     while (current <= endDate) {
       data.push({ date: current.toISOString().split('T')[0],

@@ -3,10 +3,9 @@ import { generateAIResponse } from '@/lib/ai';
 import { architecturePrompts } from './prompts';
 
 export class ComponentDesigner {
-  async designComponents(
-    requirements: any[],
-    userStories: any[],
-    overview: ArchitectureOverview
+  async designComponents(requirements: any[],
+    userStories: any[])
+    overview: ArchitectureOverview)
   ): Promise<Component[]> {
     const prompt = architecturePrompts.components
       .replace('{architectureStyle}', overview.style)
@@ -14,8 +13,8 @@ export class ComponentDesigner {
       .replace('{userStories}', JSON.stringify(userStories, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: 0.4,
-      model: 'gpt-4'
+      temperature: 0.4)
+      model: 'gpt-4')
     });
 
     try {
@@ -27,7 +26,7 @@ export class ComponentDesigner {
   }
 
   private validateComponents(components: any[]): Component[] {
-    return components.map(comp => ({
+    return components.map(comp => ({)
       id: comp.id || `comp-${Date.now()}`,
       name: comp.name || 'Unnamed Component',
       type: comp.type || 'service',
@@ -48,9 +47,9 @@ export class ComponentDesigner {
       tools: []
     };
 
-    components.forEach(component => {
+    components.forEach(component => {)
       const category = this.categorizeTech(component.type);
-      component.technology.forEach(tech => {
+      component.technology.forEach(tech => {)
         if (!techStack[category].includes(tech)) {
           techStack[category].push(tech);
         }

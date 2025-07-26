@@ -5,7 +5,7 @@ import { Code2, ArrowRight } from 'lucide-react';
 
 export function MarketplaceCTA() {
   return (
-    <Card className="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 -purple-200" className="glass
+    <Card className="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 -purple-200 glass
       <CardContent className="glass p-8">
         <div className="flex items-center justify-between">
           <div>

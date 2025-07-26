@@ -69,11 +69,10 @@ export class EventTracker {
     };
   }
 
-  trackPerformance(
-    metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
+  trackPerformance(metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
     value: number,
-    unit: 'ms' | 's' = 'ms',
-    metadata?: Record<string, any>
+    unit: 'ms' | 's' = 'ms')
+    metadata?: Record<string, any>)
   ): PerformanceEvent {
     return {
       ...this.createBaseEvent(),
@@ -85,10 +84,9 @@ export class EventTracker {
     };
   }
 
-  trackError(
-    error: Error | string,
-    severity: 'low' | 'medium' | 'high' | 'critical' = 'medium',
-    context?: Record<string, any>
+  trackError(error: Error | string,
+    severity: 'low' | 'medium' | 'high' | 'critical' = 'medium')
+    context?: Record<string, any>)
   ): ErrorEvent {
     const errorObj = error instanceof Error ? {
       message: error.message,
@@ -107,9 +105,8 @@ export class EventTracker {
     };
   }
 
-  trackUser(
-    action: 'signup' | 'login' | 'logout' | 'profile_update' | 'subscription_change',
-    metadata?: Record<string, any>
+  trackUser(action: 'signup' | 'login' | 'logout' | 'profile_update' | 'subscription_change')
+    metadata?: Record<string, any>)
   ): UserEvent {
     return {
       ...this.createBaseEvent(),

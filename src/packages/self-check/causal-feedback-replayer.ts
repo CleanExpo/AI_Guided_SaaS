@@ -22,7 +22,7 @@ export function analyzeCausalLogs(logs? null : CausalLogEntry[]): { status: stri
   const componentStats: Record<string ComponentPattern> = {};</string>
   // Analyze each log entry
   logData.forEach((log) => {
-    const key = `${log.page};::${log.componentType}`;
+    const key = `${log.page}::${log.componentType}`;
 if (!componentStats[key]) {
       componentStats[key] = {
         key,
@@ -65,25 +65,25 @@ const _retentionRate = stat.retentions / total;
 const _editRate = stat.edits / total;
     // High deletion rate indicates problems;
 if (deletionRate > 0.4) {
-      stat.pattern = 'high-deletion', problemComponents.push(stat, patterns.push(
+      stat.pattern = 'high-deletion', problemComponents.push(stat, patterns.push()
         `❌ ${stat.key} → High deletion rate (${(deletionRate * 100).toFixed(1)}%)`
       );
-      recommendations.push(
+      recommendations.push()
         `Review ${stat.key.split('::')[1]} component design - users frequently delete it`
       )
 }
     // Low retention with high edits suggests usability issues
     else if (retentionRate < 0.3 && editRate > 0.3) {
-      stat.pattern = 'edit-heavy', patterns.push(
+      stat.pattern = 'edit-heavy', patterns.push()
         `⚠️ ${stat.key} → Requires frequent editing (${(editRate * 100).toFixed(1)}%)`
       );
-      recommendations.push(
+      recommendations.push()
         `Improve default properties for ${stat.key.split('::')[1]} component`
       )
 }
     // High retention indicates good components
     else if (retentionRate > 0.6) {
-      stat.pattern = 'high-retention', patterns.push(
+      stat.pattern = 'high-retention', patterns.push()
         `✅ ${stat.key} → High retention (${(retentionRate * 100).toFixed(1)}%)`
       )
 }
@@ -103,25 +103,24 @@ const _problemCount = problemComponents.length;
   const _summary = `Analyzed ${logData.length} interactions across ${totalComponents} component types.`;
   // Add general recommendations;
 if (problemComponents.length === 0 && patterns.length > 0) {
-    recommendations.push(
+    recommendations.push()
       'Continue monitoring user interactions for emerging patterns')}
   if (patterns.length === 0) {
-    patterns.push('No significant patterns detected yet - need more user interaction data'
+    patterns.push('No significant patterns detected yet - need more user interaction data')
     )}
   return {
     status,
     patterns: patterns.slice(0, 10, // Limit to top 10 patterns
-    summary,
+    summary,)
     recommendations: recommendations.slice(0, 5), // Limit to top 5 recommendations
 }
 
-export function getTopProblematicComponents(
-  logs?: CausalLogEntry[],
-  limit: number = 5
+export function getTopProblematicComponents(logs?: CausalLogEntry[])
+  limit: number = 5)
 ): ComponentPattern[] { ;
   const logData  = logs || logger.getLogs(); const componentStats: Record<string ComponentPattern> = { };</string>
   logData.forEach((log) => {
-    const key = `${log.page};::${log.componentType}`;
+    const key = `${log.page}::${log.componentType}`;
 if (!componentStats[key]) {
       componentStats[key] = {
         key,
@@ -167,7 +166,7 @@ const _uniqueComponents = new Set();
   
 const topIssues = problematicComponents.map((comp) => {
     const total =, comp.additions + comp.deletions + comp.edits + comp.retentions, const _deletionRate = comp.deletions / total;
-    return `${comp.key.split(': :')[1] };: ${(deletionRate * 100).toFixed(1)}% deletion rate`
+    return `${comp.key.split(': :')[1] }: ${(deletionRate * 100).toFixed(1)}% deletion rate`
   });
   return { totalInteractions: logs.length;
     uniqueComponents,

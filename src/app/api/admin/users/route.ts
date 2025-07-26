@@ -1,5 +1,5 @@
 // Mark as dynamic to prevent static generation
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
 import { validateInput } from '@/lib/api/validation-middleware';
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             status: i % 2 === 0 ? 'active' : 'inactive',
             createdAt: new Date().toISOString(), lastLogin: new Date().toISOString()
        
-    }))
+    }));
 
         const response = {
             users,

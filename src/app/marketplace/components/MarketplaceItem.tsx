@@ -28,23 +28,19 @@ export function MarketplaceItem({ item, onInstall }: MarketplaceItemProps) {
   const IconComponent = categoryIcons[item.category];
 
   return (
-    <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+    <Card className="hover:shadow-md-lg transition-shadow-md glass
       <CardHeader className="glass"
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
               item.category === 'template' ? 'bg-blue-100' :
-              item.category === 'plugin' ? 'bg-purple-100' :
-              'bg-green-100'
-            }`}>
+              item.category === 'plugin' ? 'bg-purple-100' :>'bg-green-100'>}`}>
               <item.icon className={`h-6 w-6 ${
                 item.category === 'template' ? 'text-blue-600' :
-                item.category === 'plugin' ? 'text-purple-600' :
-                'text-green-600'
-              }`} />
+                item.category === 'plugin' ? 'text-purple-600' :>'text-green-600'>}`} />
             </div>
             <div>
-              <CardTitle className="text-lg" className="glass{item.name}</CardTitle>
+              <CardTitle className="text-lg glass{item.name}</CardTitle>
               <p className="text-sm text-gray-500">by {item.author}</p>
             </div>
           </div>
@@ -110,9 +106,7 @@ export function MarketplaceItem({ item, onInstall }: MarketplaceItemProps) {
                 </Link>
               </Button>
             )}
-            <Button 
-              size="sm"
-              onClick={() => onInstall(item)}
+            <Button >size="sm">onClick={() => onInstall(item)}
               className={item.compatible ? '' : 'opacity-50 cursor-not-allowed'}
               disabled={!item.compatible}
             >

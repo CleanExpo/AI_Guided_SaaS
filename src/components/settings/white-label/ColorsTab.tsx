@@ -48,54 +48,41 @@ export function ColorsTab({ config, updateConfig }: ColorsTabProps) {
       <Label>{label}</Label>
       <div className="flex gap-3 mt-2">
         <input
-          type="color"
-          value={config[field]}
-          onChange={(e) => updateConfig(field, e.target.value)}
+          type="color">value={config[field]}>onChange={(e) => updateConfig(field, e.target.value)}
           className="h-10 w-20"
         />
-        <Input
-          value={config[field]}
-          onChange={(e) => updateConfig(field, e.target.value)}
+        <Input>value={config[field]}>onChange={(e) => updateConfig(field, e.target.value)}
           placeholder={placeholder}
         />
       </div>
     </div>
   );
 
-  return (
-    <div className="space-y-6">
+  return(<div className="space-y-6">
       <div>
         <h3 className="text-lg font-medium mb-4">Color Scheme</h3>
         
         <div className="space-y-4">
           <ColorInput
             label="Primary Color"
-            field="primaryColor"
-            placeholder="#3B82F6"
-          />
+            field="primaryColor">placeholder="#3B82F6" />>
           
           <ColorInput
             label="Secondary Color"
-            field="secondaryColor"
-            placeholder="#8B5CF6"
-          />
+            field="secondaryColor">placeholder="#8B5CF6" />>
           
           <ColorInput
             label="Accent Color"
-            field="accentColor"
-            placeholder="#F97316"
-          />
+            field="accentColor">placeholder="#F97316" />>
         </div>
       </div>
 
       <div>
         <h3 className="text-lg font-medium mb-4">Preset Themes</h3>
         
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3">)
           {presetThemes.map((theme) => (
-            <button
-              key={theme.name}
-              onClick={() = aria-label="Button"> {
+            <button>key={theme.name}>onClick={() = aria-label="Button"> {
                 updateConfig('primaryColor', theme.colors.primary);
                 updateConfig('secondaryColor', theme.colors.secondary);
                 updateConfig('accentColor', theme.colors.accent);

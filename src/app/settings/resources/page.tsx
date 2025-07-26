@@ -74,7 +74,7 @@ export default function ResourcesPage() {
   const [adaptiveMode, setAdaptiveMode] = useState(true);
   const [isMonitoring, setIsMonitoring] = useState(true);
   const [history, setHistory] = useState<number[]>(Array(20).fill(0));
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [recommendations, setRecommendations] = useState<string>("");
 
   const profiles: Record<string, PerformanceProfile> = {
     'high-performance': {
@@ -115,7 +115,7 @@ export default function ResourcesPage() {
       setResources(prev => ({
         ...prev,
         cpu: {
-          ...prev.cpu,
+          ...prev.cpu))
           usage: Math.max(0, Math.min(100, prev.cpu.usage + (Math.random() - 0.5) * 10))
         },
         memory: {
@@ -160,8 +160,7 @@ export default function ResourcesPage() {
   const memoryStatus = getResourceStatus(resources.memory.percentage);
   const diskStatus = getResourceStatus(resources.disk.percentage);
 
-  return (
-    <div className="min-h-screen glass p-8">
+  return(<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -170,7 +169,7 @@ export default function ResourcesPage() {
         </div>
 
         {/* Adaptive Mode Toggle */}
-        <Card className="mb-6" className="glass
+        <Card className="mb-6 glass
           <CardContent className="glass p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -186,9 +185,7 @@ export default function ResourcesPage() {
               </div>
               <div className="glass flex items-center gap-4">
                 <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setIsMonitoring(!isMonitoring)}
+                  variant="outline">size="sm")>onClick={() => setIsMonitoring(!isMonitoring)}
                 >
                   {isMonitoring ? (
                     <>
@@ -203,9 +200,7 @@ export default function ResourcesPage() {
                   )}
                 </Button>
                 <Switch
-                  checked={adaptiveMode}
-                  onCheckedChange={setAdaptiveMode}
-                />
+                  checked={adaptiveMode}>onCheckedChange={setAdaptiveMode} />>
               </div>
             </div>
           </CardContent>
@@ -336,9 +331,9 @@ export default function ResourcesPage() {
 
         <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Performance Profiles */}
-          <Card className="lg:col-span-1" className="glass
+          <Card className="lg:col-span-1 glass
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Gauge className="h-5 w-5" />
                 Performance Profile
               </CardTitle>
@@ -349,9 +344,7 @@ export default function ResourcesPage() {
                   <div
                     key={key}
                     className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                      currentProfile === key ? 'border-blue-500 bg-blue-50' : 'hover:bg-gray-50'
-                    }`}
-                    onClick={() => setCurrentProfile(key)}
+                      currentProfile === key ? 'border-blue-500 bg-blue-50' : 'hover:bg-gray-50'>}`}>onClick={() => setCurrentProfile(key)}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-medium">{profile.name}</span>
@@ -371,9 +364,9 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Real-time Monitor */}
-          <Card className="lg:col-span-2" className="glass
+          <Card className="lg:col-span-2 glass
             <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2" className="glass
+              <CardTitle className="flex items-center gap-2 glass
                 <Activity className="h-5 w-5" />
                 Real-time CPU Usage
               </CardTitle>
@@ -383,9 +376,7 @@ export default function ResourcesPage() {
                 {history.map((value, index) => (
                   <div
                     key={index}
-                    className="flex-1 glass-button primary rounded-lg-t transition-all duration-500"
-                    style={ height: `${value}%` }
-                  />
+                    className="flex-1 glass-button primary rounded-lg-t transition-all duration-500">style={ height: `${value}%` } />>
                 ))}
               </div>
               <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
@@ -413,9 +404,9 @@ export default function ResourcesPage() {
         )}
 
         {/* Resource Settings */}
-        <Card className="mt-6" className="glass
+        <Card className="mt-6 glass
           <CardHeader className="glass"
-            <CardTitle className="flex items-center gap-2" className="glass
+            <CardTitle className="flex items-center gap-2 glass
               <Settings className="h-5 w-5" />
               Resource Thresholds
             </CardTitle>
@@ -428,9 +419,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="50"
                   max="90"
-                  defaultValue="70"
-                  className="w-full mt-2"
-                />
+                  defaultValue="70">className="w-full mt-2" />>
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>50%</span>
                   <span>70%</span>
@@ -444,9 +433,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="50"
                   max="90"
-                  defaultValue="75"
-                  className="w-full mt-2"
-                />
+                  defaultValue="75">className="w-full mt-2" />>
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>50%</span>
                   <span>75%</span>
@@ -460,9 +447,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="70"
                   max="95"
-                  defaultValue="85"
-                  className="w-full mt-2"
-                />
+                  defaultValue="85">className="w-full mt-2" />>
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>70%</span>
                   <span>85%</span>

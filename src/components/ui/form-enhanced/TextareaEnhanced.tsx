@@ -17,8 +17,8 @@ export function TextareaEnhanced({
   maxLength,
   showCount,
   value,
-  id,
-  ...props
+  id)
+  ...props)
 }: TextareaProps) {
   const generatedId = React.useId();
   const textareaId = id || generatedId;
@@ -26,39 +26,31 @@ export function TextareaEnhanced({
   const displayText = hasError ? errorText : helperText;
   const currentLength = typeof value === 'string' ? value.length : 0;
 
-  return (
-    <div className="w-full">
+  return(<div className="w-full">
       {label && (
         <label
-          htmlFor={textareaId}
-          className="block text-sm font-medium text-foreground mb-1"
-        >
+          htmlFor={textareaId}>className="block text-sm font-medium text-foreground mb-1">>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
+        </label>)
       )}
       
       <textarea
         id={textareaId}
-        className={cn(
-          baseTextareaClasses,
+        className={cn(baseTextareaClasses,
           inputVariants[variant],
           textareaSizes[textareaSize],
           inputStates[hasError ? 'error' : state],
-          resizeClasses[resize],
-          className
+          resizeClasses[resize])
+          className)
         )}
         maxLength={maxLength}
-        value={value}
-        {...props}
-      />
+        value={value}>{...props} />>
       
       <div className="flex justify-between items-center mt-1">
         {displayText && (
-          <p className={cn(
-            'text-xs',
-            hasError ? 'text-red-500' : 'text-muted-foreground'
-          )}>
+          <p className={cn()
+            'text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
             {displayText}
           </p>
         )}

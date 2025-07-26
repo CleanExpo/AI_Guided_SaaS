@@ -8,7 +8,7 @@ export default function AdminMainPage() {
   
   useEffect(() =>  {
     // Redirect to admin dashboard;
-    router.push('/admin/dashboard')
+    router.push('/admin/dashboard');
 }, [router]);
   
   return (
@@ -19,5 +19,5 @@ export default function AdminMainPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -86,8 +86,7 @@ export default function WhiteLabelPage() {
     trackFeature('white_label', 'export_config', 'json');
   };
 
-  return (
-    <div className="min-h-screen glass py-8 px-4">
+  return(<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -103,7 +102,7 @@ export default function WhiteLabelPage() {
                 <Badge className="bg-yellow-100 text-yellow-700">
                   <AlertCircle className="h-3 w-3 mr-1" />
                   Unsaved changes
-                </Badge>
+                </Badge>)
               )}
               <Button variant="outline" onClick={handleExport}>
                 <Download className="h-4 w-4 mr-2" />
@@ -114,9 +113,7 @@ export default function WhiteLabelPage() {
                 Reset
               </Button>
               <Button 
-                onClick={handleSave}
-                disabled={isSaving || !hasChanges}
-              >
+                onClick={handleSave}>disabled={isSaving || !hasChanges}>
                 {isSaving ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 ) : (

@@ -26,7 +26,7 @@ export default function GDPRPage() {
         <div className="space-y-8">
           <Card className="glass"
             <CardHeader className="glass"
-          <CardTitle className="flex items-center" className="glass
+          <CardTitle className="flex items-center glass
                 <Shield className="h-6 w-6 mr-2 text-blue-600"   />
                 Data Protection Principles
               </CardTitle>
@@ -48,7 +48,7 @@ export default function GDPRPage() {
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Users className="h-6 w-6 mr-2 text-blue-600" />
                 Your Rights
               </CardTitle>
@@ -70,7 +70,7 @@ export default function GDPRPage() {
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Lock className="h-6 w-6 mr-2 text-blue-600" />
                 Data Security
               </CardTitle>
@@ -91,7 +91,7 @@ export default function GDPRPage() {
 
           <Card className="glass"
             <CardHeader className="glass"
-              <CardTitle className="flex items-center" className="glass
+              <CardTitle className="flex items-center glass
                 <Eye className="h-6 w-6 mr-2 text-blue-600" />
                 Data Processing
               </CardTitle>
