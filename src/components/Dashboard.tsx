@@ -202,7 +202,7 @@ export default function Dashboard() {
             <div className="flex items-center">
               <Link href="/dashboard" className="flex items-center gap-2">
                 <Rocket className="w-6 h-6 text-blue-600" />
-                <span className="text-xl font-bold">AI Platform
+                <span className="text-xl font-bold">AI Platform</span>
               
             </div>
             
@@ -212,22 +212,22 @@ export default function Dashboard() {
               
               <Link href="/deployments" className="text-gray-600 hover:text-gray-900">
                 Deployments
-              
+              </Link>
               <Link href="/analytics" className="text-gray-600 hover:text-gray-900">
                 Analytics
-              
+              </Link>
               <Link href="/settings" className="text-gray-600 hover:text-gray-900">
                 Settings
-              
+              </Link>
             
-
+            </nav>
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="icon">
                 <Search className="w-5 h-5" />
-              
+              </Button>
               <Button variant="ghost" size="icon">
                 <Bell className="w-5 h-5" />
-              
+              </Button>
               <div className="flex items-center gap-2">
                 <div className="text-right">
                   <div className="text-sm font-medium">{session?.user?.name || 'User'}</div>
@@ -235,7 +235,7 @@ export default function Dashboard() {
                 </div>
                 <Button variant="ghost" size="icon" onClick={handleSignOut}>
                   <LogOut className="w-5 h-5" />
-                
+                </Button>
               </div>
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function Dashboard() {
           {/* Welcome Section */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Welcome back!</h1>
-            <p className="text-gray-600 mt-1">Here's what's happening with your projects today.
+            <p className="text-gray-600 mt-1">Here's what's happening with your projects today.</p>
           </div>
 
           {/* Stats Grid */}
@@ -258,12 +258,12 @@ export default function Dashboard() {
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
                     {stat.title}
-                  
+                  </CardTitle>
                   <stat.icon className={cn("w-4 h-4", stat.color)} />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{stat.value}</div>
-                  <p className="text-xs text-gray-600 mt-1">{stat.change}
+                  <p className="text-xs text-gray-600 mt-1">{stat.change}</p>
                 </CardContent>
               </Card>
             ))}
@@ -283,7 +283,7 @@ export default function Dashboard() {
                       <action.icon className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="font-semibold mb-1">{action.title}</h3>
-                    <p className="text-sm text-gray-600">{action.description}
+                    <p className="text-sm text-gray-600">{action.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -297,7 +297,7 @@ export default function Dashboard() {
               <Button onClick={handleCreateProject}>
                 <Plus className="w-4 h-4 mr-2" />
                 New Project
-              
+              </Button>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -305,34 +305,34 @@ export default function Dashboard() {
                 <Card key={project.id}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{project.name}
+                      <CardTitle className="text-lg">{project.name}</CardTitle>
                       <Badge variant={project.status === 'active' ? 'default' : 'secondary'}>
                         {project.status}
-                      
+                      </Badge>
                     </div>
                     <CardDescription>{project.framework}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">Last deploy:
-                        <span className="font-medium">{project.lastDeploy}
+                        <span className="text-gray-600">Last deploy:</span>
+                        <span className="font-medium">{project.lastDeploy}</span>
                       </div>
                       
                       {project.status === 'active' && (
                         <>
                           <div className="space-y-2">
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Users
-                              <span className="font-medium">{project.metrics.users}
+                              <span className="text-gray-600">Users</span>
+                              <span className="font-medium">{project.metrics.users}</span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">API Calls
-                              <span className="font-medium">{project.metrics.apiCalls.toLocaleString()}
+                              <span className="text-gray-600">API Calls</span>
+                              <span className="font-medium">{project.metrics.apiCalls.toLocaleString()}</span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Uptime
-                              <span className="font-medium">{project.metrics.uptime}%
+                              <span className="text-gray-600">Uptime</span>
+                              <span className="font-medium">{project.metrics.uptime}%</span>
                             </div>
                           </div>
                           
@@ -340,11 +340,11 @@ export default function Dashboard() {
                             <Button size="sm" className="flex-1" onClick={() => window.open(project.url, '_blank')}>
                               <Play className="w-4 h-4 mr-2" />
                               View Live
-                            
+                            </Button>
                             <Button size="sm" variant="outline" className="flex-1">
                               <Settings className="w-4 h-4 mr-2" />
                               Settings
-                            
+                            </Button>
                           </div>
                         </>
                       )}
@@ -352,7 +352,7 @@ export default function Dashboard() {
                       {project.status === 'building' && (
                         <div className="space-y-2">
                           <Progress value={45} className="w-full" />
-                          <p className="text-sm text-gray-600 text-center">Building... 45%
+                          <p className="text-sm text-gray-600 text-center">Building... 45%</p>
                         </div>
                       )}
                     </div>
@@ -370,22 +370,22 @@ export default function Dashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-600">CPU Usage
-                      <span className="text-sm font-medium">32%
+                      <span className="text-sm text-gray-600">CPU Usage</span>
+                      <span className="text-sm font-medium">32%</span>
                     </div>
                     <Progress value={32} className="w-full" />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-600">Memory
-                      <span className="text-sm font-medium">2.4GB / 8GB
+                      <span className="text-sm text-gray-600">Memory</span>
+                      <span className="text-sm font-medium">2.4GB / 8GB</span>
                     </div>
                     <Progress value={30} className="w-full" />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-600">Storage
-                      <span className="text-sm font-medium">45GB / 100GB
+                      <span className="text-sm text-gray-600">Storage</span>
+                      <span className="text-sm font-medium">45GB / 100GB</span>
                     </div>
                     <Progress value={45} className="w-full" />
                   </div>
@@ -394,7 +394,7 @@ export default function Dashboard() {
             </Card>
           </div>
         </div>
-      
+      </main>
     </div>
   );
 }

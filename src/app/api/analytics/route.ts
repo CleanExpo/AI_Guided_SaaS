@@ -57,12 +57,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             const { event, properties, timestamp, userId } = data;
             
             // Log the analytics event
-            logger.info('Analytics event tracked', { event,
+            logger.info('Analytics event tracked', {
+                event,
                 properties,
-                timestamp, userId  });
-            
-            // In production, this would send to analytics service
-            // await sendToAnalyticsService({ event, properties, timestamp, userId });
+                timestamp,
+                userId
+            });
             
             return NextResponse.json({
                 success: true,

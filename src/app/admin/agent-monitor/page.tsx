@@ -17,11 +17,11 @@ export default function AgentMonitorPage() {
 
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="overview">Overview
-          <TabsTrigger value="agents">Agents
-          <TabsTrigger value="containers">Containers
-          <TabsTrigger value="metrics">Metrics
-          <TabsTrigger value="alerts">Alerts
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="agents">Agents</TabsTrigger>
+          <TabsTrigger value="containers">Containers</TabsTrigger>
+          <TabsTrigger value="metrics">Metrics</TabsTrigger>
+          <TabsTrigger value="alerts">Alerts</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
@@ -32,7 +32,7 @@ export default function AgentMonitorPage() {
                 <CardDescription>Overall system health</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">Healthy
+                <div className="text-2xl font-bold text-green-600">Healthy</div>
               </CardContent>
             </Card>
             
@@ -74,6 +74,6 @@ export default function AgentMonitorPage() {
           <AlertsPanel />
         
       
-    
+      </Tabs>
   );
 }

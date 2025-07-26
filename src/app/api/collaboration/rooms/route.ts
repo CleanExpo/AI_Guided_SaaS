@@ -62,7 +62,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             }
         ];
         
-        return NextResponse.json({ success: true, rooms    })
+        return NextResponse.json({ success: true, rooms });
     } catch (error) {
         handleError(error, {
             operation: 'getRooms',

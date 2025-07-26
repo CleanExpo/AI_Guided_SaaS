@@ -40,38 +40,38 @@ export default function ApiDocsPage() {
           <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <Code className="w-8 h-8 text-blue-600 mr-3"  />
+            <Code className="w-8 h-8 text-blue-600 mr-3" />
             <h1 className="text-4xl font-bold text-gray-900">API Documentation</h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Complete reference for integrating with the AI Guided SaaS Platform API
           
-        
+        </div>
 
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {apiEndpoints.map((endpoint) => (
             <Card key={endpoint.slug} className="hover:shadow-md-lg transition-shadow-md glass">
               <CardHeader className="glass">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg glass">{endpoint.name}
+                  <CardTitle className="text-lg glass">{endpoint.name}</CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
                     {endpoint.status}
                   
-                
-              
+                </div>
+              </CardHeader>
               <CardContent className="glass">
-                <p className="text-gray-600 mb-4">{endpoint.description}
+                <p className="text-gray-600 mb-4">{endpoint.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">Version {endpoint.version}
+                  <span className="text-sm text-gray-500">Version {endpoint.version}</span>
                   <Link href={`/api-docs/${endpoint.slug}`}>
                     <Button size="sm">
-                      <ExternalLink className="w-4 h-4 mr-2"   />
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       View Docs
                     
-                  
-                
-              
-            
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         
 
@@ -79,16 +79,16 @@ export default function ApiDocsPage() {
           <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
           <div className="space-y-4">
           <p className="text-gray-600">
-              To get started with our API, you'll need to authenticate using your API key.
+            To get started with our API, you'll need to authenticate using your API key.</p>
             
             <div className="glass rounded-xl-lg p-4">
               <code className="text-sm">
-                curl -H "Authorization: Bearer YOUR_API_KEY" https://api.aiguidedsaas.com/v1/
+                curl -H "Authorization: Bearer YOUR_API_KEY" https://api.aiguidedsaas.com/v1/</code>
               
-            
-          
-        
-      
-    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

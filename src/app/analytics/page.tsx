@@ -39,9 +39,9 @@ export default function AnalyticsPage() {
           { date: '2025-01-03', users: 48 }
         ]
       });
-      setIsLoading(false)
-}, 1000)
-}, []);
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   if (isLoading) {
     return (
@@ -59,25 +59,25 @@ export default function AnalyticsPage() {
       <div className="glass grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Total Users
+            <CardTitle className="text-sm font-medium glass">Total Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           
           <CardContent className="glass">
             <div className="text-2xl font-bold">{data?.totalUsers}</div>
-            <p className="text-xs text-muted-foreground">Total registered users
-          
-        
+            <p className="text-xs text-muted-foreground">Total registered users</p>
+          </CardContent>
+        </Card>
         
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Active Users
+            <CardTitle className="text-sm font-medium glass">Active Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           
           <CardContent className="glass">
             <div className="text-2xl font-bold">{data?.activeUsers}</div>
-            <p className="text-xs text-muted-foreground">Active in last 24h
-          
-        
+            <p className="text-xs text-muted-foreground">Active in last 24h</p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
