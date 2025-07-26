@@ -59,6 +59,5 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
         <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
       </div>
     </div>
-    </div>
   );
 }

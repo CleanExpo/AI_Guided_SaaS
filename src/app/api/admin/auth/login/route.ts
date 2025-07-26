@@ -27,8 +27,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Authentication failed' 
             }, { 
-                status: 500)
-            });
+                status: 500 });
         }
     });
 }

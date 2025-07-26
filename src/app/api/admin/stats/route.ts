@@ -17,7 +17,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(stats)
 } catch (error) {
         logger.error('Admin stats error:', error);
-        return NextResponse.json({ error: 'Failed to fetch stats' }, { status: 500   )
-    })
+        return NextResponse.json({ error: 'Failed to fetch stats' }, { status: 500 });
     }
 }

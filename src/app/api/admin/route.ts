@@ -10,8 +10,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(adminStatus)
 } catch (error) {
         logger.error('Admin API error:', error);
-        return NextResponse.json({ error: 'Admin service unavailable' }, { status: 500   )
-    })
+        return NextResponse.json({ error: 'Admin service unavailable' }, { status: 500 });
     }
 }
 
