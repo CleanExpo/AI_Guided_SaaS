@@ -27,6 +27,8 @@
     "test:accessibility": "jest --testPathPattern=accessibility",
     "validate": "npm run typecheck && npm run lint && npm run test",
     "validate:full": "npm run typecheck && npm run lint && npm run test:coverage && npm run test:accessibility",
+    "validate:orchestra": "node mcp/orchestra-agent/orchestra-validator-v2.cjs",
+    "validate:no-bullshit": "npm run validate:orchestra && echo '✅ Anti-bullshit validation passed - production claims are verified!'",
     "deploy:check": "tsx scripts/deploy-production.ts",
     "pre-deploy": "node scripts/vercel-pre-deployment-check.js",
     "deploy:staging": "vercel",

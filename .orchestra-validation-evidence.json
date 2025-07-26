@@ -1,0 +1,61 @@
+{
+  "passed": false,
+  "score": 0,
+  "errors": [
+    "BLOCKING: 30 syntax errors found",
+    "src/components/AgentPulseMonitor.tsx: 5 syntax errors",
+    "src/components/AgentPulseMonitor.tsx(3,8): error TS1259: Module '\"D:/AI Guided SaaS/node_modules/@types/react/index\"' can only be default-imported using the 'esModuleInterop' flag\r",
+    "src/components/AgentPulseMonitor.tsx(4,75): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.\r",
+    "src/components/AgentPulseMonitor.tsx(5,26): error TS2307: Cannot find module '@/components/ui/progress' or its corresponding type declarations.\r",
+    "src/components/AgentPulseMonitor.tsx(6,23): error TS2307: Cannot find module '@/components/ui/badge' or its corresponding type declarations.\r",
+    "src/components/AgentPulseMonitor.tsx(7,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.\r",
+    "src/components/ContainerMonitor.tsx: 5 syntax errors",
+    "src/components/ContainerMonitor.tsx(4,8): error TS1259: Module '\"D:/AI Guided SaaS/node_modules/@types/react/index\"' can only be default-imported using the 'esModuleInterop' flag\r",
+    "src/components/ContainerMonitor.tsx(5,58): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.\r",
+    "src/components/ContainerMonitor.tsx(47,12): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r"
+  ],
+  "warnings": [],
+  "evidence": [
+    {
+      "step": "syntax",
+      "result": {
+        "passed": false,
+        "score": 0,
+        "errors": [
+          "src/components/AgentPulseMonitor.tsx: 5 syntax errors",
+          "src/components/AgentPulseMonitor.tsx(3,8): error TS1259: Module '\"D:/AI Guided SaaS/node_modules/@types/react/index\"' can only be default-imported using the 'esModuleInterop' flag\r",
+          "src/components/AgentPulseMonitor.tsx(4,75): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.\r",
+          "src/components/AgentPulseMonitor.tsx(5,26): error TS2307: Cannot find module '@/components/ui/progress' or its corresponding type declarations.\r",
+          "src/components/AgentPulseMonitor.tsx(6,23): error TS2307: Cannot find module '@/components/ui/badge' or its corresponding type declarations.\r",
+          "src/components/AgentPulseMonitor.tsx(7,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.\r",
+          "src/components/ContainerMonitor.tsx: 5 syntax errors",
+          "src/components/ContainerMonitor.tsx(4,8): error TS1259: Module '\"D:/AI Guided SaaS/node_modules/@types/react/index\"' can only be default-imported using the 'esModuleInterop' flag\r",
+          "src/components/ContainerMonitor.tsx(5,58): error TS2307: Cannot find module '@/components/ui/card' or its corresponding type declarations.\r",
+          "src/components/ContainerMonitor.tsx(47,12): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r",
+          "src/components/ContainerMonitor.tsx(51,5): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r",
+          "src/components/ContainerMonitor.tsx(52,11): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r",
+          "src/components/Dashboard.tsx: 5 syntax errors",
+          "src/components/Dashboard.tsx(212,46): error TS1003: Identifier expected.\r",
+          "src/components/Dashboard.tsx(213,35): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?\r",
+          "src/components/Dashboard.tsx(213,45): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?\r",
+          "src/components/Dashboard.tsx(217,31): error TS1136: Property assignment expected.\r",
+          "src/components/Dashboard.tsx(219,35): error TS1005: ';' expected.\r",
+          "src/components/LandingPageProduction.tsx: 5 syntax errors",
+          "src/components/LandingPageProduction.tsx(275,13): error TS1003: Identifier expected.\r",
+          "src/components/LandingPageProduction.tsx(276,74): error TS1003: Identifier expected.\r",
+          "src/components/LandingPageProduction.tsx(276,76): error TS17002: Expected corresponding JSX closing tag for 'div'.\r",
+          "src/components/LandingPageProduction.tsx(278,15): error TS17002: Expected corresponding JSX closing tag for 'section'.\r",
+          "src/components/LandingPageProduction.tsx(280,15): error TS1003: Identifier expected.\r",
+          "src/components/MCPDesignerIntegration.tsx: 5 syntax errors",
+          "src/components/MCPDesignerIntegration.tsx(3,8): error TS1259: Module '\"D:/AI Guided SaaS/node_modules/@types/react/index\"' can only be default-imported using the 'esModuleInterop' flag\r",
+          "src/components/MCPDesignerIntegration.tsx(4,29): error TS2307: Cannot find module '@/lib/mcp/ui-designer' or its corresponding type declarations.\r",
+          "src/components/MCPDesignerIntegration.tsx(5,24): error TS2307: Cannot find module '@/components/ui/button' or its corresponding type declarations.\r",
+          "src/components/MCPDesignerIntegration.tsx(45,5): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r",
+          "src/components/MCPDesignerIntegration.tsx(47,7): error TS17004: Cannot use JSX unless the '--jsx' flag is provided.\r"
+        ],
+        "warnings": [],
+        "evidence": []
+      }
+    }
+  ]
+}

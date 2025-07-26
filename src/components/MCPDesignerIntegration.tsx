@@ -53,7 +53,9 @@ export const MCPDesignerIntegration: React.FC = () => {
         {/* Theme Selector */}
         <div className="space-y-2 mb-4">
           {themes.map((theme) => (
-            <button>key={theme.id}>onClick={() => setCurrentTheme(theme.id)}
+            <button
+              key={theme.id}
+              onClick={() => setCurrentTheme(theme.id)}
               className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
                 currentTheme === theme.id
                   ? 'glass-button primary'
@@ -68,7 +70,9 @@ export const MCPDesignerIntegration: React.FC = () => {
 
         {/* Customization Toggle */}
         <Button
-          variant="outline">size="sm">onClick={() => setShowCustomizer(!showCustomizer)}
+          variant="outline"
+          size="sm"
+          onClick={() => setShowCustomizer(!showCustomizer)}
           className="w-full mb-2"
         >
           <Settings className="h-4 w-4 mr-2" />
@@ -83,7 +87,9 @@ export const MCPDesignerIntegration: React.FC = () => {
               <input
                 type="range"
                 min="0"
-                max="32">value={customizations.blur}>onChange={(e) => setCustomizations({ ...customizations, blur: Number(e.target.value) })}
+                max="32"
+                value={customizations.blur}
+                onChange={(e) => setCustomizations({ ...customizations, blur: Number(e.target.value) })}
                 className="w-full"
               />
               <span className="text-xs text-gray-500">{customizations.blur}px</span>
@@ -94,7 +100,9 @@ export const MCPDesignerIntegration: React.FC = () => {
               <input
                 type="range"
                 min="0"
-                max="30">value={customizations.opacity * 100}>onChange={(e) => setCustomizations({ ...customizations, opacity: Number(e.target.value) / 100 })}
+                max="30"
+                value={customizations.opacity * 100}
+                onChange={(e) => setCustomizations({ ...customizations, opacity: Number(e.target.value) / 100 })}
                 className="w-full"
               />
               <span className="text-xs text-gray-500">{(customizations.opacity * 100).toFixed(0)}%</span>
@@ -105,7 +113,9 @@ export const MCPDesignerIntegration: React.FC = () => {
               <input
                 type="range"
                 min="0"
-                max="32">value={customizations.borderRadius}>onChange={(e) => setCustomizations({ ...customizations, borderRadius: Number(e.target.value) })}
+                max="32"
+                value={customizations.borderRadius}
+                onChange={(e) => setCustomizations({ ...customizations, borderRadius: Number(e.target.value) })}
                 className="w-full"
               />
               <span className="text-xs text-gray-500">{customizations.borderRadius}px</span>
@@ -113,7 +123,8 @@ export const MCPDesignerIntegration: React.FC = () => {
             
             <Button
               size="sm"
-              onClick={handleCustomization}>className="w-full">>
+              onClick={handleCustomization}
+              className="w-full">
               Apply Changes
             </Button>
           </div>
@@ -122,13 +133,17 @@ export const MCPDesignerIntegration: React.FC = () => {
         {/* Actions */}
         <div className="flex gap-2">
           <Button
-            variant="outline">size="sm">onClick={() => window.location.reload()}
+            variant="outline"
+            size="sm"
+            onClick={() => window.location.reload()}
             className="flex-1"
           >
             <RefreshCw className="h-4 w-4" />
           </Button>
           <Button
-            variant="outline">size="sm">onClick={() => setIsActive(false)}
+            variant="outline"
+            size="sm"
+            onClick={() => setIsActive(false)}
             className="flex-1"
           >
             <Eye className="h-4 w-4" />
@@ -138,7 +153,8 @@ export const MCPDesignerIntegration: React.FC = () => {
 
       {/* Floating Action Button */}
       {!showCustomizer && (
-        <button>onClick={() => setShowCustomizer(true)}
+        <button
+          onClick={() => setShowCustomizer(true)}
           className="glass-button primary rounded-full p-3 shadow-lg hover:scale-110 transition-transform"
         >
           <Palette className="h-6 w-6" />
