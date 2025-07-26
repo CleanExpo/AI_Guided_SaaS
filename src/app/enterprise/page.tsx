@@ -77,8 +77,8 @@ export default function EnterprisePage() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Get the advanced features, security, and support your enterprise needs 
             to build and deploy AI-powered applications at scale.
-          </p>
-        </div>
+          
+        
 
         {/* Features Grid */}
         <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">)
@@ -87,52 +87,52 @@ export default function EnterprisePage() {
               <CardContent className="glass p-6 text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="h-6 w-6 text-blue-600" />
-                </div>
+                
                 <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
-              </CardContent>
-            </Card>
+                <p className="text-gray-600 text-sm">{feature.description}
+              
+            
           ))}
-        </div>
+        
 
         {/* Pricing */}
         <div className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Enterprise Pricing</h2>
-            <p className="text-gray-600">Choose the plan that fits your organization's needs</p>
-          </div>
+            <p className="text-gray-600">Choose the plan that fits your organization's needs
+          
           
           <div className="glass grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {pricingTiers.map((tier) => (
               <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''} className="glass
                 <CardHeader className="glass"
                   <div className="flex items-center justify-between">
-                    <CardTitle className="glass">{tier.name}</CardTitle>
+                    <CardTitle className="glass">{tier.name}
                     {tier.recommended && <Badge>Recommended</Badge>}
-                  </div>
+                  
                   <div className="flex items-baseline">
-                    <span className="text-3xl font-bold">{tier.price}</span>
-                    <span className="text-gray-500 ml-2">{tier.period}</span>
-                  </div>
-                </CardHeader>
+                    <span className="text-3xl font-bold">{tier.price}
+                    <span className="text-gray-500 ml-2">{tier.period}
+                  
+                
                 <CardContent className="glass"
                   <ul className="space-y-3 mb-6">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-center">
                         <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
+                        <span className="text-gray-700">{feature}
+                      
                     ))}
-                  </ul>
+                  
                   <Button 
                     className="w-full" >variant={tier.recommended ? 'default' : 'outline'}>
                     Contact Sales
-                  </Button>
-                </CardContent>
-              </Card>
+                  
+                
+              
             ))}
-          </div>
-        </div>
+          
+        
 
         {/* CTA Section */}
         <Card className="glass-button primary text-white">
@@ -142,18 +142,18 @@ export default function EnterprisePage() {
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
               Join hundreds of enterprises already using AI Guided SaaS to accelerate 
               their development processes and deliver better applications faster.
-            </p>
+            
             <div className="flex justify-center space-x-4">
               <Button variant="secondary" size="lg">
                 Schedule Demo
-              </Button>
+              
               <Button variant="outline" size="lg" className="text-white -white hover:glass hover:text-blue-600">
                 Contact Sales
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+              
+            
+          
+        
+      
+    
   );
 }

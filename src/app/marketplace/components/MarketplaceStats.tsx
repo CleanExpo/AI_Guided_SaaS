@@ -19,49 +19,49 @@ export function MarketplaceStats({ stats }: MarketplaceStatsProps) {
           <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Items</p>
-              <p className="text-2xl font-bold">{stats.totalItems}</p>
+              <p className="text-sm text-gray-600">Total Items
+              <p className="text-2xl font-bold">{stats.totalItems}
             </div>
             <Package className="h-8 w-8 text-gray-300" />
           </div>
-        </CardContent>
-      </Card>
+        
+      
       
       <Card className="glass">
           <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Free Items</p>
-              <p className="text-2xl font-bold">{stats.freeItems}</p>
+              <p className="text-sm text-gray-600">Free Items
+              <p className="text-2xl font-bold">{stats.freeItems}
             </div>
             <DollarSign className="h-8 w-8 text-gray-300" />
           </div>
-        </CardContent>
-      </Card>
+        
+      
       
       <Card className="glass">
           <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Avg Rating</p>
-              <p className="text-2xl font-bold">{stats.averageRating.toFixed(1)}</p>
+              <p className="text-sm text-gray-600">Avg Rating
+              <p className="text-2xl font-bold">{stats.averageRating.toFixed(1)}
             </div>
             <Star className="h-8 w-8 text-yellow-400" />
           </div>
-        </CardContent>
-      </Card>
+        
+      
       
       <Card className="glass">
           <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Downloads</p>
-              <p className="text-2xl font-bold">{stats.totalDownloads}</p>
+              <p className="text-sm text-gray-600">Total Downloads
+              <p className="text-2xl font-bold">{stats.totalDownloads}
             </div>
             <Download className="h-8 w-8 text-gray-300" />
           </div>
-        </CardContent>
-      </Card>
+        
+      
     </div>
   );
 }

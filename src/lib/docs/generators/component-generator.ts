@@ -125,7 +125,7 @@ export class ComponentDocumentationGenerator {
   variant="primary">size="medium">onClick={() => console.log('Clicked!')}
 >
   Click Me
-</Button>`,
+`,
         runnable: true,
         expectedOutput: 'Button rendered with click handler'
       },

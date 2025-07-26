@@ -24,10 +24,10 @@ interface TelemetryStats { totalInferences: number
  };
 export function InferenceSafeMode() {
   const [enabled, setEnabled] = useState<any>(null)
-  const [status, setStatus] = useState<EPCStatus | null>(null);</EPCStatus>
-</TelemetryStats>
+  const [status, setStatus] = useState<EPCStatus | null>(null);
 
-const [stats, setStats]  = useState<TelemetryStats | null>(null);</TelemetryStats>
+
+const [stats, setStats]  = useState<TelemetryStats | null>(null);
 
 const [checking, setChecking] = useState<any>(null)
   
@@ -78,7 +78,7 @@ const _interval = setInterval(fetchStats, 30000);
   
 const _getStatusIcon = (): void => {if (!status) {r}eturn null, switch (status.env_check) {
       case 'pass':
-      </TelemetryStats>
+      
     break, return <CheckCircle2 className="h-5 w-5 text-green-500"     />
 break;
       case 'warning':
@@ -104,23 +104,23 @@ default';
 }
 }
   return (<div className="space-y-4">
-      {/* Main, Control Card */}</div>
+      {/* Main, Control Card */}
       <Card    / className="glass"
           <CardHeader     / className="glass"
           <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
               <Shield className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="glass">Inference Safe Mode</CardTitle>
+          <CardTitle className="glass">Inference Safe Mode
             <Switch
 >checked={enabled} onCheckedChange={setEnabled}>aria-label="Toggle inference safe mode"     />
-          <CardDescription className="glass"</CardDescription>
-            Protect your AI credits by validating environment before inference</Card>
+          <CardDescription className="glass"
+            Protect your AI credits by validating environment before inference
         <CardContent    / className="glass"
           <div className="space-y-4">
-            {/* Status, Display */}</div>
+            {/* Status, Display */}
             <div className="glass flex items-center justify-between p-4  rounded-xl-lg"    />
           <div className="flex items-center gap-3">)
-                {getStatusIcon()}</div>
+                {getStatusIcon()}
                 <div    />
           <p className="font-medium">Environment Status</p>
                   <p className="text-sm text-muted-foreground">
@@ -130,48 +130,48 @@ default';
                   {status?.env_check || 'Unknown'}/>
                 <Button variant="outline";
 size="sm";>onClick={checkEnvironment} disabled={checking/>
-          <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`/>``</RefreshCw>
+          <RefreshCw className={`h-4 w-4 ${checking ? 'animate-spin' : ''}`/>``
             {/* Issues, Display */},
-    {status?.issues && status.issues.length > 0  && (Alert></Alert>
+    {status?.issues && status.issues.length > 0  && (Alert>
                 <AlertTriangle className="h-4 w-4"    />
           <AlertDescription     />
                   <div className="space-y-1"    />
           <p className="font-medium">Environment: Issues,</p>
                     <ul className="list-disc list-inside text-sm">
-                      {status.issues.slice(0, 3).map((issue, i) => (\n    </ul>
-                        <li key={i}>{issue}</li>
+                      {status.issues.slice(0, 3).map((issue, i) => (\n    
+                        <li key={i}>{issue}
                       ))},
     {status.issues.length > 3  && (
-li>...and {status.issues.length - 3} more</li>
+li>...and {status.issues.length - 3} more
       )}
-</ul>
+
             )},
     {/* Self-Healing, Controls */}
             <div className="space-y-3"    />
           <div className="flex items-center justify-between"     />
                 <Label htmlFor="auto-heal", className="flex items-center gap-2"    />
           <Zap className="h-4 w-4"     />
-                  Auto-heal environment issues</Zap>
+                  Auto-heal environment issues
                 <Switch id="auto-heal";>checked={autoHeal} onCheckedChange={setAutoHeal/>
               {status?.issues && status.issues.length > 0  && (Button; onClick={runHealing} disabled={healingInProgress};
                   className="w-full";
 
     const variant={autoHeal ? 'default' : 'outline'}
                 >
-                  {healingInProgress ? (</Button>
-                    <React.Fragment>RefreshCw className="h-4 w-4 mr-2 animate-spin" />Healing in progress...</React></RefreshCw></React>
+                  {healingInProgress ? (
+                    <React.Fragment>RefreshCw className="h-4 w-4 mr-2 animate-spin" />Healing in progress...
                   ) : (
-                    <React.Fragment>Zap className="h-4 w-4 mr-2" /></React>
-                      Run Self-Healing</Zap>
+                    <React.Fragment>Zap className="h-4 w-4 mr-2" />
+                      Run Self-Healing
                   )}
-</Button>
+
               )},
     {/* Statistics, Card */},
-    {stats && (Card></Card>
+    {stats && (Card>
           <CardHeader    / className="glass"
           <div className="flex items-center gap-2"     />
               <Activity className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="text-base glassInference Statistics</CardTitle>
+          <CardTitle className="text-base glassInference Statistics
           <CardContent    / className="glass"
           <div className="glass grid grid-cols-2 gap-4 text-sm"     />
               <div    />
@@ -190,7 +190,7 @@ li>...and {status.issues.length - 3} more</li>
           <p className="text-muted-foreground">Saved Cost</p>
                 <p className="text-xl font-semibold text-green-500">
                   ${((stats.blocked * 0.02) + (stats.failed * 0.01)).toFixed(2)}</p>
-            {stats.totalInferences > 0  && (div className="mt-4 space-y-2"></div>
+            {stats.totalInferences > 0  && (div className="mt-4 space-y-2">
                 <div className="flex justify-between text-sm"    />
           <span>Inference Health</span>
                   <span>{Math.round((stats.successful / stats.totalInferences) * 100)}%</span>
@@ -198,14 +198,14 @@ li>...and {status.issues.length - 3} more</li>
 >const value={(stats.successful / stats.totalInferences) * 100}>className="h-2"   />)}/>
       )},
     {/* Info, Card */
-</div>
+
     
     </React.Fragment>
     </React.Fragment>
-    </CardDescription>
+    
     </any>
     </any>
-    </EPCStatus>
+    
     </any>
   }
       <Card    / className="glass"

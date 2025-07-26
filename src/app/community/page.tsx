@@ -56,7 +56,7 @@ export default function CommunityPage() {
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Share knowledge, get help, and collaborate on amazing projects.
-          </p>
+          
         </div>
         
         {/* Community Stats */}
@@ -74,8 +74,8 @@ export default function CommunityPage() {
                   <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           ))}
         </div>
 
@@ -90,17 +90,17 @@ export default function CommunityPage() {
                 <CardHeader className="glass">
                   <div className="flex items-center justify-between">
 
-                    <CardTitle className="glass">{channel.name}</CardTitle>
+                    <CardTitle className="glass">{channel.name}
                     {channel.isActive && (
                       <Badge variant="secondary" className="bg-green-100 text-green-800">
                         Active
-                      </Badge>
+                      
                     )}
                   </div>
-                </CardHeader>
+                
                 <CardContent className="glass">
 
-                  <p className="text-gray-600 mb-4">{channel.description}</p>
+                  <p className="text-gray-600 mb-4">{channel.description}
                   <div className="flex items-center justify-between">
 
                     <div className="flex items-center text-sm text-gray-500">
@@ -109,10 +109,10 @@ export default function CommunityPage() {
                     </div>
                     <Button size="sm" variant="outline">
                       Join Channel
-                    </Button>
+                    
                   </div>
-                </CardContent>
-              </Card>
+                
+              
             ))}
           </div>
         </div>
@@ -123,39 +123,39 @@ export default function CommunityPage() {
           <Card className="glass">
             <CardHeader className="glass">
 
-              <CardTitle className="glass">Community Guidelines</CardTitle>
-            </CardHeader>
+              <CardTitle className="glass">Community Guidelines
+            
             <CardContent className="glass">
 
               <p className="text-gray-600 mb-4">
                 Learn about our community standards and how to be a great member.
-              </p>
+              
               <Button asChild>
 
                 <Link href="/community/guidelines">
                   Read Guidelines
                   <ExternalLink className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+                
+              
+            
+          
 
           <Card className="glass">
 
             <CardHeader className="glass">
-              <CardTitle className="glass">Report an Issue</CardTitle>
-            </CardHeader>
+              <CardTitle className="glass">Report an Issue
+            
             <CardContent className="glass">
 
               <p className="text-gray-600 mb-4">
                 Found a bug or have concerns? Let us know and we'll help resolve it.
-              </p>
+              
               <Button variant="outline">
                 Report Issue
                 <ExternalLink className="ml-2 h-4 w-4" />
-              </Button>
-            </CardContent>
-          </Card>
+              
+            
+          
         </div>
 
         {/* External Links */}
@@ -169,17 +169,17 @@ export default function CommunityPage() {
             <Button variant="outline" size="sm">
               <Github className="h-4 w-4 mr-2" />
               GitHub
-            </Button>
+            
             <Button variant="outline" size="sm">
 
               <Twitter className="h-4 w-4 mr-2" />
               Twitter
-            </Button>
+            
             <Button variant="outline" size="sm">
 
               <MessageSquare className="h-4 w-4 mr-2" />
               Discord
-            </Button>
+            
           </div>
         </div>
       </div>

@@ -173,13 +173,13 @@ const user = await prisma.user.create({
           <Badge className="bg-green-100 text-green-700 mb-4">
             <Clock className="h-3 w-3 mr-1" />
             MVP in under 5 minutes
-          </Badge>
+          
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Quickstart Guide
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             From zero to production-ready SaaS. No boilerplate fatigue. Just ship.
-          </p>
+          
         </div>
 
         {/* Setup Tabs */}
@@ -188,12 +188,12 @@ const user = await prisma.user.create({
             <TabsTrigger value="instant">
               <Rocket className="h-4 w-4 mr-2" />
               Instant Setup
-            </TabsTrigger>
+            
             <TabsTrigger value="manual">
               <Settings className="h-4 w-4 mr-2" />
               Manual Setup
-            </TabsTrigger>
-          </TabsList>
+            
+          
 
           <TabsContent value="instant" className="mt-8">
             <Card className="glass">
@@ -203,9 +203,9 @@ const user = await prisma.user.create({
                   <Badge variant="outline">
                     <Zap className="h-3 w-3 mr-1" />
                     Fastest Path
-                  </Badge>
-                </CardTitle>
-              </CardHeader>
+                  
+                
+              
               <CardContent className="glass">
             <div className="space-y-6">)
                   {instantSetupSteps.map((step, index) => (
@@ -221,13 +221,13 @@ const user = await prisma.user.create({
                           <Badge variant="secondary" className="text-xs">
                             <Clock className="h-3 w-3 mr-1" />
                             {step.time}
-                          </Badge>
+                          
                         </div>
-                        <p className="text-sm text-gray-600 mb-2">{step.description}</p>
+                        <p className="text-sm text-gray-600 mb-2">{step.description}
                         <div className="glass-navbar rounded-xl-lg p-4 relative group">
                           <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                             <code>{step.code}</code>
-                          </pre>
+                          
                           <Button
                             size="sm"
                             variant="ghost">className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">onClick={() => copyToClipboard(step.code, step.id)}
@@ -237,7 +237,7 @@ const user = await prisma.user.create({
                             ) : (
                               <Copy className="h-4 w-4 text-gray-400" />
                             )}
-                          </Button>
+                          
                         </div>
                       </div>
                     </div>
@@ -251,23 +251,23 @@ const user = await prisma.user.create({
                       <h4 className="font-semibold text-green-900">That\'s it! You\'re ready to ship.</h4>
                       <p className="text-sm text-green-700 mt-1">
                         Your SaaS is now running with auth, payments, AI, and production-ready infrastructure.
-                      </p>
+                      
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+              
+            
+          
 
           <TabsContent value="manual" className="mt-8">
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Manual Configuration</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Manual Configuration
+              
               <CardContent className="glass"
                 <p className="text-gray-600 mb-6">
                   For advanced customization, follow these detailed setup guides:
-                </p>
+                
                 <div className="glass grid md:grid-cols-2 gap-6">
                   {featureSetupGuides.map((guide, index) => (
                     <div key={index} className="glass  rounded-xl-lg p-6">
@@ -277,7 +277,7 @@ const user = await prisma.user.create({
                         </div>
                         <div>
                           <h3 className="font-semibold">{guide.title}</h3>
-                          <p className="text-sm text-gray-600">{guide.description}</p>
+                          <p className="text-sm text-gray-600">{guide.description}
                         </div>
                       </div>
                       <ul className="space-y-2">
@@ -285,16 +285,16 @@ const user = await prisma.user.create({
                           <li key={stepIndex} className="flex items-start gap-2 text-sm">
                             <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <span>{step}</span>
-                          </li>
+                          
                         ))}
-                      </ul>
+                      
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              
+            
+          
+        
 
         {/* Code Examples */}
         <div className="glass grid md:grid-cols-2 gap-6 mb-12">
@@ -303,64 +303,64 @@ const user = await prisma.user.create({
             <CardTitle className="flex items-center gap-2 glass
                 <Bot className="h-5 w-5" />
                 AI Integration
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.ai}</code>
-                </pre>
+                
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center gap-2 glass
                 <Users className="h-5 w-5" />
                 Authentication
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.auth}</code>
-                </pre>
+                
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center gap-2 glass
                 <CreditCard className="h-5 w-5" />
                 Payments
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.payments}</code>
-                </pre>
+                
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center gap-2 glass
                 <Package className="h-5 w-5" />
                 Database
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.database}</code>
-                </pre>
+                
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Next Steps */}
@@ -370,20 +370,20 @@ const user = await prisma.user.create({
               <h2 className="text-2xl font-bold mb-4">Ready to build?</h2>
               <p className="text-gray-700 mb-6">
                 You now have everything you need to ship your SaaS. No more excuses.
-              </p>
+              
               <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="glass-button primary ">
                   <Code2 className="h-5 w-5 mr-2" />
                   View Documentation
-                </Button>
+                
                 <Button size="lg" variant="outline">
                   <GitBranch className="h-5 w-5 mr-2" />
                   Join Discord
-                </Button>
+                
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

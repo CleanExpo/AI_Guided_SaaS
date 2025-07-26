@@ -92,8 +92,8 @@ export function WebVitalsMonitor({
 }
 
 function getRating(name: string,
-  value: number)
-  thresholds: WebVitalsConfig['thresholds'] = defaultThresholds)
+  value: number,
+                thresholds: WebVitalsConfig['thresholds'] = defaultThresholds)
 ): 'good' | 'needs-improvement' | 'poor' {
   const threshold = thresholds[name as keyof typeof thresholds];
   

@@ -20,8 +20,8 @@ export default function GDPRPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">GDPR Compliance</h1>
           <p className="text-lg text-gray-600">
             Your privacy matters to us. Learn how we protect your data and comply with GDPR.
-          </p>
-        </div>
+          
+        
 
         <div className="space-y-8">
           <Card className="glass">
@@ -29,12 +29,12 @@ export default function GDPRPage() {
             <CardTitle className="flex items-center glass
                 <Shield className="h-6 w-6 mr-2 text-blue-600"   />
                 Data Protection Principles
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 We adhere to the six key principles of GDPR:
-              </p>
+              
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
                 <li>Lawfulness, fairness and transparency in processing</li>
                 <li>Purpose limitation - data collected for specific purposes</li>
@@ -42,19 +42,19 @@ export default function GDPRPage() {
                 <li>Accuracy of personal data</li>
                 <li>Storage limitation - data is kept only as long as necessary</li>
                 <li>Integrity and confidentiality through appropriate security measures</li>
-              </ul>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center glass
                 <Users className="h-6 w-6 mr-2 text-blue-600" />
                 Your Rights
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass"
-              <p className="text-gray-600 mb-4">Under GDPR, you have the following rights:</p>
+              <p className="text-gray-600 mb-4">Under GDPR, you have the following rights:
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
           <li>Right to be informed about data processing</li>
                 <li>Right of access to your personal data</li>
@@ -64,42 +64,42 @@ export default function GDPRPage() {
                 <li>Right to data portability</li>
                 <li>Right to object to processing</li>
                 <li>Rights related to automated decision making</li>
-              </ul>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center glass
                 <Lock className="h-6 w-6 mr-2 text-blue-600" />
                 Data Security
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass"
           <p className="text-gray-600 mb-4">
                 We implement appropriate technical and organizational measures to ensure data security:
-              </p>
+              
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
           <li>Encryption of data in transit and at rest</li>
                 <li>Regular security assessments and audits</li>
                 <li>Access controls and authentication</li>
                 <li>Employee training on data protection</li>
                 <li>Incident response procedures</li>
-              </ul>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
             <CardTitle className="flex items-center glass
                 <Eye className="h-6 w-6 mr-2 text-blue-600" />
                 Data Processing
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass"
           <p className="text-gray-600 mb-4">
                 We process personal data only when we have a lawful basis:
-              </p>
+              
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
           <li>Consent - when you give clear consent</li>
                 <li>Contract - when processing is necessary for a contract</li>
@@ -107,9 +107,9 @@ export default function GDPRPage() {
                 <li>Vital interests - to protect life</li>
                 <li>Public task - for public interest tasks</li>
                 <li>Legitimate interests - for our legitimate business interests</li>
-              </ul>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
@@ -117,16 +117,16 @@ export default function GDPRPage() {
               <p className="text-gray-600 mb-4">
                 If you have any questions about our GDPR compliance or wish to exercise your rights, 
                 please contact our Data Protection Officer:
-              </p>
+              
               <p className="text-gray-600">
                 Email: <a href="mailto:dpo@aiguidedsaas.com" className="text-blue-600 hover:underline">
                   dpo@aiguidedsaas.com
-                </a>
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+                
+              
+            
+          
+        
+      
+    
   );
 }

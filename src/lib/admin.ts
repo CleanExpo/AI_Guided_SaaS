@@ -59,7 +59,7 @@ export interface AdminActivity { id: string;
   adminName: string;
   action: string;
   target: string;
-  details: Record<string unknown>,</string>
+  details: Record<string unknown>,
   timestamp: Date;
   ipAddress: string;
   userAgent: string

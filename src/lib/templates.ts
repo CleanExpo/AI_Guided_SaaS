@@ -28,7 +28,7 @@ export interface Template { id: string;
   },
     metadata: { version: string;
     license: string;
-    dependencies: Record<string string>,</string>
+    dependencies: Record<string string>,
     requirements: string[]
   };
   revenue? null : { totalEarnings: number;

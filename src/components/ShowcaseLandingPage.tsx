@@ -125,11 +125,11 @@ export default function ShowcaseLandingPage() {
                 <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}>
                   <Icon className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className="text-white glass">{persona.name}</CardTitle>
+                <CardTitle className="text-white glass">{persona.name}
                 <CardDescription className="text-white/80 glass">
                   {persona.description}
-                </CardDescription>
-              </CardHeader>
+                
+              
               <CardContent className="glass">
                 <AnimatePresence>
                   {selectedPersona === persona.id && (
@@ -140,18 +140,18 @@ export default function ShowcaseLandingPage() {
                       className="space-y-2">
                       <Badge variant="secondary" className="w-full justify-center">
                         Active Persona
-                      </Badge>
+                      
                       <Button size="sm" className="w-full" asChild>
                         <Link href="/auth/signin">
                           Start with {persona.name}
                           <ArrowRight className="ml-2 h-3 w-3" />
-                        </Link>
-                      </Button>
+                        
+                      
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </CardContent>
-            </Card>
+              
+            
           </motion.div>
         );
       })}
@@ -166,7 +166,7 @@ export default function ShowcaseLandingPage() {
             <Brain className="w-5 h-5 text-blue-400" />
             <CardTitle className="text-white glass">
               Claude Code Integration
-            </CardTitle>
+            
           </div>
           <div className="flex items-center gap-2">
             <Button 
@@ -178,19 +178,19 @@ export default function ShowcaseLandingPage() {
               ) : (
                 <Play className="w-4 h-4" />
               )}
-            </Button>
+            
             <Button
               size="sm"
               variant="ghost">onClick={() => setMemoryUsage(42)}
               className="text-white hover:bg-white/10">
               <RefreshCw className="w-4 h-4" />
-            </Button>
+            
           </div>
         </div>
         <CardDescription className="text-white/80 glass">
           Live AI-powered development with intelligent memory optimization
-        </CardDescription>
-      </CardHeader>
+        
+      
       <CardContent className="space-y-4 glass">
         <div className="glass grid grid-cols-2 gap-4">
           <div>
@@ -236,12 +236,12 @@ export default function ShowcaseLandingPage() {
               </div>
               <Badge variant="outline" className="text-xs">
                 {cmd.tokens}
-              </Badge>
+              
             </motion.div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 
   const renderUIBuilder = () => (
@@ -249,12 +249,12 @@ export default function ShowcaseLandingPage() {
       <CardHeader className="glass">
         <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-brand-primary-400" />
-          <CardTitle className="text-white glass">Visual UI Builder</CardTitle>
+          <CardTitle className="text-white glass">Visual UI Builder
         </div>
         <CardDescription className="text-white/80 glass">
           Drag-and-drop interface with real-time preview
-        </CardDescription>
-      </CardHeader>
+        
+      
       <CardContent className="glass">
         <div className="grid grid-cols-3 gap-2 mb-4">
           {['Button', 'Card', 'Input', 'Modal', 'Chart', 'Table'].map((component) => (
@@ -271,11 +271,11 @@ export default function ShowcaseLandingPage() {
         <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center text-center text-white/60">
           <div>
             <Palette className="w-8 h-8 mx-auto mb-2" />
-            <p className="text-sm">Drop components here</p>
+            <p className="text-sm">Drop components here
           </div>
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 
   const renderAnalytics = () => (
@@ -283,12 +283,12 @@ export default function ShowcaseLandingPage() {
       <CardHeader className="glass">
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-green-400" />
-          <CardTitle className="text-white glass">Analytics Dashboard</CardTitle>
+          <CardTitle className="text-white glass">Analytics Dashboard
         </div>
         <CardDescription className="text-white/80 glass">
           Real-time performance monitoring
-        </CardDescription>
-      </CardHeader>
+        
+      
       <CardContent className="glass">
         <div className="glass grid grid-cols-2 gap-4 mb-4">
           <div>
@@ -314,8 +314,8 @@ export default function ShowcaseLandingPage() {
             </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 
   const renderCollaboration = () => (
@@ -323,12 +323,12 @@ export default function ShowcaseLandingPage() {
       <CardHeader className="glass">
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-orange-400" />
-          <CardTitle className="text-white glass">Collaboration Workspace</CardTitle>
+          <CardTitle className="text-white glass">Collaboration Workspace
         </div>
         <CardDescription className="text-white/80 glass">
           Real-time team collaboration
-        </CardDescription>
-      </CardHeader>
+        
+      
       <CardContent className="glass">
         <div className="space-y-3">
           {[
@@ -346,8 +346,8 @@ export default function ShowcaseLandingPage() {
             </div>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 
   const renderDemo = () => {
@@ -376,7 +376,7 @@ export default function ShowcaseLandingPage() {
             <Badge variant="outline" className="mb-6 glass border-white/20 text-white">
               <Sparkles className="w-3 h-3 mr-1" />
               AI-Powered SaaS Platform
-            </Badge>
+            
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-brand-primary-400 to-pink-400 bg-clip-text text-transparent mb-6">
               AI-Guided SaaS Builder
             </h1>
@@ -384,7 +384,7 @@ export default function ShowcaseLandingPage() {
               Experience the future of development with AI personas, intelligent
               code generation, and real-time collaboration - all in one
               sophisticated platform.
-            </p>
+            
           </motion.div>
 
           {/* Persona Selection Showcase */}
@@ -399,7 +399,7 @@ export default function ShowcaseLandingPage() {
             {renderPersonaShowcase()}
           </motion.div>
         </div>
-      </section>
+      
 
       {/* Live Features Demo */}
       <section className="py-20 px-4">
@@ -414,7 +414,7 @@ export default function ShowcaseLandingPage() {
             </h2>
             <p className="text-xl text-white/80">
               See our actual components and features in action
-            </p>
+            
           </motion.div>
 
           <div className="glass grid lg:grid-cols-3 gap-8">
@@ -442,7 +442,7 @@ export default function ShowcaseLandingPage() {
                         </h3>
                         <p className="text-sm text-white/60">
                           {feature.description}
-                        </p>
+                        
                       </div>
                     </div>
                   </motion.button>
@@ -465,7 +465,7 @@ export default function ShowcaseLandingPage() {
             </div>
           </div>
         </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 px-4 text-center">
@@ -479,7 +479,7 @@ export default function ShowcaseLandingPage() {
             </h2>
             <p className="text-xl text-white/80 mb-8">
               Join the next generation of AI-powered development
-            </p>
+            
             <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
@@ -488,8 +488,8 @@ export default function ShowcaseLandingPage() {
                 <Link href="/auth/signin">
                   Start Building Now
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                
+              
               <Button
                 size="lg"
                 variant="outline"
@@ -498,12 +498,12 @@ export default function ShowcaseLandingPage() {
                 <Link href="/ui-builder">
                   Try UI Builder
                   <Wrench className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                
+              
             </div>
           </motion.div>
         </div>
-      </section>
+      
     </div>
   );
 }

@@ -39,7 +39,7 @@ export default function FormBuilderPage() {
           </h1>
           <p className="text-gray-600">
             Create dynamic forms with AI assistance and real-time preview.
-          </p>
+          
         </div>
 
         <div className="glass grid gap-6 lg:grid-cols-3">
@@ -47,8 +47,8 @@ export default function FormBuilderPage() {
           <div>
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Form Elements</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Form Elements
+              
               <CardContent className="glass">
             <div className="space-y-2">
                   {elementTypes.map((element) => (
@@ -56,21 +56,21 @@ export default function FormBuilderPage() {
                       key={element.type}
                       variant="outline">className="w-full justify-start">onClick={() => addElement(element.type)}
                     >
-                      <span className="mr-2">{element.icon}</span>
+                      <span className="mr-2">{element.icon}
                       {element.label}
-                    </Button>
+                    
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
 
           {/* Form Builder */}
           <div>
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Form Builder</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Form Builder
+              
               <CardContent className="glass">
             <div className="space-y-4">
                   {formElements.length === 0 ? (
@@ -81,8 +81,8 @@ export default function FormBuilderPage() {
                     formElements.map((element) => (
                       <div key={element.id} className="p-3  rounded-xl-lg">
                         <div className="flex items-center justify-between mb-2">
-                          <label className="font-medium">{element.label}</label>
-                          <Badge variant="outline">{element.type}</Badge>
+                          <label className="font-medium">{element.label}
+                          <Badge variant="outline">{element.type}
                         </div>
                         {element.type === 'textarea' ? (
                           <textarea 
@@ -94,31 +94,31 @@ export default function FormBuilderPage() {
                     ))
                   )}
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
 
           {/* Settings Panel */}
           <div>
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Form Settings</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Form Settings
+              
               <CardContent className="glass">
             <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-1">Form Title</label>
+                    <label className="block text-sm font-medium mb-1">Form Title
                     <Input placeholder="Contact Form" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Description</label>
+                    <label className="block text-sm font-medium mb-1">Description
                     <textarea 
                       className="w-full p-2  rounded-lg" >placeholder="Form description">rows={3} />
                   </div>
-                  <Button className="w-full">Generate Form Code</Button>
+                  <Button className="w-full">Generate Form Code
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
         </div>
       </div>

@@ -94,21 +94,21 @@ export default function MobileDashboard({ stats = {
             <h1 className="text-xl font-bold">AI SaaS</h1>
             <Badge className="bg-green-100 text-green-700 text-xs">
               Live
-            </Badge>
+            
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-lg-full" />
-            </Button>
+            
             <Button 
               variant="ghost" >size="sm">onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+            
           </div>
         </div>
-      </header>
+      
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
@@ -128,9 +128,9 @@ export default function MobileDashboard({ stats = {
                     <span>{item.label}</span>
                   </div>
                   <ChevronRight className="h-4 w-4 text-gray-400" />
-                </Link>
+                
               ))}
-            </nav>
+            
           </div>
         </div>
       )}
@@ -140,7 +140,7 @@ export default function MobileDashboard({ stats = {
         {/* Welcome Section */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Welcome back!</h2>
-          <p className="text-gray-600 mt-1">Your SaaS is performing great today</p>
+          <p className="text-gray-600 mt-1">Your SaaS is performing great today
         </div>
 
         {/* Quick Actions Grid */}
@@ -154,10 +154,10 @@ export default function MobileDashboard({ stats = {
                     <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center mb-3`}>
                       <action.icon className="h-5 w-5 text-white" />
                     </div>
-                    <p className="font-medium text-sm">{action.label}</p>
-                  </CardContent>
-                </Card>
-              </Link>
+                    <p className="font-medium text-sm">{action.label}
+                  
+                
+              
             ))}
           </div>
         </div>
@@ -175,8 +175,8 @@ export default function MobileDashboard({ stats = {
                         <metric.icon className="h-5 w-5 text-gray-600" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">{metric.label}</p>
-                        <p className="text-xl font-bold">{metric.value}</p>
+                        <p className="text-sm text-gray-600">{metric.label}
+                        <p className="text-xl font-bold">{metric.value}
                       </div>
                     </div>
                     <div className="text-right">
@@ -184,11 +184,11 @@ export default function MobileDashboard({ stats = {
                         variant="secondary" >className={metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}>
                         {metric.trend === 'up' ? <TrendingUp className="h-3 w-3 mr-1" /> : null}
                         {metric.change}
-                      </Badge>
+                      
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                
+              
             ))}
           </div>
         </div>
@@ -199,8 +199,8 @@ export default function MobileDashboard({ stats = {
             <Button className="w-full bg-green-600 hover:bg-green-700 h-12 text-base">
               <Rocket className="h-5 w-5 mr-2" />
               Quick Deploy
-            </Button>
-          </Link>
+            
+          
         </div>
       </div>
     </div>

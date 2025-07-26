@@ -70,8 +70,8 @@ export class ArchitectAgent extends Agent {
       const qualityStandards = this.getSharedMemory('quality-standards') || [];
 
       this.observe('Retrieved inputs from other agents', {
-        requirementCount: requirements.length)
-        constraintCount: constraints.length)
+        requirementCount: requirements.length,
+                constraintCount: constraints.length)
       });
 
       // Step 1: Define architecture overview and style
@@ -94,8 +94,8 @@ export class ArchitectAgent extends Agent {
         requirements)
       );
       this.observe('Designed data model', {
-        entities: dataModel.entities.length)
-        relationships: dataModel.relationships.length)
+        entities: dataModel.entities.length,
+                relationships: dataModel.relationships.length)
       });
 
       // Step 4: Design APIs
@@ -108,8 +108,8 @@ export class ArchitectAgent extends Agent {
         timeline)
       );
       this.observe('Planned infrastructure', {
-        provider: infrastructure.cloudProvider)
-        services: infrastructure.services.length)
+        provider: infrastructure.cloudProvider,
+                services: infrastructure.services.length)
       });
 
       // Step 6: Design security architecture
@@ -200,8 +200,8 @@ export class ArchitectAgent extends Agent {
       .replace('{qualityStandards}', JSON.stringify(qualityStandards, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature)
-      model: 'gpt-4')
+      temperature: this.config.temperature,
+                model: 'gpt-4')
     });
 
     return JSON.parse(response);
@@ -215,16 +215,16 @@ export class ArchitectAgent extends Agent {
       .replace('{dataModel}', JSON.stringify(dataModel, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature)
-      model: 'gpt-4')
+      temperature: this.config.temperature,
+                model: 'gpt-4')
     });
 
     return JSON.parse(response);
   }
 
   private async designSecurity(components: Component[],
-    infrastructure: Infrastructure)
-    apiDesign: APIDesign)
+    infrastructure: Infrastructure,
+                apiDesign: APIDesign)
   ): Promise<SecurityArchitecture> {
     const prompt = architecturePrompts.security
       .replace('{components}', JSON.stringify(components, null, 2))
@@ -239,8 +239,8 @@ export class ArchitectAgent extends Agent {
     return JSON.parse(response);
   }
 
-  private async planIntegrations(input: string)
-    components: Component[])
+  private async planIntegrations(input: string,
+                components: Component[])
   ): Promise<Integration[]> {
     const prompt = `Based on the project requirements and components, identify necessary third-party integrations.
 
@@ -265,8 +265,8 @@ Consider common integrations like:
 Format as JSON array of Integration objects.`;
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature)
-      model: 'gpt-4')
+      temperature: this.config.temperature,
+                model: 'gpt-4')
     });
 
     return JSON.parse(response);
@@ -282,8 +282,8 @@ Format as JSON array of Integration objects.`;
       .replace('{timeline}', JSON.stringify(timeline, null, 2));
 
     const response = await generateAIResponse(prompt, {
-      temperature: this.config.temperature)
-      model: 'gpt-4')
+      temperature: this.config.temperature,
+                model: 'gpt-4')
     });
 
     return JSON.parse(response);
@@ -316,8 +316,8 @@ Format as JSON array of TechnicalDecision objects.`;
     return JSON.parse(response);
   }
 
-  private identifyPatterns(overview: ArchitectureOverview)
-    components: Component[])
+  private identifyPatterns(overview: ArchitectureOverview,
+                components: Component[])
   ): string[] {
     const patterns: string[] = [];
 

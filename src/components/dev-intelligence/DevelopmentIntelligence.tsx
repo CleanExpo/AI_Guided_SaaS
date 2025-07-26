@@ -119,7 +119,7 @@ export function DevelopmentIntelligence() {
     return (
       <div className="glass flex items-center justify-center p-8">
         <RefreshCw className="animate-spin h-8 w-8 text-gray-400" />
-        <span className="ml-2">Analyzing project...</span>
+        <span className="ml-2">Analyzing project...
       </div>
     );
   }
@@ -147,11 +147,11 @@ export function DevelopmentIntelligence() {
           >
             <Zap className={`h-4 w-4 mr-1 ${autoAnalysis ? 'text-green-500' : 'text-gray-400'}`} />
             Auto-Analysis {autoAnalysis ? 'ON' : 'OFF'}
-          </Button>
+          
           <Button onClick={runAnalysis} disabled={loading}>
             <RefreshCw className={`h-4 w-4 mr-1 ${loading ? 'animate-spin' : ''}`} />
             Refresh
-          </Button>
+          
         </div>
       </div>
 
@@ -159,42 +159,42 @@ export function DevelopmentIntelligence() {
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="glass">
           <CardHeader className="pb-2 glass
-            <CardTitle className="text-sm font-medium glassProject Phase</CardTitle>
-          </CardHeader>
+            <CardTitle className="text-sm font-medium glassProject Phase
+          
           <CardContent className="glass"
             <Badge className={`${getPhaseColor(intelligence.phase)} text-white`}>
               {intelligence.phase.toUpperCase()}
-            </Badge>
-          </CardContent>
-        </Card>
+            
+          
+        
 
         <Card className="glass">
           <CardHeader className="pb-2 glass
-            <CardTitle className="text-sm font-medium glassCompletion</CardTitle>
-          </CardHeader>
+            <CardTitle className="text-sm font-medium glassCompletion
+          
           <CardContent className="glass">
             <div className="flex items-center space-x-2">
               <Progress value={intelligence.completionPercentage} className="flex-1" />
-              <span className="text-sm font-medium">{intelligence.completionPercentage}%</span>
+              <span className="text-sm font-medium">{intelligence.completionPercentage}%
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         <Card className="glass">
           <CardHeader className="pb-2 glass
-            <CardTitle className="text-sm font-medium glassProduction Readiness</CardTitle>
-          </CardHeader>
+            <CardTitle className="text-sm font-medium glassProduction Readiness
+          
           <CardContent className="glass">
             <div className={`text-2xl font-bold ${getScoreColor(intelligence.productionReadinessScore)}`}>
               {intelligence.productionReadinessScore}/10
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         <Card className="glass">
           <CardHeader className="pb-2 glass
-            <CardTitle className="text-sm font-medium glassIssues</CardTitle>
-          </CardHeader>
+            <CardTitle className="text-sm font-medium glassIssues
+          
           <CardContent className="glass">
             <div className="flex space-x-4">
               <div className="text-center">
@@ -206,8 +206,8 @@ export function DevelopmentIntelligence() {
                 <div className="text-xs text-gray-500">High Priority</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
 
       {/* Critical Issues Alert */}
@@ -225,11 +225,11 @@ export function DevelopmentIntelligence() {
       {/* Main Content Tabs */}
       <Tabs defaultValue="todos" className="space-y-4">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="todos">Todo List</TabsTrigger>
-          <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
-          <TabsTrigger value="dependencies">Dependencies</TabsTrigger>
-          <TabsTrigger value="production">Production</TabsTrigger>
-        </TabsList>
+          <TabsTrigger value="todos">Todo List
+          <TabsTrigger value="recommendations">Recommendations
+          <TabsTrigger value="dependencies">Dependencies
+          <TabsTrigger value="production">Production
+        
 
         <TabsContent value="todos" className="space-y-4">
           <div className="flex justify-between items-center">
@@ -241,7 +241,7 @@ export function DevelopmentIntelligence() {
                   variant={selectedPriority === priority ? 'default' : 'outline'}>size="sm">onClick={() => setSelectedPriority(priority)}
                 >
                   {priority === 'all' ? 'All' : getPriorityIcon(priority)} {priority}
-                </Button>
+                
               ))}
             </div>
           </div>
@@ -253,9 +253,9 @@ export function DevelopmentIntelligence() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-lg">{getPriorityIcon(todo.priority)}</span>
-                        <span className="font-medium">{todo.task}</span>
-                        <Badge variant="outline">{todo.category}</Badge>
+                        <span className="text-lg">{getPriorityIcon(todo.priority)}
+                        <span className="font-medium">{todo.task}
+                        <Badge variant="outline">{todo.category}
                         {todo.completed && <CheckCircle className="h-4 w-4 text-green-500" />}
                       </div>
                       <p className="text-sm text-gray-600 mb-2">{todo.description}</p>
@@ -264,22 +264,22 @@ export function DevelopmentIntelligence() {
                           <Code className="h-4 w-4 text-gray-400" />
                           <code className="text-xs glass px-2 py-1 rounded-lg">
                             {todo.command}
-                          </code>
+                          
                         </div>
                       )}
                       {todo.estimatedEffort && (
                         <div className="flex items-center gap-2 mt-1">
                           <Clock className="h-4 w-4 text-gray-400" />
-                          <span className="text-xs text-gray-500">{todo.estimatedEffort}</span>
+                          <span className="text-xs text-gray-500">{todo.estimatedEffort}
                         </div>
                       )}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                
+              
             ))}
           </div>
-        </TabsContent>
+        
 
         <TabsContent value="recommendations" className="space-y-4">
           <h3 className="text-lg font-semibold">AI Recommendations</h3>
@@ -291,20 +291,20 @@ export function DevelopmentIntelligence() {
                     <TrendingUp className="h-5 w-5 text-blue-500 mt-0.5" />
                     <p className="text-sm">{rec}</p>
                   </div>
-                </CardContent>
-              </Card>
+                
+              
             ))}
           </div>
-        </TabsContent>
+        
 
         <TabsContent value="dependencies" className="space-y-4">
           <DependencyAnalysis />
-        </TabsContent>
+        
 
         <TabsContent value="production" className="space-y-4">
           <ProductionReadiness score={intelligence.productionReadinessScore} />
-        </TabsContent>
-      </Tabs>
+        
+      
     </div>
   );
 }
@@ -343,8 +343,8 @@ function DependencyAnalysis() {
             <Package className="h-5 w-5 text-gray-500" />
             <p>Dependency analysis will be displayed here</p>
           </div>
-        </CardContent>
-      </Card>
+        
+      
     </div>
   );
 }
@@ -382,8 +382,8 @@ function ProductionReadiness({ score }: { score: number }) {
             <Shield className="h-5 w-5 text-gray-500" />
             <p>Score: {score}/10</p>
           </div>
-        </CardContent>
-      </Card>
+        
+      
     </div>
   );
 }

@@ -127,8 +127,8 @@ export class ContainerManager extends EventEmitter {
     const AgentClass = agent.constructor as new (config: any) => any;
     
     return new AgentClass({
-      ...config)
-      id: newId)
+      ...config,
+                id: newId)
     });
   }
 }

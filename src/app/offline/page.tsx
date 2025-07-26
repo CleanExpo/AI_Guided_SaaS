@@ -33,23 +33,23 @@ export default function OfflinePage() {
           <div className="flex justify-center mb-6">
             <div className="w-20 h-20 bg-orange-100 rounded-lg-full flex items-center justify-center">
               <WifiOff className="h-10 w-10 text-orange-600" />
-            </div>
-          </div>
+            
+          
 
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             You're Offline
           </h1>
           <p className="text-gray-600 mb-8">
             Don't worry! AI Guided SaaS works offline too. You can still access cached pages and your work will sync when you're back online.
-          </p>
+          
 
           <div className="space-y-3 mb-8">
             <Button 
               onClick={handleRetry}>className="w-full bg-orange-500 hover:bg-orange-600">>
               <RefreshCw className="h-4 w-4 mr-2" />
               Try Again
-            </Button>
-          </div>
+            
+          
 
           <div className="-t pt-6">
             <h2 className="text-sm font-semibold text-gray-700 mb-4">
@@ -62,13 +62,13 @@ export default function OfflinePage() {
                   href={page.url}>className="flex items-center justify-between p-3  rounded-xl-lg hover:glass transition-colors">>
                   <div className="flex items-center gap-3">
                     <page.icon className="h-5 w-5 text-gray-600" />
-                    <span className="font-medium">{page.name}</span>
-                  </div>
-                  <span className="text-sm text-gray-500">Cached</span>
-                </a>
+                    <span className="font-medium">{page.name}
+                  
+                  <span className="text-sm text-gray-500">Cached
+                
               ))}
-            </div>
-          </div>
+            
+          
 
           <div className="glass mt-8 p-4 bg-blue-50 rounded-xl-lg">
             <div className="flex items-start gap-3">
@@ -79,12 +79,12 @@ export default function OfflinePage() {
                 </h3>
                 <p className="text-xs text-blue-700 mt-1">
                   This app works offline. Your changes will sync automatically when connection is restored.
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+                
+              
+            
+          
+        
+      
+    
   );
 }

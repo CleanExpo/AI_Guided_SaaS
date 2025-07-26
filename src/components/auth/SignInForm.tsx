@@ -12,7 +12,7 @@ export default function SignInForm() {
   const router = useRouter(); const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading]  = useState(false);
 
-const [error, setError] = useState<string | null>(null);</string>
+const [error, setError] = useState<string | null>(null);
   
 const [formData, setFormData] = useState({ email: '')
 password: ''
@@ -23,8 +23,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(, setIsLoading(true); setError(null);
     try {
       const result = await signIn('credentials', { email: formData.email,
-        password: formData.password)
-redirect: false
+        password: formData.password,
+                redirect: false
      )
     });
       if (result?.error) { setError('Invalid email or password')} else {
@@ -42,34 +42,34 @@ const handleGoogleSignIn = async () =>  {
   return (<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
           <Card className="w-full max-w-md glass
         <CardHeader className="text-center glass
-          <CardTitle className="text-2xl font-bold glassWelcome Back</CardTitle>
-          <CardDescription className="glass"</CardDescription>
-            Sign in to your AI Guided SaaS account</Card>
-</CardHeader>
+          <CardTitle className="text-2xl font-bold glassWelcome Back
+          <CardDescription className="glass"
+            Sign in to your AI Guided SaaS account
+
         <CardContent className="space-y-4 glass
-          {error && (</Card>
+          {error && (
             <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>)
       )}
           <Button variant="outline";
 className="w-full";
->onClick={handleGoogleSignIn} disabled={isGoogleLoading}></Button>
+>onClick={handleGoogleSignIn} disabled={isGoogleLoading}>
             {isGoogleLoading ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin"     />
             ) : (
               <Chrome className="w-4 h-4 mr-2"     />
             )}
             Continue with Google
-</Button>
+
           <div className="relative absolute inset-0 flex items-center"    />
           <span className="w-full -t"     />
-</div>
+
             <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-                Or continue with email</span>
+                Or continue with email
           <form onSubmit={handleSubmit} className="space-y-4" role="form">
           <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Email
               <div className="relative">
           <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input id="email";
@@ -79,9 +79,9 @@ type="email"
                   className="pl-10";
                   required
                 />
-</div>
+
             <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Password
               <div className="relative">
           <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input
@@ -92,24 +92,24 @@ type="password"
                   className="pl-10";
                   required
                 />
-</div>
-            <Button type="submit" className="w-full" disabled={isLoading}></Button>
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="w-4 h-4 mr-2 animate-spin"     />
               ) : null}
               Sign In
-</Button>
+
           <div className="text-center text-sm">
-          <span className="text-gray-600">Don&apos;t have an account? </span>
+          <span className="text-gray-600">Don&apos;t have an account? 
             <Button
 variant="link";
-className="p-0 h-auto font-normal";>const onClick={() => router.push('/auth/signup')}</Button>
+className="p-0 h-auto font-normal";>const onClick={() => router.push('/auth/signup')}
               Sign up
-</Button>
-</CardContent>
-</div>
+
+
+
   );
-</div>
+
     
   }
 

@@ -14,21 +14,21 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
   return (<Card className="glass sticky top-4">
       <CardHeader className="glass"
         <div className="flex items-center justify-between">
-          <CardTitle className="glass">Live Preview</CardTitle>
+          <CardTitle className="glass">Live Preview
           <div className="flex gap-2">
             <Button)
               variant={previewMode === 'desktop' ? 'default' : 'outline'}>size="sm">onClick={() => setPreviewMode('desktop')}
             >
               <Monitor className="h-4 w-4" />
-            </Button>
+            
             <Button
               variant={previewMode === 'mobile' ? 'default' : 'outline'}>size="sm">onClick={() => setPreviewMode('mobile')}
             >
               <Smartphone className="h-4 w-4" />
-            </Button>
+            
           </div>
         </div>
-      </CardHeader>
+      
       <CardContent className="glass">
             <div className={`border rounded-lg overflow-hidden ${>previewMode === 'mobile' ? 'max-w-xs mx-auto' : ''>}`}>
           {/* Preview Header */}
@@ -43,7 +43,7 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
                 <p 
                   className="text-sm opacity-90">style={{ fontFamily: config.bodyFont }}>
                   {config.tagline}
-                </p>
+                
               </div>
               <div className="w-10 h-10 glass/20 rounded-xl-lg" />
             </div>
@@ -62,24 +62,24 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
               <p 
                 className="text-sm text-gray-600">style={{ fontFamily: config.bodyFont }}>
                 {config.description}
-              </p>
+              
             </div>
             
             <div className="flex gap-2">
               <button
                 className="px-4 py-2 text-white rounded-lg text-sm">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}>
                 Primary Button
-              </button>
+              
               <button
                 className="px-4 py-2 text-white rounded-lg text-sm">style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}}>
                 Accent Button
-              </button>
+              
             </div>
             
             {!config.removeBranding && (
               <p className="text-xs text-gray-400 mt-4 text-center">
                 Powered by AI Guided SaaS
-              </p>
+              
             )}
           </div>
         </div>
@@ -87,7 +87,7 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
         {/* Preview Info */}
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">Colors</span>
+            <span className="text-gray-600">Colors
             <div className="flex gap-2">
               <div 
                 className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}} />
@@ -98,17 +98,17 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
             </div>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">Fonts</span>
-            <span className="font-medium">{config.headerFont}</span>
+            <span className="text-gray-600">Fonts
+            <span className="font-medium">{config.headerFont}
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600">Domain</span>
+            <span className="text-gray-600">Domain
             <span className="font-medium">
               {config.customDomain || 'app.aiguidedsaas.com'}
-            </span>
+            
           </div>
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 }

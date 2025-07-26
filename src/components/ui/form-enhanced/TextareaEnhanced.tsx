@@ -31,8 +31,8 @@ export function TextareaEnhanced({
         <label
           htmlFor={textareaId}>className="block text-sm font-medium text-foreground mb-1">>
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>)
+          {required && <span className="text-red-500 ml-1">*}
+        )
       )}
       
       <textarea
@@ -52,15 +52,15 @@ export function TextareaEnhanced({
           <p className={cn()
             'text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
             {displayText}
-          </p>
+          
         )}
         
         {showCount && maxLength && (
           <p className="text-xs text-muted-foreground ml-auto">
             {currentLength}/{maxLength}
-          </p>
+          
         )}
-      </div>
-    </div>
+      
+    
   );
 }

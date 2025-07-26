@@ -36,7 +36,7 @@ export class AgentOrchestrator {
     if (!this.isClient) {r}eturn Promise.resolve({});
     
     return {}
-  async getStatus(): Promise<AgentStatus[]> {;</AgentStatus>
+  async getStatus(): Promise<AgentStatus[]> {;
     if (!this.isClient) {r}eturn Promise.resolve([]);
         return []}
   async shutdown(): Promise<any> {;</any>

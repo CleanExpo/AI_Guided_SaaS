@@ -66,13 +66,13 @@ export function OverviewTab({
           value="4m 32s"
           trend={{ value: 5, isPositive: false }}
         />
-      </div>
+      
 
       {/* Trends Chart */}
       <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Growth Trends</CardTitle>
-        </CardHeader>
+            <CardTitle className="glass">Growth Trends
+        
         <CardContent className="glass">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={userTrendData}>
@@ -102,17 +102,17 @@ export function OverviewTab({
                 strokeWidth={2}
                 name="Conversions"
               />
-            </LineChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+            
+          
+        
+      
 
       <div className="glass grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Conversion Funnel */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Conversion Funnel</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Conversion Funnel
+          
           <CardContent className="glass">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -128,19 +128,19 @@ export function OverviewTab({
                   {funnelData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
-                </Pie>
+                
                 <Tooltip />
                 <Legend />
               </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+            
+          
+        
 
         {/* Revenue by Plan */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Revenue by Plan</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Revenue by Plan
+          
           <CardContent className="glass">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -155,14 +155,14 @@ export function OverviewTab({
                   {revenueByPlan.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
-                </Pie>
+                
                 <Tooltip />
                 <Legend />
               </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+            
+          
+        
+      
+    
   );
 }

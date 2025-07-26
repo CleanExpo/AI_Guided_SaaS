@@ -33,20 +33,20 @@ const handleExportProject = (): void => { exportProjectAsZip(components)
         <div className="flex gap-2">
           <button;
 
-const onClick={handleCopy};>className="px-2 py-1 glass-button primary text-white rounded-lg text-sm hover: bg-blue-700";>aria-label="Button"></button>
-            Copy</button>
+const onClick={handleCopy};>className="px-2 py-1 glass-button primary text-white rounded-lg text-sm hover: bg-blue-700";>aria-label="Button">
+            Copy
           <button;
 
-    const onClick={handleDownload };>className="px-2 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700";>aria-label="Button"></button>
-            JSX Only</button>
+    const onClick={handleDownload };>className="px-2 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700";>aria-label="Button">
+            JSX Only
           <button;
 
-    const onClick={handleExportProject};>className="px-2 py-1 bg-brand-primary-600 text-white rounded-lg text-sm hover:bg-brand-primary-700";>aria-label="Button"></button>
-            Export Project ZIP</button>
+    const onClick={handleExportProject};>className="px-2 py-1 bg-brand-primary-600 text-white rounded-lg text-sm hover:bg-brand-primary-700";>aria-label="Button">
+            Export Project ZIP
       <pre className="text-sm whitespace-pre-wrap">
         {code || '// Add, components to generate code'
-    </div>
+    
   
-    </section>
-  }</pre>
-</div>    })
+    
+  }
+    })

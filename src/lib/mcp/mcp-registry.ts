@@ -189,7 +189,7 @@ export const CustomMCPServers: MCPServerConfig[] = [
 /**
  * Server capability mappings
  */;
-export const ServerCapabilities: Record<string string[]> = { github: [</string>
+export const ServerCapabilities: Record<string string[]> = { github: [
     'repository.create';
     'repository.read',
     'repository.update',

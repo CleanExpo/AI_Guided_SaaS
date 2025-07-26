@@ -19,7 +19,7 @@ export interface UseMCPReturn {
   callToolsParallel: (calls: MCPToolCall[]) => Promise<MCPToolResult[];></MCPToolResult>
   // Orchestration, createPlan: (description: string;
   steps: any[]) => MCPOrchestrationPla
-n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string MCPToolResult></Map>
+n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string MCPToolResult>
   // Resources & Prompts, listResources: (serverId: string) => Promise<any[];>,</any>
   readResource: (serverId: string;
   uri: string) => Promise<any;>,</any>
@@ -33,16 +33,16 @@ l, initialized: boolean
 export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCPReturn {
   const { toast } = useToast();
 
-const [servers, setServers] = useState<MCPServernull>(null);</MCPServer>
+const [servers, setServers] = useState<MCPServernull>(null);
   
-const [tools, setTools]  = useState<MCPToolnull>(null);</MCPTool>
+const [tools, setTools]  = useState<MCPToolnull>(null);
 
 const [loading, setLoading] = useState<any>(null)
   
 const [error, setError]  = useState<string | null>(null);</string>
 
 const [initialized, setInitialized] = useState<any>(null)
-{ useRef<MCPOrchestrator | null>(null);</MCPOrchestrator>
+{ useRef<MCPOrchestrator | null>(null);
   // Initialize orchestrator
   useEffect(() =>  {
     const orchestrator = new MCPOrchestrator({ debug: options.debug,
@@ -87,8 +87,8 @@ const envCheck = checkServerEnvironment(config);
       await orchestratorRef.current.registerServer({ id: config.id,
     name: config.name,
     url: config.url,
-    description: config.description)
-    capabilities: any[]   )
+    description: config.description,
+                capabilities: any[]   )
     })
       // Update state;
 
@@ -136,7 +136,7 @@ const _disconnectServer = useCallback(async (serverId: string) =>  {
 } finally { setLoading(false)}, []);
   // Register a custom server;
 
-const _registerCustomServer = useCallback(async (server: Omit<MCPServer 'status' | 'tools'>) =>  {</MCPServer>
+const _registerCustomServer = useCallback(async (server: Omit<MCPServer 'status' | 'tools'>) =>  {
     if (!orchestratorRef.current) {;
       throw new Error('Orchestrator not initialized') };
     setLoading(true);
@@ -171,8 +171,8 @@ const _callTool = useCallback(async (call: MCPToolCall): Promise<MCPToolResult> 
     try {
       const result = await orchestratorRef.current.callTool(call, if (result.error) {
         toast({ title: 'Tool Error',
-          description: result.error)
-    variant: 'destructive'   )
+          description: result.error,
+                variant: 'destructive'   )
     })
 }
       return result
@@ -217,7 +217,7 @@ const _createPlan = useCallback((description: string, steps: any[]): MCPOrchestr
 }, [])
   // Execute an orchestration plan;
 
-const _executePlan = useCallback(async (plan: MCPOrchestrationPlan): Promise<Map<string MCPToolResult> => {</Map>
+const _executePlan = useCallback(async (plan: MCPOrchestrationPlan): Promise<Map<string MCPToolResult> => {
     if (!orchestratorRef.current) {
       throw new Error('Orchestrator not initialized') };
     setLoading(true);

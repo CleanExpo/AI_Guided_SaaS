@@ -99,11 +99,11 @@ export default function RootLayout({
                 </ConditionalLayout>
                 <Toaster />
                 <MCPDesignerIntegration />
-              </div>
+              
             </ErrorBoundary>
           </Providers>
         </WhiteLabelProvider>
-      </body>
-    </html>)
+      
+    )
   );
 }

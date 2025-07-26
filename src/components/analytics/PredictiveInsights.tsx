@@ -209,17 +209,17 @@ export default function PredictiveInsights() {
                           prediction.type === 'growth' ? 'text-blue-600' :>'text-orange-600'>}`} />
                       </div>
                       <div>
-                        <CardTitle className="text-lg glass{prediction.title}</CardTitle>
-                        <p className="text-sm text-gray-500">{prediction.timeframe}</p>
+                        <CardTitle className="text-lg glass{prediction.title}
+                        <p className="text-sm text-gray-500">{prediction.timeframe}
                       </div>
                     </div>
                     <Badge className={getImpactBadgeColor(prediction.impact)}>
                       {prediction.impact} impact
-                    </Badge>
+                    
                   </div>
-                </CardHeader>
+                
                 <CardContent className="glass"
-                  <p className="text-sm text-gray-600 mb-3">{prediction.description}</p>
+                  <p className="text-sm text-gray-600 mb-3">{prediction.description}
                   
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
@@ -241,11 +241,11 @@ export default function PredictiveInsights() {
                       <Lightbulb className="h-4 w-4 text-blue-600" />
                       <AlertDescription className="text-sm text-blue-800">
                         {prediction.recommendation}
-                      </AlertDescription>
-                    </Alert>
+                      
+                    
                   )}
-                </CardContent>
-              </Card>
+                
+              
             );
           })}
         </div>
@@ -265,15 +265,15 @@ export default function PredictiveInsights() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <Badge variant="secondary">{insight.category}</Badge>
+                      <Badge variant="secondary">{insight.category}
                       <Badge className={
                         insight.priority === 'high' ? 'bg-red-100 text-red-700' :
                         insight.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :>'bg-green-100 text-green-700'>}>
                         {insight.priority} priority
-                      </Badge>
+                      
                     </div>
                     <h3 className="font-semibold mb-1">{insight.title}</h3>
-                    <p className="text-sm text-gray-600 mb-3">{insight.description}</p>
+                    <p className="text-sm text-gray-600 mb-3">{insight.description}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-sm text-blue-600">
                         <Target className="h-4 w-4" />
@@ -286,8 +286,8 @@ export default function PredictiveInsights() {
                   </div>
                   <ArrowRight className="h-5 w-5 text-gray-400 ml-4" />
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           ))}
         </div>
       </div>
@@ -313,20 +313,20 @@ export default function PredictiveInsights() {
                         <span className="font-medium">{anomaly.metric}</span>
                         <Badge variant="outline" className={>anomaly.change.startsWith('+') ? 'text-green-600' : 'text-red-600'>}>
                           {anomaly.change}
-                        </Badge>
+                        
                       </div>
-                      <p className="text-sm text-gray-600">{anomaly.description}</p>
+                      <p className="text-sm text-gray-600">{anomaly.description}
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-500">{anomaly.timeDetected}</p>
-                    <p className="text-xs text-gray-400">{anomaly.status}</p>
+                    <p className="text-sm text-gray-500">{anomaly.timeDetected}
+                    <p className="text-xs text-gray-400">{anomaly.status}
                   </div>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

@@ -129,19 +129,19 @@ export function validateAsync<T>();</T>
 } else { throw, error    })
 };
 // Type inference helpers;
-export type User = z.infer<typeof UserSchema></typeof>
-export type CreateUser = z.infer<typeof CreateUserSchema></typeof>
-export type UpdateUser = z.infer<typeof UpdateUserSchema></typeof>
-export type Project = z.infer<typeof ProjectSchema></typeof>
-export type CreateProject = z.infer<typeof CreateProjectSchema></typeof>
-export type UpdateProject = z.infer<typeof UpdateProjectSchema></typeof>
-export type Message = z.infer<typeof MessageSchema></typeof>
-export type ChatRequest = z.infer<typeof ChatRequestSchema></typeof>
-export type ChatResponse = z.infer<typeof ChatResponseSchema></typeof>
-export type AgentTask = z.infer<typeof AgentTaskSchema></typeof>
-export type AgentResult = z.infer<typeof AgentResultSchema></typeof>
-export type ApiError = z.infer<typeof ApiErrorSchema></typeof>
-export type Pagination = z.infer<typeof PaginationSchema></typeof>
-export type ListRequest = z.infer<typeof ListRequestSchema></typeof>
+export type User = z.infer<typeof UserSchema>
+export type CreateUser = z.infer<typeof CreateUserSchema>
+export type UpdateUser = z.infer<typeof UpdateUserSchema>
+export type Project = z.infer<typeof ProjectSchema>
+export type CreateProject = z.infer<typeof CreateProjectSchema>
+export type UpdateProject = z.infer<typeof UpdateProjectSchema>
+export type Message = z.infer<typeof MessageSchema>
+export type ChatRequest = z.infer<typeof ChatRequestSchema>
+export type ChatResponse = z.infer<typeof ChatResponseSchema>
+export type AgentTask = z.infer<typeof AgentTaskSchema>
+export type AgentResult = z.infer<typeof AgentResultSchema>
+export type ApiError = z.infer<typeof ApiErrorSchema>
+export type Pagination = z.infer<typeof PaginationSchema>
+export type ListRequest = z.infer<typeof ListRequestSchema>
 
 }}}

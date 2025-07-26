@@ -13,10 +13,10 @@ export function EnvironmentTab({}: EnvironmentTabProps) {
       <Label>Environment Variables</Label>
       <div className="text-sm text-muted-foreground">
         Add environment variables for your project
-      </div>
+      
       <Button variant="outline" size="sm">
         Add Variable
-      </Button>
-    </div>
+      
+    
   );
 }

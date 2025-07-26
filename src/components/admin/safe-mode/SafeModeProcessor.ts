@@ -73,8 +73,8 @@ export class SafeModeProcessor {
   async processBatch(batch: HealthIssue[],
     batchIndex: number,
     allBatches: HealthIssue[][],
-    batchConfig: BatchConfig)
-    checkpoint: CheckpointState,)
+    batchConfig: BatchConfig,
+                checkpoint: CheckpointState,)
     setCheckpoint: (checkpoint: CheckpointState) => void,
     setProcessingLog: (updater: (prev: string[]) => string[]) => void,
     setIsProcessing: (value: boolean) => void,

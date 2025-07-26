@@ -84,7 +84,7 @@ export default function LLMSettingsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">LLM Fallback System</h1>
-          <p className="text-gray-600">Manage AI providers and fallback configuration</p>
+          <p className="text-gray-600">Manage AI providers and fallback configuration
         </div>
 
         {/* System Status */}
@@ -93,64 +93,64 @@ export default function LLMSettingsPage() {
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Success Rate</p>
-                  <p className="text-2xl font-bold text-green-600">{metrics.successRate}%</p>
+                  <p className="text-sm text-gray-500">Success Rate
+                  <p className="text-2xl font-bold text-green-600">{metrics.successRate}%
                 </div>
                 <Activity className="h-8 w-8 text-green-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Avg Latency</p>
-                  <p className="text-2xl font-bold">{metrics.averageLatency}ms</p>
+                  <p className="text-sm text-gray-500">Avg Latency
+                  <p className="text-2xl font-bold">{metrics.averageLatency}ms
                 </div>
                 <Zap className="h-8 w-8 text-yellow-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Total Cost</p>)
-                  <p className="text-2xl font-bold">${metrics.totalCost.toFixed(2)}</p>
+                  <p className="text-sm text-gray-500">Total Cost)
+                  <p className="text-2xl font-bold">${metrics.totalCost.toFixed(2)}
                 </div>
                 <DollarSign className="h-8 w-8 text-purple-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Fallback Rate</p>
-                  <p className="text-2xl font-bold">{metrics.fallbackRate}%</p>
+                  <p className="text-sm text-gray-500">Fallback Rate
+                  <p className="text-2xl font-bold">{metrics.fallbackRate}%
                 </div>
                 <TrendingUp className="h-8 w-8 text-blue-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Provider Status */}
         <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle className="glass">Provider Status</CardTitle>
+              <CardTitle className="glass">Provider Status
               <Button
                 onClick={testProviders}
                 disabled={isTestingProviders}>variant="outline">>
                 <RefreshCw className={`h-4 w-4 mr-2 ${isTestingProviders ? 'animate-spin' : ''}`} />
                 Test All Providers
-              </Button>
+              
             </div>
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="space-y-4">
               {providers.map((provider) => {
@@ -162,7 +162,7 @@ export default function LLMSettingsPage() {
                         <h3 className="font-medium">{provider.name}</h3>
                         <Badge variant={provider.available ? 'default' : 'secondary'}>
                           Priority {provider.priority}
-                        </Badge>
+                        
                       </div>
                       <div className="flex items-center gap-2">)
                         <StatusIcon className={`h-5 w-5 ${getProviderStatusColor(provider.available)}`} />
@@ -174,18 +174,18 @@ export default function LLMSettingsPage() {
                     
                     <div className="glass grid grid-cols-3 gap-4 text-sm">
                       <div>
-                        <p className="text-gray-500">Latency</p>
-                        <p className="font-medium">{provider.latency || '—'}ms</p>
+                        <p className="text-gray-500">Latency
+                        <p className="font-medium">{provider.latency || '—'}ms
                       </div>
                       <div>
-                        <p className="text-gray-500">Cost per 1K tokens</p>
-                        <p className="font-medium">${provider.cost.toFixed(3)}</p>
+                        <p className="text-gray-500">Cost per 1K tokens
+                        <p className="font-medium">${provider.cost.toFixed(3)}
                       </div>
                       <div>
-                        <p className="text-gray-500">Status</p>
+                        <p className="text-gray-500">Status
                         <p className="font-medium">
                           {provider.available ? 'Healthy' : 'Down'}
-                        </p>
+                        
                       </div>
                     </div>
 
@@ -203,32 +203,32 @@ export default function LLMSettingsPage() {
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Configuration */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Fallback Configuration</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Fallback Configuration
+            
             <CardContent className="glass">
             <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Provider Selection</label>
+                  <label className="text-sm font-medium text-gray-700">Provider Selection
                   <select 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg">value={selectedProvider}>onChange={(e) => setSelectedProvider(e.target.value)}
                   >
-                    <option value="auto">Automatic (Recommended)</option>
-                    <option value="openai">OpenAI Only</option>
-                    <option value="anthropic">Anthropic Only</option>
-                    <option value="cheapest">Cheapest Available</option>
-                    <option value="fastest">Fastest Available</option>
-                  </select>
+                    <option value="auto">Automatic (Recommended)
+                    <option value="openai">OpenAI Only
+                    <option value="anthropic">Anthropic Only
+                    <option value="cheapest">Cheapest Available
+                    <option value="fastest">Fastest Available
+                  
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Max Retries</label>
+                  <label className="text-sm font-medium text-gray-700">Max Retries
                   <input 
                     type="number" 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
@@ -237,7 +237,7 @@ export default function LLMSettingsPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Timeout (ms)</label>
+                  <label className="text-sm font-medium text-gray-700">Timeout (ms)
                   <input 
                     type="number" 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
@@ -247,7 +247,7 @@ export default function LLMSettingsPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Cost Threshold ($)</label>
+                  <label className="text-sm font-medium text-gray-700">Cost Threshold ($)
                   <input 
                     type="number" 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
@@ -256,15 +256,15 @@ export default function LLMSettingsPage() {
                     max="10">step="0.01" />
                 </div>
 
-                <Button className="w-full">Save Configuration</Button>
+                <Button className="w-full">Save Configuration
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Usage Statistics</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Usage Statistics
+            
             <CardContent className="glass">
             <div className="space-y-4">
                 <div>
@@ -317,8 +317,8 @@ export default function LLMSettingsPage() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
       </div>
     </div>

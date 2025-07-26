@@ -19,7 +19,7 @@ export function CurrentBatchSection({ currentBatch }: CurrentBatchSectionProps) 
             key={issue.id}>className="flex items-center gap-3 p-2 bg-blue-50 rounded-lg">>
             <span className="text-lg">
               {getCategoryIcon(issue.category)}
-            </span>
+            
             <div className="flex-1">
               <div className="font-medium">{issue.title}</div>
               <div className="text-sm text-gray-600">{issue.description}</div>
@@ -30,6 +30,6 @@ export function CurrentBatchSection({ currentBatch }: CurrentBatchSectionProps) 
           </div>
         ))}
       </div>
-    </Card>
+    
   );
 }

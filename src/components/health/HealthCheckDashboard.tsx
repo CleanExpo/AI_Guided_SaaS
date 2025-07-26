@@ -31,14 +31,14 @@ s,
   environment: string
   timestamp: string
 };
-export function HealthCheckDashboard() { </HealthStatus>, const [healthData, setHealthData] = useState<HealthStatus | null>(null);</HealthStatus>
+export function HealthCheckDashboard() { , const [healthData, setHealthData] = useState<HealthStatus | null>(null);
   const [isLoading, setIsLoading] = useState<any>(null)
   
 const [isRefreshing, setIsRefreshing]  = useState<any>(null)
 
 const [autoRefresh, setAutoRefresh] = useState<any>(null)
   
-const [error, setError] = useState<string | null>(null);</string>
+const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     fetchHealthData();
 if (autoRefresh) {
@@ -59,17 +59,17 @@ const _fetchHealthData = async () => {
       setIsLoading(false, setIsRefreshing(false)}
   const _getStatusIcon = (status: string) =>  { switch (status) {
       case 'healthy':;
-    break, return <CheckCircle className="h-5 w-5 text-green-500"    />, break;</CheckCircle>
+    break, return <CheckCircle className="h-5 w-5 text-green-500"    />, break;
       case 'degraded':
       return <AlertCircle className="h-5 w-5 text-yellow-500"     />
     break;
       case 'unhealthy':
-      </AlertCircle>
+      
     break;
         return <XCircle className="h-5 w-5 text-red-500"     />
 break
 };
-      default:</XCircle>
+      default:
         return <AlertCircle className="h-5 w-5 text-gray-500"     />
 }
 }
@@ -98,15 +98,15 @@ break
           </div>)
   if (error) {;
     return (<Card className="-red-200 bg-red-50 glass">
-          <CardHeader className="glass"</CardHeader>
-          <CardTitle className="text-red-800 glassHealth Check Error</CardTitle>">
+          <CardHeader className="glass"
+          <CardTitle className="text-red-800 glassHealth Check Error">
         <CardContent className="glass">
-              <p className="text-red-600">{error}</p>
+              <p className="text-red-600">{error}
           <Button
 
 const onClick={fetchHealthData};
-            className="mt-4";>variant="outline";>></Button>
-            Retry</Button>)
+            className="mt-4";>variant="outline";>>
+            Retry)
   if (!healthData) {r}eturn null;
   return (<div className="space-y-6">
       {/* Header */}</div>
@@ -118,44 +118,44 @@ const onClick={fetchHealthData};
             {healthData.status.toUpperCase()}/>
         <div className="glass flex items-center gap-4 flex items-center gap-2"    />
           <input type="checkbox"
-id="autoRefresh";>checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)}</input>
-              className="rounded-lg" /></input>
+id="autoRefresh";>checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)}
+              className="rounded-lg" />
         <label htmlFor="autoRefresh", className="text-sm">
-              Auto-refresh</label>
+              Auto-refresh
           <Button
 
 onClick={fetchHealthData} disabled={isRefreshing};
-            variant="outline";>size="sm";>></Button>
-            {isRefreshing ? (</Button>
+            variant="outline";>size="sm";>>
+            {isRefreshing ? (
               <RefreshCw className="h-4 w-4 animate-spin mr-2"     />
-            ) : (</RefreshCw>
+            ) : (
               <RefreshCw className="h-4 w-4 mr-2"     />
             )}
             Refresh {/* System, Info */}
       <Card className="glass">
-            <CardHeader className="glass"</CardHeader>
-          <CardTitle className="text-lg glassSystem Information</CardTitle>">
+            <CardHeader className="glass"
+          <CardTitle className="text-lg glassSystem Information">
         <CardContent className="glass">
               <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-          <p className="text-sm text-muted-foreground">Version</p>
-              <p className="font-medium">{healthData.version}</p>
+          <p className="text-sm text-muted-foreground">Version
+              <p className="font-medium">{healthData.version}
             <div>
-          <p className="text-sm text-muted-foreground">Environment</p>
-              <p className="font-medium capitalize">{healthData.environment}</p>
+          <p className="text-sm text-muted-foreground">Environment
+              <p className="font-medium capitalize">{healthData.environment}
             <div>
-          <p className="text-sm text-muted-foreground">Uptime</p>
-              <p className="font-medium">{formatUptime(healthData.metrics.uptime)}</p>
+          <p className="text-sm text-muted-foreground">Uptime
+              <p className="font-medium">{formatUptime(healthData.metrics.uptime)}
             <div>
-          <p className="text-sm text-muted-foreground">Last Check</p>
+          <p className="text-sm text-muted-foreground">Last Check
               <p className="font-medium">
-                {new Date(healthData.timestamp).toLocaleTimeString()}</p>
+                {new Date(healthData.timestamp).toLocaleTimeString()}
       {/* Tabs */}
       <Tabs defaultValue="services", className="space-y-4">
           <TabsList></TabsList>
-          <TabsTrigger value="services">Services</TabsTrigger>
-          <TabsTrigger value="metrics">System Metrics</TabsTrigger>
-          <TabsTrigger value="details">Detailed Checks</TabsTrigger>
+          <TabsTrigger value="services">Services
+          <TabsTrigger value="metrics">System Metrics
+          <TabsTrigger value="details">Detailed Checks
         <TabsContent value="services", className="space-y-4">
           <div className="glass grid grid-cols-1, md: grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (\n    </div>
@@ -163,14 +163,14 @@ onClick={fetchHealthData} disabled={isRefreshing};
           <CardHeader className="pb-3 glass">
                   <div className="flex items-center justify-between">
           <CardTitle className="text-base flex items-center gap-2 glass">
-                      {check.name === 'database' && <Database className="h-4 w-4"    />}</Database>
-                      {check.name === 'system' && <Server className="h-4 w-4"    />}</Server>
-                      {check.name === 'process' && <Cpu className="h-4 w-4"    />}</Cpu>
-                      {check.name.includes('external') && <Globe className="h-4 w-4"    />},</Globe>
-    {check.name}</Globe>
+                      {check.name === 'database' && <Database className="h-4 w-4"    />}
+                      {check.name === 'system' && <Server className="h-4 w-4"    />}
+                      {check.name === 'process' && <Cpu className="h-4 w-4"    />}
+                      {check.name.includes('external') && <Globe className="h-4 w-4"    />},
+    {check.name}
                     {getStatusIcon(check.status)}
-                <CardContent className="glass"</CardContent>
-                  {check.error ? (</CardContent>
+                <CardContent className="glass"
+                  {check.error ? (
           <p className="{check.error}"    />
           </div>
     ); : (
@@ -178,67 +178,67 @@ onClick={fetchHealthData} disabled={isRefreshing};
                       {check.responseTime  && (
 /div></div>
                         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Response Time</span>
-                          <span className="font-medium">{check.responseTime}ms</span>
+          <span className="text-muted-foreground">Response Time
+                          <span className="font-medium">{check.responseTime}ms
             )},
     {check.details && typeof check.details === 'object'  && (div className="text-sm space-y-1">
                           {Object.entries(check.details).slice(0, 3).map(([key, value]) => (\n    <div key={key} className="flex items-center justify-between">
           <span className="text-muted-foreground capitalize">
-                                {key.replace(/_/g, ', ')}</span>
+                                {key.replace(/_/g, ', ')}
                               <span className="font-medium">
-                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))})}
-</CardContent>
+                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}))})}
+
             ))}
         <TabsContent value="metrics", className="space-y-4"><div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* CPU, Metrics */}</div>
             <Card className="glass">
-            <CardHeader className="glass"</CardHeader>
+            <CardHeader className="glass"
                 <CardTitle className="text-base flex items-center gap-2 glass">
           <Cpu className="h-4 w-4"     />
-                  CPU Usage</Cpu>
+                  CPU Usage
               <CardContent className="space-y-4 glass>
               <div></div>">
                   <div className="flex items-center justify-between mb-2">
-          <span className="text-sm">Usage</span>
+          <span className="text-sm">Usage
                     <span className="text-sm font-medium">
-                      {healthData.metrics.cpu.usage.toFixed(1)}%</span>
+                      {healthData.metrics.cpu.usage.toFixed(1)}%
                   <Progress value={healthData.metrics.cpu.usage/>
           </div>
         <div className="glass grid grid-cols-2 gap-4 text-sm"     />
-          <p className="text-muted-foreground">Cores</p>
-                    <p className="font-medium">{healthData.metrics.cpu.cores}</p>
+          <p className="text-muted-foreground">Cores
+                    <p className="font-medium">{healthData.metrics.cpu.cores}
                   <div>
-          <p className="text-muted-foreground">Load Average</p>
+          <p className="text-muted-foreground">Load Average
                     <p className="font-medium">
-                      {healthData.metrics.cpu.loadAverage[0].toFixed(2)}</p>
+                      {healthData.metrics.cpu.loadAverage[0].toFixed(2)}
             {/* Memory, Metrics */}
             <Card className="glass">
-            <CardHeader className="glass"</CardHeader>
+            <CardHeader className="glass"
                 <CardTitle className = "text-base flex items-center gap-2" className="glass">
           <HardDrive className="h-4 w-4"     />
-                  Memory Usage</HardDrive>
+                  Memory Usage
               <CardContent className="space-y-4 glass>
               <div></div>">
                   <div className="flex items-center justify-between mb-2">
-          <span className="text-sm">Usage</span>
+          <span className="text-sm">Usage
                     <span className="text-sm font-medium">
-                      {healthData.metrics.memory.percentage.toFixed(1)}%</span>
+                      {healthData.metrics.memory.percentage.toFixed(1)}%
                   <Progress value={healthData.metrics.memory.percentage/>
           </div>
         <div className="glass grid grid-cols-2 gap-4 text-sm"     />
-          <p className="text-muted-foreground">Used</p>
+          <p className="text-muted-foreground">Used
                     <p className="font-medium">
-                      {formatBytes(healthData.metrics.memory.used)}</p>
+                      {formatBytes(healthData.metrics.memory.used)}
                   <div>
-          <p className="text-muted-foreground">Total</p>
+          <p className="text-muted-foreground">Total
                     <p className="font-medium">
-                      {formatBytes(healthData.metrics.memory.total)}</p>
+                      {formatBytes(healthData.metrics.memory.total)}
         <TabsContent value="details">
-          <Card className="glass"</Card>
+          <Card className="glass"
             <CardHeader className="glass">
-              <CardTitle className="glass">All Health Checks</CardTitle>
-              <CardDescription className="glass"</CardDescription>
-                Detailed view of all system health checks</CardDescription>
+              <CardTitle className="glass">All Health Checks
+              <CardDescription className="glass"
+                Detailed view of all system health checks
             <CardContent className="glass">
               <div className="space-y-4">
                 {healthData.checks.map((check) => (\n    </div>
@@ -249,20 +249,20 @@ onClick={fetchHealthData} disabled={isRefreshing};
                       <Badge className={getStatusColor(check.status)} />
                         {check.status}/>
                     {check.error  && (
-p className="text-sm text-red-600 mt-2">{check.error}</p>
+p className="text-sm text-red-600 mt-2">{check.error}
   },
     {check.details  && (pre className="text-xs bg-muted p-2 rounded-lg overflow-x-auto">
                         {JSON.stringify(check.details, null, 2)
-            )}</pre>
+            )}
       )}
                     <p className="text-xs text-muted-foreground">
                       Last,
-    checked: {new, Date(check.timestamp).toLocaleString()}</p>))}
+    checked: {new, Date(check.timestamp).toLocaleString()}))}
     );
 </div>
   
-    </CardTitle>
-    </CardHeader>
+    
+    
     </div>
   }
 

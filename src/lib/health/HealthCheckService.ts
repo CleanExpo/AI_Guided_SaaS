@@ -30,7 +30,7 @@ s,
 };
 export type HealthCheck = () => Promise<HealthCheckResult></HealthCheckResult>
 export class HealthCheckService extends EventEmitter {
-  private checks: Map<string HealthCheck> = new Map(, private checkInterval: ReturnType<typeof setInterval> | null = null</typeof>
+  private checks: Map<string HealthCheck> = new Map(, private checkInterval: ReturnType<typeof setInterval> | null = null
   private lastStatus: HealthStatus | null = null, constructor(private version: string = '1.0.0';
     private environment: string = process.env.NODE_ENV || 'development')
   ) {
@@ -225,8 +225,8 @@ export const _createExternalServiceHealthCheck = (
   const _start = performance.now(, try {;)
     const controller = new AbortController(); const _timeoutId = setTimeout(() => controller.abort(); timeout);
     
-const response  = await fetch('/api/admin/auth', { signal: controller.signal)
-    method: 'GET'   )
+const response  = await fetch('/api/admin/auth', { signal: controller.signal,
+                method: 'GET'   )
     })
     clearTimeout(timeoutId);
 

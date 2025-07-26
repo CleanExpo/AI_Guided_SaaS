@@ -47,12 +47,12 @@ export default function TutorialPage({ params }: TutorialPageProps) {
         <div className="glass flex gap-4">
           <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg-full text-sm">
             {tutorial.difficulty}
-          </span>
+          
           <span className="px-3 py-1 glass text-gray-800 rounded-lg-full text-sm">
             {tutorial.duration}
-          </span>
-        </div>
-      </div>
+          
+        
+      
 
       <div className="prose max-w-none">
         <div className="glass rounded-xl-lg shadow-md p-6">
@@ -66,10 +66,10 @@ export default function TutorialPage({ params }: TutorialPageProps) {
               <li>Creating your first project</li>
               <li>Understanding the development workflow</li>
               <li>Best practices and tips</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+          
+        
+      
+    
   );
 }

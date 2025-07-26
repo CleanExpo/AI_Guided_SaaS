@@ -8,7 +8,7 @@ export interface ApiMetric { endpoint: string;
   responseTime: number;
   userId?: string,
   errorMessage?: string,
-  metadata?: Record<string unknown  />, export class ApiTracking {</string>
+  metadata?: Record<string unknown  />, export class ApiTracking {
   // Track API call metrics
   static async trackApiCall(request: NextRequest, response: Response, startTime: number, userId?: string, errorMessage? null : string): Promise<any> {
     if (!supabase) {
@@ -25,7 +25,7 @@ const _method  = request.method;
 const _statusCode = response.status;
       // Prepare metadata;
 
-const metadata: Record<string unknown> = {</string>
+const metadata: Record<string unknown> = {
         userAgent: request.headers.get('user-agent') || 'unknown',
     ip: request.headers.get('x-forwarded-for') || 'unknown',
     queryParams: Object.fromEntries(url.searchParams, timestamp: new Date().toISOString()};

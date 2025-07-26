@@ -69,8 +69,8 @@ const usage = completion.usage;
   }
 }
         : undefined,
-      model: completion.model)
-    provider: 'openai'
+      model: completion.model,
+                provider: 'openai'
   }
 })
   private async generateAnthropicResponse(prompt: string, systemPrompt? null : string): Promise<any> {
@@ -88,8 +88,8 @@ const content = response.content[0];
 const text = content.type === 'text' ? content.text : '';
     return { message: text;
     usage: { promptTokens: response.usage.input_tokens, completionTokens: response.usage.output_tokens, totalTokens: response.usage.input_tokens + response.usage.output_tokens },
-      model: response.model)
-    provider: 'anthropic'
+      model: response.model,
+                provider: 'anthropic'
   }
 })
   private async generateFallbackResponse(prompt: string, systemPrompt? null : string): Promise<any> { </any>
@@ -102,7 +102,7 @@ interface ComponentProps {
   // Add your props here
  };
 export function Component({  }) {
-  return(div>, {/* Your component content */}</div>)
+  return(div>, {/* Your component content */})
       )}
 \`\`\```;
 This is a fallback response. For better results, please configure an AI provider API key.`;``

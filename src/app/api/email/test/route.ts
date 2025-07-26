@@ -19,10 +19,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // Check if email is configured
       if (!process.env.SMTP_HOST) {
         return NextResponse.json({
-          success: false)
-          error: 'Email service not configured'
+          success: false,
+                error: 'Email service not configured'
         }, {
-          status: 503 });;
+          status: 503 });
       }
       
       // Simulate sending test email
@@ -42,12 +42,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       handleError(error, {
         operation: 'sendTestEmail',
         module: 'email/test')
-        metadata: { to: data.to });;
+        metadata: { to: data.to });
       
       return NextResponse.json({
         error: 'Email test failed'
       }, {
-        status: 500 });;
+        status: 500 });
     }
   });
 }
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       error: 'Failed to get email status'
     }, {
-      status: 500 });;
+      status: 500 });
   }
 }
 export const dynamic = "force-dynamic";

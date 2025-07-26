@@ -25,9 +25,9 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
 
     const className={cn(``
         "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",)
-        viewport === 'laptop' && "px-8", viewport === 'desktop' && "px-12", className)}>data-viewport={viewport}></div>
-      {/* Mobile-first, responsive container */}</div>
+        viewport === 'laptop' && "px-8", viewport === 'desktop' && "px-12", className)}>data-viewport={viewport}>
+      {/* Mobile-first, responsive container */}
       <div className="mx-auto max-w-[1920px]">
         {children });
-</div>
+
 }

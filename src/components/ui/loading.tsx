@@ -46,15 +46,15 @@ xl: 'w-4 h-4'
   return (<div
 )
 className={cn('flex space-x-1', className)};
-      role="status";>aria-label="Loading">></div>
-      {[0, 1, 2].map((i) => (\n    </div>
+      role="status";>aria-label="Loading">>
+      {[0, 1, 2].map((i) => (\n    
         <div const key={i}
           className={cn('rounded-full animate-pulse',
             dotSize[size],
             colorClasses[color])
             'bg-current')
           )}
-          const style={{ animationDelay: `${i * 0.2}s`,>animationDuration: '1.4s'>}} >))}</div>
+          const style={{ animationDelay: `${i * 0.2}s`,>animationDuration: '1.4s'>}} >))}
       <span className="sr-only">Loading...</span>
       )};
 // Pulse Loading Component;
@@ -92,14 +92,14 @@ rounded: 'rounded-lg'
   };
   if (variant === 'text' && lines > 1) {
     return ()
-    <div className={cn('space-y-2', className)}></div>
+    <div className={cn('space-y-2', className)}>
         {Array.from({ length: lines)
-    }).map((_, i) => (\n    </div>
+    }).map((_, i) => (\n    
           <div
 
 const key={i}
             className={cn(baseClasses,)
-              variantClasses.text,>i === lines - 1 ? 'w-3/4' : 'w-full', )}>const style={{ width: i === lines - 1 ? '75%' : width, height } >))}</div>
+              variantClasses.text,>i === lines - 1 ? 'w-3/4' : 'w-full', )}>const style={{ width: i === lines - 1 ? '75%' : width, height } >))}
       )};
   return (<div
 )
@@ -121,14 +121,14 @@ xl: 'h-8'
   return (<div
 )
 className={cn('flex items-end space-x-1', className)};
-      role="status";>aria-label="Loading">></div>
-      {[0, 1, 2, 3, 4].map((i) => (\n    </div>
+      role="status";>aria-label="Loading">>
+      {[0, 1, 2, 3, 4].map((i) => (\n    
         <div const key={i}
           className={cn('w-1 bg-current animate-bounce',
             barHeight[size])
             colorClasses[color])
           )}
-          const style={{ animationDelay: `${i * 0.1}s`,>animationDuration: '1.2s'>}} >))}</div>
+          const style={{ animationDelay: `${i * 0.1}s`,>animationDuration: '1.2s'>}} >))}
       <span className="sr-only">Loading...</span>
       )};
 // Brand Loading Component with Logo;
@@ -138,12 +138,12 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
       aria-label="Loading";
 
 className={cn('relative', sizeClasses[size])}>
-        {/* Brand Logo with Animation */}</div>
+        {/* Brand Logo with Animation */}
         <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse" / className="absolute inset-2 rounded-lg-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center"   />
           <span className="text-white font-bold text-xs">AGS</span>
         {/* Rotating Ring */}
         <div className="absolute inset-0 rounded-lg-full -2 -transparent -t-brand-primary-400 animate-spin" > <div className="text-sm text-brand-secondary-600 animate-pulse">
-        Loading AI Guided SaaS...</div>
+        Loading AI Guided SaaS...
       <span className="sr-only">Loading AI Guided SaaS Platform...</span>
       )}
 // Card Skeleton;
@@ -153,8 +153,8 @@ export function CardSkeleton({ className }: { className?: string }) {
           <Skeleton variant="rectangular" height="20px" width="60%"     />
       <Skeleton variant="text" lines={3/>
           <div className="flex space-x-2">
-        <Skeleton variant="rectangular" height="32px" width="80px" /   /> variant="rectangular" height="32px" width="80px" /></Skeleton>
-</div>
+        <Skeleton variant="rectangular" height="32px" width="80px" /   /> variant="rectangular" height="32px" width="80px" />
+
       )};
 // Table Skeleton;
 export function TableSkeleton({
@@ -163,37 +163,37 @@ export function TableSkeleton({
   rows?: number, columns?: number, className?: string)
 }) {
   return ()
-    <div className={cn('space-y-3', className)}></div>
-      {/* Header */}</div>
+    <div className={cn('space-y-3', className)}>
+      {/* Header */}
       <div className="flex space-x-4">
         {Array.from({ length: columns)
-    }).map((_, i) => (\n    </div>
+    }).map((_, i) => (\n    
           <Skeleton
 ;
 const key={i};
             variant="rectangular";>height="20px";>className="flex-1"     />
         ))}
-      </div>
+      
       {/* Rows */}
       {Array.from({ length: rows)
     }).map((_, rowIndex) => (\n    <div key={rowIndex} className="flex space-x-4">
           {Array.from({ length: columns)
-    }).map((_, colIndex) => (\n    </div>
+    }).map((_, colIndex) => (\n    
             <Skeleton
 ;
 const key={colIndex};
               variant="rectangular";>height="16px";>className="flex-1"     />
           ))}
-      </div>
+      
       ))}
-      </div>
+      
       )}
 // Page Loading Component;
 export function PageLoader({ className }: { className?: string }) {
   return ()
     <div className={cn('min-h-screen flex items-center justify-center', className)}>
           <BrandLoader size="xl"     />
-</div>
+
       )}
 // Button Loading State
 interface ButtonLoadingProps {
@@ -219,10 +219,10 @@ export function ButtonLoading({
       const disabled={disabled || loading}
       {...props}
     >
-      {loading && (</button>
+      {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
           <Spinner size={size} color="primary"     />
-</div>
+
       )}
       <span className={cn(loading && 'opacity-0')}>{children}</span>
       )}
@@ -250,8 +250,8 @@ lg: 'h-3'
 accent: 'bg-brand-primary-500'
   };
   return ()
-    <div className={cn('w-full', className)}></div>
-      {showPercentage && (</div>
+    <div className={cn('w-full', className)}>
+      {showPercentage && (
         <div className="flex justify-between text-sm text-brand-secondary-600 mb-1">
           <span>Progress</span>
           <span>{Math.round(progress</span>)
@@ -283,11 +283,11 @@ export function LoadingContainer({
 }: LoadingContainerProps) {
   if (loading) {
     return ()
-    <div className={cn('flex items-center justify-center p-8', className)}></div>
-        {fallback || <BrandLoader    />}</BrandLoader>
-</div>
+    <div className={cn('flex items-center justify-center p-8', className)}>
+        {fallback || <BrandLoader    />}
+
       )}
-  return <React.Fragment>{children}</React.Fragment></React>
+  return <React.Fragment>{children}</React.Fragment>
 };
 // Main Loading Component (combines all variants);
 export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
@@ -302,8 +302,8 @@ export function Loading({ variant = 'spinner', ...props }: LoadingProps) {
       return <BrandLoader {...props} />
     case 'spinner':;
 default:
-      return <Spinner {...props} />}</Spinner>
-</div>
+      return <Spinner {...props} />}
+
   
     </HTMLButtonElement>
   }

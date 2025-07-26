@@ -38,8 +38,8 @@ if (response.status >= 400) {
         operation: 'apiHandler',
         module: 'ApiMiddleware',
         metadata: { 
-          url: request.url)
-          method: request.method 
+          url: request.url,
+                method: request.method 
         })
       });
       
@@ -70,7 +70,7 @@ export function trackResourceUsage()
           const session = await getServerSession(authOptions);
           if (session?.user?.id) {
             // Extract additional metadata from response if available;
-let metadata: Record<string unknown> = { };</string>
+let metadata: Record<string unknown> = { };
             try { const responseClone = response.clone(); const body = await responseClone.json(); // Extract relevant metadata based on resource type;
 switch (resourceType) {
                 case 'ai_generation':;
@@ -126,7 +126,7 @@ exportType: body.type,
 export function withRateLimit()
     maxRequests: number = 100, windowMs: number = 60000 // 1 minute): number = 100,
   windowMs: number = 60000 // 1 minute) {
-  const requestCounts  = new Map<string { count: number, resetTime: number }>()</string>
+  const requestCounts  = new Map<string { count: number, resetTime: number }>()
   return (handler: ApiHandler): ApiHandler: (any) =>  {
     return async (request: NextRequest, context?) => {
       // Get client identifier (IP or user ID, const session = await getServerSession(authOptions); const _identifier = session?.user?.id || ;

@@ -14,8 +14,8 @@ export class MessageQueueManager {
       this.queues.set(agentId, {
         agent_id: agentId,
         queue: [],
-        processing: false)
-        max_size: maxSize,)
+        processing: false,
+                max_size: maxSize,)
         last_processed: new Date()
       });
     }

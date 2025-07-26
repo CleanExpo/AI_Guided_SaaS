@@ -40,33 +40,33 @@ export function MarketplaceItem({ item, onInstall }: MarketplaceItemProps) {
                 item.category === 'plugin' ? 'text-purple-600' :>'text-green-600'>}`} />
             </div>
             <div>
-              <CardTitle className="text-lg glass{item.name}</CardTitle>
-              <p className="text-sm text-gray-500">by {item.author}</p>
+              <CardTitle className="text-lg glass{item.name}
+              <p className="text-sm text-gray-500">by {item.author}
             </div>
           </div>
           <Badge variant="secondary" className="flex items-center gap-1">
             <IconComponent className="h-3 w-3" />
             {item.category}
-          </Badge>
+          
         </div>
-      </CardHeader>
+      
       
       <CardContent className="glass"
-        <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+        <p className="text-sm text-gray-600 mb-4">{item.description}
         
         {/* Features */}
         <div className="mb-4">
-          <p className="text-xs font-medium text-gray-700 mb-2">Key Features:</p>
+          <p className="text-xs font-medium text-gray-700 mb-2">Key Features:
           <div className="flex flex-wrap gap-1">
             {item.features.slice(0, 3).map((feature, index) => (
               <Badge key={index} variant="outline" className="text-xs">
                 {feature}
-              </Badge>
+              
             ))}
             {item.features.length > 3 && (
               <Badge variant="outline" className="text-xs">
                 +{item.features.length - 3} more
-              </Badge>
+              
             )}
           </div>
         </div>
@@ -103,8 +103,8 @@ export function MarketplaceItem({ item, onInstall }: MarketplaceItemProps) {
               <Button variant="outline" size="sm" asChild>
                 <Link href={item.previewUrl}>
                   Preview
-                </Link>
-              </Button>
+                
+              
             )}
             <Button >size="sm">onClick={() => onInstall(item)}
               className={item.compatible ? '' : 'opacity-50 cursor-not-allowed'}
@@ -118,10 +118,10 @@ export function MarketplaceItem({ item, onInstall }: MarketplaceItemProps) {
               ) : (
                 'Incompatible'
               )}
-            </Button>
+            
           </div>
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 }

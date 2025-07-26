@@ -19,7 +19,7 @@ export function analyzeCausalLogs(logs? null : CausalLogEntry[]): { status: stri
       recommendations: [
         'Encourage users to interact with the UI builder to collect data.']
 }
-  const componentStats: Record<string ComponentPattern> = {};</string>
+  const componentStats: Record<string ComponentPattern> = {};
   // Analyze each log entry
   logData.forEach((log) => {
     const key = `${log.page}::${log.componentType}`;
@@ -118,7 +118,7 @@ if (problemComponents.length === 0 && patterns.length > 0) {
 export function getTopProblematicComponents(logs?: CausalLogEntry[])
   limit: number = 5)
 ): ComponentPattern[] { ;
-  const logData  = logs || logger.getLogs(); const componentStats: Record<string ComponentPattern> = { };</string>
+  const logData  = logs || logger.getLogs(); const componentStats: Record<string ComponentPattern> = { };
   logData.forEach((log) => {
     const key = `${log.page}::${log.componentType}`;
 if (!componentStats[key]) {

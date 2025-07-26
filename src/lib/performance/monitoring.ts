@@ -56,13 +56,13 @@ export interface BundleAnalysis {
  * Performance Budget Thresholds
  */
 export const PERFORMANCE_BUDGETS = {
-  // Core Web Vitals thresholds (Google recommended)
-  LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint (ms)
-  FID: { good: 100, poor: 300 }, // First Input Delay (ms)
-  CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift
-  FCP: { good: 1800, poor: 3000 }, // First Contentful Paint (ms)
-  TTFB: { good: 600, poor: 1500 }, // Time to First Byte (ms)
-  INP: { good: 200, poor: 500 }, // Interaction to Next Paint (ms)
+  // Core Web Vitals thresholds (Google recommended,
+                LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint (ms,
+                FID: { good: 100, poor: 300 }, // First Input Delay (ms,
+                CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift
+  FCP: { good: 1800, poor: 3000 }, // First Contentful Paint (ms,
+                TTFB: { good: 600, poor: 1500 }, // Time to First Byte (ms,
+                INP: { good: 200, poor: 500 }, // Interaction to Next Paint (ms)
 
   // Bundle size budgets
   BUNDLE_SIZE: {

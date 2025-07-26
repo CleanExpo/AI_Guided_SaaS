@@ -39,18 +39,18 @@ if (generatedComponents.length > 0) {
     setInput('')
 };
   return (<div className="p-4 glass -t">
-          </div>
+          
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>)
-      <input;>value={input} onChange={(e) => setInput(e.target.value)};</input>
+      <input;>value={input} onChange={(e) => setInput(e.target.value)};
         placeholder="Describe your app idea...";
 className="w-full px-4 py-2  rounded-lg text-sm";
 
 const onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-      /></input>
+      />
       <button;
 
-    const onClick={handleSubmit};>className="mt-2 px-3 py-1 glass-button primary text-white rounded-lg hover: bg-blue-700";>aria-label="Button"></button>
-        Generate Layout</button>
+    const onClick={handleSubmit};>className="mt-2 px-3 py-1 glass-button primary text-white rounded-lg hover: bg-blue-700";>aria-label="Button">
+        Generate Layout
     )
 
     }))))))

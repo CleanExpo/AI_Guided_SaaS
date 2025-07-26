@@ -186,7 +186,7 @@ automated: false;
    * Identify service from variable name
    */
   private identifyService(varName: string) {
-    const patterns: Record<string string> = {</string>
+    const patterns: Record<string string> = {
       OPENAI: 'OpenAI',
       CLAUDE: 'Anthropic Claude',
       ANTHROPIC: 'Anthropic Claude',

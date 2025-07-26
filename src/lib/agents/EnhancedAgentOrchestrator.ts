@@ -34,12 +34,12 @@ export interface OrchestrationMetrics { totalTasks: number;
 }
 
 export class EnhancedAgentOrchestrator extends EventEmitter {
-  private agents: Map<string Agent> = new Map();</string>
+  private agents: Map<string Agent> = new Map();
   private registry: AgentRegistry;
   private communication: AgentCommunication;
   private rateLimiter: CPURateLimiter;
   private taskQueue: AgentTask[] = [];
-  private activeWorkflows: Map<string WorkflowExecution> = new Map();</string>
+  private activeWorkflows: Map<string WorkflowExecution> = new Map();
   private metrics: OrchestrationMetrics;
   private config: OrchestrationConfig;
   private selfHealingAgent?: SelfHealingAgent;
@@ -59,8 +59,8 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     
     this.registry = new AgentRegistry();
     this.communication = new AgentCommunication();
-    this.rateLimiter = new CPURateLimiter({ maxCpuUsage: this.config.resourceLimits.maxCpu)
-      maxMemoryUsage: this.config.resourceLimits.maxMemory
+    this.rateLimiter = new CPURateLimiter({ maxCpuUsage: this.config.resourceLimits.maxCpu,
+                maxMemoryUsage: this.config.resourceLimits.maxMemory
    )
     });
     
@@ -101,8 +101,8 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
       this.registerAgent(agent)
 };);
     
-    this.emit('orchestrator:initialized', { agentCount: this.agents.size)
-      config: this.config   )
+    this.emit('orchestrator:initialized', { agentCount: this.agents.size,
+                config: this.config   )
     })
 }
 
@@ -178,7 +178,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
   }
 
   private async executeWorkflowSteps(execution: WorkflowExecution): Promise<any> {
-    const results: Map<string any> = new Map();</string>
+    const results: Map<string any> = new Map();
     
     for (const step of execution.workflow.steps) {
       // Check dependencies
@@ -281,8 +281,8 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     try {
       const result = await agent.processMessage({ from: 'orchestrator',
         to: task.assignedTo!,
-        type: task.type)
-        payload: task.payload
+        type: task.type,
+                payload: task.payload
      )
     });
       
@@ -422,7 +422,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
     return { ...this.metrics }
 }
 
-  public getAgents(): Map<string Agent> {</string>
+  public getAgents(): Map<string Agent> {
     return new Map(this.agents)
 }
 

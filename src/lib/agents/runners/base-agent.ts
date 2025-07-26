@@ -43,8 +43,8 @@ export abstract class BaseAgent extends EventEmitter {
   private async register(): Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/register`, {``, agentId: this.context.agentId: agentType, this.context.agentType,;
-        capabilities: this.context.capabilities)
-    status: 'ready'   )
+        capabilities: this.context.capabilities,
+                status: 'ready'   )
     })
     } catch (error) {
       : Promise<any> {

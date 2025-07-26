@@ -126,8 +126,8 @@ export class UserQueries {
         .from('users')
         .update({
           name: updates.name,
-          role: updates.role)
-          status: updates.status,)
+          role: updates.role,
+                status: updates.status,)
           updated_at: new Date().toISOString()
         })
         .eq('id', userId)
@@ -170,8 +170,8 @@ export class UserQueries {
 
       // Log the admin action
       await supabase.from('activity_logs').insert({
-        user_id: userId)
-        action: 'admin_user_delete',)
+        user_id: userId,
+                action: 'admin_user_delete',)
         created_at: new Date().toISOString()
       });
 

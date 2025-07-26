@@ -53,8 +53,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ];
         
         return NextResponse.json({ success: true,
-            requirements)
-            total: requirements.length   )
+            requirements,
+                total: requirements.length   )
     })
 } catch (error) {
         logger.error('Get requirements error:', error);

@@ -75,7 +75,7 @@ export interface ToolPerformanceAnalysis { overallEfficiency: number, // 0-100,
 }
 
 export class ToolsRefinerAgent extends Agent {
-  private toolLibrary: Map<string Tool>, constructor() {</string>
+  private toolLibrary: Map<string Tool>, constructor() {
     super({ id: 'tools-refiner-agent',
       name: 'Tools Refiner',
       role: 'Optimize tool selection and configuration for agents',
@@ -102,8 +102,8 @@ export class ToolsRefinerAgent extends Agent {
     try {
       this.think('Analyzing current tool configuration and requirements...', // Parse input to extract current tools and requirements, const { currentTools, requirements, constraints } =;)
         await this.parseInput(input);
-      this.observe('Parsed input', { toolCount: currentTools.length)
-    requirementCount: requirements.length
+      this.observe('Parsed input', { toolCount: currentTools.length,
+                requirementCount: requirements.length
       }};
       // Step, 1: Analyze current tools;
 )
@@ -209,7 +209,7 @@ const result: ToolRefinement={ originalTools: currentTools;
 }
 }
   private initializeToolLibrary(): Map {
-    const library = new Map<string Tool>(, // Add common development tools, const commonTools: Tool[]  = [</string>
+    const library = new Map<string Tool>(, // Add common development tools, const commonTools: Tool[]  = [
   { id: 'code-generator',
         name: 'Code Generator',
         description: 'Generates code based on specifications',
@@ -280,8 +280,8 @@ const currentTools =;
     reliability: 70;
     scalability: 'medium' as any,
     resourceUsage: { cpu: 'medium' as any,
-    memory: 'medium' as any)
-    network: 'medium' as any)
+    memory: 'medium' as any,
+                network: 'medium' as any)
 }}) || [];
     return {
       currentTools,;
@@ -315,8 +315,8 @@ Analysis, insights:
 ${JSON.stringify(analysis, null, 2)}
 List specific capabilities that are missing or insufficient.`;
 
-const response = await generateAIResponse(gapPrompt, { model: this.config.model)
-    temperature: 0.3
+const response = await generateAIResponse(gapPrompt, { model: this.config.model,
+                temperature: 0.3
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private async recommendAdditions(gaps: string[], constraints: string[],)
@@ -463,8 +463,8 @@ Performance, analysis:
 ${JSON.stringify(performance, null, 2)};
 Provide 5-7 specific, actionable recommendations prioritized by impact.`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.model)
-    temperature: 0.4
+const response = await generateAIResponse(recommendPrompt, { model: this.config.model,
+                temperature: 0.4
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private compileRefinedTools();

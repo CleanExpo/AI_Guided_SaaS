@@ -127,8 +127,8 @@ export class AdvisorAgent extends Agent {
       );
       this.observe('Action plan developed', {
         immediateActions: actionPlan.immediateActions.length,
-        shortTermActions: actionPlan.shortTermActions.length)
-        longTermActions: actionPlan.longTermActions.length)
+        shortTermActions: actionPlan.shortTermActions.length,
+                longTermActions: actionPlan.longTermActions.length)
       });
 
       // Calculate overall confidence

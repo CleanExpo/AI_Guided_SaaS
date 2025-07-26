@@ -148,13 +148,13 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl glass">Something went wrong</CardTitle>
+                  <CardTitle className="text-2xl glass">Something went wrong
                   <p className="text-gray-600 text-sm mt-1">
                     We encountered an unexpected error. Please try again.
                   </p>
                 </div>
               </div>
-            </CardHeader>
+            
             <CardContent className="space-y-4 glass">
               {/* Error Message */}
               <Alert variant="destructive">
@@ -170,14 +170,14 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                 <Button onClick={this.handleReset} className="flex-1">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Try Again
-                </Button>
+                
                 <Button
                   variant="outline"
                   onClick={() => window.location.href = '/'}
                   className="flex-1">
                   <Home className="h-4 w-4 mr-2" />
                   Go to Homepage
-                </Button>
+                
               </div>
 
               {/* Developer Details (in development mode) */}
@@ -195,7 +195,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                       ) : (
                         <ChevronDown className="h-4 w-4" />
                       )}
-                    </button>
+                    
                     <Button
                       variant="ghost"
                       size="sm"
@@ -211,7 +211,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                           Copy Details
                         </>
                       )}
-                    </Button>
+                    
                   </div>
 
                   {showDetails && (
@@ -223,7 +223,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                         </h4>
                         <pre className="glass-navbar text-gray-100 p-3 rounded-xl-lg text-xs overflow-x-auto">
                           {error?.stack || 'No stack trace available'}
-                        </pre>
+                        
                       </div>
 
                       {/* Component Stack */}
@@ -234,7 +234,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                           </h4>
                           <pre className="glass-navbar text-gray-100 p-3 rounded-xl-lg text-xs overflow-x-auto">
                             {errorInfo.componentStack}
-                          </pre>
+                          
                         </div>
                       )}
                     </div>
@@ -251,8 +251,8 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                   </p>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
       );
     }
@@ -289,7 +289,7 @@ export function ErrorBoundaryWrapper({
   return (
     <ErrorBoundary fallback={fallback} onError={handleError}>
       {children}
-    </ErrorBoundary>
+    
   );
 }
 
@@ -302,7 +302,7 @@ export function PageErrorBoundary({ children }: { children: ReactNode }) {
       }}
     >
       {children}
-    </ErrorBoundaryWrapper>
+    
   );
 }
 
@@ -324,6 +324,6 @@ export function ComponentErrorBoundary({
       }
     >
       {children}
-    </ErrorBoundaryWrapper>
+    
   );
 }

@@ -81,7 +81,7 @@ export function WhiteLabelText({
     description: config.description
   }[type];
   
-  return <span className={className}>{text}</span>;
+  return <span className={className}>{text};
 }
 
 export function WhiteLabelLogo({ 
@@ -174,6 +174,6 @@ export function PoweredBy({ className = '' }: { className?: string }) {
   
   return (<p className={`text-sm text-gray-500 ${className}`}>
       Powered by AI Guided SaaS
-    </p>)
+    )
   );
 }

@@ -37,7 +37,7 @@ export interface RegistryEvent { type: 'registration' | 'deregistration' | 'stat
 };
 export class AgentRegistry {
   private static instance: AgentRegistry
-  private registrations: Map<string AgentRegistration> = new Map(, private eventHistory: RegistryEvent[] = []</string>
+  private registrations: Map<string AgentRegistration> = new Map(, private eventHistory: RegistryEvent[] = []
   private healthCheckInterval: NodeJS.Timeout | null = null
   private loader: AgentLoader)
   private coordinator: AgentCoordinator, constructor() {
@@ -131,7 +131,7 @@ if (query.availability !== undefined) {
    * Get best agent for specific task
    */
   getBestAgentForTask(taskType: string, requirements: string[] = []): AgentRegistration | null {
-    // Define task-to-capability mappings, const taskCapabilityMap: Record<string string[]>  = {'architecture': ['system_architecture_design', 'technology_stack_selection'],</string>
+    // Define task-to-capability mappings, const taskCapabilityMap: Record<string string[]>  = {'architecture': ['system_architecture_design', 'technology_stack_selection'],
       'frontend': ['ui_development', 'component_design', 'responsive_design'],
       'backend': ['api_development', 'database_design', 'server_architecture'],
       'testing': ['automated_testing', 'performance_testing', 'security_testing'],
@@ -213,8 +213,8 @@ if (taskResult.execution_time) {
         status.agents_by_health[health] = []
 }
       status.agents_by_health[health].push({ id: registration.agent.agent_id,
-    name: registration.agent.name)
-    role: registration.agent.role   )
+    name: registration.agent.name,
+                role: registration.agent.role   )
     })
       // Group by role; const role = registration.agent.role; if (!status.agents_by_role[role]) {
         status.agents_by_role[role] = []

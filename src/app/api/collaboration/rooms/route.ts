@@ -65,13 +65,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, rooms    })
     } catch (error) {
         handleError(error, {
-            operation: 'getRooms')
-            module: 'collaboration/rooms')
+            operation: 'getRooms',
+            module: 'collaboration/rooms'
         });
         
         return NextResponse.json({
             error: 'Failed to fetch rooms'
         }, {
-            status: 500 });;
+            status: 500 });
     }
 }

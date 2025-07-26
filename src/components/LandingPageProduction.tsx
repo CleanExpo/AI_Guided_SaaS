@@ -240,32 +240,32 @@ export default function LandingPageProduction() {
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-blue-600" />
-              <span className="text-xl font-bold">AI Guided SaaS</span>
+              <span className="text-xl font-bold">AI Guided SaaS
             </div>
             <div className="flex items-center gap-6">
               <Link href="/features" className="text-gray-600 hover:text-gray-900 hidden md:block">
                 Features
-              </Link>
+              
               <Link href="/pricing" className="text-gray-600 hover:text-gray-900 hidden md:block">
                 Pricing
-              </Link>
+              
               <Link href="/docs" className="text-gray-600 hover:text-gray-900 hidden md:block">
                 Docs
-              </Link>
+              
               <Link href="/auth/signin">
-                <Button variant="ghost" size="sm">Sign In</Button>
-              </Link>
+                <Button variant="ghost" size="sm">Sign In
+              
               <Button 
                 onClick={handleGetStarted}
                 size="sm" 
                 className="bg-blue-600 hover:bg-blue-700 text-white"
                 disabled={isLoading}>
                 Get Started
-              </Button>
+              
             </div>
-          </nav>
+          
         </div>
-      </header>
+      
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
@@ -274,19 +274,19 @@ export default function LandingPageProduction() {
             <Badge className="bg-blue-100 text-blue-700 px-4 py-2">
               <Star className="w-4 h-4 inline mr-2" />
               #1 AI Development Platform on Product Hunt
-            </Badge>
+            
             
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900">
               Build SaaS Apps
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 10x Faster with AI
-              </span>
+              
             </h1>
             
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               The complete platform for building, deploying, and scaling AI-powered applications. 
               From idea to production in hours, not months.
-            </p>
+            
           </div>
 
           {/* Email Capture */}
@@ -303,11 +303,11 @@ export default function LandingPageProduction() {
                 onClick={handleStartTrial}
                 className="bg-blue-600 hover:bg-blue-700 text-white">
                 Start Free Trial
-              </Button>
+              
             </div>
             <p className="text-sm text-gray-500 mt-2 text-center">
               No credit card required • 14-day free trial
-            </p>
+            
           </div>
 
           {/* Stats */}
@@ -320,14 +320,14 @@ export default function LandingPageProduction() {
             ))}
           </div>
         </div>
-      </section>
+      
 
       {/* Features Grid */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Everything You Need to Build</h2>
-            <p className="text-xl text-gray-600">Powerful features that accelerate development</p>
+            <p className="text-xl text-gray-600">Powerful features that accelerate development
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -335,10 +335,10 @@ export default function LandingPageProduction() {
               <Card key={index} className="hover:shadow-lg transition-all">
                 <CardHeader>
                   <feature.icon className="w-12 h-12 text-blue-600 mb-4" />
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="text-xl">{feature.title}
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <p className="text-gray-600">{feature.description}
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -346,20 +346,20 @@ export default function LandingPageProduction() {
                     onClick={() => setShowDemo(true)}>
                     <Play className="w-4 h-4 mr-2" />
                     Watch Demo
-                  </Button>
+                  
                 </CardContent>
-              </Card>
+              
             ))}
           </div>
         </div>
-      </section>
+      
 
       {/* Live Demo Section */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">See It In Action</h2>
-            <p className="text-xl text-gray-600">Build a complete app in under 5 minutes</p>
+            <p className="text-xl text-gray-600">Build a complete app in under 5 minutes
           </div>
           
           <Card className="overflow-hidden">
@@ -371,19 +371,19 @@ export default function LandingPageProduction() {
                   onClick={() => window.open('https://demo.ai-guided-saas.com', '_blank')}>
                   <Play className="w-6 h-6 mr-2" />
                   Launch Interactive Demo
-                </Button>
+                
               </div>
             </CardContent>
-          </Card>
+          
         </div>
-      </section>
+      
 
       {/* Pricing */}
       <section className="py-20 px-4 bg-white" id="pricing">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-gray-600">Choose the plan that fits your needs</p>
+            <p className="text-xl text-gray-600">Choose the plan that fits your needs
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -397,25 +397,25 @@ export default function LandingPageProduction() {
                 {plan.popular && (
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white">
                     Most Popular
-                  </Badge>
+                  
                 )}
                 <CardHeader className="text-center">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardTitle className="text-2xl">{plan.name}
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                    <span className="text-gray-600">{plan.period}</span>
+                    <span className="text-4xl font-bold">{plan.price}
+                    <span className="text-gray-600">{plan.period}
                   </div>
-                  <CardDescription className="mt-2">{plan.description}</CardDescription>
+                  <CardDescription className="mt-2">{plan.description}
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <span className="text-sm">{feature}
                       </li>
                     ))}
-                  </ul>
+                  
                   <Button 
                     className={cn(
                       "w-full",
@@ -427,20 +427,20 @@ export default function LandingPageProduction() {
                       handleGetStarted();
                     }}>
                     {plan.cta}
-                  </Button>
+                  
                 </CardContent>
-              </Card>
+              
             ))}
           </div>
         </div>
-      </section>
+      
 
       {/* Testimonials */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Loved by Developers</h2>
-            <p className="text-xl text-gray-600">Join thousands of satisfied users</p>
+            <p className="text-xl text-gray-600">Join thousands of satisfied users
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -452,7 +452,7 @@ export default function LandingPageProduction() {
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-4">"{testimonial.content}"</p>
+                  <p className="text-gray-600 mb-4">"{testimonial.content}"
                   <div className="flex items-center gap-3">
                     <img 
                       src={testimonial.avatar} 
@@ -465,11 +465,11 @@ export default function LandingPageProduction() {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+              
             ))}
           </div>
         </div>
-      </section>
+      
 
       {/* FAQ */}
       <section className="py-20 px-4 bg-white">
@@ -485,16 +485,16 @@ export default function LandingPageProduction() {
                   <CardTitle className="text-lg flex items-center justify-between">
                     {faq.question}
                     <ChevronDown className="w-5 h-5 text-gray-400" />
-                  </CardTitle>
+                  
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{faq.answer}</p>
+                  <p className="text-gray-600">{faq.answer}
                 </CardContent>
-              </Card>
+              
             ))}
           </div>
         </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
@@ -502,7 +502,7 @@ export default function LandingPageProduction() {
           <h2 className="text-4xl font-bold mb-4">Ready to Build Something Amazing?</h2>
           <p className="text-xl mb-8 opacity-90">
             Join 10,000+ developers building the future with AI
-          </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
@@ -510,16 +510,16 @@ export default function LandingPageProduction() {
               onClick={handleGetStarted}>
               Start Building Now
               <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            
             <Button 
               size="lg" 
               variant="outline"
               className="border-white text-white hover:bg-white/10">
               Schedule Demo
-            </Button>
+            
           </div>
         </div>
-      </section>
+      
 
       {/* Footer */}
       <footer className="py-12 px-4 bg-gray-900 text-gray-400">
@@ -528,56 +528,56 @@ export default function LandingPageProduction() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-6 h-6 text-blue-500" />
-                <span className="text-white font-bold">AI Guided SaaS</span>
+                <span className="text-white font-bold">AI Guided SaaS
               </div>
               <p className="text-sm">
                 The complete platform for building AI-powered applications.
-              </p>
+              
             </div>
             
             <div>
               <h4 className="text-white font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/features" className="hover:text-white">Features</Link></li>
-                <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
-                <li><Link href="/docs" className="hover:text-white">Documentation</Link></li>
-                <li><Link href="/changelog" className="hover:text-white">Changelog</Link></li>
-              </ul>
+                <li><Link href="/features" className="hover:text-white">Features</li>
+                <li><Link href="/pricing" className="hover:text-white">Pricing</li>
+                <li><Link href="/docs" className="hover:text-white">Documentation</li>
+                <li><Link href="/changelog" className="hover:text-white">Changelog</li>
+              
             </div>
             
             <div>
               <h4 className="text-white font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/about" className="hover:text-white">About</Link></li>
-                <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
-                <li><Link href="/careers" className="hover:text-white">Careers</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
+                <li><Link href="/about" className="hover:text-white">About</li>
+                <li><Link href="/blog" className="hover:text-white">Blog</li>
+                <li><Link href="/careers" className="hover:text-white">Careers</li>
+                <li><Link href="/contact" className="hover:text-white">Contact</li>
+              
             </div>
             
             <div>
               <h4 className="text-white font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
-                <li><Link href="/security" className="hover:text-white">Security</Link></li>
-              </ul>
+                <li><Link href="/privacy" className="hover:text-white">Privacy Policy</li>
+                <li><Link href="/terms" className="hover:text-white">Terms of Service</li>
+                <li><Link href="/security" className="hover:text-white">Security</li>
+              
             </div>
           </div>
           
           <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm">© 2024 AI Guided SaaS. All rights reserved.</p>
+            <p className="text-sm">© 2024 AI Guided SaaS. All rights reserved.
             <div className="flex gap-4 mt-4 md:mt-0">
               <Link href="https://github.com" className="hover:text-white">
                 <Github className="w-5 h-5" />
-              </Link>
+              
               <Link href="https://twitter.com" className="hover:text-white">
                 <MessageSquare className="w-5 h-5" />
-              </Link>
+              
             </div>
           </div>
         </div>
-      </footer>
+      
     </div>
   );
 }

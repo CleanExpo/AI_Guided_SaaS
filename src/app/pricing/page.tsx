@@ -72,7 +72,7 @@ export default function PricingPage() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Choose the perfect plan for your needs. Start free and upgrade as you grow.
-          </p>
+          
         </div>
 
         {/* Pricing Cards */}
@@ -87,38 +87,38 @@ export default function PricingPage() {
                   <Badge className="glass-button primary text-white px-4 py-1">
                     <Star className="h-3 w-3 mr-1" />
                     Most Popular
-                  </Badge>
+                  
                 </div>
               )}
               
               <CardHeader className="text-center pb-8 glass
-                <CardTitle className="text-2xl glass{plan.name}</CardTitle>
+                <CardTitle className="text-2xl glass{plan.name}
                 <div className="flex items-baseline justify-center">
                   <span className="text-4xl font-bold">
                     ${plan.price}
-                  </span>
-                  <span className="text-gray-500 ml-2">/{plan.period}</span>
+                  
+                  <span className="text-gray-500 ml-2">/{plan.period}
                 </div>
-                <p className="text-gray-600 mt-2">{plan.description}</p>
-              </CardHeader>
+                <p className="text-gray-600 mt-2">{plan.description}
+              
               
               <CardContent className="glass"
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
+                      <span className="text-gray-700">{feature}
+                    
                   ))}
-                </ul>
+                
                 
                 <Button
                   className="w-full"
                   variant={plan.popular ? 'default' : 'outline'}>size="lg">>
                   {plan.buttonText}
-                </Button>
-              </CardContent>
-            </Card>
+                
+              
+            
           ))}
         </div>
 
@@ -138,7 +138,7 @@ export default function PricingPage() {
               <p className="text-gray-600">
                 Yes, you can upgrade or downgrade your plan at any time. 
                 Changes take effect immediately.
-              </p>
+              
             </div>
             
             <div>
@@ -148,7 +148,7 @@ export default function PricingPage() {
               <p className="text-gray-600">
                 Yes, we offer a 14-day free trial for Pro and Enterprise plans. 
                 No credit card required.
-              </p>
+              
             </div>
             
             <div>
@@ -158,7 +158,7 @@ export default function PricingPage() {
               <p className="text-gray-600">
                 We accept all major credit cards, PayPal, and wire transfers 
                 for Enterprise customers.
-              </p>
+              
             </div>
             
             <div>
@@ -168,7 +168,7 @@ export default function PricingPage() {
               <p className="text-gray-600">
                 Yes, we offer a 30-day money-back guarantee for all paid plans. 
                 No questions asked.
-              </p>
+              
             </div>
           </div>
         </div>

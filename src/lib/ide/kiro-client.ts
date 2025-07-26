@@ -40,8 +40,8 @@ export interface KiroProjectSettings { buildCommand?: string,
   startCommand?: string,
   testCommand?: string,
   outputDirectory?: string,
-  environment?: Record<string string></string>
-  dependencies?: Record<string string  />}</string>
+  environment?: Record<string string>
+  dependencies?: Record<string string  />}
 // IDE features;
 export interface KiroFile { path: string;
   content: string;
@@ -63,14 +63,14 @@ export interface KiroTerminal { id: string;
   name: string;
   shell?: string,
   cwd?: string,
-  env?: Record<string string  />, export</string>
+  env?: Record<string string  />, export
 }
 
 interface KiroDebugSession { id: string;
   name: string;
   type: string;
   request: 'launch' | 'attach',
-  configuration: Record<string any  />}</string>
+  configuration: Record<string any  />}
 // AI assistance types;
 export interface KiroAIAssistance { suggestions: KiroSuggestion[],
   diagnostics: KiroDiagnostic[],
@@ -135,7 +135,7 @@ export const KiroProjectSchema = z.object({ name: z.string().min(1).max(100, des
 export class KiroClient {
   private config: KiroConfig
   private ws: WebSocket | null = null
-  private eventHandlers: Map<string Set<Function> = new Map(, constructor(config: KiroConfig) {</string>
+  private eventHandlers: Map<string Set<Function> = new Map(, constructor(config: KiroConfig) {
     this.config = config
 }
   // Connection management
@@ -285,9 +285,9 @@ on(event: string, handler: Function) {
   private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise<any> {
 { `${this.config.apiUrl}${endpoint}`;
 
-const headers: Record<string string> = {</string>
+const headers: Record<string string> = {
       'Content-Type': 'application/json',
-      ...(options.headers as Record<string string> || {})</string>
+      ...(options.headers as Record<string string> || {})
 }
     if (this.config.apiKey) {
       headers['Authorization'] = `Bearer ${this.config.apiKey}`

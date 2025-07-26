@@ -110,8 +110,8 @@ export default function ChatPage() {
         {!isMobile && (
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Assistant</h1>
-            <p className="text-gray-600">Get help shipping your SaaS faster</p>
-          </div>
+            <p className="text-gray-600">Get help shipping your SaaS faster
+          
         )}
 
         {/* Chat Container */}
@@ -121,13 +121,13 @@ export default function ChatPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-purple-600" />
-                  <CardTitle className="text-lg glass">AI Assistant</CardTitle>
-                </div>
+                  <CardTitle className="text-lg glass">AI Assistant
+                
                 <Badge variant={isOnline ? 'default' : 'secondary'}>
                   {isOnline ? 'Online' : 'Offline'}
-                </Badge>
-              </div>
-            </CardHeader>
+                
+              
+            
           )}
 
           <CardContent className={`${isMobile ? 'flex-1 overflow-y-auto p-4' : 'h-[600px] overflow-y-auto p-6'} glass`}>
@@ -144,7 +144,7 @@ export default function ChatPage() {
                       ) : (
                         <Bot className="h-4 w-4 text-purple-600" />
                       )}
-                    </div>
+                    
                     <div className={`rounded-lg px-4 py-3 ${
                       message.role === 'user' 
                         ? 'bg-blue-600 text-white' 
@@ -157,7 +157,7 @@ export default function ChatPage() {
                                 <div key={index} className="relative">
                                   <pre className="glass-navbar text-gray-100 p-3 rounded-lg text-sm overflow-x-auto">
                                     <code>{part.replace(/^typescript\n/, '')}</code>
-                                  </pre>
+                                  
                                   <Button
                                     size="sm"
                                     variant="ghost"
@@ -168,23 +168,23 @@ export default function ChatPage() {
                                     ) : (
                                       <Copy className="h-4 w-4" />
                                     )}
-                                  </Button>
-                                </div>
+                                  
+                                
                               );
                             }
-                            return <p key={index} className="whitespace-pre-wrap">{part}</p>;
+                            return <p key={index} className="whitespace-pre-wrap">{part};
                           })}
-                        </div>
+                        
                       ) : (
-                        <p className="whitespace-pre-wrap">{message.content}</p>
+                        <p className="whitespace-pre-wrap">{message.content}
                       )}
                       <p className={`text-xs mt-2 ${
                         message.role === 'user' ? 'text-blue-200' : 'text-gray-500'>}`}>
                         {message.timestamp.toLocaleTimeString()}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                      
+                    
+                  
+                
               ))}
               
               {isLoading && (
@@ -192,17 +192,17 @@ export default function ChatPage() {
                   <div className="flex gap-3">
                     <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
                       <Bot className="h-4 w-4 text-purple-600" />
-                    </div>
+                    
                     <div className="bg-gray-100 rounded-lg px-4 py-3">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                    </div>
-                  </div>
-                </div>
+                    
+                  
+                
               )}
               
               <div ref={messagesEndRef} />
-            </div>
-          </CardContent>
+            
+          
 
           {/* Input Area */}
           <div className={`border-t p-4 ${isMobile ? 'bg-white' : ''}`}>
@@ -221,8 +221,8 @@ export default function ChatPage() {
                 disabled={!input.trim() || isLoading || !isOnline}
                 className="bg-purple-600 hover:bg-purple-700">
                 <Send className="h-4 w-4" />
-              </Button>
-            </div>
+              
+            
             
             {/* Quick Actions */}
             <div className="flex flex-wrap gap-2 mt-3">
@@ -232,25 +232,25 @@ export default function ChatPage() {
               >
                 <Zap className="h-3 w-3 mr-1" />
                 Deploy
-              </Button>
+              
               <Button
                 variant="outline"
                 size="sm">onClick={() => setInput('How do I add Stripe payments?')}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
                 Payments
-              </Button>
+              
               <Button
                 variant="outline"
                 size="sm">onClick={() => setInput('Show me authentication setup')}
               >
                 <Code2 className="h-3 w-3 mr-1" />
                 Auth
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </div>
-    </div>
+              
+            
+          
+        
+      
+    
   );
 }

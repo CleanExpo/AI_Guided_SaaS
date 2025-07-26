@@ -34,7 +34,7 @@ export class HierarchicalMemorySystem {
   private userMemory: MemoryTier
   private projectMemory: MemoryTier
   private modularMemory: MemoryTier
-  private memoryEntries: Map<string MemoryEntry> = new Map(, private accessLog: AccessLog[] = [], constructor() {</string>
+  private memoryEntries: Map<string MemoryEntry> = new Map(, private accessLog: AccessLog[] = [], constructor() {
     this.userMemory={ name: 'User Memory',
       maxTokens: 15000;
   // ~/.claude/CLAUDE.md personal preferences, currentTokens: 0;
@@ -304,7 +304,7 @@ interface AccessLog { entryId: string;
 };
 interface CompactionResult { totalCompacted: number;
   tierResults: TierCompactionResult[],
-  newUtilizationRates: Record<string any>,</string>
+  newUtilizationRates: Record<string any>,
   timestamp: Date
 };
 interface TierCompactionResult { tierName: string;
@@ -315,8 +315,8 @@ interface TierCompactionResult { tierName: string;
  };
 interface MemoryAnalytics { totalEntries: number;
   totalTokens: number;
-  tierDistribution: Record<string any>,</string>
-  utilizationRates: Record<string any>,</string>
+  tierDistribution: Record<string any>,
+  utilizationRates: Record<string any>,
   averageAccessCount: number;
   oldestEntry: number;
   newestEntry: number

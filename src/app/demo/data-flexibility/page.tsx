@@ -51,15 +51,15 @@ export default function DataFlexibilityPage() {
           </h1>
           <p className="text-gray-600">
             Explore how AI Guided SaaS works with various data sources and formats.
-          </p>
+          
         </div>
         
         <div className="glass grid gap-6 lg:grid-cols-2">
           <div>
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Available Data Sources</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Available Data Sources
+              
               <CardContent className="glass">
             <div className="space-y-4">)
                   {dataSources.map((source) => (
@@ -69,32 +69,32 @@ export default function DataFlexibilityPage() {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900">{source.name}</h3>
-                        <p className="text-sm text-gray-600">{source.description}</p>
+                        <p className="text-sm text-gray-600">{source.description}
                       </div>
                       <Badge >variant={source.status === 'connected' ? 'default' : 'secondary'}>
                         {source.status}
-                      </Badge>
+                      
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
           
           <div>
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Sample Data Preview</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Sample Data Preview
+              
               <CardContent className="glass">
             <div className="space-y-3">
                   {mockData.map((item) => (
                     <div key={item.id} className="flex items-center justify-between p-3 glass rounded-xl-lg">
                       <div>
-                        <p className="font-medium text-gray-900">{item.name}</p>
-                        <p className="text-sm text-gray-600">{item.email}</p>
+                        <p className="font-medium text-gray-900">{item.name}
+                        <p className="text-sm text-gray-600">{item.email}
                       </div>
-                      <Badge variant="outline">{item.role}</Badge>
+                      <Badge variant="outline">{item.role}
                     </div>
                   ))}
                 </div>
@@ -102,10 +102,10 @@ export default function DataFlexibilityPage() {
                   <p className="text-sm text-blue-800">
                     <strong>AI Insight:</strong> This data shows 3 users with different roles. 
                     I can help you analyze patterns, generate reports, or create visualizations.
-                  </p>
+                  
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
         </div>
       </div>

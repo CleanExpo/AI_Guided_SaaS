@@ -71,8 +71,8 @@ const data = await response.json();
   async updateUser(id: string, data: Partial<User>): Promise<User> {
 { await this.request<any>(`/users/${id}`, {</any>
       method: 'PUT',
-      body: JSON.stringify({ username: data.email)
-        email: data.email;
+      body: JSON.stringify({ username: data.email,
+                email: data.email;
         ...data.metadata)
       })};
     return this.mapStrapiUser(response)
@@ -102,7 +102,7 @@ const data = await response.json();
     await this.request(`/projects/${id}`, { method: 'DELETE'   )
     })
   }
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;</PaginatedResponse>
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;
 { new URLSearchParams(, // Filtering, params.append('filters[user][id][$eq]', userId);
     // Pagination;
 
@@ -128,8 +128,8 @@ const response = await this.request<{ data: [] as any[],
         }}>(`/projects?${params.toString()}`);
     return { data: (response as any).data.map(this.mapStrapiProject, total: response.meta.pagination.total,
       page: response.meta.pagination.page,
-      pageSize: response.meta.pagination.pageSize)
-      hasMore: response.meta.pagination.page < response.meta.pagination.pageCount
+      pageSize: response.meta.pagination.pageSize,
+                hasMore: response.meta.pagination.page < response.meta.pagination.pageCount
   }
 }
   // Generic CRUD)
@@ -158,7 +158,7 @@ const response = await this.request<{ data: [] as any[],
     await this.request(`/${collection}/${id}`, { method: 'DELETE'   )
     })
   }
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {</PaginatedResponse>
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {
 { new URLSearchParams(, // Filters, if (options?.filters) {
       Object.entries(options.filters).forEach(([key, value]) => {
         params.append(`filters[${key};][$eq]`, value.toString())    })
@@ -237,8 +237,8 @@ const response = await fetch('/api/admin/auth', { method: 'POST',)
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       metadata: { blocked: user.blocked,
-        confirmed: user.confirmed)
-        provider: user.provider
+        confirmed: user.confirmed,
+                provider: user.provider
   }
 })
   private mapStrapiProject(data: any): Project {

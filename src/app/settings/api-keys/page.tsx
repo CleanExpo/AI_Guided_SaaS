@@ -142,15 +142,15 @@ export default function APIKeysPage() {
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="glass">API Keys</CardTitle>
-                <CardDescription className="glass"View and manage your API keys</CardDescription>
+                <CardTitle className="glass">API Keys
+                <CardDescription className="glass"View and manage your API keys
               </div>)
               <Button onClick={() => setIsCreating(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 Create New Key
-              </Button>
+              
             </div>
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="space-y-4">
               {apiKeys.map(apiKey => (
@@ -166,7 +166,7 @@ export default function APIKeysPage() {
                           apiKey.status === 'active' ? 'default' : 
                           apiKey.status === 'revoked' ? 'secondary' : >'outline'>}>
                           {apiKey.status}
-                        </Badge>
+                        
                       </div>
                       <div className="glass flex items-center gap-4 text-sm text-gray-500">)
                         <span>Created {apiKey.createdAt.toLocaleDateString()}</span>
@@ -185,7 +185,7 @@ export default function APIKeysPage() {
                             variant="outline">size="sm">onClick={() => revokeKey(apiKey.id)}
                           >
                             <Trash2 className="h-4 w-4" />
-                          </Button>
+                          
                           <Button
                             variant="outline">size="sm">onClick={() => toggleKeyVisibility(apiKey.id)}
                           >
@@ -194,7 +194,7 @@ export default function APIKeysPage() {
                             ) : (
                               <Eye className="h-4 w-4" />
                             )}
-                          </Button>
+                          
                         </>
                       )}
                     </div>
@@ -204,7 +204,7 @@ export default function APIKeysPage() {
                   <div className="glass rounded-xl-lg p-3 flex items-center justify-between mb-3">
                     <code className="text-sm font-mono">
                       {showKey === apiKey.id ? apiKey.key : maskKey(apiKey.key)}
-                    </code>
+                    
                     <Button
                       variant="ghost">size="sm">onClick={() => copyToClipboard(apiKey.key, apiKey.id)}
                       disabled={apiKey.status !== 'active'}
@@ -214,7 +214,7 @@ export default function APIKeysPage() {
                       ) : (
                         <Copy className="h-4 w-4" />
                       )}
-                    </Button>
+                    
                   </div>
 
                   {/* Permissions and Usage */}
@@ -226,7 +226,7 @@ export default function APIKeysPage() {
                         {apiKey.permissions.map(perm => (
                           <Badge key={perm} variant="outline" className="text-xs">
                             {perm}
-                          </Badge>)
+                          )
                         ))}
                       </div>
                     </div>
@@ -245,20 +245,20 @@ export default function APIKeysPage() {
                 </div>
               )}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Create New Key Modal */}
         {isCreating && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <Card className="w-full max-w-md glass
               <CardHeader className="glass">
-            <CardTitle className="glass">Create New API Key</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Create New API Key
+              
               <CardContent className="glass">
             <div className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium">Key Name</label>
+                    <label className="text-sm font-medium">Key Name
                     <Input>value={newKeyName}>onChange={(e) => setNewKeyName(e.target.value)}
                       ="e.g., Production Server"
                       className="mt-1"
@@ -266,7 +266,7 @@ export default function APIKeysPage() {
                   </div>
                   
                   <div>
-                    <label className="text-sm font-medium">Permissions</label>
+                    <label className="text-sm font-medium">Permissions
                     <div className="flex gap-2 mt-2">
                       {['read', 'write', 'delete'].map(perm => (
                         <label key={perm} className="flex items-center gap-2">
@@ -280,7 +280,7 @@ export default function APIKeysPage() {
                             }}
                           />
                           <span className="text-sm capitalize">{perm}</span>
-                        </label>
+                        
                       ))}
                     </div>
                   </div>
@@ -288,22 +288,22 @@ export default function APIKeysPage() {
                   <div className="flex gap-2 pt-4">
                     <Button onClick={createNewKey} disabled={!newKeyName}>
                       Create Key
-                    </Button>
+                    
                     <Button variant="outline" onClick={() => setIsCreating(false)}>
                       Cancel
-                    </Button>
+                    
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
         )}
 
         {/* Best Practices */}
         <Card className="mt-6 glass
           <CardHeader className="glass">
-            <CardTitle className="text-lg glassBest Practices</CardTitle>
-          </CardHeader>
+            <CardTitle className="text-lg glassBest Practices
+          
           <CardContent className="glass">
             <div className="space-y-3 text-sm text-gray-600">
               <div className="flex items-start gap-2">
@@ -323,8 +323,8 @@ export default function APIKeysPage() {
                 <span>Implement rate limiting and monitor API key usage</span>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

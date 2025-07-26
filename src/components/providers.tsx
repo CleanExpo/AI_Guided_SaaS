@@ -39,8 +39,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
           enableSystem>disableTransitionOnChange>
           {children}
           <PWAInstallPrompt />
-        </ThemeProvider>
-      </QueryClientProvider>)
+        
+      )
     );
   }
 
@@ -53,8 +53,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
           enableSystem>disableTransitionOnChange>
           {children}
           <PWAInstallPrompt />
-        </ThemeProvider>
-      </QueryClientProvider>
+        
+      
     </SessionProvider>)
   );
 }

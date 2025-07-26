@@ -21,7 +21,7 @@ export interface TypeScriptFix { file: string;
 }
 
 export interface TypeAnalysis { totalErrors: number;
-  errorsByType: Record<string number>,</string>
+  errorsByType: Record<string number>,
   filesByErrorCount: Array<{ file: string, errors: number }>;
   suggestedFixes: TypeScriptFix[],
   complexityScore: number
@@ -110,8 +110,8 @@ export class TypeScriptAgent extends Agent {
       this.logger.error('TypeScript task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message)
-          task: message.type)
+        payload: { error: error.message,
+                task: message.type)
         }    })
 }
   }
@@ -141,8 +141,8 @@ export class TypeScriptAgent extends Agent {
     if (analysis.totalErrors > 100) {
       await this.sendMessage({ to: 'architect-agent',
         type: 'critical-type-issues',
-        payload: { errorCount: analysis.totalErrors)
-          topIssues: analysis.errorsByType)
+        payload: { errorCount: analysis.totalErrors,
+                topIssues: analysis.errorsByType)
         }    })
 }
   }
@@ -189,8 +189,8 @@ export class TypeScriptAgent extends Agent {
       type: 'types-generated',
       payload: {
         source,
-        outputPath)
-        typeCount: inferredTypes.length)
+        outputPath,
+                typeCount: inferredTypes.length)
       }    })
 }
 
@@ -252,8 +252,8 @@ export class TypeScriptAgent extends Agent {
     return errors
 }
 
-  private performTypeAnalysis(errors: TypeScriptError[]): TypeAnalysis { const errorsByType: Record<string number> = { };</string>
-    const fileErrorCount: Record<string number> = {};</string>
+  private performTypeAnalysis(errors: TypeScriptError[]): TypeAnalysis { const errorsByType: Record<string number> = { };
+    const fileErrorCount: Record<string number> = {};
     
     errors.forEach(error => {
       // Count by error code)
@@ -279,7 +279,7 @@ export class TypeScriptAgent extends Agent {
     }
 }
 
-  private async generateFixSuggestions(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async generateFixSuggestions(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {
     const fixes: TypeScriptFix[] = [];
     
     // Group errors by type for efficient fixing
@@ -304,7 +304,7 @@ export class TypeScriptAgent extends Agent {
     return fixes
 }
 
-  private async fixFileTypeErrors(file: string, errorCodes? null : string[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async fixFileTypeErrors(file: string, errorCodes? null : string[]): Promise<TypeScriptFix[]> {
 { this.runTypeScriptDiagnostics(file);
     const filteredErrors = errorCodes ;
       ? errors.filter(e => errorCodes.includes(e.code))
@@ -313,7 +313,7 @@ export class TypeScriptAgent extends Agent {
     return this.generateFixSuggestions(filteredErrors)
 }
 
-  private async applyFixes(fixes: TypeScriptFix[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async applyFixes(fixes: TypeScriptFix[]): Promise<TypeScriptFix[]> {
     const appliedFixes: TypeScriptFix[] = [];
     
     // Group fixes by file
@@ -340,7 +340,7 @@ export class TypeScriptAgent extends Agent {
     return appliedFixes
 }
 
-  private async inferTypes(source: string): Promise<any[]> {</any>
+  private async inferTypes(source: string): Promise<any[]> {
     // Simplified type inference
     const inferredTypes: any[] = [];
     
@@ -375,22 +375,22 @@ export class TypeScriptAgent extends Agent {
     return definitions
 }
 
-  private async addExplicitTypes(targetPath: string): Promise<any[]> {</any>
+  private async addExplicitTypes(targetPath: string): Promise<any[]> {
     // Add explicit types to implicit any
     return []
 }
 
-  private async addStrictNullChecks(targetPath: string): Promise<any[]> {</any>
+  private async addStrictNullChecks(targetPath: string): Promise<any[]> {
     // Add null checks
     return []
 }
 
-  private async addReadonlyModifiers(targetPath: string): Promise<any[]> {</any>
+  private async addReadonlyModifiers(targetPath: string): Promise<any[]> {
     // Add readonly where appropriate
     return []
 }
 
-  private async applyRefactorings(refactorings: any[]): Promise<any[]> {</any>
+  private async applyRefactorings(refactorings: any[]): Promise<any[]> {
     // Apply refactorings
     return refactorings
 }
@@ -410,8 +410,8 @@ export class TypeScriptAgent extends Agent {
     return Math.min(score, 100); // Cap at 100
   }
 
-  private groupErrorsByType(errors: TypeScriptError[]): Record<string TypeScriptError[]> {</string>
-    const groups: Record<string TypeScriptError[]> = { };</string>
+  private groupErrorsByType(errors: TypeScriptError[]): Record<string TypeScriptError[]> {
+    const groups: Record<string TypeScriptError[]> = { };
     
     errors.forEach(error => { if (!groups[error.code]) {
         groups[error.code] = []
@@ -422,8 +422,8 @@ export class TypeScriptAgent extends Agent {
     return groups
 }
 
-  private groupFixesByFile(fixes: TypeScriptFix[]): Record<string TypeScriptFix[]> {</string>
-    const groups: Record<string TypeScriptFix[]> = { };</string>
+  private groupFixesByFile(fixes: TypeScriptFix[]): Record<string TypeScriptFix[]> {
+    const groups: Record<string TypeScriptFix[]> = { };
     
     fixes.forEach(fix => {)
       if (!groups[fix.file]) {
@@ -457,22 +457,22 @@ export class TypeScriptAgent extends Agent {
 }
 
   // Specific fix implementations
-  private async fixPropertyDoesNotExist(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async fixPropertyDoesNotExist(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {
     // Fix "Property does not exist" errors
     return []
 }
 
-  private async fixTypeMismatch(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async fixTypeMismatch(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {
     // Fix type mismatch errors
     return []
 }
 
-  private async fixImplicitAny(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async fixImplicitAny(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {
     // Fix implicit any errors
     return []
 }
 
-  private async fixTypeNotAssignable(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {</TypeScriptFix>
+  private async fixTypeNotAssignable(errors: TypeScriptError[]): Promise<TypeScriptFix[]> {
     // Fix type not assignable errors
     return []
 }

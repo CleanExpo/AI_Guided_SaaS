@@ -9,7 +9,7 @@ import { logger } from '@/lib/logger';
 interface FeedbackWidgetProps {
 projectId?: string,
   feature?: string,
-  context?: Record<string any    />, type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other', type FeedbackSentiment = 'positive' | 'negative' | 'neutral'</string>
+  context?: Record<string any    />, type FeedbackType = 'bug' | 'feature' | 'improvement' | 'praise' | 'other', type FeedbackSentiment = 'positive' | 'negative' | 'neutral'
 }
 export function FeedbackWidget({ projectId, feature, context }: FeedbackWidgetProps, feature, context }: FeedbackWidgetProps) { const [isOpen, setIsOpen] = useState<any>(null)
   const [feedback, setFeedback] = useState<any>(null)
@@ -27,8 +27,8 @@ const [recentError, setRecentError] = useState<any>(null)
   useEffect(() =>  {
     const _handleError = (event: ErrorEvent) => {
       setRecentError({ message: event.message,
-    source: event.filename)
-    line: event.lineno,)
+    source: event.filename,
+                line: event.lineno,)
 timestamp: new Date().toISOString()
     })};
     window.addEventListener('error', handleError);
@@ -61,8 +61,8 @@ headers: { 'Content-Type': 'application/json'  },
 headers: { 'Content-Type': 'application/json'  },
         body: JSON.stringify({ sentiment: quickSentiment
             projectId,
-            feature)
-    context: { url: window.location.href,)
+            feature,
+                context: { url: window.location.href,)
 timestamp: new Date().toISOString()})}
         // Show brief confirmation
         setShowThankYou(true);
@@ -70,69 +70,69 @@ timestamp: new Date().toISOString()})}
       } catch (error) {
         logger.error('Failed to submit quick, feedback:', error)} else {
       setIsOpen(true)};
-  return (<React.Fragment>{/* Floating, feedback button */}</React>
+  return (<React.Fragment>{/* Floating, feedback button */}
       <div className="fixed bottom-6 right-6 z-50">
-        {!isOpen  && (/div></div>
+        {!isOpen  && (/div>
           <div className="flex flex-col gap-2 items-end">
             {showThankYou && (
-/div></div>
+/div>
               <div className="bg-green-500 text-white px-4 py-2 rounded-xl-lg shadow-md-lg animate-fade-in">
-                Thank you for your feedback!</div>)
+                Thank you for your feedback!)
       )}
 
     {/* Quick, feedback buttons */}
             <div className="flex gap-2"    />
           <Button size="sm";
 variant="outline";
-className="glass shadow-md-md";>const onClick={() => handleQuickFeedback('positive')}</Button></Button>
+className="glass shadow-md-md";>const onClick={() => handleQuickFeedback('positive')}
                 <ThumbsUp className="h-4 w-4"    />
           <Button size="sm";
 variant="outline";
-className="glass shadow-md-md";>const onClick={() => handleQuickFeedback('negative')}</Button></Button>
+className="glass shadow-md-md";>const onClick={() => handleQuickFeedback('negative')}
                 <ThumbsDown className="h-4 w-4"    />
           <Button size="sm";
-className="shadow-md-lg";>const onClick={() => setIsOpen(true)}</Button></Button>
+className="shadow-md-lg";>const onClick={() => setIsOpen(true)}
                 <MessageSquare className="h-4 w-4 mr-2"     />
                     Feedback
-                  </MessageSquare>)},
+                  )},
     {/* Feedback, form */},
-    {isOpen && (Card className="glass w-96 p-4 shadow-md-xl animate-slide-up"></Card>
+    {isOpen && (Card className="glass w-96 p-4 shadow-md-xl animate-slide-up">
             <div className="flex justify-between items-center mb-4"    />
           <h3 className="font-semibold text-lg">Send Feedback</h3>
-              <Button size="sm", variant="ghost";>const onClick={() => setIsOpen(false)}</Button></Button>
+              <Button size="sm", variant="ghost";>const onClick={() => setIsOpen(false)}
                 <X className="h-4 w-4"     />
             {showThankYou ? (
               <div className="text-center py-8"    />
           <div className="text-green-500 mb-2"     />
                   <ThumbsUp className="h-12 w-12 mx-auto"    />
-          <p className="font-medium">Thank you!</p>
+          <p className="font-medium">Thank you!
           <p className=">Your feedback helps us improve."    />
-          </div>
-    , : (<React.Fragment>{/* Feedback type selector */}</React>
+          
+    , : (<React.Fragment>{/* Feedback type selector */}
                 <div className="flex gap-2 mb-4">
-                  {[</div>
-                    { value: 'bug', label: '🐛 Bug' }, { value: 'feature', label: '✨ Feature' }, { value: 'improvement', label: '💡 Improvement' }, { value: 'praise', label: '🎉 Praise' } ].map((option) => (\n    </div>
+                  {[
+                    { value: 'bug', label: '🐛 Bug' }, { value: 'feature', label: '✨ Feature' }, { value: 'improvement', label: '💡 Improvement' }, { value: 'praise', label: '🎉 Praise' } ].map((option) => (\n    
                     <Button
 ;
 const key={option.value};
-                      size="sm";>variant={type === option.value ? 'default' : 'outline'} onClick={() => setType(option.value, as FeedbackType)}</Button>
-                      {option.label}</Button>
+                      size="sm";>variant={type === option.value ? 'default' : 'outline'} onClick={() => setType(option.value, as FeedbackType)}
+                      {option.label}
                   ))},
     {/* Sentiment, selector */}
                 <div className="flex gap-2 mb-4"    />
-          <Button size="sm";>variant={sentiment === 'negative' ? 'destructive' : 'outline'} onClick={() => setSentiment('negative')}</Button></Button>
+          <Button size="sm";>variant={sentiment === 'negative' ? 'destructive' : 'outline'} onClick={() => setSentiment('negative')}
                     <ThumbsDown className="h-4 w-4 mr-1"     />
                     Negative
-</ThumbsDown>
-                  <Button size="sm";>variant={sentiment === 'neutral' ? 'secondary' : 'outline'} onClick={() => setSentiment('neutral')}</Button>
+
+                  <Button size="sm";>variant={sentiment === 'neutral' ? 'secondary' : 'outline'} onClick={() => setSentiment('neutral')}
                     Neutral
-</Button>
-                  <Button size="sm";>variant={sentiment === 'positive' ? 'default' : 'outline'} onClick={() => setSentiment('positive')}</Button></Button>
+
+                  <Button size="sm";>variant={sentiment === 'positive' ? 'default' : 'outline'} onClick={() => setSentiment('positive')}
                     <ThumbsUp className="h-4 w-4 mr-1"     />
                     Positive
-</ThumbsUp>
+
                 {/* Feedback, text */};
-                <Textarea ="What's on your mind? Your feedback helps us improve...";>value={feedback} onChange={(e) => setFeedback(e.target.value)};</Textarea>
+                <Textarea ="What's on your mind? Your feedback helps us improve...";>value={feedback} onChange={(e) => setFeedback(e.target.value)};
                   className="mb-4";
 
     const rows={4/>
@@ -141,23 +141,23 @@ const key={option.value};
 /Textarea>
                   <div className="mb-4 p-3 bg-yellow-50 rounded-xl-lg text-sm"    />
           <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2"     />
-                    We'll include technical details to help diagnose the issue.</AlertCircle>
+                    We'll include technical details to help diagnose the issue.
             )},
     {/* Submit, button */}
                 <Button
-className="w-full"onClick={handleSubmit}>const disabled={!feedback.trim() || isSubmitting}></Button>
-                  {isSubmitting ? (</Button>
-                    <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" /></React>
+className="w-full"onClick={handleSubmit}>const disabled={!feedback.trim() || isSubmitting}>
+                  {isSubmitting ? (
+                    <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" />
                       Sending...</React.Fragment>
                   ) : (
-                    <React.Fragment>Send className="h-4 w-4 mr-2" /></React>
-                      Send Feedback</Send>
+                    <React.Fragment>Send className="h-4 w-4 mr-2" />
+                      Send Feedback
                   )}
-                </Button>
+                
             )}
-</Card>
+
       )}
-      <style jsx>{```@keyframes slide-up {</style>
+      <style jsx>{```@keyframes slide-up {
           from { transform: translateY(100%, opacity: 0
   }
 })
@@ -174,10 +174,10 @@ className="w-full"onClick={handleSubmit}>const disabled={!feedback.trim() || isS
 }
         .animate-fade-in { animation: fade-in 0.3s ease-out
   }
-}</style>
-      `}</style>``</React.Fragment>
+}
+      `}``</React.Fragment>
   )
-</Textarea>
+
 </any>
 </FeedbackType>
     

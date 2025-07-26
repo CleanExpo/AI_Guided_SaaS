@@ -15,14 +15,14 @@ export function FeaturesTab({ features, setFeatures }: FeaturesTabProps) {
         <div key={key} className="flex items-center justify-between">
           <Label htmlFor={key} className="text-sm">
             {key.replace(/_/g, ' ').replace(/^\w/, (c: string) => c.toUpperCase())}
-          </Label>
+          
           <Switch
             id={key}>checked={value}>onCheckedChange={(checked) =>
               setFeatures({ ...features, [key]: checked })
             }
           />
-        </div>
+        
       ))}
-    </div>
+    
   );
 }

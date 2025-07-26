@@ -168,7 +168,7 @@ export default function PluginManager() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Installed Plugins</h2>
-          <p className="text-gray-600">Manage your installed plugins and their settings</p>
+          <p className="text-gray-600">Manage your installed plugins and their settings
         </div>
         <Button>
           <Download className="h-4 w-4 mr-2" />
@@ -182,39 +182,39 @@ export default function PluginManager() {
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Plugins</p>
-                <p className="text-2xl font-bold">{plugins.length}</p>
+                <p className="text-sm text-gray-600">Total Plugins
+                <p className="text-2xl font-bold">{plugins.length}
               </div>
               <Package className="h-8 w-8 text-gray-300" />
             </div>
-          </CardContent>
-        </Card>
+          
+        
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Active</p>
+                <p className="text-sm text-gray-600">Active
                 <p className="text-2xl font-bold">
                   {plugins.filter(p => p.active).length}
-                </p>
+                
               </div>
               <Power className="h-8 w-8 text-green-400" />
             </div>
-          </CardContent>
-        </Card>
+          
+        
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Updates Available</p>
+                <p className="text-sm text-gray-600">Updates Available
                 <p className="text-2xl font-bold">
                   {plugins.filter(p => p.hasUpdate).length}
-                </p>
+                
               </div>
               <RefreshCw className="h-8 w-8 text-blue-400" />
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
 
       {/* Plugin List */}
@@ -229,16 +229,16 @@ export default function PluginManager() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <CardTitle className="text-lg">{plugin.name}</CardTitle>
-                      <Badge variant="secondary">v{plugin.version}</Badge>
+                      <CardTitle className="text-lg">{plugin.name}
+                      <Badge variant="secondary">v{plugin.version}
                       {plugin.hasUpdate && (
                         <Badge className="bg-blue-100 text-blue-700">
                           Update available
-                        </Badge>
+                        
                       )}
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">{plugin.description}</p>
-                    <p className="text-xs text-gray-500 mt-1">by {plugin.author}</p>
+                    <p className="text-sm text-gray-600 mt-1">{plugin.description}
+                    <p className="text-xs text-gray-500 mt-1">by {plugin.author}
                   </div>
                 </div>
                 <Switch
@@ -247,7 +247,7 @@ export default function PluginManager() {
                   disabled={loading[plugin.id]}
                 />
               </div>
-            </CardHeader>
+            
             <CardContent className="glass">
             <div className="flex items-center justify-between">
                 <div className="flex gap-2">
@@ -297,12 +297,12 @@ export default function PluginManager() {
                   {plugin.active ? (
                     <>
                       <CheckCircle className="h-4 w-4 text-green-600" />
-                      <span className="text-green-600">Active</span>
+                      <span className="text-green-600">Active
                     </>
                   ) : (
                     <>
                       <AlertCircle className="h-4 w-4 text-gray-400" />
-                      <span className="text-gray-400">Inactive</span>
+                      <span className="text-gray-400">Inactive
                     </>
                   )}
                 </div>
@@ -317,7 +317,7 @@ export default function PluginManager() {
                       <div key={key} className="flex items-center justify-between">
                         <label className="text-sm font-medium capitalize">
                           {key.replace(/([A-Z])/g, ' $1').trim()}
-                        </label>
+                        
                         {typeof value === 'boolean' ? (
                           <Switch defaultChecked={value} />
                         ) : (
@@ -335,8 +335,8 @@ export default function PluginManager() {
                   </div>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            
+          
         ))}
       </div>
 
@@ -348,13 +348,13 @@ export default function PluginManager() {
             <h3 className="text-lg font-medium text-gray-900 mb-2">No plugins installed</h3>
             <p className="text-gray-600 mb-4">
               Browse the marketplace to find plugins that enhance your app
-            </p>
+            
             <Button>
               <Download className="h-4 w-4 mr-2" />
               Browse Marketplace
             </Button>
-          </CardContent>
-        </Card>
+          
+        
       )}
 
       {/* Info Alert */}

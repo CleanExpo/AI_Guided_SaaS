@@ -100,12 +100,12 @@ export default function FreeTierManager({
             <CardTitle className="flex items-center gap-2 glass
               <Sparkles className="h-5 w-5 text-blue-600" />
               Free Tier Status
-            </CardTitle>
+            
             {currentPlan === 'free' && (
-              <Badge className="bg-blue-100 text-blue-700">FREE PLAN</Badge>)
+              <Badge className="bg-blue-100 text-blue-700">FREE PLAN)
             )}
           </div>
-        </CardHeader>
+        
         <CardContent className="glass">
             <div className="space-y-4">
             {/* Projects Usage */}
@@ -160,22 +160,22 @@ export default function FreeTierManager({
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        
+      
 
       {/* Projects List */}
       <Card className="glass">
           <CardHeader className="glass"
           <div className="flex items-center justify-between">
-            <CardTitle className="glass">Your Projects</CardTitle>
+            <CardTitle className="glass">Your Projects
             <Button
               onClick={createNewProject}
               disabled={!canCreateNewProject && currentPlan === 'free'}>size="sm">>
               <Plus className="h-4 w-4 mr-2" />
               New Project
-            </Button>
+            
           </div>
-        </CardHeader>
+        
         <CardContent className="glass">
             <div className="space-y-3">
             {activeProjects.map((project, index) => (
@@ -195,13 +195,13 @@ export default function FreeTierManager({
                       <Badge variant="outline" className="text-orange-600">
                         <Lock className="h-3 w-3 mr-1" />
                         Requires Pro
-                      </Badge>
+                      
                     )}
                     <Button 
                       variant="outline" >size="sm">onClick={() => archiveProject(project.id)}
                     >
                       Archive
-                    </Button>
+                    
                   </div>
                 </div>
               </div>
@@ -215,8 +215,8 @@ export default function FreeTierManager({
               </div>
             )}
           </div>
-        </CardContent>
-      </Card>
+        
+      
 
       {/* Upgrade Prompt */}
       {currentPlan === 'free' && projectsRemaining <= 1 && (
@@ -235,10 +235,10 @@ export default function FreeTierManager({
               <Button 
                 onClick={onUpgrade}>className="bg-purple-600 hover:bg-purple-700">>
                 Upgrade to Pro
-              </Button>
+              
             </div>
-          </CardContent>
-        </Card>
+          
+        
       )}
 
       {/* Usage Warning */}

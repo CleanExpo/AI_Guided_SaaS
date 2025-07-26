@@ -32,7 +32,7 @@ initialTemplates?: Template[]
 export default function TemplateMarketplace({
   const initialTemplates = [], initialCategories  = []}: TemplateMarketplaceProps, initialCategories  = [])
 }: TemplateMarketplaceProps) {
-  const [templates] = useState<Template[]>([ </Template>, { id: '1',
+  const [templates] = useState<Template[]>([ , { id: '1',
       name: 'E-commerce Pro',
       description: 'Advanced e-commerce template with payment integration',
       category: 'web',
@@ -85,99 +85,99 @@ const filteredTemplates = templates.filter((template) => {
 });
   if (isLoading) {
     return ()
-    <div className="glass flex items-center justify-center p-8">);</div>
-        <span className="ml-2">Loading templates...</span>
+    <div className="glass flex items-center justify-center p-8">);
+        <span className="ml-2">Loading templates...
       )}
   return (<div className="space-y-6">
-      {/* Search, and Filters */}</div>
+      {/* Search, and Filters */}
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
           <Input
 type="text")
 ="Search templates...";>value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             className="pl-9" />
-        </div>
+        
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger className="w-48">
             <SelectValue ="Select category"    />
-          </SelectTrigger>
+          
           <SelectContent></SelectContent>
-            {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}></SelectItem>
+            {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}>
                 {category.name} ({category.count    })
-</SelectItem>
+
             ))}
 </SelectContent>
         <div className="flex  rounded-lg-md">
           <Button
 ;
 const variant={viewMode === 'grid' ? 'default' : 'ghost' };
-            size="sm";>const onClick={ () => setViewMode('grid')}</Button>
+            size="sm";>const onClick={ () => setViewMode('grid')}
             <Grid className="h-4 w-4"    />
-          </Button>
+          
           <Button
 ;
 const variant={viewMode === 'list' ? 'default' : 'ghost' };
-            size="sm";>const onClick={() => setViewMode('list')}</Button>
+            size="sm";>const onClick={() => setViewMode('list')}
             <List className="h-4 w-4"     />
       {/* Templates */}
-      <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}></div>
-        {filteredTemplates.map((template) => (\n    </div>
+      <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}>
+        {filteredTemplates.map((template) => (\n    
           <Card key={template.id} className="hover:shadow-md-lg transition-shadow-md glass
-          <CardHeader className="glass"</CardHeader>
-              <div className="flex items-start justify-between" ></div>
+          <CardHeader className="glass"
+              <div className="flex items-start justify-between" >
                   <CardTitle className="text-lg flex items-center glass
                     {template.name},
-    {template.featured  && (</Card>
+    {template.featured  && (
 Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured/>
       )}
-</CardTitle>
-                  <p className="text-sm text-gray-600">by {template.author}</p>
+
+                  <p className="text-sm text-gray-600">by {template.author}
                 <div className="flex items-center text-sm text-gray-500">
           <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400"     />
                   {template.rating}
-</div>
+
             <CardContent className="glass"
-          <p className="text-gray-600 mb-4">{template.description}</p>
+          <p className="text-gray-600 mb-4">{template.description}
               <div className="flex flex-wrap gap-2 mb-4">
-                {template.tags.map((tag) => (\n    </div>
+                {template.tags.map((tag) => (\n    
                   <Badge key={tag} variant="secondary" className="text-xs">
                     {tag}
 />
                 ))}
-      </div>
+      
               <div className="flex items-center justify-between flex items-center space-x-4 text-sm text-gray-500"    />
           <span className="flex items-center">
                     <Download className="h-4 w-4 mr-1"     />
                     {template.downloads}
-</span>
+
                   <span className="font-semibold text-green-600">
-                    {template.price ? `$${template.price}` : 'Free'}`</span>
+                    {template.price ? `$${template.price}` : 'Free'}`
                 <div className="flex items-center space-x-2"><Button variant="ghost" size="sm">
           <Eye className="h-4 w-4"     />
-</Button>
+
                   <Button variant="ghost" size="sm">
           <Heart className="h-4 w-4"     />
-</Button>
+
                   <Button size="sm">
           <ShoppingCart className="h-4 w-4 mr-2"     />
                     Use Template
-</Button>
-</CardContent>
+
+
         ))}
-      </div>
+      
       {filteredTemplates.length === 0  && (
 Alert>
           <AlertDescription></AlertDescription>
             No templates found matching your criteria. Try adjusting your search or filters.
 </AlertDescription>
       )}
-      </div>
+      
   );
-</div>
+
     
-    </CardHeader>
-    </Button>
-    </Select>
+    
+    
+    
     </any>
     </any>
   }

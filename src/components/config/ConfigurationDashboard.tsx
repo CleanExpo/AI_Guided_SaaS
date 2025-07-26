@@ -70,16 +70,16 @@ analyticsEnabled: boolean
     features: FeatureFlags
 };
 export default function ConfigurationDashboard() {
-</ConfigurationData>, const [configData, setConfigData] = useState<ConfigurationData | null>(null);</ConfigurationData>
+, const [configData, setConfigData] = useState<ConfigurationData | null>(null);
 
-const [fullConfig, setFullConfig] = useState<FullConfig | null>(null);</FullConfig>
-</FeatureFlags>
+const [fullConfig, setFullConfig] = useState<FullConfig | null>(null);
 
-const [features, setFeatures]  = useState<FeatureFlags | null>(null);</FeatureFlags>
+
+const [features, setFeatures]  = useState<FeatureFlags | null>(null);
 
 const [loading, setLoading] = useState<any>(null)
 
-const [error, setError]  = useState<string | null>(null);</string>
+const [error, setError]  = useState<string | null>(null);
 
 const [reloading, setReloading] = useState<any>(null)
 { async () => {
@@ -125,19 +125,19 @@ const fullData = await fullResponse.json();
     return (<div className="glass flex items-center justify-center p-8"    />
           <div className="text-center"     />
           <Progress value={66} className="w-64 mb-4"    />
-          <p className="text-sm text-muted-foreground">Loading configuration...</p>)
+          <p className="text-sm text-muted-foreground">Loading configuration...)
   if (error) {;
     return ()
-    <Alert className="m-4"    />);</Alert>
+    <Alert className="m-4"    />);
           Error loading,
-    configuration: { error }</AlertDescription>
+    configuration: { error }
           <Button
 
 const onClick={fetchConfiguration};
             variant="outline";
-size="sm";>className="ml-4";>></Button>
+size="sm";>className="ml-4";>>
                     Retry
-</Button>
+
 { features ? Object.values(features).filter(Boolean).length : 0
 
 const _totalFeaturesCount = features ? Object.keys(features).length : 0
@@ -148,58 +148,58 @@ const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCo
         <div    />
           <h1 className="text-3xl font-bold">Platform Configuration</h1>
           <p className="text-muted-foreground">
-            AI-Guided SaaS Platform Configuration Dashboard</p>)
+            AI-Guided SaaS Platform Configuration Dashboard)
         {(process.env.NODE_ENV || "development") === "development"  && (
 Button; onClick={reloadConfiguration} disabled={reloading};
             variant="outline";
           >
-            {reloading ? 'Reloading...' : 'Reload Config'}</Button>
+            {reloading ? 'Reloading...' : 'Reload Config'}
             )},
     {/* Status, Overview */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4"    />
           <Card     / className="glass"
           <CardHeader className="pb-2"    / className="glass
-          <CardTitle className="text-sm font-medium glassStatus</CardTitle>
+          <CardTitle className="text-sm font-medium glassStatus
           <CardContent    / className="glass"
           <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'} />
               {configData?.status || 'Unknown'}/>
         <Card    / className="glass"
           <CardHeader className="pb-2"     / className="glass
-            <CardTitle className="text-sm font-medium glassFeatures Enabled</CardTitle>
+            <CardTitle className="text-sm font-medium glassFeatures Enabled
           <CardContent    / className="glass"
           <div className="text-2xl font-bold">
-              {enabledFeaturesCount}/{totalFeaturesCount}</div>
+              {enabledFeaturesCount}/{totalFeaturesCount}
             <Progress value={featureCompletionPercentage} className="mt-2"    />
           <Card     / className="glass"
           <CardHeader className="pb-2"    / className="glass
-          <CardTitle className="text-sm font-medium glassPrimary AI Provider</CardTitle>
+          <CardTitle className="text-sm font-medium glassPrimary AI Provider
           <CardContent    / className="glass"
           <Badge variant="outline" />
               {configData?.aiProviders.primary || 'Not configured'}/>
         <Card    / className="glass"
           <CardHeader className="pb-2"     / className="glass
-            <CardTitle className="text-sm font-medium glassLast Updated</CardTitle>
+            <CardTitle className="text-sm font-medium glassLast Updated
           <CardContent    / className="glass"
           <p className="text-sm text-muted-foreground">
-              {configData?.timestamp ? new Date(configData.timestamp).toLocaleString() : 'Unknown'}</p>
+              {configData?.timestamp ? new Date(configData.timestamp).toLocaleString() : 'Unknown'}
       {/* Detailed, Configuration */}
       <Tabs defaultValue="features", className="space-y-4"    />
           <TabsList     />
-          <TabsTrigger value="features">Feature Flags</TabsTrigger>
-          <TabsTrigger value="ai-models">AI Models</TabsTrigger>
-          <TabsTrigger value="framework">Framework</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-          <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsTrigger value="features">Feature Flags
+          <TabsTrigger value="ai-models">AI Models
+          <TabsTrigger value="framework">Framework
+          <TabsTrigger value="security">Security
+          <TabsTrigger value="performance">Performance
         <TabsContent value="features", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Feature Flags</CardTitle>
-              <CardDescription className="glass"</CardDescription>
-                Current status of platform features and experimental capabilities</Card>
-            <CardContent className="glass"</CardContent>
-              {features && (/CardContent></CardContent>
+          <CardTitle className="glass">Feature Flags
+              <CardDescription className="glass"
+                Current status of platform features and experimental capabilities
+            <CardContent className="glass"
+              {features && (/CardContent>
                 <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {Object.entries(features).map(([feature, enabled]) => (\n    </div>
+                  {Object.entries(features).map(([feature, enabled]) => (\n    
                     <div key={feature} className="flex items-center justify-between p-3  rounded-xl-lg"    />
           <span className="font-medium">
                         {feature.replace(/([A-Z])/g, ' $1').replace(/^./, str: any => str.toUpperCase())}</span>
@@ -207,15 +207,15 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                         {enabled ? 'Enabled' : 'Disabled'}/>
                   ))}
               )}
-</CardContent>
+
         <TabsContent value="ai-models", className="space-y-4"    />
           <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
             {fullConfig && (
-/div></div>
-              <React.Fragment>Card></React></Card></React>
+/div>
+              <React.Fragment>Card>
                   <CardHeader    / className="glass"
-          <CardTitle className="text-lg glassOpenAI</CardTitle>
-                    <CardDescription className="glass"{fullConfig.openai.displayName}</CardDescription>
+          <CardTitle className="text-lg glassOpenAI
+                    <CardDescription className="glass"{fullConfig.openai.displayName}
                   <CardContent className="space-y-2"    / className="glass
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
@@ -231,8 +231,8 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                       <span className="text-sm">{fullConfig.openai.rateLimitRequestsPerMinute}/min</span>
                 <Card    / className="glass"
           <CardHeader     / className="glass"
-                    <CardTitle className="text-lg glassAnthropic</CardTitle>
-                    <CardDescription className="glass"{fullConfig.anthropic.displayName}</CardDescription>
+                    <CardTitle className="text-lg glassAnthropic
+                    <CardDescription className="glass"{fullConfig.anthropic.displayName}
                   <CardContent className="space-y-2"    / className="glass
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
@@ -248,8 +248,8 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                       <span className="text-sm">{fullConfig.anthropic.rateLimitRequestsPerMinute}/min</span>
                 <Card    / className="glass"
           <CardHeader     / className="glass"
-                    <CardTitle className="text-lg glassGoogle</CardTitle>
-                    <CardDescription className="glass"{fullConfig.google.displayName}</CardDescription>
+                    <CardTitle className="text-lg glassGoogle
+                    <CardDescription className="glass"{fullConfig.google.displayName}
                   <CardContent className="space-y-2"    / className="glass
           <div className="flex justify-between"     />
                       <span className="text-sm">Primary: Model,</span>
@@ -267,11 +267,11 @@ Button; onClick={reloadConfiguration} disabled={reloading};
         <TabsContent value="framework", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Framework Configuration</CardTitle>
-              <CardDescription className="glass"Development framework and build settings</CardDescription>
-            <CardContent className="glass"</CardContent>
+          <CardTitle className="glass">Framework Configuration
+              <CardDescription className="glass"Development framework and build settings
+            <CardContent className="glass"
               {fullConfig && (
-/CardContent></CardContent>
+/CardContent>
                 <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4"    />
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
@@ -293,11 +293,11 @@ Button; onClick={reloadConfiguration} disabled={reloading};
         <TabsContent value="security", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Security Configuration</CardTitle>
-              <CardDescription className="glass"Security features and protection settings</CardDescription>
-            <CardContent className="glass"</CardContent>
+          <CardTitle className="glass">Security Configuration
+              <CardDescription className="glass"Security features and protection settings
+            <CardContent className="glass"
               {fullConfig && (
-/CardContent></CardContent>
+/CardContent>
                 <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4"    />
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
@@ -320,11 +320,11 @@ Button; onClick={reloadConfiguration} disabled={reloading};
         <TabsContent value="performance", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Performance Configuration</CardTitle>
-              <CardDescription className="glass"Caching, monitoring, and optimization settings</CardDescription>
-            <CardContent className="glass"</CardContent>
+          <CardTitle className="glass">Performance Configuration
+              <CardDescription className="glass"Caching, monitoring, and optimization settings
+            <CardContent className="glass"
               {fullConfig && (
-/CardContent></CardContent>
+/CardContent>
                 <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4"    />
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
@@ -344,14 +344,14 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                       <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'} />
                         {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}/>
       )});
-</CardContent>
+
 
     
-    </CardDescription>
+    
     </any>
-    </FullConfig>
+    
   }
-</FeatureFlags>
-</ConfigurationData>
+
+
 
 }}}}}    }

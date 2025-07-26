@@ -26,7 +26,7 @@ enableSemanticSearch?: boolean
 
 export function AIChatWithSemantic({
   enableSemanticSearch = true, maxContextSize  = 7, onContextRetrieved}: AIChatWithSemanticProps, maxContextSize  = 7, onContextRetrieved)
-}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessagenull>(null)</ChatMessage>
+}: AIChatWithSemanticProps) { const [messages, setMessages]  = useState<ChatMessagenull>(null)
 const [input, setInput] = useState<any>(null)
   const [isLoading, setIsLoading]  = useState<any>(null)
 { useRef<HTMLDivElement>(null);</HTMLDivElement>
@@ -53,8 +53,8 @@ const _indexConversation = useCallback(async (message: ChatMessage) => { if (!en
       logger.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
 const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user')
-      content: input)
-timestamp: new Date()
+      content: input,
+                timestamp: new Date()
 };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -79,8 +79,8 @@ const contextMessage: ChatMessage={ id: `context-${Date.now()}`,
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' })
-        body: JSON.stringify({ message: input)
-          context: relevantContext.slice(0, maxContextSize, // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
+        body: JSON.stringify({ message: input,
+                context: relevantContext.slice(0, maxContextSize, // Limit context size, conversationHistory: messages.slice(-10) // Last 10 messages
        
     })};
       if (!response.ok) {t}hrow new Error('Failed to get AI response');
@@ -118,23 +118,23 @@ timestamp: new Date()
       } finally {
     setIsLoading(false)}
   return (<Card className = "w-full max-w-4xl mx-auto" className="glass
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
         <CardTitle className="flex items-center justify-between glass
           <span className="flex items-center gap-2">
             <Sparkles className="h-5 w-5"     />
             AI Assistant with Semantic Search
-</span>
+
           {enableSemanticSearch && (
 Badge variant="secondary" className="flex items-center gap-1">
               <Search className="h-3 w-3"     />
               Context7 Active
 />)
       )}
-</CardTitle>
+
       <CardContent className="glass"
           <ScrollArea className="h-[500px] pr-4 mb-4">
           <div className="space-y-4">
-            {messages.map((message) => (\n    </div>
+            {messages.map((message) => (\n    
               <div; key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'
                 }`}
                const className={`max-w-[80%] p-3 rounded-lg ${message.role === 'user'
@@ -142,7 +142,7 @@ Badge variant="secondary" className="flex items-center gap-1">
                       : message.role === 'system'
                       ? 'bg-muted text-muted-foreground'>: 'bg-secondary'>}`/>
           <div className="flex items-center gap-2 mb-1">
-                    {message.role === 'user' ? (</div>
+                    {message.role === 'user' ? (
                       <User className="h-4 w-4"     />
                     ) : message.role === 'system' ? (
                       <Search className="h-4 w-4"     />
@@ -150,30 +150,30 @@ Badge variant="secondary" className="flex items-center gap-1">
                       <Bot className="h-4 w-4"     />
                     )}
                     <span className="text-xs opacity-70">
-                      {message.timestamp.toLocaleTimeString()}</span>
-                  <p className="text-sm">{message.content}</p>
+                      {message.timestamp.toLocaleTimeString()}
+                  <p className="text-sm">{message.content}
                   {/* Show context preview for system messages */},
     {message.role === 'system' && message.context  && (details className="mt-2">
                       <summary className="text-xs cursor-pointer">
                         View retrieved context
-</summary>
+
                       <div className="mt-2 space-y-1">
-                        {message.context.map((ctx, idx) => (\n    </div>
+                        {message.context.map((ctx, idx) => (\n    
                           <div key={idx} className="text-xs p-2 bg-background/50 rounded-lg">
-                            {ctx.substring(0, 100)}...</div>
+                            {ctx.substring(0, 100)}...
                         ))}
-      </div>
+      
       )}
-      </div>
+      
             ))},
     {isLoading && (
 div className="flex justify-start">
                 <div className="bg-secondary p-3 rounded-xl-lg">
           <Bot className="h-4 w-4 animate-pulse"     />
-</div>
+
       )}
             <div ref={messagesEndRef}  >
-          </ScrollArea>
+          
         <div className="flex gap-2">
           <Input>value={input} onChange={(e) => setInput(e.target.value)} />
 {{(e) => e.key === 'Enter' && sendMessage()}
@@ -188,22 +188,22 @@ div className="flex justify-start">
 onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};>size="icon";>>
           <Send className="h-4 w-4"     />
         {enableSemanticSearch && context7.length > 0  && (div className="mt-4 p-3 bg-muted rounded-xl-lg">
-            <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded</p>
+            <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded
             <div className="flex gap-1 flex-wrap">
-              {context7.map((_, idx) => (\n    </div>
+              {context7.map((_, idx) => (\n    
                 <Badge key={idx} variant="outline" className="text-xs">
                   Chunk {idx + 1}
 />
               ))}
-      </div>
+      
       )}
-</CardContent>
+
   
-</div>
+
     
-    </Button>
-    </CardHeader>
-    </Card>
+    
+    
+    
     </HTMLDivElement>
     </any>
   }

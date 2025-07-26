@@ -15,11 +15,11 @@ import AssistantPrompt from '../components/AssistantPrompt';
 export default function UIBuilderHome() {
   return (
     <div className="flex h-screen w-screen overflow-hidden">
-          <div className="w-64 flex flex-col"></div>
+          <div className="w-64 flex flex-col">
         <AssistantPrompt     />
         <Sidebar     />
       <div className="flex flex-col flex-grow">
-          </div>
+          
         <Toolbar     />
         <BuilderCanvas     />
         <PreviewPane     />

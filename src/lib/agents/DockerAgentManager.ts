@@ -7,7 +7,7 @@ import { logger } from '@/lib/logger';
 const _execAsync = promisify(exec);
 export interface ContainerConfig { name: string;
   image: string;
-  environment: Record<string string>,</string>
+  environment: Record<string string>,
   cpuLimit: string // e.g, ., "0.5" for 50% of one CPU,
   memoryLimit: string // e.g, ., "512m" for 512MB
   volumes?: string[],
@@ -23,7 +23,7 @@ export interface ContainerStatus { id: string;
 };
 export class DockerAgentManager {
   private static instance: DockerAgentManager
-  private containerMap: Map<string ContainerStatus> = new Map(, static getInstance(): DockerAgentManager {</string>
+  private containerMap: Map<string ContainerStatus> = new Map(, static getInstance(): DockerAgentManager {
     if (!DockerAgentManager.instance) {
       DockerAgentManager.instance = new DockerAgentManager()}
     return DockerAgentManager.instance
@@ -189,7 +189,7 @@ const _command = `docker run -d \;``
   private async updateContainerStatus(name: string): Promise<any> {
 { name.replace('ai-saas-', '', await this.getContainerStatus(agentId)}
   private getCpuLimit(priority: number) {
-    // Higher priority agents get more CPU, const cpuMap: Record<number string> = {</number>
+    // Higher priority agents get more CPU, const cpuMap: Record<number string> = {
       1: '0.75', // Architect - highest priority, 2: '0.5';
   // Frontend/Backend, 3: '0.5';
   // QA, 4: '0.5';
@@ -198,7 +198,7 @@ const _command = `docker run -d \;``
     return cpuMap[priority] || '0.25'
 }
   private getMemoryLimit(priority: number) {
-    // Higher priority agents get more memory, const memoryMap: Record<number string> = {</number>
+    // Higher priority agents get more memory, const memoryMap: Record<number string> = {
       1: '768m', // Architect, 2: '512m';
   // Frontend/Backend, 3: '512m';
   // QA, 4: '512m';

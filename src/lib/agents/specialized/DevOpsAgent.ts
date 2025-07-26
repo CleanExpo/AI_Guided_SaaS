@@ -7,7 +7,7 @@ import * as path from 'path';
 export interface DeploymentConfig { environment: 'development' | 'staging' | 'production',
   platform: 'vercel' | 'railway' | 'docker' | 'custom';
   branch?: string;
-  variables?: Record<string string></string>
+  variables?: Record<string string>
   healthCheckUrl?: string
 }
 
@@ -96,8 +96,8 @@ export class DevOpsAgent extends Agent {
       this.logger.error('DevOps task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message)
-          task: message.type)
+        payload: { error: error.message,
+                task: message.type)
         }    })
 }
   }
@@ -361,7 +361,7 @@ export class DevOpsAgent extends Agent {
 
   private async checkServiceHealth(service: string): Promise<any> {
     // Service-specific health checks
-    const healthEndpoints: Record<string string> = {</string>
+    const healthEndpoints: Record<string string> = {
       web: 'http://localhost:3000/api/health',
       api: 'http://localhost:3000/api/health',
       database: 'postgresql://localhost:5432',
@@ -415,8 +415,8 @@ export class DevOpsAgent extends Agent {
       await this.sendMessage({ to: 'orchestrator',
         type: 'rollback-recommendation',
         payload: {
-          environment)
-          recommendedDeployment: lastSuccessful.deploymentId)
+          environment,
+                recommendedDeployment: lastSuccessful.deploymentId)
         }    })
 }
   }

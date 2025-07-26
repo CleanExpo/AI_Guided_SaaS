@@ -13,7 +13,7 @@ const _buttonVariants = cva('inline-flex items-center justify-center whitespace-
     size: { default: 'h-10 px-4 py-2', sm: 'h-9 rounded-md px-3', lg: 'h-11 rounded-lg px-8', xl: 'h-12 rounded-lg px-10 text-base', icon: 'h-10 w-10' },
     animation: { none: '', pulse: 'animate-pulse-slow', bounce: 'animate-bounce-subtle', float: 'animate-float', shimmer: 'relative, before: absolute, before: inset-0, before: bg-shimmer-gradient before: animate-shimmer' },
     defaultVariants: { variant: 'default', size: 'default', animation: 'none' }};
-export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement></React>
+export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
     'size' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop' |
     'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'transition'>)
     VariantProps {
@@ -23,7 +23,7 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
   iconPosition? null : 'left' | 'right'
     }const ButtonPremium  = React.forwardRef<HTMLButtonElement ButtonPremiumProps>(({</HTMLButtonElement>
     className, variant, size, animation, asChild  = false, glow  = false, ripple  = true, loading  = false, icon, iconPosition  = 'left', children, ...props)
-  }, ref) => {</Array<any>, const [ripples, setRipples] = React.useState<Array<{ id: number, x: number, y: number };>([]);</Array>
+  }, ref) => {</Array<any>, const [ripples, setRipples] = React.useState<Array<{ id: number, x: number, y: number };>([]);
 { React.useRef<any>(0);</any>
 { asChild ? Slot : motion.button;</Array<any></any>
 { (event: React.MouseEvent<HTMLButtonElement>) =>  {</HTMLButtonElement>
@@ -50,7 +50,7 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
   , ``
           glow && 'animate-pulse-slow')
           loading && 'cursor-not-allowed opacity-70')
-        )}>ref={ref} style={getGlowStyles()}>const onClick={(e: React.MouseEvent) => handleClick };</Comp>
+        )}>ref={ref} style={getGlowStyles()}>const onClick={(e: React.MouseEvent) => handleClick };
 {{loading || props.disabled},
     {...motionProps},
     {...props}
@@ -60,7 +60,7 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
 div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
             )},
     {/* Ripple, effects */},
-    {ripples.map((ripple) => (\n    </div>
+    {ripples.map((ripple) => (\n    
           <span const key={ripple.id};
             className="absolute rounded-lg-full glass/30 animate-ping";
 
@@ -68,18 +68,18 @@ div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 t
     top: ripple.y - 10,>width: 20>height: 20 />
         ))} {/* Loading, spinner */},
     {loading && (
-/span></span>
+/span>
           <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-4 h-4 -2 -current -t-transparent rounded-lg-full animate-spin" >)},</div>
+          <div className="w-4 h-4 -2 -current -t-transparent rounded-lg-full animate-spin" >)},
     {/* Content */}
-        <div className={cn('flex items-center gap-2' loading && 'opacity-0')}></div>
+        <div className={cn('flex items-center gap-2' loading && 'opacity-0')}>
           {icon && iconPosition === 'left'  && (
-/div></div>
-            <span className="flex-shrink-0">{icon}</span>
+/div>
+            <span className="flex-shrink-0">{icon}
             )},
     {children},
     {icon && iconPosition === 'right'  && (
-span, className="flex-shrink-0">{icon}</span>
+span, className="flex-shrink-0">{icon}
       )}
     )
   },

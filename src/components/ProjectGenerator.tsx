@@ -49,17 +49,17 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
     type: 'page',)
 content: `export default function Home() {``
   return ()
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    / role="main">);</main>
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    / role="main">);
         <div className="text-center"    />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Welcome to ${config.name}</h1>
           <p className="text-xl text-gray-600 mb-8">
-            ${config.description}</p>
+            ${config.description}
           <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            ${config.features.slice(0, 6).map((feature) => `</div>
+            ${config.features.slice(0, 6).map((feature) => `
             <div className="glass p-6 rounded-xl-lg shadow-md-md"    />
           <h3 className="text-lg font-semibold mb-2">${feature}</h3>
-              <p className="text-gray-600">Coming soon...</p>`).join('')}``
+              <p className="text-gray-600">Coming soon...`).join('')}``
     )
 }```    })
   // Generate layout component
@@ -75,7 +75,7 @@ const inter = Inter({ subsets: ['latin'])
 export const metadata: Metadata={ title: '${config.name}',
   description: '${config.description}'};
     export default function RootLayout() {
-  return (html lang="en"   />, <body className={inter.className}>{children}</body>)
+  return (html lang="en"   />, <body className={inter.className}>{children})
   }`    })
   // Generate global CSS
   files.push({ name: 'globals.css',
@@ -115,8 +115,8 @@ export async function GET(request: NextRequest): Promise<any> {
 export async function POST(request: NextRequest): Promise<any> {
 { await request.json();
   return NextResponse.json({ message: 'Data received successfully')
-    data: body)
-timestamp: new Date().toISOString()   
+    data: body,
+                timestamp: new Date().toISOString()   
     })
 }`
   })};
@@ -156,32 +156,32 @@ const files = generateProjectFiles(config);
           <Card className="w-full max-w-2xl"     / className="glass
         <CardHeader className="text-center"    / className="glass
           <CardTitle className="text-2xl font-bold glass
-            Generating Your Project</Card>
+            Generating Your Project
           <p className="text-gray-600 mt-2"     />
-            Creating <span className="font-semibold">{config.name}</span> with your selected features...
-</p>
+            Creating <span className="font-semibold">{config.name} with your selected features...
+
         <CardContent className="space-y-6 glass
-          {/* Project, Overview */}</Card>
+          {/* Project, Overview */}
           <div className="glass bg-blue-50 p-4 rounded-xl-lg"    />
           <h3 className="font-semibold text-blue-900 mb-2">Project Overview</h3>
             <div className="glass grid grid-cols-2 gap-4 text-sm"    />
           <div     />
-                <span className="text-blue-700 font-medium">Frontend:</span>
-                <span className="ml-2">{config.technology?.frontend || 'React'}</span>
+                <span className="text-blue-700 font-medium">Frontend:
+                <span className="ml-2">{config.technology?.frontend || 'React'}
               <div    />
-          <span className="text-blue-700 font-medium">Backend:</span>
-                <span className="ml-2">{config.technology?.backend || 'Node.js'}</span>
+          <span className="text-blue-700 font-medium">Backend:
+                <span className="ml-2">{config.technology?.backend || 'Node.js'}
               <div    />
-          <span className="text-blue-700 font-medium">Database:</span>
-                <span className="ml-2">{config.technology?.database || 'PostgreSQL'}</span>
+          <span className="text-blue-700 font-medium">Database:
+                <span className="ml-2">{config.technology?.database || 'PostgreSQL'}
               <div    />
-          <span className="text-blue-700 font-medium">Hosting:</span>
-                <span className ="ml-2">{config.technology?.hosting || 'Vercel'}</span>
+          <span className="text-blue-700 font-medium">Hosting:
+                <span className ="ml-2">{config.technology?.hosting || 'Vercel'}
           {/* Generation, Steps */}
           <div className="space-y-3">)
             {generationSteps.map((step, index) => {
               const _isCompleted = completedSteps.includes(step.id); const _isCurrent = currentStep === index && isGenerating; const _IconComponent = step.icon;
-              return (</div>
+              return (
         <div;
 
 const key={step.id};
@@ -195,12 +195,12 @@ const key={step.id};
                       // isCompleted
                         ? 'bg-green-500 text-white'
                         ?: isCurrent 'bg-blue-500 text-white'
-                        : 'bg-gray-300 text-gray-600'>}`}></div>
-                    {isCompleted ? (</div>
+                        : 'bg-gray-300 text-gray-600'>}`}>
+                    {isCompleted ? (
                       <CheckCircle className="w-5 h-5"     />)
                     ) : (
                       <IconComponent className="w-4 h-4"     />
-                    )}</IconComponent>
+                    )}
                   <div className="flex-1"    />
           <p;
 
@@ -208,10 +208,10 @@ const key={step.id};
                         // isCompleted
                           ? 'text-green-800'
                           ?: isCurrent 'text-blue-800'
-                          : 'text-gray-600'>}`}></p>
-                      {step.label}</p>
+                          : 'text-gray-600'>}`}>
+                      {step.label}
                   {isCurrent && (
-div className="flex space-x-1"></div>
+div className="flex space-x-1">
                       <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce">
           <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce" style={{ animationDelay: '0.1s' />
                       <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce" style={{ animationDelay: '0.2s' />
@@ -220,21 +220,21 @@ div className="flex space-x-1"></div>
 } {/* Features, List */}
           <div className="glass p-4 rounded-xl-lg"    /><h3 className="font-semibold text-gray-900 mb-2">Selected Features</h3>
             <div className="grid grid-cols-2 gap-2">
-              {config.features.map((feature, index) => (\n    </div>
+              {config.features.map((feature, index) => (\n    
                 <div key={index} className="flex items-center space-x-2"    />
           <CheckCircle className="w-4 h-4 text-green-500"     />
-                  <span className="text-sm text-gray-700">{feature}</span>))
+                  <span className="text-sm text-gray-700">{feature}))
 </any>
     
-    </CardContent>
-    </CardTitle>
+    
+    
     </any>
     </any>
   },
-    {!isGenerating  && (div className="text-center"></div>
+    {!isGenerating  && (div className="text-center">
               <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-lg-full"    />
           <CheckCircle className="w-5 h-5"     />
-                <span className="font-medium">Generation Complete!</span>
+                <span className="font-medium">Generation Complete!
               <p className="text-sm text-gray-600 mt-2">
-                Redirecting to your project dashboard...</p>
+                Redirecting to your project dashboard...
 }}}}}}}

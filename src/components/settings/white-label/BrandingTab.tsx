@@ -53,10 +53,10 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
               <Button variant="outline" size="sm">
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Logo
-              </Button>
+              
               <p className="text-xs text-gray-500 mt-2">
                 PNG or SVG, max 2MB
-              </p>
+              
             </div>
           </div>
           
@@ -67,10 +67,10 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
               <Button variant="outline" size="sm">
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Favicon
-              </Button>
+              
               <p className="text-xs text-gray-500 mt-2">
                 ICO or PNG, 32x32px
-              </p>
+              
             </div>
           </div>
         </div>
@@ -86,9 +86,9 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
               className="w-full px-3 py-2  rounded-xl-lg">value={config.headerFont}>onChange={(e) => updateConfig('headerFont', e.target.value)}
             >
               {fontOptions.map(font => (
-                <option key={font} value={font}>{font}</option>
+                <option key={font} value={font}>{font}
               ))}
-            </select>
+            
           </div>
           
           <div>
@@ -97,9 +97,9 @@ export function BrandingTab({ config, updateConfig }: BrandingTabProps) {
               className="w-full px-3 py-2  rounded-xl-lg">value={config.bodyFont}>onChange={(e) => updateConfig('bodyFont', e.target.value)}
             >
               {fontOptions.map(font => (
-                <option key={font} value={font}>{font}</option>
+                <option key={font} value={font}>{font}
               ))}
-            </select>
+            
           </div>
         </div>
       </div>

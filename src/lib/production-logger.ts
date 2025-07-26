@@ -10,7 +10,7 @@ interface LogEntry { timestamp: string;
   level: LogLeve
 l,
     message: string;
-  context?: Record<string unknown>,</string>
+  context?: Record<string unknown>,
   userId?: string,
   sessionId?: string
 }
@@ -25,7 +25,7 @@ constructor() {
   private createLogEntry();
 level: LogLevel;
     message: string;
-    context?: Record<string unknown></string>
+    context?: Record<string unknown>
   ): LogEntry {
     return { timestamp: new Date().toISOString();
       level,
@@ -60,31 +60,31 @@ if (!this.isDevelopment && entry.level <= LogLevel.WARN) {
       // Fail silently to avoid logging loops
   }
 }
-  error(message: string, context?: Record<string unknown>) {</string>
+  error(message: string, context?: Record<string unknown>) {
     if (this.shouldLog(LogLevel.ERROR) {)} {
       this.writeLog(this.createLogEntry(LogLevel.ERROR, message, context))}
-  warn(message: string, context?: Record<string unknown>) {</string>
+  warn(message: string, context?: Record<string unknown>) {
     if (this.shouldLog(LogLevel.WARN) {)} {
       this.writeLog(this.createLogEntry(LogLevel.WARN, message, context))}
-  info(message: string, context?: Record<string unknown>) {</string>
+  info(message: string, context?: Record<string unknown>) {
     if (this.shouldLog(LogLevel.INFO) {)} {
       this.writeLog(this.createLogEntry(LogLevel.INFO, message, context))}
-  debug(message: string, context?: Record<string unknown>) {</string>
+  debug(message: string, context?: Record<string unknown>) {
     if (this.shouldLog(LogLevel.DEBUG) {)} {
       this.writeLog(this.createLogEntry(LogLevel.DEBUG, message, context))}
   // Security-focused logging methods;
-securityEvent(event: string, context?: Record<string unknown>) {</string>
+securityEvent(event: string, context?: Record<string unknown>) {
     this.warn(`SECURITY: ${event}`, context);``
 }
   adminActivity(activity: string;
     adminId: string;
-    context?: Record<string unknown></string>
+    context?: Record<string unknown>
   ) {
     this.info(`ADMIN: ${activity}`, { adminId, ...context });``
 }
   userActivity(activity: string;
     userId: string;
-    context?: Record<string unknown></string>
+    context?: Record<string unknown>
   ) {
     this.debug(`USER: ${activity}`, { userId, ...context });``
 }
@@ -100,25 +100,25 @@ securityEvent(event: string, context?: Record<string unknown>) {</string>
 // Export singleton instance;
 export const logger = new ProductionLogger();
 // Convenience functions for common use cases;
-export const _logError = (message: string, context?: Record<string unknown>) =></string>
+export const _logError = (message: string, context?: Record<string unknown>) =>
   logger.error(message, context);
-export const _logWarn = (message: string, context?: Record<string unknown>) =></string>
+export const _logWarn = (message: string, context?: Record<string unknown>) =>
   logger.warn(message, context);
-export const _logInfo = (message: string, context?: Record<string unknown>) =></string>
+export const _logInfo = (message: string, context?: Record<string unknown>) =>
   logger.info(message, context);
-export const _logDebug = (message: string, context?: Record<string unknown>) =></string>
+export const _logDebug = (message: string, context?: Record<string unknown>) =>
   logger.debug(message, context);
-export const _logSecurity = (event: string, context?: Record<string unknown>) =></string>
+export const _logSecurity = (event: string, context?: Record<string unknown>) =>
   logger.securityEvent(event, context);
 export const _logAdmin = (
     activity: string;
     adminId: string;
-  context?: Record<string unknown></string>
+  context?: Record<string unknown>
 ) => logger.adminActivity(activity, adminId, context);
 export const _logUser = (
     activity: string;
     userId: string;
-  context?: Record<string unknown></string>
+  context?: Record<string unknown>
 ) => logger.userActivity(activity, userId, context);
 
 }}}}}}    }

@@ -106,7 +106,7 @@ export default function MarketingPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Sales Funnel & Marketing</h1>
-          <p className="text-gray-600">Track conversions and optimize your marketing campaigns</p>
+          <p className="text-gray-600">Track conversions and optimize your marketing campaigns
         </div>
 
         {/* Funnel Visualization */}
@@ -115,8 +115,8 @@ export default function MarketingPage() {
             <CardTitle className="flex items-center gap-2 glass
               <Target className="h-5 w-5" />
               Conversion Funnel
-            </CardTitle>
-          </CardHeader>
+            
+          
           <CardContent className="glass">
             <div className="space-y-6">)
               {funnelStages.map((stage, index) => (
@@ -140,57 +140,57 @@ export default function MarketingPage() {
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Campaign Performance */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Active Campaigns</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Active Campaigns
+            
             <CardContent className="glass">
             <div className="space-y-4">
                 {campaigns.filter(c => c.status === 'active').map(campaign => (
                   <div key={campaign.id} className="glass  rounded-xl-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-medium">{campaign.name}</h3>
-                      <Badge variant="default">Active</Badge>
+                      <Badge variant="default">Active
                     </div>
                     <div className="glass grid grid-cols-3 gap-4 text-sm">
                       <div>
-                        <p className="text-gray-500">Leads</p>)
-                        <p className="font-bold">{campaign.leads.toLocaleString()}</p>
+                        <p className="text-gray-500">Leads)
+                        <p className="font-bold">{campaign.leads.toLocaleString()}
                       </div>
                       <div>
-                        <p className="text-gray-500">Conversion</p>
-                        <p className="font-bold">{calculateConversionRate(campaign)}%</p>
+                        <p className="text-gray-500">Conversion
+                        <p className="font-bold">{calculateConversionRate(campaign)}%
                       </div>
                       <div>
-                        <p className="text-gray-500">Revenue</p>
-                        <p className="font-bold">${campaign.revenue.toLocaleString()}</p>
+                        <p className="text-gray-500">Revenue
+                        <p className="font-bold">${campaign.revenue.toLocaleString()}
                       </div>
                     </div>
                     <div className="mt-3 flex items-center justify-between">
                       <span className="text-xs text-gray-500">
                         ROI: <span className="font-medium text-green-600">+{calculateROI(campaign)}%</span>
                       </span>
-                      <Button size="sm" variant="outline">View Details</Button>
+                      <Button size="sm" variant="outline">View Details
                     </div>
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Email Capture Widget</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Email Capture Widget
+            
             <CardContent className="glass">
             <div className="glass bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Start Building Faster</h3>
-                <p className="mb-4 text-blue-100">Join 10,000+ developers using AI Guided SaaS</p>
+                <p className="mb-4 text-blue-100">Join 10,000+ developers using AI Guided SaaS
                 <form onSubmit={handleEmailSubmit} className="space-y-3" role="form">
                   <Input
                     type="email"
@@ -202,8 +202,8 @@ export default function MarketingPage() {
                     type="submit" 
                     className="w-full glass text-blue-600 hover:glass">disabled={isSubmitting}>
                     {isSubmitting ? 'Subscribing...' : 'Get Early Access'}
-                  </Button>
-                </form>
+                  
+                
                 <div className="mt-4 space-y-2 text-sm">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4" />
@@ -219,8 +219,8 @@ export default function MarketingPage() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Marketing Metrics */}
@@ -229,53 +229,53 @@ export default function MarketingPage() {
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Total Leads</p>
-                  <p className="text-2xl font-bold">9,851</p>
+                  <p className="text-sm text-gray-500">Total Leads
+                  <p className="text-2xl font-bold">9,851
                 </div>
                 <Users className="h-8 w-8 text-blue-600" />
               </div>
-              <p className="text-xs text-green-600 mt-2">+23% this month</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-green-600 mt-2">+23% this month
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Conversion Rate</p>
-                  <p className="text-2xl font-bold">7.4%</p>
+                  <p className="text-sm text-gray-500">Conversion Rate
+                  <p className="text-2xl font-bold">7.4%
                 </div>
                 <TrendingUp className="h-8 w-8 text-green-600" />
               </div>
-              <p className="text-xs text-green-600 mt-2">+1.2% improvement</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-green-600 mt-2">+1.2% improvement
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Avg. Deal Size</p>
-                  <p className="text-2xl font-bold">$243</p>
+                  <p className="text-sm text-gray-500">Avg. Deal Size
+                  <p className="text-2xl font-bold">$243
                 </div>
                 <DollarSign className="h-8 w-8 text-purple-600" />
               </div>
-              <p className="text-xs text-green-600 mt-2">+$12 increase</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-green-600 mt-2">+$12 increase
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">CAC Payback</p>
-                  <p className="text-2xl font-bold">4.2mo</p>
+                  <p className="text-sm text-gray-500">CAC Payback
+                  <p className="text-2xl font-bold">4.2mo
                 </div>
                 <Clock className="h-8 w-8 text-orange-600" />
               </div>
-              <p className="text-xs text-green-600 mt-2">-0.8mo faster</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-green-600 mt-2">-0.8mo faster
+            
+          
         </div>
       </div>
     </div>

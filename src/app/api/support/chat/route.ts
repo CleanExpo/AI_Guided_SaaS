@@ -77,14 +77,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         operation: 'processSupportChat',
         module: 'support/chat',
         metadata: { 
-          sessionId: data.sessionId)
-          category: data.category
-        });;
+          sessionId: data.sessionId,
+                category: data.category
+        });
       
       return NextResponse.json({
         error: 'Support chat failed'
       }, {
-        status: 500 });;
+        status: 500 });
     }
   });
 }
@@ -99,8 +99,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         type: 'bot',
         timestamp: new Date().toISOString()}
     ];
-    return NextResponse.json({ success: true, chatHistory)
-      sessionId: sessionId || 'session_new'   )
+    return NextResponse.json({ success: true, chatHistory,
+                sessionId: sessionId || 'session_new'   )
     })
   } catch (error) {
     handleError(error, {
@@ -111,6 +111,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       error: 'Failed to get chat history'
     }, {
-      status: 500 });;
+      status: 500 });
   }
 }

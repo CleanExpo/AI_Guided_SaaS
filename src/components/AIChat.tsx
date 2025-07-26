@@ -46,22 +46,22 @@ const chatQuestions = [
     type: 'select' as const options: ['1-2 weeks', '1 month', '2-3 months', '6+ months']}
 ];
 export default function AIChat({ persona, onProjectConfigReady }: AIChatProps, onProjectConfigReady }: AIChatProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([ {</ChatMessage>
+  const [messages, setMessages] = useState<ChatMessage[]>([ {
   id: '1',
       role: 'assistant',
       sender: 'assistant',
 content: 'Hello! I\'m your AI assistant. How can I help you build your SaaS application today?'
-</ChatMessage>, timestamp: new Date()
+, timestamp: new Date()
 }
   ]);
 
 const [currentQuestionIndex, setCurrentQuestionIndex]  = useState(0);
 
-const [projectData, setProjectData] = useState<Partial<ProjectConfig>({</Partial>
+const [projectData, setProjectData] = useState<Partial<ProjectConfig>({
     persona: persona
     features: [] as any[],
     technology: { frontend: 'React', backend: 'Node.js', database: 'PostgreSQL', hosting: 'Vercel' }
-</Partial>
+
   });
 
 const [userInput, setUserInput]  = useState('');
@@ -94,8 +94,8 @@ timestamp: new Date()};
 const _handleUserResponse = (response: string) => {
     // Add user message; const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
       sender: 'user')
-      content: response)
-timestamp: new Date()};
+      content: response,
+                timestamp: new Date()};
     setMessages(prev => [...prev, userMessage]);
     // Update project data based on current question;
 
@@ -164,14 +164,14 @@ timestamp: new Date()};
           <Bot className="w-6 h-6 text-blue-600"     />
             <div    />
           <h2 className="text-xl font-semibold">{persona.name}</h2>
-              <p className="text-sm text-gray-600 font-normal">{persona.tone}</p>
+              <p className="text-sm text-gray-600 font-normal">{persona.tone}
         <CardContent className="flex-1 flex flex-col p-0 glass
-          {/* Messages, Area */}</Card>
-          <div className = "flex-1 overflow-y-auto p-6 space-y-4"></div>)
-            {messages.map((message) => (\n    </div>
-              <div; key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}></div>
+          {/* Messages, Area */}
+          <div className = "flex-1 overflow-y-auto p-6 space-y-4">)
+            {messages.map((message) => (\n    
+              <div; key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'assistant'  && (
-/div></div>
+/div>
                   <div className="w-8 h-8 bg-blue-100 rounded-lg-full flex items-center justify-center flex-shrink-0"    />
           <Bot className="w-4 h-4 text-blue-600"     />
             )};
@@ -180,16 +180,16 @@ timestamp: new Date()};
     const className={`max-w-[70%] p-3 rounded-lg ${``
                     message.role === 'user'
                       ? 'bg-blue-600 text-white'>: 'bg-gray-100 text-gray-900'>}`/>
-          <p className="text-sm">{message.content}</p>
+          <p className="text-sm">{message.content}
                   <p className="text-xs opacity-70 mt-1">
-                    {message.timestamp.toLocaleTimeString()}</p>
+                    {message.timestamp.toLocaleTimeString()}
                 {message.role === 'user'  && (
-div className="w-8 h-8 glass rounded-lg-full flex items-center justify-center flex-shrink-0"></div>
+div className="w-8 h-8 glass rounded-lg-full flex items-center justify-center flex-shrink-0">
                     <User className="w-4 h-4 text-gray-600"     />
             )}
             ))},
     {isTyping && (
-div className="flex gap-3 justify-start"></div>
+div className="flex gap-3 justify-start">
                 <div className="w-8 h-8 bg-blue-100 rounded-lg-full flex items-center justify-center flex-shrink-0"    />
           <Bot className="w-4 h-4 text-blue-600"     />
                 <div className="glass text-gray-900 p-3 rounded-xl-lg"    />
@@ -198,43 +198,43 @@ div className="flex gap-3 justify-start"></div>
           <div className="w-2 h-2 bg-gray-400 rounded-lg-full animate-bounce" style={{ animationDelay: '0.1s' />
                     <div className="w-2 h-2 bg-gray-400 rounded-lg-full animate-bounce" style={{ animationDelay: '0.2s' />
       )}
-            <div ref={ messagesEndRef}  >{/* Input, Area */},</div>
+            <div ref={ messagesEndRef}  >{/* Input, Area */},
     {showInput && (div className="glass -t p-6">
               {currentQuestion?.type === 'features'  && (/div>
                 <div className="mb-4"    />
-          <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include: </p>
-                  <div className = "grid grid-cols-2 md:grid-cols-3 gap-2"></div>
-                    {currentQuestion.options?.map((feature) => (\n    </div>
+          <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include: 
+                  <div className = "grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {currentQuestion.options?.map((feature) => (\n    
                       <Button const key={feature };
                         const variant={ selectedFeatures.includes(feature) ? "default" : "outline" };
-                        size="sm";>const onClick={() => handleFeatureToggle(feature)};</Button>
+                        size="sm";>const onClick={() => handleFeatureToggle(feature)};
                         className="text-xs";
                       >
-                        {feature}</Button>
+                        {feature}
                     ))}
               )},
-    {currentQuestion?.type = == 'select'  && (div className="mb-4"></div>
+    {currentQuestion?.type = == 'select'  && (div className="mb-4">
                   <div className="grid grid-cols-2 gap-2">
-                    {currentQuestion.options?.map((option) => (\n    </div>
+                    {currentQuestion.options?.map((option) => (\n    
                       <Button const key={option};
-                        variant="outline";>const onClick={() => handleUserResponse(option)};</Button>
+                        variant="outline";>const onClick={() => handleUserResponse(option)};
                         className="text-sm";
                       >
-                        {option}</Button>
+                        {option}
                     ))}
               )},
-    {(currentQuestion?.type === 'text' || currentQuestion?.type === 'features')  && (div className="flex gap-2"></div>
-                  <input type = "text"; value={userInput} onChange={(e) => setUserInput(e.target.value)}</input>
+    {(currentQuestion?.type === 'text' || currentQuestion?.type === 'features')  && (div className="flex gap-2">
+                  <input type = "text"; value={userInput} onChange={(e) => setUserInput(e.target.value)}
 {{(e) => e.key === 'Enter' && handleSendMessage()}
                     const ={
                       currentQuestion?.type === 'features'
                         ? "Or describe custom features": "Type your response"
 }
-                    className="flex-1 px-3 py-2  -gray-300 rounded-lg-md, focus:outline-none focus:ring-2 " /></input>
+                    className="flex-1 px-3 py-2  -gray-300 rounded-lg-md, focus:outline-none focus:ring-2 " />
         <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0/>
           <Send className="w-4 h-4"     />)}
           )
-</any>
+
     }
-</CardContent>
+
 }}}}}}}

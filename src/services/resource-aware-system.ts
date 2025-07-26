@@ -106,8 +106,8 @@ class ResourceAwareSystem extends EventEmitter {
       cpuLimit: 30,
       memoryLimit: 50,
       concurrentTasks: 1,
-      enableBackground: false)
-      throttleNetwork: true
+      enableBackground: false,
+                throttleNetwork: true
     }])
   ]);
 
@@ -325,8 +325,8 @@ class ResourceAwareSystem extends EventEmitter {
       switch (action) {
         case 'throttle':
           this.emit('action:throttle', {
-            cpuLimit: strategy.profile.cpuLimit)
-            memoryLimit: strategy.profile.memoryLimit)
+            cpuLimit: strategy.profile.cpuLimit,
+                memoryLimit: strategy.profile.memoryLimit)
           });
           break;
         

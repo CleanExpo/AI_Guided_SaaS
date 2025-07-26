@@ -11,7 +11,7 @@ export interface AgentConfig { agent_id: string;
   role: string;
   priority: number;
   capabilities: string[],
-  specializations: Record<string any>,</string>
+  specializations: Record<string any>,
   coordination_protocols: { initiates_with: string[],
   coordinates_with: string[],
   provides_to: string[],
@@ -19,11 +19,11 @@ export interface AgentConfig { agent_id: string;
   escalates_to: string[],
   reports_to: string[]
 }
-  workflow_patterns: Record<string any>,</string>
-  communication_templates: Record<string any>,</string>
-  error_handling: Record<string any>,</string>
-  learning_patterns: Record<string any>,</string>
-  metrics: Record<string any></string>
+  workflow_patterns: Record<string any>,
+  communication_templates: Record<string any>,
+  error_handling: Record<string any>,
+  learning_patterns: Record<string any>,
+  metrics: Record<string any>
   status?: 'STANDBY' | 'ACTIVE' | 'BUSY' | 'ERROR' | 'OFFLINE';
   last_action?: string
   next_action? null : string
@@ -42,7 +42,7 @@ export interface AgentDiscoveryResult { total_agents: number;
 export class AgentLoader {
   private static instance: AgentLoader
   private agentsPath: string
-  private loadedAgents: Map<string AgentConfig> = new Map(, private agentDependencies: Map<string string[]> = new Map(), constructor(agentsPath: string = '') {</string>
+  private loadedAgents: Map<string AgentConfig> = new Map(, private agentDependencies: Map<string string[]> = new Map(), constructor(agentsPath: string = '') {
     // Default to project agents directory
     this.agentsPath = agentsPath || join(process.cwd(, 'agents')
 }
@@ -107,7 +107,7 @@ const _agentFiles = this.getAgentFiles();
    * Get agents required for next stage based on current project state
    */
   async getRequiredAgentsForStage(currentStage: string, projectType: string = 'saas_platform'): Promise<any> {
-    const stageAgentMap: Record<string string[]>  = {</string>
+    const stageAgentMap: Record<string string[]>  = {
       'requirements': ['ARCHITECT'],
       'architecture': ['ARCHITECT', 'FRONTEND', 'BACKEND'],
       'implementation': ['FRONTEND', 'BACKEND', 'QA'],
@@ -145,7 +145,7 @@ const requiredAgents: AgentConfig[] = [];
    * Get agent status and health information
    */
   getAgentStatus(): Record {
-    const status: Record<string any> = {</string>
+    const status: Record<string any> = {
       total_loaded: this.loadedAgents.size,
     agents_by_status: {};
     agents_by_role: {},

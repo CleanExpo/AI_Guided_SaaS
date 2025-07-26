@@ -326,7 +326,7 @@ const _paid = Number(paidUsers[0]?.count) || 0;
     day7: 62.8,
     day30: 45.1
       } as const }
-  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }> {</Array>
+  private static async getUserGrowthData(startDate: Date, endDate: Date): Promise<Array<{ date: string, users: number }> {
     // Mock implementation - would generate daily user counts, const data = []; const current = new Date(startDate);
     while (current <= endDate) {
       data.push({ date: current.toISOString().split('T')[0],

@@ -38,18 +38,18 @@ export default function NoCodeBuilder() {
               className="flex items-center p-3  -gray-200 rounded-lg cursor-grab hover:glass">draggable>onDragStart={() => handleDragStart(type)}
             >
               <Icon className="h-5 w-5 mr-3 text-gray-600" />
-              <span className="text-sm">{label}</span>
-            </div>
+              <span className="text-sm">{label}
+            
           ))}
-        </div>
-      </div>
+        
+      
       <div className="glass flex-1 p-4">
         <div
           ref={canvasRef}>className="min-h-[600px] glass -2 -dashed -gray-300 rounded-lg relative">>
           {components.length === 0 && (
             <div className="flex items-center justify-center h-full text-gray-500">
               <p>Drag components here to build your app</p>
-            </div>
+            
           )}
           
           {components.map((component) => (
@@ -62,10 +62,10 @@ export default function NoCodeBuilder() {
                 width: component.width,
                 height: component.height>}}>
               {component.label}
-            </div>
+            
           ))}
-        </div>
-      </div>
-    </div>
+        
+      
+    
   );
 }

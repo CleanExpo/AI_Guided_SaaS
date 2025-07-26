@@ -35,13 +35,13 @@ export default function ProCodeEditor() {
             <File className="h-4 w-4 mr-2 text-gray-600" />
           )}
           <span>{node.name}</span>
-        </div>
+        
         {node.children && (
           <div className="ml-4">
             {renderFileTree(node.children)}
-          </div>
+          
         )}
-      </div>
+      
     ));
   };
 
@@ -52,29 +52,29 @@ export default function ProCodeEditor() {
         <div className="flex items-center space-x-2">
           <button className="p-2 hover:bg-gray-700 rounded-lg">
             <Settings className="h-4 w-4" />
-          </button>
+          
           <button className="px-3 py-1 bg-green-600 hover:bg-green-700 rounded-lg text-sm flex items-center">
             <Play className="h-4 w-4 mr-1" />
             Run
-          </button>
-        </div>
-      </div>
+          
+        
+      
       <div className="flex-1 flex">
         <div className="w-64 glass-navbar -r -gray-700">
           <div className="p-3">
             <span className="text-sm font-medium">Explorer</span>
-          </div>
+          
           <div className="p-2">
             {renderFileTree(fileTree)}
-          </div>
-        </div>
+          
+        
         <div className="flex-1 flex items-center justify-center text-gray-500">
           <div className="text-center">
             <File className="h-16 w-16 mx-auto mb-4 text-gray-600" />
             <p>Select a file to start editing</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          
+        
+      
+    
   );
 }

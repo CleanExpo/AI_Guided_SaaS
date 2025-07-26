@@ -21,7 +21,7 @@ export interface CodebaseOptions {
 }
 
 export class DocumentLoader {
-  private languageMap: Record<string string> = {</string>
+  private languageMap: Record<string string> = {
     js: 'javascript',
     jsx: 'javascript',
     ts: 'typescript',

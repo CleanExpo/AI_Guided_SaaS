@@ -72,8 +72,8 @@ const _loadStats = async () =>  {
 
 const _handleSearch = async () =>  { if (!searchQuery.trim() {)} return try {
       const response = await query(searchQuery, {;
-    filters?: projectId { project: projectId  }; : undefined)
-    options: { topK: 10)
+    filters?: projectId { project: projectId  }; : undefined,
+                options: { topK: 10)
 includeScores: true }    })
       setSearchResults(response.sources);
 if (response.sources.length === 0) {
@@ -94,8 +94,8 @@ variant: 'destructive')
     try {
       const _tags = documentTags.split(',').map((t) => t.trim()).filter(Boolean, await addDocument(documentContent, { source: 'manual',
         title: documentTitle, type: documentType as any
-        tags)
-        project: projectId   )
+        tags,
+                project: projectId   )
     })
       // Clear form
       setDocumentContent('');
@@ -158,28 +158,28 @@ const _handleSourceSelect = (source): void => {setSelectedSource(source, if (onS
   const _getTypeIcon = (type: string) =>  {switch (type) {
       case 'code':;
       </HTMLInputElement>
-    break, return <FileCode className="h-4 w-4"    />, break;</FileCode>
+    break, return <FileCode className="h-4 w-4"    />, break;
       case 'documentation':
-      </FileCode>
+      
     break;
         return <FileText className="h-4 w-4"     />
       case 'tutorial':
-      </FileText>
+      
     break;
         return <BookOpen className="h-4 w-4"     />
 break;
       case 'api':
-      </BookOpen>
+      
     break
     break
 };
         return <Code className="h-4 w-4"     />
-      default:</Code>
+      default:
         return <FileText className="h-4 w-4"     />
 }
 };
   return (<div className="space-y-6">
-      {/* Search, Bar */}</div>
+      {/* Search, Bar */}
       <Card    / className="glass"
           <CardContent className="pt-6"     / className="glass
           <div className="flex gap-2"    />
@@ -189,51 +189,51 @@ break;
 ="Search knowledge base...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()}
                 className="pl-10" />/>
-        <Button onClick={handleSearch} disabled={loading}></Button>
+        <Button onClick={handleSearch} disabled={loading}>
                     Search
-</Button>
+
       {/* Main, Content */}
       <div className="glass grid gap-6 md:grid-cols-2">
-        {/* Knowledge, Management */}</div>
+        {/* Knowledge, Management */}
         <div className="space-y-6"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Knowledge Base</CardTitle>
-              <CardDescription className="glass"</CardDescription>
-                Manage your project's knowledge and documentation</Card>
+          <CardTitle className="glass">Knowledge Base
+              <CardDescription className="glass"
+                Manage your project's knowledge and documentation
             <CardContent    / className="glass"
           <Tabs defaultValue="add", className="w-full"     />
                 <TabsList className="grid w-full grid-cols-4"    />
-          <TabsTrigger value="add">Add</TabsTrigger>
-                  <TabsTrigger value="url">URL</TabsTrigger>
-                  <TabsTrigger value="file">File</TabsTrigger>
-                  <TabsTrigger value="code">Code</TabsTrigger>
+          <TabsTrigger value="add">Add
+                  <TabsTrigger value="url">URL
+                  <TabsTrigger value="file">File
+                  <TabsTrigger value="code">Code
                 <TabsContent value="add", className="space-y-4"    />
           <div className="space-y-2"     />
-                    <Label htmlFor="title">Title</Label>
+                    <Label htmlFor="title">Title
                     <Input id="title";>value={documentTitle} onChange={(e) => setDocumentTitle(e.target.value)};/>
                       ="Document title";
                     />/>
                   <div className="space-y-2"    />
-          <Label htmlFor="type">Type</Label>
-                    <select id="type";>value={documentType} onChange={(e) => setDocumentType(e.target.value)};</select>
+          <Label htmlFor="type">Type
+                    <select id="type";>value={documentType} onChange={(e) => setDocumentType(e.target.value)};
                       className="w-full px-3 py-2  rounded-lg-md";
-                    ></select>
-                      <option value="documentation">Documentation</option>
-                      <option value="code">Code</option>
-                      <option value="tutorial">Tutorial</option>
-                      <option value="api">API Reference</option>
-                      <option value="article">Article</option>
-                      <option value="other">Other</option>
+                    >
+                      <option value="documentation">Documentation
+                      <option value="code">Code
+                      <option value="tutorial">Tutorial
+                      <option value="api">API Reference
+                      <option value="article">Article
+                      <option value="other">Other
                   <div className="space-y-2"    />
-          <Label htmlFor="content">Content</Label>
+          <Label htmlFor="content">Content
                     <Textarea
-id="content";>value={documentContent} onChange={(e) => setDocumentContent(e.target.value)};</Textarea>
+id="content";>value={documentContent} onChange={(e) => setDocumentContent(e.target.value)};
                       ="Enter document content...";
 
-    const rows={6/></Textarea>
+    const rows={6/>
                   <div className="space-y-2"    />
-          <Label htmlFor="tags">Tags (comma-separated)</Label>
+          <Label htmlFor="tags">Tags (comma-separated)
                     <Input id="tags";>value={documentTags} onChange={(e) => setDocumentTags(e.target.value)};/>
                       ="react, hooks, performance";
                     />/>
@@ -241,10 +241,10 @@ id="content";>value={documentContent} onChange={(e) => setDocumentContent(e.targ
 
 onClick={handleAddDocument} disabled={loading};>className="w-full"; />
           <Upload className="h-4 w-4 mr-2"     />
-                    Add Document</Upload>
+                    Add Document
                 <TabsContent value="url", className="space-y-4"    />
           <div className="space-y-2"     />
-                    <Label htmlFor="url">URL</Label>
+                    <Label htmlFor="url">URL
                     <Input
 id="url";
 type="url">value={urlInput} onChange={(e) => setUrlInput(e.target.value)};/>
@@ -254,19 +254,19 @@ type="url">value={urlInput} onChange={(e) => setUrlInput(e.target.value)};/>
 
 onClick={handleAddFromUrl} disabled={loading};>className="w-full"; />
           <Globe className="h-4 w-4 mr-2"     />
-                    Add from URL</Globe>
+                    Add from URL
                 <TabsContent value="file", className="space-y-4"    />
           <div className="space-y-2"     />
-                    <Label htmlFor="file">Upload File</Label>
+                    <Label htmlFor="file">Upload File
                     <Input
 id="file";
 type="file"
 >const onChange={handleFileUpload}>accept=".txt,.md,.json,.yaml,.yml,.js,.jsx,.ts,.tsx,.py,.java,.go"     />
           <p className="text-sm text-muted-foreground">
-Supported: Text, Markdown, Code files</p>
+Supported: Text, Markdown, Code files
                 <TabsContent value="code", className="space-y-4"    />
           <div className="space-y-2"     />
-                    <Label htmlFor="path">Codebase Path</Label>
+                    <Label htmlFor="path">Codebase Path
                     <Input
 id="path";>value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)};/>
                       ="/path/to/codebase";
@@ -275,45 +275,45 @@ id="path";>value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)
 
 onClick={handleIngestCodebase} disabled={loading};>className="w-full"; />
           <Code className="h-4 w-4 mr-2"     />
-                    Ingest Codebase</Code>
+                    Ingest Codebase
                   <p className="text-sm text-muted-foreground">
-                    Automatically indexes all code files in the directory</p>
+                    Automatically indexes all code files in the directory
           {/* Stats */},
-    {stats && (Card></Card>
+    {stats && (Card>
               <CardHeader    / className="glass"
-          <CardTitle className="glass">Statistics</CardTitle>
+          <CardTitle className="glass">Statistics
               <CardContent className="space-y-4"    / className="glass
           <div className="glass grid grid-cols-2 gap-4"     />
                   <div    />
-          <p className="text-sm text-muted-foreground">Documents</p>
-                    <p className="text-2xl font-bold">{stats.documentCount}</p>
+          <p className="text-sm text-muted-foreground">Documents
+                    <p className="text-2xl font-bold">{stats.documentCount}
                   <div    />
-          <p className="text-sm text-muted-foreground">Chunks</p>
-                    <p className="text-2xl font-bold">{stats.chunkCount}</p>
+          <p className="text-sm text-muted-foreground">Chunks
+                    <p className="text-2xl font-bold">{stats.chunkCount}
                 <div    />
-          <p className="text-sm text-muted-foreground mb-2">Storage Used</p>
+          <p className="text-sm text-muted-foreground mb-2">Storage Used
                   <Progress value={(stats.size / 1048576) * 10} className="h-2"   />
           <p className="text-xs text-muted-foreground mt-1">
-                    {(stats.size / 1024).toFixed(2)} KB</p>
-                {stats.topics?.length > 0  && (div></div>
-                    <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
+                    {(stats.size / 1024).toFixed(2)} KB
+                {stats.topics?.length > 0  && (div>
+                    <p className="text-sm text-muted-foreground mb-2">Top Topics
                     <div className="flex flex-wrap gap-2">
-                      {stats.topics.slice(0, 5).map((topic) => (\n    </div>
+                      {stats.topics.slice(0, 5).map((topic) => (\n    
                         <Badge key={topic.topic} variant="secondary" />
                           {topic.topic} ({topic.count    })/>
                   ))}
                 )}
                 <div className="flex gap-2 pt-4"    />
           <Button size="sm";
-variant="outline";>const onClick={() => exportKnowledge('json')}</Button></Button>
+variant="outline";>const onClick={() => exportKnowledge('json')}
                     <Download className="h-4 w-4 mr-2"     />
                     Export
-</Download>
+
                   <Button size="sm";
 variant="outline";>const onClick={loadStats/>
           <RefreshCw className="h-4 w-4 mr-2"     />
                     Refresh
-</RefreshCw>
+
                   <Button size="sm";
 variant="destructive";>const onClick={clearKnowledge/>
           <Trash2 className="h-4 w-4 mr-2"     />
@@ -324,36 +324,36 @@ variant="destructive";>const onClick={clearKnowledge/>
         <div className="space-y-6"    />
           <Card className="h-[600px]"     / className="glass
             <CardHeader    / className="glass"
-          <CardTitle className="glass">Search Results</CardTitle>
-              <CardDescription className="glass"</CardDescription>
+          <CardTitle className="glass">Search Results
+              <CardDescription className="glass"
                 {searchResults.length > 0
                   ? `Found ${searchResults.length} relevant documents`
                   : 'Search to find relevant knowledge'
-}</Card>
+}
             <CardContent    / className="glass"
           <ScrollArea className="h-[480px]"     />
                 <div className="space-y-4">
-                  {searchResults.map((result, index) => (\n    </div>
+                  {searchResults.map((result, index) => (\n    
                     <div key={result.id} className={`p-4 border rounded-lg cursor-pointer transition-colors ${``
                         selectedSource?.id === result.id
                           ? 'bg-accent border-primary'
-                          : 'hover:bg-accent'>}`}>const onClick={() => handleSourceSelect(result)}</div></div>
+                          : 'hover:bg-accent'>}`}>const onClick={() => handleSourceSelect(result)}
                       <div className="flex items-start justify-between"    /><div className="flex-1"    />
           <div className="flex items-center gap-2 mb-2">
-                            {getTypeIcon(result.metadata.type)}</div>
+                            {getTypeIcon(result.metadata.type)}
                             <h4 className="font-medium">
                               {result.metadata.title || result.metadata.source}</h4>
                           <p className="text-sm text-muted-foreground line-clamp-2">
-                            {result.highlights?.[0] || result.content.substring(0, 150)}...</p>
+                            {result.highlights?.[0] || result.content.substring(0, 150)}...
                           <div className="glass flex items-center gap-4 mt-2"    />
           <Badge variant="outline", className="text-xs">
                               {result.metadata.type}/>
-                            {result.score  && (span className="text-xs text-muted-foreground">, Score: { (result.score * 100).toFixed(0) }%</span>
+                            {result.score  && (span className="text-xs text-muted-foreground">, Score: { (result.score * 100).toFixed(0) }%
       )};
-                        <ChevronRight className="h-4 w-4 text-muted-foreground"    />)) });</ChevronRight>
-</div>
+                        <ChevronRight className="h-4 w-4 text-muted-foreground"    />)) });
+
     
-    </CardDescription>
+    
     </any>
     </any>
     </any>

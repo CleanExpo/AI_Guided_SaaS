@@ -72,12 +72,12 @@ export function AdvancedCodeEditor({
   projectId)
   initialFiles = defaultFiles, onSave,)
   readOnly = false}: AdvancedCodeEditorProps) {
-  const [files, setFiles] = useState<FileNode[]>(initialFiles);</FileNode>
-  const [activeFile, setActiveFile] = useState<FileNode | null>(null);</FileNode>
+  const [files, setFiles] = useState<FileNode[]>(initialFiles);
+  const [activeFile, setActiveFile] = useState<FileNode | null>(null);
   
-const [openFiles, setOpenFiles]  = useState<FileNodenull>(null);</FileNode>
+const [openFiles, setOpenFiles]  = useState<FileNodenull>(null);
 
-const [expandedFolders, setExpandedFolders] = useState<Set<string>(new Set(['src']);</Set>
+const [expandedFolders, setExpandedFolders] = useState<Set<string>(new Set(['src']);
   
 const [searchQuery, setSearchQuery]  = useState('');
 
@@ -189,20 +189,20 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
         <div className="flex items-center gap-2">
           <Button size="sm";
 variant="outline";
->const onClick={handleRun}></Button>
+>const onClick={handleRun}>
             <Play className="h-4 w-4 mr-1"     />
             Run
-</Button>
+
           <Button size="sm";
 
-    variant={hasChanges ? 'default' : 'outline'} onClick={handleSave}>const disabled={readOnly || isSaving}></Button>
+    variant={hasChanges ? 'default' : 'outline'} onClick={handleSave}>const disabled={readOnly || isSaving}>
             {isSaving ? (
               <Loader2 className="h-4 w-4 mr-1 animate-spin"     />)
             ) : (
               <Save className="h-4 w-4 mr-1"     />
             )}
             Save
-</Button>
+
       <div className="flex-1 flex">
         {/* Sidebar */}</div>
         <div className="w-64 glass -r flex flex-col p-4 -b">
@@ -225,9 +225,9 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";>value={searchQuery} o
                     : "bg-gray-100 hover:bg-gray-200">)}>const onClick={() => setActiveFile(file)}</div role="button" tabIndex={0}></div>
                 <FileCode className="h-3 w-3"    />
           <span>{file.name}</span>
-                <button className="ml-2 hover: bg-gray-300 rounded-lg p-0.5">const onClick={(e) = aria-label="Button">  {</button>
+                <button className="ml-2 hover: bg-gray-300 rounded-lg p-0.5">const onClick={(e) = aria-label="Button">  {
                     e.stopPropagation(, handleCloseFile(file)};
-                ></button>
+                >
                   <X className="h-3 w-3"     />
             ))}
       </div>
@@ -244,7 +244,7 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";>value={searchQuery} o
                   readOnly: readOnly
                   wordWrap: 'on',
                   automaticLayout: true
-  }>}>const onMount={(editor) =>  {</Editor>
+  }>}>const onMount={(editor) =>  {
                   editorRef.current = editor
 };
               />
@@ -260,9 +260,9 @@ className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";>value={searchQuery} o
           <span className="text-sm font-medium">Terminal</span>
           <Button size="sm";
 variant="ghost";
-className="text-gray-400 hover: text-gray-100">const onClick={() => setTerminalOutput([])}</Button>
+className="text-gray-400 hover: text-gray-100">const onClick={() => setTerminalOutput([])}
             Clear
-</Button>
+
         <div className="glass p-4 font-mono text-sm overflow-y-auto h-full">
           {terminalOutput.map((line, index) => (\n    </div>
             <div key={index} className="mb-1">
@@ -270,13 +270,13 @@ className="text-gray-400 hover: text-gray-100">const onClick={() => setTerminalO
           ))}
       </div>
 );
-</Editor>
+
 </any>
-</FileNode>
+
   
     </div>
     
-    </main>
+    
   }
 
 }}}}}}}}

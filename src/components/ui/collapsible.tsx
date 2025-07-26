@@ -31,7 +31,7 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
     return (<CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}>)
         <div ref={ref} className={cn('', className)}>
           {children}
-        </div>
+        
       </CollapsibleContext.Provider>
     );
   }
@@ -54,7 +54,7 @@ const CollapsibleTrigger = React.forwardRef<
     >
       {children}
       <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
-    </button>
+    
   );
 });
 
@@ -72,8 +72,8 @@ const CollapsibleContent = React.forwardRef<
         open ? 'animate-in slide-in-from-top-1' : 'animate-out slide-out-to-top-1 hidden')
         className)
       )}>{...props}>
-      <div className={cn('pb-4 pt-0', className)}>{children}</div>
-    </div>
+      <div className={cn('pb-4 pt-0', className)}>{children}
+    
   );
 });
 

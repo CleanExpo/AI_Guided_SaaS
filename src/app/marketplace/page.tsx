@@ -47,12 +47,12 @@ export default function MarketplacePage() {
             <h1 className="text-3xl font-bold text-gray-900">Marketplace</h1>
             <p className="mt-1 text-gray-600">
               Pre-built templates, plugins, and integrations to ship even faster
-            </p>
+            
           </div>
           <Badge className="bg-orange-100 text-orange-700">
             <Rocket className="h-3 w-3 mr-1" />
             Ship 10x faster
-          </Badge>
+          
         </div>
 
         {/* Header with Search and Filters */}

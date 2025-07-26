@@ -28,7 +28,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
   return (<Card className="h-full glass
           <CardHeader className="glass"
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg glass{tutorial.title}</CardTitle>
+          <CardTitle className="text-lg glass{tutorial.title}
           {isCompleted ? (
             <CheckCircle className="w-5 h-5 text-green-600" />)
           ) : isLocked ? (
@@ -36,24 +36,24 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           ) : (
             <Play className="w-5 h-5 text-orange-500" />
           )}
-        </div>
+        
         <Badge className={difficultyColors[tutorial.difficulty]}>
           {tutorial.difficulty}
-        </Badge>
-      </CardHeader>
+        
+      
       <CardContent className="glass"
-          <p className="text-gray-600 mb-4">{tutorial.description}</p>
+          <p className="text-gray-600 mb-4">{tutorial.description}
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500">{tutorial.duration}</span>
+          <span className="text-sm text-gray-500">{tutorial.duration}
           <Button >onClick={() => onStart(tutorial.id)}
             disabled={isLocked}
             variant={isCompleted ? "outline" : "default"}
           >
             {isCompleted ? 'Review' : isLocked ? 'Locked' : 'Start'}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+          
+        
+      
+    
   );
 }
 
@@ -92,8 +92,8 @@ export default function TutorialsPage() {
   return (<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Learn & Master</h1>
-        <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development</p>
-      </div>
+        <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development
+      
 
       <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">)
         {tutorials.map((tutorial, index) => {
@@ -107,7 +107,7 @@ export default function TutorialsPage() {
               isLocked={isLocked}>onStart={handleStartTutorial} />>)
           );
         })}
-      </div>
-    </div>
+      
+    
   );
 }

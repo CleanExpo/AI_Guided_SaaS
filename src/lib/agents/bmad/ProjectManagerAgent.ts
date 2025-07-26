@@ -109,8 +109,8 @@ export class ProjectManagerAgent extends Agent {
 const userStories = this.getSharedMemory('user-stories') || [];
       
 constraints = this.getSharedMemory('technical-constraints') || [];
-      this.observe('Retrieved requirements from Analyst', { requirementCount: requirements.length)
-    userStoryCount: userStories.length
+      this.observe('Retrieved requirements from Analyst', { requirementCount: requirements.length,
+                userStoryCount: userStories.length
       }};
       // Step, 1: Define project scope and objectives;
 )

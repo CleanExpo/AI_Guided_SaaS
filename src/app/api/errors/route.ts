@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ 
-      success: true)
-      received: errors.length )
+      success: true,
+                received: errors.length )
     });
 
   } catch (error) {
@@ -113,7 +113,7 @@ async function sendCriticalErrorAlert(errors: Record<string, unknown>[]) {
             `Time: ${e.timestamp}\n` +
             `User: ${e.userId || 'Anonymous'}\n`)
           ).join('\n---\n')}`
-        });;
+        });
     } catch (error) {
       logger.error('Failed to send Discord alert:', error);
     }

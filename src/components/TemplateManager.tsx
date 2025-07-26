@@ -10,12 +10,12 @@ g,
 g, files: ProjectFile[]) => void
 };
 export default function TemplateManager() {
-  return (Card></Card>, <CardHeader className="glass"
-          </CardHeader>
+  return (Card>, <CardHeader className="glass"
+          
         <CardTitle className="flex items-center gap-2 glass
-          </CardTitle><Files className="w-5 h-5 text-indigo-600"     />
-          Template Manager</Files>
+          <Files className="w-5 h-5 text-indigo-600"     />
+          Template Manager
       <CardContent className="glass"
-          </CardContent>
+          
         <p className="text-gray-600">
-          Template management for {currentConfig.name} coming soon...</p>    }
+          Template management for {currentConfig.name} coming soon...    }

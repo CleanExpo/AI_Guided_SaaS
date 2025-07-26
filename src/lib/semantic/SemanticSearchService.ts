@@ -205,8 +205,8 @@ export class SemanticSearchService {
     
     return this.search({
       query,
-      filters)
-      size: 10)
+      filters,
+                size: 10)
     });
   }
 
@@ -233,8 +233,8 @@ export class SemanticSearchService {
     
     return this.search({
       query,
-      filters)
-      size: 5)
+      filters,
+                size: 5)
     });
   }
 }

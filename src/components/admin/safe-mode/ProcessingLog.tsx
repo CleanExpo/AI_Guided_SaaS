@@ -16,9 +16,9 @@ export function ProcessingLog({ processingLog }: ProcessingLogProps) {
         {processingLog.map((log, index) => (
           <div key={index} className="mb-1">
             [{new Date().toLocaleTimeString()}] {log}
-          </div>
+          
         ))}
-      </div>
-    </Card>
+      
+    
   );
 }

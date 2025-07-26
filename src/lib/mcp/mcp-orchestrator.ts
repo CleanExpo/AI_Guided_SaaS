@@ -116,8 +116,8 @@ const tools = await this.discoverTools(server.id);
       this.servers.set(server.id, {
         ...server,
         capabilities,
-        tools)
-        status: 'connected'
+        tools,
+                status: 'connected'
      )
     });
       if (this.config?.debug) {
@@ -231,7 +231,7 @@ for (const step of steps) {
    * Execute an orchestration plan
    */
   async executePlan(plan: MCPOrchestrationPlan)
-  ): Promise<Map<string MCPToolResult> {</Map>
+  ): Promise<Map<string MCPToolResult> {
 { MCPOrchestrationPlanSchema.parse(plan); const results = new Map<string MCPToolResult>(, if (validated.parallel && Object.keys(plan.dependencies) {.}length === 0) {</string>
       // Execute all steps in parallel;
 
@@ -259,8 +259,8 @@ if (step.dependsOn) {
           throw new Error('Circular dependency detected in orchestration plan')};
         // Execute ready steps;
 for (const step of readySteps) {
-          const promise = this.callTool({ tool: step.operation)
-            server: step.server,)
+          const promise = this.callTool({ tool: step.operation,
+                server: step.server,)
             arguments: step.arguments || {}); executing.set(step.id, promise); // Handle completion
           promise
             .then((result) => {
@@ -269,7 +269,7 @@ for (const step of readySteps) {
               results.set(step.id, { tool: step.operation,
                 server: step.server,
                 result: null;
-                error: error.message)
+                error: error.message,
                 duration: 0;)
                 timestamp: new Date().toISOString()
     });
@@ -336,7 +336,7 @@ if (executing.size > 0) {
           server.status = 'disconnected'
   }    })
 }
-  private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {</MCPCapability>
+  private async discoverCapabilities(serverId: string): Promise<MCPCapability[]> {
     try {
       const response  = await this.sendRequest(serverId, 'initialize', { protocolVersion: '2024-11-05',)
         capabilities: {});

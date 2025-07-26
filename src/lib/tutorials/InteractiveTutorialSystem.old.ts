@@ -47,7 +47,7 @@ export interface TutorialProgress { tutorialId: string;
   completedAt?: Date,
   score: number;
   hints_used: number;
-  attempts: Record<string any  />, export</string>
+  attempts: Record<string any  />, export
 }
 
 interface TutorialHighlight { element: string;
@@ -57,7 +57,7 @@ interface TutorialHighlight { element: string;
 }
 
 export class InteractiveTutorialSystem extends EventEmitter {
-  private tutorials: Map<string Tutorial> = new Map(, private activeProgress: Map<string TutorialProgress> = new Map(); private currentHighlights: TutorialHighlight[] = [];</string>
+  private tutorials: Map<string Tutorial> = new Map(, private activeProgress: Map<string TutorialProgress> = new Map(); private currentHighlights: TutorialHighlight[] = [];
   private documentationSystem: DynamicDocumentationSystem;
   constructor(documentationSystem: DynamicDocumentationSystem) {
     super();
@@ -502,7 +502,7 @@ const tutorial = this.tutorials.get(tutorialId);
     await this.saveProgress(progress);
     return true
 }
-  async useHint(tutorialId: string, userId: string): Promise<string | null> {</string>
+  async useHint(tutorialId: string, userId: string): Promise<string | null> {
 { `${userId}-${tutorialId}`;
 
 const progress = this.activeProgress.get(progressKey);
@@ -529,15 +529,15 @@ const hint = currentStep.hints[hintIndex];
 if (step.type === 'action' && step.action) {
       this.addHighlight({ element: step.action.parameters?.target || step.action.component,
         type: 'highlight',
-        content: step.content)
-        position: 'top'   )
+        content: step.content,
+                position: 'top'   )
     })
 }
     // Emit step event
     this.emit('step-shown', { tutorialId: tutorial.id;
       step,
-      stepIndex)
-      totalSteps: tutorial.steps.length;)
+      stepIndex,
+                totalSteps: tutorial.steps.length;)
       progress    })
 }
   private async validateStep(step: TutorialStep, userId: string): Promise<boolean> {
@@ -602,8 +602,8 @@ if (step.type === 'action' && step.action) {
     this.activeProgress.delete(`${progress.userId}-${tutorial.id}`);
     // Emit completion event
     this.emit('tutorial-completed', { tutorialId: tutorial.id,
-      userId: progress.userId)
-      score: progress.score,)
+      userId: progress.userId,
+                score: progress.score,)
       duration: progress.completedAt.getTime() - progress.startedAt.getTime();
       rewards    })
   }
@@ -647,7 +647,7 @@ const data = await response.json();
 }
   getCurrentHighlights(): TutorialHighlight[] {
     return [...this.currentHighlights]}
-  async getRecommendedTutorials(userId: string): Promise<Tutorial[]> {;</Tutorial>
+  async getRecommendedTutorials(userId: string): Promise<Tutorial[]> {;
 { await this.getUserProgress(userId); const completedIds = new Set(completed.map((p) => p.tutorialId); const recommendations: Tutorial[] = [];
     // Find tutorials where prerequisites are met
     this.tutorials.forEach((tutorial) =>  {

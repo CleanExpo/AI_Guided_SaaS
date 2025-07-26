@@ -21,8 +21,8 @@ export function FormGroup({
         <div className="flex items-center space-x-1">
           <span className="text-sm font-medium text-foreground">
             {label}
-          </span>
-          {required && <span className="text-red-500">*</span>}
+          
+          {required && <span className="text-red-500">*}
         </div>
       )}
       
@@ -32,7 +32,7 @@ export function FormGroup({
         <p className={cn()
           'text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
           {displayText}
-        </p>
+        
       )}
     </div>
   );

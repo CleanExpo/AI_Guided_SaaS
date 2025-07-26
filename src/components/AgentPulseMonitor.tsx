@@ -90,8 +90,8 @@ export function AgentPulseMonitor() {
       <Card className="glass">
         <CardContent className="p-6">
           <div className="animate-pulse">Loading pulse monitor...</div>
-        </CardContent>
-      </Card>
+        
+      
     );
   }
 
@@ -103,8 +103,8 @@ export function AgentPulseMonitor() {
             <AlertCircle className="h-4 w-4" />
             {error || 'No pulse data available'}
           </div>
-        </CardContent>
-      </Card>
+        
+      
     );
   }
 
@@ -118,19 +118,19 @@ export function AgentPulseMonitor() {
           <CardTitle className="flex items-center gap-2 glass">
             <Activity className="h-5 w-5" />
             System Resources
-          </CardTitle>
-          <CardDescription className="glass">Real-time resource utilization</CardDescription>
-        </CardHeader>
+          
+          <CardDescription className="glass">Real-time resource utilization
+        
         <CardContent className="space-y-4 glass">
           <div>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Cpu className="h-4 w-4" />
-                <span className="text-sm">CPU Usage</span>
+                <span className="text-sm">CPU Usage
               </div>
               <span className="text-sm font-medium">
                 {pulse.resources.cpuUsage.toFixed(1)}%
-              </span>
+              
             </div>
             <Progress 
               value={pulse.resources.cpuUsage} 
@@ -142,19 +142,19 @@ export function AgentPulseMonitor() {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <HardDrive className="h-4 w-4" />
-                <span className="text-sm">Memory Usage</span>
+                <span className="text-sm">Memory Usage
               </div>
               <span className="text-sm font-medium">
                 {pulse.resources.memoryUsage.toFixed(1)}%
-              </span>
+              
             </div>
             <Progress 
               value={pulse.resources.memoryUsage} 
               className={pulse.resources.memoryUsage > pulse.config.maxMemoryUsage ? 'bg-red-100' : ''}
             />
           </div>
-        </CardContent>
-      </Card>
+        
+      
 
       {/* Task Queue */}
       <Card className="glass">
@@ -162,9 +162,9 @@ export function AgentPulseMonitor() {
           <CardTitle className="flex items-center gap-2 glass">
             <Clock className="h-5 w-5" />
             Task Queue ({pulse.taskQueue.length})
-          </CardTitle>
-          <CardDescription className="glass">Pending tasks by priority</CardDescription>
-        </CardHeader>
+          
+          <CardDescription className="glass">Pending tasks by priority
+        
         <CardContent className="glass">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
@@ -192,8 +192,8 @@ export function AgentPulseMonitor() {
               <div className="text-xs text-gray-600">Low</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        
+      
 
       {/* Active Agents */}
       <Card className="glass">
@@ -201,9 +201,9 @@ export function AgentPulseMonitor() {
           <CardTitle className="flex items-center gap-2 glass">
             <Users className="h-5 w-5" />
             Active Agents ({pulse.activeAgents.length}/{pulse.config.maxConcurrentAgents})
-          </CardTitle>
-          <CardDescription className="glass">Currently running agent instances</CardDescription>
-        </CardHeader>
+          
+          <CardDescription className="glass">Currently running agent instances
+        
         <CardContent className="glass">
           <div className="space-y-3">
             {agents.map((agent) => (
@@ -217,46 +217,46 @@ export function AgentPulseMonitor() {
                 <div className="flex items-center gap-2">
                   <Badge variant={agent.isAvailable ? 'default' : 'secondary'}>
                     {agent.isAvailable ? 'Available' : 'Busy'}
-                  </Badge>
+                  
                   {agent.cooldownRemaining > 0 && (
                     <Badge variant="outline">
                       Cooldown: {agent.cooldownRemaining}s
-                    </Badge>
+                    
                   )}
                 </div>
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        
+      
 
       {/* Configuration */}
       <Card className="glass">
         <CardHeader className="glass">
-          <CardTitle className="glass">Pulse Configuration</CardTitle>
-          <CardDescription className="glass">System limits and intervals</CardDescription>
-        </CardHeader>
+          <CardTitle className="glass">Pulse Configuration
+          <CardDescription className="glass">System limits and intervals
+        
         <CardContent className="space-y-4 glass">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium">Max Concurrent Agents</label>
+              <label className="text-sm font-medium">Max Concurrent Agents
               <div className="text-lg">{pulse.config.maxConcurrentAgents}</div>
             </div>
             <div>
-              <label className="text-sm font-medium">Pulse Interval</label>
+              <label className="text-sm font-medium">Pulse Interval
               <div className="text-lg">{pulse.config.pulseInterval}ms</div>
             </div>
             <div>
-              <label className="text-sm font-medium">Cooldown Period</label>
+              <label className="text-sm font-medium">Cooldown Period
               <div className="text-lg">{pulse.config.cooldownPeriod}ms</div>
             </div>
             <div>
-              <label className="text-sm font-medium">Max CPU Usage</label>
+              <label className="text-sm font-medium">Max CPU Usage
               <div className="text-lg">{pulse.config.maxCpuUsage}%</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        
+      
     </div>
   );
 }

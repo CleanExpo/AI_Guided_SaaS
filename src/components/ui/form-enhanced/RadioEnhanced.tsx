@@ -38,7 +38,7 @@ export function RadioEnhanced({
         <div className={cn('absolute inset-0 rounded-full peer-checked:after:content-[""] peer-checked:after:absolute peer-checked:after:top-1/2 peer-checked:after:left-1/2 peer-checked:after:transform peer-checked:after:-translate-x-1/2 peer-checked:after:-translate-y-1/2 peer-checked:after:bg-white peer-checked:after:rounded-full')
           radioSize === 'sm' && 'peer-checked:after:w-1 peer-checked:after:h-1',)
           radioSize === 'md' && 'peer-checked:after:w-1.5 peer-checked:after:h-1.5',>radioSize === 'lg' && 'peer-checked:after:w-2 peer-checked:after:h-2'>)} />
-      </div>
+      
       
       {(label || description) && (
         <div className="flex flex-col">
@@ -46,15 +46,15 @@ export function RadioEnhanced({
             <label
               htmlFor={radioId}>className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">>
               {label}
-            </label>
+            
           )}
           {description && (
             <p className="text-xs text-muted-foreground mt-1">
               {description}
-            </p>
+            
           )}
-        </div>
+        
       )}
-    </div>
+    
   );
 }

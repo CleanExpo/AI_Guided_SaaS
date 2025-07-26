@@ -11,9 +11,9 @@ interface HealthMetrics { moduleScore: number
 
 interface SelfCheckTriggerProps { onReportGenerated?: (metrics: HealthMetrics) => void
  };
-const SelfCheckTrigger: React.FC<SelfCheckTriggerProps>  = ({ onReportGenerated }) => {</SelfCheckTriggerProps>
+const SelfCheckTrigger: React.FC<SelfCheckTriggerProps> = ({ onReportGenerated }) => {
   const [isRunning, setIsRunning] = useState(false);
-  const [metrics, setMetrics] = useState<HealthMetrics | null>(null);</HealthMetrics>
+  const [metrics, setMetrics] = useState<HealthMetrics | null>(null);
 { async () => {
     setIsRunning(true);
     try {
@@ -35,13 +35,13 @@ const mockMetrics: HealthMetrics={ moduleScore: 85
     <div className="p-4  -gray-200 rounded-xl-lg glass mb-4">
           <div></div>
         <h3 className="text-lg font-semibold text-gray-900">System Health Check</h3>
-        <p className="text-sm text-gray-600">Run comprehensive system diagnostics</p>
+        <p className="text-sm text-gray-600">Run comprehensive system diagnostics
       </div>
       <button;
 
-    onClick={runSelfCheck} disabled={isRunning};>className="mt-4 px-4 py-2 glass-button primary text-white rounded-lg hover: bg-blue-700 disabled:opacity-50">aria-label="Button"></button>
+    onClick={runSelfCheck} disabled={isRunning};>className="mt-4 px-4 py-2 glass-button primary text-white rounded-lg hover: bg-blue-700 disabled:opacity-50">aria-label="Button">
         {isRunning ? 'Running Check...' : 'Run Self Check'}
-      </button>
+      
       
       {metrics && (
         <div className="mt-4 space-y-2">

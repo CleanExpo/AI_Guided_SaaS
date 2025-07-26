@@ -115,15 +115,15 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
           <Button variant="ghost" className="mb-8">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
-          </Button>
-        </Link>
+          
+        
         
         <article>
           <div className="mb-8">
             <div className="glass flex items-center gap-4 mb-4">
-          <Badge variant="secondary">{post.category}</Badge>
+          <Badge variant="secondary">{post.category}
               <span className="text-sm text-gray-500">{post.readTime}</span>
-            </div>
+            
             
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
             
@@ -133,37 +133,37 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
           <span className="mr-3">{post.author}</span>
                 <Calendar className="h-4 w-4 mr-1" />
           <span>{post.publishedAt}</span>
-              </div>
+              
               
               <div className="flex gap-2">
                 <Button variant="outline" size="icon">
                   <Share2 className="h-4 w-4" />
-                </Button>
+                
                 <Button variant="outline" size="icon">
                   <Bookmark className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+                
+              
             
-            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mb-8"></div>
-          </div>
+            
+            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mb-8">
+          
           
           <Card className="glass">
             <CardContent className="glass prose prose-lg max-w-none p-8">
               <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }} />
-            </CardContent>
-          </Card>
+            
+          
           
           <div className="mt-12 pt-8 border-t">
             <h3 className="text-2xl font-bold mb-4">Share this article</h3>
             <div className="glass flex gap-4">
-              <Button variant="outline">Share on Twitter</Button>
-              <Button variant="outline">Share on LinkedIn</Button>
-              <Button variant="outline">Copy Link</Button>
-            </div>
-          </div>
+              <Button variant="outline">Share on Twitter
+              <Button variant="outline">Share on LinkedIn
+              <Button variant="outline">Copy Link
+            
+          
         </article>
-      </div>
-    </div>
+      
+    
   );
 }

@@ -104,8 +104,8 @@ export class RAGEngine {
     try {
       const _files = await this.documentLoader.loadCodebase(path, options, for (const file of files) {
         try {
-          await this.addDocument(file.content, { source: file.path: type, 'code',; title: file.name)
-    tags: [file.language || 'unknown'],)
+          await this.addDocument(file.content, { source: file.path: type, 'code',; title: file.name,
+                tags: [file.language || 'unknown'],)
     project?: options.project    })
           results.documentsAdded++
         } catch (error) {
@@ -260,7 +260,7 @@ const answer = `Based on the provided context, here's the answer to your questio
     // Mock streaming response, const _words = 'This is a streaming response based on the context provided.'.split(', ', for (const word of words) {
       yield word + ' '
       await new Promise(resolve => setTimeout(resolve, 100))}
-  private extractTopics(documents: Document[]): Array { const topicCounts = new Map<string number>(, // Count tags and types, for (const doc of documents) {; </string>
+  private extractTopics(documents: Document[]): Array { const topicCounts = new Map<string number>(, // Count tags and types, for (const doc of documents) {; 
       // Count type as topic; const _type = doc.metadata.type;
       topicCounts.set(type, (topicCounts.get(type) || 0) + 1)
       // Count tags as topics;

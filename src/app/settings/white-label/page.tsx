@@ -95,23 +95,23 @@ export default function WhiteLabelPage() {
               <h1 className="text-3xl font-bold text-gray-900">White-Label Settings</h1>
               <p className="mt-1 text-gray-600">
                 Customize branding and make this platform your own
-              </p>
+              
             </div>
             <div className="flex items-center gap-3">
               {hasChanges && (
                 <Badge className="bg-yellow-100 text-yellow-700">
                   <AlertCircle className="h-3 w-3 mr-1" />
                   Unsaved changes
-                </Badge>)
+                )
               )}
               <Button variant="outline" onClick={handleExport}>
                 <Download className="h-4 w-4 mr-2" />
                 Export
-              </Button>
+              
               <Button variant="outline" onClick={handleReset}>
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Reset
-              </Button>
+              
               <Button 
                 onClick={handleSave}>disabled={isSaving || !hasChanges}>
                 {isSaving ? (
@@ -120,7 +120,7 @@ export default function WhiteLabelPage() {
                   <Save className="h-4 w-4 mr-2" />
                 )}
                 Save Changes
-              </Button>
+              
             </div>
           </div>
         </div>
@@ -134,38 +134,38 @@ export default function WhiteLabelPage() {
                   <TabsTrigger value="branding">
                     <Building2 className="h-4 w-4 mr-2" />
                     Branding
-                  </TabsTrigger>
+                  
                   <TabsTrigger value="colors">
                     <Palette className="h-4 w-4 mr-2" />
                     Colors
-                  </TabsTrigger>
+                  
                   <TabsTrigger value="advanced">
                     <Code2 className="h-4 w-4 mr-2" />
                     Advanced
-                  </TabsTrigger>
+                  
                   <TabsTrigger value="premium">
                     <Globe className="h-4 w-4 mr-2" />
                     Premium
-                  </TabsTrigger>
-                </TabsList>
+                  
+                
 
                 <TabsContent value="branding">
                   <BrandingTab config={config} updateConfig={updateConfig} />
-                </TabsContent>
+                
 
                 <TabsContent value="colors">
                   <ColorsTab config={config} updateConfig={updateConfig} />
-                </TabsContent>
+                
 
                 <TabsContent value="advanced">
                   <AdvancedTab config={config} updateConfig={updateConfig} />
-                </TabsContent>
+                
 
                 <TabsContent value="premium">
                   <PremiumTab config={config} updateConfig={updateConfig} />
-                </TabsContent>
-              </Tabs>
-            </Card>
+                
+              
+            
           </div>
 
           {/* Preview Panel */}

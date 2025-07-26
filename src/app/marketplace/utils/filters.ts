@@ -1,8 +1,8 @@
 import { MarketplaceItem, CategoryType, FilterType } from '../types';
 
 export function filterItems(items: MarketplaceItem[],
-  searchQuery: string)
-  selectedCategory: CategoryType)
+  searchQuery: string,
+                selectedCategory: CategoryType)
 ): MarketplaceItem[] {
   return items.filter(item => {)
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -63,8 +63,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     
     // Simulate service health action
     return NextResponse.json({
-      success: true)
-      message: `Health check action ${action} performed on ${service}`,)
+      success: true,
+                message: `Health check action ${action} performed on ${service}`,)
       timestamp: new Date().toISOString()
     });
   } catch (error) {

@@ -8,8 +8,8 @@ export function withSSRGuard<T extends object>(Component: React.ComponentType<T>
       setMounted(true)}, []);
     if (!mounted) {
       return <div className="animate-pulse glass-sidebar h-4 w-full rounded-lg">}
-    return <Component {...props}    />}</Component>
-</any>
+    return <Component {...props}    />}
+
   
     </T>
   };

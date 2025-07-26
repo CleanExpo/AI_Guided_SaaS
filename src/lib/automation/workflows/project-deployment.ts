@@ -195,8 +195,8 @@ error: healthStatus.error || 'Health check failed',
 <p><strong>Project:</strong> {{ $json.projectId }}</p>
 <p><strong>Time:</strong> {{ $json.timestamp }}</p>
 <p><strong>Message:</strong> {{ $json.message }}</p>
-{{ $json.success ? '<p><strong>Production: URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '</a>' : '' }}
-<p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}</a>
+{{ $json.success ? '<p><strong>Production: URL:</strong> <a href="' + $json.deploymentUrl + '">' + $json.deploymentUrl + '' : '' }}
+<p><strong>Staging: URL:</strong> <a href="{{ $json.stagingUrl }}">{{ $json.stagingUrl }}
 <h3>Details</h3>)
 <pre>{{ JSON.stringify($json.details, null, 2)}</pre>
 `, ``,

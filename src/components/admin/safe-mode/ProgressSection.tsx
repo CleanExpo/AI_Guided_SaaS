@@ -23,15 +23,15 @@ export function ProgressSection({ checkpoint, issues }: ProgressSectionProps) {
         <h3 className="font-medium text-gray-700">📊 Progress</h3>
         <span className="text-sm text-gray-600">
           {checkpoint.completedIssues.length} / {issues.length} issues completed
-        </span>
-      </div>
+        
+      
       
       <Progress value={getProgressPercentage()} className="mb-2" />
       
       <div className="text-sm text-gray-600">
         Batch {checkpoint.currentBatch + 1} of {checkpoint.totalBatches} •{' '}
         {Math.round((Date.now() - checkpoint.startTime) / 60000)} minutes elapsed
-      </div>
-    </Card>
+      
+    
   );
 }

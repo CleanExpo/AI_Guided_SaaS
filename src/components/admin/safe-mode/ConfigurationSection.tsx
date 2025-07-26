@@ -23,7 +23,7 @@ export function ConfigurationSection({
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Issues per batch
-          </label>
+          
           <input
             type="number"
             min="1")
@@ -43,7 +43,7 @@ export function ConfigurationSection({
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Max time per batch (min)
-          </label>
+          
           <input
             type="number"
             min="1"
@@ -63,7 +63,7 @@ export function ConfigurationSection({
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Pause between batches (s)
-          </label>
+          
           <input
             type="number"
             min="10"
@@ -85,8 +85,8 @@ export function ConfigurationSection({
             <input
               type="checkbox">checked={batchConfig.requireConfirmation}>onChange={(e) =>
                 setBatchConfig({
-                  ...batchConfig)
-                  requireConfirmation: e.target.checked)
+                  ...batchConfig,
+                requireConfirmation: e.target.checked)
                 })
               }
               className="mr-2"
@@ -94,10 +94,10 @@ export function ConfigurationSection({
             />
             <span className="text-sm font-medium text-gray-700">
               Require confirmation
-            </span>
-          </label>
+            
+          
         </div>
       </div>
-    </Card>
+    
   );
 }

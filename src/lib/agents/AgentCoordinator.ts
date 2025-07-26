@@ -267,7 +267,7 @@ const agentPriorityMap = new Map<string number>();</string>
       agentPriorityMap.set(agent.agent_id, agent.priority)
 };);
 
-const tasksByPriority = new Map<number string[]>();</number>
+const tasksByPriority = new Map<number string[]>();
     tasks.forEach((task) =>  { const _priority = agentPriorityMap.get(task.agent_id) || 999, if (!tasksByPriority.has(priority) {)} {;
         tasksByPriority.set(priority, []) };
       tasksByPriority.get(priority)!.push(task.id)    })

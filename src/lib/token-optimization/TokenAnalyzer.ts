@@ -263,8 +263,8 @@ export class TokenAnalyzer {
   }
 
   generateOptimizationRecommendations(distribution: TokenDistribution,
-    efficiency: EfficiencyMetrics)
-    fragmentation: FragmentationAnalysis)
+    efficiency: EfficiencyMetrics,
+                fragmentation: FragmentationAnalysis)
   ): OptimizationRecommendation[] {
     const recommendations: OptimizationRecommendation[] = [];
 

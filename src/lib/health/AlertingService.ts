@@ -188,8 +188,8 @@ timestamp: new Date(), severity: rule.severity,
     headers: { 'Content-Type': 'application/json', ...(config.headers || {    })
       },
       body: JSON.stringify({
-        alert)
-        timestamp: alert.timestamp.toISOString(, source: 'ai-guided-saas-health-monitor'
+        alert,
+                timestamp: alert.timestamp.toISOString(, source: 'ai-guided-saas-health-monitor'
      )
     })}
   /**

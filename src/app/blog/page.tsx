@@ -51,47 +51,47 @@ export default function BlogPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Stay updated with the latest news, insights, and developments from AI Guided SaaS Platform.
-          </p>
-        </div>
+          
+        
         
         <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <Card key={post.id} className="overflow-hidden hover:shadow-md-lg transition-shadow-md glass">
-              <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"></div>
+              <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600">
               <CardHeader className="glass">
                 <div className="flex items-center justify-between mb-2">
-                  <Badge variant="secondary">{post.category}</Badge>
+                  <Badge variant="secondary">{post.category}
                   <span className="text-sm text-gray-500">{post.readTime}</span>
-                </div>
+                
                 <CardTitle className="line-clamp-2 hover:text-blue-600 transition-colors glass">
-                  <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                </CardTitle>
-              </CardHeader>
+                  <Link href={`/blog/${post.id}`}>{post.title}
+                
+              
               <CardContent className="glass">
-                <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}
                 <div className="flex items-center text-sm text-gray-500 mb-4">
                   <User className="h-4 w-4 mr-1" />
                   <span className="mr-3">{post.author}</span>
                   <Calendar className="h-4 w-4 mr-1" />
                   <span>{post.publishedAt}</span>
-                </div>
+                
                 <Link href={`/blog/${post.id}`}>
                   <Button variant="ghost" size="sm" className="p-0">
                     Read More
                     <ArrowRight className="ml-1 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+                  
+                
+              
+            
           ))}
-        </div>
+        
         
         <div className="text-center mt-12">
           <Button variant="outline" size="lg">
             Load More Posts
-          </Button>
-        </div>
-      </div>
-    </div>
+          
+        
+      
+    
   );
 }

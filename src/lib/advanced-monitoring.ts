@@ -6,7 +6,7 @@
 import { logSecurity, logWarn } from './production-logger';interface SecurityEvent { type: 'attack' | 'breach' | 'suspicious' | 'rate_limit' | 'auth_failure',
   severity: 'critical' | 'high' | 'medium' | 'low',
   source: string;
-  details: Record<string unknown>,</string>
+  details: Record<string unknown>,
   timestamp: Date;
   ip?: string,
   userAgent?: string
@@ -40,7 +40,7 @@ class AdvancedMonitoringSystem {
   /**
    * Log security events with automatic alerting
    */;
-logSecurityEvent(event: Omit<SecurityEvent 'timestamp'>) { </SecurityEvent>
+logSecurityEvent(event: Omit<SecurityEvent 'timestamp'>) { 
     const securityEvent: SecurityEvent={;
       ...event;
       timestamp: new Date() };
@@ -52,13 +52,13 @@ if (event.severity === 'critical' || event.severity === 'high') {
     // Log to production logger;
 if (typeof window === 'undefined') {
       logSecurity('Security event detected', { type: event.type,
-    severity: event.severity)
-    source: event.source,)
+    severity: event.severity,
+                source: event.source,)
     details: event.details})}
   /**
    * Track performance metrics
    */;
-trackPerformance(metric: Omit<PerformanceMetric 'timestamp' | 'memoryUsage' | 'cpuUsage'>) {</PerformanceMetric>
+trackPerformance(metric: Omit<PerformanceMetric 'timestamp' | 'memoryUsage' | 'cpuUsage'>) {
     const performanceMetric: PerformanceMetric={;
       ...metric;
       timestamp: new Date(), memoryUsage: this.getMemoryUsage(),
@@ -67,8 +67,8 @@ trackPerformance(metric: Omit<PerformanceMetric 'timestamp' | 'memoryUsage' | 'c
     this.trimPerformanceHistory();
     // Check for performance alerts;
 if (metric.responseTime > this.alertThresholds.responseTime) {
-      this.triggerPerformanceAlert('High response time detected', { endpoint: metric.endpoint)
-    responseTime: metric.responseTime,)
+      this.triggerPerformanceAlert('High response time detected', { endpoint: metric.endpoint,
+                responseTime: metric.responseTime,)
     threshold: this.alertThresholds.responseTime})}
   /**
    * Monitor system health
@@ -98,10 +98,10 @@ if (metric.responseTime > this.alertThresholds.responseTime) {
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentEvents = this.securityEvents.filter(, event: any => event.timestamp > last24Hours;)
     );
     
-const _attackTypes = recentEvents.reduce((acc: Record<string any>, event) =>  {</string>
+const _attackTypes = recentEvents.reduce((acc: Record<string any>, event) =>  {
       acc[event.type] = (acc[event.type] || 0) + 1;
       return acc
-}, {} as Record<string any>);</string>
+}, {} as Record<string any>);
 { Object.entries(attackTypes);
       .map(([type, count]) => ({ type, count })).sort((a, b) => b.count - a.count);
       .slice(0, 5);
@@ -122,13 +122,13 @@ const _attackTypes = recentEvents.reduce((acc: Record<string any>, event) =>  {<
     const _last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000); const recentMetrics = this.performanceMetrics.filter(, metric: any => metric.timestamp > last24Hours;)
     );
     
-const _endpointTimes = recentMetrics.reduce((acc: Record<string number[]>, metric) =>  {</string>
+const _endpointTimes = recentMetrics.reduce((acc: Record<string number[]>, metric) =>  {
       if (!acc[metric.endpoint]) {
         acc[metric.endpoint] = []
 };
       acc[metric.endpoint].push(metric.responseTime);
       return acc
-}, {} as Record<string number[]>);</string>
+}, {} as Record<string number[]>);
 { Object.entries(endpointTimes);
       .map(([endpoint, times]) => ({
         endpoint, avgTime: times.reduce((sum, time) => sum + time, 0) / times.length})).sort((a, b) => b.avgTime - a.avgTime);
@@ -219,7 +219,7 @@ severity: event.severity,
     // In production, this would send to external monitoring services;
 if (typeof window === 'undefined') {
       logSecurity('Security alert triggered', alert)}
-  private triggerPerformanceAlert(message: string, details: Record<string unknown>) {</string>
+  private triggerPerformanceAlert(message: string, details: Record<string unknown>) {
 {{ type: 'performance';
       message,
       severity: 'medium' as const timestamp: new Date(); details};
@@ -227,8 +227,8 @@ if (typeof window === 'undefined') {
       logWarn('Performance alert triggered', alert)}
   private checkHealthAlerts(health: SystemHealth) {
     if (health.memoryUsage.percentage > this.alertThresholds.memoryUsage) {
-      this.triggerPerformanceAlert('High memory usage detected', { usage: health.memoryUsage.percentage)
-    threshold: this.alertThresholds.memoryUsage   )
+      this.triggerPerformanceAlert('High memory usage detected', { usage: health.memoryUsage.percentage,
+                threshold: this.alertThresholds.memoryUsage   )
     })
 }
     if (health.errorRate > this.alertThresholds.errorRate) {

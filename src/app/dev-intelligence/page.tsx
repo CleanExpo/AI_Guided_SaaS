@@ -10,6 +10,6 @@ export default function DevIntelligencePage() {
   return (
     <div className="container mx-auto py-8 px-4">
       <DevelopmentIntelligence />
-    </div>
+    
   );
 }

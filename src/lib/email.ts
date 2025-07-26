@@ -23,7 +23,7 @@ interface NotificationEmailData { userName: string;
   actionText?: string
 }
 class EmailService {
-  private apiKey: string, private baseUrl = 'https://api.resend.com', private defaultFrom = 'AI Guided SaaS <noreply@ai-guided-saas.com>';</noreply>
+  private apiKey: string, private baseUrl = 'https://api.resend.com', private defaultFrom = 'AI Guided SaaS <noreply@ai-guided-saas.com>';
   constructor() {
     this.apiKey = process.env.RESEND_API_KEY || '';
     if (!this.apiKey && process.env.NODE_ENV || "development" !== 'development') {
@@ -66,7 +66,7 @@ class EmailService {
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
-          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Welcome to AI Guided SaaS Builder</title>
           <style></style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6, color: #333 }
@@ -78,9 +78,9 @@ class EmailService {
             .footer { text-align: center, margin-top: 30px, color: #6b7280, font-size: 14px }
 </style>
         <body></body>
-          <div className="container"></div>
-            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder</div>
-            <div className="content"></div>
+          <div className="container">
+            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder
+            <div className="content">
               <h2>Welcome aboard, ${data.userName}! 🎉</h2>
               <p>Thank you for joining AI Guided SaaS Builder! We're excited to help you create amazing applications with the power of AI.</p>
               <p>Here's what you can do with your new, account:</p>
@@ -91,8 +91,8 @@ class EmailService {
                 <li>🚀 Deploy with one-click to production</li>
                 <li>📊 Access analytics and collaboration tools</li>
               <p>Ready to get started?</p>
-              <a href="${data.loginUrl}" className="button">Access Your Dashboard</a>
-            <div className="footer"></div>
+              <a href="${data.loginUrl}" className="button">Access Your Dashboard
+            <div className="footer">
               <p>If you have any questions, feel free to reach out to our support team.</p>
               <p>Happy building! 🛠️</p>
 </body>
@@ -105,8 +105,8 @@ const _text = `;``
       If you have any questions, feel free to reach out to our support team.
       Happy building!
     `
-    return this.sendEmail({ to: data.userEmail)
-    subject: 'Welcome to AI Guided SaaS Builder! 🚀';
+    return this.sendEmail({ to: data.userEmail,
+                subject: 'Welcome to AI Guided SaaS Builder! 🚀';
       html,)
       text    })
 }
@@ -117,7 +117,7 @@ const _text = `;``
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
-          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0">
           <title>${data.title}</title>
           <style></style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif, line-height: 1.6, color: #333 }
@@ -129,19 +129,19 @@ const _text = `;``
             .footer { text-align: center, margin-top: 30px, color: #6b7280, font-size: 14px }
 </style>
         <body></body>
-          <div className="container"></div>
-            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder</div>
-            <div className="content"></div>
+          <div className="container">
+            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder
+            <div className="content">
               <h2>Hi ${data.userName}! 👋</h2>
               <h3>${data.title}</h3>
               <p>${data.message}</p>
               ${data.actionUrl && data.actionText
                   ? ```
-                <a href="${data.actionUrl}" className="button">${data.actionText}</a>
+                <a href="${data.actionUrl}" className="button">${data.actionText}
               `
                   : ''
 }
-            <div className="footer"></div>
+            <div className="footer">
               <p>Best regards,<br>The AI Guided SaaS Builder Team</p>
 </body>
     `;``;
@@ -166,7 +166,7 @@ const _text = `;``
 { `, ``, <!DOCTYPE html>
         <html></html>
         <head></head>
-          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+          <meta charset="utf-8"  /> name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Reset Your Password</title>
           <style></style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6, color: #333 }
@@ -179,23 +179,23 @@ const _text = `;``
             .warning { background: #fef3c7, border: 1px solid #f59e0b, padding: 15px, border-radius: 6px, margin: 15px 0 }
 </style>
         <body></body>
-          <div className="container"></div>
-            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder</div>
-            <div className="content"></div>
+          <div className="container">
+            <div className="header"  /> className="logo">🚀 AI Guided SaaS Builder
+            <div className="content">
               <h2>Password Reset Request 🔐</h2>
               <p>Hi ${userName},</p>
               <p>We received a request to reset your password for your AI Guided SaaS Builder account.</p>
-              <a href="${resetUrl}" className="button">Reset Your Password</a>
-              <div className="warning"></div>
+              <a href="${resetUrl}" className="button">Reset Your Password
+              <div className="warning">
                 <strong>⚠️ Security: Notice:</strong>
                 <ul></ul>
                   <li>This link will expire in 1 hour for security reasons</li>
                   <li>If you didn't request this reset, please ignore this email</li>
                   <li>Never share this link with anyone</li>
-</div>
+
               <p>If the button doesn't work, copy and paste this link into your, browser: </p>
               <p style="word-break: break-all, color: #6b7280;">${resetUrl}</p>
-            <div className="footer"></div>
+            <div className="footer">
               <p>If you didn't request this password reset, please contact our support team immediately.</p>
               <p>Stay secure! 🛡️</p>
 </body>

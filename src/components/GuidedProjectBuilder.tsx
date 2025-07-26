@@ -171,7 +171,7 @@ const steps: Step[]  = [
 export function GuidedProjectBuilder({ onComplete, initialData  = {}: GuidedProjectBuilderProps, initialData  = {}: GuidedProjectBuilderProps) {
   const [currentStep, setCurrentStep] = useState<any>(null)
   const [formData, setFormData] = useState<any>(null)
-  const [errors, setErrors]  = useState<Record<string string>({});</Record>
+  const [errors, setErrors]  = useState<Record<string string>({});
 
 const [isProcessing, setIsProcessing] = useState<any>(null)
   
@@ -236,8 +236,8 @@ integrations: formData.integrations || []
   return (<div className="glass max-w-4xl mx-auto p-6">
       {/* Progress, Bar */}</div>
       <div className="mb-8 flex items-center justify-between mb-2"    />
-          <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>)
-          <span className="text-sm font-medium">{Math.round(progress)}% Complete</span>
+          <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length})
+          <span className="text-sm font-medium">{Math.round(progress)}% Complete
         <Progress value={progress} className="h-2"    />
           </div>
       {/* Step, Content */}
@@ -245,7 +245,7 @@ integrations: formData.integrations || []
           <motion.div;
 
 key={currentStep} initial={{ opacity: 0, x: 20 }
-          animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }>const transition={{ duration: 0.3 }></motion>
+          animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }>const transition={{ duration: 0.3 }>
           <Card className="glass p-8">
           <div className="glass flex items-center gap-4 mb-6">
               <div className="h-12 w-12 rounded-lg-full glass-button primary/10 flex items-center justify-center">
@@ -253,24 +253,24 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
 </div>
               <div>
           <h2 className="text-2xl font-bold">{step.title}</h2>
-                <p className="text-muted-foreground">{step.description}</p>
+                <p className="text-muted-foreground">{step.description}
             {/* AI, Helper */},
     {step.helper  && (div className="mb-6 p-4 glass-button primary/5 rounded-xl-lg  -primary/20">
                 <div className="flex items-start gap-3">
           <Lightbulb className="h-5 w-5 text-primary mt-0.5"     />
-                  <p className="text-sm">{step.helper}</p>
+                  <p className="text-sm">{step.helper}
   }, {/* Fields */}
             <div className = "space-y-6"></div>
               {step.fields.map((field) => (\n    </div>
                 <div key={field.name}>
           <label className="block text-sm font-medium mb-2">
-                    {field.label}</label>
-                    {field.required && <span className="text-red-500 ml-1">*</span>
+                    {field.label}
+                    {field.required && <span className="text-red-500 ml-1">*
                   {field.type === 'text'  && (Input; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       ={field.} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
     {field.type = == 'textarea'  && (/Input>
-                    <Textarea value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}</Textarea>
+                    <Textarea value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
 {{field.}
                       rows={4} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
@@ -282,70 +282,70 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
                               ? "border-primary bg-primary/5")
                               : "border-border, hover:border-primary/50">)}>
           <input type="radio"
->name={field.name} value={option.value}>checked={formData[field.name] === option.value} onChange={() =    /> handleFieldChange(field.name, option.value)}</input>
-                            className="sr-only" /></input>
-        <span className="text-sm font-medium">{option.label}</span>))}
+>name={field.name} value={option.value}>checked={formData[field.name] === option.value} onChange={() =    /> handleFieldChange(field.name, option.value)}
+                            className="sr-only" />
+        <span className="text-sm font-medium">{option.label}))}
                   )},
     {field.type = == 'select'  && (select; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
                       const className={cn('w-full p-2 border rounded-md',errors[field.name] && 'border-red-500')
                       )}
-                    ></select>
-                      <option value="">Select an option {field.options?.map((option) => (\n    <option key={option.value} value={option.value}></option>
-                          {option.label}</option>
+                    >
+                      <option value="">Select an option {field.options?.map((option) => (\n    <option key={option.value} value={option.value}>
+                          {option.label}
                       ))}
-</select>
+
                   )},
     {field.type = == 'multiselect'  && (div className="grid grid-cols-2 gap-3">{field.options?.map((option) => (\n    </div>
                         <label; key={option.value} className={cn(`
                             "flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors" formData[field.name]?.includes(option.value, ? "border-primary bg-primary/5")
                               : "border-border, hover:border-primary/50">)}>
           <input type="checkbox"
->value={ option.value} checked={formData[field.name]?.includes(option.value) || false}>const onChange={(e) =    /> {</input>
+>value={ option.value} checked={formData[field.name]?.includes(option.value) || false}>const onChange={(e) =    /> {
 { formData[field.name] || [], if (e.target.checked) {
                                 handleFieldChange(field.name, [...values, option.value])} else { handleFieldChange(field.name, values.filter((v: string) => v !== option.value))
  };
-                            className="rounded-lg -gray-300" /></input>
-        <span className="text-sm">{option.label}</span>)) })} {errors[field.name]  && (p className="text-sm text-red-500 mt-1">{errors[field.name]}</p>
+                            className="rounded-lg -gray-300" />
+        <span className="text-sm">{option.label})) })} {errors[field.name]  && (p className="text-sm text-red-500 mt-1">{errors[field.name]}
               ))},
     {/* AI, Suggestions */},
     {aiSuggestions.length > 0  && (div className="glass mt-6 p-4 bg-blue-50 rounded-xl-lg">
                 <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
           <Sparkles className="h-4 w-4"     />
-                  AI Suggestions</Sparkles>
+                  AI Suggestions
                 <ul className="space-y-1">
                   {aiSuggestions.map((suggestion, index) => (\n    <li key={index} className="text-sm text-muted-foreground">
-                      • {suggestion}</li>
+                      • {suggestion}
                   ))}
-                </ul>)},
+                )},
     {/* Navigation */}
             <div className="flex justify-between mt-8">
           <Button variant="outline";
->onClick={handleBack} disabled={currentStep === 0}></Button>
+>onClick={handleBack} disabled={currentStep === 0}>
                 <ArrowLeft className="h-4 w-4 mr-2"     />
-                Back</ArrowLeft>
+                Back
               <Button
->onClick={handleNext} disabled={isProcessing || isLoading}></Button>
-                {isProcessing ? (</Button>
-                  <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" /></React>
+>onClick={handleNext} disabled={isProcessing || isLoading}>
+                {isProcessing ? (
+                  <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" />
                     Processing...</React.Fragment>
                 ) : currentStep === steps.length - 1 ? (
-                  <React.Fragment>Rocket className="h-4 w-4 mr-2" /></React>
-                    Create Project</Rocket>
+                  <React.Fragment>Rocket className="h-4 w-4 mr-2" />
+                    Create Project
                 ) : (
-                  <React.Fragment>Next</React>
+                  <React.Fragment>Next
                     <ArrowRight className="h-4 w-4 ml-2"    /></React.Fragment>
                 )
-</label>
+
 </div>
     
     </React.Fragment>
     </h4>
-    </option>
-    </label>
-    </Textarea>
+    
+    
+    
     </div>
   }
-</Button>
+
         </motion.div>
     );
 </div>

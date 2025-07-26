@@ -4,7 +4,7 @@ import { N8nNode, N8nWorkflow, N8nConnection } from '../n8n-client';/**
  */;
 export interface AgentNodeConfig { agentType: 'architect' | 'frontend' | 'backend' | 'qa' | 'devops',
   taskType: string;
-  parameters?: Record<string any></string>
+  parameters?: Record<string any>
   timeout?: number,
   retryConfig? null : { maxRetries: number;
   waitBetweenRetries: number

@@ -11,7 +11,7 @@ interface UnifiedButtonProps extends HTMLMotionProps {
   iconPosition? null : 'left' | 'right'
   fullWidth? null : boolean
 };
-export const UnifiedButton = React.forwardRef<HTMLButtonElement UnifiedButtonProps>(</HTMLButtonElement>
+export const UnifiedButton = React.forwardRef<HTMLButtonElement UnifiedButtonProps>(
   ({
     className, variant  = 'primary', size  = 'md', loading  = false, icon, iconPosition  = 'left', fullWidth  = false, children, disabled, ...props
   }, ref) =>  {
@@ -38,19 +38,19 @@ xl: 'px-8 py-4 text-xl'
         )} disabled={ disabled || loading}
         const whileHover={{ scale: disabled || loading ? 1 : 1.02  };
 
-    const whileTap={{ scale: disabled || loading ? 1 : 0.98 }>{ ...props}></motion>
+    const whileTap={{ scale: disabled || loading ? 1 : 0.98 }>{ ...props}>
         {loading && (
 Loader2 className={cn("h-4 w-4 animate-spin", children && "mr-2")
             )}   />
         )},
     {!loading && icon && iconPosition === 'left'  && (
 span className={cn(children && "mr-2")
-            )}>{icon}</span>
+            )}>{icon}
         )},
     {children},
     {!loading && icon && iconPosition === 'right'  && (
 span className={cn(children && "ml-2")
-            )}>{icon}</span>
+            )}>{icon}
       )}
       </motion.button>
     ))
@@ -61,7 +61,7 @@ interface UnifiedCardProps extends HTMLMotionProps {
   padding? null : 'none' | 'sm' | 'md' | 'lg' | 'xl'
   interactive? null : boolean
  };
-export const UnifiedCard = React.forwardRef<HTMLDivElement UnifiedCardProps>(</HTMLDivElement>
+export const UnifiedCard = React.forwardRef<HTMLDivElement UnifiedCardProps>(
   ({
     className, variant  = 'default', padding  = 'md', interactive  = false, children, ...props
   }, ref) =>  {
@@ -82,7 +82,7 @@ xl: 'p-10'
           interactive && 'cursor-pointer hover: shadow-xl hover:-translate-y-1' className)
         ) };
 
-    const whileHover={interactive ? { y: -4 } : {},>{...props}></motion>
+    const whileHover={interactive ? { y: -4 } : {},>{...props}>
         {children}
       </motion.div>
     ))
@@ -127,19 +127,19 @@ export function UnifiedAlert({
     initial={{ opacity: 0, y: -10 } animate={{ opacity: 1, y: 0 })
       exit={{ opacity: 0, y: -10 } className={cn(`'flex items-start p-4 rounded-lg border' config.bg className>)}>
           <div className="flex-shrink-0">
-        {icon || config.icon}</div>
+        {icon || config.icon}
       <div className="ml-3 flex-1">
         {title && (
-/div></div>
+/div>
           <h3 className={cn('text-sm font-medium mb-1' config.title>)}></h3>
             {title}</h3>
       )}
-        <p className={cn('text-sm' config.description)}></p>
-          {description}</p>
+        <p className={cn('text-sm' config.description)}>
+          {description}
       {dismissible && ();
 button; const onClick={onDismiss}
           className="ml-3 flex-shrink-0 rounded-lg-md p-1.5 hover:bg-black/5 transition-colors";
-        ></button>
+        >
           <X className="h-4 w-4"     />
             )}
     </motion.div>
@@ -168,19 +168,19 @@ lg: 'h-3'
 error: 'bg-error-600'
 }
   return ()
-    <div className={cn('w-full' className)}></div>
+    <div className={cn('w-full' className)}>
       {showValue && (
-/div></div>
+/div>
         <div className="flex justify-between mb-1"    />
-          <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-neutral-600">{percentage.toFixed(0</span>)
-            )}%</span>
+          <span className="text-sm font-medium">Progress
+          <span className="text-sm text-neutral-600">{percentage.toFixed(0)
+            )}%
       )}
       <div className={cn('bg-neutral-200 rounded-full overflow-hidden' sizes[size])}    />
           <motion.div;
 
 className={cn('h-full rounded-full' variants[variant])} initial={{ width: 0 }
-          const animate={ width: `${percentage}%` }``;>const transition={{ duration?: animated 0.5 : 0 ease: "easeOut" }    />}</motion>
+          const animate={ width: `${percentage}%` }``;>const transition={{ duration?: animated 0.5 : 0 ease: "easeOut" }    />}
 // Unified Badge Component
 interface UnifiedBadgeProps {;
 variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'outline';
@@ -206,13 +206,13 @@ outline: 'bg-transparent border border-neutral-300 text-neutral-700'
     md: 'px-2.5 py-1 text-base',
 lg: 'px-3 py-1.5 text-lg'}
   return ()
-    <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className>)`}>``</span>
+    <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className>)`}>``
       {dot && (
-/span></span>
+/span>
         <span className="w-1.5 h-1.5 bg-current rounded-lg-full"     />
             )},
     {icon},
-    {children}</span>
+    {children}
 // Unified Step Indicator Component
 interface Step { id: string;
   title: string;
@@ -230,11 +230,11 @@ export function UnifiedSteps({
 }: UnifiedStepsProps, currentStep, variant  = 'linear', size = 'md', className)
 }: UnifiedStepsProps) {
   return ()
-    <div className={cn('w-full' className)}></div>
-      {variant === 'linear' ? (</div>
+    <div className={cn('w-full' className)}>
+      {variant === 'linear' ? (
         <div className="flex items-center justify-between">
           {steps.map((step, index) => {
-            const _isActive = index === currentStep, </div>, const _isCompleted = index < currentStep;
+            const _isActive = index === currentStep, , const _isCompleted = index < currentStep;
             return (<React.Fragment key={step.id};>
           <div className="flex flex-col items-center flex-1"     />
                   <motion.div;
@@ -242,7 +242,7 @@ export function UnifiedSteps({
     className={cn("w-10 h-10 rounded-full flex items-center justify-center font-medium transition-colors", isCompleted ? 'bg-primary-600 text-white'  : null
                       isActive ? 'bg-primary-600 text-white ring-4 ring-primary-100'  : null
                       'bg-neutral-200 text-neutral-600')
-                    )} initial={{ scale: 0.8 }>animate={{ scale?: isActive 1.1 : 1 } transition={{ duration: 0.2 }></motion>
+                    )} initial={{ scale: 0.8 }>animate={{ scale?: isActive 1.1 : 1 } transition={{ duration: 0.2 }>
                     {isCompleted ? (
                       <CheckCircle className="h-5 w-5"     />
                     ) : step.icon ? (
@@ -252,13 +252,13 @@ export function UnifiedSteps({
                     )}
                   </motion.div>
                   <div className="text-center mt-2"    />
-          <p className={cn("text-sm font-medium", isActive ? 'text-primary-700' : 'text-neutral-600'>)}></p>
-                      {step.title}</p>
+          <p className={cn("text-sm font-medium", isActive ? 'text-primary-700' : 'text-neutral-600'>)}>
+                      {step.title}
                     {step.description  && (
 p className="text-xs text-neutral-500 mt-1">
-                        {step.description}</p>
+                        {step.description}
   },
-    {index < steps.length - 1  && (div className="flex-1 max-w-[100px]"></div>
+    {index < steps.length - 1  && (div className="flex-1 max-w-[100px]">
                     <div className="h-1 bg-neutral-200 rounded-lg-full overflow-hidden"    />
           <motion.div, className = "h-full bg-primary-600"; initial={{ width: 0 } animate={{ width?: isCompleted '100%' : '0%' }>const transition={{ duration: 0.5 delay: 0.2 } />
             )}
@@ -275,7 +275,7 @@ export default {
   UnifiedAlert,
   UnifiedProgress,
   UnifiedBadge,
-  UnifiedSteps</div>
+  UnifiedSteps
 }
 
 }}}}}}}}}}}}}}

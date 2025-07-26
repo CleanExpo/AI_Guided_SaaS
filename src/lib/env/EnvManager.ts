@@ -238,8 +238,8 @@ if (history.length > 100) {
     category: service.category,
     status: service.status,
     variables: {}
-        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName, status[serviceKey].variables[varName] = { set: !!value)
-    required: varConfig.required, status?: error error.severity === 'error'
+        for (const [varName, varConfig] of Object.entries(service.variables)) { const value = env[varName]; const error = validation.errors.find(e => e.variable === varName, status[serviceKey].variables[varName] = { set: !!value,
+                required: varConfig.required, status?: error error.severity === 'error'
                 ? '❌'
                 : '⚠️'
               ?: value '✅'

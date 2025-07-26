@@ -47,21 +47,21 @@ export class ErrorBoundary extends Component<Props, State> {
             <CardTitle className="flex items-center gap-2 text-red-600 glass
                 <AlertCircle className="h-5 w-5" />
                 Something went wrong
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 We apologize for the inconvenience. Please try again.
-              </p>
+              
               <div className="glass p-3 rounded-lg text-sm text-gray-700 mb-4">
                 {this.state.error?.message || 'Unknown error'}
-              </div>
+              
               <Button onClick={this.handleReset} className="w-full">
                 Try Again
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+              
+            
+          
+        
       );
     }
 

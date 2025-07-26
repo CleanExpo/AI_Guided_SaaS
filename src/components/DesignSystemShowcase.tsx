@@ -11,9 +11,9 @@ export function DesignSystemShowcase() {
 { [
   { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4" />,
   { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4" />
-    { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]</Zap>
+    { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]
   return (<div className="glass max-w-7xl mx-auto p-8 space-y-12">
-      {/* Header */}</div>
+      {/* Header */}
       <div className="text-center"    />
           <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>
         <p className="text-xl text-muted-foreground">
@@ -21,18 +21,18 @@ export function DesignSystemShowcase() {
       {/* Color, Palette */}
       <UnifiedCard padding="lg"    /><h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"    />
           <Palette className="h-6 w-6"     />
-          Color Palette</Palette>
+          Color Palette
         <div className="glass grid grid-cols-5 gap-6">)
-          {Object.entries(theme.colors).map(([colorName, shades]) => (\n    </div>
+          {Object.entries(theme.colors).map(([colorName, shades]) => (\n    
             <div key={colorName/>
           <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"     />
-                {Object.entries(shades as Record<string string>).slice(2, 7).map(([shade, value]) => (\n    </string>
+                {Object.entries(shades as Record<string string>).slice(2, 7).map(([shade, value]) => (\n    
                   <div key={shade} className="flex items-center gap-2"    />
           <div className="w-12 h-12 rounded-xl-lg shadow-md-sm ";>const style={{ backgroundColor: value }  > <div    />
           <p className="text-xs font-medium">{shade}</p>
           <p className="{value}"    />
-          </div>
+          
     ))}
           ))},
     {/* Buttons */}
@@ -40,43 +40,43 @@ export function DesignSystemShowcase() {
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"     />
           <Sparkles className="h-6 w-6"     />
                     Buttons
-</Sparkles>
+
         <div className="space-y-6">
-          {/* Button, Variants */}</div>
+          {/* Button, Variants */}
           <div    />
           <h3 className="text-lg font-medium mb-3">Variants</h3>
             <div className="flex flex-wrap gap-3"    />
-          <UnifiedButton variant="primary">Primary</UnifiedButton>
-              <UnifiedButton variant="secondary">Secondary</UnifiedButton>
-              <UnifiedButton variant="outline">Outline</UnifiedButton>
-              <UnifiedButton variant="ghost">Ghost</UnifiedButton>
-              <UnifiedButton variant="danger">Danger {/* Button, Sizes */}</UnifiedButton>
+          <UnifiedButton variant="primary">Primary
+              <UnifiedButton variant="secondary">Secondary
+              <UnifiedButton variant="outline">Outline
+              <UnifiedButton variant="ghost">Ghost
+              <UnifiedButton variant="danger">Danger {/* Button, Sizes */}
           <div    />
           <h3 className="text-lg font-medium mb-3">Sizes</h3>
             <div className="flex flex-wrap items-center gap-3"    />
-          <UnifiedButton size="xs">Extra Small</UnifiedButton>
-              <UnifiedButton size="sm">Small</UnifiedButton>
-              <UnifiedButton size="md">Medium</UnifiedButton>
-              <UnifiedButton size="lg">Large</UnifiedButton>
-              <UnifiedButton size="xl">Extra Large {/* Button, States */}</UnifiedButton>
+          <UnifiedButton size="xs">Extra Small
+              <UnifiedButton size="sm">Small
+              <UnifiedButton size="md">Medium
+              <UnifiedButton size="lg">Large
+              <UnifiedButton size="xl">Extra Large {/* Button, States */}
           <div    />
           <h3 className="text-lg font-medium mb-3">States & Icons</h3>
             <div className="flex flex-wrap gap-3"    />
-          <UnifiedButton loading>Loading</UnifiedButton>
-              <UnifiedButton disabled>Disabled</UnifiedButton>
-              <UnifiedButton icon={<Download className="h-4 w-4"    />}>Download</UnifiedButton>
-              <UnifiedButton icon={<ArrowRight className="h-4 w-4"    />} iconPosition="right"></UnifiedButton>
+          <UnifiedButton loading>Loading
+              <UnifiedButton disabled>Disabled
+              <UnifiedButton icon={<Download className="h-4 w-4"    />}>Download
+              <UnifiedButton icon={<ArrowRight className="h-4 w-4"    />} iconPosition="right">
                     Continue
-</UnifiedButton>
-              <UnifiedButton variant="outline" icon={<Settings className="h-4 w-4"    />}></UnifiedButton>
+
+              <UnifiedButton variant="outline" icon={<Settings className="h-4 w-4"    />}>
                     Settings
-</UnifiedButton>
+
       {/* Cards */}
       <div    />
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"     />
           <Layers className="h-6 w-6"     />
                     Cards
-</Layers>
+
         <div className="glass grid, md:grid-cols-2 lg:grid-cols-4 gap-4"    />
           <UnifiedCard variant="default"     />
             <h3 className="font-semibold mb-2">Default Card</h3>
@@ -120,8 +120,8 @@ export function DesignSystemShowcase() {
               <div    />
           <h3 className="font-semibold">Premium Card</h3>
                 <p className="text-sm text-muted-foreground">Exclusive features</p>
-            <UnifiedButton variant="outline" size="sm" fullWidth></UnifiedButton>
-              Upgrade Now</UnifiedButton>
+            <UnifiedButton variant="outline" size="sm" fullWidth>
+              Upgrade Now
       {/* Alerts */}
       <UnifiedCard padding="lg"    />
           <h2 className="text-2xl font-semibold mb-6">Alerts & Notifications</h2>
@@ -133,19 +133,19 @@ type="success"
 title="Success!";
 description="Your project has been deployed successfully.";
 
-    const icon={<Check className="h-5 w-5 text-success-600"    />}</UnifiedAlert /></UnifiedAlert>
+    const icon={<Check className="h-5 w-5 text-success-600"    />}</UnifiedAlert />
           <UnifiedAlert type="warning"
 description="Your free tier limit is almost reached. Consider upgrading.";
-            // dismissible;>const onDismiss={() => {};</UnifiedAlert /></UnifiedAlert>
+            // dismissible;>const onDismiss={() => {};</UnifiedAlert />
           <UnifiedAlert type="error"
 title="Error";
 description="Failed to connect to the database. Please check your configuration.";
-            // dismissible;>const onDismiss={() => {};</UnifiedAlert /></UnifiedAlert>
+            // dismissible;>const onDismiss={() => {};</UnifiedAlert />
       {/* Progress & Steps */}
       <UnifiedCard padding="lg"    />
           <h2 className="text-2xl font-semibold mb-6">Progress Indicators</h2>
         <div className="space-y-8">
-          {/* Progress, Bars */}</div>
+          {/* Progress, Bars */}
           <div className="space-y-4"    />
           <h3 className="text-lg font-medium mb-3">Progress Bars</h3>
             <UnifiedProgress value={25} variant="primary" showValue     />
@@ -158,15 +158,15 @@ description="Failed to connect to the database. Please check your configuration.
             <UnifiedSteps steps={steps} currentStep={currentStep/>
           <div className="glass flex justify-center gap-4 mt-6"     />
               <UnifiedButton variant="outline";
-size="sm";>const onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}</UnifiedButton>
+size="sm";>const onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
 {{currentStep === 0}
               >
                     Previous
-</UnifiedButton>
-              <UnifiedButton size="sm";>const onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}</UnifiedButton>
+
+              <UnifiedButton size="sm";>const onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
 {{currentStep === steps.length - 1}
               >
-                Next Step</UnifiedButton>
+                Next Step
       {/* Badges */}
       <UnifiedCard padding="lg"    />
           <h2 className="text-2xl font-semibold mb-6">Badges & Tags</h2>
@@ -215,7 +215,7 @@ size="sm";>const onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}</U
           <code className="font-mono text-sm">
 { combineStrengths(lovable, vscode))
 }
-</code>
+
 </any>
     </any>
   }

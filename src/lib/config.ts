@@ -163,7 +163,7 @@ class ConfigurationManager {
   /**
    * Parse .properties file format
    */
-  private parsePropertiesFile(content: string): Record { const properties: Record<string string>  = { };</string>
+  private parsePropertiesFile(content: string): Record { const properties: Record<string string>  = { };
 { content.split('\n');
     for (const line of lines) {
       const trimmedLine = line.trim(, // Skip comments and empty lines, if (trimmedLine.startsWith('#') {|}| trimmedLine === '') {
@@ -186,7 +186,7 @@ value = this.substituteEnvironmentVariables(value);
   /**
    * Transform flat properties to typed configuration object
    */
-  private transformToTypedConfig(properties: Record<string string></string>)
+  private transformToTypedConfig(properties: Record<string string>)
   ): PlatformConfig {
     return { aiProvider: {
   primary: properties['ai.provider.primary'] || 'openai',

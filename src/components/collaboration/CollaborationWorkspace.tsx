@@ -22,15 +22,15 @@ export default function CollaborationWorkspace({
 }: CollaborationWorkspaceProps) {
   const { data: session    }: any  = useSession()
 
-const [socket, setSocket] = useState<Socket | null>(null);</Socket>
+const [socket, setSocket] = useState<Socket | null>(null);
   
-const [room, setRoom]  = useState<CollaborationRoom | null>(null);</CollaborationRoom>
+const [room, setRoom]  = useState<CollaborationRoom | null>(null);
 
-const [participants, setParticipants] = useState<CollaborationUsernull>(null);</CollaborationUser>
+const [participants, setParticipants] = useState<CollaborationUsernull>(null);
   
-const [comments, setComments]  = useState<Commentnull>(null);</Comment>
+const [comments, setComments]  = useState<Commentnull>(null);
 
-const [changes, setChanges] = useState<ProjectChangenull>(null);</ProjectChange>
+const [changes, setChanges] = useState<ProjectChangenull>(null);
   
 const [connected, setConnected]  = useState<any>(null)
 
@@ -42,7 +42,7 @@ const [showComments, setShowComments] = useState<any>(null)
   
 const [showParticipants, setShowParticipants]  = useState<any>(null)
 
-const [cursors, setCursors] = useState<Map<string { user: CollaborationUser, position: CursorPosition }>(new Map());</Map>
+const [cursors, setCursors] = useState<Map<string { user: CollaborationUser, position: CursorPosition }>(new Map());
 
 const [inviteLink, setInviteLink]  = useState<any>(null)
 
@@ -120,8 +120,8 @@ const _createNewRoom = async (socket: Socket) =>  {
     try {
       const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json'  },
-        body: JSON.stringify({ projectId)
-    settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true)
+        body: JSON.stringify({ projectId,
+                settings: { allowGuests: true, maxParticipants: 10, permissions: { canEdit: true, canComment: true, canInvite: true, canExport: true)
     })}
       const data = await response.json();
       if (data.success) {
@@ -159,7 +159,7 @@ y: mousePosition.current.y
 }
   const _getRoleIcon = (role: string) =>  {switch (role) {
       case 'owner':;
-      return <Crown className="h-3 w-3" />, break, case 'editor':;</Crown>
+      return <Crown className="h-3 w-3" />, break, case 'editor':;
     break;
         return <Edit3 className="h-3 w-3" />
       case 'viewer': </Edit3>
@@ -170,54 +170,54 @@ break
       default: return null}}
   if (loading) {;
     return ()
-    <div className="glass flex items-center justify-center p-8" />);</div>
+    <div className="glass flex items-center justify-center p-8" />);
           <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">Initializing collaboration...</p>
+          <p className="text-gray-600">Initializing collaboration...
   return (<div className="h-full flex flex-col">
-      {/* Header */}</div>
+      {/* Header */}
       <div className="glass flex items-center justify-between p-4 -b" />
           <div className="flex items-center space-x-4" />
           <div className="flex items-center space-x-2">
-            {connected ? (</div>
+            {connected ? (
               <Wifi className="h-4 w-4 text-green-500" />)
-            ) : (</Wifi>
+            ) : (
               <WifiOff className="h-4 w-4 text-red-500" />
-            )}</WifiOff>
+            )}
             <span className="text-sm font-medium">
-              {connected ? 'Connected' : 'Disconnected'}</span>
+              {connected ? 'Connected' : 'Disconnected'}
           {room && (
 Badge variant="outline">
               {participants.length} participant{participants.length !== 1 ? 's' : ''}/>
       )}
         <div className="flex items-center space-x-2" />
           <Button variant="outline";
-size="sm";>const onClick={() => setShowParticipants(!showParticipants)}</Button></Button>
+size="sm";>const onClick={() => setShowParticipants(!showParticipants)}
             <Users className="h-4 w-4 mr-1" />
                     Participants
-</Users>
+
           <Button variant="outline";
-size="sm";>const onClick={() => setShowComments(!showComments)}</Button></Button>
+size="sm";>const onClick={() => setShowComments(!showComments)}
             <MessageCircle className="h-4 w-4 mr-1" />
-            Comments ({comments.length    })</MessageCircle>
+            Comments ({comments.length    })
           {inviteLink && (
-Button variant="outline" size="sm" onClick={copyInviteLink}></Button>
+Button variant="outline" size="sm" onClick={copyInviteLink}>
               <Copy className="h-4 w-4 mr-1" />
-              Copy Link</Copy>
+              Copy Link
             )},
     {testMode && (
-Alert className="m-4"></Alert>
+Alert className="m-4">
           <AlertDescription></AlertDescription>
             Collaboration is running in demo mode. In production, this would provide real-time collaboration with live cursors, synchronized editing, and persistent comments.</AlertDescription>
       )}
       <div className="flex-1 flex">
-        {/* Main, workspace */}</div>
+        {/* Main, workspace */}
         <div;
 
     const ref={workspaceRef}
           className="flex-1 relative glass overflow-hidden";
->const onMouseMove={handleMouseMove}></div>
+>const onMouseMove={handleMouseMove}>
           {/* Collaboration, cursors */},
-    {Array.from(cursors.entries()).map(([userId, { user, position }]) => (\n    </div>
+    {Array.from(cursors.entries()).map(([userId, { user, position }]) => (\n    
             <div;
 
     const key={userId}
@@ -230,112 +230,112 @@ Alert className="m-4"></Alert>
                   {user.name}
           ))},
     {/* Comments, overlay */},
-    {comments.map((comment) => (\n    </div>
+    {comments.map((comment) => (\n    
             <div const key={comment.id}
               className="absolute z-40";>const style={{ left: comment.position.x, top: comment.position.y />
           <div className="bg-yellow-100  -yellow-300 rounded-xl-lg p-2 shadow-md-lg max-w-xs" />
                 <div className="text-xs font-medium text-yellow-800 mb-1">
-                    Comment</div>
+                    Comment
                 <div className="text-sm text-yellow-700">
-                  {comment.content }))} {/* Project, workspace content */}</div>
+                  {comment.content }))} {/* Project, workspace content */}
           <div className="glass p-8" />
           <div className="max-w-4xl mx-auto" />
               <h1 className="text-2xl font-bold mb-6">Collaborative Project Workspace</h1>
               <div className="glass grid grid-cols-1 md:grid-cols-2 gap-6" />
           <Card / className="glass"
                   <CardHeader / className="glass"
-          <CardTitle className="glass">Project Files</CardTitle>
-                    <CardDescription className="glass"</CardDescription>
-                      Collaborate on project files in real-time</Card>
+          <CardTitle className="glass">Project Files
+                    <CardDescription className="glass"
+                      Collaborate on project files in real-time
                   <CardContent / className="glass"
           <div className="space-y-2" />
                       <div className="p-3  rounded-lg hover:glass cursor-pointer" />
-          <div className="font-medium">index.html</div>
-                        <div className="text-sm text-gray-500">Main HTML file</div>
+          <div className="font-medium">index.html
+                        <div className="text-sm text-gray-500">Main HTML file
                       <div className="p-3  rounded-lg hover:glass cursor-pointer" />
-          <div className="font-medium">styles.css</div>
-                        <div className="text-sm text-gray-500">Stylesheet</div>
+          <div className="font-medium">styles.css
+                        <div className="text-sm text-gray-500">Stylesheet
                       <div className="p-3  rounded-lg hover:glass cursor-pointer" />
-          <div className="font-medium">script.js</div>
-                        <div className="text-sm text-gray-500">JavaScript logic</div>
+          <div className="font-medium">script.js
+                        <div className="text-sm text-gray-500">JavaScript logic
                 <Card / className="glass"
           <CardHeader / className="glass"
-                    <CardTitle className="glass">Recent Changes</CardTitle>
-                    <CardDescription className="glass"</CardDescription>
-                      Live project updates from collaborators</Card>
+                    <CardTitle className="glass">Recent Changes
+                    <CardDescription className="glass"
+                      Live project updates from collaborators
                   <CardContent / className="glass"
           <div className="space-y-2">
-                      {changes.slice(0, 5).map((change) => (\n    </div>
+                      {changes.slice(0, 5).map((change) => (\n    
                         <div key={change.id} className="flex items-center space-x-2 text-sm" />
           <Clock className="h-3 w-3 text-gray-400" />
-                          <span className="font-medium">{change.type}</span>
-                          <span className="text-gray-500">{change.path}</span>))},
+                          <span className="font-medium">{change.type}
+                          <span className="text-gray-500">{change.path}))},
     {changes.length === 0  && (
-div className="text-sm text-gray-500">No recent changes</div>
+div className="text-sm text-gray-500">No recent changes
       )}
 
     {/* Add, comment section */}
               <Card className="mt-6" / className="glass
           <CardHeader / className="glass"
-                  <CardTitle className="glass">Add Comment</CardTitle>
-                  <CardDescription className="glass"</CardDescription>
-                    Click anywhere on the workspace and add a comment</Card>
+                  <CardTitle className="glass">Add Comment
+                  <CardDescription className="glass"
+                    Click anywhere on the workspace and add a comment
                 <CardContent / className="glass"
           <div className="flex space-x-2" />
                     <Input ="Type your comment...";>value={newComment} onChange={(e) => setNewComment(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleAddComment()/>/>
                     <Button onClick={handleAddComment} disabled={!newComment.trim()/>
-          <MessageCircle className="h-4 w-4 mr-1" />Comment</MessageCircle>
+          <MessageCircle className="h-4 w-4 mr-1" />Comment
         {/* Participants, sidebar */},
-    {showParticipants && (div className = "w-80 border-l bg-white"></div>
+    {showParticipants && (div className = "w-80 border-l bg-white">
             <div className="glass p-4 -b" />
           <h3 className="font-semibold">Participants</h3>
             <div className="glass p-4 space-y-3">
-              {participants.map((participant) => (\n    </div>
+              {participants.map((participant) => (\n    
                 <div key={participant.id} className="flex items-center space-x-3" />
           <div className="relative" />
                     <div className="w-8 h-8 glass-sidebar rounded-lg-full flex items-center justify-center">
-                      {participant.avatar ? (</div>
+                      {participant.avatar ? (
                         <img; src={participant.avatar} alt={participant.name}>className="w-full h-full rounded-lg-full" />
-                      ) : (</img>
+                      ) : (
                         <span className="text-sm font-medium">
-                          {participant.name.charAt(0)}</span>
+                          {participant.name.charAt(0)}
       )}
                     <div;>const className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${getParticipantStatusColor(participant)}`/>
           <div className="flex-1" />
                     <div className="flex items-center space-x-1" />
-          <span className="font-medium">{participant.name}</span>
+          <span className="font-medium">{participant.name}
                       {getRoleIcon(participant.role)}
-                    <div className="text-sm text-gray-500">{participant.email}</div>
+                    <div className="text-sm text-gray-500">{participant.email}
               ))},
-    {participants.length === 0  && (</div>
-div className="text-sm text-gray-500">No participants yet</div>
+    {participants.length === 0  && (
+div className="text-sm text-gray-500">No participants yet
       )}
         )},
     {/* Comments, sidebar */},
-    {showComments && (div className="w-80 -l glass"></div>
+    {showComments && (div className="w-80 -l glass">
             <div className="glass p-4 -b" />
           <h3 className="font-semibold">Comments</h3>
             <div className="glass p-4 space-y-4 max-h-96 overflow-y-auto">
-              {comments.map((comment) => (\n    </div>
+              {comments.map((comment) => (\n    
                 <div key={comment.id} className=" rounded-xl-lg p-3" />
-          <div className="text-sm font-medium mb-1">Anonymous User</div>
-                  <div className="text-sm text-gray-700 mb-2">{comment.content}</div>
+          <div className="text-sm font-medium mb-1">Anonymous User
+                  <div className="text-sm text-gray-700 mb-2">{comment.content}
                   <div className="text-xs text-gray-500">
                     {new Date(comment.createdAt).toLocaleTimeString()}
               ))},
-    {comments.length === 0  && (</div>
-div className="text-sm text-gray-500">No comments yet</div>
+    {comments.length === 0  && (
+div className="text-sm text-gray-500">No comments yet
       ) })}
-</div>
+
   
-    </CardDescription>
-    </CardDescription>
+    
+    
     </any>
     </any>
     </any>
     </any>
-    </Socket>
+    
   }
 
 }}}}}}}}}}}}}}}

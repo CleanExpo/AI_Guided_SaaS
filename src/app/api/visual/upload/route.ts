@@ -70,8 +70,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     };
     
     return NextResponse.json({
-      success: true)
-      upload: uploadResult)
+      success: true,
+                upload: uploadResult)
     });
   } catch (error) {
     logger.error('Upload error:', error);

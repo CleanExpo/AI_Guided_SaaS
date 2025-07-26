@@ -37,7 +37,7 @@ export default function AdminAnalyticsPage() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Admin
             </Button>
-          </Link>
+          
           <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
         </div>
         <Button>
@@ -54,7 +54,7 @@ export default function AdminAnalyticsPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{users.length}</div>
-            <p className="text-xs text-muted-foreground">Active users</p>
+            <p className="text-xs text-muted-foreground">Active users
           </CardContent>
         </Card>
       </div>
@@ -71,14 +71,14 @@ export default function AdminAnalyticsPage() {
               {users.map(user => (
                 <div key={user.id} className="flex items-center justify-between border-b pb-2">
                   <div>
-                    <p className="font-medium">{user.name}</p>
-                    <p className="text-sm text-gray-500">{user.email}</p>
+                    <p className="font-medium">{user.name}
+                    <p className="text-sm text-gray-500">{user.email}
                   </div>
                   <div className="text-right">
-                    <p className="text-sm">Last login: {user.lastLogin}</p>
+                    <p className="text-sm">Last login: {user.lastLogin}
                     <span className={`inline-flex px-2 py-1 text-xs rounded-full \${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
                       {user.status}
-                    </span>
+                    
                   </div>
                 </div>
               ))}

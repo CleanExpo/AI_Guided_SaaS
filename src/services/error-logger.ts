@@ -89,8 +89,8 @@ class ErrorLogger {
     // Track with analytics if available
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, severity, {
-        ...metadata)
-        errorId: entry.id)
+        ...metadata,
+                errorId: entry.id)
       });
     }
   }

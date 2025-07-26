@@ -42,8 +42,8 @@ export function handleError(error: unknown,
       stack: err.stack,
       name: err.name,
     })
-    context,)
-  });
+    context
+            });
 
   // Track error metrics (integrate with analytics)
   if (typeof window === 'undefined') {
@@ -129,9 +129,9 @@ export function withErrorBoundary<T extends (...args: unknown[]) => unknown>(
       if (result instanceof Promise) {
         return result.catch(error => {
           handleError(error, {
-            ...context)
-            operation: fn.name || 'anonymous function',)
-          });
+            ...context,
+                operation: fn.name || 'anonymous function'
+            });
           throw error;
         });
       }
@@ -139,9 +139,9 @@ export function withErrorBoundary<T extends (...args: unknown[]) => unknown>(
       return result;
     } catch (error) {
       handleError(error, {
-        ...context)
-        operation: fn.name || 'anonymous function',)
-      });
+        ...context,
+                operation: fn.name || 'anonymous function'
+            });
       throw error;
     }
   }) as T;
@@ -179,8 +179,8 @@ export const ErrorMessages = {
  * Error code constants
  */
 export const ErrorCodes = {
-  // Client errors (4xx)
-  BAD_REQUEST: 'BAD_REQUEST',
+  // Client errors (4xx,
+                BAD_REQUEST: 'BAD_REQUEST',
   UNAUTHORIZED: 'UNAUTHORIZED',
   FORBIDDEN: 'FORBIDDEN',
   NOT_FOUND: 'NOT_FOUND',
@@ -188,8 +188,8 @@ export const ErrorCodes = {
   VALIDATION_ERROR: 'VALIDATION_ERROR',
   RATE_LIMITED: 'RATE_LIMITED',
   
-  // Server errors (5xx)
-  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  // Server errors (5xx,
+                INTERNAL_ERROR: 'INTERNAL_ERROR',
   SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
   TIMEOUT: 'TIMEOUT',
   CONFIGURATION_ERROR: 'CONFIGURATION_ERROR',

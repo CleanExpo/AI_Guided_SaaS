@@ -36,8 +36,8 @@ export default function SecurityPage() {
     <div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Security & Privacy</h1>
-        <p className="text-xl text-gray-600">Your data security is our top priority</p>
-      </div>
+        <p className="text-xl text-gray-600">Your data security is our top priority
+      
 
       <div className="glass grid md:grid-cols-2 gap-8">
         {securityFeatures.map((feature, index) => (
@@ -45,16 +45,16 @@ export default function SecurityPage() {
             <CardHeader className="glass"
               <div className="flex items-center gap-3">
                 <feature.icon className="w-8 h-8 text-green-600" />
-                <CardTitle className="text-xl glass{feature.title}</CardTitle>
-                <Badge className="bg-green-100 text-green-800">{feature.status}</Badge>
-              </div>
-            </CardHeader>
+                <CardTitle className="text-xl glass{feature.title}
+                <Badge className="bg-green-100 text-green-800">{feature.status}
+              
+            
             <CardContent className="glass"
-              <p className="text-gray-600">{feature.description}</p>
-            </CardContent>
-          </Card>
+              <p className="text-gray-600">{feature.description}
+            
+          
         ))}
-      </div>
-    </div>
+      
+    
   );
 }

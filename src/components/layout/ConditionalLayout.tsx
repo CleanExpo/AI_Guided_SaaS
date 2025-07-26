@@ -28,7 +28,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
     <div className="min-h-screen bg-background">
           <main className="container mx-auto px-4 py-8" role="main">
         {children}
-      </main>
-    </div>
+      
+    
   );
 }

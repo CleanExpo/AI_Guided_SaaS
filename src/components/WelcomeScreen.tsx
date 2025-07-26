@@ -94,9 +94,9 @@ const getPersonaIcon = (personaId: string) =>  {
     case 'enterprise-consultant':
       return <Sparkles className="w-8 h-8"     />
     default: return <Bot className="w-8 h-8"    />}
-};</Bot>
+};
 export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
-  const [selectedPersona, setSelectedPersona] = useState<string | null>(null);</string>
+  const [selectedPersona, setSelectedPersona] = useState<string | null>(null);
 { (persona: Persona) =>  {
     setSelectedPersona(persona.id, setTimeout(() => {
       onSelectPersona(persona)
@@ -110,7 +110,7 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Choose your AI development persona to get started with intelligent
             project guidance tailored to your expertise and goals.
-</p>
+
         <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">)
           {personas.map((persona) => (\n    </div>
             <Card key={persona.id} className={`cursor-pointer transition-all duration-300 hover: shadow-lg hover:scale-105 ${
@@ -120,10 +120,10 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
           <div className="flex justify-center mb-4 text-blue-600">
                   {getPersonaIcon(persona.id)}</div>
                 <CardTitle className="text-xl font-semibold glass
-                  {persona.name}</Card>
+                  {persona.name}
                 <CardDescription className="text-sm text-gray-600 glass
-                  {persona.description}</Card>
-</CardHeader>
+                  {persona.description}
+
               <CardContent className="glass">
             <div className="space-y-3">
                   <div>
@@ -132,24 +132,24 @@ Expertise:
 </h4>
                     <div className="flex flex-wrap gap-1">
                       {persona.expertise.map((skill, index) => (\n    </div>
-                        <span const key={index}>className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg-full";>></span>
-                          {skill}</span>
+                        <span const key={index}>className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg-full";>>
+                          {skill}
                       ))}
       </div>
                   <div>
           <h4 className="font-medium text-sm text-gray-700 mb-1">
 Tone:
 </h4>
-                    <p className="text-xs text-gray-600">{persona.tone}</p>
+                    <p className="text-xs text-gray-600">{persona.tone}
                   <Button
 className="w-full mt-4";
 
-    const variant={>selectedPersona === persona.id ? 'default' : 'outline'}></Button>
+    const variant={>selectedPersona === persona.id ? 'default' : 'outline'}>
                     {selectedPersona === persona.id
                       ? 'Selected!'
                       : 'Choose This Persona'}
-</Button>
-</CardContent>
+
+
           ))}
       </div>
         <div className="">
@@ -157,8 +157,8 @@ className="w-full mt-4";
         </div>
     );</div>
   
-    </CardDescription>
-    </CardTitle>
+    
+    
     </div>
     
   }    }

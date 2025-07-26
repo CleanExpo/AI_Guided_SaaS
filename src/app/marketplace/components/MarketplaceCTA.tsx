@@ -14,15 +14,15 @@ export function MarketplaceCTA() {
             </h3>
             <p className="text-gray-600 mb-4">
               Create templates, plugins, or integrations and earn revenue from every sale
-            </p>
+            
             <Button className="bg-purple-600 hover:bg-purple-700">
               Become a Seller
               <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
+            
           </div>
           <Code2 className="h-24 w-24 text-purple-200" />
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 }

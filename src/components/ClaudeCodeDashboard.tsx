@@ -33,12 +33,12 @@ l,
   efficiency: number
 };
 export default function ClaudeCodeDashboard({)
-  onWorkflowComplete}: Omit<ClaudeCodeDashboardProps 'projectConfig'>): Omit<ClaudeCodeDashboardProps 'projectConfig'>) {</ClaudeCodeDashboardProps>, const [isExecuting, setIsExecuting] = useState<any>(null)
+  onWorkflowComplete}: Omit<ClaudeCodeDashboardProps 'projectConfig'>): Omit<ClaudeCodeDashboardProps 'projectConfig'>) {, const [isExecuting, setIsExecuting] = useState<any>(null)
 
-const [currentCommand, setCurrentCommand] = useState<string | null>(null);</string>
-</CommandExecution>
+const [currentCommand, setCurrentCommand] = useState<string | null>(null);
 
-const [commandHistory, setCommandHistory]  = useState<CommandExecutionnull>(null);</CommandExecution>
+
+const [commandHistory, setCommandHistory]  = useState<CommandExecutionnull>(null);
 
 const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({</MemoryStatus>
     currentTokens: 42000
@@ -49,9 +49,9 @@ const [memoryStatus, setMemoryStatus] = useState<MemoryStatus>({</MemoryStatus>
         </MemoryStatus>
 efficiency: 78});
   
-const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(</WorkflowResult>
+const [workflowResult, setWorkflowResult] = useState<WorkflowResult | null>(
     // null;
-</WorkflowResult>
+
 { [ { command: '/init-docs', description: 'Initialize comprehensive documentation system',
   icon: Sparkles, category: 'initialization', tokenImpact: 8000, estimatedTime: 12000}, { command: '/sync-docs', description: 'Synchronize documentation with project state',
   icon: GitBranch, category: 'maintenance', tokenImpact: 2000, estimatedTime: 5000}, { command: '/compact-docs', description: 'Optimize context window with strategic compression',
@@ -77,12 +77,12 @@ executionTime: 0 };
 const _executionTime = Date.now() - startTime;
       // Update memory status
       setMemoryStatus(prev => ({
-        ...prev)
-        currentTokens: Math.max(0, prev.currentTokens + command.tokenImpact, utilizationRate: Math.max(
+        ...prev,
+                currentTokens: Math.max(0, prev.currentTokens + command.tokenImpact, utilizationRate: Math.max(
           0;)
           (prev.currentTokens + command.tokenImpact) / prev.maxTokens
         , lastCompaction: commandName === '/compact-docs' ? new Date() : prev.lastCompaction,
-efficiency: Math.min(100,</WorkflowResult>)
+efficiency: Math.min(100,)
           prev.efficiency + (command.tokenImpact < 0 ? 10 : -2))});
       // Update command history
       setCommandHistory(prev =>)
@@ -124,7 +124,7 @@ integrationCommands: [
   
 const _simulateCommandExecution  = async(command: { estimatedTime: number }}: Promise<any> => {</any>
     // Simulate realistic execution time
-</void>)
+)
     await new Promise(resolve => setTimeout(resolve, command.estimatedTime))
 };
 
@@ -155,7 +155,7 @@ const _generateCommandOutput = (commandName: string): string: (any) =>  { switch
 ✅ Cross-reference, integrity: 98%
 ✅ Ready for next development phase`, ``,
 default: return `✅ Command executed successfully```}
-  const _getUtilizationColor = (rate: number): string: (any) => { </void>, if (rate < 0.5) {r}eturn 'text-green-600', if (rate < 0.75) {r}eturn 'text-yellow-600';
+  const _getUtilizationColor = (rate: number): string: (any) => { , if (rate < 0.5) {r}eturn 'text-green-600', if (rate < 0.75) {r}eturn 'text-yellow-600';
     if (rate < 0.9) {r}eturn 'text-orange-600';
     return 'text-red-600' };
   const _getOptimizationRecommendation = (): string: (any) => { if (memoryStatus.utilizationRate < 0.5) {
@@ -167,12 +167,12 @@ default: return `✅ Command executed successfully```}
     return 'Immediate /compact-docs recommended' };
   const _renderMemoryStatus = () => (
     <Card className="glass">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
           <CardTitle className="flex items-center gap-2 glass
           <Brain className="w-5 h-5"     />
-            Claude Code Memory Status</Brain>
-          <CardDescription className="glass"</CardDescription>
-            Context window utilization and optimization status</CardDescription>
+            Claude Code Memory Status
+          <CardDescription className="glass"
+            Context window utilization and optimization status
         <CardContent className="space-y-4 glass
           <div className="glass grid grid-cols-2 gap-4">
             <div className="flex justify-between text-sm mb-1"    />
@@ -190,14 +190,14 @@ default: return `✅ Command executed successfully```}
               <Progress value={memoryStatus.efficiency} className="h-2"    />
           </div>
         <div className="glass grid grid-cols-2 gap-4 text-sm" ></div>
-              <p className="text-muted-foreground">Utilization Rate</p>
+              <p className="text-muted-foreground">Utilization Rate
               <p;
->const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate)}`}></p>
-                {Math.round(memoryStatus.utilizationRate * 100)}%</p>
+>const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate)}`}>
+                {Math.round(memoryStatus.utilizationRate * 100)}%
             <div>
-          <p className="text-muted-foreground">Optimization Level</p>
+          <p className="text-muted-foreground">Optimization Level
               <p className="font-medium">
-                {memoryStatus.optimizationLevel.split(' - ')[0]}</p>
+                {memoryStatus.optimizationLevel.split(' - ')[0]}
           <Alert>
           <Target className="h-4 w-4"     />
             <AlertDescription></AlertDescription>
@@ -206,12 +206,12 @@ default: return `✅ Command executed successfully```}
 
 const _renderCommandInterface = () => (
     <Card className="glass">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
           <CardTitle className="flex items-center gap-2 glass
           <Terminal className="w-5 h-5"     />
-            Claude Code Commands</Terminal>
-          <CardDescription className="glass"</CardDescription>
-            Execute Claude Code documentation commands</CardDescription>
+            Claude Code Commands
+          <CardDescription className="glass"
+            Execute Claude Code documentation commands
         <CardContent className="glass">
             <div className="grid grid-cols-2 gap-3">
             {claudeCommands.map((cmd, index) => {
@@ -222,14 +222,14 @@ const key={cmd.command};
           <Button
 
 const variant={ currentCommand === cmd.command ? 'default' : 'outline' };)
-                    className="glass w-full h-auto p-4 flex flex-col items-start";>const onClick={() => executeCommand(cmd.command)}</Button>
+                    className="glass w-full h-auto p-4 flex flex-col items-start";>const onClick={() => executeCommand(cmd.command)}
 {{isExecuting}
-                  ></Button>
+                  >
                     <div className="flex items-center gap-2 mb-2">
           <Icon className="w-4 h-4"     />
                       <span className="font-mono text-sm">{cmd.command}</span>
                     <p className="text-xs text-left opacity-75">
-                      {cmd.description}</p>
+                      {cmd.description}
                     <div className="flex justify-between w-full mt-2 text-xs opacity-60">
           <span></span>
                         {cmd.tokenImpact > 0 ? '+' : ''},</span>
@@ -242,12 +242,12 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };)
       )};
   const _renderCommandHistory = () => (
     <Card className="glass">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
           <CardTitle className="flex items-center gap-2 glass
           <Clock className="w-5 h-5"     />
-            Command History</Clock>
-          <CardDescription className="glass"</CardDescription>
-            Recent Claude Code command executions</CardDescription>
+            Command History
+          <CardDescription className="glass"
+            Recent Claude Code command executions
         <CardContent className="glass">
             <div className="space-y-3 max-h-96 overflow-y-auto">
             {commandHistory.length === 0 ? (</div>
@@ -288,65 +288,65 @@ const _renderWorkflowResults = (): void => {
     if (!workflowResult) {r}eturn null, return (Card>
         <CardHeader className="glass">
             <CardTitle className = "flex items-center gap-2" className="glass<TrendingUp className="w-5 h-5"     />
-            Workflow Results</TrendingUp>
-          <CardDescription className="glass"</CardDescription>
-            Claude Code integration workflow outcomes</CardDescription>
+            Workflow Results
+          <CardDescription className="glass"
+            Claude Code integration workflow outcomes
         <CardContent className="space-y-4 glass
           <div className="glass grid grid-cols-2 gap-4">
             <div>
-          <p className="text-sm text-muted-foreground">Total Token Usage</p>
+          <p className="text-sm text-muted-foreground">Total Token Usage
               <p className="text-2xl font-bold">)
-                {workflowResult.totalTokenUsage?.toLocaleString()};</p>
+                {workflowResult.totalTokenUsage?.toLocaleString()};
             <div>
-          <p className="text-sm text-muted-foreground">Utilization Rate</p>
+          <p className="text-sm text-muted-foreground">Utilization Rate
               <p className="text-2xl font-bold">
-                {Math.round((workflowResult.utilizationRate || 0) * 100)}%</p>
+                {Math.round((workflowResult.utilizationRate || 0) * 100)}%
           <div>
           <p className="text-sm text-muted-foreground mb-2">
-              Integration Commands</p>
+              Integration Commands
             <div className="space-y-1">
               {workflowResult.integrationCommands?.map((cmd: string, index: number) => (\n    </div>
                   <div; const key={index}>className="font-mono text-sm bg-muted p-2 rounded-lg";>></div>
                     {cmd}
     ))}</div>
           <div>
-          <p className="text-sm text-muted-foreground mb-2">Next Steps</p>
+          <p className="text-sm text-muted-foreground mb-2">Next Steps
             <ul className="space-y-1">
               {workflowResult.nextSteps?.map((step: string, index: number) => (\n    <li key={index} className="text-sm flex items-center gap-2">
           <CheckCircle className="w-3 h-3 text-green-500"     />
                   {step}
               ))}
-</ul>
+
 };
   return (<div className="space-y-6 text-center"    />
           <h2 className="text-2xl font-bold mb-2">
           Claude Code Integration Dashboard</h2>
         <p className="text-muted-foreground">
-          Advanced documentation automation with Claude Code best practices</p>
+          Advanced documentation automation with Claude Code best practices
       <Tabs defaultValue="commands", className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="commands">Commands</TabsTrigger>
-          <TabsTrigger value="memory">Memory</TabsTrigger>
-          <TabsTrigger value="history">History</TabsTrigger>
-          <TabsTrigger value="results">Results</TabsTrigger>
+          <TabsTrigger value="commands">Commands
+          <TabsTrigger value="memory">Memory
+          <TabsTrigger value="history">History
+          <TabsTrigger value="results">Results
         <TabsContent value="commands", className="mt-4">)
-          {renderCommandInterface()}</TabsContent>
+          {renderCommandInterface()}
         <TabsContent value="memory", className="mt-4">
-          {renderMemoryStatus()}</TabsContent>
+          {renderMemoryStatus()}
         <TabsContent value="history", className="mt-4">
-          {renderCommandHistory()}</TabsContent>
+          {renderCommandHistory()}
         <TabsContent value="results", className="mt-4">
           {renderWorkflowResults()}
   )
 }
-</TabsContent>
-</Tabs>
-</li>
-</CardContent>
-</CardHeader>
+
+
+
+
+
 </span>
     
-    </TabsList>
+    
     </div>
     
     </any>

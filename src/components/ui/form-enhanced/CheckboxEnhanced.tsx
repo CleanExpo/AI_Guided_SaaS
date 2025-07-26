@@ -53,12 +53,12 @@ export function CheckboxEnhanced({
             ) : (
               <CheckIcon className="w-3 h-3" />
             )}
-          </div>
+          
         )}
         
         <div className={cn()
           'absolute inset-0 rounded peer-checked:bg-primary peer-checked:border-primary peer-indeterminate:bg-primary peer-indeterminate:border-primary',>checkboxSizes[checkboxSize]>)} />
-      </div>
+      
       
       {(label || description) && (
         <div className="flex flex-col">
@@ -66,15 +66,15 @@ export function CheckboxEnhanced({
             <label
               htmlFor={checkboxId}>className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">>
               {label}
-            </label>
+            
           )}
           {description && (
             <p className="text-xs text-muted-foreground mt-1">
               {description}
-            </p>
+            
           )}
-        </div>
+        
       )}
-    </div>
+    
   );
 }

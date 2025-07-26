@@ -8,15 +8,15 @@ e,
   resolvedTheme: 'light' | 'dark',
   toggleTheme: () => void
 };
-</ThemeContextType>
-{ createContext<ThemeContextType | undefined>(undefined);</ThemeContextType>
+
+{ createContext<ThemeContextType | undefined>(undefined);
 interface ThemeProviderProps { children: React.ReactNod
 e;
   defaultTheme?: Theme,
   storageKey?: string
 };
 export function ThemeProvider({)
-  children, defaultTheme  = 'system', storageKey  = 'ai-guided-saas-theme'}: ThemeProviderProps, defaultTheme  = 'system', storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) {</ThemeContextType> const [theme, setTheme] = useState<Theme>(null)
+  children, defaultTheme  = 'system', storageKey  = 'ai-guided-saas-theme'}: ThemeProviderProps, defaultTheme  = 'system', storageKey = 'ai-guided-saas-theme'}: ThemeProviderProps) { const [theme, setTheme] = useState<Theme>(null)
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
   useEffect(() => {
     // Load theme from localStorage on mount;
@@ -65,8 +65,8 @@ const _toggleTheme = (): void => {
     setTheme,
     resolvedTheme,
     toggleTheme};
-  return (<ThemeContext.Provider value={value}></ThemeContext>
-      {children}</ThemeContext>
+  return (<ThemeContext.Provider value={value}>
+      {children}
     </ThemeContext.Provider>)
   )
 };
@@ -84,8 +84,8 @@ export function ThemeToggle() {
       className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl-lg  -gray-200 glass text-gray-900 transition-colors, hover: glass, focus: outline-none,;
   focus: ring-2, focus: ring-blue-500,
   focus: ring-offset-2, dark: -gray-700,
-  dark: glass-navbar, dark:text-gray-100 dark: hover bg-gray-700">aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}``>></button>
-      {/* Sun icon for light mode */}</button>
+  dark: glass-navbar, dark:text-gray-100 dark: hover bg-gray-700">aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}``>>
+      {/* Sun icon for light mode */}
       <svg;
 
     const className={`h-5 w-5 transition-all duration-300 ${``, resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`};
@@ -120,11 +120,11 @@ const themes = [
     { value: 'dark', label: 'Dark', icon: '🌙' },
     { value: 'system', label: 'System', icon: '💻' }] as const;
   return (<div className="relative"    />)
-          <button;>const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
+          <button;>const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};
         className="flex items-center gap-2 rounded-xl-lg  -gray-200 glass px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: glass, focus: outline-none,;
   focus: ring-2, focus: ring-blue-500,
   focus: ring-offset-2, dark: -gray-700,
-  dark: glass-navbar, dark:text-gray-100 dark:hover:bg-gray-700"></button>
+  dark: glass-navbar, dark:text-gray-100 dark:hover:bg-gray-700">
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
         <svg;
@@ -134,20 +134,20 @@ const themes = [
 viewBox="0 0 24 24";>stroke="currentColor"; />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"      />
       {isOpen && (div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-xl-lg  -gray-200 glass py-1 shadow-md-lg, dark:-gray-700 dark:glass-navbar">
-          {themes.map((themeOption) => (\n    </div>
-            <button key={themeOption.value} onClick={() = aria-label="Button"> {</button>
+          {themes.map((themeOption) => (\n    
+            <button key={themeOption.value} onClick={() = aria-label="Button"> {
                 setTheme(themeOption.value, setIsOpen(false)};
               const className={```flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover: bg-gray-100, dark:hover:bg-gray-700 ${``, theme === themeOption.value, ? 'bg-blue-50 text-blue-900, dark: bg-blue-900 dark:text-blue-100'
                   : 'text-gray-900, dark:text-gray-100'
               `}`}
-            ></button>
+            >
               <span>{themeOption.icon}</span>
               <span>{themeOption.label}</span>
               {theme === themeOption.value  && (
-svg className="ml-auto h-4 w-4" fill="currentColor" viewBox="0 0 20 20"></svg>
+svg className="ml-auto h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd", d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z";>clipRule="evenodd"     />
             )}
-</button>
+
           ))})}
 // Hook to detect if user prefers dark mode;
 export function usePrefersDarkMode() {
@@ -208,7 +208,7 @@ ring: '#3b82f6'};
 ring: '#3b82f6'}
 
 export type { Theme, ThemeContextType }
-</any>
+
     }
 </Theme>
 `

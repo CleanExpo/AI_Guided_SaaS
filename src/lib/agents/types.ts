@@ -12,7 +12,7 @@ export interface AgentConfig { id: string;
 
 export interface AgentCapability { name: string;
   description: string;
-  parameters?: Record<string ParameterDefinition></string>
+  parameters?: Record<string ParameterDefinition>
   returns?: string
 }
 

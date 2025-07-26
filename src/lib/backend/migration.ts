@@ -30,8 +30,8 @@ export class BackendMigrator {
   private targetAdapter: BackendAdapter
   private options: MigrationOptions
   private progress: MigrationProgress, constructor(sourceConfig,
-    targetConfig)
-    options: MigrationOptions = {})
+    targetConfig,
+                options: MigrationOptions = {})
   ) {
     this.sourceAdapter = createBackendAdapter(sourceConfig, this.targetAdapter = createBackendAdapter(targetConfig), this.options={ batchSize: 100;
     includeUsers: true;
@@ -179,10 +179,10 @@ if (sourceConfig.type === targetConfig.type && sourceConfig.url === targetConfig
 /**
  * Export data from a backend;
  */;
-export async function exportBackendData(config)
-  collections: string[] = ['users', 'projects'])
-): Promise<Record<string any[]> {</Record>
-{ createBackendAdapter(config); const data: Record<string any[]> = {}</string>
+export async function exportBackendData(config,
+                collections: string[] = ['users', 'projects'])
+): Promise<Record<string any[]> {
+{ createBackendAdapter(config); const data: Record<string any[]> = {}
   for (const collection of collections) {
     const records = []; let offset = 0; let hasMore = true;
     while (hasMore) {
@@ -200,8 +200,8 @@ hasMore = batch.hasMore
 /**
  * Import data to a backend
  */;
-export async function importBackendData(config)
-  data: Record<string any[]>,</string>
+export async function importBackendData(config,
+                data: Record<string any[]>,
     options: { overwrite?: boolean } = {})
 ): Promise<any> {
 { createBackendAdapter(config); const _startTime = Date.now(); let totalRecords = 0;

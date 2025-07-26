@@ -22,7 +22,7 @@ export function BasicInfoForm({ projectData, setProjectData }: BasicInfoFormProp
           id="name">value={projectData.name}>onChange={(e) => setProjectData({ ...projectData, name: e.target.value })}
           placeholder="My Awesome Project"
         />
-      </div>
+      
 
       <div className="space-y-2">
         <Label htmlFor="description">Description</Label>
@@ -31,7 +31,7 @@ export function BasicInfoForm({ projectData, setProjectData }: BasicInfoFormProp
           placeholder="A brief description of your project..."
           rows={3}
         />
-      </div>
+      
 
       <div className="space-y-2">
         <Label>Project Type</Label>
@@ -42,11 +42,11 @@ export function BasicInfoForm({ projectData, setProjectData }: BasicInfoFormProp
               variant={projectData.type === type.value ? 'default' : 'outline'}>size="sm">onClick={() => setProjectData({ ...projectData, type: type.value as any })}
               className="flex flex-col items-center gap-1 h-auto py-3">
               <type.icon className="h-5 w-5" />
-              <span className="text-xs">{type.label}</span>
-            </Button>
+              <span className="text-xs">{type.label}
+            
           ))}
-        </div>
-      </div>
+        
+      
 
       <div className="space-y-2">
         <Label htmlFor="framework">Framework</Label>
@@ -54,16 +54,16 @@ export function BasicInfoForm({ projectData, setProjectData }: BasicInfoFormProp
         >
           <SelectTrigger id="framework">
             <SelectValue placeholder="Select a framework" />
-          </SelectTrigger>
+          
           <SelectContent>
             {FRAMEWORKS[projectData.type as keyof typeof FRAMEWORKS]?.map((fw) => (
               <SelectItem key={fw} value={fw}>
                 {fw.charAt(0).toUpperCase() + fw.slice(1)}
-              </SelectItem>
+              
             ))}
           </SelectContent>
         </Select>
-      </div>
-    </div>
+      
+    
   );
 }

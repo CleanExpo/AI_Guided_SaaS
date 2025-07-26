@@ -161,7 +161,7 @@ export default function AutoCompactPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Auto-Compact System</h1>
-          <p className="text-gray-600">Automatically optimize and compress your codebase</p>
+          <p className="text-gray-600">Automatically optimize and compress your codebase
         </div>
 
         {/* System Status */}
@@ -169,40 +169,40 @@ export default function AutoCompactPage() {
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <CardTitle className="glass">Compaction Status</CardTitle>
+                <CardTitle className="glass">Compaction Status
                 <Badge variant={isEnabled ? 'default' : 'secondary'}>
                   {isEnabled ? 'Enabled' : 'Disabled'}
-                </Badge>
+                
               </div>
               <Switch
                 checked={isEnabled}>onCheckedChange={setIsEnabled} />
             </div>
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
-                <p className="text-sm text-gray-500">Total Reduction</p>
+                <p className="text-sm text-gray-500">Total Reduction
                 <p className="text-2xl font-bold text-green-600">)
                   {formatBytes(stats.totalReduction)}
-                </p>
+                
               </div>
               <div className="text-center">
-                <p className="text-sm text-gray-500">Average Reduction</p>
-                <p className="text-2xl font-bold">{stats.averageReduction.toFixed(1)}%</p>
+                <p className="text-sm text-gray-500">Average Reduction
+                <p className="text-2xl font-bold">{stats.averageReduction.toFixed(1)}%
               </div>
               <div className="text-center">
-                <p className="text-sm text-gray-500">Files Processed</p>
-                <p className="text-2xl font-bold">{stats.processedFiles}</p>
+                <p className="text-sm text-gray-500">Files Processed
+                <p className="text-2xl font-bold">{stats.processedFiles}
               </div>
               <div className="text-center">
-                <p className="text-sm text-gray-500">Last Run</p>
+                <p className="text-sm text-gray-500">Last Run
                 <p className="text-lg font-medium">
                   {stats.lastRun ? (
                     new Date(stats.lastRun).toLocaleTimeString()
                   ) : (
                     'Never'
                   )}
-                </p>
+                
               </div>
             </div>
 
@@ -221,7 +221,7 @@ export default function AutoCompactPage() {
                     Run Compaction
                   </>
                 )}
-              </Button>
+              
               
               <div className="flex-1">
                 {stats.isRunning && (
@@ -235,8 +235,8 @@ export default function AutoCompactPage() {
                 )}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Configuration */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -245,12 +245,12 @@ export default function AutoCompactPage() {
             <CardTitle className="flex items-center gap-2 glass
                 <Settings className="h-5 w-5" />
                 Configuration
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Compaction Level</label>
+                  <label className="text-sm font-medium">Compaction Level
                   <div className="mt-2 space-y-2">
                     {(['light', 'medium', 'aggressive'] as const).map(level => (
                       <label key={level} className="flex items-center gap-3">
@@ -266,13 +266,13 @@ export default function AutoCompactPage() {
                           {level === 'medium' && '(Balanced optimization)'}
                           {level === 'aggressive' && '(Maximum compression)'}
                         </span>
-                      </label>
+                      
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium">File Size Threshold (KB)</label>
+                  <label className="text-sm font-medium">File Size Threshold (KB)
                   <input
                     type="number">value={threshold}>onChange={(e) => setThreshold(Number(e.target.value))}
                     min="0.5"
@@ -282,13 +282,13 @@ export default function AutoCompactPage() {
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     Only process files larger than this size
-                  </p>
+                  
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium">Preserve Comments</p>
-                    <p className="text-xs text-gray-500">Keep important code comments</p>
+                    <p className="text-sm font-medium">Preserve Comments
+                    <p className="text-xs text-gray-500">Keep important code comments
                   </div>
                   <Switch
                     checked={preserveComments}>onCheckedChange={setPreserveComments} />
@@ -296,15 +296,15 @@ export default function AutoCompactPage() {
 
                 <Button variant="outline" className="w-full">
                   Save Configuration
-                </Button>
+                
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Recent Compressions</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Recent Compressions
+            
             <CardContent className="glass">
             <div className="space-y-3">
                 {recentResults.map((result, index) => {
@@ -313,26 +313,26 @@ export default function AutoCompactPage() {
                       <div className="flex items-center gap-3">
                         <Icon className="h-4 w-4 text-gray-600" />
                         <div>)
-                          <p className="text-sm font-medium">{result.file.split('/').pop()}</p>
+                          <p className="text-sm font-medium">{result.file.split('/').pop()}
                           <p className="text-xs text-gray-500">
                             {formatBytes(result.originalSize)} → {formatBytes(result.compactedSize)}
-                          </p>
+                          
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-bold text-green-600">
                           -{result.reductionPercentage.toFixed(1)}%
-                        </p>
+                        
                         <p className="text-xs text-gray-500">
                           {formatBytes(result.reduction)}
-                        </p>
+                        
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Summary Stats */}
@@ -341,39 +341,39 @@ export default function AutoCompactPage() {
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Space Saved</p>
-                  <p className="text-2xl font-bold">{formatBytes(stats.totalReduction)}</p>
+                  <p className="text-sm text-gray-500">Space Saved
+                  <p className="text-2xl font-bold">{formatBytes(stats.totalReduction)}
                 </div>
                 <HardDrive className="h-8 w-8 text-blue-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Compression Rate</p>
-                  <p className="text-2xl font-bold">{stats.averageReduction.toFixed(1)}%</p>
+                  <p className="text-sm text-gray-500">Compression Rate
+                  <p className="text-2xl font-bold">{stats.averageReduction.toFixed(1)}%
                 </div>
                 <TrendingDown className="h-8 w-8 text-green-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           <Card className="glass">
           <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Next Run</p>
+                  <p className="text-sm text-gray-500">Next Run
                   <p className="text-xl font-bold">
                     {isEnabled ? 'On Save' : 'Disabled'}
-                  </p>
+                  
                 </div>
                 <Clock className="h-8 w-8 text-purple-600" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Info Box */}
@@ -386,7 +386,7 @@ export default function AutoCompactPage() {
                 Auto-Compact automatically optimizes your JavaScript, CSS, SVG, and JSON files by removing 
                 unnecessary whitespace, comments, and redundant code. Files are only modified if the 
                 reduction is significant (&gt;1%). Original functionality is always preserved.
-              </p>
+              
             </div>
           </div>
         </div>

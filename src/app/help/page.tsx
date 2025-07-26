@@ -58,15 +58,15 @@ export default function HelpPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Help & Support</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Find answers to your questions and get the help you need to succeed with AI Guided SaaS
-          </p>
+          
           
           {/* Search */}
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
               ="Search for help...">className="pl-10" />
-          </div>
-        </div>
+          
+        
 
         {/* Support Options */}
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">)
@@ -75,16 +75,16 @@ export default function HelpPage() {
           <CardContent className="glass p-6 text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mx-auto mb-4">
           <option.icon className="h-6 w-6 text-blue-600"   />
-                </div>
+                
                 <h3 className="font-semibold text-gray-900 mb-2">{option.title}</h3>
-                <p className="text-gray-600 text-sm mb-4">{option.description}</p>
+                <p className="text-gray-600 text-sm mb-4">{option.description}
                 <Button variant="outline" size="sm" className="w-full">
                   {option.action}
-                </Button>
-              </CardContent>
-            </Card>
+                
+              
+            
           ))}
-        </div>
+        
 
         {/* FAQ Section */}
         <Card className="glass">
@@ -92,20 +92,20 @@ export default function HelpPage() {
             <CardTitle className="flex items-center glass
               <HelpCircle className="h-6 w-6 mr-2" />
               Frequently Asked Questions
-            </CardTitle>
-          </CardHeader>
+            
+          
           <CardContent className="glass">
             <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <div key={index} className="-b -gray-200 pb-4 last:-b-0">
                   <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
+                  <p className="text-gray-600">{faq.answer}
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+            
+          
+        
+      
+    
   );
 }

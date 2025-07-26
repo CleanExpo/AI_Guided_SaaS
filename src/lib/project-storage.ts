@@ -13,7 +13,7 @@ export interface Project { id: string;
   description?,
     string: type: string;
   status: 'draft' | 'active' | 'completed' | 'archived',
-  settings: Record<string any>, metadata: Record<string any>,</string>
+  settings: Record<string any>, metadata: Record<string any>,
   created_at: string;
   updated_at: string
 };
@@ -126,8 +126,8 @@ const { data: existing    }: any = await supabase;
 if (existing) {
     // Update existing file, const { data: file, error    }: any = await supabase;
       .from('project_files');
-      .update({ content: data.content: type, data.type)
-        size: data.size,)
+      .update({ content: data.content: type, data.type,
+                size: data.size,)
     updated_at: new Date().toISOString()   
     })
       .eq('id', existing.id);
@@ -186,7 +186,7 @@ if (error) {
  */;
 export async function saveProjectArtifacts(projectId: string;
     userId: string;
-    artifacts: Map<string any></string>)
+    artifacts: Map<string any>)
 ): Promise<any> {
   if (!supabase) {
     throw new Error('Database not available') };

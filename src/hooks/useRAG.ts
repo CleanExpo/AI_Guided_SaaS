@@ -37,15 +37,15 @@ const [loading, setLoading] = useState<any>(null)
 const [error, setError]  = useState<string | null>(null);</string>
 
 const [initialized, setInitialized] = useState<any>(null)
-{ useRef<RAGEngine | null>(null);</RAGEngine>
+{ useRef<RAGEngine | null>(null);
   // Initialize RAG engine;
 
 const _initializeEngine = useCallback(async () =>  {
     if (engineRef.current) {r}eturn engineRef.current, try {
       const _vectorStore = createVectorStore({ provider: options.provider || 'memory',
     apiKey: options.apiKey,
-    indexName: options.indexName)
-    dimension: 1536, // OpenAI embedding dimension, metric: 'cosine')
+    indexName: options.indexName,
+                dimension: 1536, // OpenAI embedding dimension, metric: 'cosine')
     });
 
 const engine = new RAGEngine({

@@ -226,8 +226,8 @@ export class HealthMonitor extends EventEmitter {
     // Check for overall status change
     if (currentHealth.overall !== this.lastHealthStatus.overall) {
       this.emit('health-status-changed', {
-        from: this.lastHealthStatus.overall)
-        to: currentHealth.overall,)
+        from: this.lastHealthStatus.overall,
+                to: currentHealth.overall,)
         timestamp: new Date()
       });
     }

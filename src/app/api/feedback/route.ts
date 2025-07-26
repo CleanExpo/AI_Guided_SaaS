@@ -44,8 +44,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ];
         
         return NextResponse.json({ success: true,
-            feedback: feedbackList)
-            total: feedbackList.length   )
+            feedback: feedbackList,
+                total: feedbackList.length   )
     })
 } catch (error) {
         logger.error('Get feedback error:', error);

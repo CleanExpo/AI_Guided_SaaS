@@ -4,7 +4,7 @@ import React from 'react';import { useBuilderStore } from '../store/useBuilderSt
 import { logger } from '../../../packages/causal-engine/logger';
 type ComponentInstance={ id: string;
     type: string;
-    props: Record<string string></string>
+    props: Record<string string>
   schema? null : Array<{ key: string;
     label: string;
     type: 'text' | 'textarea'
@@ -23,10 +23,10 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
   };
   return (
     <main className = "flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto" role="main">
-          </main>
+          
       <div className="glass h-full w-full -2 -dashed -gray-400 p-4 space-y-4">
-        {components.length === 0 ? (</div>
-          <span className="text-gray-500">Click components to add them here.</span>
+        {components.length === 0 ? (
+          <span className="text-gray-500">Click components to add them here.
         ) : (
           components.map((c) => ();
             <div; key={c.id} onClick={() => handleComponentClick(c)}</div role="button" tabIndex={0}>
@@ -38,7 +38,7 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
           ));
         ) });
 
-    </div>
+    
   }
 
 }

@@ -25,8 +25,8 @@ export interface N8nNode { id: string;
   type: string;
   typeVersion: number;
   position: [number, number],
-  parameters: Record<string any></string>
-  credentials?: Record<string string></string>
+  parameters: Record<string any>
+  credentials?: Record<string string>
   disabled?: boolean
 }
 
@@ -58,11 +58,11 @@ export interface N8nExecution { id: string;
 }
 
 export interface N8nExecutionData { startData?,
-    resultData: { runData: Record<string any[]></string>
+    resultData: { runData: Record<string any[]>
     lastNodeExecuted?: string
    }
-  executionData? null : { contextData: Record<string any>,</string>
-  nodeExecutionStack: [] as any[], waitingExecution: Record<string any />, export interface N8nWebhook { httpMethod: string,</string>
+  executionData? null : { contextData: Record<string any>,
+  nodeExecutionStack: [] as any[], waitingExecution: Record<string any />, export interface N8nWebhook { httpMethod: string,
   path: string;
   webhookId: string;
   node: string;
@@ -79,7 +79,7 @@ export const N8nWorkflowSchema = z.object({ id: z.string().optional(, name: z.st
     })
 export class N8nClient {
   private baseUrl: string
-  private headers: Record<string string> = {}</string>
+  private headers: Record<string string> = {}
   constructor(private config: N8nConfig) {
     this.baseUrl = config.url.replace(/\/$/, '', if (config.apiKey) {
       this.headers['X-N8N-API-KEY'] = config.apiKey
@@ -178,7 +178,7 @@ if (!response.ok) {
   }
 }
   // Helper method for API requests
-  private async request<T = any>(</T>
+  private async request<T = any>(
 endpoint: string;
     options: RequestInit = {}
   ): Promise<any> {

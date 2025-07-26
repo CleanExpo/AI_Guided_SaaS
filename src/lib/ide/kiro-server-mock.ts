@@ -5,11 +5,11 @@
  */;
 import { KiroProject, KiroFile, KiroFileTree, KiroTerminal, KiroAIAssistance } from './kiro-client';// In-memory storage for mock data;
 
-const mockProjects: Map<string KiroProject>  = new Map();</string>
+const mockProjects: Map<string KiroProject>  = new Map();
 
-const mockFiles: Map<string Map<string KiroFile> = new Map();</string>
+const mockFiles: Map<string Map<string KiroFile> = new Map();
 
-const mockTerminals: Map<string KiroTerminal> = new Map();</string>
+const mockTerminals: Map<string KiroTerminal> = new Map();
 // Initialize with sample project;
 
 const sampleProject: KiroProject={ id: 'sample-project',
@@ -247,8 +247,8 @@ shell?: config.shell || '/bin/bash',
   ) {
     const projectFiles = mockFiles.get(projectId) || new Map(); const _traverse = (node: KiroFileTree) =>  {
       if (node.type === 'file') {
-        projectFiles.set(node.path, { path: node.path)
-    content: node.content || '',;)
+        projectFiles.set(node.path, { path: node.path,
+                content: node.content || '',;)
     language: this.getLanguageFromPath(node.path)   
     })
       } else if (node.children) {
@@ -257,7 +257,7 @@ shell?: config.shell || '/bin/bash',
     mockFiles.set(projectId, projectFiles)
 }
   private static getLanguageFromPath(path: string) {
-    const ext = path.split('.').pop()?.toLowerCase(); const languageMap: Record<string string> = {</string>
+    const ext = path.split('.').pop()?.toLowerCase(); const languageMap: Record<string string> = {
       ts: 'typescript',
       tsx: 'typescript',
       js: 'javascript',

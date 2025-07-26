@@ -71,8 +71,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
         
         return NextResponse.json({ success: true,
-            templates)
-            total: templates.length,)
+            templates,
+                total: templates.length,)
             filters: { query, category, framework, pricing, difficulty }    })
 } catch (error) {
         logger.error('Templates API error:', error);

@@ -31,37 +31,37 @@ export default function StatusPage() {
       maintenance: 'bg-yellow-100 text-yellow-800',
       degraded: 'bg-red-100 text-red-800'
 };
-    return <Badge className={colors[status] || colors.degraded}>{status}</Badge>
+    return <Badge className={colors[status] || colors.degraded}>{status}
 };
 
   return (
     <div className="container mx-auto max-w-4xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">System Status</h1>
-        <p className="text-xl text-gray-600">Current status of all our services</p>
-      </div>
+        <p className="text-xl text-gray-600">Current status of all our services
+      
 
       <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Service Status</CardTitle>
-        </CardHeader>
+            <CardTitle className="glass">Service Status
+        
         <CardContent className="glass">
             <div className="space-y-4">
             {services.map((service, index) => (
               <div key={index} className="glass flex items-center justify-between p-4  rounded-xl-lg">
           <div className="flex items-center gap-3">
                   {getStatusIcon(service.status)}
-                  <span className="font-medium">{service.name}</span>
-                </div>
+                  <span className="font-medium">{service.name}
+                
                 <div className="glass flex items-center gap-4">
-          <span className="text-sm text-gray-600">{service.uptime}</span>
+          <span className="text-sm text-gray-600">{service.uptime}
                   {getStatusBadge(service.status)}
-                </div>
-              </div>
+                
+              
             ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          
+        
+      
+    
   );
 }

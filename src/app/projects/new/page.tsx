@@ -131,10 +131,10 @@ export default function NewProjectPage() {
             className="mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
-          </Button>
+          
           
           <h1 className="text-3xl font-bold text-gray-900">Create New Project</h1>
-          <p className="text-gray-600 mt-2">Set up your project with AI assistance</p>
+          <p className="text-gray-600 mt-2">Set up your project with AI assistance
           
           <Progress value={progress} className="mt-6" />
         </div>
@@ -176,7 +176,7 @@ export default function NewProjectPage() {
                   disabled={!projectData.name}>
                   Next
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                
               </div>
             </CardContent>
           </Card>
@@ -210,7 +210,7 @@ export default function NewProjectPage() {
                       </Label>
                     </div>
                   ))}
-                </RadioGroup>
+                
               </div>
 
               <div>
@@ -233,7 +233,7 @@ export default function NewProjectPage() {
                           {template.features.map((feature) => (
                             <Badge key={feature} variant="secondary" className="text-xs">
                               {feature}
-                            </Badge>
+                            
                           ))}
                         </div>
                       </CardContent>
@@ -246,11 +246,11 @@ export default function NewProjectPage() {
                 <Button variant="outline" onClick={() => setStep(1)}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back
-                </Button>
+                
                 <Button onClick={() => setStep(3)}>
                   Next
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                
               </div>
             </CardContent>
           </Card>
@@ -285,11 +285,11 @@ export default function NewProjectPage() {
                 <Button variant="outline" onClick={() => setStep(2)}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back
-                </Button>
+                
                 <Button onClick={() => setStep(4)}>
                   Next
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                
               </div>
             </CardContent>
           </Card>
@@ -311,14 +311,14 @@ export default function NewProjectPage() {
                     onValueChange={(value) => setProjectData(prev => ({ ...prev, database: value }))}>
                     <SelectTrigger id="database" className="mt-2">
                       <SelectValue />
-                    </SelectTrigger>
+                    
                     <SelectContent>
-                      <SelectItem value="postgresql">PostgreSQL</SelectItem>
-                      <SelectItem value="mysql">MySQL</SelectItem>
-                      <SelectItem value="mongodb">MongoDB</SelectItem>
-                      <SelectItem value="sqlite">SQLite</SelectItem>
+                      <SelectItem value="postgresql">PostgreSQL
+                      <SelectItem value="mysql">MySQL
+                      <SelectItem value="mongodb">MongoDB
+                      <SelectItem value="sqlite">SQLite
                     </SelectContent>
-                  </Select>
+                  
                 </div>
 
                 <div>
@@ -328,14 +328,14 @@ export default function NewProjectPage() {
                     onValueChange={(value) => setProjectData(prev => ({ ...prev, auth: value }))}>
                     <SelectTrigger id="auth" className="mt-2">
                       <SelectValue />
-                    </SelectTrigger>
+                    
                     <SelectContent>
-                      <SelectItem value="nextauth">NextAuth.js</SelectItem>
-                      <SelectItem value="clerk">Clerk</SelectItem>
-                      <SelectItem value="auth0">Auth0</SelectItem>
-                      <SelectItem value="supabase">Supabase Auth</SelectItem>
+                      <SelectItem value="nextauth">NextAuth.js
+                      <SelectItem value="clerk">Clerk
+                      <SelectItem value="auth0">Auth0
+                      <SelectItem value="supabase">Supabase Auth
                     </SelectContent>
-                  </Select>
+                  
                 </div>
 
                 <div>
@@ -345,14 +345,14 @@ export default function NewProjectPage() {
                     onValueChange={(value) => setProjectData(prev => ({ ...prev, payment: value }))}>
                     <SelectTrigger id="payment" className="mt-2">
                       <SelectValue />
-                    </SelectTrigger>
+                    
                     <SelectContent>
-                      <SelectItem value="stripe">Stripe</SelectItem>
-                      <SelectItem value="paddle">Paddle</SelectItem>
-                      <SelectItem value="lemonsqueezy">LemonSqueezy</SelectItem>
-                      <SelectItem value="none">None</SelectItem>
+                      <SelectItem value="stripe">Stripe
+                      <SelectItem value="paddle">Paddle
+                      <SelectItem value="lemonsqueezy">LemonSqueezy
+                      <SelectItem value="none">None
                     </SelectContent>
-                  </Select>
+                  
                 </div>
 
                 <div>
@@ -362,14 +362,14 @@ export default function NewProjectPage() {
                     onValueChange={(value) => setProjectData(prev => ({ ...prev, deployment: value }))}>
                     <SelectTrigger id="deployment" className="mt-2">
                       <SelectValue />
-                    </SelectTrigger>
+                    
                     <SelectContent>
-                      <SelectItem value="vercel">Vercel</SelectItem>
-                      <SelectItem value="netlify">Netlify</SelectItem>
-                      <SelectItem value="aws">AWS</SelectItem>
-                      <SelectItem value="custom">Custom</SelectItem>
+                      <SelectItem value="vercel">Vercel
+                      <SelectItem value="netlify">Netlify
+                      <SelectItem value="aws">AWS
+                      <SelectItem value="custom">Custom
                     </SelectContent>
-                  </Select>
+                  
                 </div>
               </div>
 
@@ -391,7 +391,7 @@ export default function NewProjectPage() {
                 <Button variant="outline" onClick={() => setStep(3)}>
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back
-                </Button>
+                
                 <Button 
                   onClick={handleCreateProject}
                   disabled={isCreating}
@@ -404,7 +404,7 @@ export default function NewProjectPage() {
                       Create Project
                     </>
                   )}
-                </Button>
+                
               </div>
             </CardContent>
           </Card>

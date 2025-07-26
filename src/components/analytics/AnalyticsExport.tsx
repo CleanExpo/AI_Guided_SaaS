@@ -252,8 +252,8 @@ export default function AnalyticsExport() {
   return (
     <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Export Analytics</CardTitle>
-      </CardHeader>
+            <CardTitle className="glass">Export Analytics
+      
       <CardContent className="glass">
             <div className="space-y-6">
           {/* Format Selection */}
@@ -273,7 +273,7 @@ export default function AnalyticsExport() {
                 >
                   {formatIcons[format]}
                   <span className="text-sm font-medium uppercase">{format}</span>
-                </button>
+                
               ))}
             </div>
           </div>
@@ -297,7 +297,7 @@ export default function AnalyticsExport() {
                    range === '7days' ? 'Last 7 Days' :
                    range === '30days' ? 'Last 30 Days' :
                    'Last 90 Days'}
-                </button>
+                
               ))}
             </div>
           </div>
@@ -321,7 +321,7 @@ export default function AnalyticsExport() {
                     className="rounded-lg text-blue-600"
                   />
                   <span className="capitalize">{metric}</span>
-                </label>
+                
               ))}
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function AnalyticsExport() {
                 className="rounded-lg text-blue-600"
               />
               <span>Include raw data</span>
-            </label>
+            
             {(options.format === 'pdf' || options.format === 'excel') && (
               <label className="flex items-center gap-2">
                 <input
@@ -346,7 +346,7 @@ export default function AnalyticsExport() {
                   className="rounded-lg text-blue-600"
                 />
                 <span>Include charts</span>
-              </label>
+              
             )}
           </div>
 
@@ -367,9 +367,9 @@ export default function AnalyticsExport() {
                 Export Analytics
               </>
             )}
-          </Button>
+          
         </div>
-      </CardContent>
-    </Card>
+      
+    
   );
 }

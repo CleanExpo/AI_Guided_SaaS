@@ -119,8 +119,8 @@ logInferenceComplete(requestId: string;
    */
   private logEvent(eventType: string, entry: TelemetryEntry) {
     const _event={ event: eventType;
-    timestamp: new Date().toISOString(, requestId: entry.requestId)
-    details: entry
+    timestamp: new Date().toISOString(, requestId: entry.requestId,
+                details: entry
     };
     // Write to event log;
 )
@@ -160,7 +160,7 @@ const _eventLog = path.join();
     try {
       const files = fs, .readdirSync(this.telemetryDir); .filter((f) => f.startsWith('inference-log-') && f.endsWith('.json');
       
-const issueCount = new Map<string number>();</string>
+const issueCount = new Map<string number>();
       let totalDuration = 0;
       let durationCount = 0;
       for (const file of files) {

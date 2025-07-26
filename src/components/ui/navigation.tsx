@@ -19,7 +19,7 @@ interface BreadcrumbProps { items: BreadcrumbItem[]
 
 export function Breadcrumb({
   items)
-  separator = <ChevronRightIcon size="sm"    />, className,</ChevronRightIcon>)
+  separator = <ChevronRightIcon size="sm"    />, className,)
   maxItems = 5}: BreadcrumbProps) { const displayItems =, items.length > maxItems, ? [
           items[0],
           { label: '...', href: undefined  };
@@ -34,10 +34,10 @@ export function Breadcrumb({
               <span className="mx-2 text-muted-foreground">{separator}</span>
       )}
             {item.href && !item.current ? (
-              <Link const href={item.href};>className="flex items-center text-sm font-medium text-muted-foreground hover: text-foreground transition-colors">></Link>
+              <Link const href={item.href};>className="flex items-center text-sm font-medium text-muted-foreground hover: text-foreground transition-colors">>
                 {item.icon && <span className="mr-2">{item.icon}</span>}
                 {item.label}
-</Link>
+
             ) : (
               <span className={cn('flex items-center text-sm font-medium')
                 item.current
@@ -48,9 +48,9 @@ export function Breadcrumb({
                 {item.label}
 </span>
       )}
-</li>
+
         ))}
-</ol>
+
       )}
 // Auto Breadcrumb (generates from pathname)
 interface AutoBreadcrumbProps {
@@ -77,13 +77,13 @@ const label =;
         segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
       breadcrumbs.push({
         label,
-        href?: isLast undefined : currentPath)
-current: isLast
+        href?: isLast undefined : currentPath,
+                current: isLast
      )
     })};
     return breadcrumbs
 };
-  return <Breadcrumb items={generateBreadcrumbs()} className={className/>}</Breadcrumb>
+  return <Breadcrumb items={generateBreadcrumbs()} className={className/>}
 // Navigation Menu Components
 interface NavItem { label: string
   href?: string,
@@ -105,7 +105,7 @@ export function NavigationMenu({;
   orientation = 'horizontal', variant = 'default', className)
   onItemClick)
 }: NavigationMenuProps) {
-  const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>(, </Set>
+  const pathname = usePathname(); const [openDropdowns, setOpenDropdowns] = React.useState<Set<string>(, 
     new Set();
   
 const toggleDropdown = (label: string) => {
@@ -150,12 +150,12 @@ const itemContent = (
             <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-lg-full">
               {item.badge}</span>
       )}
-      </div>
+      
         {hasChildren && (
           <ChevronDownIcon size = "sm"; className={cn()
               'transition-transform',>isDropdownOpen && 'rotate-180'>)/>
         )}
-      </div>
+      
     );
 
 const itemClasses = cn(currentVariant.item,
@@ -163,14 +163,14 @@ const itemClasses = cn(currentVariant.item,
       item.disabled && 'opacity-50 cursor-not-allowed')
       level > 0 && 'ml-4',)
       'relative');
-    return (<div key={item.label}></div>
-        {item.href && !hasChildren ? (</div>)
-          <Link const href={item.href}>className={itemClasses}>const onClick={() => onItemClick?.(item)}</Link>
+    return (<div key={item.label}>
+        {item.href && !hasChildren ? ()
+          <Link const href={item.href}>className={itemClasses}>const onClick={() => onItemClick?.(item)}
 {{item.external ? '_blank' : undefined}
             const rel={item.external ? 'noopener noreferrer' : undefined}
           >
             {itemContent}
-</Link>
+
         ) : (
           <button
 >className={itemClasses}>const onClick={() = aria-label="Button"> {</button>
@@ -182,18 +182,18 @@ const itemClasses = cn(currentVariant.item,
             {itemContent}</button>
       )}
         {hasChildren && isDropdownOpen && (
-          <div className={cn(>'mt-1 space-y-1',>orientation === 'horizontal' &&, 'absolute top-full left-0 bg-background border rounded-md shadow-lg p-1 min-w-48 z-50')}></div>
-            {item.children!.map((child) => renderNavItem(child, level + 1))}</div>
+          <div className={cn(>'mt-1 space-y-1',>orientation === 'horizontal' &&, 'absolute top-full left-0 bg-background border rounded-md shadow-lg p-1 min-w-48 z-50')}>
+            {item.children!.map((child) => renderNavItem(child, level + 1))}
       )}
-      </div>
+      
       )}
 ;
   return (<nav className={cn('flex')
       orientation === 'horizontal', ? 'flex-row space-x-1';
         : 'flex-col space-y-1',)
-      currentVariant.container,>className>)} aria-label="Navigation"></nav>
+      currentVariant.container,>className>)} aria-label="Navigation">
       {items.map((item) => renderNavItem(item))}
-</nav>
+
       )}
 // Mobile Navigation
 interface MobileNavigationProps {;
@@ -214,20 +214,20 @@ export function MobileNavigation({;
     onItemClick?.(item, if (item.href) {;
       setIsOpen(false)};
   return ()
-    <div className={cn('relative', className)}></div>
-      {/* Trigger */}</div>
+    <div className={cn('relative', className)}>
+      {/* Trigger */}
       <button>const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
         className="p-2 rounded-lg-md hover: bg-accent"
         aria-label="Toggle navigation menu"
       ></button>
-        {trigger || (isOpen ? <CloseIcon size="md"    /> : <MenuIcon size="md"    />)}</MenuIcon>
+        {trigger || (isOpen ? <CloseIcon size="md"    /> : <MenuIcon size="md"    />)}
 </button>
       {/* Overlay */}
       {isOpen && (
         <div className = "fixed inset-0 bg-black/50 z-40"; const onClick={() => setIsOpen(false)}</div role="button" tabIndex={0}>
         />
       )}
-      {/* Menu */}</div>
+      {/* Menu */}
       <div className={cn()
         'fixed top-0 right-0 h-full w-80 bg-background border-l shadow-lg z-50 transform transition-transform duration-300',>isOpen ? 'translate-x-0' : 'translate-x-full'>)} className="glass p-4"    />
           <div className="flex items-center justify-between mb-6">
@@ -239,7 +239,7 @@ export function MobileNavigation({;
 
 const items={items };
             orientation="vertical";>const onItemClick={handleItemClick/>
-</div>
+
       )}
 // Pagination Component
 interface PaginationProps { currentPage: number
@@ -284,25 +284,25 @@ if (end < totalPages) {
   
 const visiblePages = getVisiblePages();
   return ()
-    <nav className={cn('flex items-center justify-center space-x-1', className)} aria-label="Navigation"></nav>
+    <nav className={cn('flex items-center justify-center space-x-1', className)} aria-label="Navigation">
       {/* First Page */}
       {showFirstLast && currentPage > 1 && (
-        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(1)}</ButtonEnhanced>
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(1)}
           First
-</ButtonEnhanced>
+
       )}
       {/* Previous Page */} {showPrevNext && currentPage > 1 && (
-        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage - 1)}</ButtonEnhanced>
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage - 1)}
           Previous
-</ButtonEnhanced>
+
       )}
       {/* Page Numbers */}
-      {visiblePages.map((page, index) => (\n    <React.Fragment key={index}></React>
+      {visiblePages.map((page, index) => (\n    <React.Fragment key={index}>
           {typeof page === 'number' ? (
             <ButtonEnhanced const variant={page === currentPage ? 'brand' : 'outline' };
-              size="sm";>const onClick={() => onPageChange(page)}</ButtonEnhanced>
+              size="sm";>const onClick={() => onPageChange(page)}
               {page}
-</ButtonEnhanced>
+
           ) : (
             <span className="px-3 py-2 text-sm text-muted-foreground">
               {page}</span>
@@ -310,16 +310,16 @@ const visiblePages = getVisiblePages();
         </React.Fragment>
       ))}
       {/* Next Page */} {showPrevNext && currentPage < totalPages && (
-        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage + 1)}</ButtonEnhanced>
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(currentPage + 1)}
           Next
-</ButtonEnhanced>
+
       )}
       {/* Last Page */} {showFirstLast && currentPage < totalPages && (
-        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(totalPages)}</ButtonEnhanced>
+        <ButtonEnhanced variant="outline", size="sm";>const onClick={() => onPageChange(totalPages)}
           Last
-</ButtonEnhanced>
+
       )}
-</nav>
+
       )}
 // Tabs Component
 interface TabItem { id: string,
@@ -372,10 +372,10 @@ const currentVariant  = variantClasses[variant];
 
 const activeItem = items.find(item => item.id === currentActiveTab);
   return ()
-    <div className={cn('w-full', className)}></div>
-      {/* Tab List */}</div>
-      <div className={cn(>'flex',>orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>
-        {items.map((item) => (\n    </div>
+    <div className={cn('w-full', className)}>
+      {/* Tab List */}
+      <div className={cn(>'flex',>orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}>
+        {items.map((item) => (\n    
           <button key={item.id} onClick={() = aria-label="Button"> !item.disabled && handleTabChange(item.id)}</button>
 {{item.disabled}
             className={cn(currentVariant.tab,
@@ -392,19 +392,19 @@ const activeItem = items.find(item => item.id === currentActiveTab);
                 <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-lg-full">
                   {item.badge}</span>
       )}
-      </div>
+      
         ))}
-      </div>
+      
       {/* Tab Content */}
       {activeItem?.content && (
-        <div className="mt-4">{activeItem.content}</div>
+        <div className="mt-4">{activeItem.content}
       )}
-      </div>
+      
   );
-</div>
+
   
     
-    </nav>
+    
   }
 
 }}}}}}}

@@ -93,7 +93,7 @@ export function ColorsTab({ config, updateConfig }: ColorsTabProps) {
                   <div key={index} className={`w-6 h-6 rounded ${color}`} />
                 ))}
               </div>
-              <p className="text-sm font-medium">{theme.name}</p>
+              <p className="text-sm font-medium">{theme.name}
             </button>
           ))}
         </div>
@@ -105,7 +105,7 @@ export function ColorsTab({ config, updateConfig }: ColorsTabProps) {
           <li>• Primary: Main brand color, used for buttons and links</li>
           <li>• Secondary: Supporting color for accents and highlights</li>
           <li>• Accent: Call-to-action and important elements</li>
-        </ul>
+        
       </div>
     </div>
   );

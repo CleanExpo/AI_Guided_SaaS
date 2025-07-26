@@ -31,8 +31,8 @@ export function UsersTab() {
         {/* User Acquisition */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">User Acquisition</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">User Acquisition
+          
           <CardContent className="glass">
             <div className="space-y-4">
               {acquisitionChannels.map((channel) => (
@@ -44,14 +44,14 @@ export function UsersTab() {
                 />
               ))}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* User Segments */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">User Segments</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">User Segments
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {userSegments.map((segment) => (
@@ -60,23 +60,23 @@ export function UsersTab() {
                   className="flex items-center justify-between p-3 glass rounded-xl-lg"
                 >
                   <div>
-                    <p className="font-medium">{segment.name}</p>
-                    <p className="text-sm text-gray-600">{segment.description}</p>
+                    <p className="font-medium">{segment.name}
+                    <p className="text-sm text-gray-600">{segment.description}
                   </div>
                   <Badge variant={segment.isRisk ? 'destructive' : 'default'}>
                     {segment.count.toLocaleString()}
-                  </Badge>
+                  
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Cohort Retention */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Cohort Retention</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Cohort Retention
+          
           <CardContent className="glass">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -88,7 +88,7 @@ export function UsersTab() {
                         className="text-left p-2 font-medium text-gray-600"
                       >
                         {header}
-                      </th>
+                      
                     ))}
                   </tr>
                 </thead>
@@ -110,15 +110,15 @@ export function UsersTab() {
                           }}
                         >
                           {cell}
-                        </td>
+                        
                       ))}
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

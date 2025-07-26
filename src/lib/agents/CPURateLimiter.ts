@@ -98,8 +98,8 @@ const _avgMem = recentMetrics.reduce((sum, m) => sum + m.memoryUsage, 0) / recen
       this.isThrottled = true
       this.throttleUntil = new Date(Date.now() + this.config.cooldownPeriod)
       this.emit('throttle', { reason: 'Resource limits exceeded',
-        until: this.throttleUntil)
-    metrics: this.metrics[this.metrics.length - 1]
+        until: this.throttleUntil,
+                metrics: this.metrics[this.metrics.length - 1]
      )
     })}
   private canRelease(): boolean {

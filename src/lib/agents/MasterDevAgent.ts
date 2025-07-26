@@ -211,8 +211,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     const result = await this.mcpClient.callTool('full_analysis', {
-      projectPath: this.config.projectPath)
-      outputFormat: 'actionable')
+      projectPath: this.config.projectPath,
+                outputFormat: 'actionable')
     });
 
     return this.parseAnalysisResult(result);
@@ -224,8 +224,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     return await this.mcpClient.callTool('analyze_project', {
-      projectPath: this.config.projectPath)
-      depth: 'deep')
+      projectPath: this.config.projectPath,
+                depth: 'deep')
     });
   }
 
@@ -249,8 +249,8 @@ export class MasterDevAgent extends EventEmitter {
 
     return await this.mcpClient.callTool('check_dependencies', {
       projectPath: this.config.projectPath,
-      checkSecurity: true)
-      checkUpdates: true)
+      checkSecurity: true,
+                checkUpdates: true)
     });
   }
 
@@ -260,8 +260,8 @@ export class MasterDevAgent extends EventEmitter {
     }
 
     return await this.mcpClient.callTool('validate_production', {
-      projectPath: this.config.projectPath)
-      environment: 'production')
+      projectPath: this.config.projectPath,
+                environment: 'production')
     });
   }
 
@@ -382,8 +382,8 @@ export class MasterDevAgent extends EventEmitter {
           await this.executeCommand(todo.command);
           
           this.emit('auto-fix-applied', {
-            todo)
-            success: true)
+            todo,
+                success: true)
           });
         } catch (error) {
           this.emit('auto-fix-failed', {
@@ -398,8 +398,8 @@ export class MasterDevAgent extends EventEmitter {
   private async executeCommand(command: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const child = spawn(command, [], {
-        shell: true)
-        cwd: this.config.projectPath)
+        shell: true,
+                cwd: this.config.projectPath)
       });
 
       child.on('close', (code) => {

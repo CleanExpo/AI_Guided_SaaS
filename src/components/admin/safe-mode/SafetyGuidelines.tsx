@@ -22,7 +22,7 @@ export function SafetyGuidelines() {
         <li>
           • <strong>Emergency stop</strong>: Pause immediately if system becomes slow
         </li>
-      </ul>
-    </Card>
+      
+    
   );
 }

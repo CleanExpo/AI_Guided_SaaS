@@ -59,7 +59,7 @@ export class AdminAuthService {
 }
 
   // Authenticate admin credentials
-  async authenticateAdmin(email: string, password: string): Promise<AdminUser | null> {</AdminUser>
+  async authenticateAdmin(email: string, password: string): Promise<AdminUser | null> {
     try {
       // Check if admin panel is enabled
       if (process.env.ENABLE_ADMIN_PANEL || "false" !== 'true') {
@@ -94,7 +94,7 @@ export class AdminAuthService {
   // Generate admin JWT token
   generateAdminToken(admin: AdminUser): string {
     try {
-      const payload: Omit<AdminSession 'iat' | 'exp'> = {</AdminSession>
+      const payload: Omit<AdminSession 'iat' | 'exp'> = {
         adminId: admin.id,
         email: admin.email,
         role: admin.role,
@@ -140,7 +140,7 @@ export class AdminAuthService {
   }
 
   // Verify admin session from request
-  async verifyAdminSession(request: NextRequest): Promise<AdminSession | null> {</AdminSession>
+  async verifyAdminSession(request: NextRequest): Promise<AdminSession | null> {
     try {
       const token = this.extractAdminToken(request, if (!token) {
         return null};

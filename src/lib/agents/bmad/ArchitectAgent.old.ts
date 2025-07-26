@@ -109,7 +109,7 @@ export interface Database { name: string;
 
 export interface CachingStrategy { levels: string[],
   technologies: string[],
-  ttl: Record<string any  />, export</string>
+  ttl: Record<string any  />, export
 }
 
 interface FileStorageStrategy { type: string;
@@ -146,7 +146,7 @@ y
 
 export interface ComputeResource { name: string;
   type: string;
-  specifications: Record<string any>,</string>
+  specifications: Record<string any>,
     scalingPolicy: string;
   estimatedCost: string
 }
@@ -237,7 +237,7 @@ export interface DeploymentStrategy { approach: string;
 
 export interface Environment { name: string;
   purpose: string;
-  configuration: Record<string any>,</string>
+  configuration: Record<string any>,
     resources: string[]
 }
 
@@ -290,8 +290,8 @@ constraints  = this.getSharedMemory('technical-constraints') || [];
 const _timeline = this.getSharedMemory('project-timeline');
       
 const qualityStandards = this.getSharedMemory('quality-standards') || [];
-      this.observe('Retrieved inputs from other agents', { requirementCount: requirements.length)
-    constraintCount: constraints.length
+      this.observe('Retrieved inputs from other agents', { requirementCount: requirements.length,
+                constraintCount: constraints.length
       }};
       // Step, 1: Define architecture overview and style;
 )
@@ -644,7 +644,7 @@ t: any =>)
     return [...new Set(patterns)]
 }
   private extractTechStack(components: Component[]): Record {
-    const techStack: Record<string string[]> = {</string>
+    const techStack: Record<string string[]> = {
       frontend: [] as any[],
     backend: [] as any[],
     database: [] as any[],

@@ -37,7 +37,7 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
       <div className="glass container mx-auto p-6">
         <h1 className="text-2xl font-bold">API Documentation Not Found</h1>
         <p>The requested API documentation could not be found.</p>
-      </div>
+      
     );
 }
 
@@ -49,15 +49,15 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
         <div className="glass flex items-center gap-4 mt-4">
           <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-lg text-sm">
             {doc.category}
-          </span>
+          
           <span className="glass text-gray-800 px-2 py-1 rounded-lg text-sm">
             {doc.version}
-          </span>
-        </div>
-      </div>
+          
+        
+      
       <div className="glass rounded-xl-lg  p-6">
-        <pre className="whitespace-pre-wrap text-sm">{doc.content}</pre>
-      </div>
-    </div>
+        <pre className="whitespace-pre-wrap text-sm">{doc.content}
+      
+    
   );
 }

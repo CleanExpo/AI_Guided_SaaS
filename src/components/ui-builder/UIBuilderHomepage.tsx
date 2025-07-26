@@ -14,8 +14,8 @@ export default function UIBuilderHomepage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">UI Builder</h1>
           <p className="text-xl text-gray-600">
             Create beautiful user interfaces with our drag-and-drop UI builder.
-          </p>
-        </div>
+          
+        
         
         <Card className="glass">
           <CardContent className="py-12 text-center glass
@@ -23,11 +23,11 @@ export default function UIBuilderHomepage() {
           <h3 className="text-xl font-semibold text-gray-900 mb-2">UI Builder Coming Soon</h3>
             <p className="text-gray-600 mb-6">
               Our visual UI builder is currently in development. Stay tuned for updates!
-            </p>
+            
             <Button>Get Notified</Button>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+          
+        
+      
+    
   )
 }

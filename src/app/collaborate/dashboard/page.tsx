@@ -29,25 +29,25 @@ export default function CollaborateDashboardPage() {
           </h1>
           <p className="text-gray-600">
             Manage your collaborative projects and team activities.
-          </p>
+          
         </div>
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
           <div className="glass p-6 rounded-xl-lg shadow-md-sm ">
             <h3 className="font-semibold text-gray-900 mb-2">Active Projects</h3>
             <div className="text-3xl font-bold text-blue-600">3</div>
-            <p className="text-sm text-gray-600 mt-1">Currently working on</p>
+            <p className="text-sm text-gray-600 mt-1">Currently working on
           </div>
           
           <div className="glass p-6 rounded-xl-lg shadow-md-sm ">
           <h3 className="font-semibold text-gray-900 mb-2">Team Members</h3>
             <div className="text-3xl font-bold text-green-600">12</div>
-            <p className="text-sm text-gray-600 mt-1">Across all projects</p>
+            <p className="text-sm text-gray-600 mt-1">Across all projects
           </div>
           
           <div className="glass p-6 rounded-xl-lg shadow-md-sm ">
           <h3 className="font-semibold text-gray-900 mb-2">Recent Activity</h3>
             <div className="text-3xl font-bold text-purple-600">24</div>
-            <p className="text-sm text-gray-600 mt-1">Actions this week</p>
+            <p className="text-sm text-gray-600 mt-1">Actions this week
           </div>
         </div>
         
@@ -59,26 +59,26 @@ export default function CollaborateDashboardPage() {
           <div className="flex items-center justify-between py-4 -b -gray-100 last:-b-0">
               <div>
           <h3 className="font-medium text-gray-900">E-commerce Platform</h3>
-                <p className="text-sm text-gray-600">Last updated 2 hours ago</p>
+                <p className="text-sm text-gray-600">Last updated 2 hours ago
               </div>
               <div className="flex items-center space-x-2">
           <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-lg-full">
                   Active
-                </span>
-                <span className="text-sm text-gray-500">5 members</span>
+                
+                <span className="text-sm text-gray-500">5 members
               </div>
             </div>
             
             <div className="flex items-center justify-between py-4 -b -gray-100 last:-b-0">
               <div>
                 <h3 className="font-medium text-gray-900">Mobile App UI</h3>
-                <p className="text-sm text-gray-600">Last updated 1 day ago</p>
+                <p className="text-sm text-gray-600">Last updated 1 day ago
               </div>
               <div className="flex items-center space-x-2">
           <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-lg-full">
                   In Review
-                </span>
-                <span className="text-sm text-gray-500">3 members</span>
+                
+                <span className="text-sm text-gray-500">3 members
               </div>
             </div>
           </div>

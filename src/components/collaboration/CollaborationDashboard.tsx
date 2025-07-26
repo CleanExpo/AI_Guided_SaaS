@@ -20,7 +20,7 @@ interface CollaborationSession { id: string
   createdAt: Date
  };
 export default function CollaborationDashboard() {
-</CollaborationSession>, const [sessions, setSessions]  = useState<CollaborationSessionnull>(null)</CollaborationSession>
+, const [sessions, setSessions]  = useState<CollaborationSessionnull>(null)
 
 const [loading, setLoading] = useState<any>(null)
   
@@ -108,54 +108,54 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
   if (loading) {
     return ()
     <div className="glass flex items-center justify-center p-8 text-center">);</div>
-          <p className="text-gray-600">Loading collaboration sessions...</p>
+          <p className="text-gray-600">Loading collaboration sessions...
   return (<div className="space-y-6">
       {/* Header */}</div>
       <div className="flex items-center justify-between"     />
           <h1 className="text-2xl font-bold text-gray-900">
             Collaboration Dashboard</h1>
           <p className="text-gray-600">
-            Manage your collaborative projects and sessions</p>
+            Manage your collaborative projects and sessions
         <Button>
           <Plus className="h-4 w-4 mr-2"     />
           New Session {/* Stats, Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="glass"</Card>
+          <Card className="glass"
           <CardContent className="glass p-4">
           <div className="flex items-center space-x-2">
               <Activity className="h-5 w-5 text-blue-600"    />
           <div></div>
                 <p className="text-sm font-medium text-gray-600">
-                  Active Sessions</p>
+                  Active Sessions
                 <p className="text-2xl font-bold">)
-                  {sessions.filter((s) => s.isActive).length}</p>
+                  {sessions.filter((s) => s.isActive).length}
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <Users className="h-5 w-5 text-green-600"     />
               <div>
           <p className="text-sm font-medium text-gray-600">
-                  Total Participants</p>
+                  Total Participants
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.participants, 0)}</p>
+                  {sessions.reduce((sum, s) => sum + s.participants, 0)}
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <MessageCircle className="h-5 w-5 text-brand-primary-600"     />
               <div>
           <p className="text-sm font-medium text-gray-600">
-                  Total Comments</p>
+                  Total Comments
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.comments, 0)}</p>
+                  {sessions.reduce((sum, s) => sum + s.comments, 0)}
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <Edit className="h-5 w-5 text-orange-600"     />
               <div>
           <p className="text-sm font-medium text-gray-600">
-                  Total Changes</p>
+                  Total Changes
                 <p className="text-2xl font-bold">
-                  {sessions.reduce((sum, s) => sum + s.changes, 0)}</p>
+                  {sessions.reduce((sum, s) => sum + s.changes, 0)}
       {/* Filters, and Search */}
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1"    />
           <Input ="Search collaboration sessions...";>value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
@@ -183,9 +183,9 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
               <p className="text-gray-600 mb-4">
                 {searchTerm
                   ? 'Try adjusting your search terms.'
-                  : 'Create your first collaboration session to get started.'}</p>
+                  : 'Create your first collaboration session to get started.'}
               <Button>
-          <Plus className="h-4 w-4 mr-2"    />Create Session</Plus>
+          <Plus className="h-4 w-4 mr-2"    />Create Session
         ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session)
         return (Card;
 
@@ -200,13 +200,13 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
 Badge, variant="default", className="bg-green-100 text-green-800";
                           >
                             <Activity className="h-3 w-3 mr-1"     />
-                            Live</Activity>)
+                            Live)
             )},
     {session.isPublic ? (
                           <Globe className="h-4 w-4 text-gray-400"     />
-                        ) : (</Globe>
+                        ) : (
                           <Lock className="h-4 w-4 text-gray-400"     />
-                        )}</Lock>
+                        )}
                       <div className="flex items-center space-x-6 text-sm text-gray-600 mb-3 flex items-center space-x-1"    />
           <Users className="h-4 w-4"     />
                           <span>{session.participants} participants</span>
@@ -231,7 +231,7 @@ Badge, variant="default", className="bg-green-100 text-green-800";
                     <div className="flex items-center space-x-2 ml-4">
           <Button variant="outline" size="sm"></Button>
                         <Eye className="h-4 w-4 mr-1"     />
-                        View</Eye>
+                        View
                       <Button variant="outline" size="sm">
           <Share2 className="h-4 w-4 mr-1"     />
                         Share</Share2>
@@ -241,8 +241,8 @@ Badge, variant="default", className="bg-green-100 text-green-800";
                       <Button variant="outline";
 size="sm";>className="text-red-600 hover: text-red-700">>
           <Trash2 className="h-4 w-4" /    />
-</CardContent>
-</Card>
+
+
 </div>
           }))},
     {/* Demo, Notice */
@@ -260,7 +260,7 @@ size="sm";>className="text-red-600 hover: text-red-700">>
           live participant counts, activity metrics, and session management
           capabilities.</AlertDescription>
 </Button>
-</Card></CardContent>
+
 </div>
 
 }

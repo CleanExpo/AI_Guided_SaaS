@@ -81,8 +81,8 @@ return {
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $json.projectId,
     coverage: $json.coverage,
-    reporters: $json.reporters)
-    runId: $json.runId
+    reporters: $json.reporters,
+                runId: $json.runId
          )
     })}`, ``,
 options: { timeout: 120000 // 2 minutes
@@ -100,8 +100,8 @@ options: { timeout: 120000 // 2 minutes
         sendBody: true;
     bodyParametersJson: `{{``
           JSON.stringify({ projectId: $json.projectId,
-    reporters: $json.reporters)
-    runId: $json.runId
+    reporters: $json.reporters,
+                runId: $json.runId
          )
     })}`, ``,
 options: { timeout: 180000 // 3 minutes
@@ -310,8 +310,8 @@ options: {};
 const failedTests = [];
 Object.entries(results.suites).forEach(([suite, data]) =>  { if (data.failures && data.failures.length > 0) {
     failedTests.push({
-      suite)
-      failures: data.failures
+      suite,
+                failures: data.failures
 )
     })});
 return { projectId: results.projectId,

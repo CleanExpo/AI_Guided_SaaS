@@ -48,8 +48,8 @@ const handleSubmit = async (e: React.FormEvent) => {
           <CardTitle className="flex items-center glass">
             <Shield className="w-5 h-5 mr-2" />
             Admin Login
-          </CardTitle>
-        </CardHeader>
+          
+        
         <CardContent className="glass">
 
 
@@ -68,14 +68,14 @@ const handleSubmit = async (e: React.FormEvent) => {
 
                 <AlertTriangle className="w-4 h-4 mr-2" />
                 {error}
-              </div>
+              
             )}
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? 'Authenticating...' : 'Login'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+            
+          
+        
+      
+    
   );
 }

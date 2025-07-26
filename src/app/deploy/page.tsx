@@ -128,12 +128,12 @@ export default function DeployPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Quick Deploy</h1>
-              <p className="mt-1 text-gray-600">Deploy to production in under 60 seconds</p>
+              <p className="mt-1 text-gray-600">Deploy to production in under 60 seconds
             </div>
             {!isOnline && (
               <Badge variant="secondary" className="bg-yellow-100 text-yellow-700">
                 Offline Mode
-              </Badge>)
+              )
             )}
           </div>
         </div>
@@ -143,8 +143,8 @@ export default function DeployPage() {
           <div className="lg:col-span-1">
             <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Choose Provider</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Choose Provider
+              
               <CardContent className="glass">
             <div className="space-y-3">
                   {deployProviders.map((provider) => (
@@ -160,7 +160,7 @@ export default function DeployPage() {
                           <span className="text-2xl">{provider.icon}</span>
                           <div>
                             <h3 className="font-medium">{provider.name}</h3>
-                            <p className="text-sm text-gray-500">{provider.time}</p>
+                            <p className="text-sm text-gray-500">{provider.time}
                           </div>
                         </div>
                         {selectedProvider === provider.id && (
@@ -171,20 +171,20 @@ export default function DeployPage() {
                         {provider.features.map((feature) => (
                           <Badge key={feature} variant="secondary" className="text-xs">
                             {feature}
-                          </Badge>
+                          
                         ))}
                       </div>
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              
+            
 
             {/* Environment */}
             <Card className="mt-6 glass
               <CardHeader className="glass">
-            <CardTitle className="glass">Environment</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Environment
+              
               <CardContent className="glass">
             <div className="space-y-3">
                   <div className="flex items-center justify-between p-3  rounded-xl-lg">
@@ -209,8 +209,8 @@ export default function DeployPage() {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
 
           {/* Deployment Process */}
@@ -218,15 +218,15 @@ export default function DeployPage() {
             <Card className="glass">
           <CardHeader className="glass"
                 <div className="flex items-center justify-between">
-                  <CardTitle className="glass">Deployment Process</CardTitle>
+                  <CardTitle className="glass">Deployment Process
                   {isDeploying && (
                     <Badge className="bg-blue-100 text-blue-700">
                       <Activity className="h-3 w-3 mr-1 animate-pulse" />
                       Deploying
-                    </Badge>
+                    
                   )}
                 </div>
-              </CardHeader>
+              
               <CardContent className="glass"
                 {!isDeploying && completedSteps === 0 ? (
                   <div className="text-center py-12">
@@ -236,14 +236,14 @@ export default function DeployPage() {
                     <h3 className="text-xl font-semibold mb-2">Ready to Deploy</h3>
                     <p className="text-gray-600 mb-6">
                       Your application will be live in less than 60 seconds
-                    </p>
+                    
                     <Button 
                       size="lg" 
                       className="bg-green-600 hover:bg-green-700"
                       onClick={handleDeploy}>disabled={isDeploying}>
                       <Rocket className="h-5 w-5 mr-2" />
                       Deploy Now
-                    </Button>
+                    
                   </div>
                 ) : (
                   <>
@@ -266,11 +266,11 @@ export default function DeployPage() {
                           <div className="flex items-center gap-3">
                             {getStepIcon(step.status)}
                             <div>
-                              <p className="font-medium">{step.name}</p>
+                              <p className="font-medium">{step.name}
                               {step.duration && (
                                 <p className="text-sm text-gray-500">
                                   Completed in {step.duration}s
-                                </p>
+                                
                               )}
                             </div>
                           </div>
@@ -292,16 +292,16 @@ export default function DeployPage() {
                             </h3>
                             <p className="text-sm text-green-700 mb-4">
                               Your application is now live and ready to use.
-                            </p>
+                            
                             <div className="flex flex-col sm:flex-row gap-3">
                               <Button className="bg-green-600 hover:bg-green-700">
                                 <Globe className="h-4 w-4 mr-2" />
                                 View Live Site
-                              </Button>
+                              
                               <Button variant="outline">
                                 <Terminal className="h-4 w-4 mr-2" />
                                 View Logs
-                              </Button>
+                              
                             </div>
                           </div>
                         </div>
@@ -309,39 +309,39 @@ export default function DeployPage() {
                     )}
                   </>
                 )}
-              </CardContent>
-            </Card>
+              
+            
 
             {/* Recent Deployments */}
             <Card className="mt-6 glass
               <CardHeader className="glass">
-            <CardTitle className="glass">Recent Deployments</CardTitle>
-              </CardHeader>
+            <CardTitle className="glass">Recent Deployments
+              
               <CardContent className="glass">
             <div className="space-y-3">
                   <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <GitBranch className="h-5 w-5 text-gray-600" />
                       <div>
-                        <p className="font-medium">main</p>
-                        <p className="text-sm text-gray-500">2 minutes ago</p>
+                        <p className="font-medium">main
+                        <p className="text-sm text-gray-500">2 minutes ago
                       </div>
                     </div>
-                    <Badge className="bg-green-100 text-green-700">Live</Badge>
+                    <Badge className="bg-green-100 text-green-700">Live
                   </div>
                   <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <GitBranch className="h-5 w-5 text-gray-600" />
                       <div>
-                        <p className="font-medium">feature/new-ui</p>
-                        <p className="text-sm text-gray-500">1 hour ago</p>
+                        <p className="font-medium">feature/new-ui
+                        <p className="text-sm text-gray-500">1 hour ago
                       </div>
                     </div>
-                    <Badge variant="secondary">Preview</Badge>
+                    <Badge variant="secondary">Preview
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           </div>
         </div>
       </div>

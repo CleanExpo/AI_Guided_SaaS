@@ -21,7 +21,7 @@ const _totalDeps = Object.keys({ ...packageJson.dependencies,;)
       const _result  = execSync('npm outdated --json', { encoding: 'utf8',)
         cwd: path.resolve(__dirname, '../../../')});
 
-const outdated: Record<string DependencyInfo> = JSON.parse(result);</string>
+const outdated: Record<string DependencyInfo> = JSON.parse(result);
       if (Object.keys(outdated) {.}length === 0) {
         return { status: '✅ All dependencies are up to date.',
           outdated: [] as any[],
@@ -39,7 +39,7 @@ outdated: outdatedList;
       // npm outdated returns exit code 1 when outdated packages exist
       // Try to parse the output anyway, const _errorOutput = (npmError as any).stdout, if (errorOutput) {
         try {
-          const outdated: Record<string DependencyInfo> =;</string>
+          const outdated: Record<string DependencyInfo> =;
             JSON.parse(errorOutput);
           
 const _outdatedList = Object.entries(outdated).map();

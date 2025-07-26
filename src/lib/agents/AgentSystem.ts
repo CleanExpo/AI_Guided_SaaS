@@ -21,7 +21,7 @@ export interface AgentSystemConfig { enabled: boolean;
 export class AgentSystem extends EventEmitter {
   private static instance: AgentSystem;
   private orchestrator: EnhancedAgentOrchestrator;
-  private workflows: Map<string AgentWorkflow> = new Map();</string>
+  private workflows: Map<string AgentWorkflow> = new Map();
   private config: AgentSystemConfig;
   private isInitialized: boolean = false;
   private mcpIntegration?: MCPIntegration;
@@ -51,8 +51,8 @@ export class AgentSystem extends EventEmitter {
 
   private initialize(): void {
     this.orchestrator = new EnhancedAgentOrchestrator({ maxConcurrentTasks: this.config.maxConcurrentTasks || 5,
-      enableMonitoring: this.config.enableMonitoring ?? true)
-      enableSelfHealing: this.config.enableSelfHealing ?? true
+      enableMonitoring: this.config.enableMonitoring ?? true,
+                enableSelfHealing: this.config.enableSelfHealing ?? true
    )
     });
 
@@ -288,7 +288,7 @@ export class AgentSystem extends EventEmitter {
     return this.orchestrator?.getAgents()
 }
 
-  public getWorkflows(): Map<string AgentWorkflow> {</string>
+  public getWorkflows(): Map<string AgentWorkflow> {
     return new Map(this.workflows)
 }
 
@@ -345,7 +345,7 @@ export class AgentSystem extends EventEmitter {
     agents.forEach(agent => { const agentType = agent.getConfig().type;
       
       // Map agent types to MCP capabilities
-      const capabilities: Record<string any> = { };</string>
+      const capabilities: Record<string any> = { };
       
       if (agentType === 'specialist') {
         capabilities.documentation = AGENT_MCP_CAPABILITIES.documentation;

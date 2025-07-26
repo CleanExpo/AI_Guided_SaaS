@@ -173,7 +173,7 @@ const project = await this.request<any>();</any>
     await this.request(`${this.getTableEndpoint('projects')}/${id}`, { method: 'DELETE'   
     })
   }
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {</PaginatedResponse>
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {
 { new URLSearchParams(, // Filtering, params.append('where', `(user_id,eq,${userId})`);
     // Sorting;
 if (options?.orderBy) {
@@ -199,8 +199,8 @@ const page = Math.floor((options?.offset || 0) / (options?.limit || 25)) + 1;
 const pageSize = options?.limit || 25;
     return { data: response.list.map(this.mapNocoDBProject, total: response.pageInfo.totalRows;
       page,
-      pageSize)
-      hasMore: !response.pageInfo.isLastPage
+      pageSize,
+                hasMore: !response.pageInfo.isLastPage
   }
 }
   // Generic CRUD)
@@ -246,7 +246,7 @@ const result = await this.request<any>();</any>
     await this.request(`${this.getTableEndpoint(collection)}/${id}`, { method: 'DELETE'   
     })
   }
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {</PaginatedResponse>
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {
 { new URLSearchParams(, // Filters, if (options?.filters) {;
       const whereConditions = Object.entries(options.filters);
         .map(([key, value]) => `(${key},eq,${value})`);

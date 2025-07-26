@@ -25,56 +25,56 @@ export function PerformanceTab({ dashboardData }: PerformanceTabProps) {
         {/* Page Load Times */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Page Load Times</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Page Load Times
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {pageLoadMetrics.map((metric) => (
                 <div key={metric.label} className="flex items-center justify-between">
-                  <span className="text-sm">{metric.label}</span>
-                  <span className="text-sm font-medium">{metric.value}</span>
-                </div>
+                  <span className="text-sm">{metric.label}
+                  <span className="text-sm font-medium">{metric.value}
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
+            
+          
+        
 
         {/* API Performance */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">API Performance</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">API Performance
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {apiMetrics.map((metric) => (
                 <div key={metric.label} className="flex items-center justify-between">
-                  <span className="text-sm">{metric.label}</span>
+                  <span className="text-sm">{metric.label}
                   <span className={`text-sm font-medium ${metric.isSuccess ? 'text-green-600' : ''}`}>
                     {metric.value}
-                  </span>
-                </div>
+                  
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
+            
+          
+        
 
         {/* Error Tracking */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Recent Errors</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Recent Errors
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {dashboardData.top.errors.map((error: any, index: number) => (
                 <div key={index} className="flex items-center justify-between">
-                  <span className="text-sm text-red-600">{error.message}</span>
-                  <Badge variant="secondary">{error.count}</Badge>
-                </div>
+                  <span className="text-sm text-red-600">{error.message}
+                  <Badge variant="secondary">{error.count}
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+            
+          
+        
+      
+    
   );
 }

@@ -16,8 +16,8 @@ export class GoogleAnalyticsProvider {
     switch (event.type) {
       case 'pageview':
         this.gtag('event', 'page_view', {
-          page_path: event.url)
-          page_referrer: event.referrer)
+          page_path: event.url,
+                page_referrer: event.referrer)
         });
         break;
         
@@ -84,8 +84,8 @@ export class MixpanelProvider {
         this.mixpanel.track('Page View', {
           ...properties,
           url: event.url,
-          referrer: event.referrer)
-          duration: event.duration)
+          referrer: event.referrer,
+                duration: event.duration)
         });
         break;
         
@@ -104,8 +104,8 @@ export class MixpanelProvider {
         this.mixpanel.track('Feature Usage', {
           ...properties,
           feature: event.feature,
-          action: event.action)
-          value: event.value)
+          action: event.action,
+                value: event.value)
         });
         break;
         
@@ -113,8 +113,8 @@ export class MixpanelProvider {
         this.mixpanel.track('Conversion', {
           ...properties,
           goal: event.goal,
-          value: event.value)
-          currency: event.currency)
+          value: event.value,
+                currency: event.currency)
         });
         this.mixpanel.people.track_charge(event.value || 0);
         break;
@@ -165,8 +165,8 @@ export class AmplitudeProvider {
       case 'pageview':
         this.amplitude.track('Page View', {
           ...eventProperties,
-          url: event.url)
-          referrer: event.referrer)
+          url: event.url,
+                referrer: event.referrer)
         });
         break;
         
@@ -184,8 +184,8 @@ export class AmplitudeProvider {
         this.amplitude.track('Feature Usage', {
           ...eventProperties,
           feature: event.feature,
-          action: event.action)
-          value: event.value)
+          action: event.action,
+                value: event.value)
         });
         break;
         
@@ -193,8 +193,8 @@ export class AmplitudeProvider {
         this.amplitude.track('Conversion', {
           ...eventProperties,
           goal: event.goal,
-          revenue: event.value)
-          revenueType: event.goal)
+          revenue: event.value,
+                revenueType: event.goal)
         });
         break;
         
@@ -260,8 +260,8 @@ export class PostHogProvider {
         this.posthog.capture('feature_usage', {
           ...properties,
           feature: event.feature,
-          action: event.action)
-          value: event.value)
+          action: event.action,
+                value: event.value)
         });
         break;
         
@@ -269,8 +269,8 @@ export class PostHogProvider {
         this.posthog.capture('conversion', {
           ...properties,
           goal: event.goal,
-          value: event.value)
-          currency: event.currency)
+          value: event.value,
+                currency: event.currency)
         });
         break;
         
@@ -285,8 +285,8 @@ export class PostHogProvider {
 }
 
 // Factory function to create providers
-export function createAnalyticsProvider(name: string)
-  config: Record<string, unknown>)
+export function createAnalyticsProvider(name: string,
+                config: Record<string, unknown>)
 ) {
   switch (name) {
     case 'google':

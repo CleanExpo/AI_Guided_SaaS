@@ -25,9 +25,9 @@ interface ProcessedRequirements { requirements: Array<{
   const [projectName, setProjectName] = useState<any>(null)
   const [isProcessing, setIsProcessing]  = useState<any>(null)
 
-const [error, setError] = useState<string | null>(null);</string>
+const [error, setError] = useState<string | null>(null);
   
-const [result, setResult]  = useState<ProcessedRequirements | null>(null);</ProcessedRequirements>
+const [result, setResult]  = useState<ProcessedRequirements | null>(null);
 { [
   "I need an e-commerce platform with user authentication, product catalog, shopping cart, and Stripe payment integration",
     "Build a real-time dashboard with analytics, charts, dark mode, and export functionality",
@@ -49,8 +49,8 @@ const _handleSubmit = async (e: React.FormEvent) => {
 headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           input;
-          projectName)
-    metadata: { source: 'web_form',)
+          projectName,
+                metadata: { source: 'web_form',)
 timestamp: new Date().toISOString()})}
       const data = await response.json();
       if (!response.ok) {
@@ -61,7 +61,7 @@ timestamp: new Date().toISOString()})}
       setIsProcessing(false)}
   const _useExample  = (example: string) => {
     setInput(example, setProjectName('')};
-  const _getCategoryColor = (category: string) => {</ProcessedRequirements> const colors: Record<string string> = {</string>
+  const _getCategoryColor = (category: string) => { const colors: Record<string string> = {
     functional: 'bg-blue-100 text-blue-800',
       technical: 'bg-purple-100 text-purple-800',
       design: 'bg-pink-100 text-pink-800',
@@ -69,7 +69,7 @@ business: 'bg-green-100 text-green-800'
 };
     return colors[category] || 'bg-gray-100 text-gray-800'
 }
-  const _getPriorityColor = (priority: string) =>  { const colors: Record<string string> = {</string>
+  const _getPriorityColor = (priority: string) =>  { const colors: Record<string string> = {
     high: 'bg-red-100 text-red-800',
       medium: 'bg-yellow-100 text-yellow-800',
 low: 'bg-gray-100 text-gray-800'
@@ -79,54 +79,54 @@ low: 'bg-gray-100 text-gray-800'
   return (<div className="max-w-4xl mx-auto space-y-6"    />
           <Card     / className="glass"
         <CardHeader    / className="glass"
-          <CardTitle className="text-2xl glassDescribe Your Project</CardTitle>
+          <CardTitle className="text-2xl glassDescribe Your Project
           <p className="text-muted-foreground">
-            Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.</p>
+            Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.
         <CardContent    / className="glass"
           <form onSubmit={handleSubmit} className="space-y-4"     / role="form">
             <div className="space-y-2"    />)
-          <Label htmlFor="projectName">Project Name (optional)</Label>
+          <Label htmlFor="projectName">Project Name (optional)
               <Input id="projectName";
 ="My Awesome Project";>value={projectName} onChange={(e) => setProjectName(e.target.value)} />
 {{isProcessing/>/>
             <div className="space-y-2"    />
-          <Label htmlFor="requirements">Project Requirements</Label>
+          <Label htmlFor="requirements">Project Requirements
               <Textarea id="requirements";
-="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";>value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
+="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";>value={input} onChange={(e) => setInput(e.target.value)}
 {{isProcessing}
                 const rows={8};
-                className="resize-none" /></Textarea>
+                className="resize-none" />
             {error && (
-Alert variant="destructive"></Alert>
+Alert variant="destructive">
                 <AlertCircle className="h-4 w-4"    />
           <AlertDescription>{error}</AlertDescription>
       )}
             <Button
 type="submit"
 
-const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
-              {isProcessing ? (</Button>
-                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" /></React>
+const disabled={isProcessing || !input.trim()};>className="w-full";>>
+              {isProcessing ? (
+                <React.Fragment>Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Analyzing Requirements...</React.Fragment>
               ) : (
-                <React.Fragment>Send className="mr-2 h-4 w-4" /></React>
-                  Process Requirements</Send>
+                <React.Fragment>Send className="mr-2 h-4 w-4" />
+                  Process Requirements
               )}
-</Button>
+
           <div className="mt-6 space-y-2"    />
           <div className="flex items-center gap-2 text-sm text-muted-foreground"     />
               <Lightbulb className="h-4 w-4"    />
           <span>Need inspiration? Try these, examples:</span>
             <div className="space-y-2">
-              {examplePrompts.map((example, index) => (\n    </div>
-                <button const key={index};>const onClick={() = aria-label="Button"> useExample(example)};</button>
+              {examplePrompts.map((example, index) => (\n    
+                <button const key={index};>const onClick={() = aria-label="Button"> useExample(example)};
                   className="text-left text-sm p-3 rounded-xl-lg  hover: bg-accent transition-colors w-full"
 
     const disabled={isProcessing}
                 >
-                  {example}</button>
+                  {example}
               ))},
-    {result && (React.Fragment>Card></Card>
+    {result && (React.Fragment>Card>
             <CardHeader    / className="glass"
           <CardTitle className="flex items-center gap-2"     / className="glass
                 <CheckCircle className="h-5 w-5 text-green-600"     />
@@ -134,26 +134,26 @@ const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
             <CardContent className="space-y-4"    / className="glass
           <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4"     />
                 <div className="text-center"    />
-          <p className="text-2xl font-bold">{result.summary.totalRequirements}</p>
-                  <p className="text-sm text-muted-foreground">Requirements</p>
+          <p className="text-2xl font-bold">{result.summary.totalRequirements}
+                  <p className="text-sm text-muted-foreground">Requirements
                 <div className="text-center"    />
-          <p className="text-2xl font-bold capitalize">{result.summary.complexity}</p>
-                  <p className="text-sm text-muted-foreground">Complexity</p>
+          <p className="text-2xl font-bold capitalize">{result.summary.complexity}
+                  <p className="text-sm text-muted-foreground">Complexity
                 <div className="text-center"    />
-          <p className="text-2xl font-bold">{result.summary.estimatedDuration}</p>
-                  <p className="text-sm text-muted-foreground">Duration</p>
+          <p className="text-2xl font-bold">{result.summary.estimatedDuration}
+                  <p className="text-sm text-muted-foreground">Duration
                 <div className="text-center"    />
-          <p className="text-2xl font-bold">{result.summary.assignedAgents.length}</p>
-                  <p className="text-sm text-muted-foreground">AI Agents</p>
+          <p className="text-2xl font-bold">{result.summary.assignedAgents.length}
+                  <p className="text-sm text-muted-foreground">AI Agents
           <Card    / className="glass"
           <CardHeader     / className="glass"
-              <CardTitle className="glass">Extracted Requirements</CardTitle>
+              <CardTitle className="glass">Extracted Requirements
             <CardContent    / className="glass"
           <div className="space-y-3">
-                {result.requirements.map((req) => (\n    </div>
+                {result.requirements.map((req) => (\n    
                   <div key={req.id} className="glass p-4  rounded-xl-lg space-y-2"    />
           <div className="flex items-start justify-between"     />
-                      <p className="font-medium">{req.description}</p>
+                      <p className="font-medium">{req.description}
                       <Badge className={getPriorityColor(req.priority)} />
                         {req.priority}/>
                     <div className="flex items-center gap-2"    />
@@ -165,26 +165,26 @@ const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
                 ))}
           <Card    / className="glass"
           <CardHeader     / className="glass"
-              <CardTitle className="glass">Development Roadmap</CardTitle>
+              <CardTitle className="glass">Development Roadmap
             <CardContent    / className="glass"
           <div className="space-y-4">
-                {result.roadmap.phases.map((phase, index) => (\n    </div>
+                {result.roadmap.phases.map((phase, index) => (\n    
                   <div key={phase.name} className="glass flex items-start gap-4"    />
           <div className="flex-shrink-0 w-8 h-8 rounded-lg-full glass-button primary text-primary-foreground flex items-center justify-center text-sm font-medium">
-                      {index + 1}</div>
+                      {index + 1}
                     <div className="flex-1 space-y-1"    />
           <h4 className="font-medium">{phase.name}</h4>
                       <p className="text-sm text-muted-foreground">
-Duration: { phase.duration }</p>
+Duration: { phase.duration }
                       <div className="flex gap-1 mt-2">
-                        {phase.agents.map((agent) => (\n    </div>
+                        {phase.agents.map((agent) => (\n    
                           <Badge key={agent} variant="secondary", className="text-xs">
                             {agent.replace('agent_', '')}/>
                   ))}
                 ))}</React.Fragment>
       )}
     )}
-      </div>
+      
     
     </any>
     </any>

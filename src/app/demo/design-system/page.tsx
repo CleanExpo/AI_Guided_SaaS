@@ -23,7 +23,7 @@ export default function DesignSystemDemoPage() {
           </h1>
           <p className="text-gray-600">
             Explore the design system that powers AI Guided SaaS Platform.
-          </p>
+          
         </div>
         
         <div className="glass grid gap-8">
@@ -33,53 +33,53 @@ export default function DesignSystemDemoPage() {
             <CardTitle className="flex items-center glass
                 <Palette className="h-5 w-5 mr-2" />
                 Color Palette
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="glass grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                 <div className="space-y-2">
                   <div className="w-full h-16 glass-button primary rounded-lg"></div>
-                  <p className="text-sm font-medium">Primary</p>
-                  <p className="text-xs text-gray-500">#2563eb</p>
+                  <p className="text-sm font-medium">Primary
+                  <p className="text-xs text-gray-500">#2563eb
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 glass-navbar rounded-lg"></div>
-                  <p className="text-sm font-medium">Secondary</p>
-                  <p className="text-xs text-gray-500">#111827</p>
+                  <p className="text-sm font-medium">Secondary
+                  <p className="text-xs text-gray-500">#111827
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 bg-green-600 rounded-lg"></div>
-                  <p className="text-sm font-medium">Success</p>
-                  <p className="text-xs text-gray-500">#16a34a</p>
+                  <p className="text-sm font-medium">Success
+                  <p className="text-xs text-gray-500">#16a34a
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 bg-red-600 rounded-lg"></div>
-                  <p className="text-sm font-medium">Error</p>
-                  <p className="text-xs text-gray-500">#dc2626</p>
+                  <p className="text-sm font-medium">Error
+                  <p className="text-xs text-gray-500">#dc2626
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 bg-yellow-500 rounded-lg"></div>
-                  <p className="text-sm font-medium">Warning</p>
-                  <p className="text-xs text-gray-500">#eab308</p>
+                  <p className="text-sm font-medium">Warning
+                  <p className="text-xs text-gray-500">#eab308
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 glass-button primary rounded-lg"></div>
-                  <p className="text-sm font-medium">Info</p>
-                  <p className="text-xs text-gray-500">#3b82f6</p>
+                  <p className="text-sm font-medium">Info
+                  <p className="text-xs text-gray-500">#3b82f6
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 glass rounded-lg "></div>
-                  <p className="text-sm font-medium">Light</p>
-                  <p className="text-xs text-gray-500">#f3f4f6</p>
+                  <p className="text-sm font-medium">Light
+                  <p className="text-xs text-gray-500">#f3f4f6
                 </div>
                 <div className="space-y-2">
                   <div className="w-full h-16 glass-navbar rounded-lg"></div>
-                  <p className="text-sm font-medium">Dark</p>
-                  <p className="text-xs text-gray-500">#1f2937</p>
+                  <p className="text-sm font-medium">Dark
+                  <p className="text-xs text-gray-500">#1f2937
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           {/* Typography */}
           <Card className="glass">
@@ -87,37 +87,37 @@ export default function DesignSystemDemoPage() {
             <CardTitle className="flex items-center glass
                 <Type className="h-5 w-5 mr-2" />
                 Typography
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="space-y-6">
                 <div>
                   <h1 className="text-4xl font-bold text-gray-900">Heading 1</h1>
-                  <p className="text-sm text-gray-500">text-4xl font-bold</p>
+                  <p className="text-sm text-gray-500">text-4xl font-bold
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900">Heading 2</h2>
-                  <p className="text-sm text-gray-500">text-3xl font-bold</p>
+                  <p className="text-sm text-gray-500">text-3xl font-bold
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">Heading 3</h3>
-                  <p className="text-sm text-gray-500">text-2xl font-bold</p>
+                  <p className="text-sm text-gray-500">text-2xl font-bold
                 </div>
                 <div>
                   <p className="text-base text-gray-900">
                     This is body text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                  <p className="text-sm text-gray-500">text-base</p>
+                  
+                  <p className="text-sm text-gray-500">text-base
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">
                     This is small text for captions and metadata.
-                  </p>
-                  <p className="text-xs text-gray-500">text-sm</p>
+                  
+                  <p className="text-xs text-gray-500">text-sm
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           {/* Buttons */}
           <Card className="glass">
@@ -125,8 +125,8 @@ export default function DesignSystemDemoPage() {
             <CardTitle className="flex items-center glass
                 <Zap className="h-5 w-5 mr-2" />
                 Buttons
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="space-y-4">
                 <div className="glass flex flex-wrap gap-4">
@@ -146,8 +146,8 @@ export default function DesignSystemDemoPage() {
                   <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           {/* Form Elements */}
           <Card className="glass">
@@ -155,8 +155,8 @@ export default function DesignSystemDemoPage() {
             <CardTitle className="flex items-center glass
                 <Layout className="h-5 w-5 mr-2" />
                 Form Elements
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="space-y-4 max-w-md">
                 <Input ="Default input" />
@@ -164,14 +164,14 @@ export default function DesignSystemDemoPage() {
                 <Input type="email" ="Email input" />
                 <Input type="password" ="Password input" />
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           {/* Badges */}
           <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Badges</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">Badges
+            
             <CardContent className="glass">
             <div className="flex flex-wrap gap-2">
                 <Badge>Default</Badge>
@@ -179,8 +179,8 @@ export default function DesignSystemDemoPage() {
                 <Badge variant="outline">Outline</Badge>
                 <Badge variant="destructive">Destructive</Badge>
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
       </div>
     </div>

@@ -78,9 +78,9 @@ export function validateInput<T extends z.ZodSchema>(
     } catch (error) {
       if (error instanceof z.ZodError) {
         logger.warn('Validation error:', {
-          url: request.url)
-          errors: error.errors,)
-        });
+          url: request.url,
+                errors: error.errors
+            });
         return new ValidationError(error).toResponse();
       }
 

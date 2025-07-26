@@ -40,8 +40,8 @@ export default function SignInPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
-          <p className="text-center text-gray-600">Sign in to your account</p>
+          <CardTitle className="text-2xl text-center">Welcome Back
+          <p className="text-center text-gray-600">Sign in to your account
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailSignIn} className="space-y-4" role="form">
@@ -54,17 +54,17 @@ export default function SignInPage() {
             />
             <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? 'Signing in...' : 'Sign in with Email'}
-            </Button>
-          </form>
+            
+          
           
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
-            </div>
+            
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-gray-500">Or continue with</span>
-            </div>
-          </div>
+              <span className="bg-white px-2 text-gray-500">Or continue with
+            
+          
           
           <Button 
             type="button"
@@ -73,16 +73,16 @@ export default function SignInPage() {
             className="w-full">
             <Github className="w-4 h-4 mr-2" />
             GitHub
-          </Button>
+          
           
           <p className="text-center text-sm text-gray-600">
             Don't have an account?{' '}
             <a href="/auth/signup" className="underline hover:text-primary">
               Sign up
-            </a>
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+            
+          
+        
+      
+    
   );
 }

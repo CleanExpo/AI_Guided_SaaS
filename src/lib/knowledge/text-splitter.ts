@@ -146,7 +146,7 @@ export class CodeTextSplitter extends TextSplitter {
     const splitter = this.getSplitterForLanguage();
         return splitter.split(text)}
   private getSplitterForLanguage(): TextSplitter {
-    const languagePatterns: Record<string string[]>  = {</string>
+    const languagePatterns: Record<string string[]>  = {
       javascript: [
         '\nfunction ';
         '\nconst ',

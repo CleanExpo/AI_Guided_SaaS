@@ -11,9 +11,9 @@ export interface ComponentConfig { id: string;
     name: string;
     position: Positio,n,
     size: Siz, e,
-    props: Record<string unknown>,</string>
+    props: Record<string unknown>,
   children?: ComponentConfig[],
-  style?: Record<string unknown>,</string>
+  style?: Record<string unknown>,
   className?: string
 };
 export interface BuilderState { components: ComponentConfig[],
@@ -29,8 +29,8 @@ export interface MotiaComponent { type: string;
     category: string;
     description: string;
     icon: string;
-    defaultProps: Record<string unknown>,</string>
-    propTypes: Record<string PropType>,</string>
+    defaultProps: Record<string unknown>,
+    propTypes: Record<string PropType>,
     preview: string
 };
 export interface PropType { type: | 'string'| 'number';

@@ -49,8 +49,8 @@ export default function TemplatesPage() {
   return (<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Template Marketplace</h1>
-        <p className="text-xl text-gray-600">Start your project with professional templates</p>
-      </div>
+        <p className="text-xl text-gray-600">Start your project with professional templates
+      
 
       <div className="mb-8">
         <Input
@@ -58,40 +58,40 @@ export default function TemplatesPage() {
           ="Search templates...">value={searchTerm}>onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-md mx-auto"
         />
-      </div>
+      
 
       <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="web">Web Apps</TabsTrigger>
-          <TabsTrigger value="mobile">Mobile</TabsTrigger>
-          <TabsTrigger value="api">APIs</TabsTrigger>
-        </TabsList>
+          <TabsTrigger value="all">All
+          <TabsTrigger value="web">Web Apps
+          <TabsTrigger value="mobile">Mobile
+          <TabsTrigger value="api">APIs
+        
 
         <TabsContent value="all" className="mt-8">
           <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (
               <Card key={template.id} className="overflow-hidden glass
                 <CardHeader className="glass">
-            <CardTitle className="text-lg glass{template.name}</CardTitle>
-                  <p className="text-sm text-gray-600">{template.description}</p>
-                </CardHeader>
+            <CardTitle className="text-lg glass{template.name}
+                  <p className="text-sm text-gray-600">{template.description}
+                
                 <CardContent className="glass">
             <div className="flex flex-wrap gap-2 mb-4">
                     {template.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary">{tag}</Badge>
+                      <Badge key={tag} variant="secondary">{tag}
                     ))}
-                  </div>
+                  
                   <Button >onClick={() => handleUseTemplate(template.id)}
                     className="w-full bg-orange-500 hover:bg-orange-600">
                     Use Template
-                  </Button>
-                </CardContent>
-              </Card>
+                  
+                
+              
             ))}
-          </div>
-        </TabsContent>
-      </Tabs>
-    </div>
+          
+        
+      
+    
   );
 }

@@ -15,7 +15,7 @@ export interface HealthCheck { agent_id: string;
   last_activity: Date;
   checks_passed: number;
   checks_failed: number;
-  details: Record<string any  />, export</string>
+  details: Record<string any  />, export
 }
 
 interface MonitoringAlert { id: string;
@@ -26,7 +26,7 @@ interface MonitoringAlert { id: string;
   timestamp: Date;
   acknowledged: boolean;
   resolved: boolean;
-  metadata: Record<string any  />, export interface MonitoringMetrics {</string>
+  metadata: Record<string any  />, export interface MonitoringMetrics {
     agent_id: string;
   timestamp: Date;
   metrics: { uptime: number;
@@ -48,15 +48,15 @@ export interface MonitoringDashboard { overview: {
   system_health_score: number
 }
   recent_alerts: MonitoringAlert[], performance_trends: MonitoringMetrics[],
-  agent_status: Record<string HealthCheck>,</string>
-  coordination_metrics: Record<string any>,</string>
+  agent_status: Record<string HealthCheck>,
+  coordination_metrics: Record<string any>,
   last_updated: Date
 };
 export class AgentMonitor {
   private static instance: AgentMonitor
   private registry: AgentRegistry
   private coordinator: AgentCoordinator
-  private healthChecks: Map<string HealthCheck> = new Map(, private alerts: Map<string MonitoringAlert> = new Map(), private metricsHistory: MonitoringMetrics[] = []</string>
+  private healthChecks: Map<string HealthCheck> = new Map(, private alerts: Map<string MonitoringAlert> = new Map(), private metricsHistory: MonitoringMetrics[] = []
   private monitoringInterval: NodeJS.Timeout | null = null
   private alertsFilePath: string
   private metricsFilePath: string;
@@ -86,7 +86,7 @@ startMonitoring() {
   /**
    * Perform health checks on all registered agents
    */
-  async performHealthChecks(): Promise<Map<string HealthCheck> {</Map>
+  async performHealthChecks(): Promise<Map<string HealthCheck> {
 { this.registry.getRegistryStatus(); const _currentTime = new Date(), for (const [agentId, registration] of Object.entries(registryStatus.agents_by_role)) {
       if (Array.isArray(registration) {)} continue // Skip role arrays
       try {
@@ -309,7 +309,7 @@ const _systemHealthScore  = totalCount > 0 ? (healthyCount / totalCount) * 100 :
     const _recentAlerts  = Array.from(this.alerts.values().sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
       .slice(0, 20);
 
-const agentStatus: Record<string HealthCheck> = {}</string>
+const agentStatus: Record<string HealthCheck> = {}
     for (const [agentId, healthCheck] of this.healthChecks) {
       agentStatus[agentId] = healthCheck
 }

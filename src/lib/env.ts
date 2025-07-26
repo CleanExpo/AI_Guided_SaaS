@@ -13,7 +13,7 @@ const envSchema = z.object({)
   // App Configuration, APP_URL: z.string().default('http://localhost:3000', APP_NAME: z.string().default('AI Guided SaaS Builder', // Feature Flags, ANALYTICS_ENABLED: z.string().default('true', ENABLE_COLLABORATION: z.string().default('true', ENABLE_TEMPLATES: z.string().default('true', ENABLE_ANALYTICS: z.string().default('true', ENABLE_ADMIN_PANEL: z.string().default('true')   
     })
 // Parse and validate environment variables with graceful fallbacks;
-let env: z.infer<typeof envSchema></typeof>
+let env: z.infer<typeof envSchema>
 try {
   env = envSchema.parse(process.env)} catch (error) {
   // During build time, use safe defaults

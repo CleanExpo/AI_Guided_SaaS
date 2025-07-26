@@ -22,12 +22,12 @@ export default function EnhancedAdminPanel() {
           <span className="text-sm text-gray-600">
                 System Management Dashboard</span>
       <div className="max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-8">
-          <Tabs value={activeTab} onValueChange={setActiveTab}></Tabs>
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="performance">Performance Monitor</TabsTrigger>
-            <TabsTrigger value="safe-mode">Safe Mode Health Check</TabsTrigger>
-            <TabsTrigger value="system-check">System Health {/* Overview, Tab */}</TabsTrigger>
+          <TabsTrigger value="overview">Overview
+            <TabsTrigger value="performance">Performance Monitor
+            <TabsTrigger value="safe-mode">Safe Mode Health Check
+            <TabsTrigger value="system-check">System Health {/* Overview, Tab */}
           <TabsContent value="overview", className="space-y-6">
           <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Performance, Status */}</div>
@@ -47,7 +47,7 @@ export default function EnhancedAdminPanel() {
                     <span className="font-medium">3</span>
                 <Button
 className="w-full mt-4";)
-variant="outline";>const onClick={() => setActiveTab('performance')}</Button>
+variant="outline";>const onClick={() => setActiveTab('performance')}
                   View Details {/* Safe, Mode Status */}
               <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
@@ -64,7 +64,7 @@ variant="outline";>const onClick={() => setActiveTab('performance')}</Button>
           <span>Safety Checks</span>
                     <span className="font-medium">Active</span>
                 <Button className="w-full mt-4";
-variant="outline";>const onClick={() => setActiveTab('safe-mode')}</Button>
+variant="outline";>const onClick={() => setActiveTab('safe-mode')}
                   Start Safe Check {/* System, Health */}
               <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
@@ -80,21 +80,21 @@ variant="outline";>const onClick={() => setActiveTab('safe-mode')}</Button>
           <span>Issues Found</span>
                     <span className="font-medium">3 minor</span>
                 <Button className="w-full mt-4";
-variant="outline";>const onClick={() => setActiveTab('system-check')}</Button>
+variant="outline";>const onClick={() => setActiveTab('system-check')}
                   Run Health Check {/* Quick, Actions */}
             <Card className="glass p-6">
           <h3 className="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
               <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4">
           <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('performance')}</Button></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('performance')}
                   <span className="text-2xl mb-1">📊</span>
                   <span className="text-sm">Monitor Resources</span>
                 <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('safe-mode')}</Button></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('safe-mode')}
                   <span className="text-2xl mb-1">🛡️</span>
                   <span className="text-sm">Safe Processing</span>
                 <Button variant="outline";
-className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('system-check')}</Button></Button>
+className="h-20 flex flex-col items-center justify-center";>const onClick={() => setActiveTab('system-check')}
                   <span className="text-2xl mb-1">🔍</span><span className="text-sm">System Check</span>
                 <Button variant="outline";>className="h-20 flex flex-col items-center justify-center";>>
           <span className="text-2xl mb-1">📋</span>
@@ -109,20 +109,20 @@ className="h-20 flex flex-col items-center justify-center";>const onClick={() =>
                   <p className="text-sm text-orange-800 mt-1">
                     If you experience system freezing or performance issues,
                     refer to the emergency procedures documentation. Always use
-                    Safe Mode for processing large numbers of issues.</p>
+                    Safe Mode for processing large numbers of issues.
                   <div className="mt-2">
           <Button
 size="sm";
-variant="outline";>className="text-orange-700 -orange-300";>></Button>
+variant="outline";>className="text-orange-700 -orange-300";>>
                       📖 View Emergency Guide {/* Performance, Monitor Tab */}
           <TabsContent value="performance", className="space-y-6">
-          <SystemResourceMonitor></TabsContent>
+          <SystemResourceMonitor>
           {/* Safe, Mode Health Check Tab */}
           <TabsContent value="safe-mode", className="space-y-6">
-          <SafeModeHealthCheck></TabsContent>
+          <SafeModeHealthCheck>
           {/* System, Health Check Tab */}
           <TabsContent value="system-check", className="space-y-6">
-          <SelfCheckTrigger></TabsContent>
+          <SelfCheckTrigger>
       {/* Footer */}
       <div className="glass -t mt-12 max-w-7xl mx-auto px-4, sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between text-sm text-gray-600 flex items-center space-x-4"     />
@@ -130,16 +130,16 @@ variant="outline";>className="text-orange-700 -orange-300";>></Button>
               <span>•</span>
               <span>Last: Updated: {new, Date().toLocaleTimeString()}</span>
             <div className="flex items-center space-x-4">
-          <Button size="sm" variant="ghost"></Button>
-                📚 Documentation</Button>
-              <Button size="sm" variant="ghost"></Button>
-                🆘 Support</Button>
+          <Button size="sm" variant="ghost">
+                📚 Documentation
+              <Button size="sm" variant="ghost">
+                🆘 Support
   
 </div>
 
     </SelfCheckTrigger>
     </SafeModeHealthCheck>
     </SystemResourceMonitor>
-    </Button>
+    
     </div>
   }

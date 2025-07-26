@@ -165,7 +165,7 @@ export default function ResourcesPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Resource-Aware System</h1>
-          <p className="text-gray-600">Monitor and optimize system resource usage</p>
+          <p className="text-gray-600">Monitor and optimize system resource usage
         </div>
 
         {/* Adaptive Mode Toggle */}
@@ -177,11 +177,11 @@ export default function ResourcesPage() {
                   <h3 className="font-semibold">Adaptive Resource Management</h3>
                   <Badge variant={adaptiveMode ? 'default' : 'secondary'}>
                     {adaptiveMode ? 'Active' : 'Inactive'}
-                  </Badge>
+                  
                 </div>
                 <p className="text-sm text-gray-600">
                   Automatically adjust performance based on available resources
-                </p>
+                
               </div>
               <div className="glass flex items-center gap-4">
                 <Button
@@ -198,13 +198,13 @@ export default function ResourcesPage() {
                       Resume
                     </>
                   )}
-                </Button>
+                
                 <Switch
                   checked={adaptiveMode}>onCheckedChange={setAdaptiveMode} />
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Resource Overview */}
         <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -218,7 +218,7 @@ export default function ResourcesPage() {
                 </div>
                 <Badge className={`${cpuStatus.bg} ${cpuStatus.color}`}>
                   {cpuStatus.status}
-                </Badge>
+                
               </div>
               <div className="mb-2">
                 <div className="flex items-center justify-between text-sm mb-1">
@@ -227,9 +227,9 @@ export default function ResourcesPage() {
                 </div>
                 <Progress value={resources.cpu.usage} className="h-2" />
               </div>
-              <p className="text-xs text-gray-500">{resources.cpu.model}</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-gray-500">{resources.cpu.model}
+            
+          
 
           {/* Memory */}
           <Card className="glass">
@@ -241,7 +241,7 @@ export default function ResourcesPage() {
                 </div>
                 <Badge className={`${memoryStatus.bg} ${memoryStatus.color}`}>
                   {memoryStatus.status}
-                </Badge>
+                
               </div>
               <div className="mb-2">
                 <div className="flex items-center justify-between text-sm mb-1">
@@ -250,9 +250,9 @@ export default function ResourcesPage() {
                 </div>
                 <Progress value={resources.memory.percentage} className="h-2" />
               </div>
-              <p className="text-xs text-gray-500">{formatBytes(resources.memory.free)} free</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-gray-500">{formatBytes(resources.memory.free)} free
+            
+          
 
           {/* Disk */}
           <Card className="glass">
@@ -264,7 +264,7 @@ export default function ResourcesPage() {
                 </div>
                 <Badge className={`${diskStatus.bg} ${diskStatus.color}`}>
                   {diskStatus.status}
-                </Badge>
+                
               </div>
               <div className="mb-2">
                 <div className="flex items-center justify-between text-sm mb-1">
@@ -273,9 +273,9 @@ export default function ResourcesPage() {
                 </div>
                 <Progress value={resources.disk.percentage} className="h-2" />
               </div>
-              <p className="text-xs text-gray-500">{formatBytes(resources.disk.free)} free</p>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-gray-500">{formatBytes(resources.disk.free)} free
+            
+          
 
           {/* Network/Battery */}
           {resources.battery ? (
@@ -301,9 +301,9 @@ export default function ResourcesPage() {
                 </div>
                 <p className="text-xs text-gray-500">
                   {resources.battery.isCharging ? 'AC Power' : 'Estimated 2h 30m remaining'}
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
           ) : (
             <Card className="glass">
           <CardContent className="glass p-6">
@@ -324,8 +324,8 @@ export default function ResourcesPage() {
                     <span className="font-medium">{resources.network.latency}ms</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           )}
         </div>
 
@@ -336,8 +336,8 @@ export default function ResourcesPage() {
             <CardTitle className="flex items-center gap-2 glass
                 <Gauge className="h-5 w-5" />
                 Performance Profile
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="space-y-3">
                 {Object.entries(profiles).map(([key, profile]) => (
@@ -360,8 +360,8 @@ export default function ResourcesPage() {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            
+          
 
           {/* Real-time Monitor */}
           <Card className="lg:col-span-2 glass
@@ -369,8 +369,8 @@ export default function ResourcesPage() {
             <CardTitle className="flex items-center gap-2 glass
                 <Activity className="h-5 w-5" />
                 Real-time CPU Usage
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
             <div className="h-32 flex items-end gap-1">
                 {history.map((value, index) => (
@@ -384,8 +384,8 @@ export default function ResourcesPage() {
                 <span>-20s</span>
                 <span>Now</span>
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
 
         {/* Recommendations */}
@@ -396,11 +396,11 @@ export default function ResourcesPage() {
               <div className="font-medium mb-2">Performance Recommendations</div>
               <ul className="list-disc list-inside space-y-1 text-sm">
                 {recommendations.map((rec, index) => (
-                  <li key={index}>{rec}</li>
+                  <li key={index}>{rec}
                 ))}
-              </ul>
+              
             </AlertDescription>
-          </Alert>
+          
         )}
 
         {/* Resource Settings */}
@@ -409,12 +409,12 @@ export default function ResourcesPage() {
             <CardTitle className="flex items-center gap-2 glass
               <Settings className="h-5 w-5" />
               Resource Thresholds
-            </CardTitle>
-          </CardHeader>
+            
+          
           <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="text-sm font-medium">CPU Warning Level</label>
+                <label className="text-sm font-medium">CPU Warning Level
                 <input
                   type="range"
                   min="50"
@@ -428,7 +428,7 @@ export default function ResourcesPage() {
               </div>
               
               <div>
-                <label className="text-sm font-medium">Memory Warning Level</label>
+                <label className="text-sm font-medium">Memory Warning Level
                 <input
                   type="range"
                   min="50"
@@ -442,7 +442,7 @@ export default function ResourcesPage() {
               </div>
               
               <div>
-                <label className="text-sm font-medium">Disk Warning Level</label>
+                <label className="text-sm font-medium">Disk Warning Level
                 <input
                   type="range"
                   min="70"
@@ -455,8 +455,8 @@ export default function ResourcesPage() {
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

@@ -98,6 +98,6 @@ export default function SafeModeHealthCheck() {
       <ProcessingLog processingLog={processingLog} />
 
       <SafetyGuidelines />
-    </div>)
+    )
   );
 }

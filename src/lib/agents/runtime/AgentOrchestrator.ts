@@ -12,7 +12,7 @@ export interface OrchestratorConfig {
 
 export interface ProjectRequest { description: string;
   type?: 'analysis' | 'planning' | 'architecture' | 'full-stack' | 'refinement' | 'advisory',
-  context?: Record<string any>, constraints?: string[],</string>
+  context?: Record<string any>, constraints?: string[],
   priorities?: string[]
 };
 export interface ProjectResult { request: ProjectReques
@@ -22,7 +22,7 @@ n,
     results: TaskResult[],
   summary: ProjectSummar
 y,
-    artifacts: Map<string any>,</string>
+    artifacts: Map<string any>,
   recommendations: string[]
 };
 export interface ProjectSummary { overview: string;
@@ -48,8 +48,8 @@ export class AgentOrchestrator {
       ...config
 }
     this.runtime = new AgentRuntime({ enableLogging: this.config.enableLogging,
-    maxConcurrentAgents: this.config.maxConcurrentAgents)
-    timeoutMs: this.config.timeoutMs   )
+    maxConcurrentAgents: this.config.maxConcurrentAgents,
+                timeoutMs: this.config.timeoutMs   )
     })
 }
   /**
@@ -112,7 +112,7 @@ const plan: ExecutionPlan={;
    * Enhance request based on type
    */
   private async enhanceRequest(request: ProjectRequest): Promise<any> {
-    const typePrompts: Record<string string>  = {</string>
+    const typePrompts: Record<string string>  = {
     analysis: "Analyze requirements, create user stories, identify risks and constraints",
       planning: "Create project plan with timeline, milestones, and resource allocation",
       architecture: "Design system architecture, data models, and technical infrastructure",
@@ -188,8 +188,8 @@ Generate 5-7 specific, actionable recommendations, that:
 5. Are practical and implementable
 Return as a simple array of recommendation strings.`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.modelConfig?.model)
-    temperature: 0.4   )
+const response = await generateAIResponse(recommendPrompt, { model: this.config.modelConfig?.model,
+                temperature: 0.4   )
     })
     return response.message.split('\n').filter((line: string) => line.trim().length > 0)
 }
@@ -197,7 +197,7 @@ const response = await generateAIResponse(recommendPrompt, { model: this.config.
    * Extract outputs from task results
    */
   private extractOutputs(results: TaskResult[]): Record {
-    const outputs: Record<string any> = {}</string>
+    const outputs: Record<string any> = {}
     results.forEach((result) =>  { if (result.result.success && result.result.output) {;
         outputs[result.agentType] = result.result.output }
 });

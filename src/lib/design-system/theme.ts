@@ -188,7 +188,7 @@ export const _getRadius = (size: keyof typeof theme.borderRadius): string: (any)
 export const _getTransition = (speed: keyof typeof theme.transitions): string: (any) => { return `all ${theme.transitions[speed]}; ease-in-out`
 };
 // CSS Variables for runtime theming;
-export const _generateCSSVariables = (): void => {const vars: Record<string string> = { };</string>
+export const _generateCSSVariables = (): void => {const vars: Record<string string> = { };
   // Colors
   Object.entries(theme.colors).forEach(([colorName, shades]) =>  {
     Object.entries(shades).forEach(([shade, value]) => {

@@ -108,37 +108,37 @@ export default function DocPage({ params }: { params: { slug: string } }) {
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Documentation
-            </Button>
-          </Link>
+            
+          
           
           <div className="glass flex items-center gap-4 mb-4">
-            <Badge variant="secondary">{doc.category}</Badge>
+            <Badge variant="secondary">{doc.category}
             <div className="flex items-center text-sm text-gray-500">
               <Clock className="h-4 w-4 mr-1" />
               Updated {doc.lastUpdated}
-            </div>
-          </div>
+            
+          
           
           <h1 className="text-4xl font-bold text-gray-900 mb-2">{doc.title}</h1>
           <p className="text-xl text-gray-600">{doc.description}</p>
-        </div>
+        
         
         <Card className="glass">
           <CardContent className="glass prose prose-lg max-w-none p-8">
             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(doc.content ) }} />
-          </CardContent>
-        </Card>
+          
+        
         
         <div className="mt-8 pt-6 -t">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-sm text-gray-500">
               <User className="h-4 w-4 mr-1" />
               Last updated by AI Guided SaaS Team
-            </div>
-            <Button variant="outline">Edit this page</Button>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+            <Button variant="outline">Edit this page
+          
+        
+      
+    
   );
 }

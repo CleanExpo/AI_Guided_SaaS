@@ -9,7 +9,7 @@ export interface MCPMessage { id: string;
   to: string
   payload,
     timestamp: Date;
-  metadata?: Record<string any  />, export</string>
+  metadata?: Record<string any  />, export
 }
 
 interface MCPChannel { id: string;

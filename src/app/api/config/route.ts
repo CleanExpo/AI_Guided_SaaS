@@ -22,8 +22,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         if (feature) {
             const enabled = getFeatureStatus(feature)
             return NextResponse.json({
-                feature,)
-                enabled    })
+                feature,
+                enabled
+            });
 }
         
         // Return all configuration

@@ -19,7 +19,7 @@ export default function FoldersPage() {
         <Button data-testid="create-folder-button">
           <FolderPlus className="mr-2 h-4 w-4" />
           Create Folder
-        </Button>
+        
       </div>
 
       <div className="glass grid gap-4">
@@ -33,14 +33,14 @@ export default function FoldersPage() {
                 <Folder className="h-6 w-6 text-blue-500" />
                 <div>
                   <h3 className="font-semibold">{folder.name}</h3>
-                  <p className="text-sm text-gray-500">{folder.items} items</p>
+                  <p className="text-sm text-gray-500">{folder.items} items
                 </div>
               </div>
               <div className="text-gray-400">
                 <File className="h-4 w-4" />
               </div>
             </div>
-          </Card>
+          
         ))}
       </div>
     </div>

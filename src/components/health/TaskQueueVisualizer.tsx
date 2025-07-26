@@ -18,8 +18,8 @@ export function TaskQueueVisualizer() {
         <CardTitle className="flex items-center gap-2 glass">
           <Clock className="h-5 w-5" />
           Task Queue
-        </CardTitle>
-      </CardHeader>
+        
+      
       <CardContent className="glass">
         <div className="space-y-2">
           {tasks.map(task => (
@@ -28,13 +28,13 @@ export function TaskQueueVisualizer() {
                 {task.status === 'completed' && <CheckCircle className="h-4 w-4 text-green-500" />}
                 {task.status === 'running' && <Clock className="h-4 w-4 text-blue-500 animate-pulse" />}
                 {task.status === 'pending' && <Clock className="h-4 w-4 text-gray-400" />}
-                <span className="text-sm font-medium">{task.name}</span>
-              </div>
-              <span className="text-sm text-gray-500">{task.duration}</span>
-            </div>
+                <span className="text-sm font-medium">{task.name}
+              
+              <span className="text-sm text-gray-500">{task.duration}
+            
           ))}
-        </div>
-      </CardContent>
-    </Card>
+        
+      
+    
   );
 }

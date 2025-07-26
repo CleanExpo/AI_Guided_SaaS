@@ -71,8 +71,8 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
 
       // Create the project
       const project = await createProject({
-        ...projectData)
-        structure: projectStructure)
+        ...projectData,
+                structure: projectStructure)
       });
 
       toast({
@@ -97,34 +97,34 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
   return (<div className="space-y-6">
       <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Create New Kiro Project</CardTitle>
+            <CardTitle className="glass">Create New Kiro Project
           <CardDescription className="glass">
           Set up a new project with Kiro IDE integration
-          </CardDescription>
-        </CardHeader>
+          
+        
         <CardContent className="space-y-6 glass
           <BasicInfoForm
             projectData={projectData}>setProjectData={setProjectData} />
 
           <Tabs defaultValue="features" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="features">Features</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
-              <TabsTrigger value="environment">Environment</TabsTrigger>
-            </TabsList>
+              <TabsTrigger value="features">Features
+              <TabsTrigger value="settings">Settings
+              <TabsTrigger value="environment">Environment
+            
 
             <TabsContent value="features" className="space-y-4">
               <FeaturesTab features={features} setFeatures={setFeatures} />
-            </TabsContent>
+            
 
             <TabsContent value="settings" className="space-y-4">
               <SettingsTab projectData={projectData} setProjectData={setProjectData} />
-            </TabsContent>
+            
 
             <TabsContent value="environment" className="space-y-4">
               <EnvironmentTab />
-            </TabsContent>
-          </Tabs>
+            
+          
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -132,22 +132,22 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
                 <Badge variant="outline" className="text-green-500">
                   <CheckCircle className="h-3 w-3 mr-1" />
                   Connected
-                </Badge>)
+                )
               ) : (
                 <Badge variant="outline" className="text-yellow-500">
                   Disconnected
-                </Badge>
+                
               )}
-            </div>
+            
 
             <Button
               onClick={handleCreateProject}>disabled={loading || !projectData.name}>
               <Rocket className="h-4 w-4 mr-2" />
               Create Project
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            
+          
+        
+      
+    
   );
 }

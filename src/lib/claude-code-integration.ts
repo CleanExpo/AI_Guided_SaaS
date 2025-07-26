@@ -50,7 +50,7 @@ export interface ClaudeCommand { name: string;
   description: string;
   tokenImpact: number;
   memoryLevel: 'user' | 'project' | 'modular'
-  execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult />, export</ClaudeCommandResult>
+  execute(projectContext: ProjectConfig): Promise<ClaudeCommandResult />, export
 }
 
 interface ClaudeCommandResult { success: boolean;

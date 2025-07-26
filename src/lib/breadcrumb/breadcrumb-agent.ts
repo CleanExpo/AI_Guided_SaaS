@@ -215,7 +215,7 @@ const indexedFiles = new Set();
    * Generate improvement suggestions
    */
   private generateSuggestions(result: ValidationResult): string[] {
-    const suggestions: string[] = [], // Count issue types, const issueCounts = new Map<string number>();</string>
+    const suggestions: string[] = [], // Count issue types, const issueCounts = new Map<string number>();
     for (const issue of result.issues) {
       issueCounts.set(issue.type, (issueCounts.get(issue.type) || 0) + 1)
 }

@@ -29,9 +29,9 @@ export interface UseKiroIDEReturn {
   // AI assistance,
     getAISuggestions: (file: string, position?) => Promise<KiroAIAssistance>,</KiroAIAssistance>
   applyAISuggestion: (suggestionId: string) => Promise<any;>,</any>
-  getCompletions: (file: string, position) => Promise<KiroCompletion[]></KiroCompletion>
+  getCompletions: (file: string, position) => Promise<KiroCompletion[]>
 };
-runDiagnostics: (projectId: string) => Promise<KiroDiagnostic[];>,</KiroDiagnostic>
+runDiagnostics: (projectId: string) => Promise<KiroDiagnostic[];>,
   applyQuickFix: (file: string;
   line: number;
   fixIndex: number) => Promise<any;></any>
@@ -56,13 +56,13 @@ l,
 export function useKiroIDE(): UseKiroIDEReturn {
   const { toast } = useToast();
 
-const [client, setClient] = useState<KiroClient | null>(null);</KiroClient>
+const [client, setClient] = useState<KiroClient | null>(null);
   
 const [connected, setConnected]  = useState<any>(null)
 
 const [loading, setLoading] = useState<any>(null)
   
-const [error, setError]  = useState<string | null>(null);</string>
+const [error, setError]  = useState<string | null>(null);
 
 const [currentProject, setCurrentProject] = useState<KiroProject | null>(null);</KiroProject>
   

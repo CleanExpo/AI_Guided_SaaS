@@ -47,7 +47,7 @@ export const MCPDesignerIntegration: React.FC = () => {
       <div className="glass-card p-4 mb-4 shadow-xl">
         <div className="flex items-center gap-3 mb-4">
           <Sparkles className="h-5 w-5 text-purple-600" />
-          <span className="font-semibold">MCP UI Designer</span>
+          <span className="font-semibold">MCP UI Designer
         </div>
         
         {/* Theme Selector */}
@@ -62,9 +62,9 @@ export const MCPDesignerIntegration: React.FC = () => {
                   : 'hover:bg-gray-100'
               }`}
             >
-              <span className="mr-2">{theme.icon}</span>
+              <span className="mr-2">{theme.icon}
               {theme.name}
-            </button>
+            
           ))}
         </div>
 
@@ -76,13 +76,13 @@ export const MCPDesignerIntegration: React.FC = () => {
           className="w-full mb-2">
           <Settings className="h-4 w-4 mr-2" />
           Customize
-        </Button>
+        
 
         {/* Customization Panel */}
         {showCustomizer && (
           <div className="mt-4 space-y-3 p-3 bg-gray-50 rounded-lg">
             <div>
-              <label className="text-xs font-medium">Blur Intensity</label>
+              <label className="text-xs font-medium">Blur Intensity
               <input
                 type="range"
                 min="0"
@@ -91,11 +91,11 @@ export const MCPDesignerIntegration: React.FC = () => {
                 onChange={(e) => setCustomizations({ ...customizations, blur: Number(e.target.value) })}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500">{customizations.blur}px</span>
+              <span className="text-xs text-gray-500">{customizations.blur}px
             </div>
             
             <div>
-              <label className="text-xs font-medium">Glass Opacity</label>
+              <label className="text-xs font-medium">Glass Opacity
               <input
                 type="range"
                 min="0"
@@ -104,11 +104,11 @@ export const MCPDesignerIntegration: React.FC = () => {
                 onChange={(e) => setCustomizations({ ...customizations, opacity: Number(e.target.value) / 100 })}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500">{(customizations.opacity * 100).toFixed(0)}%</span>
+              <span className="text-xs text-gray-500">{(customizations.opacity * 100).toFixed(0)}%
             </div>
             
             <div>
-              <label className="text-xs font-medium">Border Radius</label>
+              <label className="text-xs font-medium">Border Radius
               <input
                 type="range"
                 min="0"
@@ -117,7 +117,7 @@ export const MCPDesignerIntegration: React.FC = () => {
                 onChange={(e) => setCustomizations({ ...customizations, borderRadius: Number(e.target.value) })}
                 className="w-full"
               />
-              <span className="text-xs text-gray-500">{customizations.borderRadius}px</span>
+              <span className="text-xs text-gray-500">{customizations.borderRadius}px
             </div>
             
             <Button
@@ -125,7 +125,7 @@ export const MCPDesignerIntegration: React.FC = () => {
               onClick={handleCustomization}
               className="w-full">
               Apply Changes
-            </Button>
+            
           </div>
         )}
 
@@ -137,14 +137,14 @@ export const MCPDesignerIntegration: React.FC = () => {
             onClick={() => window.location.reload()}
             className="flex-1">
             <RefreshCw className="h-4 w-4" />
-          </Button>
+          
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsActive(false)}
             className="flex-1">
             <Eye className="h-4 w-4" />
-          </Button>
+          
         </div>
       </div>
 
@@ -154,7 +154,7 @@ export const MCPDesignerIntegration: React.FC = () => {
           onClick={() => setShowCustomizer(true)}
           className="glass-button primary rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
           <Palette className="h-6 w-6" />
-        </button>
+        
       )}
     </div>
   );
@@ -181,16 +181,16 @@ export const MCPDesignerOutput: React.FC = () => {
       
       <div className="space-y-3">
         <div>
-          <span className="font-medium">Active Visual Theme:</span> Apple Glass
+          <span className="font-medium">Active Visual Theme: Apple Glass
         </div>
         <div>
-          <span className="font-medium">Consistency:</span> 98%
+          <span className="font-medium">Consistency: 98%
         </div>
         <div>
-          <span className="font-medium">Accessibility:</span> Compliant ✓
+          <span className="font-medium">Accessibility: Compliant ✓
         </div>
         <div>
-          <span className="font-medium">Animation & Depth:</span> Smooth glassmorphic transitions
+          <span className="font-medium">Animation & Depth: Smooth glassmorphic transitions
         </div>
       </div>
 
@@ -199,9 +199,9 @@ export const MCPDesignerOutput: React.FC = () => {
           <h4 className="font-medium mb-2">Recommendations Panel</h4>
           <ul className="space-y-1 text-sm">
             {report.recommendations.map((rec: string, i: number) => (
-              <li key={i} className="text-gray-600">• {rec}</li>
+              <li key={i} className="text-gray-600">• {rec}
             ))}
-          </ul>
+          
         </div>
       )}
 

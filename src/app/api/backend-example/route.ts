@@ -21,7 +21,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         }
         
         return NextResponse.json({ success: true,
-            message: 'Project created successfully')
+            message: 'Project created successfully',
             project 
         }, { status: 201 });
 } catch (error) {
@@ -55,8 +55,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         ]
         
         return NextResponse.json({ success: true,
-            projects)
-            total: projects.length   )
+            projects,
+                total: projects.length   )
     })
 } catch (error) {
         logger.error('Get projects error:', error);

@@ -46,7 +46,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Failed to fetch analytics' 
             }, { 
-                status: 500 });;
+                status: 500 });
         }
     });
 }
@@ -66,8 +66,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             
             return NextResponse.json({
                 success: true,
-                event)
-                tracked: true,)
+                event,
+                tracked: true,
                 timestamp: timestamp || new Date().toISOString()
             });
         } catch (error) {
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ 
                 error: 'Failed to track event' 
             }, { 
-                status: 500 });;
+                status: 500 });
         }
     });
 }

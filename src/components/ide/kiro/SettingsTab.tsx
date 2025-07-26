@@ -23,28 +23,28 @@ export function SettingsTab({ projectData, setProjectData }: SettingsTabProps) {
   return (
     <div className="glass grid gap-4">
       <div className="space-y-2">
-        <Label htmlFor="buildCommand">Build Command</Label>
+        <Label htmlFor="buildCommand">Build Command
         <Input
           id="buildCommand">value={projectData.settings.buildCommand}>onChange={(e) => updateSettings('buildCommand', e.target.value)}
           placeholder="npm run build"
         />
-      </div>
+      
 
       <div className="space-y-2">
-        <Label htmlFor="startCommand">Start Command</Label>
+        <Label htmlFor="startCommand">Start Command
         <Input
           id="startCommand">value={projectData.settings.startCommand}>onChange={(e) => updateSettings('startCommand', e.target.value)}
           placeholder="npm run dev"
         />
-      </div>
+      
 
       <div className="space-y-2">
-        <Label htmlFor="testCommand">Test Command</Label>
+        <Label htmlFor="testCommand">Test Command
         <Input
           id="testCommand">value={projectData.settings.testCommand}>onChange={(e) => updateSettings('testCommand', e.target.value)}
           placeholder="npm test"
         />
-      </div>
-    </div>
+      
+    
   );
 }

@@ -50,13 +50,13 @@ export default function AdminDirectPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {error && <p className="text-red-600 text-sm">{error}</p>}
+            {error && <p className="text-red-600 text-sm">{error}}
             <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? 'Authenticating...' : 'Access Admin'}
-            </Button>
-          </form>
+            
+          
         </CardContent>
-      </Card>
-    </div>
+      
+    
   );
 }

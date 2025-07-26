@@ -49,8 +49,8 @@ const mockProjects = [
     return (<div className="flex items-center justify-center min-h-screen">
 
 
-        <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600"></div>
-      </div>)
+        <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600">
+      )
     );
   }
   
@@ -59,33 +59,33 @@ const mockProjects = [
       <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
 
 
-          <div className="absolute inset-0 bg-grid-gray-100 bg-grid opacity-50"></div>
+          <div className="absolute inset-0 bg-grid-gray-100 bg-grid opacity-50">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
 
 
           <div className="text-center max-w-3xl mx-auto">
             <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-200">
               Real-time Collaboration
-            </Badge>
+            
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Build Together, Ship Faster
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Collaborate with your team in real-time. Share code, ideas, and build amazing projects together.
-            </p>
+            
             {session ? ()
               <Button size="lg" onClick={() => setShowWorkspace(true)} className="gap-2">
                 <Plus className="h-5 w-5" />
                 Create New Project
-              </Button>
+              
             ) : (
               <Button size="lg" onClick={() => window.location.href = "/auth/signin"}
                 Get Started Free
-              </Button>
+              
             )}
-          </div>
-        </div>
-      </section>
+          
+        
+      
 
       {/* Features Section */}
       <section className="py-16 md:py-24">
@@ -100,8 +100,8 @@ const mockProjects = [
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Everything you need to collaborate effectively with your team
-            </p>
-          </div>
+            
+          
           
           <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
@@ -111,16 +111,16 @@ const mockProjects = [
 
 
                 <Share2 className="h-12 w-12 text-blue-600 mb-4" />
-                <CardTitle className="glass">Real-time Sync</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">Real-time Sync
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   See changes instantly as your team works. No more merge conflicts or outdated versions.
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
             
             <Card className="hover:shadow-md-lg transition-shadow-md glass">
 
@@ -129,16 +129,16 @@ const mockProjects = [
                 <Users className="h-12 w-12 text-green-600 mb-4" />
 
 
-                <CardTitle className="glass">Team Management</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">Team Management
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   Invite team members, manage permissions, and track contributions all in one place.
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
             
             <Card className="hover:shadow-md-lg transition-shadow-md glass">
 
@@ -147,16 +147,16 @@ const mockProjects = [
                 <MessageCircle className="h-12 w-12 text-purple-600 mb-4" />
 
 
-                <CardTitle className="glass">Built-in Chat</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">Built-in Chat
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   Discuss ideas and solve problems together with integrated team chat and comments.
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
             
             <Card className="hover:shadow-md-lg transition-shadow-md glass">
 
@@ -165,16 +165,16 @@ const mockProjects = [
                 <Clock className="h-12 w-12 text-orange-600 mb-4" />
 
 
-                <CardTitle className="glass">Version History</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">Version History
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   Track every change and revert to any previous version with complete history.
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
             
             <Card className="hover:shadow-md-lg transition-shadow-md glass">
 
@@ -183,16 +183,16 @@ const mockProjects = [
                 <Lock className="h-12 w-12 text-red-600 mb-4" />
 
 
-                <CardTitle className="glass">Secure & Private</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">Secure & Private
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   Enterprise-grade security with end-to-end encryption and access controls.
-                </p>
-              </CardContent>
-            </Card>
+                
+              
+            
             
             <Card className="hover:shadow-md-lg transition-shadow-md glass">
 
@@ -201,19 +201,19 @@ const mockProjects = [
                 <Zap className="h-12 w-12 text-yellow-600 mb-4" />
 
 
-                <CardTitle className="glass">AI-Powered</CardTitle>
-              </CardHeader>
+                <CardTitle className="glass">AI-Powered
+              
               <CardContent className="glass">
 
 
                 <p className="text-gray-600">
                   Get intelligent suggestions, auto-completion, and code reviews powered by AI.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+                
+              
+            
+          
+        
+      
 
       {/* Projects Section (for logged-in users) */}
       {session && (
@@ -228,8 +228,8 @@ const mockProjects = [
               <Button onClick={() => setShowWorkspace(true)} className="gap-2">
                 <Plus className="h-4 w-4" />
                 New Project
-              </Button>
-            </div>
+              
+            
             
             <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {mockProjects.map((project) => (
@@ -238,18 +238,18 @@ const mockProjects = [
 
 
                     <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg glass">{project.name}</CardTitle>
+                      <CardTitle className="text-lg glass">{project.name}
                       {project.isPublic ? (
                         <Globe className="h-4 w-4 text-gray-400" />
                       ) : (
                         <Lock className="h-4 w-4 text-gray-400" />
                       )}
-                    </div>
-                  </CardHeader>
+                    
+                  
                   <CardContent className="glass">
 
 
-                    <p className="text-gray-600 text-sm mb-4">{project.description}</p>
+                    <p className="text-gray-600 text-sm mb-4">{project.description}
                     <div className="flex items-center justify-between">
 
 
@@ -258,21 +258,21 @@ const mockProjects = [
 
 
                         <span>{project.members} members</span>
-                      </div>
+                      
                       <Badge variant={
                         project.status === "active" ? "default" :>project.status === "review" ? "secondary" : "outline">}>
                         {project.status}
-                      </Badge>
-                    </div>
+                      
+                    
                     <p className="text-xs text-gray-400 mt-2">
                       Last activity: {project.lastActivity}
-                    </p>
-                  </CardContent>
-                </Card>
+                    
+                  
+                
               ))}
-            </div>
-          </div>
-        </section>
+            
+          
+        
       )}
 
       {/* CTA Section */}
@@ -286,13 +286,13 @@ const mockProjects = [
             </h2>
             <p className="text-xl text-blue-100 mb-8">
               Join thousands of teams building amazing products together
-            </p>
+            
             <Button size="lg" variant="secondary" onClick={() => window.location.href = "/auth/signin"}
               Start Free Trial
-            </Button>
-          </div>
-        </section>
+            
+          
+        
       )}
-    </div>
+    
   );
 }

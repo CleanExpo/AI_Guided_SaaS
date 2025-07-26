@@ -26,7 +26,7 @@ export function IssuesList({ issues, checkpoint }: IssuesListProps) {
                 : 'bg-gray-50'>}`}>
             <span className="text-lg">
               {getCategoryIcon(issue.category)}
-            </span>
+            
             <div className="flex-1">
               <div className="font-medium">{issue.title}</div>
               <div className="text-sm text-gray-600">
@@ -43,11 +43,11 @@ export function IssuesList({ issues, checkpoint }: IssuesListProps) {
               {issue.type.toUpperCase()}
             </div>
             {checkpoint?.completedIssues.includes(issue.id) && (
-              <span className="text-green-600">✅</span>
+              <span className="text-green-600">✅
             )}
           </div>
         ))}
       </div>
-    </Card>
+    
   );
 }

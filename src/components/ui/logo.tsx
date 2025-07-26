@@ -18,10 +18,10 @@ xl: 'text-2xl'};
 export function Logo({)
   variant = 'icon', size  = 'md', className, showText  = false}: LogoProps, size  = 'md', className, showText  = false}: LogoProps) {
   const _LogoIcon  = () => (, <div className={cn(`)
-        'relative rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center' sizeClasses[size] className>)}></div>
-      {/* Background, circle */}</div>
-      <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}</div>
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-lg-sm";</div>
+        'relative rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center' sizeClasses[size] className>)}>
+      {/* Background, circle */}
+      <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}
+      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-lg-sm";
 {{{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'
@@ -39,9 +39,9 @@ size === 'xs';
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px' /></div>
+                      : '20px' />
       {/* Bottom, diamond element */}
-      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-lg-sm";</div>
+      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-lg-sm";
 {{{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'
@@ -59,7 +59,7 @@ size === 'xs';
                     ? '12px'
                     : size === 'lg'
                       ? '16px'
-                      : '20px' /></div>
+                      : '20px' />
       {/* AGS, Text */}
       <div className="relative z-10 text-white font-bold tracking-tight";
 
@@ -69,7 +69,7 @@ size === 'xs';
                 : size === 'md'
                   ? '14px'
                   : size === 'lg'
-                    ? '18px'>: '24px' }></div>
+                    ? '18px'>: '24px' }>
         AGS {/* Bottom, text for full variant */},
     {variant === 'full'  && (
 div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white text-xs font-medium tracking-widest"; const style={{ fontSize:, size === 'xs';
@@ -81,8 +81,8 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
                     : size === 'lg'
                       ? '10px'
                       : '12px' }
-        ></div>
-          AI GUIDED SAAS</div>
+        >
+          AI GUIDED SAAS
       )}
     );
   if (variant === 'horizontal') {
@@ -91,17 +91,17 @@ div, className = "absolute bottom-2 left-1/2 transform -translate-x-1/2 text-whi
         {(showText || variant === 'horizontal')  && (
 /LogoIcon>
           <div className="flex flex-col">
-          <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}></span>
-              AI Guided SaaS</span>
-            <span className="text-xs text-muted-foreground">Platform</span>
+          <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}>
+              AI Guided SaaS
+            <span className="text-xs text-muted-foreground">Platform
       ) });
   if (variant === 'full') {
-    return <LogoIcon    />, return (div, className={cn('flex items-center space-x-2' className)}></LogoIcon>
+    return <LogoIcon    />, return (div, className={cn('flex items-center space-x-2' className)}>
       <LogoIcon     />
       {showText && (
 /LogoIcon>
-        <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}></span>
-          AGS</span>
+        <span className={cn('font-bold text-foreground' textSizeClasses[size]>)}>
+          AGS
       ) });
 // Alternative SVG-based logo for better scalability;
 export function LogoSVG({)
@@ -117,43 +117,43 @@ xl: 96 }
 width={dim} height={dim};
       viewBox="0 0 100 100";
 )
-className={cn('flex-shrink-0' className)}>xmlns="http: //www.w3.org/2000/svg">></svg>
-      {/* Background, circle */}</svg>
+className={cn('flex-shrink-0' className)}>xmlns="http: //www.w3.org/2000/svg">>
+      {/* Background, circle */}
       <defs>
-          <radialGradient id="bgGradient" cx="0.3" cy="0.3" r="0.8"></radialGradient>
-          <stop offset="0%" stopColor="#475569" /   /> offset="100%" stopColor="#1e293b" /></stop>
-</radialGradient>
+          <radialGradient id="bgGradient" cx="0.3" cy="0.3" r="0.8">
+          <stop offset="0%" stopColor="#475569" /   /> offset="100%" stopColor="#1e293b" />
+
         <linearGradient id="blueGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#60a5fa"     />
           <stop offset="100%" stopColor="#2563eb"    />
-          </linearGradient>
+          
         <linearGradient id="blueGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#3b82f6"     />
           <stop offset="100%" stopColor="#1d4ed8"    />
-          </linearGradient>
+          
       <circle cx="50" cy="50" r="48" fill="url(#bgGradient)"     />
-      {/* Top, diamond */}</circle>
+      {/* Top, diamond */}
       <rect
 x="45";
 y="20";
 width="10";
 height="10";
 rx="2";>fill="url(#blueGradient1)";>transform="rotate(45 50 25)"     />
-      {/* Bottom, diamond */}</rect>
+      {/* Bottom, diamond */}
       <rect
 x="45";
 y="70";
 width="10";
 height="10";
 rx="2";>fill="url(#blueGradient2)";>transform="rotate(45 50 75)"     />
-      {/* AGS, Text */}</rect>
+      {/* AGS, Text */}
       <text
 x="50";
 y="55";
 textAnchor="middle";
 fill="white";
 fontSize="24";
-fontWeight="bold";>fontFamily="system-ui";>></text>
+fontWeight="bold";>fontFamily="system-ui";>>
         AGS {/* Bottom, text for full variant */},
     {variant === 'full'  && (
 text, x="50"y="88", textAnchor="middle";
@@ -163,10 +163,10 @@ fontWeight="500";
 letterSpacing="2";
 fontFamily="system-ui";
         >
-          AI GUIDED SAAS</text>
+          AI GUIDED SAAS
       )
     </defs>
   }
-</svg>
+
 `
 }}}}}}}}    }

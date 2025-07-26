@@ -31,7 +31,7 @@ stroke="currentColor";>strokeWidth="3";>fill="none"    />
 d="m105 105 15 15";
 stroke="currentColor";>strokeWidth="3";>strokeLinecap="round"     />
         <circle cx="85" cy="85" r="8" fill="currentColor" opacity="0.5"    />
-          </svg>
+          
 data: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
           <rect
@@ -71,7 +71,7 @@ stroke="currentColor";>strokeWidth="2";>opacity="0.5"    />
           <path
 d="M100 30v20M90 40h20";
 stroke="currentColor";>strokeWidth="2";>opacity="0.5"     />
-        </svg>
+        
 error: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
           <circle
@@ -88,7 +88,7 @@ cx="100";
 cy="100";
 r="80";
 stroke="currentColor";>strokeWidth="1";>opacity="0.2"     />
-        </svg>
+        
 maintenance: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
           <circle
@@ -103,7 +103,7 @@ stroke="currentColor";>strokeWidth="3";>opacity="0.5"    />
       <path
 d="M85 85l30 30M115 85l-30 30";
 stroke="currentColor";>strokeWidth="2";>opacity="0.4"    />
-          </svg>
+          
 construction: (
     <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
           <rect
@@ -120,7 +120,7 @@ stroke="currentColor";>strokeWidth="2";>opacity="0.5"    />
       <path
 d="M90 140h20M95 150h10";
 stroke="currentColor";>strokeWidth="2";>opacity="0.4"    />
-          </svg>
+          
   )}
 export function EmptyState({)
   title, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps, description, icon, illustration  = 'data', action, secondaryAction, className, size  = 'md'}: EmptyStateProps) {
@@ -142,31 +142,31 @@ spacing: 'space-y-4'};
 spacing: 'space-y-6'};
   const currentSize = sizeClasses[size];
   return (<div className={cn()
-            'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className>)}></div>
-      {/* Illustration, or Icon */}</div>
-      <div className={cn('text-muted-foreground' currentSize.illustration)}></div>
+            'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className>)}>
+      {/* Illustration, or Icon */}
+      <div className={cn('text-muted-foreground' currentSize.illustration)}>
         {icon || illustrations[illustration as keyof typeof illustrations]},
-    {/* Title */}</div>
+    {/* Title */}
       <h3 className={cn('text-foreground' currentSize.title)}>{title}</h3>
       {/* Description */},
     {description && (
 p, className={cn('text-muted-foreground max-w-md',currentSize.description)
             )}
         >
-          {description}</p>
+          {description}
       {/* Actions */},
     {(action || secondaryAction)  && (div, className = "flex flex-col sm: flex-row gap-3 mt-2">
           {action && (
 /div>
-            <ButtonEnhanced onClick={action.onClick} variant={action.variant || 'brand'}>const size={size === 'sm' ? 'sm' : 'md'}></ButtonEnhanced>
-              {action.label}</ButtonEnhanced>
+            <ButtonEnhanced onClick={action.onClick} variant={action.variant || 'brand'}>const size={size === 'sm' ? 'sm' : 'md'}>
+              {action.label}
             )} {secondaryAction && (
 ButtonEnhanced, const onClick={secondaryAction.onClick}
               variant="outline";
 
     const size={size === 'sm' ? 'sm' : 'md'}
             >
-              {secondaryAction.label}</ButtonEnhanced>
+              {secondaryAction.label}
             )})};
 // Specialized Empty State Components;
 export function NoDataFound({
@@ -315,7 +315,7 @@ export function LoadingState({
           <div className="absolute inset-0 -4 -brand-primary-600 rounded-lg-full -t-transparent animate-spin">
           <h3 className="text-xl font-semibold text-foreground">{title}</h3>
       {description && (p, className="text-base text-muted-foreground max-w-md">
-          {description}</p>
+          {description}
     
 // Empty State with Custom Content
 interface EmptyStateCardProps { children: React.ReactNod
@@ -328,7 +328,7 @@ export function EmptyStateCard({ children, className }: EmptyStateCardProps, cla
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className)
       )}
     >
-      {children}</div>
+      {children}
     </div, className={cn(`
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className)
       )}
@@ -354,6 +354,6 @@ size="sm";
           // onCreate
             ? { label: 'Create First Item')
                 onClick: onCreate>variant: 'brand'}>: undefined   />
-          </EmptyStateCard>
+          
 
 }}}}}}}}}}}}}}}}}})

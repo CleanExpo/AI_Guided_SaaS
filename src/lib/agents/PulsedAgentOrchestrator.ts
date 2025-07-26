@@ -48,8 +48,8 @@ constructor(config: Partial<OrchestratorConfig> = {},</OrchestratorConfig>)
     this.cpuRateLimiter = new CPURateLimiter({ maxCpuUsage: this.pulseConfig.maxCpuUsage,
     maxMemoryUsage: this.pulseConfig.maxMemoryUsage,
     checkInterval: 1000;
-    cooldownPeriod: this.pulseConfig.cooldownPeriod)
-    adaptiveScaling: this.pulseConfig.enableAdaptiveThrottling   )
+    cooldownPeriod: this.pulseConfig.cooldownPeriod,
+                adaptiveScaling: this.pulseConfig.enableAdaptiveThrottling   )
     })
     // Listen to rate limiter events
     this.cpuRateLimiter.on('throttle', (data) => {
@@ -183,7 +183,7 @@ const _cpuSummary = this.cpuRateLimiter.getMetricsSummary();
             const _priority = ['low', 'medium', 'high', 'critical'][item.priority - 1];
             acc[priority] = (acc[priority] || 0) + 1
             return acc
-}, {} as Record<string any>)</string>
+}, {} as Record<string any>)
         },
         resources: latestMetrics || { cpuUsage: 0;
     memoryUsage: 0;

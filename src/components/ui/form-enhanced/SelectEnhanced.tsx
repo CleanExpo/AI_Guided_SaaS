@@ -29,8 +29,8 @@ export function SelectEnhanced({
         <label
           htmlFor={selectId}>className="block text-sm font-medium text-foreground mb-1">>
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>)
+          {required && <span className="text-red-500 ml-1">*}
+        )
       )}
       
       <div className="relative">
@@ -46,28 +46,28 @@ export function SelectEnhanced({
           {placeholder && (
             <option value="" disabled>
               {placeholder}
-            </option>
+            
           )}
           {options.map((option) => (
             <option
               key={option.value}
               value={option.value}>disabled={option.disabled}>
               {option.label}
-            </option>
+            
           ))}
-        </select>
+        
         
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
           <ChevronDownIcon className="w-4 h-4 text-muted-foreground" />
-        </div>
-      </div>
+        
+      
       
       {displayText && (
         <p className={cn()
           'mt-1 text-xs',>hasError ? 'text-red-500' : 'text-muted-foreground'>)}>
           {displayText}
-        </p>
+        
       )}
-    </div>
+    
   );
 }

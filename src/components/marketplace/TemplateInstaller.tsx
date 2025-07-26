@@ -133,8 +133,8 @@ export default function TemplateInstaller({
     } catch (error) {
       setError('Installation failed. Please try again.');
       setInstallSteps(prev => prev.map(step => ({
-        ...step)
-        status: step.status === 'running' ? 'error' : step.status)
+        ...step,
+                status: step.status === 'running' ? 'error' : step.status)
       })));
     }
   };
@@ -157,8 +157,8 @@ export default function TemplateInstaller({
 
   return (<Card className="max-w-2xl mx-auto glass
       <CardHeader className="glass">
-            <CardTitle className="glass">Install {templateName}</CardTitle>
-      </CardHeader>
+            <CardTitle className="glass">Install {templateName}
+      
       <CardContent className="glass"
         {currentStep === 'config' && (
           <div className="space-y-6">
@@ -166,7 +166,7 @@ export default function TemplateInstaller({
               <h3 className="text-lg font-medium mb-4">Configure Template</h3>
               <p className="text-sm text-gray-600 mb-6">
                 Customize the template settings before installation
-              </p>
+              
             </div>
 
             <div className="space-y-4">)
@@ -175,7 +175,7 @@ export default function TemplateInstaller({
                   <Label htmlFor={variable.name}>
                     {variable.label}
                     {variable.required && <span className="text-red-500 ml-1">*</span>}
-                  </Label>
+                  
                   
                   {variable.type === 'string' && (
                     <Input
@@ -198,9 +198,9 @@ export default function TemplateInstaller({
                       {variable.options?.map(option => (
                         <option key={option} value={option}>)
                           {option.charAt(0).toUpperCase() + option.slice(1)}
-                        </option>
+                        
                       ))}
-                    </select>
+                    
                   )}
                   
                   {variable.type === 'boolean' && (
@@ -216,7 +216,7 @@ export default function TemplateInstaller({
                           className="rounded-lg"
                         />
                         <span className="text-sm">Enable</span>
-                      </label>
+                      
                     </div>
                   )}
                 </div>
@@ -233,11 +233,11 @@ export default function TemplateInstaller({
             <div className="flex justify-end gap-3">
               <Button variant="outline" onClick={onCancel}>
                 Cancel
-              </Button>
+              
               <Button onClick={handleConfigSubmit}>
                 <Settings className="h-4 w-4 mr-2" />
                 Install Template
-              </Button>
+              
             </div>
           </div>
         )}
@@ -248,7 +248,7 @@ export default function TemplateInstaller({
               <h3 className="text-lg font-medium mb-2">Installing Template</h3>
               <p className="text-sm text-gray-600">
                 Please wait while we set up your template...
-              </p>
+              
             </div>
 
             <div>
@@ -270,9 +270,9 @@ export default function TemplateInstaller({
                     'border-gray-200'>}`}>
                   {getStepIcon(step.status)}
                   <div className="flex-1">
-                    <p className="font-medium">{step.name}</p>
+                    <p className="font-medium">{step.name}
                     {step.message && (
-                      <p className="text-sm text-gray-600">{step.message}</p>
+                      <p className="text-sm text-gray-600">{step.message}
                     )}
                   </div>
                 </div>
@@ -298,7 +298,7 @@ export default function TemplateInstaller({
               <h3 className="text-xl font-semibold mb-2">Installation Complete!</h3>
               <p className="text-gray-600">
                 {templateName} has been successfully installed
-              </p>
+              
             </div>
 
             <div className="glass rounded-xl-lg p-4 text-left">
@@ -307,28 +307,28 @@ export default function TemplateInstaller({
                 <div className="flex items-start gap-2">
                   <FileCode className="h-4 w-4 text-gray-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium">Check the installed files</p>
+                    <p className="text-sm font-medium">Check the installed files
                     <p className="text-xs text-gray-600">
                       New components and pages have been added to your project
-                    </p>
+                    
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <GitBranch className="h-4 w-4 text-gray-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium">Review the changes</p>
+                    <p className="text-sm font-medium">Review the changes
                     <p className="text-xs text-gray-600">
                       Use git diff to see what was modified
-                    </p>
+                    
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <FileText className="h-4 w-4 text-gray-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium">Read the documentation</p>
+                    <p className="text-sm font-medium">Read the documentation
                     <p className="text-xs text-gray-600">
                       Check README.md for template-specific instructions
-                    </p>
+                    
                   </div>
                 </div>
               </div>
@@ -337,15 +337,15 @@ export default function TemplateInstaller({
             <div className="flex justify-center gap-3">
               <Button variant="outline" onClick={onComplete}>
                 View Files
-              </Button>
+              
               <Button onClick={onComplete}>
                 <ArrowRight className="h-4 w-4 mr-2" />
                 Continue
-              </Button>
+              
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      
+    
   );
 }

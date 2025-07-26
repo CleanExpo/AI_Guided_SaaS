@@ -151,8 +151,8 @@ Create a clear, specific, well-structured prompt, that:
 - Includes relevant constraints
 - Maintains the original intent
 Provide only the refined prompt text.`
-    return await generateAIResponse(refinePrompt, { model: this.config.model)
-    temperature: 0.2
+    return await generateAIResponse(refinePrompt, { model: this.config.model,
+                temperature: 0.2
   }
 })
   private async generateExamples(refinedPrompt: string, analysis): Promise<any> {
@@ -181,8 +181,8 @@ Consider:
 - Technical limitations
 List clear, actionable constraints.`;
 
-const response = await generateAIResponse(constraintPrompt, { model: this.config.model)
-    temperature: 0.2
+const response = await generateAIResponse(constraintPrompt, { model: this.config.model,
+                temperature: 0.2
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private async specifyOutput(refinedPrompt: string, analysis): Promise<any> {;</any>

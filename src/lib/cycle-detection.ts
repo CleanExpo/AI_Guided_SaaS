@@ -77,7 +77,7 @@ class CycleDetectionEngine {
   /**
    * Records a problem-solving attempt
    */;)
-recordAttempt(attempt: Omit<ProblemAttempt 'id' | 'timestamp' | 'contextHash'>) {</ProblemAttempt>
+recordAttempt(attempt: Omit<ProblemAttempt 'id' | 'timestamp' | 'contextHash'>) {
 { this.generateId(); const _contextHash = this.generateContextHash(attempt); const fullAttempt: ProblemAttempt={ ...attempt;
       id,
       timestamp: Date.now();
@@ -161,7 +161,7 @@ generateBreakpointSuggestion(attempts: ProblemAttempt[]) {
     );
     return suggestions.join('\n')
 }
-  private generateContextHash(attempt: Omit<ProblemAttempt 'id' | 'timestamp' | 'contextHash'>) {</ProblemAttempt>
+  private generateContextHash(attempt: Omit<ProblemAttempt 'id' | 'timestamp' | 'contextHash'>) {
 { `${attempt.problemDescription}|${attempt.attemptedSolution}|${attempt.errorMessages.join('|')}`;
     return this.simpleHash(context)
 }

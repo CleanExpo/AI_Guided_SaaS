@@ -30,8 +30,8 @@ export default function AdminDashboardPage() {
           <Button variant="outline">
           <LogOut className="w-4 h-4 mr-2"     />
             Logout
-          </Button>
-        </div>
+          
+        
 
         <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="glass">
@@ -39,15 +39,15 @@ export default function AdminDashboardPage() {
               <CardTitle className="flex items-center glass">
                 <Shield className="w-5 h-5 mr-2" />
                 System Status
-              </CardTitle>
-            </CardHeader>
+              
+            
             <CardContent className="glass">
-              <div className="text-2xl font-bold text-green-600">Operational</div>
-              <p className="text-gray-600">All systems running normally</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+              <div className="text-2xl font-bold text-green-600">Operational
+              <p className="text-gray-600">All systems running normally
+            
+          
+        
+      
+    
   );
 }

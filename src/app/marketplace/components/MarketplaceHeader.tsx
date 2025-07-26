@@ -47,7 +47,7 @@ export function MarketplaceHeader({
         <h1 className="text-4xl font-bold mb-2">Marketplace</h1>
         <p className="text-gray-600 text-lg">
           Accelerate your development with templates, plugins, and integrations
-        </p>
+        
       </div>
 
       {/* Search and Filters */}
@@ -64,7 +64,7 @@ export function MarketplaceHeader({
           <Button variant="outline" size="sm">
             <Filter className="h-4 w-4 mr-2" />
             Filters
-          </Button>
+          
         </div>
       </div>
 
@@ -74,21 +74,21 @@ export function MarketplaceHeader({
           <TabsTrigger value="all" className="flex items-center gap-2">
             <Package className="h-4 w-4" />
             All
-          </TabsTrigger>
+          
           <TabsTrigger value="template" className="flex items-center gap-2">
             <Code2 className="h-4 w-4" />
             Templates
-          </TabsTrigger>
+          
           <TabsTrigger value="plugin" className="flex items-center gap-2">
             <Zap className="h-4 w-4" />
             Plugins
-          </TabsTrigger>
+          
           <TabsTrigger value="integration" className="flex items-center gap-2">
             <Palette className="h-4 w-4" />
             Integrations
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
+          
+        
+      
 
       {/* Filter Buttons */}
       <div className="flex flex-wrap gap-2">
@@ -101,7 +101,7 @@ export function MarketplaceHeader({
             {filter === 'newest' && 'Newest'}
             {filter === 'rating' && 'Top Rated'}
             {filter === 'price' && 'Price: Low to High'}
-          </Button>
+          
         ))}
       </div>
 
@@ -111,49 +111,49 @@ export function MarketplaceHeader({
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Available Items</p>
-                <p className="text-2xl font-bold">{stats.totalItems}</p>
+                <p className="text-sm text-gray-600">Available Items
+                <p className="text-2xl font-bold">{stats.totalItems}
               </div>
               <Package className="h-8 w-8 text-gray-300" />
             </div>
-          </CardContent>
-        </Card>
+          
+        
         
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Downloads</p>
-                <p className="text-2xl font-bold">{stats.totalDownloads}</p>
+                <p className="text-sm text-gray-600">Total Downloads
+                <p className="text-2xl font-bold">{stats.totalDownloads}
               </div>
               <Download className="h-8 w-8 text-gray-300" />
             </div>
-          </CardContent>
-        </Card>
+          
+        
         
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Average Rating</p>
-                <p className="text-2xl font-bold">{stats.averageRating.toFixed(1)}</p>
+                <p className="text-sm text-gray-600">Average Rating
+                <p className="text-2xl font-bold">{stats.averageRating.toFixed(1)}
               </div>
               <div className="text-yellow-400 text-2xl">★</div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
         
         <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Free Items</p>
-                <p className="text-2xl font-bold">{stats.freeItems}</p>
+                <p className="text-sm text-gray-600">Free Items
+                <p className="text-2xl font-bold">{stats.freeItems}
               </div>
               <div className="text-green-500 text-2xl">💚</div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

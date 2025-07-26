@@ -34,9 +34,9 @@ export default function SignUpPage() {
     <div className="min-h-screen flex items-center justify-center glass">
       <Card className="w-full max-w-md glass">
         <CardHeader className="glass">
-          <CardTitle className="text-2xl text-center glass">Create Account</CardTitle>
-          <p className="text-center text-gray-600">Join AI Guided SaaS Platform</p>
-        </CardHeader>
+          <CardTitle className="text-2xl text-center glass">Create Account
+          <p className="text-center text-gray-600">Join AI Guided SaaS Platform
+        
         <CardContent className="space-y-4 glass">
           <form onSubmit={handleSubmit} className="space-y-4" role="form">
             <Input
@@ -65,30 +65,30 @@ export default function SignUpPage() {
             />
           <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? 'Creating Account...' : 'Create Account'}
-            </Button>
-          </form>
+            
+          
           
           <div className="relative">
           <div className="absolute inset-0 flex items-center">
               <Separator />
-          </div>
+          
             <div className="relative flex justify-center text-xs uppercase">
-          <span className="glass px-2 text-gray-500">Or continue with</span>
-            </div>
-          </div>
+          <span className="glass px-2 text-gray-500">Or continue with
+            
+          
           <Button type="button" variant="outline" className="w-full">
             <Github className="w-4 h-4 mr-2" />
             Continue with GitHub
-          </Button>
+          
           
           <p className="text-center text-sm text-gray-600">
             Already have an account?{' '}
             <a href="/auth/signin" className="underline hover: text-primary">
               Sign in
-            </a>
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+            
+          
+        
+      
+    
   );
 }

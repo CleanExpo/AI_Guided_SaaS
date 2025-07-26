@@ -59,25 +59,25 @@ export default function AnalyticsPage() {
       <div className="glass grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Total Users</CardTitle>
+            <CardTitle className="text-sm font-medium glass">Total Users
             <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="text-2xl font-bold">{data?.totalUsers}</div>
-            <p className="text-xs text-muted-foreground">Total registered users</p>
-          </CardContent>
-        </Card>
+            <p className="text-xs text-muted-foreground">Total registered users
+          
+        
         
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Active Users</CardTitle>
+            <CardTitle className="text-sm font-medium glass">Active Users
             <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="text-2xl font-bold">{data?.activeUsers}</div>
-            <p className="text-xs text-muted-foreground">Active in last 24h</p>
-          </CardContent>
-        </Card>
+            <p className="text-xs text-muted-foreground">Active in last 24h
+          
+        
       </div>
     </div>
   );

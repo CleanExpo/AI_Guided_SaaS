@@ -6,7 +6,7 @@ import path from 'path';
 export interface MCPServer { name: string;
   command: string;
   args?: string[];
-  env?: Record<string string></string>
+  env?: Record<string string>
   capabilities?: string[]
 }
 
@@ -27,9 +27,9 @@ export interface MCPResponse { serverId: string;
 }
 
 export class MCPIntegration extends EventEmitter {
-  private servers: Map<string MCPServerInstance> = new Map();</string>
-  private messageQueue: Map<string MCPMessage[]> = new Map();</string>
-  private responseHandlers: Map<string (response: MCPResponse) => void> = new Map();</string>
+  private servers: Map<string MCPServerInstance> = new Map();
+  private messageQueue: Map<string MCPMessage[]> = new Map();
+  private responseHandlers: Map<string (response: MCPResponse) => void> = new Map();
   private messageIdCounter: number = 0;
 
   constructor() {
@@ -147,7 +147,7 @@ export class MCPIntegration extends EventEmitter {
   /**
    * Get capabilities of an MCP server
    */
-  public async getCapabilities(serverId: string): Promise<string[]> {</string>
+  public async getCapabilities(serverId: string): Promise<string[]> {
 { this.servers.get(serverId);
     if (!server) {
       throw new Error(`MCP server ${serverId} not found`)
@@ -175,8 +175,8 @@ export class MCPIntegration extends EventEmitter {
         const handler = this.responseHandlers.get(message.id.toString())!;
         handler({ serverId: server.config.name,
           result: message.result,
-          error: message.error)
-          id: message.id   )
+          error: message.error,
+                id: message.id   )
     })
 } else {
         // Handle notification messages
@@ -210,7 +210,7 @@ export class MCPIntegration extends EventEmitter {
   /**
    * Get all registered servers
    */
-  public getServers(): Map<string MCPServerInstance> {</string>
+  public getServers(): Map<string MCPServerInstance> {
     return new Map(this.servers)
 }
 
@@ -275,8 +275,8 @@ class MCPServerInstance extends EventEmitter {
     };
 
     this.process = spawn(command, args, {
-      env)
-      stdio: ['pipe', 'pipe', 'pipe'])
+      env,
+                stdio: ['pipe', 'pipe', 'pipe'])
     });
 
     // Handle stdout (messages from server)

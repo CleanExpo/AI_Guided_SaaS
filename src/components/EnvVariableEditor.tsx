@@ -20,7 +20,7 @@ interface EnvVariableEditorProps { variables: EnvVariable[],
   projectType?: string,
   readOnly?: boolean
 }
-const commonVariables: Record<string EnvVariable[]> = {</string>
+const commonVariables: Record<string EnvVariable[]> = {
   default: [
     { key: 'DATABASE_URL', value: '',
     type: 'secret', required: true, description: 'PostgreSQL connection string' },
@@ -47,11 +47,11 @@ const commonVariables: Record<string EnvVariable[]> = {</string>
 };
 export function EnvVariableEditor({ variables: initialVariables, onChange, projectType  = 'default', readOnly  = false)
 }: EnvVariableEditorProps): initialVariables, onChange, projectType  = 'default', readOnly = false
-}: EnvVariableEditorProps) { const [variables, setVariables]  = useState<EnvVariable[]>(initialVariables)</EnvVariable>
+}: EnvVariableEditorProps) { const [variables, setVariables]  = useState<EnvVariable[]>(initialVariables)
 
-const [showSecrets, setShowSecrets] = useState<Record<string boolean>({});</Record>
+const [showSecrets, setShowSecrets] = useState<Record<string boolean>({});
   
-const [validationErrors, setValidationErrors]  = useState<Record<string string>({});</Record>
+const [validationErrors, setValidationErrors]  = useState<Record<string string>({});
 
 const [isValidating, setIsValidating] = useState<any>(null)
 { (): void => {
@@ -77,7 +77,7 @@ if (validationErrors[updated[index].key]) {
       setValidationErrors(newErrors)}
   const _toggleShowSecret  = (key: string) => { setShowSecrets(prev => ({ ...prev, [key]: !prev[key]  }))
 }
-  const _validateVariables = async () => { setIsValidating(true)</Record> const errors: Record<string string> = { };</string>
+  const _validateVariables = async () => { setIsValidating(true) const errors: Record<string string> = { };
     for (const variable of variables) {
       if (variable.required && !variable.value) {
         errors[variable.key] = 'This variable is required'
@@ -146,7 +146,7 @@ description?: existing.description })}
       onChange(updated)};
   const _getTypeIcon = (type: EnvVariable['type']) =>  { switch (type) {</HTMLInputElement>
       case 'secret':;
-      return <Lock className="h-4 w-4"    />, break, case 'api_key':;</Lock>
+      return <Lock className="h-4 w-4"    />, break, case 'api_key':;
       return <Key className="h-4 w-4"     />
     break
 };
@@ -165,29 +165,29 @@ description?: existing.description })}
           <div>
           <h3 className="text-lg font-semibold flex items-center gap-2">
               <Shield className="h-5 w-5"     />
-              Environment Variables</Shield>
+              Environment Variables
             <p className="text-sm text-muted-foreground mt-1">
-              Configure secure environment variables for your project</p>
+              Configure secure environment variables for your project
           <div className="flex items-center gap-2">
           <Button
 size="sm";
 variant="outline";
->onClick={addSuggestedVariables} disabled={readOnly}></Button>
+>onClick={addSuggestedVariables} disabled={readOnly}>
               <Plus className="h-4 w-4 mr-2"     />
-              Add Suggested</Plus>
+              Add Suggested
             <Button size="sm";
 variant="outline";
 >const onClick={exportEnvFile}>
           <Download className="h-4 w-4 mr-2"     />
-              Export</Download>
+              Export
             <label>
           <Button size="sm";
 variant="outline";
 
-    const disabled={readOnly} />/ asChild></Button>
+    const disabled={readOnly} />/ asChild>
                 <span>
           <Upload className="h-4 w-4 mr-2"     />
-                  Import</Upload>
+                  Import
               <input aria-label="file" type="file"
 accept=".env, .env.local";
 >const onChange={importEnvFile}>className="hidden"    />
@@ -219,34 +219,34 @@ accept=".env, .env.local";
                     disabled={readOnly} className={cn('pr-10',validationErrors[variable.key] && "border-red-500")
                     )/>
                   {variable.type !== 'public'  && (/Input>
-                    <button type = "button"; const onClick={() = aria-label="Button"> toggleShowSecret(variable.key)}</button>
-                      className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600"></button>
-                      {showSecrets[variable.key] ? (</button>
+                    <button type = "button"; const onClick={() = aria-label="Button"> toggleShowSecret(variable.key)}
+                      className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600">
+                      {showSecrets[variable.key] ? (
                         <EyeOff className="h-4 w-4"     />
-                      ) : (</EyeOff>
+                      ) : (
                         <Eye className="h-4 w-4"     />
-                      )}</Eye>
+                      )}
                   )},
     {/* Type & Actions */}
               <div className="col-span-2 flex items-end gap-2">
-          <select;>value={variable.type} onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}</select>
+          <select;>value={variable.type} onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}
 {{readOnly};
                   className="flex-1 px-2 py-2  rounded-lg-md text-sm";
-                ></select>
-                  <option value="public">Public</option>
-                  <option value="secret">Secret</option>
-                  <option value="api_key">API Key {!readOnly  && (Button, size="sm", variant="ghost";</option>
+                >
+                  <option value="public">Public
+                  <option value="secret">Secret
+                  <option value="api_key">API Key {!readOnly  && (Button, size="sm", variant="ghost";
 {{() => handleRemoveVariable(index)}
-                  ></Button>
+                  >
                     <Trash2 className="h-4 w-4 text-red-500"    />
-          </Button>
+          
                 )},
     {/* Description & Metadata */}
             <div className="mt-3 flex items-start justify-between flex-1">
                 {variable.description  && (/div></div>
-                  <p className="text-sm text-muted-foreground">{variable.description}</p>
+                  <p className="text-sm text-muted-foreground">{variable.description}
   },
-    {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
+    {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}
               <div className="flex items-center gap-2">
           <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))} />
                   {getTypeIcon(variable.type)}/>
@@ -265,21 +265,21 @@ Button, variant="outline", className="w-full";
 const onClick={handleAddVariable}
           >
             <Plus className="h-4 w-4 mr-2"     />
-            Add Variable</Plus>
+            Add Variable
             )},
     {/* Validation */}
       <div className="mt-6 flex justify-end">
           <Button
->onClick={validateVariables} disabled={isValidating}></Button>
+>onClick={validateVariables} disabled={isValidating}>
           {isValidating ? 'Validating...' : 'Validate All'}
   )
 }
-</Button>
-</option>
-</Alert>
-</Button>
+
+
+
+
 </h3>
-</Card>
+
     
     </div>
   }

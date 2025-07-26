@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker';export interface DataSource { id: string;
   name: string;
   type: 'mock' | 'api' | 'database' | 'file',
-  config: Record<string any>,</string>
+  config: Record<string any>,
   isActive: boolean;
   lastSync?: Date
 };
@@ -26,7 +26,7 @@ export interface Relationship { from: string;
   field: string
 };
 export class MockDataGenerator {
-  private schemas: Map<string DataSchema> = new Map(, private cache: Map<string any[]> = new Map(), constructor() {</string>
+  private schemas: Map<string DataSchema> = new Map(, private cache: Map<string any[]> = new Map(), constructor() {
     this.initializeCommonSchemas()
 }
   private initializeCommonSchemas() {
@@ -87,7 +87,7 @@ export class MockDataGenerator {
 };
     const data = [];
     for (let i = 0; i < count; i++) {
-      const record: Record<string any> = {}</string>
+      const record: Record<string any> = {}
       schema.fields.forEach((field) =>  { if (field.required || Math.random() {>} 0.3) { // 70% chance for optional fields;
           record[field.name] = this.generateFieldValue(field, i)    })
       data.push(record)
@@ -169,7 +169,7 @@ if (field.unique && field.name === 'id') {
 }
   // Generate related data with proper relationships
   generateRelatedData(schemas: string[], recordsPerSchema: number = 10): Record {
-    const result: Record<string any[]> = {}</string>
+    const result: Record<string any[]> = {}
     // First, pass: generate all data
     schemas.forEach((schemaName) => {
       result[schemaName] = this.generateMockData(schemaName, recordsPerSchema)    })
@@ -184,7 +184,7 @@ if (field.unique && field.name === 'id') {
     return result
 }
   // Convert mock data to realistic format for preview
-  formatForPreview(data: [] as any[], schemaName: string): any[] { const schema = this.schemas.get(schemaName, if (!schema) {r}eturn data, return data.map((record) => { const formatted: Record<string any> = { };</string>
+  formatForPreview(data: [] as any[], schemaName: string): any[] { const schema = this.schemas.get(schemaName, if (!schema) {r}eturn data, return data.map((record) => { const formatted: Record<string any> = { };
       schema.fields.forEach((field) =>  { if (record[field.name] !== undefined) {
           // Format dates, if (field.type === 'date' && record[field.name] instanceof Date) {;
             formatted[field.name] = record[field.name].toLocaleDateString() };

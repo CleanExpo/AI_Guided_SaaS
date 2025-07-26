@@ -33,10 +33,10 @@ export function AISupportChat({
 }: AISupportChatProps) {
   const [isOpen, setIsOpen] = useState<any>(null)
   const [isMinimized, setIsMinimized] = useState<any>(null)
-  const [messages, setMessages] = useState<Message[]>([</Message>
+  const [messages, setMessages] = useState<Message[]>([
   { id: '1',
       role: 'system',
-content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?', </Message>,
+content: 'Hi! I\'m your AI support assistant. I can help you with documentation, tutorials, troubleshooting, and more. How can I assist you today?', ,
 timestamp: new Date()}
   ]);
 
@@ -71,8 +71,8 @@ const tutorials = await tutorialSystem.getRecommendedTutorials(userId);
 
 const response = await fetch('/api/admin/auth', { method: 'POST',
 headers: { 'Content-Type': 'application/json' })
-        body: JSON.stringify({ message: input)
-    context: { userId, projectId, documentationResults: docResults.slice(0, 3, availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title }, conversationHistory: messages.slice(-5)})};
+        body: JSON.stringify({ message: input,
+                context: { userId, projectId, documentationResults: docResults.slice(0, 3, availableTutorials: tutorials.map((t) => ({ id: t.id title: t.title }, conversationHistory: messages.slice(-5)})};
       const data  = await response.json();
 
 const assistantMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant')
@@ -183,39 +183,39 @@ data: { sectionId: r.sectionId }}))};
    ];
 if (!isOpen) {
     return ()
-    <Button className = "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"; const onClick={() => setIsOpen(true)}</Button></Button>
+    <Button className = "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"; const onClick={() => setIsOpen(true)}
         <MessageCircle className="h-6 w-6"    />
-          </Button>
+          
   return (<div;
 
     ref={chatContainerRef} className={cn()
             'fixed bottom-6 right-6 z-50 transition-all duration-300',isMinimized ? "h-14" : "h-[600px]">)}>
           <Card className={cn('w-[400px] flex flex-col shadow-xl',isMinimized ? "h-14" : "h-full")
-      )} className="glass</Card>
-        {/* Header */}</Card>
+      )} className="glass
+        {/* Header */}
         <div className="glass flex items-center justify-between p-4 -b flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg-full glass-button primary/10 flex items-center justify-center">
               <Bot className="h-5 w-5 text-primary"    />
           </div>
             <div>
-          <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help</p>
+          <h3 className="font-semibold text-sm">AI Support {!isMinimized  && (p className="text-xs text-muted-foreground">Always here to help
           <div className="flex gap-1">
-          <Button size="sm", variant="ghost";>const onClick={() => setIsMinimized(!isMinimized)}</Button></Button>
+          <Button size="sm", variant="ghost";>const onClick={() => setIsMinimized(!isMinimized)}
               <ChevronDown className={cn(>'h-4 w-4 transition-transform',isMinimized && "rotate-180">)/>
-          </Button>
+          
             <Button size="sm";
-variant="ghost";>const onClick={() => setIsOpen(false)}</Button></Button>
+variant="ghost";>const onClick={() => setIsOpen(false)}
               <X className="h-4 w-4"    />
-          </Button>
+          
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
             <div className="p-3 -b flex gap-2">
           <div className="flex-1 relative">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
           <input type="text"
-="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
+="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
 {{(e) => e.key === 'Enter' && handleSearch()};
-                    className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md, focus:outline-none focus:ring-2 focus:ring-primary/20" /></input>
-        <Button size = "sm" onClick={handleSearch}></Button>
+                    className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md, focus:outline-none focus:ring-2 focus:ring-primary/20" />
+        <Button size = "sm" onClick={handleSearch}>
                   Search {/* Messages */}
             <ScrollArea className="glass flex-1 p-4">
           <div className="space-y-4">
@@ -225,35 +225,35 @@ variant="ghost";>const onClick={() => setIsOpen(false)}</Button></Button>
                    const className={cn(>'h-8 w-8 rounded-full flex items-center justify-center shrink-0',message.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted">)/>
                       {message.role === 'user' ? (</div>
                         <User className="h-4 w-4"     />
-                      ) : (</User>
+                      ) : (
                         <Bot className="h-4 w-4"     />
-                      )}</Bot>
+                      )}
                     <div className={cn('flex-1 space-y-2',message.role === 'user' && "flex flex-col items-end")
                     )} className={cn('rounded-lg px-3 py-2 max-w-[85%] text-sm',message.role === 'user')
                           ? "bg-primary text-primary-foreground">: "bg-muted">)/>
-          <p className="whitespace-pre-wrap">{ message.content}</p>
+          <p className="whitespace-pre-wrap">{ message.content}
                       {/* Code, blocks */},
     {message.metadata?.codeBlocks?.map((block, index) => (\n    <div key={index} className="max-w-[85%]">
           <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-xl-lg overflow-x-auto text-xs">
                             <code>{block.code}</code>))},
     {/* Suggested, docs */},
     {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0  && (div className="max-w-[85%] space-y-1">
-                          <p className="text-xs text-muted-foreground">Related, documentation: </p>
+                          <p className="text-xs text-muted-foreground">Related, documentation: 
                           {message.metadata.suggestedDocs.map((docId) => {
                             const doc = documentationSystem.getSection(docId);
-        return doc ? (<button const key={docId };>const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};</button>
-                                className="text-xs text-primary hover: underline block text-left"></button>
-                                📄 {doc.title}</button>
+        return doc ? (<button const key={docId };>const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};
+                                className="text-xs text-primary hover: underline block text-left">
+                                📄 {doc.title}
                             ) : null
 }) })},
     { /* Action, buttons */},
     {message.metadata?.actionButtons && message.metadata.actionButtons.length > 0  && (div className="flex flex-wrap gap-2 max-w-[85%]">
                           {message.metadata.actionButtons.map((button, index) => (\n    <Button const key={index};
                               size="sm";
-variant="outline";>const onClick={() => handleActionButton(button.action, button.data)};</Button>
+variant="outline";>const onClick={() => handleActionButton(button.action, button.data)};
                               className="text-xs";
                             >
-                              {button.label}</Button>
+                              {button.label}
                           ))})})},
     {isLoading && (
 div className="flex gap-3">
@@ -266,14 +266,14 @@ div className="flex gap-3">
       )}
                 <div ref={messagesEndRef}  >{/* Quick, Actions */},</div>
     {showQuickActions && messages.length === 1  && (div className="p-3 -t">
-                <p className="text-xs text-muted-foreground mb-2">Quick, actions: </p>
+                <p className="text-xs text-muted-foreground mb-2">Quick, actions: 
                 <div className = "grid grid-cols-3 gap-2"></div>
                   {quickActions.map((action) => (\n    <Button const key={action.action };
                       variant="outline";
 size="sm";
-className="flex flex-col gap-1 h-auto py-2";>const onClick={() => handleQuickAction(action.action)}</Button></Button>
+className="flex flex-col gap-1 h-auto py-2";>const onClick={() => handleQuickAction(action.action)}
                       <action.icon className="h-4 w-4"    />
-          <span className="text-xs">{action.label}</span>))}
+          <span className="text-xs">{action.label}))}
             )},
     {/* Input */}
             <div className="p-3 -t flex gap-2"    />
@@ -286,12 +286,12 @@ className="flex flex-col gap-1 h-auto py-2";>const onClick={() => handleQuickAct
     const rows={1/></Textarea>
                 <Button
 
-onClick={handleSendMessage} disabled={!input.trim() || isLoading};>size="sm";>></Button>
-                  {isLoading ? (</Button>
+onClick={handleSendMessage} disabled={!input.trim() || isLoading};>size="sm";>>
+                  {isLoading ? (
                     <Loader2 className="h-4 w-4 animate-spin"     />
                   ) : (
                     <Send className="h-4 w-4"     />
-                  )}</Send>
+                  )}
               <div className="flex items-center gap-1 mt-2">
           <Sparkles className="h-3 w-3 text-primary"     />
           <p className=">AI-powered support with real-time documentation"    />

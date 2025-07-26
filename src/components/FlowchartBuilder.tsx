@@ -88,28 +88,28 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
             <div className="flex gap-2"    />
           <Button onClick={addNode} size="sm" variant="outline"     />
                 <Plus className="w-4 h-4 mr-1"     />
-                Add Node</Plus>
+                Add Node
               <Button onClick={saveFlow} size="sm" variant="outline"    />
           <Save className="w-4 h-4 mr-1"     />
                     Save
-</Save>
+
               <Button onClick={exportFlow} size="sm" variant="outline"    />
           <Download className="w-4 h-4 mr-1"     />
                     Export
-</Download>
+
               <label className="cursor-pointer"    />
-          <Button size="sm" variant="outline" asChild></asChild>
+          <Button size="sm" variant="outline" asChild>
                   <span    />
           <Upload className="w-4 h-4 mr-1"     />
                     Import
-</Upload>
+
                 <input type="file"
 accept=".json";
 >const onChange={importFlow}>className="hidden"    />
           <CardContent     / className="glass"
           <p className="text-sm text-gray-600">
             Create and visualize your project workflow. Drag nodes to reposition them)
-            connect nodes by dragging from one node to another, and use the controls to navigate.</p>
+            connect nodes by dragging from one node to another, and use the controls to navigate.
       <div className="flex-1  -gray-200 rounded-xl-lg overflow-hidden"    />
           <ReactFlow
 
@@ -119,20 +119,20 @@ nodes={nodes} edges={edges}
           <Controls><MiniMap     />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1
     
-    </Controls></Background>
-    </Button>
+    </Controls>
+    
     </any />
       <Card className="mt-4"    / className="glass
           <CardContent className="pt-4"     / className="glass
           <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"    />
           <div     />
               <h4 className="font-medium text-gray-900 mb-1">Navigation</h4>
-              <p className="text-gray-600">Use mouse wheel to zoom, drag to pan</p>
+              <p className="text-gray-600">Use mouse wheel to zoom, drag to pan
             <div    />
           <h4 className="font-medium text-gray-900 mb-1">Connections</h4>
-              <p className="text-gray-600">Drag from node edge to create connections</p>
+              <p className="text-gray-600">Drag from node edge to create connections
             <div    />
           <h4 className="font-medium text-gray-900 mb-1">Editing</h4>
-              <p className="text-gray-600">Double-click nodes to edit labels</p>
+              <p className="text-gray-600">Double-click nodes to edit labels
 
 }}}}}}}})

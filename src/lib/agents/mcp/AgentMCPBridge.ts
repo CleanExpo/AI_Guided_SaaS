@@ -16,10 +16,10 @@ export interface AgentMCPConfig { enabledServers: string[],
 }
 
 export class AgentMCPBridge extends EventEmitter {
-  private agents: Map<string Agent> = new Map();</string>
+  private agents: Map<string Agent> = new Map();
   private mcpIntegration: MCPIntegration;
-  private capabilityMap: Map<string MCPCapability[]> = new Map();</string>
-  private responseCache: Map<string { result: any, timestamp: number }> = new Map();</string>
+  private capabilityMap: Map<string MCPCapability[]> = new Map();
+  private responseCache: Map<string { result: any, timestamp: number }> = new Map();
   private config: AgentMCPConfig;
 
   constructor(mcpIntegration: MCPIntegration, config: Partial<AgentMCPConfig> = {}) {</AgentMCPConfig>
@@ -79,8 +79,8 @@ export class AgentMCPBridge extends EventEmitter {
       const cachedResult = this.getCachedResult(cacheKey);
       if (cachedResult) {
         agent.emit('mcp:response', {
-          capability)
-          result: cachedResult;
+          capability,
+                result: cachedResult;
           cached: true
        )
     });
@@ -102,13 +102,13 @@ export class AgentMCPBridge extends EventEmitter {
       // Send response to agent
       agent.emit('mcp:response', {
         capability,
-        result)
-        cached: false   )
+        result,
+                cached: false   )
     })
 } catch (error) {
       agent.emit('mcp:error', {
-        capability)
-        error: error.message   )
+        capability,
+                error: error.message   )
     })
 }
   }
@@ -327,7 +327,7 @@ export class AgentMCPBridge extends EventEmitter {
  */
 export function enhanceAgentWithMCP(agent: Agent;
   bridge: AgentMCPBridge;
-  capabilities: Record<string { serverId: string, methods: string[] }></string>)
+  capabilities: Record<string { serverId: string, methods: string[] }>)
 ): void {
   // Register agent with bridge
   bridge.registerAgent(agent, Object.keys(capabilities));

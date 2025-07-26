@@ -79,8 +79,8 @@ export abstract class VectorStore {
   abstract addDocuments(documents: Document[]): Promise<string[]></string>
   abstract updateDocument(id: string, document: Partial<Document>): Promise<any></any>
   abstract deleteDocument(id: string): Promise<any></any>
-  abstract search(query: SearchQuery): Promise<SearchResult[]></SearchResult>
-  abstract similaritySearch(embedding: number[], topK?: number): Promise<SearchResult[]></SearchResult>
+  abstract search(query: SearchQuery): Promise<SearchResult[]>
+  abstract similaritySearch(embedding: number[], topK?: number): Promise<SearchResult[]>
   abstract getDocument(id: string): Promise<Document | null></Document>
   abstract listDocuments(filter? null : SearchFilter): Promise<Document[]></Document>
   abstract clear(): Promise<any></any>
@@ -193,16 +193,16 @@ const results: SearchResult[] = [];
           const chunk = doc.chunks?.find(c => c.id === id); if (chunk) {
             results.push({ id: documentId;
               score,
-              content: chunk.content)
-    metadata: doc.metadata,)
+              content: chunk.content,
+                metadata: doc.metadata,)
     highlights: [chunk.content.substring(0, 100) + '...']
             })} else {
         // Handle full document results, const doc = this.documents.get(id, if (doc) {
           results.push({
             id,
             score,
-            content: doc.content)
-    metadata: doc.metadata,)
+            content: doc.content,
+                metadata: doc.metadata,)
     highlights: [doc.content.substring(0, 100) + '...']
           })}
     return results

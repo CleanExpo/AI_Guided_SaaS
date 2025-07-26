@@ -206,15 +206,15 @@ export const _getGradient = (variant: keyof typeof designTokens.gradients) => { 
 export const _getShadow = (variant: keyof typeof designTokens.shadows) => {
   return designTokens.shadows[variant] };
 export const _getColor = (color: string, shade? null : number): string: (any) => {
-  const _colorPath = color.split('.'); let result: Record<string unknown> = designTokens.colors, for (const path of colorPath) { </string>
+  const _colorPath = color.split('.'); let result: Record<string unknown> = designTokens.colors, for (const path of colorPath) { 
     result = result[path] as Record<string unknown   />
 if (shade && typeof result === 'object') {
-    return (result as Record<string string>)[shade]; </string>
+    return (result as Record<string string>)[shade]; 
 };
   return result as unknown as string
 };
 // CSS Custom Properties Generator;
-export const _generateCSSVariables = (): void => {const cssVars: Record<string string> = { };</string>
+export const _generateCSSVariables = (): void => {const cssVars: Record<string string> = { };
   // Generate color variables
   Object.entries(designTokens.colors).forEach(([colorName, colorValues]) =>  {
     if (typeof colorValues === 'object') {

@@ -12,17 +12,17 @@ export const exportProjectAsZip = (components: ComponentInstance[]) => {
     .join('\n\n');
   
 const indexHTML = `<!DOCTYPE html>``
-<html lang="en"></html>
+<html lang="en">
 <head></head>
-  <meta charset="UTF-8"></meta>
+  <meta charset="UTF-8">
   <title>AI Guided UI Builder Export</title>
   <link href="style.css" rel="stylesheet"      />
 </head>
-<body className="bg-gray-100 p-8 font-sans"></body>
-  <div className="max-w-4xl mx-auto space-y-4"></div>
+<body className="bg-gray-100 p-8 font-sans">
+  <div className="max-w-4xl mx-auto space-y-4">
 ${componentBlocks};
-</body>
-</html>`;
+
+`;
 
 const styleCSS = `@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');`;``
   zip.file('index.html', indexHTML);

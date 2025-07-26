@@ -39,9 +39,9 @@ export function DataSourceManager({ projectId, onDataChange }: DataSourceManager
 const [testResult, setTestResult] = useState<any>(null)
   
 const [mockGenerator]  = useState<any>(() => new MockDataGenerator();</any>
-</Record>
 
-const [generatedData, setGeneratedData] = useState<Record<string any[]>({});</Record>
+
+const [generatedData, setGeneratedData] = useState<Record<string any[]>({});
   
 const [selectedSchema, setSelectedSchema] = useState<any>(null)
   useEffect(() =>  {
@@ -99,9 +99,9 @@ const a = document.createElement('a');
     a.click();
     URL.revokeObjectURL(url)
 }
-  const _getSourceIcon = (type: DataSource['type']) =>  { switch (type) {</Record>
+  const _getSourceIcon = (type: DataSource['type']) =>  { switch (type) {
       case 'mock':;
-      return <Sparkles className="h-5 w-5"    />, break, case 'api':;</Sparkles>
+      return <Sparkles className="h-5 w-5"    />, break, case 'api':;
       return <Cloud className="h-5 w-5"     />
     break;
       case 'database':
@@ -143,7 +143,7 @@ const a = document.createElement('a');
 span className="text-xs text-muted-foreground">
                         Last,
     sync: { source.lastSync.toLocaleString()
-            ) }</span>
+            ) }
       )}
               <div className="flex items-center gap-2">
                 {source.isActive ? (</div>
@@ -160,7 +160,7 @@ span className="text-xs text-muted-foreground">
           <h3 className="text-lg font-semibold">Configure {activeSource.name}</h3>
           <Badge className={getSourceBadgeColor(activeSource.type)} />
             {getSourceIcon(activeSource.type)}/>
-            <span className="ml-1">{activeSource.type}</span>
+            <span className="ml-1">{activeSource.type}
         {activeSource.type === 'mock'  && (div className="space-y-4">
             <Alert>
           <Sparkles className="h-4 w-4"     />
@@ -168,21 +168,21 @@ span className="text-xs text-muted-foreground">
                 Mock data is automatically generated based on your project schema. Perfect for development and testing.</AlertDescription>
             <Tabs value={selectedSchema} onValueChange={setSelectedSchema}>
           <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="users">Users</TabsTrigger>
-                <TabsTrigger value="products">Products</TabsTrigger>
-                <TabsTrigger value="orders">Orders</TabsTrigger>
+                <TabsTrigger value="users">Users
+                <TabsTrigger value="products">Products
+                <TabsTrigger value="orders">Orders
                 <TabsTrigger value="analytics">Analytics {Object.entries(generatedData).map(([schema, data]) => (\n    <TabsContent key={schema} value={schema}>
           <div className="space-y-4">
                     <div className="">
           <p className="text-sm text-muted-foreground">
-                        {data.length} records generated</p>
+                        {data.length} records generated
                       <div className="flex gap-2">
           <Button size="sm" variant="outline" onClick={() => exportData('json')}></Button>
                           <Download className="h-4 w-4 mr-2"     />
-                          JSON</Download>
+                          JSON
                         <Button size="sm" variant="outline" onClick={() => exportData('csv')}></Button>
                           <Download className="h-4 w-4 mr-2"     />
-                          CSV</Download>
+                          CSV
                         <Button size="sm" variant="outline" onClick={() => exportData('sql')}></Button>
                           <Download className="h-4 w-4 mr-2"     />
                           SQL {/* Data, Preview */}
@@ -192,35 +192,35 @@ span className="text-xs text-muted-foreground">
           <tr></tr>
                             {data[0] && Object.keys(data[0]).slice(0, 5).map((key) => (\n    </tr>
                               <th key={key} className="text-left p-3 font-medium">
-                                {key}</th>
+                                {key}
                             ))}
 </tr>
                         <tbody></tbody>
                           {data.slice(0, 5).map((record, i) => (\n    <tr key={i} className="-t">
                               {Object.values(record).slice(0, 5).map((value, j) => (\n    <td key={j} className="p-3">
-                                  {typeof value === 'object' ? JSON.stringify(value) : String(value)}</td>
+                                  {typeof value === 'object' ? JSON.stringify(value) : String(value)}
                               ))}
 </tr>
                           ))}
 </tbody>
                     <Button onClick={generateMockData} className="w-full">
           <RefreshCw className="h-4 w-4 mr-2"     />
-                      Regenerate Data</RefreshCw>
+                      Regenerate Data
               ))}
-            </Tabs>)},
+            )},
     {activeSource.type = == 'api'  && (div className="space-y-4">
             <div>
-          <label className="text-sm font-medium">API Endpoint</label>
+          <label className="text-sm font-medium">API Endpoint
               <Input value={activeSource.config.endpoint || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {/>
-                  ...activeSource.config)
-                  endpoint: e.target.value)
+                  ...activeSource.config,
+                endpoint: e.target.value)
     })};
                 ="https: //api.example.com/data"
 className="mt-1" / />
         <div>
-          <label className="text-sm font-medium">Headers (JSON)</label>
+          <label className="text-sm font-medium">Headers (JSON)
               <Textarea
->const value={JSON.stringify(activeSource.config.headers || {} null, 2)}>const onChange={(e) =>  {</Textarea>
+>const value={JSON.stringify(activeSource.config.headers || {} null, 2)}>const onChange={(e) =>  {
                   try {
                     const _headers = JSON.parse(e.target.value, handleConfigUpdate(activeSource.id, {
                       ...activeSource.config,)
@@ -229,17 +229,17 @@ className="mt-1" / />
                 ='{ "Authorization": "Bearer ${process.env.AUTH_TOKEN || ""}" }';
 className="mt-1 font-mono text-sm";
 
-const rows={4/></Textarea>
+const rows={4/>
             <Button>const onClick={() => testConnection(activeSource)}</Button>
 {{!activeSource.config.endpoint || isLoading};
               className="w-full";
             >
               {isLoading ? (</Button>
-                <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" /></React>
+                <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   Testing...</React.Fragment>
               ) : (
-                <React.Fragment>Play className="h-4 w-4 mr-2" /></React>
-                  Test Connection</Play>
+                <React.Fragment>Play className="h-4 w-4 mr-2" />
+                  Test Connection
               )}
 </Button>
             {testResult && (Alert className={testResult.success ? 'border-green-200' : 'border-red-200'}>
@@ -247,16 +247,16 @@ const rows={4/></Textarea>
                   <CheckCircle className="h-4 w-4 text-green-600"     />
                 ) : (
                   <AlertCircle className="h-4 w-4 text-red-600"     />
-                )}</AlertCircle>
+                )}
                 <AlertDescription>{testResult.message}</AlertDescription>
       )}
         )},
     {activeSource.type === 'database'  && (div className="space-y-4">
             <div>
-          <label className="text-sm font-medium">Connection String</label>
+          <label className="text-sm font-medium">Connection String
               <Input type = "password"; value={activeSource.config.connectionString || ''} onChange={(e) => handleConfigUpdate(activeSource.id, {/>
-                  ...activeSource.config)
-                  connectionString: e.target.value)
+                  ...activeSource.config,
+                connectionString: e.target.value)
     })};
                 ="postgresql: //user:password@host:port/database"
 className="mt-1" / />
@@ -269,16 +269,16 @@ className="mt-1" / />
               className="w-full";
             >
               {isLoading ? (</Button>
-                <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" /></React>
+                <React.Fragment>Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   Testing...</React.Fragment>
               ) : (
-                <React.Fragment>Link className="h-4 w-4 mr-2" /></React>
-                  Test Connection</Link>
+                <React.Fragment>Link className="h-4 w-4 mr-2" />
+                  Test Connection
               )}
             </Button>
       )}
 </Alert>
-</thead>
+
 </div>
       )}
 // Add missing import;
@@ -287,7 +287,7 @@ import { Textarea } from '@/components/ui/textarea';
   
     </React.Fragment>
     </React.Fragment>
-    </table>
+    
     </div>
   }
 `

@@ -52,14 +52,14 @@ r,
   getProject(id: string): Promise<Project | null></Project>
   updateProject(id: string, data: Partial<Project>): Promise<Project></Project>
   deleteProject(id: string): Promise<void></void>
-  listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project></PaginatedResponse>
+  listProjects(userId: string, options?: QueryOptions): Promise<PaginatedResponse<Project>
   // Generic CRUD operations
   create<T>(collection: string, data: any): Promise<T></T>
   read<T>(collection: string, id: string): Promise<T | null></T>
   update<T>(collection: string, id: string,</T>
   data: any): Promise<T></T>
   delete(collection: string, id: string): Promise<void></void>
-  list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T></PaginatedResponse>
+  list<T>(collection: string, options?: QueryOptions): Promise<PaginatedResponse<T>
   // Query builder
   query<T>(collection: string): QueryBuilder<T></T>
   // Real-time subscriptions

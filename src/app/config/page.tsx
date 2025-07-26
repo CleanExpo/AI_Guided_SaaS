@@ -32,8 +32,8 @@ export default function ConfigPage() {
           </h1>
           <p className="text-gray-600">
             Manage your AI Guided SaaS platform settings and configurations.
-          </p>
-        </div>
+          
+        
         
         <div className="glass grid gap-6 lg:grid-cols-4">
 
@@ -43,8 +43,8 @@ export default function ConfigPage() {
           <CardHeader className="glass">
 
 
-                <CardTitle className="text-lg glassConfiguration</CardTitle>
-              </CardHeader>
+                <CardTitle className="text-lg glassConfiguration
+              
               <CardContent className="p-0 glass>
 
 
@@ -61,10 +61,10 @@ export default function ConfigPage() {
                       {section.label}
                     </button>
                   ))}
-                </nav>
-              </CardContent>
-            </Card>
-          </div>
+                
+              
+            
+          
           
           <div className="lg:col-span-3 space-y-6">
             {activeSection === 'overview' && (
@@ -75,8 +75,8 @@ export default function ConfigPage() {
           <CardHeader className="glass">
 
 
-                    <CardTitle className="glass">System Status</CardTitle>
-                  </CardHeader>
+                    <CardTitle className="glass">System Status
+                  
                   <CardContent className="glass">
             <div className="glass grid gap-4 md:grid-cols-3">
 
@@ -85,42 +85,42 @@ export default function ConfigPage() {
                         <div className="w-3 h-3 bg-green-500 rounded-lg-full" />
 
 
-                        <span className="text-sm text-gray-600">Database Connected</span>
-                      </div>
+                        <span className="text-sm text-gray-600">Database Connected
+                      
                       <div className="flex items-center space-x-2">
 
 
                         <div className="w-3 h-3 bg-green-500 rounded-lg-full" />
-                        <span className="text-sm text-gray-600">AI Models Active</span>
-                      </div>
+                        <span className="text-sm text-gray-600">AI Models Active
+                      
                       <div className="flex items-center space-x-2">
 
 
                         <div className="w-3 h-3 bg-yellow-500 rounded-lg-full" />
-                        <span className="text-sm text-gray-600">Maintenance Mode</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                        <span className="text-sm text-gray-600">Maintenance Mode
+                      
+                    
+                  
+                
                 
                 <Card className="glass">
           <CardHeader className="glass">
 
 
-                    <CardTitle className="glass">Quick Actions</CardTitle>
-                  </CardHeader>
+                    <CardTitle className="glass">Quick Actions
+                  
                   <CardContent className="glass">
             <div className="flex flex-wrap gap-2">
 
 
-                      <Button variant="outline" size="sm">Restart Services</Button>
-                      <Button variant="outline" size="sm">Clear Cache</Button>
-                      <Button variant="outline" size="sm">Backup Data</Button>
-                      <Button variant="outline" size="sm">View Logs</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                      <Button variant="outline" size="sm">Restart Services
+                      <Button variant="outline" size="sm">Clear Cache
+                      <Button variant="outline" size="sm">Backup Data
+                      <Button variant="outline" size="sm">View Logs
+                    
+                  
+                
+              
             )}
             
             {activeSection !== 'overview' && (
@@ -131,21 +131,21 @@ export default function ConfigPage() {
 
                     <Settings className="h-5 w-5 mr-2" />
                     {activeSection} Configuration
-                  </CardTitle>
-                </CardHeader>
+                  
+                
                 <CardContent className="glass">
 
 
                   <p className="text-gray-600 mb-4">
                     {activeSection} configuration options will be available here.
-                  </p>
-                  <Badge variant="secondary">Coming Soon</Badge>
-                </CardContent>
-              </Card>
+                  
+                  <Badge variant="secondary">Coming Soon
+                
+              
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+          
+        
+      
+    
   );
 }

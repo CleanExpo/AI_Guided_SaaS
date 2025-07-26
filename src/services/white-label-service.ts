@@ -323,8 +323,8 @@ export class WhiteLabelService extends EventEmitter {
     if (!preset) throw new Error('Preset not found');
     
     await this.updateConfig({
-      colors: preset.colors)
-      fonts: preset.fonts)
+      colors: preset.colors,
+                fonts: preset.fonts)
     });
   }
 

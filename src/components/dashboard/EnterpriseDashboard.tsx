@@ -76,7 +76,7 @@ export default function EnterpriseDashboard({
   if (loading) {
     return (<div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-gray-600">Loading enterprise dashboard...</p>
+          <p className="text-gray-600">Loading enterprise dashboard...
         </div>
       </div>)
     );
@@ -89,19 +89,19 @@ export default function EnterpriseDashboard({
           <h1 className="text-3xl font-bold">Enterprise Dashboard</h1>
           <p className="text-gray-600">
             Comprehensive analytics and system monitoring
-          </p>
+          
         </div>
         <div className="flex items-center space-x-2">
           <select)
             value={timeRange}>onChange={(e) => setTimeRange(e.target.value)}
             className="px-3 py-2 border rounded-md">
-            <option value="7d">Last 7 days</option>
-            <option value="30d">Last 30 days</option>
-            <option value="90d">Last 90 days</option>
-          </select>
+            <option value="7d">Last 7 days
+            <option value="30d">Last 30 days
+            <option value="90d">Last 90 days
+          
           <Button onClick={loadDashboardData} variant="outline">
             Refresh
-          </Button>
+          
         </div>
       </div>
 
@@ -122,69 +122,69 @@ export default function EnterpriseDashboard({
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
               <CardTitle className="text-sm font-medium glass">
                 Total Users
-              </CardTitle>
+              
               <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
+            
             <CardContent className="glass">
               <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalUsers)}
               </div>
               <p className="text-xs text-muted-foreground">
                 {formatNumber(platformMetrics.activeUsers)} active this month
-              </p>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
               <CardTitle className="text-sm font-medium glass">
                 Total Revenue
-              </CardTitle>
+              
               <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
+            
             <CardContent className="glass">
               <div className="text-2xl font-bold">
                 {formatCurrency(platformMetrics.totalRevenue)}
               </div>
               <p className="text-xs text-muted-foreground">
                 {formatCurrency(platformMetrics.monthlyRevenue)} this month
-              </p>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
               <CardTitle className="text-sm font-medium glass">
                 Projects Created
-              </CardTitle>
+              
               <Package className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
+            
             <CardContent className="glass">
               <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalProjects)}
               </div>
               <p className="text-xs text-muted-foreground">
                 AI-generated projects
-              </p>
-            </CardContent>
-          </Card>
+              
+            
+          
 
           <Card className="glass">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
               <CardTitle className="text-sm font-medium glass">
                 Conversion Rate
-              </CardTitle>
+              
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
+            
             <CardContent className="glass">
               <div className="text-2xl font-bold">
                 {formatPercentage(platformMetrics.conversionRate)}
               </div>
               <p className="text-xs text-muted-foreground">
                 Free to paid conversion
-              </p>
-            </CardContent>
-          </Card>
+              
+            
+          
         </div>
       )}
 
@@ -195,11 +195,11 @@ export default function EnterpriseDashboard({
             <CardTitle className="flex items-center space-x-2 glass">
               <Activity className="h-5 w-5" />
               <span>System Health</span>
-            </CardTitle>
+            
             <CardDescription className="glass">
               Real-time system performance and health metrics
-            </CardDescription>
-          </CardHeader>
+            
+          
           <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="space-y-2">
@@ -207,7 +207,7 @@ export default function EnterpriseDashboard({
                   <span className="text-sm font-medium">Uptime</span>
                   <Badge variant="secondary" className="bg-green-100 text-green-800">
                     {formatPercentage(systemMetrics.uptime)}
-                  </Badge>
+                  
                 </div>
                 <Progress value={systemMetrics.uptime} className="h-2" />
               </div>
@@ -217,7 +217,7 @@ export default function EnterpriseDashboard({
                   <span className="text-sm font-medium">Cache Hit Rate</span>
                   <Badge variant="secondary">
                     {formatPercentage(systemMetrics.cacheHitRate)}
-                  </Badge>
+                  
                 </div>
                 <Progress value={systemMetrics.cacheHitRate} className="h-2" />
               </div>
@@ -227,7 +227,7 @@ export default function EnterpriseDashboard({
                   <span className="text-sm font-medium">Error Rate</span>
                   <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
                     {formatPercentage(systemMetrics.errorRate * 100)}
-                  </Badge>
+                  
                 </div>
                 <Progress value={systemMetrics.errorRate * 100} className="h-2" />
               </div>
@@ -237,7 +237,7 @@ export default function EnterpriseDashboard({
                   <span className="text-sm font-medium">Response Time</span>
                   <Badge variant="secondary">
                     {systemMetrics.averageResponseTime}ms
-                  </Badge>
+                  
                 </div>
                 <div className="text-xs text-gray-500">
                   Average API response
@@ -265,8 +265,8 @@ export default function EnterpriseDashboard({
                 </span>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       )}
 
       {/* Admin Actions */}
@@ -276,28 +276,28 @@ export default function EnterpriseDashboard({
             <CardTitle className="flex items-center space-x-2 glass">
               <Shield className="h-5 w-5" />
               <span>Admin Actions</span>
-            </CardTitle>
+            
             <CardDescription className="glass">
               Administrative tools and system management
-            </CardDescription>
-          </CardHeader>
+            
+          
           <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button variant="outline" className="justify-start">
                 <Users className="h-4 w-4 mr-2" />
                 Manage Users
-              </Button>
+              
               <Button variant="outline" className="justify-start">
                 <Package className="h-4 w-4 mr-2" />
                 Review Templates
-              </Button>
+              
               <Button variant="outline" className="justify-start">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Export Analytics
-              </Button>
+              
             </div>
-          </CardContent>
-        </Card>
+          
+        
       )}
     </div>
   );

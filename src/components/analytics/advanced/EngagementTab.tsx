@@ -15,51 +15,51 @@ export function EngagementTab({ dashboardData }: EngagementTabProps) {
         {/* Top Pages */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Top Pages</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Top Pages
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {dashboardData.top.pages.map((page: any, index: number) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium">{index + 1}</span>
-                    <span className="text-sm">{page.url}</span>
-                  </div>
+                    <span className="text-sm font-medium">{index + 1}
+                    <span className="text-sm">{page.url}
+                  
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{page.views.toLocaleString()}</span>
-                    <span className="text-xs text-gray-500">views</span>
-                  </div>
-                </div>
+                    <span className="text-sm font-medium">{page.views.toLocaleString()}
+                    <span className="text-xs text-gray-500">views
+                  
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
+            
+          
+        
 
         {/* Feature Usage */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Feature Usage</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Feature Usage
+          
           <CardContent className="glass">
             <div className="space-y-3">
               {dashboardData.top.features.map((feature: any, index: number) => (
                 <div key={index}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm">{feature.name}</span>
-                    <span className="text-sm font-medium">{feature.usage}</span>
-                  </div>
+                    <span className="text-sm">{feature.name}
+                    <span className="text-sm font-medium">{feature.usage}
+                  
                   <div className="w-full glass-sidebar rounded-lg-full h-2">
                     <div 
                       className="glass-button primary h-2 rounded-lg-full"
                       style={{ width: `${(feature.usage / maxFeatureUsage) * 100}%` }}
                     />
-                  </div>
-                </div>
+                  
+                
               ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+            
+          
+        
+      
+    
   );
 }

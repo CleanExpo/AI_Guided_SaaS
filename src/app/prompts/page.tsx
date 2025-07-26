@@ -20,8 +20,8 @@ export default function PromptsPage() {
         <Button data-testid="create-prompt-button">
           <Plus className="mr-2 h-4 w-4" />
           Create Prompt
-        </Button>
-      </div>
+        
+      
 
       <div className="mb-6">
         <div className="relative">
@@ -32,8 +32,8 @@ export default function PromptsPage() {
             ="Search prompts...">value={searchQuery}>onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
           />
-        </div>
-      </div>
+        
+      
 
       <div className="glass grid gap-4">
         <Card className="glass">
@@ -41,25 +41,25 @@ export default function PromptsPage() {
             <Input 
               data-testid="prompt-title"
               ="Prompt Title">defaultValue="New Prompt" />
-          </CardHeader>
+          
           <CardContent className="glass"
             <Textarea
               data-testid="prompt-content"
               ="Enter your prompt content...">rows={4} />
-          </CardContent>
-        </Card>
+          
+        
 
         {prompts.map((prompt) => (
           <Card key={prompt.id} className="glass"
             <CardHeader className="glass">
-            <CardTitle className="glass">{prompt.title}</CardTitle>
-            </CardHeader>
+            <CardTitle className="glass">{prompt.title}
+            
             <CardContent className="glass"
-              <p className="text-gray-600">{prompt.content}</p>
-            </CardContent>
-          </Card>
+              <p className="text-gray-600">{prompt.content}
+            
+          
         ))}
-      </div>
-    </div>
+      
+    
   );
 }

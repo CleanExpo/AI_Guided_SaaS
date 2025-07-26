@@ -91,8 +91,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'preserve',
             originalTokens,
-            newTokens: originalTokens)
-            reason: 'Always preserve rule applied')
+            newTokens: originalTokens,
+                reason: 'Always preserve rule applied')
           });
           break;
 
@@ -105,8 +105,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'light_compress',
             originalTokens,
-            newTokens: lightTokens)
-            reason: 'Conditional preservation with light compression')
+            newTokens: lightTokens,
+                reason: 'Conditional preservation with light compression')
           });
           break;
 
@@ -119,8 +119,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'moderate_compress',
             originalTokens,
-            newTokens: moderateTokens)
-            reason: 'Applied moderate compression')
+            newTokens: moderateTokens,
+                reason: 'Applied moderate compression')
           });
           break;
 
@@ -133,8 +133,8 @@ export class TokenOptimizationEngine {
             filename,
             operation: 'heavy_compress',
             originalTokens,
-            newTokens: heavyTokens)
-            reason: 'Applied heavy compression or archival')
+            newTokens: heavyTokens,
+                reason: 'Applied heavy compression or archival')
           });
           break;
       }

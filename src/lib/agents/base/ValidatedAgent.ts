@@ -108,8 +108,8 @@ const _validatedAnalysis = this.validateOutput(analysis);
     // Simplified for example - implement your actual logic, const _prompt  = `Analyze these requirements and provide a structured, analysis: ${input}`;
 
 const _response = await generateAIResponse(prompt, { model: this.config.model,
-    temperature: this.config.temperature)
-    responseFormat: 'json'   )
+    temperature: this.config.temperature,
+                responseFormat: 'json'   )
     })
     return JSON.parse(response)
 }
@@ -118,7 +118,7 @@ const _response = await generateAIResponse(prompt, { model: this.config.model,
  * Decorator for validating agent configuration
  */;
 export function ValidatedAgentConfig(schema: z.ZodSchema): z.ZodSchema) {
-  return function <T extends { new(...args[]): {}>(constructor: T) {return class extends constructor {</T>
+  return function <T extends { new(...args[]): {}>(constructor: T) {return class extends constructor {
       constructor(...args[]) {;
         // Validate config before calling super, const config = args[0]; const _validatedConfig = schema.parse(config);
         args[0] = validatedConfig

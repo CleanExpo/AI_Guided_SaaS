@@ -81,8 +81,8 @@ export class QAAgent extends Agent {
       this.logger.error('QA task failed:', error);
       await this.sendMessage({ to: message.from,
         type: 'error',
-        payload: { error: error.message)
-          task: message.type)
+        payload: { error: error.message,
+                task: message.type)
         }    })
 }
   }
@@ -172,8 +172,8 @@ export class QAAgent extends Agent {
     await this.sendMessage({ to: 'orchestrator',
       type: 'deployment-validation',
       payload: {
-        environment)
-        passed: allPassed;
+        environment,
+                passed: allPassed;
         checks: results)
       }    })
 }
@@ -276,8 +276,8 @@ export class QAAgent extends Agent {
       await this.sendMessage({ to: 'self-healing-agent',
         type: 'test-failures',
         payload: {
-          failures)
-          request: 'analyze-and-fix')
+          failures,
+                request: 'analyze-and-fix')
         }    })
 }
   }

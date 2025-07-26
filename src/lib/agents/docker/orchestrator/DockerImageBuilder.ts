@@ -80,8 +80,8 @@ server.listen(3000);`;
   private async buildDockerImage(buildDir: string, imageName: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const process = spawn('docker', ['build', '-t', imageName, '.'], {
-        cwd: buildDir)
-        stdio: 'inherit')
+        cwd: buildDir,
+                stdio: 'inherit')
       });
       
       process.on('exit', (code) => {

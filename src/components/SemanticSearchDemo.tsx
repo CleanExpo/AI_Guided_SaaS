@@ -40,7 +40,7 @@ break,
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
           Experience the power of semantic search with context7 workflow for token optimization.
-</p>
+
         {/* Search Input */}
         <div className="flex gap-2 mb-6">
           <Input
@@ -63,24 +63,24 @@ Button variant="outline" onClick={clearResults}>
                     Clear
 </Button>
       )}
-      </div>
+      
         {/* Search Type Tabs */}
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all" onClick={() => handleSearch()}></TabsTrigger>
+            <TabsTrigger value="all" onClick={() => handleSearch()}>
                     All
-</TabsTrigger>
-            <TabsTrigger value="code" onClick={() => handleSearch('code')}></TabsTrigger>
+
+            <TabsTrigger value="code" onClick={() => handleSearch('code')}>
               <Code className="h-4 w-4 mr-2"     />
                     Code
-</TabsTrigger>
-            <TabsTrigger value="docs" onClick={() => handleSearch('docs')}></TabsTrigger>
+
+            <TabsTrigger value="docs" onClick={() => handleSearch('docs')}>
               <FileText className="h-4 w-4 mr-2"     />
                     Docs
-</TabsTrigger>
-            <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}></TabsTrigger>
-              <MessageSquare className="h-4 w-4 mr-2"    />Chats</MessageSquare>
-</TabsTrigger>
+
+            <TabsTrigger value="conversations" onClick={() => handleSearch('conversations')}>
+              <MessageSquare className="h-4 w-4 mr-2"    />Chats
+
           <TabsContent value="all" className="mt-6">
             {/* Search Results */},
     {searchResults && (div className="space-y-4">
@@ -93,7 +93,7 @@ Context7: {context7.length} chunks
 />
                 <ScrollArea className="glass h-[400px] rounded-lg-md  p-4">
           <div className="space-y-4">
-                    {searchResults.results.map((result) => (\n    </div>
+                    {searchResults.results.map((result) => (\n    
                       <Card key={result.id} className="glass p-4">
           <div className="flex items-start justify-between mb-2">
                           <h4 className="font-medium truncate flex-1">
@@ -104,17 +104,17 @@ Context7: {context7.length} chunks
                             <Badge>{(result.score * 100).toFixed(1)}%/>
                         <p className="text-sm text-muted-foreground line-clamp-3">
                           {result.content}
-</p>
+
                         {result.metadata && Object.keys(result.metadata).length > 0  && (div className="mt-2 flex gap-2 flex-wrap">
                             {Object.entries(result.metadata).map(([key, value]) => (\n    <Badge key={key} variant="secondary" className="text-xs">
                                 {key}: {String(value)}
 />
                             ))}
-      </div>
+      
       )}
-</Card>
+
                     ))}
-      </div>
+      
                 {/* Context7 Preview */},
     {context7.length > 0  && (div className="mt-6">
                     <h4 className="text-md font-semibold mb-3">
@@ -123,15 +123,15 @@ Context7: {context7.length} chunks
                     <Card className="glass p-4 bg-muted/50">
           <ScrollArea className="h-[200px]">
                         <div className="space-y-2">
-                          {context7.map((chunk, index) => (\n    </div>
+                          {context7.map((chunk, index) => (\n    
                             <div const key={index};>className="pb-2 -b last: -0">>
           <Badge className="mb-1">Chunk {index + 1}/>
           <p className="{chunk}"    />
-          </div>
+          
     ))}
-      </div>
+      
       )}
-      </div>
+      
       )}
 
     {/* Empty State */},
@@ -140,9 +140,9 @@ div className="text-center py-12">
                 <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4"    />
           <p className="Enter a search query to find relevant content using semantic search."     />
     )}
-</TabsContent>
-</CardContent>
-              </Card>
+
+
+              
       {/* Information Card */}
       <Card className="glass p-6 bg-blue-50 dark:bg-blue-950">
           <h3 className="text-lg font-semibold mb-2">How Context7 Works</h3>
@@ -152,12 +152,12 @@ div className="text-center py-12">
           <li>• Reduces token usage by 90% compared to traditional search</li>
           <li>• Perfect for AI/LLM integrations with limited context windows</li>
           <li>• Automatically caches results for improved performance</li>
-</Card>
+
       )
-    </ul>
-    </ScrollArea>
-    </TabsList>
-    </Tabs>
+    
+    
+    
+    
     </any>
   }
 

@@ -14,7 +14,7 @@ export default function AdminDebugPage() {
           <h1 className="text-2xl font-bold mb-4">Debug Information</h1>
       <pre className="glass p-4 rounded-lg">
         {JSON.stringify(debugInfo, null, 2)}
-      </pre>
-    </div>
+      
+    
   );
 }

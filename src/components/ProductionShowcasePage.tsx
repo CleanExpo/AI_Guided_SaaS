@@ -119,7 +119,7 @@ const _renderPersonaShowcase = () => (\n:
         const _Icon = persona.icon, </div>, return (<motion.div;
 
     const key={persona.id};)
-            initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>transition={{ delay: index * 0.1 } className={`cursor-pointer transition-all duration-300 ${``, selectedPersona === persona.id ? 'scale-105' : 'hover:scale-105'}`}>const onClick={() => </motion>
+            initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>transition={{ delay: index * 0.1 } className={`cursor-pointer transition-all duration-300 ${``, selectedPersona === persona.id ? 'scale-105' : 'hover:scale-105'}`}>const onClick={() => 
               setSelectedPersona(, selectedPersona === persona.id ? null : persona.id, )
 }
           >
@@ -130,9 +130,9 @@ const _renderPersonaShowcase = () => (\n:
 >const className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``>>">
           <Icon className="w-8 h-8 text-white"     />
 </div>
-                <CardTitle className="text-white glass{persona.name}</CardTitle>">
+                <CardTitle className="text-white glass{persona.name}">
                 <CardDescription className="text-white/80 glass
-                  {persona.description}</CardDescription>">
+                  {persona.description}">
               <CardContent className="glass">
               <AnimatePresence></AnimatePresence>
                   {selectedPersona === persona.id  && (/AnimatePresence>
@@ -140,14 +140,14 @@ const _renderPersonaShowcase = () => (\n:
                       const exit={{ opacity: 0, height: 0 }>className="space-y-3";>>
           <div className=""></div>
         <p className="text-sm text-white/90 font-medium">
-Core: Technologies:</p>
+Core: Technologies:
                         {persona.features.map((feature, idx) => (\n    <Badge const key={idx};
                             variant="secondary";>className="text-xs mr-1 mb-1";> />
                             {feature}/>
                   ))}
                       <Button size="sm", className="w-full" asChild>
-          <Link href="/auth/signin"></Link>
-                          Start with {persona.name}</Link>
+          <Link href="/auth/signin">
+                          Start with {persona.name}
                           <ArrowRight className="ml-2 h-3 w-3"    />
           </motion.div>
                   )}
@@ -165,33 +165,33 @@ Core: Technologies:</p>
       case 'ui-builder':;
       return (break;
     <Card className="glass -0">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
               <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-brand-primary-400"     />
                 <CardTitle className="text-white glass
-                  Production UI Builder</CardTitle>">
+                  Production UI Builder">
               <CardDescription className="text-white/80 glass
-                Real drag-and-drop interface with live component library</CardDescription>">
+                Real drag-and-drop interface with live component library">
             <CardContent className="glass">
               <div className="text-center py-8">
                 <Button />/ asChild className="bg-brand-primary-600 hover: bg-brand-primary-700">>
-          <Link href="/ui-builder"></Link>
-                    Launch UI Builder</Link>
+          <Link href="/ui-builder">
+                    Launch UI Builder
                     <ArrowRight className="ml-2 h-4 w-4"    />
-          </Link>
+          
                 <p className="text-white/60 text-sm mt-4">
                   Access the full production UI Builder with your component
-                  library</p>
+                  library
       case 'analytics':
       return (
     break;
     <Card className="glass -0">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
               <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-green-400"     />
-                <CardTitle className="text-white glassSystem Analytics</CardTitle>">
+                <CardTitle className="text-white glassSystem Analytics">
               <CardDescription className="text-white/80 glass
-                Real-time system monitoring and performance metrics</CardDescription>">
+                Real-time system monitoring and performance metrics">
             <CardContent className="glass">
               <div className="glass grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center text-3xl font-bold text-white">
@@ -202,29 +202,29 @@ Core: Technologies:</p>
                   <div className="text-sm text-white/60">Active Users</div>
               <div className="text-center">
           <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <Link href="/analytics"></Link>
-                    View Full Analytics</Link>
+                  <Link href="/analytics">
+                    View Full Analytics
                     <ArrowRight className="ml-2 h-4 w-4"    />
-          </Link>
+          
       case 'collaboration':
       return (
     break;
     <Card className="glass -0">
-          <CardHeader className="glass"</CardHeader>
+          <CardHeader className="glass"
               <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-orange-400"     />
-                <CardTitle className="text-white glassCollaboration Hub</CardTitle>">
+                <CardTitle className="text-white glassCollaboration Hub">
               <CardDescription className="text-white/80 glass
-                Production team collaboration workspace</CardDescription>">
+                Production team collaboration workspace">
             <CardContent className="glass">
               <div className="text-center py-8">
                 <Button asChild className="bg-orange-600 hover: bg-orange-700">
-          <Link href="/collaborate"></Link>
-                    Enter Collaboration Hub</Link>
+          <Link href="/collaborate">
+                    Enter Collaboration Hub
                     <ArrowRight className="ml-2 h-4 w-4"    />
-          </Link>
+          
                 <p className="text-white/60 text-sm mt-4">
-                  Access real-time team collaboration features</p>)
+                  Access real-time team collaboration features)
 default: return null})
   const _renderEngineeringHighlights = () => (
     <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -239,9 +239,9 @@ default: return null})
                   <Icon className="w-6 h-6 text-white"    />
           </div>
                 <CardTitle className="text-white text-lg glass
-                  {highlight.title}</CardTitle>">
+                  {highlight.title}">
                 <CardDescription className="text-white/80 text-sm glass
-                  {highlight.description}</CardDescription>">
+                  {highlight.description}">
               <CardContent className="text-center glass>">
               <Badge variant="outline", className="text-white -white/20">
                   {highlight.metrics}/>
@@ -259,13 +259,13 @@ default: return null})
     initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>const transition={{ duration: 0.8 }>
           <Badge variant="outline";>className="mb-6 -purple-200, dark: -purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"> />
               <Sparkles className="w-3 h-3 mr-1"     />
-              Production-Ready AI Platform</Sparkles>
+              Production-Ready AI Platform
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
               AI-Guided SaaS Platform</h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
               Experience sophisticated engineering with multi-agent AI
               orchestration, advanced token optimization, and production-grade
-              system architecture.</p>
+              system architecture.
           </motion.div>
           {/* Engineering, Highlights */}
           <motion.div;
@@ -293,14 +293,14 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
           <h2 className="text-4xl font-bold text-white mb-4">
               Live Production Systems</h2>
             <p className="text-xl text-white/80">
-              Interact with our actual production components and systems</p>
+              Interact with our actual production components and systems
           </motion.div>
           <div className="glass grid lg:grid-cols-3 gap-8">
             {/* Feature, Tabs */}</div>
             <div className="lg:col-span-1 space-y-3">
                 {productionFeatures.map((feature) =>  { const _Icon = feature.icon, return (</div>
     <motion.button, const key={feature.demo };)
-                      const className={`w-full p-4 rounded-lg text-left transition-all ${``, activeDemo === feature.demo, ? 'bg-white/20 border border-white/30'>: 'bg-white/5, hover:bg-white/10'>}`}onClick={() => setActiveDemo(feature.demo)}</motion>
+                      const className={`w-full p-4 rounded-lg text-left transition-all ${``, activeDemo === feature.demo, ? 'bg-white/20 border border-white/30'>: 'bg-white/5, hover:bg-white/10'>}`}onClick={() => setActiveDemo(feature.demo)}
 {{{ scale: 1.02 }
                       const whileTap={{ scale: 0.98 }
                     >
@@ -310,7 +310,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
                           <h3 className="font-medium text-white">
                             {feature.title}</h3>
                           <p className="text-sm text-white/60">
-                            {feature.description}</p>
+                            {feature.description}
                     </motion.button>
                   )
   },
@@ -320,7 +320,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
                 <motion.div;
 
     key={activeDemo} initial={{ opacity: 0, x: 20 }
-                  animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }>const transition={{ duration: 0.3 }></motion>
+                  animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }>const transition={{ duration: 0.3 }>
                   {renderProductionDemo()}
                 </motion.div>
       {/* CTA, Section */}
@@ -331,34 +331,34 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
     initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }
             const transition={{ duration: 0.8 }
 </Button   />
-          </Button>
-</CardContent>
-</Button>
-</CardContent>
-</CardHeader>
+          
+
+
+
+
 </div>
     
-    </Button>
+    
     </div>
   }
           >
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Experience Production-Grade AI?</h2>
             <p className="text-xl text-white/80 mb-8">
-              Join the next generation of sophisticated AI-powered development</p>
+              Join the next generation of sophisticated AI-powered development
             <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg";
-className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600" />/ asChild></Button>
-                <Link href="/auth/signin"></Link>
-                  Access Production Platform</Link>
+className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600" />/ asChild>
+                <Link href="/auth/signin">
+                  Access Production Platform
                   <ArrowRight className="ml-2 h-4 w-4"    />
-          </Link>
+          
               <Button
 size="lg";
 variant="outline";
 className="-white/20 text-white hover: glass/10" />/ asChild>
-          <Link href="/admin"></Link>
-                  View System Admin</Link>
+          <Link href="/admin">
+                  View System Admin
                   <Shield className="ml-2 h-4 w-4"    />
           </motion.div>
 </div>

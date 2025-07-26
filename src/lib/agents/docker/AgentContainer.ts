@@ -264,8 +264,8 @@ export class AgentContainer extends EventEmitter {
         // Check resource limits
         if (stats.cpuPercent > 85) {
           this.emit('resource:warning', { type: 'cpu',
-            value: stats.cpuPercent)
-            threshold: 85   )
+            value: stats.cpuPercent,
+                threshold: 85   )
     })
 }
         

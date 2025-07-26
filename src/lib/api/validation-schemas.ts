@@ -39,8 +39,8 @@ export const authSchemas = {
   }),
   
   resetPassword: z.object({
-    email: commonSchemas.email,)
-  }),
+    email: commonSchemas.email
+            }),
   
   updatePassword: z.object({)
     currentPassword: z.string().min(1, 'Current password is required'),

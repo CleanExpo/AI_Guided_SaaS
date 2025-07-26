@@ -36,9 +36,9 @@ const { servers,
       }: any = useMCP({ autoConnect: ['filesystem'] // Auto-connect filesystem by default)
     });
   
-const [selectedTool, setSelectedTool]  = useState<MCPTool | null>(null);</MCPTool>
+const [selectedTool, setSelectedTool]  = useState<MCPTool | null>(null);
 
-const [toolArguments, setToolArguments] = useState<Record<string any>({});</Record>
+const [toolArguments, setToolArguments] = useState<Record<string any>({});
   
 const [executionResults, setExecutionResults]  = useState<anynull>(null);</any>
 
@@ -54,7 +54,7 @@ const _availableServers = getAllServers();
 
 const _getCategoryIcon = (category: string) =>  { switch (category) {
       case 'development':
-      return<Code className="h-4 w-4"    />, break, case 'data':</Code>
+      return<Code className="h-4 w-4"    />, break, case 'data':
       return<Database className="h-4 w-4"     />
     break;
       case 'automation': return<Zap className="h-4 w-4"     />
@@ -62,7 +62,7 @@ const _getCategoryIcon = (category: string) =>  { switch (category) {
       case 'ai':
       return<Brain className="h-4 w-4"     />
     break;
-      case 'integration': return<Globe className="h-4 w-4"    />,</Globe>
+      case 'integration': return<Globe className="h-4 w-4"    />,
     break
 break
 };
@@ -140,19 +140,19 @@ required: required.includes(name)}))
   return (<div className="space-y-6">
       {/* Server, Management */}</div>
       <Card className="glass">
-          <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass">MCP Servers</CardTitle>
-          <CardDescription className="glass"</CardDescription>
-            Connect to Model Context Protocol servers to access their tools</Card>
-</CardHeader>
+          <CardHeader className="glass"
+          <CardTitle className="glass">MCP Servers
+          <CardDescription className="glass"
+            Connect to Model Context Protocol servers to access their tools
+
         <CardContent className="glass"
           <Tabs defaultValue = "development" className="w-full">
             <TabsList className="grid w-full grid-cols-5">)
               {categories.map((category) => (\n    <TabsTrigger key={category} value={category} className="flex items-center gap-2">
                   {getCategoryIcon(category)}
-                  <span className="hidden md:inline">{ category}</span>
+                  <span className="hidden md:inline">{ category}
               ))}
-</TabsList>
+
             {categories.map((category) => (\n    <TabsContent key={category} value={category} className="space-y-2">
                 {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return (<div;
 >const key={server.id };>className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
@@ -169,29 +169,29 @@ const variant={isConnected ? 'default' : 'secondary' };>className="capitalize";>
                           {status}
 />
                         <Button)
-size="sm";>variant={isConnected ? 'destructive' : 'default'} onClick={() => </Button>
+size="sm";>variant={isConnected ? 'destructive' : 'default'} onClick={() => 
                             // isConnected
                               ? disconnectServer(server.id, : connectServer(server.id)}
                           const disabled={loading}
                         >
                           {isConnected ? 'Disconnect' : 'Connect'}
-</Button>
+
       )}
 )}
-</TabsContent>
+
             ))}
-</Tabs>
-</CardContent>
-              </Card>
+
+
+              
       {/* Tool, Execution */}
       <div className="glass grid gap-6 md:grid-cols-2">
         {/* Tool, Selection */}</div>
         <Card className = "h-[600px]" className="glass
-          <CardHeader className="glass"</CardHeader>
-            <CardTitle className="glass">Available Tools</CardTitle>
-            <CardDescription className="glass"</CardDescription>
-              {tools.length} tools from {servers.filter((s) => s.status === 'connected').length} connected servers</Card>
-</CardHeader>
+          <CardHeader className="glass"
+            <CardTitle className="glass">Available Tools
+            <CardDescription className="glass"
+              {tools.length} tools from {servers.filter((s) => s.status === 'connected').length} connected servers
+
           <CardContent className="glass"
           <ScrollArea className="h-[480px]">
               <div className="space-y-2">
@@ -199,11 +199,11 @@ size="sm";>variant={isConnected ? 'destructive' : 'default'} onClick={() => </Bu
           <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 hover:bg-accent rounded-lg">
                       <ChevronRight className="h-4 w-4"    />
           <Server className="h-4 w-4"     />
-                      <span className="font-medium">{server.name}</span>
+                      <span className="font-medium">{server.name}
                       <Badge variant="secondary" className="ml-auto">
                         {server.tools.length} tools
 />
-                    <CollapsibleContent className ="pl-6 space-y-1"></CollapsibleContent>
+                    <CollapsibleContent className ="pl-6 space-y-1">
                       {server.tools.map((tool) => (\n    <div; const key={`${server.id}-${tool.name}`}`;
 
 const className={`p-2 rounded cursor-pointer transition-colors ${`
@@ -215,26 +215,26 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                         ></div>
                           <div className="flex items-center gap-2">
           <Settings className="h-4 w-4"     />
-                            <span className="font-medium">{tool.name}</span>
+                            <span className="font-medium">{tool.name}
           <p className="{tool.description}"    />
           </div>
     ))}
-</CollapsibleContent>
+
                 ))}
       </div>
         {/* Tool, Configuration */}
         <Card className="h-[600px] glass
-          <CardHeader className="glass"</CardHeader>
-            <CardTitle className="glass">Tool Configuration</CardTitle>
-            <CardDescription className="glass"</CardDescription>
-              {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}`</Card>
-</CardHeader>
-          <CardContent className="glass"</CardContent>
-            {selectedTool ? (</Card>
+          <CardHeader className="glass"
+            <CardTitle className="glass">Tool Configuration
+            <CardDescription className="glass"
+              {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}`
+
+          <CardContent className="glass"
+            {selectedTool ? (
               <div className="space-y-4" ></div>
                   <h4 className="font-medium mb-2">Arguments {getToolInputFields(selectedTool).map((field) => (\n    <div key={field.name} className="space-y-2 mb-4">
           <Label htmlFor={field.name}></Label>
-                        {field.name}, {field.required && <span className = "text-red-500 ml-1">*</span>
+                        {field.name}, {field.required && <span className = "text-red-500 ml-1">*
                       {field.type === 'string'  && (Input; id={field.name} value={toolArguments[field.name] || ''}
                           const onChange={(e) => setToolArguments({
                             ...toolArguments)
@@ -257,28 +257,28 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
           <Button
 
 const onClick={handleExecuteTool};
-                    const disabled={loading};>className="flex-1";>></Button>
+                    const disabled={loading};>className="flex-1";>>
                     {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin"    />}</Loader2>
                     Execute Tool
-</Button>
+
                   <Button
 variant="outline";
->onClick={addPlanStep} disabled={loading}></Button>
+>onClick={addPlanStep} disabled={loading}>
                     Add to Plan
-</Button>
+
             ) : (
               <div className="">
           <p>Select a tool from the left panel</p>
       )}
-</CardContent>
+
 </div>
       {/* Orchestration, Plan */}
       <Card className="glass">
-          <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass">Orchestration Plan</CardTitle>
-          <CardDescription className="glass"</CardDescription>
-            Build complex workflows by combining multiple tools</Card>
-</CardHeader>
+          <CardHeader className="glass"
+          <CardTitle className="glass">Orchestration Plan
+          <CardDescription className="glass"
+            Build complex workflows by combining multiple tools
+
         <CardContent className="space-y-4 glass
           <div className="space-y-2">
             <Label htmlFor="plan-description">Plan Description</Label>
@@ -298,7 +298,7 @@ Server: { step.server }
 </p>
                     <Button
 size="sm";
-variant="ghost";>const onClick={() => setPlanSteps(prev =></Button>)
+variant="ghost";>const onClick={() => setPlanSteps(prev =>)
                         prev.filter((s) => s.id !== step.id))}
                     >
                       <XCircle className="h-4 w-4"     />
@@ -308,19 +308,19 @@ variant="ghost";>const onClick={() => setPlanSteps(prev =></Button>)
           <Button
 
 const onClick={handleExecutePlan};
-            const disabled={loading || planSteps.length === 0};>className="w-full";>></Button>
+            const disabled={loading || planSteps.length === 0};>className="w-full";>>
             {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin"    />}</Loader2>
             Execute Plan ({planSteps.length} steps)
-</Button>
-</CardContent>
-              </Card>
+
+
+              
       {/* Execution, Results */},
     {executionResults.length > 0  && (Card>
           <CardHeader className="glass">
-            <CardTitle className="glass">Execution Results</CardTitle>
-            <CardDescription className="glass"</CardDescription>
-              Recent tool executions and their results</Card>
-</CardHeader>
+            <CardTitle className="glass">Execution Results
+            <CardDescription className="glass"
+              Recent tool executions and their results
+
           <CardContent className="glass"
           <ScrollArea className="h-[300px]">
               <div className="space-y-3">
@@ -332,10 +332,10 @@ const onClick={handleExecutePlan};
                         ) : (
                           <CheckCircle2 className="h-4 w-4 text-green-500"     />
                         )}
-                        <span className="font-medium">{result.tool}</span>
+                        <span className="font-medium">{result.tool}
                         <Badge variant="outline">{result.server}/>
                       <span className="text-sm text-muted-foreground">
-                        {result.duration}ms</span>
+                        {result.duration}ms
                     {result.error  && (
 div className="text-sm text-red-500">, Error: { result.error }
 </div>
@@ -346,7 +346,7 @@ div className="text-sm bg-muted p-2 rounded-lg">
                         <pre className="whitespace-pre-wrap">
                           {JSON.stringify(result.result, null, 2)
             )}
-</pre>
+
       )}
       </div>
                 ))}
@@ -357,19 +357,19 @@ div className="text-sm bg-muted p-2 rounded-lg">
 </h4>
 </any>
   
-    </ScrollArea>
-    </CardDescription>
-    </Button>
-    </CardDescription>
+    
+    
+    
+    
     </Label>
-    </CardDescription>
-    </CollapsibleTrigger>
-    </Collapsible>
-    </ScrollArea>
-    </CardDescription>
-    </TabsTrigger>
-    </CardDescription>
-    </MCPTool>
+    
+    
+    
+    
+    
+    
+    
+    
   }
 `
 }}}}

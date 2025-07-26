@@ -19,8 +19,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Perform semantic search
     const results = await semanticSearch.search({ query: validatedData.query,
       filters: validatedData.filters,
-      size: validatedData.size)
-      includeSource: validatedData.includeSource   )
+      size: validatedData.size,
+                includeSource: validatedData.includeSource   )
     })
     return NextResponse.json(results)
 } catch (error) {

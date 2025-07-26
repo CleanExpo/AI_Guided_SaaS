@@ -35,7 +35,7 @@ l
 };
 export function useN8nAutomation(): UseN8nAutomationReturn {
   const [loading, setLoading] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null, // List all workflows;</string>
+  const [error, setError] = useState<string | null>(null, // List all workflows;
 { useCallback(async () => {
     setLoading(true);
     setError(null);

@@ -12,7 +12,7 @@ interface UseSemanticSearchOptions {
 }
 
 export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSemanticSearchOptions = { }) { const [isSearching, setIsSearching] = useState<any>(null)
-  const [isIndexing, setIsIndexing] = useState<any>(false, const [searchResults, setSearchResults]  = useState<SearchResponse | null>(null);</SearchResponse>
+  const [isIndexing, setIsIndexing] = useState<any>(false, const [searchResults, setSearchResults]  = useState<SearchResponse | null>(null);
 
 const [context7, setContext7] = useState<string>("");</string>
   

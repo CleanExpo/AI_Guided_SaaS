@@ -7,5 +7,5 @@ export interface ProjectFormData { projectType: 'api' | 'web' | 'mobile' | 'desk
   complexity: 'simple' | 'moderate' | 'complex'
 };
 export interface ValidationResult { isValid: boolean,
-  errors: Record<string, string></string>
+  errors: Record<string, string>
 }

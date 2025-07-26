@@ -109,8 +109,8 @@ const analysis: RequirementAnalysis={ functionalRequirements: categorizedReqs.fu
 { `As a expert requirements analyst, extract all explicit and implicit requirements from the following project description. Include functional features, quality attributes, constraints, and any, assumptions: Project, Description:``, ${input};
 Provide a comprehensive list of all requirements found.`;
 
-const response = await generateAIResponse(prompt, { model: this.config.model)
-    temperature: this.config.temperature
+const response = await generateAIResponse(prompt, { model: this.config.model,
+                temperature: this.config.temperature
     }};
     return response
 })
@@ -161,8 +161,8 @@ Requirements: Summary:
 ${JSON.stringify(requirements, null, 2)}
 List technical risks, business risks, timeline risks, and any other concerns. Be specific and actionable.`;
 
-const response = await generateAIResponse(prompt, { model: this.config.model)
-    temperature: 0.4
+const response = await generateAIResponse(prompt, { model: this.config.model,
+                temperature: 0.4
     }};
     // Parse response into array)
     return response.split('\n').filter((line) => line.trim().length > 0)}
@@ -175,8 +175,8 @@ Include:
 - Operational constraints (performance, scalability needs);
 List each constraint clearly.`;
 
-const response = await generateAIResponse(prompt, { model: this.config.model)
-    temperature: 0.2
+const response = await generateAIResponse(prompt, { model: this.config.model,
+                temperature: 0.2
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};
   private async defineSuccessCriteria(functionalReqs: string[], userStories: UserStory[]): Promise<any> {;</any>
@@ -188,8 +188,8 @@ ${userStories
   .join('\n')};
 Provide specific, measurable, achievable, relevant, and time-bound (SMART) criteria.`;
 
-const response = await generateAIResponse(prompt, { model: this.config.model)
-    temperature: 0.3
+const response = await generateAIResponse(prompt, { model: this.config.model,
+                temperature: 0.3
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)}
   private async analyzeTechnicalAspects(input: string, requirements): Promise<any> {
@@ -205,8 +205,8 @@ Identify:
 - Scalability needs;
 - Development complexity areas`;
 
-const response = await generateAIResponse(prompt, { model: this.config.model)
-    temperature: 0.3
+const response = await generateAIResponse(prompt, { model: this.config.model,
+                temperature: 0.3
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)}
 }

@@ -6,8 +6,8 @@ import {
 
 export class DashboardGenerator {
   generateDashboardData(events: AnalyticsEvent[], 
-    metrics: AnalyticsMetrics)
-    realtimeEvents: AnalyticsEvent[])
+    metrics: AnalyticsMetrics,
+                realtimeEvents: AnalyticsEvent[])
   ): DashboardData {
     return {
       overview: this.generateOverview(metrics),

@@ -27,19 +27,19 @@ export function RevenueTab({ userTrendData }: RevenueTabProps) {
         {revenueMetrics.map((metric) => (
           <Card key={metric.title} className="glass">
             <CardContent className="glass p-6">
-              <p className="text-sm text-gray-600">{metric.title}</p>
-              <p className="text-2xl font-bold">{metric.value}</p>
-              <p className={`text-sm ${metric.changeColor} mt-1`}>{metric.change}</p>
-            </CardContent>
-          </Card>
+              <p className="text-sm text-gray-600">{metric.title}
+              <p className="text-2xl font-bold">{metric.value}
+              <p className={`text-sm ${metric.changeColor} mt-1`}>{metric.change}
+            
+          
         ))}
-      </div>
+      
 
       {/* Revenue Growth Chart */}
       <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Revenue Growth</CardTitle>
-        </CardHeader>
+            <CardTitle className="glass">Revenue Growth
+        
         <CardContent className="glass">
           <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={userTrendData}>
@@ -54,10 +54,10 @@ export function RevenueTab({ userTrendData }: RevenueTabProps) {
                 fill="#10b98133"
                 strokeWidth={2}
               />
-            </AreaChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
-    </div>
+            
+          
+        
+      
+    
   );
 }

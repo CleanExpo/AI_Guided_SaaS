@@ -24,9 +24,9 @@ export function DocumentationViewer({
   documentationSystem, tutorialSystem, userId, initialSectionId
 }: DocumentationViewerProps, tutorialSystem, userId, initialSectionId)
 }: DocumentationViewerProps) {
-  const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null);</DocumentationSection>
+  const [selectedSection, setSelectedSection] = useState<DocumentationSection | null>(null);
   const [searchQuery, setSearchQuery] = useState<any>(null)
-  const [searchResults, setSearchResults]  = useState<DocumentationSectionnull>(null);</DocumentationSection>
+  const [searchResults, setSearchResults]  = useState<DocumentationSectionnull>(null);
 
 const [userProgress, setUserProgress] = useState<any>(null)
   
@@ -101,15 +101,15 @@ break
         <div className="glass p-4 -b">
           {!sidebarCollapsed  && (div className="relative">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
-          <input type="text", ="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
+          <input type="text", ="Search documentation...";>value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
 {{(e) => e.key === 'Enter' && handleSearch()};
                 className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
         </div>
       )}
           <Button variant="ghost";
-size="sm";>className={`cn("mt-2" sidebarCollapsed && "w-full")} onClick={() => setSidebarCollapsed(!sidebarCollapsed)}</Button>
-            {sidebarCollapsed ? <ChevronRight className="h-4 w-4"    /> : <ChevronLeft className="h-4 w-4"    />}</ChevronLeft>
-</Button>
+size="sm";>className={`cn("mt-2" sidebarCollapsed && "w-full")} onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            {sidebarCollapsed ? <ChevronRight className="h-4 w-4"    /> : <ChevronLeft className="h-4 w-4"    />}
+
         {/* Navigation */}
         <ScrollArea className="flex-1">
           <div className="glass p-4 space-y-6">
@@ -122,14 +122,14 @@ size="sm";>className={`cn("mt-2" sidebarCollapsed && "w-full")} onClick={() => s
 h3 className="text-sm font-semibold mb-2">Search Results</h3>
       )}
                 <div className="space-y-1">
-                  {searchResults.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button">  {</button>
+                  {searchResults.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button">  {
                         setSelectedSection(section, setSearchResults([]); setSearchQuery('')
 };
                       const className={cn(`
                         "w-full text-left p-2 rounded-md text-sm, hover:bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted")
                       )}
                     >
-                      {sidebarCollapsed ? (</button>
+                      {sidebarCollapsed ? (
                         <div className="flex justify-center">
                           {isCompleted(section.id) ? (</div>
                             <CheckCircle className="h-4 w-4 text-green-600"     />
@@ -146,7 +146,7 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
                           )}
                           <span className="truncate">{section.title}</span>
       )}
-</button>
+
                   ))}
       </div>
             ) : (categories.map((category) => {
@@ -157,12 +157,12 @@ div className="flex items-center gap-2 mb-2">
           <h3 className="text-sm font-semibold">{category.label}</h3>)
       )}
                     <div className="space-y-1">
-                      {sections.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button"> setSelectedSection(section)}</button>
+                      {sections.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button"> setSelectedSection(section)}
 {{cn(`
                             "w-full text-left p-2 rounded-md text-sm, hover: bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted")
                           )}
                         >
-                          {sidebarCollapsed ? (</button>
+                          {sidebarCollapsed ? (
                             <div className="flex justify-center">
                               {isCompleted(section.id) ? (</div>
                                 <CheckCircle className="h-4 w-4 text-green-600"     />
@@ -179,7 +179,7 @@ div className="flex items-center gap-2 mb-2">
                               )}
                               <span className="truncate">{section.title}</span>
       )}
-</button>
+
                       ))}
       </div>
       )}
@@ -217,22 +217,22 @@ div className="flex items-center gap-2 mb-2">
                       <span>{selectedSection.metadata.tags.join(', ')},</span>
     {!isCompleted(selectedSection.id)  && (
 Button onClick={handleSectionComplete}></span>
-                    Mark as Complete</Button>
+                    Mark as Complete
       )}
       </div>
             {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
           <TabsList className="px-6">
-                <TabsTrigger value="content">Content {selectedSection.codeExamples.length > 0  && (</TabsTrigger>
-TabsTrigger value="examples">Code Examples</TabsTrigger>
+                <TabsTrigger value="content">Content {selectedSection.codeExamples.length > 0  && (
+TabsTrigger value="examples">Code Examples
             )},
     {selectedSection.interactiveElements.length > 0  && (
-TabsTrigger value="interactive">Interactive</TabsTrigger>
+TabsTrigger value="interactive">Interactive
             )},
     {selectedSection.systemState  && (
-TabsTrigger value="system">System State</TabsTrigger>
+TabsTrigger value="system">System State
       )}
-</TabsList>
+
               <ScrollArea className="flex-1">
           <TabsContent value="content", className="glass p-6 prose prose-sm max-w-none">
                   <ReactMarkdown
@@ -243,31 +243,31 @@ const components={{
                           <SyntaxHighlighter
 
 style={vscDarkPlus} language={match[1]};
-                            PreTag="div";>{...props}></ReactMarkdown>
+                            PreTag="div";>{...props}>
                             {String(children).replace(/\n$/, '')}
-</SyntaxHighlighter>
+
                         ) : (
-                          <code className={className} {...props}></code>
+                          <code className={className} {...props}>
                             {children}
-</code>
+
   )
 }
                   >
                     {selectedSection.content}
-</ReactMarkdown>
+
                   {/* Related, sections */},
     {selectedSection.relatedSections.length > 0  && (div className="glass mt-8 p-4 bg-muted rounded-xl-lg">
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;>const key={relatedId};>const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
+                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;>const key={relatedId};>const onClick={() = aria-label="Button"> setSelectedSection(related)};
                               className="text-sm text-primary hover: underline">
-                              {related.title}</button>
+                              {related.title}
                           ) : null
                         })}
       </div>
       )}
-</TabsContent>
+
                 <TabsContent value="examples", className="glass p-6">
           <div className="space-y-6">
                     {selectedSection.codeExamples.map((example) => (\n    </div>
@@ -276,16 +276,16 @@ style={vscDarkPlus} language={match[1]};
                         <SyntaxHighlighter
 
 const style={vscDarkPlus};
-                          const language={example.language};>PreTag="div";>></SyntaxHighlighter>
+                          const language={example.language};>PreTag="div";>>
                           {example.code}
-</SyntaxHighlighter>
+
                         {example.runnable  && (
 Button size="sm", className="mt-2">
                             <Play className="h-4 w-4 mr-2"     />
                             Run Example
-</Button>
+
       )}
-</Card>
+
                     ))}
       </div>
                 <TabsContent value="interactive", className = "p-6">
@@ -296,24 +296,24 @@ Button size="sm", className="mt-2">
                           <Badge variant="outline">{element.type}/>
                         <p className="text-sm text-muted-foreground mb-4">
                           {element.description}
-</p>
+
                         {element.type === 'tutorial'  && (Button; const onClick={() => startRelatedTutorial(element.config.tutorialId)}
                           >
                             <Play className="h-4 w-4 mr-2"     />
                             Start Tutorial
-</Button>
+
                         )},
     {element.type === 'playground'  && (
 Button variant="outline"><Code className="h-4 w-4 mr-2"     />
                             Open Playground
-</Button>
+
             )},
     {element.completionTracking  && (
 div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                             <Sparkles className="h-4 w-4"    />
           <span>{element.completionTracking.points} points</span>
       )}
-</Card>
+
                     ))}
       </div>
                 <TabsContent value="system", className="glass p-6">
@@ -367,10 +367,10 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
   );
 </div>
   
-    </Card>
-    </Card>
-    </TabsContent>
-    </ScrollArea>
+    
+    
+    
+    
     </any>
     </any>
     </any>

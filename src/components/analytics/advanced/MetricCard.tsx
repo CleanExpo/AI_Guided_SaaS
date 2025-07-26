@@ -30,12 +30,12 @@ export function MetricCard({ icon: Icon, iconColor, title, value, trend }: Metri
                 <ArrowDownRight className="h-3 w-3 mr-1" />
               )}
               {trend.value}%
-            </Badge>
+            
           )}
-        </div>
-        <p className="text-sm text-gray-600">{title}</p>
-        <p className="text-2xl font-bold">{value}</p>
-      </CardContent>
-    </Card>
+        
+        <p className="text-sm text-gray-600">{title}
+        <p className="text-2xl font-bold">{value}
+      
+    
   );
 }

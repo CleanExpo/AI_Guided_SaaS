@@ -4,8 +4,8 @@ import { architecturePrompts } from './prompts';
 
 export class InfrastructurePlanner {
   async planInfrastructure(components: Component[],
-    overview: ArchitectureOverview)
-    timeline: any)
+    overview: ArchitectureOverview,
+                timeline: any)
   ): Promise<Infrastructure> {
     const prompt = architecturePrompts.infrastructure
       .replace('{components}', JSON.stringify(components, null, 2))

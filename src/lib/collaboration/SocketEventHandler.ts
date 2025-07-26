@@ -111,15 +111,15 @@ export class SocketEventHandler {
           // Validate and save change
           const savedChange = await this.projectManager.saveProjectChange({
             ...change,
-            userId)
-            projectId: change.projectId!,)
+            userId,
+                projectId: change.projectId!,)
             timestamp: new Date()
           } as ProjectChange);
 
           // Broadcast to other users in room
           socket.to(roomId).emit('project_updated', {
-            change: savedChange)
-            user: socket.data.user)
+            change: savedChange,
+                user: socket.data.user)
           });
         } catch (error) {
           logger.error('Error handling project change:', error);
@@ -145,8 +145,8 @@ export class SocketEventHandler {
 
           // Broadcast to room
           io.to(roomId).emit('comment_added', {
-            comment: savedComment)
-            user: socket.data.user)
+            comment: savedComment,
+                user: socket.data.user)
           });
         } catch (error) {
           logger.error('Error adding comment:', error);
@@ -187,8 +187,8 @@ export class SocketEventHandler {
     if (room) {
       // Notify other participants
       socket.to(roomId).emit('user_left', {
-        userId)
-        user: socket.data.user)
+        userId,
+                user: socket.data.user)
       });
     }
   }

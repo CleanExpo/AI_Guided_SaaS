@@ -63,54 +63,54 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-          <CardTitle className="text-sm font-medium glass">Total Users</CardTitle>
+          <CardTitle className="text-sm font-medium glass">Total Users
             <Users className="h-4 w-4 text-muted-foreground"  />
-          </CardHeader>
+          
           <CardContent className="glass">
-            <div className="text-2xl font-bold">{analyticsData.overview.totalUsers.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-          </CardContent>
-        </Card>
+            <div className="text-2xl font-bold">{analyticsData.overview.totalUsers.toLocaleString()}
+            <p className="text-xs text-muted-foreground">+20.1% from last month
+          
+        
         
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Active Users</CardTitle>
+            <CardTitle className="text-sm font-medium glass">Active Users
             <TrendingUp className="h-4 w-4 text-muted-foreground"  />
-          </CardHeader>
+          
           <CardContent className="glass">
-          <div className="text-2xl font-bold">{analyticsData.overview.activeUsers.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+15% from last week</p>
-          </CardContent>
-        </Card>
+          <div className="text-2xl font-bold">{analyticsData.overview.activeUsers.toLocaleString()}
+            <p className="text-xs text-muted-foreground">+15% from last week
+          
+        
         
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Total Projects</CardTitle>
+            <CardTitle className="text-sm font-medium glass">Total Projects
             <BarChart3 className="h-4 w-4 text-muted-foreground"  />
-          </CardHeader>
+          
           <CardContent className="glass">
-          <div className="text-2xl font-bold">{analyticsData.overview.totalProjects.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+12 new today</p>
-          </CardContent>
-        </Card>
+          <div className="text-2xl font-bold">{analyticsData.overview.totalProjects.toLocaleString()}
+            <p className="text-xs text-muted-foreground">+12 new today
+          
+        
         
         <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass">
-            <CardTitle className="text-sm font-medium glass">Revenue</CardTitle>
+            <CardTitle className="text-sm font-medium glass">Revenue
             <DollarSign className="h-4 w-4 text-muted-foreground"  />
-          </CardHeader>
+          
           <CardContent className="glass">
-          <div className="text-2xl font-bold">${analyticsData.overview.revenue.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">+25% from last month</p>
-          </CardContent>
-        </Card>
-      </div>
+          <div className="text-2xl font-bold">${analyticsData.overview.revenue.toLocaleString()}
+            <p className="text-xs text-muted-foreground">+25% from last month
+          
+        
+      
       
       {/* User Activity Chart */}
       <Card className="glass">
           <CardHeader className="glass">
-          <CardTitle className="glass">User Activity - Last 7 Days</CardTitle>
-        </CardHeader>
+          <CardTitle className="glass">User Activity - Last 7 Days
+        
         <CardContent className="glass">
           <div className="h-[200px] flex items-end justify-between gap-2">
             {analyticsData.userMetrics.activeUsers.map((day, index) => (
@@ -118,12 +118,12 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
                 <div 
                   className="w-full glass-button primary rounded-lg-t"
                   style={{ height: `${(day.count / 150) * 100}%` }} />
-                <span className="text-xs text-gray-600">{day.date}</span>
-              </div>
+                <span className="text-xs text-gray-600">{day.date}
+              
             ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          
+        
+      
+    
   )
 }

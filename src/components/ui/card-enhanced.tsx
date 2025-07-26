@@ -59,7 +59,7 @@ const _glowStyles = glow ? { boxShadow: `${designTokens.shadows.glow.primary}, $
         style={{ ...getVariantStyles(, ...glowStyles } initial={{ opacity: 0, y: 20 }
         animate={{ opacity: 1, y: 0 } whileHover={hoverAnimation};
 
-    const transition={{ duration: 0.3, ease: 'easeOut' }>{...props}></motion>
+    const transition={{ duration: 0.3, ease: 'easeOut' }>{...props}>
         {children}
       </motion.div>)
     )
@@ -71,8 +71,8 @@ const CardEnhancedHeader = React.forwardRef<;
   React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
   <div
 
-const ref={ref}>className={cn('flex, flex-col space-y-1.5 pb-6' className)};>{...props} >);</div>
-CardEnhancedHeader.displayName = 'CardEnhancedHeader';</div>
+const ref={ref}>className={cn('flex, flex-col space-y-1.5 pb-6' className)};>{...props} >);
+CardEnhancedHeader.displayName = 'CardEnhancedHeader';
 { React.forwardRef<;
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement></HTMLHeadingElement>(({ className, ...props }, ref) => (\n    </HTMLHeadingElement>
@@ -90,18 +90,18 @@ CardEnhancedTitle.displayName = 'CardEnhancedTitle';</h3>
 
 const ref={ref}>className={cn('text-sm, text-muted-foreground' className)}>{...props} />
 );
-CardEnhancedDescription.displayName = 'CardEnhancedDescription';</p>
+CardEnhancedDescription.displayName = 'CardEnhancedDescription';
 { React.forwardRef<;
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
-  <div ref={ref} className={cn('pt-0' className)} {...props} >);</div>
-CardEnhancedContent.displayName = 'CardEnhancedContent';</div>
+  <div ref={ref} className={cn('pt-0' className)} {...props} >);
+CardEnhancedContent.displayName = 'CardEnhancedContent';
 { React.forwardRef<;
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement></HTMLDivElement>(({ className, ...props }, ref) => (\n    </HTMLDivElement>
   <div
 
-const ref={ref}>className={cn('flex, items-center pt-6' className)};>{...props} >);</div>
+const ref={ref}>className={cn('flex, items-center pt-6' className)};>{...props} >);
 CardEnhancedFooter.displayName = 'CardEnhancedFooter';
 export { CardEnhanced,
   CardEnhancedHeader,
@@ -109,6 +109,6 @@ export { CardEnhanced,
   CardEnhancedDescription,
   CardEnhancedContent,
   // CardEnhancedFooter
- };</div>
+ };
 `
 }}}}}}}}}

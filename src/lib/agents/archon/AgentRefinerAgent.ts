@@ -106,8 +106,8 @@ export class AgentRefinerAgent extends Agent {
       this.think('Analyzing agent team configuration and collaboration patterns...'
       , // Parse input to extract current agents and requirements, const { currentAgents, requirements, constraints } =;)
         await this.parseInput(input);
-      this.observe('Parsed agent configuration', { agentCount: currentAgents.length)
-    requirementCount: requirements.length
+      this.observe('Parsed agent configuration', { agentCount: currentAgents.length,
+                requirementCount: requirements.length
       }};
       // Step, 1: Analyze current agent configuration;
 )
@@ -223,8 +223,8 @@ const response = await generateAIResponse(analysisPrompt, { model: this.config.m
 }
   private async profileAgentPerformance(agents: AgentConfiguration[];
     // analysis)
-  ): Promise<Map<string PerformanceProfile> {</Map>
-{ new Map<string PerformanceProfile>(, for (const agent of agents) {</string>
+  ): Promise<Map<string PerformanceProfile> {
+{ new Map<string PerformanceProfile>(, for (const agent of agents) {
 { `Profile the performance characteristics of this, agent: ``, Agent: ${JSON.stringify(agent, null, 2)}
 Context from, analysis:
 ${JSON.stringify(analysis, null, 2)}
@@ -358,7 +358,7 @@ Provide 5-7 specific recommendations, for:
 4. Optimization opportunities
 5. Future enhancements`;
 
-const response = await generateAIResponse(recommendPrompt, { model: this.config.model)
-    temperature: 0.4
+const response = await generateAIResponse(recommendPrompt, { model: this.config.model,
+                temperature: 0.4
     }};)
     return response.split('\n').filter((line) => line.trim().length > 0)};))))))))))))))))

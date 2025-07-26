@@ -54,8 +54,8 @@ export function ContainerMonitor() {
           <CardTitle className="flex items-center gap-2 glass">
             <Activity className="h-5 w-5" />
             Container Status
-          </CardTitle>
-        </CardHeader>
+          
+        
         <CardContent className="glass">
           <div className="space-y-4">
             {containers?.map((container) => (
@@ -65,19 +65,19 @@ export function ContainerMonitor() {
                     container.status === 'running' ? 'bg-green-500' : container.status === 'stopped' ? 'bg-gray-500' : 'bg-red-500'
                   }`} />
                   <div>
-                    <p className="font-medium">{container.name}</p>
-                    <p className="text-sm text-gray-500">Uptime: {container.uptime}</p>
+                    <p className="font-medium">{container.name}
+                    <p className="text-sm text-gray-500">Uptime: {container.uptime}
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm">CPU: {container.cpu}%</p>
-                  <p className="text-sm">Memory: {container.memory}MB</p>
+                  <p className="text-sm">CPU: {container.cpu}%
+                  <p className="text-sm">Memory: {container.memory}MB
                 </div>
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        
+      
     </div>
   );
 }

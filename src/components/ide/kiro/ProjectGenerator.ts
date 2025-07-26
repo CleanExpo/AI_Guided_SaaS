@@ -358,7 +358,7 @@ export default function RootLayout({
 }) {
   return(<html lang="en">
       <body>{children}</body>
-    </html>)
+    )
   )
 }`;
   }
@@ -370,7 +370,7 @@ function App() {
   return(<div className="App">
       <h1>Welcome to ${name}</h1>
       <p>Edit src/App.tsx to get started</p>
-    </div>)
+    )
   )
 }
 
@@ -433,9 +433,9 @@ app.listen(PORT, () => {
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
   </body>
-</html>`;
+`;
   }
 
   private static generateDockerfile(projectType: string, framework: string): string {

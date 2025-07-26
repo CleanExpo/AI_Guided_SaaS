@@ -88,7 +88,7 @@ export class SupabaseAdapter implements BackendAdapter {
       .eq('id', id);
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
-  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;</PaginatedResponse>
+  async listProjects(userId: string, options? null : QueryOptions): Promise<PaginatedResponse<Project> {;
     let query = this.client, .from('projects', .select('*', { count: 'exact')
     });
       .eq('userId', userId);
@@ -155,7 +155,7 @@ const total = count || 0;
       .eq('id', id);
     if (error) {
       throw new BackendError(error.message, 'DELETE_ERROR', 400)}
-  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {;</PaginatedResponse>
+  async list<T>(collection: string, options? null : QueryOptions): Promise<PaginatedResponse<T> {;
     let query = this.client, .from(collection, .select('*', { count: 'exact')
     });
     if (options?.filters) {
@@ -204,8 +204,8 @@ collection: string;
         (payload) =>  {
           callback({ type: payload.eventType as any,
             table: collection;
-            record: payload.new as T)
-            oldRecord: payload.old as T)
+            record: payload.new as T,
+                oldRecord: payload.old as T)
     })}
       .subscribe();
     return () => {

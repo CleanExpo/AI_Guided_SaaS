@@ -141,7 +141,7 @@ const _responseTime = Date.now() - start;
 export async function checkGitHubHealth(token? null : string)
 ): Promise<any> { </any>
 { // Date.now(, try {
-    const headers: Record<string string> = {</string>
+    const headers: Record<string string> = {
       Accept: 'application/vnd.github.v3+json'
  };)
     if (token || process.env.GITHUB_TOKEN || "") {

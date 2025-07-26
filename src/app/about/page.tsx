@@ -16,13 +16,13 @@ export default function AboutPage() {
           <div className="space-y-6">
             <p className="text-lg text-gray-700">
               We're revolutionizing software development by making professional-grade applications accessible to everyone through AI-powered guidance.
-            </p>
+            
 
             <section>
               <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
               <p className="text-gray-600">
                 To democratize software development by providing intelligent, AI-driven tools that bridge the gap between no-code simplicity and professional development power.
-              </p>
+              
             </section>
 
             <section>
@@ -33,11 +33,11 @@ export default function AboutPage() {
                 <li>Enterprise-grade security and scalability built-in</li>
                 <li>One-click deployment to any cloud platform</li>
                 <li>Continuous learning and improvement of our AI models</li>
-              </ul>
+              
             </section>
-          </div>
-        </div>
-      </div>
-    </div>
+          
+        
+      
+    
   );
 }

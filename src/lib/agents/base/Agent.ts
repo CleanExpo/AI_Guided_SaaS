@@ -18,14 +18,14 @@ export interface AgentContext { projectId: string;
   sessionId: string;
   requirements: string;
   history: AgentMessage[],
-  sharedMemory: Map<string any>,</string>
-  artifacts: Map<string any></string>
+  sharedMemory: Map<string any>,
+  artifacts: Map<string any>
 }
 
 export interface AgentResult { success: boolean;
   output: any;
   messages: AgentMessage[];
-  artifacts?: Map<string any></string>
+  artifacts?: Map<string any>
   nextSteps?: string[];
   confidence?: number
 }
@@ -131,7 +131,7 @@ export abstract class Agent extends EventEmitter {
   
   protected addMessage(type: AgentMessage['type'])
     content: string;
-    metadata?: Record<string any></string>)
+    metadata?: Record<string any>)
   ): AgentMessage {
     const message: AgentMessage={ id: uuidv4(, from: this.config.id,
       to: 'system',

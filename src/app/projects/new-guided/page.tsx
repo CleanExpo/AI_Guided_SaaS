@@ -29,12 +29,12 @@ export default function NewGuidedProjectPage() {
           <div className="container mx-auto max-w-2xl px-4">
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Create New Guided Project</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Create New Guided Project
+          
           <CardContent className="glass"
           <form onSubmit={handleSubmit} className="space-y-6" role="form">
               <div>
-          <label className="block text-sm font-medium mb-2">Project Name</label>
+          <label className="block text-sm font-medium mb-2">Project Name
                 <Input
                   type="text">value={formData.name}>onChange={(e) => setFormData({...formData, name: e.target.value})}
                   ="Enter project name"
@@ -42,7 +42,7 @@ export default function NewGuidedProjectPage() {
                 />
               </div>
               <div>
-          <label className="block text-sm font-medium mb-2">Description</label>
+          <label className="block text-sm font-medium mb-2">Description
                 <Input
                   type="text">value={formData.description}>onChange={(e) => setFormData({...formData, description: e.target.value})}
                   ="Describe your project"
@@ -50,10 +50,10 @@ export default function NewGuidedProjectPage() {
               </div>
               <Button type="submit" disabled={isLoading} className="w-full">
                 {isLoading ? 'Creating...' : 'Create Project'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+              
+            
+          
+        
       </div>
     </div>
   );

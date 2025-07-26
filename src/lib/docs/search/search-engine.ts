@@ -30,8 +30,8 @@ export class DocumentationSearchEngine {
       const score = this.calculateRelevance(queryTokens, tokens);
       if (score > 0) {
         results.push({
-          sectionId)
-          title: section.title,)
+          sectionId,
+                title: section.title,)
           snippet: this.generateSnippet(section.content, queryTokens),
           relevanceScore: score,
           context: [section.metadata.category, ...section.metadata.tags]
@@ -92,8 +92,8 @@ export class DocumentationSearchEngine {
       : bestSentence;
   }
 
-  async searchWithAI(query: string)
-    sections: Map<string, DocumentationSection>)
+  async searchWithAI(query: string,
+                sections: Map<string, DocumentationSection>)
   ): Promise<DocumentationSearchResult[]> {
     // Placeholder for AI-enhanced search
     // Would integrate with embedding-based search

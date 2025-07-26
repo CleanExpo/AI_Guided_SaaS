@@ -2,7 +2,7 @@
 import { EventEmitter } from 'events';export interface UserBehaviorPattern { userId: string;
 import { logger } from '@/lib/logger';
   patterns: { errorFrequency: number;
-  featureUsage: Record<string any>,</string>
+  featureUsage: Record<string any>,
   sessionDuration: number;
   clickPatterns: Array<{ element: string;
   count: number }>
@@ -19,7 +19,7 @@ export interface AnomalyDetection { type: | 'error_spike'
   severity: 'low' | 'medium' | 'high' | 'critical',
   timestamp: Date;
   description: string;
-  metrics: Record<string any  />, export</string>
+  metrics: Record<string any  />, export
 }
 
 interface PredictedIssue { type: | 'churn_risk'
@@ -41,7 +41,7 @@ export interface SystemHealthMetrics { errorRate: number;
     userSatisfaction: number
 };
 export class PredictiveAnalytics extends EventEmitter {
-  private behaviorHistory: Map<string UserBehaviorPattern[]> = new Map(, private systemMetrics: SystemHealthMetrics[] = [], private anomalyThresholds={</string>
+  private behaviorHistory: Map<string UserBehaviorPattern[]> = new Map(, private systemMetrics: SystemHealthMetrics[] = [], private anomalyThresholds={
     errorRate: 0.05;
   // 5% error rate, responseTime: 1000;
   // 1 second, sessionDuration: 300;
@@ -59,7 +59,7 @@ export class PredictiveAnalytics extends EventEmitter {
       this.analyzePatterns()}, 300000)
 }
   recordUserBehavior(userId: string;
-    behavior: Partial<UserBehaviorPattern['patterns']></UserBehaviorPattern>)
+    behavior: Partial<UserBehaviorPattern['patterns']>)
   ) { const existingPatterns = this.behaviorHistory.get(userId) || []; const currentPattern =, existingPatterns[existingPatterns.length - 1] ||;
       this.createNewPattern(userId);
     // Merge behavior data
@@ -119,7 +119,7 @@ if (pattern.riskScore > 0.7) {
     if (anomalies.length > 0) {
       this.emit('anomaly-detected', { userId, anomalies })}
   private detectNavigationLoops(flow: string[]): number {
-    const visited = new Map<string number>(, let loops = 0, for (const page of flow) {; </string>
+    const visited = new Map<string number>(, let loops = 0, for (const page of flow) {; 
 { visited.get(page) || 0; visited.set(page, count + 1);
       if (count > 2) {l}oops++
 }
@@ -244,7 +244,7 @@ const commonIssues = this.findCommonPatterns(allPatterns);
           0
         , recommendations: this.generateRecommendations(commonIssues)})}
   private findCommonPatterns(patterns: UserBehaviorPattern[]): Array { ;
-    const issues: Record<string any> = { };</string>
+    const issues: Record<string any> = { };
     patterns.forEach((pattern) =>  {
       pattern.anomalies.forEach((anomaly) => {
         const key = `${anomaly.type}:${ anomaly.severity}`

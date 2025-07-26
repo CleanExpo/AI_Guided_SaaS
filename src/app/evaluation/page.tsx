@@ -97,9 +97,9 @@ export default function EvaluationDashboard() {
   };
 
   const getStatusBadge = (score: number) => {
-    if (score >= 8) return <Badge className="bg-green-100 text-green-800">Production Ready</Badge>;
-    if (score >= 6) return <Badge className="bg-yellow-100 text-yellow-800">Needs Work</Badge>;
-    return <Badge className="bg-red-100 text-red-800">Critical</Badge>;
+    if (score >= 8) return <Badge className="bg-green-100 text-green-800">Production Ready;
+    if (score >= 6) return <Badge className="bg-yellow-100 text-yellow-800">Needs Work;
+    return <Badge className="bg-red-100 text-red-800">Critical;
   };
 
   const handleRunEvaluation = async () => {
@@ -127,7 +127,7 @@ export default function EvaluationDashboard() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Evaluation Dashboard</h1>
-              <p className="text-gray-600 mt-1">Monitor your application quality scores in real-time</p>
+              <p className="text-gray-600 mt-1">Monitor your application quality scores in real-time
             </div>
             <div className="glass flex items-center gap-4">
               <Button
@@ -135,7 +135,7 @@ export default function EvaluationDashboard() {
                 onClick={loadEvaluationData}>disabled={isRunning}>
                 <RefreshCw className={`h-4 w-4 mr-2 ${isRunning ? 'animate-spin' : ''}`} />
                 Refresh
-              </Button>
+              
               <Button
                 onClick={handleRunEvaluation}>disabled={isRunning}>
                 {isRunning ? (
@@ -149,7 +149,7 @@ export default function EvaluationDashboard() {
                     Run Evaluation
                   </>
                 )}
-              </Button>
+              
             </div>
           </div>
         </div>
@@ -158,10 +158,10 @@ export default function EvaluationDashboard() {
         <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl glassOverall Score</CardTitle>
+              <CardTitle className="text-2xl glassOverall Score
               {latest && getStatusBadge(latest.overall)}
             </div>
-          </CardHeader>
+          
           <CardContent className="glass">
             <div className="flex items-center justify-between">
               <div className="glass flex items-center gap-4">
@@ -184,23 +184,23 @@ export default function EvaluationDashboard() {
               </div>
             </div>
             <Progress value={latest ? latest.overall * 10 : 0} className="mt-4" />
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Component Scores */}
         <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {latest && Object.entries(latest.scores).map(([component, data]) => (
             <Card key={component} className="glass"
               <CardHeader className="glass">
-            <CardTitle className="capitalize glass{component}</CardTitle>
-              </CardHeader>
+            <CardTitle className="capitalize glass{component}
+              
               <CardContent className="glass">
             <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className={`text-3xl font-bold ${getScoreColor(data.total)}`}>
                       {data.total.toFixed(1)}/10
-                    </span>
-                    <span className="text-2xl">{getScoreEmoji(data.total)}</span>
+                    
+                    <span className="text-2xl">{getScoreEmoji(data.total)}
                   </div>
                   <Progress value={data.total * 10} />
                   <div className="text-sm text-gray-600">
@@ -208,31 +208,31 @@ export default function EvaluationDashboard() {
                       <span className="flex items-center gap-1 text-green-600">
                         <CheckCircle className="h-4 w-4" />
                         Meets standards
-                      </span>
+                      
                     ) : (
                       <span className="flex items-center gap-1 text-yellow-600">
                         <AlertCircle className="h-4 w-4" />
                         Needs improvement
-                      </span>
+                      
                     )}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           ))}
         </div>
 
         {/* History Chart */}
         <Card className="glass">
           <CardHeader className="glass">
-            <CardTitle className="glass">Score History</CardTitle>
-          </CardHeader>
+            <CardTitle className="glass">Score History
+          
           <CardContent className="glass">
             <div className="glass h-64 flex items-end justify-between gap-4">
               {history.map((entry, index) => (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
                   <div className="w-full flex flex-col items-center">
-                    <span className="text-sm font-medium mb-1">{entry.overall.toFixed(1)}</span>
+                    <span className="text-sm font-medium mb-1">{entry.overall.toFixed(1)}
                     <div
                       className="w-full glass-button primary rounded-lg-t">style={ height: `${(entry.overall / 10) * 200}px` } />
                   </div>
@@ -242,8 +242,8 @@ export default function EvaluationDashboard() {
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          
+        
 
         {/* Quick Actions */}
         <div className="glass mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -253,11 +253,11 @@ export default function EvaluationDashboard() {
                 <Activity className="h-8 w-8 text-blue-600" />
                 <div>
                   <h3 className="font-semibold">Continuous Monitoring</h3>
-                  <p className="text-sm text-gray-600">Running every 30 minutes</p>
+                  <p className="text-sm text-gray-600">Running every 30 minutes
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
           
           <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md glass
             <CardContent className="glass p-6">
@@ -265,11 +265,11 @@ export default function EvaluationDashboard() {
                 <TrendingUp className="h-8 w-8 text-green-600" />
                 <div>
                   <h3 className="font-semibold">View Trends</h3>
-                  <p className="text-sm text-gray-600">Analyze improvement patterns</p>
+                  <p className="text-sm text-gray-600">Analyze improvement patterns
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
           
           <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md glass
             <CardContent className="glass p-6">
@@ -277,11 +277,11 @@ export default function EvaluationDashboard() {
                 <BarChart3 className="h-8 w-8 text-purple-600" />
                 <div>
                   <h3 className="font-semibold">Detailed Report</h3>
-                  <p className="text-sm text-gray-600">View comprehensive analysis</p>
+                  <p className="text-sm text-gray-600">View comprehensive analysis
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            
+          
         </div>
       </div>
     </div>

@@ -20,10 +20,10 @@ export class ErrorBoundary extends React.Component {
     if (this.state.hasError) {;
       return this.props.fallback || (, <div className="glass flex items-center justify-center min-h-[200px] p-4 text-center">, <h2 className="text-lg font-semibold mb-2">Something went wrong</h2>
         <p className="Please refresh the page or try again later.">
-          </div>
+          
     )
 }
     return this.props.children
 }
-</div>
+
   }

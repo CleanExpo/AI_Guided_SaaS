@@ -35,8 +35,8 @@ export function validateRequired(value: unknown, fieldName: string): string | nu
 }
 
 export function validateMinLength(value: string,
-  minLength: number)
-  fieldName: string)
+  minLength: number,
+                fieldName: string)
 ): string | null {
   if (value.length < minLength) {
     return `${fieldName} must be at least ${minLength} characters`;
@@ -45,8 +45,8 @@ export function validateMinLength(value: string,
 }
 
 export function validateMaxLength(value: string,
-  maxLength: number)
-  fieldName: string)
+  maxLength: number,
+                fieldName: string)
 ): string | null {
   if (value.length > maxLength) {
     return `${fieldName} must be no more than ${maxLength} characters`;
@@ -56,8 +56,8 @@ export function validateMaxLength(value: string,
 
 export function validateRange(value: number,
   min: number,
-  max: number)
-  fieldName: string)
+  max: number,
+                fieldName: string)
 ): string | null {
   if (value < min || value > max) {
     return `${fieldName} must be between ${min} and ${max}`;

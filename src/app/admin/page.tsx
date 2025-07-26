@@ -16,8 +16,8 @@ export default function AdminMainPage() {
           <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Redirecting to Admin Dashboard...</h1>
         <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto">
-        </div>
-      </div>
-    </div>
+        
+      
+    
   );
 }

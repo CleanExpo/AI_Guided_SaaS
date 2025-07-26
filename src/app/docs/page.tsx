@@ -95,7 +95,7 @@ export default function DocsPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Documentation</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Everything you need to build amazing applications with AI Guided SaaS
-          </p>
+          
           
           {/* Search */}
           <div className="max-w-md mx-auto relative">
@@ -119,9 +119,9 @@ export default function DocsPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900">{link.title}</h3>
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
+                
+              
+            
           ))}
         </div>
 
@@ -133,22 +133,22 @@ export default function DocsPage() {
             <CardTitle className="flex items-center glass
                   <category.icon className="h-6 w-6 mr-3 text-blue-600" />
                   {category.title}
-                </CardTitle>
-                <p className="text-gray-600">{category.description}</p>
-              </CardHeader>
+                
+                <p className="text-gray-600">{category.description}
+              
               <CardContent className="glass">
             <div className="glass grid gap-4 md:grid-cols-3">
                   {category.docs.map((doc) => (
                     <Link key={doc.slug} href={`/docs/${doc.slug}`}>
                       <div className="p-4  rounded-xl-lg hover:glass transition-colors cursor-pointer">
                         <h4 className="font-semibold text-gray-900 mb-2">{doc.title}</h4>
-                        <p className="text-sm text-gray-600">{doc.description}</p>
+                        <p className="text-sm text-gray-600">{doc.description}
                       </div>
-                    </Link>
+                    
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              
+            
           ))}
         </div>
 
@@ -159,13 +159,13 @@ export default function DocsPage() {
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Need more help?</h3>
             <p className="text-gray-600 mb-6">
               Can't find what you're looking for? Our support team is here to help.
-            </p>
+            
             <div className="flex justify-center space-x-4">
               <Button variant="outline">Contact Support</Button>
               <Button>Join Community</Button>
             </div>
-          </CardContent>
-        </Card>
+          
+        
       </div>
     </div>
   );

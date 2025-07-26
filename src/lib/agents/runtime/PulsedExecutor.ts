@@ -17,8 +17,8 @@ export interface ResourceMetrics { cpuUsage: number;
 }
 
 export class PulsedExecutor extends EventEmitter {
-  private agents: Map<string Agent> = new Map();</string>
-  private pulseIntervals: Map<string NodeJS.Timeout> = new Map();</string>
+  private agents: Map<string Agent> = new Map();
+  private pulseIntervals: Map<string NodeJS.Timeout> = new Map();
   private config: PulseConfig;
   private resourceMetrics: ResourceMetrics;
   private isRunning: boolean = false;

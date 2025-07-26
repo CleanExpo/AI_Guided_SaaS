@@ -42,7 +42,7 @@ export interface RoadmapDeviation { type: 'delay' | 'scope_change' | 'blocker' |
   suggestedAction: string
 };
 export class RoadmapValidator {
-  private milestones: Map<string RoadmapMilestone> = new Map(, private validationHistory: RoadmapValidationResult[] = [], constructor(private roadmap: DevelopmentRoadmap) { </string>
+  private milestones: Map<string RoadmapMilestone> = new Map(, private validationHistory: RoadmapValidationResult[] = [], constructor(private roadmap: DevelopmentRoadmap) { 
     this.initializeMilestones()
 }
   private initializeMilestones() {
