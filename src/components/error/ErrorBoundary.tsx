@@ -81,14 +81,14 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Update state with error info
     this.setState({
-      errorInfo)
+      errorInfo
     });
 
     // Track error in analytics (if available)
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
         componentStack: errorInfo.componentStack,
-        errorBoundary: true)
+        errorBoundary: true
       });
     }
   }
@@ -99,13 +99,13 @@ export class ErrorBoundary extends Component<Props, State> {
       error: null,
       errorInfo: null,
       showDetails: false,
-      copied: false)
+      copied: false
     });
   };
 
   toggleDetails = () => {
     this.setState(prevState => ({
-      showDetails: !prevState.showDetails)
+      showDetails: !prevState.showDetails
     }));
   };
 
@@ -171,7 +171,9 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Try Again
                 </Button>
-                <Button >variant="outline" )>onClick={() => window.location.href = '/'}
+                <Button
+                  variant="outline"
+                  onClick={() => window.location.href = '/'}
                   className="flex-1"
                 >
                   <Home className="h-4 w-4 mr-2" />
@@ -184,7 +186,9 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                 <div className="-t pt-4">
                   <div className="flex items-center justify-between mb-3">
                     <button
-                      onClick={this.toggleDetails}>className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">aria-label="Button">
+                      onClick={this.toggleDetails}
+                      className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      aria-label="Button">
                       <Bug className="h-4 w-4" />
                       Developer Details
                       {showDetails ? (
@@ -195,7 +199,8 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                     </button>
                     <Button
                       variant="ghost"
-                      size="sm">onClick={this.copyErrorDetails}>
+                      size="sm"
+                      onClick={this.copyErrorDetails}>
                       {copied ? (
                         <>
                           <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
@@ -264,7 +269,7 @@ export function ErrorBoundaryWrapper({
   onError 
 }: { 
   children: ReactNode;
-  fallback?: ReactNode;)
+  fallback?: ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }) {
   const handleError = (error: Error, errorInfo: ErrorInfo) => {
@@ -272,7 +277,7 @@ export function ErrorBoundaryWrapper({
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
         errorBoundary: true,
-        componentStack: errorInfo.componentStack)
+        componentStack: errorInfo.componentStack
       });
     }
     
@@ -282,9 +287,10 @@ export function ErrorBoundaryWrapper({
     }
   };
 
-  return(<ErrorBoundary fallback={fallback} onError={handleError}>
+  return (
+    <ErrorBoundary fallback={fallback} onError={handleError}>
       {children}
-    </ErrorBoundary>)
+    </ErrorBoundary>
   );
 }
 
@@ -307,9 +313,10 @@ export function ComponentErrorBoundary({
   fallbackText = 'Unable to load this component'
 }: { 
   children: ReactNode;
-  fallbackText?: string;)
+  fallbackText?: string;
 }) {
-  return(<ErrorBoundaryWrapper
+  return (
+    <ErrorBoundaryWrapper
       fallback={
         <Alert>
           <AlertTriangle className="h-4 w-4" />
@@ -318,6 +325,6 @@ export function ComponentErrorBoundary({
       }
     >
       {children}
-    </ErrorBoundaryWrapper>)
+    </ErrorBoundaryWrapper>
   );
 }
