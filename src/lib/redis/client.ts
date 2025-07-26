@@ -209,7 +209,7 @@ export class Redis {
       return await client.exists(key);
     });
     return Boolean(
-      result && ((typeof result === 'number' && result > 0) || result === true)
+      result && typeof result === 'number' && result > 0
     );
   }
 
@@ -217,7 +217,7 @@ export class Redis {
     const result = await this.withClient(async client => {
       return await client.expire(key, seconds);
     });
-    return result === true;
+    return Boolean(result && typeof result === 'number' && result > 0);
   }
 
   // Rate limiting operations
