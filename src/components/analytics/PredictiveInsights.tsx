@@ -195,8 +195,8 @@ export default function PredictiveInsights() {
           {predictions.map((prediction) => {
             const Icon = getPredictionIcon(prediction.type);
             return (
-              <Card key={prediction.id} className="hover:shadow-md-lg transition-shadow-md glass
-                <CardHeader className="pb-3 glass
+              <Card key={prediction.id} className="hover:shadow-md-lg transition-shadow-md glass">
+                 <CardHeader className="pb-3 glass">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${

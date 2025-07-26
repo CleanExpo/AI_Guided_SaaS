@@ -261,7 +261,7 @@ export default function AnalyticsExport() {
             <Label>Export Format</Label>
             <div className="grid grid-cols-4 gap-3 mt-2">
               {(['csv', 'json', 'pdf', 'excel'] as const).map((format) => (
-                <button>key={format}>onClick={() = aria-label="Button"> setOptions({ ...options, format })}
+<button key={format} onClick={() => setOptions({ ...options, format })} aria-label="Button"
                   className={`p-3 border rounded-lg flex flex-col items-center gap-2 transition-all ${
                     options.format === format
                       ? 'border-blue-500 bg-blue-50'
@@ -281,7 +281,7 @@ export default function AnalyticsExport() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
               {(['today', '7days', '30days', '90days'] as const).map((range) => (
                 <button>key={range}>onClick={() = aria-label="Button"> setOptions({ ...options, dateRange: range })}
-                  className={`p-2 border rounded-lg text-sm transition-all ${
+<button key={range} onClick={() => setOptions({ ...options, dateRange: range })} aria-label="Button">
                     options.dateRange === range
                       ? 'border-blue-500 bg-blue-50'
                       : 'hover:border-gray-300'

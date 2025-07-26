@@ -147,7 +147,9 @@ export function OverviewTab({
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  dataKey="value">label>
+                  dataKey="value"
+                  label
+                >
                   {revenueByPlan.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}
