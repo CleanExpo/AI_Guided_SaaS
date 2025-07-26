@@ -35,7 +35,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Failed to validate roadmap' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to validate roadmap' }, { status: 500
     })
 }
 }
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, validation    })
 } catch (error) {
         logger.error('Get validation error:', error);
-        return NextResponse.json({ error: 'Failed to get validation status' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to get validation status' }, { status: 500
     })
     }
 }

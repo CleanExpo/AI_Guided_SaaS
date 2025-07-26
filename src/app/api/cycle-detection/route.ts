@@ -42,7 +42,7 @@ const result: CycleDetectionResult= { hasCycle: false,
     })
   } catch (error) {
     logger.error('Cycle detection error:', error);
-        return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500   )
+        return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500
     })
 }};
 export const dynamic = "force-dynamic";

@@ -26,7 +26,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Workflow execution failed' }, { status: 500   )
+        return NextResponse.json({ error: 'Workflow execution failed' }, { status: 500
     })
 }
 }
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, executions    })
 } catch (error) {
         logger.error('Get executions error:', error);
-        return NextResponse.json({ error: 'Failed to fetch executions' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to fetch executions' }, { status: 500
     })
 }
 }

@@ -32,7 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     })
 }
     logger.error('Indexing error:', error);
-    return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   )
+    return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500
     })
 }
 }
@@ -50,7 +50,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(result)
 } catch (error) {
     logger.error('Delete error:', error);
-        return NextResponse.json({ error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   )
+        return NextResponse.json({ error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500
     })
   }
 }

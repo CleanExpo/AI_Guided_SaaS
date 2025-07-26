@@ -54,7 +54,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400   )
     })
 }
-        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   )
+        return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500
     })
 }
 }
@@ -72,7 +72,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json(webhookInfo)
 } catch (error) {
         logger.error('Webhook info error:', error);
-        return NextResponse.json({ error: 'Failed to get webhook info' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to get webhook info' }, { status: 500
     })
 }
 }

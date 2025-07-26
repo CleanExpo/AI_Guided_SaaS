@@ -76,7 +76,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             filters: { query, category, framework, pricing, difficulty }    })
 } catch (error) {
         logger.error('Templates API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500
     })
 }
 }

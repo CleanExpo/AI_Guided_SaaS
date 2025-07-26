@@ -16,7 +16,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     })
 } catch (error) {
     logger.error('Env status error:', error);
-        return NextResponse.json({ error: 'Failed to get environment status' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to get environment status' }, { status: 500
     })
 }
 }
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: new Date().toISOString()   
     })
 } catch (error) {
-    return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500   )
+    return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500
     })
 }
 }

@@ -29,7 +29,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     })
 }
     logger.error('Semantic search error:', error);
-    return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   )
+    return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500
     })
 }
 }

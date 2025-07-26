@@ -43,8 +43,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       handleError(error, {
         operation: 'sendTestEmail',
         module: 'email/test')
-        metadata: { to: data.to })
-      });
+        metadata: { to: data.to });;
       
       return NextResponse.json({
         error: 'Email test failed'

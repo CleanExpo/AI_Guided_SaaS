@@ -38,8 +38,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             handleError(error, {
                 operation: 'createCollaborationRoom',
                 module: 'collaboration/rooms')
-                metadata: { projectId: data.projectId })
-            });
+                metadata: { projectId: data.projectId });;
             
             return NextResponse.json({
                 error: 'Failed to create collaboration room'

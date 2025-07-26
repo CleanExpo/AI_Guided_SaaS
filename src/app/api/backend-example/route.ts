@@ -31,7 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
     })
         }
-        return NextResponse.json({ error: 'Failed to create project' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to create project' }, { status: 500
     })
     }
 }
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     })
 } catch (error) {
         logger.error('Get projects error:', error);
-        return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500
     })
     }
 }

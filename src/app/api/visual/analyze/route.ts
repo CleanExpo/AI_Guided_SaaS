@@ -29,7 +29,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, analysis    })
 } catch (error) {
         logger.error('Visual analysis error:', error);
-        return NextResponse.json({ error: 'Analysis failed' }, { status: 500   )
+        return NextResponse.json({ error: 'Analysis failed' }, { status: 500
     })
 }
 }
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, analysis    })
 } catch (error) {
         logger.error('Get analysis error:', error);
-        return NextResponse.json({ error: 'Failed to get analysis' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to get analysis' }, { status: 500
     })
     }
 }

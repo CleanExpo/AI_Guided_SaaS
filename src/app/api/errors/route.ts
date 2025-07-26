@@ -113,8 +113,7 @@ async function sendCriticalErrorAlert(errors: Record<string, unknown>[]) {
             `Time: ${e.timestamp}\n` +
             `User: ${e.userId || 'Anonymous'}\n`)
           ).join('\n---\n')}`
-        })
-      });
+        });;
     } catch (error) {
       logger.error('Failed to send Discord alert:', error);
     }

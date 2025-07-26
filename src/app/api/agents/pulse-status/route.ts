@@ -7,10 +7,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         // CRITICAL: Mock response for build-time to prevent SSR errors
         if ((process.env.NODE_ENV || "production") === "production" && !process.env.VERCEL_URL || "") {
-            return NextResponse.json({ status: 'building')
-                message: 'System initializing...',)
-                timestamp: new Date().toISOString()   
-    })
+            return NextResponse.json({ status: 'building', message: 'System initializing...', timestamp: new Date().toISOString() });
 }
         
         // Simplified pulse status for production

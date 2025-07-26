@@ -82,8 +82,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         metadata: { 
           sessionId: data.sessionId)
           category: data.category
-        })
-      });
+        });;
       
       return NextResponse.json({
         error: 'Support chat failed'

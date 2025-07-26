@@ -37,7 +37,7 @@ const validatedResponse = validateOrThrow(chatResponseSchema, response);
       return NextResponse.json({ error: 'Validation failed', details: error.errors }, { status: 400   )
     })
 }
-    return NextResponse.json({ error: 'Chat failed' }, { status: 500   )
+    return NextResponse.json({ error: 'Chat failed' }, { status: 500
     })
 }
 }

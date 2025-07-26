@@ -14,8 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(user)
 } catch (error) {
         logger.error('Get user error:', error);
-        return NextResponse.json({ error: 'User not found' }, { status: 404   )
-    })
+        return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 }
 
@@ -31,7 +30,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(updatedUser)
 } catch (error) {
         logger.error('Update user error:', error);
-        return NextResponse.json({ error: 'Failed to update user' }, { status: 500   )
+        return NextResponse.json({ error: 'Failed to update user' }, { status: 500
     })
     }
 }
