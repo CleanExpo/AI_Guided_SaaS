@@ -51,8 +51,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 } catch (error) {
         logger.error('Webhook processing error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500
     })

@@ -53,11 +53,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const sanitizedFilename = sanitize.filename(file.name);
     
     // Log upload attempt
-    logger.info('File upload attempt', {
-      filename: sanitizedFilename,
-      size: file.size)
-      type: file.type,)
-    });
+    logger.info('File upload attempt', { filename: sanitizedFilename,
+      size: file.size, type: file.type,  });
     
     // TODO: Implement actual file upload to storage (S3, Cloudinary, etc.)
     // For now, simulate successful upload

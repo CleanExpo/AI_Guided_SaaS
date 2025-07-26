@@ -32,8 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
                 success: true)
                 room
             }, {
-                status: 201)
-            });
+                status: 201 });;
         } catch (error) {
             handleError(error, {
                 operation: 'createCollaborationRoom',
@@ -43,8 +42,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             return NextResponse.json({
                 error: 'Failed to create collaboration room'
             }, {
-                status: 500)
-            });
+                status: 500 });;
         }
     });
 }
@@ -71,7 +69,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({
             error: 'Failed to fetch rooms'
         }, {
-            status: 500)
-        });
+            status: 500 });;
     }
 }

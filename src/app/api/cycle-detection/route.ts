@@ -15,8 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const body = await request.json(); 
     const { query, context }: { query: string; context?: Record<string, unknown> } = body
     if (!query) {
-      return NextResponse.json({ error: 'Query is required' }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Query is required' }, { status: 400 });
 };
     // Simulate cycle detection
 

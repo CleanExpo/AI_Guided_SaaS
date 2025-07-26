@@ -18,13 +18,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             startTime: new Date().toISOString(), data: validatedData.data || {}
         }
         
-        return NextResponse.json({ success: true, execution }, { status: 201   )
-    })
+        return NextResponse.json({ success: true, execution }, { status: 201 });
 } catch (error) {
         logger.error('N8N execution error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Workflow execution failed' }, { status: 500
     })
@@ -37,8 +35,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const workflowId = url.searchParams.get('workflowId');
         
         if (!workflowId) {
-            return NextResponse.json({ error: 'Workflow ID is required' }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Workflow ID is required' }, { status: 400 });
 }
         
         // Simulate getting executions

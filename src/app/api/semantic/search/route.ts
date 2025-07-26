@@ -25,8 +25,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(results)
 } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400 });
 }
     logger.error('Semantic search error:', error);
     return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500
@@ -42,7 +41,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 } catch (error) {
     return NextResponse.json({ status: 'unhealthy')
         error: error instanceof Error ? error.message : 'Health check failed'
-      }, { status: 503   )
-    })
+      }, { status: 503 });
   }
 }

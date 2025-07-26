@@ -28,8 +28,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400 });
 }
     logger.error('Indexing error:', error);
     return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500
@@ -43,8 +42,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = url;
     const docId = searchParams.get('id');
     if (!docId) {
-      return NextResponse.json({ error: 'Document ID is required' }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Document ID is required' }, { status: 400 });
 }
     const result = await semanticSearch.deleteDocument(docId);
     return NextResponse.json(result)

@@ -11,8 +11,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       dimensions = { width: 512, height: 512 }
     } = body;
     if (!prompt) {
-      return NextResponse.json({ error: 'Prompt is required' }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
 }
     // Visual generation logic would go here
     // This is a  for actual image generation
@@ -38,8 +37,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const url = new URL(request.url);
     const generationId = url.searchParams.get('generationId');
     if (!generationId) {
-      return NextResponse.json({ error: 'Generation ID is required' }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Generation ID is required' }, { status: 400 });
 }
     // Simulate getting generation status
 

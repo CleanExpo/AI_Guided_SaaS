@@ -9,8 +9,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         const { imageUrl, analysisType = 'general' }: { imageUrl: string; analysisType?: string } = body
         
         if (!imageUrl) {
-            return NextResponse.json({ error: 'Image URL is required' }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Image URL is required' }, { status: 400 });
 }
         
         // Visual analysis logic would go here
@@ -40,8 +39,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const analysisId = url.searchParams.get('analysisId');
         
         if (!analysisId) {
-            return NextResponse.json({ error: 'Analysis ID is required' }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Analysis ID is required' }, { status: 400 });
 }
         
         // Simulate getting analysis results

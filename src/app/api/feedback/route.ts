@@ -20,13 +20,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true,
             message: 'Feedback received successfully')
             feedback 
-        }, { status: 201   )
-    })
+        }, { status: 201 });
 } catch (error) {
         logger.error('Feedback error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Failed to submit feedback' }, { status: 500
     })

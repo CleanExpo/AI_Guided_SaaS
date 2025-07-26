@@ -29,13 +29,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             createdAt: new Date().toISOString()
         }
         
-        return NextResponse.json({ success: true, processed }, { status: 201   )
-    })
+        return NextResponse.json({ success: true, processed }, { status: 201 });
 } catch (error) {
         logger.error('Process requirements error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Failed to process requirements' }, { status: 500
     })

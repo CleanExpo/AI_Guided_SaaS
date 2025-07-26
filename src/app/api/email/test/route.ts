@@ -22,8 +22,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           success: false)
           error: 'Email service not configured'
         }, {
-          status: 503)
-        });
+          status: 503 });;
       }
       
       // Simulate sending test email
@@ -48,8 +47,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({
         error: 'Email test failed'
       }, {
-        status: 500)
-      });
+        status: 500 });;
     }
   });
 }
@@ -70,8 +68,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       error: 'Failed to get email status'
     }, {
-      status: 500)
-    });
+      status: 500 });;
   }
 }
 export const dynamic = "force-dynamic";

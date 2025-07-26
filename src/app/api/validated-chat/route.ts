@@ -29,13 +29,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Validate output using type-safe validation
 
 const validatedResponse = validateOrThrow(chatResponseSchema, response);
-    return NextResponse.json({ success: true, response: validatedResponse   )
-    })
+    return NextResponse.json({ success: true, response: validatedResponse   );
 } catch (error) {
     logger.error('Validated chat error:', error);
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation failed', details: error.errors }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Validation failed', details: error.errors }, { status: 400 });
 }
     return NextResponse.json({ error: 'Chat failed' }, { status: 500
     })

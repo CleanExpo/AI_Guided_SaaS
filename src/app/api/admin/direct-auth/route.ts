@@ -19,14 +19,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         const body = await request.json();
         const { password } = body;
         if (!password) {
-            return NextResponse.json({ error: 'Password required' }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Password required' }, { status: 400 });
         }
         // Simple password check
         const isValid = password === process.env.ADMIN_PASSWORD || ""
         if (isValid) {
-            return NextResponse.json({ success: true, message: 'Authentication successful'   )
-    })
+            return NextResponse.json({ success: true, message: 'Authentication successful' });
 } else {
             return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
         }

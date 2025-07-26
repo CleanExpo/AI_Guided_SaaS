@@ -22,12 +22,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       const chatSessionId = sessionId || 'session_' + Math.random().toString(36).substr(2, 9);
       
       // Log support request
-      logger.info('Support chat request', {
-        sessionId: chatSessionId,
+      logger.info('Support chat request', { sessionId: chatSessionId,
         userId,
-        category)
-        messageLength: message.length)
-      });
+        category, messageLength: message.length  });
       
       // Simulate AI support response based on category
       let responseMessage = '';
@@ -87,8 +84,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({
         error: 'Support chat failed'
       }, {
-        status: 500)
-      });
+        status: 500 });;
     }
   });
 }
@@ -115,7 +111,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       error: 'Failed to get chat history'
     }, {
-      status: 500)
-    });
+      status: 500 });;
   }
 }

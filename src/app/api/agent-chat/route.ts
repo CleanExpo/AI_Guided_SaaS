@@ -28,8 +28,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       // Log the agent chat request for monitoring
       logger.info('Agent chat request', { 
         messageLength: message.length, 
-        projectType)
-        hasContext: !!context )
+        projectType,
+        hasContext: !!context
       });
       
       // Simulate agent response

@@ -20,8 +20,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 } catch (error) {
     logger.error('Tutorial progress error:', error);
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+      return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
     return NextResponse.json({ error: 'Failed to track progress' }, { status: 500
     })

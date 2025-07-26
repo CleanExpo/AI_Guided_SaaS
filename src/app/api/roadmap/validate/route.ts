@@ -32,8 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 } catch (error) {
         logger.error('Validate roadmap error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Failed to validate roadmap' }, { status: 500
     })
@@ -46,8 +45,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const roadmapId = url.searchParams.get('roadmapId');
         
         if (!roadmapId) {
-            return NextResponse.json({ error: 'Roadmap ID is required' }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Roadmap ID is required' }, { status: 400 });
 }
         
         // Simulate getting validation status

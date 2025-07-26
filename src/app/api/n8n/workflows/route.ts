@@ -22,13 +22,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             createdAt: new Date().toISOString(), active: true
         }
         
-        return NextResponse.json({ success: true, workflow }, { status: 201   )
-    })
+        return NextResponse.json({ success: true, workflow }, { status: 201 });
 } catch (error) {
         logger.error('Create workflow error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
 }
         return NextResponse.json({ error: 'Failed to create workflow' }, { status: 500
     })

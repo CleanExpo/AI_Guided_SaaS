@@ -7,9 +7,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const session = request.cookies.get('session');
         
         if (!session) {
-            return NextResponse.json({ authenticated: false)
-                user: null   )
-    })
+            return NextResponse.json({ authenticated: false, user: null });
 }
         
         // Simulate authenticated session

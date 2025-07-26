@@ -23,13 +23,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true,
             message: 'Project created successfully')
             project 
-        }, { status: 201   )
-    })
+        }, { status: 201 });
 } catch (error) {
         logger.error('Create project error:', error);
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   )
-    })
+            return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400 });
         }
         return NextResponse.json({ error: 'Failed to create project' }, { status: 500
     })
