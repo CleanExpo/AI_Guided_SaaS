@@ -49,9 +49,8 @@ export default function AnalyticsPage() {
         <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   return (
     <div className="glass container mx-auto p-6 space-y-6">

@@ -14,23 +14,23 @@ import Link from 'next/link';
 
 
 const apiEndpoints = [
-  { name: 'Authentication';
+  { name: 'Authentication',
     slug: 'auth',
-    description: 'User authentication and session management';
+    description: 'User authentication and session management',
     version: 'v1',
-    status: 'stable';
+    status: 'stable',
   },
-  { name: 'Users';
+  { name: 'Users',
     slug: 'users',
-    description: 'User management and profiles';
+    description: 'User management and profiles',
     version: 'v1',
-    status: 'stable';
+    status: 'stable',
   },
-  { name: 'Projects';
+  { name: 'Projects',
     slug: 'projects',
-    description: 'Project creation and management';
+    description: 'Project creation and management',
     version: 'v1',
-    status: 'beta';
+    status: 'beta',
   }
 ];
 

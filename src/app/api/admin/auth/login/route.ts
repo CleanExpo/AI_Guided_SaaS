@@ -11,8 +11,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             if (isValid) {
                 logger.info('Admin login successful', { email: data.email });
                 return NextResponse.json({ 
-                    success: true)
-                    message: 'Login successful')
+                    success: true,
+                    message: 'Login successful'
                 });
             } else {
                 logger.warn('Admin login failed', { email: data.email });

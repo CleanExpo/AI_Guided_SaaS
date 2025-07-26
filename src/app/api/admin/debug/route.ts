@@ -10,8 +10,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 const debugKey = searchParams.get('key');
         // Simple access control
 if (debugKey !== 'debug123' && (process.env.NODE_ENV || "production") === "production") {
-            return NextResponse.json({ error: 'Access denied' }, { status: 403   )
-    })
+            return NextResponse.json({ error: 'Access denied' }, { status: 403 });
 }
         const debugInfo = { 
             environment: {

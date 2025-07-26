@@ -10,19 +10,19 @@ interface ApiDoc { slug: string
 }
 
 const apiDocs: Record<string, ApiDoc> = {
-  auth: { slug: 'auth';
+  auth: { slug: 'auth',
     title: 'Authentication API',
-    description: 'User authentication and authorization endpoints';
+    description: 'User authentication and authorization endpoints',
     content: 'Authentication API documentation content...',
-    category: 'Security';
-    version: '1.0.0';
+    category: 'Security',
+    version: '1.0.0'
   },
-  users: { slug: 'users';
+  users: { slug: 'users',
     title: 'Users API',
-    description: 'User management endpoints';
+    description: 'User management endpoints',
     content: 'Users API documentation content...',
-    category: 'User Management';
-    version: '1.0.0';
+    category: 'User Management',
+    version: '1.0.0'
   }
 };
 
