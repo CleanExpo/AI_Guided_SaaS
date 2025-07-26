@@ -42,30 +42,30 @@ export default function CausalExplorerUI() {
   
   if (isLoading) {
     return (
-    <div className="p-6 animate-pulse">, <div className="h-8 bg-gray-200 rounded mb-4">
+    <div className="glass p-6 animate-pulse">, <div className="h-8 glass-sidebar rounded-lg mb-4">
           <div className="space-y-4">
-          <div className="h-24 bg-gray-200 rounded">
-          <div className="h-24 bg-gray-200 rounded">
+          <div className="h-24 glass-sidebar rounded-lg">
+          <div className="h-24 glass-sidebar rounded-lg">
         </div>
   )
 }
   
   return (
-    <div className="p-6 space-y-6">
+    <div className="glass p-6 space-y-6">
           <div></div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Causal Explorer</h1>
         <p className="text-gray-600">Discover causal relationships in your application data</p>
       </div>
       
-      <div className="grid gap-6 md:grid-cols-2">
-          <Card></Card>
-          <CardHeader>
-          <CardTitle>Top Insights</CardTitle>
+      <div className="glass grid gap-6 md:grid-cols-2">
+          <Card className="glass"</Card>
+          <CardHeader className="glass"
+          <CardTitle className="glass"Top Insights</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="space-y-4">
               {insights.map((insight) => (
-                <div key={insight.id} className="border-l-4 border-blue-500 pl-4">
+                <div key={insight.id} className="-l-4 -blue-500 pl-4">
           <h3 className="font-semibold text-gray-900">{insight.title}</h3>
                   <p className="text-gray-600 text-sm">{insight.description}</p>
                   <div className="flex items-center mt-2 space-x-4">
@@ -78,14 +78,14 @@ Confidence: { insight.confidence }%
               ))}
             </div>
         
-        <Card>
-          <CardHeader></CardHeader>
-            <CardTitle>Component Analysis</CardTitle>
+        <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+            <CardTitle className="glass"Component Analysis</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="space-y-4">
               {topComponents.map((component) => (
-                <div key={component.id} className="p-3 bg-gray-50 rounded flex items-center justify-between">
+                <div key={component.id} className="p-3 glass rounded-lg flex items-center justify-between">
           <span className="font-medium">{component.page}</span>
                   <span className="text-sm text-gray-500">{component.impact}%</span>
                 </div>

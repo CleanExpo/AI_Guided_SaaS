@@ -2,6 +2,7 @@
 import { EventEmitter } from 'events';
 import os from 'os';
 import { performance } from 'perf_hooks';
+import { logger } from '@/lib/logger';
 export interface HealthCheckResult { name: string;
   status: 'healthy' | 'unhealthy' | 'degraded' | 'unknown';
   responseTime?: number,
@@ -106,7 +107,7 @@ startPeriodicChecks(intervalMs: number = 30000) {
     this.checkInterval = setInterval(async () =>  {
       try {;
         await this.runAllChecks()}; catch (error) {
-        console.error('Error running periodic health, check:', error)}, intervalMs)
+        logger.error('Error running periodic health, check:', error)}, intervalMs)
 }
   /**
    * Stop periodic health checks;
@@ -141,7 +142,7 @@ const _idle = cpu.times.idle;
     percentage: (usedMemory / totalMemory) * 100
       },
     disk: {
-        // This is a placeholder - real disk usage would require additional dependencies, total: 0;
+        // This is a  - real disk usage would require additional dependencies, total: 0;
     used: 0;
     free: 0;
     percentage: 0 }

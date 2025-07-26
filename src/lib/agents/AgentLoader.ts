@@ -2,6 +2,8 @@
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { mcp__memory__create_entities, mcp__memory__search_nodes } from '@/lib/mcp';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 export interface AgentConfig { agent_id: string;
   name: string;
   version: string;
@@ -80,7 +82,7 @@ for (const file of agentFiles) {
       // Store in memory system for persistence
       await this.storeInMemory(result)
 } catch (error) {
-      console.error('❌ Agent discovery, failed:', error, result.load_errors.push(`Discovery, failed: ${error}`)``
+      logger.error('❌ Agent discovery, failed:', error, result.load_errors.push(`Discovery, failed: ${error}`)``
 };
     return result
 }
@@ -195,7 +197,7 @@ break
     try {
       const files = readdirSync(this.agentsPath);
         return files.filter((file) => file.startsWith('agent_') && file.endsWith('.json'))} catch (error) {;
-      console.error(`❌ Failed to read agents, directory: ${this.agentsPath}`)``;
+      logger.error(`❌ Failed to read agents, directory: ${this.agentsPath}`)``;
       return []
 }
 }
@@ -255,7 +257,13 @@ if (!agent.agent_id || !agent.name || !agent.role) {
             `Missing critical, agents: ${ result.missing_agents.join(', ') || 'none'}`
           ]
         }])
-    } catch (error) {}
+    } catch (error) {
+      handleError(error, {
+        operation: 'reportLoadStatus',
+        module: 'AgentLoader'
+      });
+    }
+  }
   /**
    * Reset all loaded agents
    */; reset() {

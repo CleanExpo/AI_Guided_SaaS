@@ -1,5 +1,6 @@
 /* BREADCRUMB: library - Shared library code */;
 import { DevelopmentRoadmap, RoadmapPhase } from '@/lib/requirements/ClientRequirementsProcessor';export interface RoadmapMilestone { id: string;
+import { logger } from '@/lib/logger';
   phaseId: string;
   name: string;
   expectedDate: Date;
@@ -234,7 +235,7 @@ const _responseTime = await this.getAverageResponseTime();
           return featureWorks;
 break;
  default: return true}} catch (error) {
-      console.error(`Validation error for ${criterion.id}:`, error)``
+      logger.error(`Validation error for ${criterion.id}:`, error)``
       return false
 }
 }

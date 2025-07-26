@@ -1,19 +1,15 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
+import { validateInput } from '@/lib/api/validation-middleware';
+import { commonSchemas } from '@/lib/api/validation-schemas';
 export async function GET(request: NextRequest): Promise<NextResponse> {
-    try {
-        const url = new URL(request.url);
-        const page = parseInt(url.searchParams.get('page') || '1', 10);
-        const limit = parseInt(url.searchParams.get('limit') || '10', 10);
-
-const search = url.searchParams.get('search') || '';
-        
-const status  = url.searchParams.get('status') || 'all';
-
-const sortBy = url.searchParams.get('sortBy') || 'createdAt';
-        
-const sortOrder = (url.searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
+    return validateInput(commonSchemas.pagination, 'query')(request, async (params) => {
+        try {
+            const { page, limit, search, sortBy, sortOrder } = params;
+            const url = new URL(request.url);
+            const status = url.searchParams.get('status') || 'all';
         // Simulate users data
 
         const users = Array.from({ length: limit }, (_, i) => ({ id: `user_${page}_${i + 1}`,
@@ -39,10 +35,14 @@ const sortOrder = (url.searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc
                 sortOrder
             }
         };
-        return NextResponse.json(response)
-} catch (error) {
-        console.error('Get users error:', error);
-        return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500   
-    })
-    }
+            return NextResponse.json(response);
+        } catch (error) {
+            logger.error('Get users error:', error);
+            return NextResponse.json({ 
+                error: 'Failed to fetch users' 
+            }, { 
+                status: 500
+            });
+        }
+    });
 }

@@ -412,7 +412,7 @@ export class EnhancedAgentOrchestrator extends EventEmitter {
   private evaluateCondition(condition: string, context: any): boolean {
     // Simple condition evaluation - in production use a proper expression evaluator
     try {
-      return new Function('context', `return ${condition}`)(context)
+      return new new Function('context', `return ${condition}`)(context)
 } catch {
       return false
 }

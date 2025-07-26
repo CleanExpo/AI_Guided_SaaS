@@ -78,7 +78,7 @@ export default function DeployPage() {
         provider: selectedProvider,
         timestamp: Date.now()
       });
-      alert('Deployment queued. Will process when back online.');
+      toast({ title: "Success", description: "Deployment queued. Will process when back online." });
       return;
     }
 
@@ -110,7 +110,7 @@ export default function DeployPage() {
       case 'completed':
         return <CheckCircle className="h-5 w-5 text-green-600" />;
       case 'running':
-        return <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600" />;
+        return <div className="animate-spin rounded-lg-full h-5 w-5 -b-2 -blue-600" />;
       case 'error':
         return <AlertCircle className="h-5 w-5 text-red-600" />;
       default:
@@ -122,7 +122,7 @@ export default function DeployPage() {
   const progress = (completedSteps / deploymentSteps.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen glass py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -139,14 +139,14 @@ export default function DeployPage() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="glass grid lg:grid-cols-3 gap-8">
           {/* Deployment Providers */}
           <div className="lg:col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle>Choose Provider</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Choose Provider</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-3">
                   {deployProviders.map((provider) => (
                     <div
@@ -184,13 +184,13 @@ export default function DeployPage() {
             </Card>
 
             {/* Environment */}
-            <Card className="mt-6">
-              <CardHeader>
-                <CardTitle>Environment</CardTitle>
+            <Card className="mt-6" className="glass
+              <CardHeader className="glass"
+                <CardTitle className="glass"Environment</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <Server className="h-5 w-5 text-gray-600" />
                       <span className="font-medium">Production</span>
@@ -199,15 +199,15 @@ export default function DeployPage() {
                   </div>
                   <div className="text-sm text-gray-600 space-y-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full" />
+                      <div className="w-2 h-2 bg-green-500 rounded-lg-full" />
                       <span>Auto-scaling enabled</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full" />
+                      <div className="w-2 h-2 bg-green-500 rounded-lg-full" />
                       <span>SSL certificates ready</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full" />
+                      <div className="w-2 h-2 bg-green-500 rounded-lg-full" />
                       <span>CDN configured</span>
                     </div>
                   </div>
@@ -218,10 +218,10 @@ export default function DeployPage() {
 
           {/* Deployment Process */}
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
+            <Card className="glass"
+              <CardHeader className="glass"
                 <div className="flex items-center justify-between">
-                  <CardTitle>Deployment Process</CardTitle>
+                  <CardTitle className="glass"Deployment Process</CardTitle>
                   {isDeploying && (
                     <Badge className="bg-blue-100 text-blue-700">
                       <Activity className="h-3 w-3 mr-1 animate-pulse" />
@@ -230,10 +230,10 @@ export default function DeployPage() {
                   )}
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 {!isDeploying && completedSteps === 0 ? (
                   <div className="text-center py-12">
-                    <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-20 h-20 bg-orange-100 rounded-lg-full flex items-center justify-center mx-auto mb-4">
                       <Rocket className="h-10 w-10 text-orange-600" />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">Ready to Deploy</h3>
@@ -290,7 +290,7 @@ export default function DeployPage() {
 
                     {/* Success Message */}
                     {completedSteps === deploymentSteps.length && (
-                      <div className="mt-6 p-6 bg-green-50 rounded-lg border border-green-200">
+                      <div className="glass mt-6 p-6 bg-green-50 rounded-xl-lg  -green-200">
                         <div className="flex items-start gap-3">
                           <CheckCircle className="h-6 w-6 text-green-600 mt-0.5" />
                           <div className="flex-1">
@@ -320,13 +320,13 @@ export default function DeployPage() {
             </Card>
 
             {/* Recent Deployments */}
-            <Card className="mt-6">
-              <CardHeader>
-                <CardTitle>Recent Deployments</CardTitle>
+            <Card className="mt-6" className="glass
+              <CardHeader className="glass"
+                <CardTitle className="glass"Recent Deployments</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <GitBranch className="h-5 w-5 text-gray-600" />
                       <div>
@@ -336,7 +336,7 @@ export default function DeployPage() {
                     </div>
                     <Badge className="bg-green-100 text-green-700">Live</Badge>
                   </div>
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <GitBranch className="h-5 w-5 text-gray-600" />
                       <div>

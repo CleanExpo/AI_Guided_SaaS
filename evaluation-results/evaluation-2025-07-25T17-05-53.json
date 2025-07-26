@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-07-25T17:05:44.057Z",
+  "scores": {
+    "dashboard": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "prompts": {
+      "functionality": 4,
+      "usability": 10,
+      "performance": 10,
+      "design": 10,
+      "testing": 10,
+      "details": {
+        "functionality": {
+          "Create prompt button works": "Error: Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"create-prompt-button\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"create-prompt-button\"]')\u001b[22m\n",
+          "Title and content fields function": "Failed",
+          "Search functionality works": "Failed",
+          "Prompt saving works correctly": "Passed",
+          "Prompt deletion works": "Passed"
+        },
+        "usability": {
+          "Clear form structure": "Passed",
+          "Intuitive workflow": "Passed",
+          "Search is responsive": "Passed",
+          "Validation messages clear": "Passed",
+          "Keyboard navigation works": "Passed"
+        },
+        "performance": {
+          "Fast form interactions": "Passed",
+          "Quick search results": "Passed",
+          "Efficient data handling": "Passed",
+          "No input lag": "Passed",
+          "Smooth transitions": "Passed"
+        },
+        "design": {
+          "Clean form layout": "Passed",
+          "Consistent button styles": "Passed",
+          "Proper field spacing": "Passed",
+          "Visual feedback on actions": "Passed",
+          "Mobile-responsive design": "Passed"
+        },
+        "testing": {
+          "Form validation works": "Passed",
+          "Error states handled": "Passed",
+          "Success feedback shown": "Passed",
+          "Data persistence checked": "Passed"
+        }
+      },
+      "total": 8.2
+    },
+    "folders": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    }
+  },
+  "overall": 2.7,
+  "recommendations": [
+    "[CRITICAL] Folders requires immediate attention",
+    "[Dashboard] Improve core functionality - ensure all metrics load correctly",
+    "[Dashboard] Optimize performance - reduce initial load time",
+    "[Folders] Implement drag-and-drop functionality properly",
+    "[Folders] Improve visual hierarchy and folder nesting indicators"
+  ]
+}

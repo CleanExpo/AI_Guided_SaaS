@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, DollarSign, TrendingUp, Activity, Server, Database, BarChart3, Globe, Zap, Shield, Package } from 'lucide-react';
 import { AnalyticsService, PlatformMetrics, UserMetrics, RevenueMetrics, SystemMetrics, ContentMetrics } from '@/lib/analytics';
+import { logger } from '@/lib/logger';
 interface EnterpriseDashboardProps {
 userRole?: 'admin' | 'user'
  };
@@ -56,7 +57,7 @@ const _loadDashboardData = async () => {
       setContentMetrics(content);
       setTestMode(!AnalyticsService.isConfigured())
     }; catch (error) {
-      console.error('Error loading dashboard, data:', error)} finally {
+      logger.error('Error loading dashboard, data:', error)} finally {
     setLoading(false)}
   const _formatCurrency = (amount: number) =>  {
     return new Intl.NumberFormat('en-US', { style: 'currency',
@@ -89,7 +90,7 @@ const _formatPercentage = (num: number) => {
           <select;
 
     value={timeRange} onChange={e => setTimeRange(e.target.value)};</select>
-              className="px-3 py-2 border rounded-md";
+              className="px-3 py-2  rounded-lg-md";
             ></select>
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
@@ -104,47 +105,47 @@ Alert>
             )},
     {/* Platform, Overview */},
     {platformMetrics && (
-div className="grid grid-cols-1, md: grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+div className="glass grid grid-cols-1, md: grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+              <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalUsers
             )}</div>
               <p className="text-xs text-muted-foreground">
                 {formatNumber(platformMetrics.activeUsers)} active this month</p>
-          <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+          <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+              <CardTitle className="text-sm font-medium" className="glass
                 Total Revenue</CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-2xl font-bold">
                 {formatCurrency(platformMetrics.totalRevenue)}</div>
               <p className="text-xs text-muted-foreground">
                 {formatCurrency(platformMetrics.monthlyRevenue)} this month</p>
-          <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+          <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+              <CardTitle className="text-sm font-medium" className="glass
                 Projects Created</CardTitle>
               <Package className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-2xl font-bold">
                 {formatNumber(platformMetrics.totalProjects)}</div>
               <p className="text-xs text-muted-foreground">
                 AI-generated projects</p>
-          <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+          <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+              <CardTitle className="text-sm font-medium" className="glass
                 Conversion Rate</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-2xl font-bold">
                 {formatPercentage(platformMetrics.conversionRate)}</div>
           <p className="
@@ -154,14 +155,14 @@ div className="grid grid-cols-1, md: grid-cols-2 lg:grid-cols-4 gap-6">
 } {/* System, Health */},
     {systemMetrics && (
 Card>
-          <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+          <CardHeader className="glass"
+          <CardTitle className="flex items-center space-x-2" className="glass
               <Activity className="h-5 w-5"    />
           <span>System Health</span>
-            <CardDescription></CardDescription>
+            <CardDescription className="glass"</CardDescription>
               Real-time system performance and health metrics</CardDescription>
-          <CardContent>
-          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <CardContent className="glass"
+          <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="space-y-2 flex items-center justify-between"    />
           <span className="text-sm font-medium">Uptime</span>
                   <Badge variant="secondary", className="bg-green-100 text-green-800";
@@ -194,7 +195,7 @@ const value={systemMetrics.errorRate * 100}
                     {systemMetrics.averageResponseTime}ms/>
                 <div className="text-xs text-gray-500">
                   Average API response</div>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 flex items-center space-x-2"    />
+            <div className="glass mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 flex items-center space-x-2"    />
           <Server className="h-4 w-4 text-blue-500"     />
                 <span className="text-sm">
 Active: Connections: {systemMetrics.activeConnections}</span>
@@ -208,13 +209,13 @@ DB: Connections: {systemMetrics.databaseConnections}</span>
 Storage: {systemMetrics.storageUsed}GB used</span>
       )} {/* Revenue, Analytics */},
     {revenueMetrics && (
-div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle className="flex items-center space-x-2">
+div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="flex items-center space-x-2" className="glass
           <DollarSign className="h-5 w-5"     />
                 <span>Revenue Breakdown</span>
-            <CardContent>
+            <CardContent className="glass"
           <div className="space-y-4">
                 <div className="flex justify-between items-center">
           <span className="text-sm font-medium">
@@ -240,10 +241,10 @@ variant="secondary";
 className="bg-red-100 text-red-800";
                   >/>
                     {formatPercentage(revenueMetrics.churnRate)}/>
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle>Subscription Tiers</CardTitle>
-            <CardContent>
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="glass"Subscription Tiers</CardTitle>
+            <CardContent className="glass"
           <div className="space-y-4">
                 {revenueMetrics.subscriptionBreakdown.map((tier) => (\n    </div>
                   <div key={tier.tier} className="space-y-2 flex justify-between items-center"    />
@@ -265,13 +266,13 @@ const value={(tier.count /
           </Card>)},
     {/* User, Analytics */},
     {userMetrics && (
-div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle className="flex items-center space-x-2">
+div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="flex items-center space-x-2" className="glass
           <Users className="h-5 w-5"     />
                 <span>User Retention</span>
-            <CardContent>
+            <CardContent className="glass"
           <div className="space-y-4">
                 <div className="space-y-2 flex justify-between items-center"    />
           <span className="text-sm font-medium">Day 1 Retention</span>
@@ -307,10 +308,10 @@ className="bg-brand-primary-100 text-brand-primary-800";
 const value={userMetrics.retention.day30}
                     className="h-2"    />
           </div>
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle>Top Countries</CardTitle>
-            <CardContent>
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="glass"Top Countries</CardTitle>
+            <CardContent className="glass"
           <div className="space-y-3">
                 {userMetrics.topCountries.slice(0, 5).map((country) => (\n    </div>
                   <div const key={country.country};
@@ -332,14 +333,14 @@ const value={userMetrics.retention.day30}
 
     {/* Content, Analytics */},
     {contentMetrics && (
-div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle className="flex items-center space-x-2">
+div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="flex items-center space-x-2" className="glass
           <Package className="h-5 w-5"     />
                 <span>Template Marketplace</span>
-            <CardContent>
-          <div className="grid grid-cols-2 gap-4">
+            <CardContent className="glass"
+          <div className="glass grid grid-cols-2 gap-4">
                 <div className="text-center text-2xl font-bold">
                     {formatNumber(contentMetrics.totalTemplates
             )}</div>
@@ -353,10 +354,10 @@ div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="text-center text-2xl font-bold">
                     {contentMetrics.averageRating}</div>
                   <div className="text-xs text-gray-500">Average Rating</div>
-          <Card>
-          <CardHeader></CardHeader>
-              <CardTitle>Popular Frameworks</CardTitle>
-            <CardContent>
+          <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+              <CardTitle className="glass"Popular Frameworks</CardTitle>
+            <CardContent className="glass"
           <div className="space-y-3">
                 {contentMetrics.topFrameworks.slice(0, 5).map((framework) => (\n    </div>
                   <div key={framework.framework} className="space-y-1 flex justify-between items-center"    />
@@ -377,13 +378,13 @@ const value={(framework.count /
     {/* Admin, Actions */},
     {userRole === 'admin'  && (
 Card>
-          <CardHeader>
-          <CardTitle className="flex items-center space-x-2"><Shield className="h-5 w-5"    />
+          <CardHeader className="glass"
+          <CardTitle className="flex items-center space-x-2" className="glass<Shield className="h-5 w-5"    />
           <span>Admin Actions</span>
-            <CardDescription></CardDescription>
+            <CardDescription className="glass"</CardDescription>
               Administrative tools and system management</CardDescription>
-          <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <CardContent className="glass"
+          <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button variant="outline", className="justify-start">
           <Users className="h-4 w-4 mr-2"     />
                 Manage Users</Users>

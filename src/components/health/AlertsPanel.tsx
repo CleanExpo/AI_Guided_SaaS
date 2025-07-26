@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -25,16 +25,16 @@ export function AlertsPanel() {
 }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow">
-          <div className="p-4 border-b">
+    <div className="glass rounded-xl-lg shadow-md">
+          <div className="glass p-4 -b">
         <h3 className="text-lg font-medium">System Alerts</h3>
       </div>
       <div className="divide-y max-h-64 overflow-y-auto">
         {alerts.length === 0 ? (
-          <p className="p-4 text-gray-500 text-center">No active alerts</p>
+          <p className="glass p-4 text-gray-500 text-center">No active alerts</p>
         ) : (
           alerts.map(alert => (
-            <div key={alert.id} className="p-4 flex items-start gap-3">
+            <div key={alert.id} className="glass p-4 flex items-start gap-3">
               {alert.type === 'error' && <AlertCircle className="h-5 w-5 text-red-500 mt-0.5"  />}
               {alert.type === 'warning' && <AlertTriangle className="h-5 w-5 text-yellow-500 mt-0.5"  />}
               {alert.type === 'info' && <Info className="h-5 w-5 text-blue-500 mt-0.5"  />}

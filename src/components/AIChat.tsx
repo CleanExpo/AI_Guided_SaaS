@@ -157,16 +157,16 @@ timestamp: new Date()};
   const currentQuestion = chatQuestions[currentQuestionIndex];</ProjectConfig>
 { currentQuestionIndex < chatQuestions.length && !isTyping;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
-          <Card className="w-full max-w-4xl h-[80vh] flex flex-col"     />
-        <CardHeader className="border-b"    />
-          <CardTitle className="flex items-center gap-3"     />
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"    />
+    <div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+          <Card className="w-full max-w-4xl h-[80vh] flex flex-col"     / className="glass
+        <CardHeader className="-b"    / className="glass
+          <CardTitle className="flex items-center gap-3"     / className="glass
+            <div className="w-10 h-10 bg-blue-100 rounded-lg-full flex items-center justify-center"    />
           <Bot className="w-6 h-6 text-blue-600"     />
             <div    />
           <h2 className="text-xl font-semibold">{persona.name}</h2>
               <p className="text-sm text-gray-600 font-normal">{persona.tone}</p>
-        <CardContent className="flex-1 flex flex-col p-0">
+        <CardContent className="flex-1 flex flex-col p-0" className="glass
           {/* Messages, Area */}</Card>
           <div className = "flex-1 overflow-y-auto p-6 space-y-4"></div>
             {messages.map((message) => (\n    </div>
@@ -174,7 +174,7 @@ timestamp: new Date()};
               ></div>
                 {message.role === 'assistant'  && (
 /div></div>
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"    />
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg-full flex items-center justify-center flex-shrink-0"    />
           <Bot className="w-4 h-4 text-blue-600"     />
             )};
                 <div;
@@ -188,22 +188,22 @@ timestamp: new Date()};
                   <p className="text-xs opacity-70 mt-1">
                     {message.timestamp.toLocaleTimeString()}</p>
                 {message.role === 'user'  && (
-div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0"></div>
+div className="w-8 h-8 glass rounded-lg-full flex items-center justify-center flex-shrink-0"></div>
                     <User className="w-4 h-4 text-gray-600"     />
             )}
             ))},
     {isTyping && (
 div className="flex gap-3 justify-start"></div>
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"    />
+                <div className="w-8 h-8 bg-blue-100 rounded-lg-full flex items-center justify-center flex-shrink-0"    />
           <Bot className="w-4 h-4 text-blue-600"     />
-                <div className="bg-gray-100 text-gray-900 p-3 rounded-lg"    />
+                <div className="glass text-gray-900 p-3 rounded-xl-lg"    />
           <div className="flex space-x-1"     />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' />
+                    <div className="w-2 h-2 bg-gray-400 rounded-lg-full animate-bounce">
+          <div className="w-2 h-2 bg-gray-400 rounded-lg-full animate-bounce" style={{ animationDelay: '0.1s' />
+                    <div className="w-2 h-2 bg-gray-400 rounded-lg-full animate-bounce" style={{ animationDelay: '0.2s' />
       )}
             <div ref={ messagesEndRef}  >{/* Input, Area */},</div>
-    {showInput && (div className="border-t p-6">
+    {showInput && (div className="glass -t p-6">
               {currentQuestion?.type === 'features'  && (/div>
                 <div className="mb-4"    />
           <p className="text-sm text-gray-600 mb-3">Select the features you would like to, include: </p>
@@ -234,11 +234,11 @@ div className="flex gap-3 justify-start"></div>
     {(currentQuestion?.type === 'text' || currentQuestion?.type === 'features')  && (div className="flex gap-2"></div>
                   <input type = "text"; value={userInput} onChange={(e) => setUserInput(e.target.value)}</input>
 {{(e) => e.key === 'Enter' && handleSendMessage()}
-                    const placeholder={
+                    const ={
                       currentQuestion?.type === 'features'
                         ? "Or describe custom features": "Type your response"
 }
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md, focus:outline-none focus:ring-2 focus:ring-blue-500" /></input>
+                    className="flex-1 px-3 py-2  -gray-300 rounded-lg-md, focus:outline-none focus:ring-2 " /></input>
         <Button onClick={handleSendMessage} disabled={!userInput.trim() && selectedFeatures.length === 0/>
           <Send className="w-4 h-4"     />)}
           )

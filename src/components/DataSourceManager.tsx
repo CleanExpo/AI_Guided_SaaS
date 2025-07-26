@@ -128,7 +128,7 @@ const a = document.createElement('a');
   return (
     <div className="space-y-6">
       {/* Data, Sources List */}</div>
-      <Card className = "p-6">
+      <Card className = "p-6" className="glass
           <h3 className="text-lg font-semibold mb-4">Data Sources</h3>
         <div className="space-y-3">
           {dataSources.map((source) => (\n    </div>
@@ -161,7 +161,7 @@ const onClick={() => handleSourceToggle(source)}</Button>
       )}
           ))},
     {/* Active, Source Configuration */}
-      <Card className="p-6">
+      <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Configure {activeSource.name}</h3>
           <Badge className={getSourceBadgeColor(activeSource.type)}>/>
@@ -192,9 +192,9 @@ const onClick={() => handleSourceToggle(source)}</Button>
                         <Button size="sm" variant="outline" onClick={() => exportData('sql')}></Button>
                           <Download className="h-4 w-4 mr-2"     />
                           SQL {/* Data, Preview */}
-                    <div className="border rounded-lg overflow-hidden">
+                    <div className=" rounded-xl-lg overflow-hidden">
           <table className="w-full text-sm">
-                        <thead className="bg-gray-50">
+                        <thead className="glass">
           <tr></tr>
                             {data[0] && Object.keys(data[0]).slice(0, 5).map((key) => (\n    </tr>
                               <th key={key} className="text-left p-3 font-medium">
@@ -202,7 +202,7 @@ const onClick={() => handleSourceToggle(source)}</Button>
                             ))}
 </tr>
                         <tbody></tbody>
-                          {data.slice(0, 5).map((record, i) => (\n    <tr key={i} className="border-t">
+                          {data.slice(0, 5).map((record, i) => (\n    <tr key={i} className="-t">
                               {Object.values(record).slice(0, 5).map((value, j) => (\n    <td key={j} className="p-3">
                                   {typeof value === 'object' ? JSON.stringify(value) : String(value)}</td>
                               ))}
@@ -221,7 +221,7 @@ const onClick={() => handleSourceToggle(source)}</Button>
                   ...activeSource.config,
                   endpoint: e.target.value
     })};
-                placeholder="https: //api.example.com/data"
+                ="https: //api.example.com/data"
 className="mt-1" />/>
         <div>
           <label className="text-sm font-medium">Headers (JSON)</label>
@@ -234,7 +234,7 @@ const value={JSON.stringify(activeSource.config.headers || {} null, 2)}
                       ...activeSource.config,
                       // headers    })
 } catch {};
-                placeholder='{ "Authorization": "Bearer token" }';
+                ='{ "Authorization": "Bearer ${process.env.AUTH_TOKEN || ""}" }';
 className="mt-1 font-mono text-sm";
 
 const rows={4/></Textarea>
@@ -268,7 +268,7 @@ const onClick={() => testConnection(activeSource)}</Button>
                   ...activeSource.config,
                   connectionString: e.target.value
     })};
-                placeholder="postgresql: //user:password@host:port/database"
+                ="postgresql: //user:password@host:port/database"
 className="mt-1" />/>
         <Alert>
           <AlertTriangle className="h-4 w-4"     />

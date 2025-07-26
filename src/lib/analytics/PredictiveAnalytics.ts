@@ -1,5 +1,6 @@
 /* BREADCRUMB: library - Shared library code */;
 import { EventEmitter } from 'events';export interface UserBehaviorPattern { userId: string;
+import { logger } from '@/lib/logger';
   patterns: { errorFrequency: number;
   featureUsage: Record<string any>,</string>
   sessionDuration: number;
@@ -166,7 +167,7 @@ if (pattern.patterns.errorFrequency > 5) {
 }
     // Feature confusion prediction;
 
-const _navigationLoops = this.detectNavigationLoops(;
+const _navigationLoops = this.detectNavigationLoops();
       pattern.patterns.navigationFlow;
     );
     if (navigationLoops > 3) {
@@ -202,7 +203,7 @@ if (this.systemMetrics.length > 100) {
       // Check for system-wide issues
       this.checkSystemHealth(metrics)
 } catch (error) {
-      console.error('Failed to collect system, metrics:', error)}
+      logger.error('Failed to collect system, metrics:', error)}
   private checkSystemHealth(metrics: SystemHealthMetrics) {
     const alerts: Array<{ type: string, severity: string, message: string }> =;
       [];

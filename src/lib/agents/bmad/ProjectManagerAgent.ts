@@ -118,7 +118,7 @@ const projectScope = await this.defineProjectScope(input, requirements);
       this.observe('Defined project scope', projectScope);
       // Step, 2: Create timeline and phases;
 
-const timeline = await this.createTimeline(;
+const timeline = await this.createTimeline();
         projectScope,
         userStories,
         // constraints;
@@ -130,7 +130,7 @@ const milestones = await this.defineMilestones(timeline, userStories);
       this.observe('Defined project milestones', milestones);
       // Step, 4: Create work breakdown structure;
 
-const workBreakdown = await this.createWorkBreakdown(;
+const workBreakdown = await this.createWorkBreakdown();
         userStories,
         // milestones;
       );
@@ -149,14 +149,14 @@ const riskMitigation = await this.planRiskMitigation(risks, projectScope);
       }};
       // Step, 7: Create communication plan;
 
-const _communicationPlan = await this.createCommunicationPlan(;
+const _communicationPlan = await this.createCommunicationPlan();
         projectScope,
         // resourcePlan;
       );
       this.observe('Created communication plan', communicationPlan);
       // Step, 8: Define quality assurance plan;
 
-const qualityPlan = await this.defineQualityPlan(;
+const qualityPlan = await this.defineQualityPlan();
         requirements,
         // userStories;
       );

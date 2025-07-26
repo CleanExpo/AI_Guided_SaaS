@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { NextRequest } from 'next/server';
 import { supabase } from './database';
+import { logger } from '@/lib/logger';
 export interface ApiMetric { endpoint: string;
   method: string;
   statusCode: number;
@@ -40,11 +41,11 @@ const { error     }: any = await supabase.from('api_metrics').insert({
         metadata,
         created_at: new Date().toISOString()});
       if (error) {
-        console.error('Error tracking API, call:', error)}
+        }
       // Also log as activity if user is authenticated;
 if (userId) {
         await this.logApiActivity(userId, endpoint, method, statusCode)} catch (error) {
-      console.error('Error in API, tracking:', error)}
+      logger.error('Error in API, tracking:', error)}
   // Log API activity for user tracking;
   private static async logApiActivity(userId: string, endpoint: string;
   method: string, statusCode: number): Promise<any> {
@@ -56,8 +57,8 @@ if (userId) {
     metadata: { method, statusCode, endpoint, created_at: new Date().toISOString()
     });
       if (error) {
-        console.error('Error logging API, activity:', error)} catch (error) {
-      console.error('Error in activity, logging:', error)}
+        logger.error('Error logging API, activity:', error)} catch (error) {
+      logger.error('Error in activity, logging:', error)}
   // Track specific resource usage
   static async trackResourceUsage(userId: string, resourceType:
       | 'ai_generation'
@@ -72,8 +73,8 @@ if (userId) {
     metadata: { ...metadata, timestamp: new Date().toISOString() },
     created_at: new Date().toISOString()});
       if (error) {
-        console.error('Error tracking resource, usage:', error)} catch (error) {
-      console.error('Error in resource, tracking:', error)}
+        logger.error('Error tracking resource, usage:', error)} catch (error) {
+      logger.error('Error in resource, tracking:', error)}
   // Get API performance summary
   static async getApiPerformanceSummary(
 timeRange: '1h' | '24h' | '7d' | '30d' = '24h'
@@ -109,7 +110,7 @@ const { data: metrics, error    }: any = await supabase;
         .select('*');
         .gte('created_at', startTime.toISOString();
       if (error || !metrics) {
-        console.error('Error fetching API, metrics:', error); return null
+         return null
 }
       // Calculate summary statistics;
 
@@ -146,7 +147,7 @@ const _topEndpoints = Object.entries(endpointStats);
         avgResponseTime: Math.round(avgResponseTime, errorRate: Math.round(errorRate * 100) / 100;
         topEndpoints
     } catch (error) {
-      console.error('Error calculating API, performance:', error); return null
+      logger.error('Error calculating API, performance:', error); return null
 }
 }
   // Clean up old metrics (run periodically)
@@ -159,6 +160,6 @@ const { error    }: any = await supabase;
         .delete();
         .lt('created_at', cutoffDate.toISOString();
       if (error) {
-        console.error('Error cleaning up old, metrics:', error)} else {} catch (error) { console.error('Error in metrics, cleanup:', error)}
+        logger.error('Error cleaning up old, metrics:', error)} else {} catch (error) { logger.error('Error in metrics, cleanup:', error)}
 
 }}}}}}}}}}}

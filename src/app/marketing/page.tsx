@@ -88,7 +88,7 @@ export default function MarketingPage() {
     setTimeout(() => {
       setIsSubmitting(false);
       setEmailCapture('');
-      alert('Thank you for subscribing!');
+      toast({ title: "Success", description: "Thank you for subscribing!" });
     }, 1000);
   };
 
@@ -102,7 +102,7 @@ export default function MarketingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -111,14 +111,14 @@ export default function MarketingPage() {
         </div>
 
         {/* Funnel Visualization */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+        <Card className="mb-8" className="glass
+          <CardHeader className="glass"
+            <CardTitle className="flex items-center gap-2" className="glass
               <Target className="h-5 w-5" />
               Conversion Funnel
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
             <div className="space-y-6">
               {funnelStages.map((stage, index) => (
                 <div key={stage.name}>
@@ -145,20 +145,20 @@ export default function MarketingPage() {
         </Card>
 
         {/* Campaign Performance */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Active Campaigns</CardTitle>
+        <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Active Campaigns</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4">
                 {campaigns.filter(c => c.status === 'active').map(campaign => (
-                  <div key={campaign.id} className="border rounded-lg p-4">
+                  <div key={campaign.id} className="glass  rounded-xl-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-medium">{campaign.name}</h3>
                       <Badge variant="default">Active</Badge>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div className="glass grid grid-cols-3 gap-4 text-sm">
                       <div>
                         <p className="text-gray-500">Leads</p>
                         <p className="font-bold">{campaign.leads.toLocaleString()}</p>
@@ -184,26 +184,26 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Email Capture Widget</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Email Capture Widget</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-6 text-white">
+            <CardContent className="glass"
+              <div className="glass bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Start Building Faster</h3>
                 <p className="mb-4 text-blue-100">Join 10,000+ developers using AI Guided SaaS</p>
-                <form onSubmit={handleEmailSubmit} className="space-y-3">
+                <form onSubmit={handleEmailSubmit} className="space-y-3" role="form">
                   <Input
                     type="email"
-                    placeholder="Enter your email"
+                    ="Enter your email"
                     value={emailCapture}
                     onChange={(e) => setEmailCapture(e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                    className="glass/20 -white/30 text-white :text-white/70"
                     required
                   />
                   <Button 
                     type="submit" 
-                    className="w-full bg-white text-blue-600 hover:bg-gray-100"
+                    className="w-full glass text-blue-600 hover:glass"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Subscribing...' : 'Get Early Access'}
@@ -229,9 +229,9 @@ export default function MarketingPage() {
         </div>
 
         {/* Marketing Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-6">
+        <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Total Leads</p>
@@ -243,8 +243,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Conversion Rate</p>
@@ -256,8 +256,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Avg. Deal Size</p>
@@ -269,8 +269,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">CAC Payback</p>

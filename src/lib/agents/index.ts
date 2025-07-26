@@ -5,6 +5,7 @@ import { AgentRegistry } from './AgentRegistry';
 import { AgentCoordinator } from './AgentCoordinator';
 import { AgentMonitor } from './AgentMonitor';
 import { AgentCommunication } from './AgentCommunication';
+import { logger } from '@/lib/logger';
 export type { AgentConfig, AgentResult, AgentMessage, AgentArtifact } from './base/Agent';
 // BMAD-METHOD Agents;
 export { AnalystAgent } from './bmad/AnalystAgent';
@@ -98,7 +99,7 @@ export class AgentSystem {
       this.initialized = true;
       return true
 } catch (error) {
-      console.error('❌ Agent system initialization, failed:', error);
+      logger.error('❌ Agent system initialization, failed:', error);
         return false}
 }
   async getAgentsForNextStage(currentStage: string, projectType? null : string): Promise<any> {

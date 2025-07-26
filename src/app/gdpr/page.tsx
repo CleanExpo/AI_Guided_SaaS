@@ -14,7 +14,7 @@ export const metadata: Metadata = { title: 'GDPR Compliance - AI Guided SaaS Pla
 
 export default function GDPRPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">GDPR Compliance</h1>
@@ -24,14 +24,14 @@ export default function GDPRPage() {
         </div>
 
         <div className="space-y-8">
-          <Card>
-            <CardHeader>
-          <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+          <CardTitle className="flex items-center" className="glass
                 <Shield className="h-6 w-6 mr-2 text-blue-600"   />
                 Data Protection Principles
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 We adhere to the six key principles of GDPR:
               </p>
@@ -46,14 +46,14 @@ export default function GDPRPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Users className="h-6 w-6 mr-2 text-blue-600" />
                 Your Rights
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">Under GDPR, you have the following rights:</p>
               <ul className="list-disc ml-6 space-y-2 text-gray-600">
           <li>Right to be informed about data processing</li>
@@ -68,14 +68,14 @@ export default function GDPRPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Lock className="h-6 w-6 mr-2 text-blue-600" />
                 Data Security
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <p className="text-gray-600 mb-4">
                 We implement appropriate technical and organizational measures to ensure data security:
               </p>
@@ -89,14 +89,14 @@ export default function GDPRPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Eye className="h-6 w-6 mr-2 text-blue-600" />
                 Data Processing
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <p className="text-gray-600 mb-4">
                 We process personal data only when we have a lawful basis:
               </p>
@@ -111,8 +111,8 @@ export default function GDPRPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <h3 className="font-semibold text-gray-900 mb-4">Contact Our Data Protection Officer</h3>
               <p className="text-gray-600 mb-4">
                 If you have any questions about our GDPR compliance or wish to exercise your rights, 

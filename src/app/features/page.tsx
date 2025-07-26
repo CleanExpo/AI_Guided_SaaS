@@ -39,7 +39,7 @@ export default function FeaturesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <Badge className="mb-4">Platform Features</Badge>
@@ -52,16 +52,16 @@ export default function FeaturesPage() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
-            <Card key={feature.title} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
+            <Card key={feature.title} className="hover:shadow-md-lg transition-shadow-md" className="glass
+              <CardHeader className="glass"
                 <div className="flex items-center mb-4">
                   <span className="text-3xl mr-4">{feature.icon}</span>
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  <CardTitle className="text-lg" className="glass{feature.title}</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <p className="text-gray-600">{feature.description}</p>
               </CardContent>
             </Card>

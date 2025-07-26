@@ -278,7 +278,7 @@ export class ResourceMonitor extends EventEmitter {
     if (this.history.length === 0) {r}eturn null;
     
     const now = Date.now();
-    const relevantSnapshots = this.history.filter(;
+    const relevantSnapshots = this.history.filter();
       s => now - s.timestamp.getTime() <= periodMs;
     );
     

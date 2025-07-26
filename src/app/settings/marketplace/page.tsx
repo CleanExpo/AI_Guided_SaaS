@@ -17,7 +17,7 @@ export default function MarketplaceSettingsPage() {
   const { trackFeature } = useAnalytics();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen glass py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -52,11 +52,11 @@ export default function MarketplaceSettingsPage() {
           </TabsContent>
 
           <TabsContent value="templates" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Installed Templates</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Installed Templates</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="text-center py-12">
                   <Puzzle className="h-12 w-12 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -71,15 +71,15 @@ export default function MarketplaceSettingsPage() {
           </TabsContent>
 
           <TabsContent value="integrations" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Active Integrations</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Active Integrations</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="glass flex items-center justify-between p-4  rounded-xl-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-green-100 rounded-xl-lg flex items-center justify-center">
                         <Zap className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
@@ -89,9 +89,9 @@ export default function MarketplaceSettingsPage() {
                     </div>
                     <span className="text-sm text-green-600">Connected</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="glass flex items-center justify-between p-4  rounded-xl-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-blue-100 rounded-xl-lg flex items-center justify-center">
                         <Zap className="h-5 w-5 text-blue-600" />
                       </div>
                       <div>
@@ -101,9 +101,9 @@ export default function MarketplaceSettingsPage() {
                     </div>
                     <span className="text-sm text-green-600">Connected</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="glass flex items-center justify-between p-4  rounded-xl-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-purple-100 rounded-xl-lg flex items-center justify-center">
                         <Zap className="h-5 w-5 text-purple-600" />
                       </div>
                       <div>

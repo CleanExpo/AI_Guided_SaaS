@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const feedbackSchema = z.object({ type: z.enum(['bug', 'feature', 'general']), message: z.string().min(1, 'Message is required'),
     email: z.string().email().optional()   
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         }, { status: 201   
     })
 } catch (error) {
-        console.error('Feedback error:', error);
+        logger.error('Feedback error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -49,7 +50,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             total: feedbackList.length   
     })
 } catch (error) {
-        console.error('Get feedback error:', error);
+        logger.error('Get feedback error:', error);
         return NextResponse.json({ error: 'Failed to fetch feedback' }, { status: 500   
     })
     }

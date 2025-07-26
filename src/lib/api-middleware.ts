@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { ApiTracking } from './api-tracking';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 export type ApiHandler = (, request: NextRequest, context?) => Promise<Response> | Response;</Response>
 // Middleware wrapper for API routes;
 export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
@@ -13,9 +15,14 @@ export function withApiTracking(handler: ApiHandler): ApiHandler): ApiHandler {
       try {
         const session = await getServerSession(authOptions);
         userId = session?.user?.id
- }; catch (error) {
+      } catch (error) {
         // Session might not be available for all routes
-}
+        handleError(error, {
+          operation: 'getServerSession',
+          module: 'ApiMiddleware',
+          metadata: { route: request.url }
+        });
+      }
       // Call the actual handler;
 response = await handler(request, context);
       // Extract error message if response is an error;
@@ -24,14 +31,27 @@ if (response.status >= 400) {
           const responseClone = response.clone(); const body = await responseClone.json(, errorMessage = body.error || body.message || `HTTP ${response.status}`
         } catch {
           errorMessage = `HTTP ${response.status}`
-}} catch (error) {
+      }
+    } catch (error) {
       // Handler threw an error
-      console.error('API handler, error:', error, errorMessage = error instanceof Error ? error.message : 'Unknown error', response = NextResponse.json({ error: 'Internal server error' ,  status: 500   
-    })
-}
+      handleError(error, {
+        operation: 'apiHandler',
+        module: 'ApiMiddleware',
+        metadata: { 
+          url: request.url,
+          method: request.method 
+        }
+      });
+      
+      // Return error response
+      response = NextResponse.json(
+        { error: 'Internal server error' },
+        { status: 500 }
+      );
+    }
     // Track the API call
     try {
-      await ApiTracking.trackApiCall(;
+      await ApiTracking.trackApiCall();
         request;
         response,
         startTime,
@@ -39,7 +59,7 @@ if (response.status >= 400) {
         // errorMessage
       )} catch (trackingError) {
       // Don't fail the request if tracking fails
-      console.error('API tracking, error:', trackingError)}
+      logger.error('API tracking, error:', trackingError)}
     return response
 }
 }
@@ -93,13 +113,13 @@ exportType: body.type,
 }} catch {
               // Ignore metadata extraction errors
 }
-            await ApiTracking.trackResourceUsage(;
+            await ApiTracking.trackResourceUsage();
               session.user.id;
               resourceType,
               1,
               // metadata
             )} catch (error) {
-          console.error('Resource tracking, error:', error)}
+          logger.error('Resource tracking, error:', error)}
       return response
 }
 }

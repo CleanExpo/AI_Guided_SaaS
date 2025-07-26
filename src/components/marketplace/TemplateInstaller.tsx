@@ -148,7 +148,7 @@ export default function TemplateInstaller({
       case 'error':
         return <AlertCircle className="h-5 w-5 text-red-600" />;
       default:
-        return <div className="h-5 w-5 rounded-full border-2 border-gray-300" />;
+        return <div className="h-5 w-5 rounded-lg-full -2 -gray-300" />;
     }
   };
 
@@ -156,11 +156,11 @@ export default function TemplateInstaller({
   const progress = (completedSteps / installSteps.length) * 100;
 
   return (
-    <Card className="max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle>Install {templateName}</CardTitle>
+    <Card className="max-w-2xl mx-auto" className="glass
+      <CardHeader className="glass"
+        <CardTitle className="glass"Install {templateName}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="glass"
         {currentStep === 'config' && (
           <div className="space-y-6">
             <div>
@@ -199,7 +199,7 @@ export default function TemplateInstaller({
                         ...config,
                         [variable.name]: e.target.value
                       })}
-                      className="mt-1 w-full px-3 py-2 border rounded-lg"
+                      className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     >
                       {variable.options?.map(option => (
                         <option key={option} value={option}>
@@ -221,7 +221,7 @@ export default function TemplateInstaller({
                             ...config,
                             [variable.name]: e.target.checked
                           })}
-                          className="rounded"
+                          className="rounded-lg"
                         />
                         <span className="text-sm">Enable</span>
                       </label>
@@ -300,7 +300,7 @@ export default function TemplateInstaller({
 
         {currentStep === 'complete' && (
           <div className="space-y-6 text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+            <div className="w-20 h-20 bg-green-100 rounded-lg-full flex items-center justify-center mx-auto">
               <CheckCircle className="h-10 w-10 text-green-600" />
             </div>
 
@@ -311,7 +311,7 @@ export default function TemplateInstaller({
               </p>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-4 text-left">
+            <div className="glass rounded-xl-lg p-4 text-left">
               <h4 className="font-medium mb-3">What's Next?</h4>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">

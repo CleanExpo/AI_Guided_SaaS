@@ -41,13 +41,13 @@ const handleGoogleSignIn = async () =>  {
       setError('Failed to sign in with Google'); setIsGoogleLoading(false)};
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
-          <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription></CardDescription>
+          <Card className="w-full max-w-md" className="glass
+        <CardHeader className="text-center" className="glass
+          <CardTitle className="text-2xl font-bold" className="glassWelcome Back</CardTitle>
+          <CardDescription className="glass"</CardDescription>
             Sign in to your AI Guided SaaS account</Card>
 </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4" className="glass
           {error && (</Card>
             <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>
@@ -65,19 +65,19 @@ className="w-full";
             Continue with Google
 </Button>
           <div className="relative absolute inset-0 flex items-center"    />
-          <span className="w-full border-t"     />
+          <span className="w-full -t"     />
 </div>
             <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
                 Or continue with email</span>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" role="form">
           <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
           <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400"     />
                 <Input id="email";
 type="email"
-placeholder="Enter your email";
+="Enter your email";
 
     value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value
     })};/>
@@ -92,7 +92,7 @@ placeholder="Enter your email";
                 <Input
 id="password";
 type="password"
-placeholder="Enter your password";
+="Enter your password";
 
     value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value
     })};/>

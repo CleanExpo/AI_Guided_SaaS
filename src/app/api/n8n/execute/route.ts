@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const ExecuteWorkflowSchema = z.object({ workflowId: z.string(), data: z.record(z.any()).optional(),
     mode: z.enum(['manual', 'trigger']).optional()
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, execution }, { status: 201   
     })
 } catch (error) {
-        console.error('N8N execution error:', error);
+        logger.error('N8N execution error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json({ success: true, executions    })
 } catch (error) {
-        console.error('Get executions error:', error);
+        logger.error('Get executions error:', error);
         return NextResponse.json({ error: 'Failed to fetch executions' }, { status: 500   
     })
 }

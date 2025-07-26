@@ -116,13 +116,13 @@ export function AgentMonitoringDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold">Agent Monitoring Dashboard</h2>
-        <div className="flex items-center gap-4">
+        <div className="glass flex items-center gap-4">
           <label className="flex items-center gap-2">
             <input
               type="checkbox"
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}</input>
-              className="rounded";
+              className="rounded-lg";
             />
             <span className="text-sm">Auto-refresh</span>
           <Button
@@ -137,47 +137,47 @@ export function AgentMonitoringDashboard() {
         </div>
 
       {/* System Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card></Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">System Health</CardTitle>
+      <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card className="glass"</Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+          <CardTitle className="text-sm font-medium" className="glassSystem Health</CardTitle>
             <Activity className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className={`text-2xl font-bold ${getHealthColor(systemMetrics?.systemHealth || 'healthy')}`}></div>
               {systemMetrics?.systemHealth || 'Unknown'}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Agents</CardTitle>
+        <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassActive Agents</CardTitle>
             <Users className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">
               {systemMetrics?.activeAgents || 0} / {agents.length}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Task Queue</CardTitle>
+        <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassTask Queue</CardTitle>
             <Clock className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{systemMetrics?.queueLength || 0}</div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+        <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassSuccess Rate</CardTitle>
             <BarChart3 className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">
               {systemMetrics && systemMetrics.totalTasks > 0
                 ? Math.round((systemMetrics.completedTasks / systemMetrics.totalTasks) * 100)
@@ -185,17 +185,17 @@ export function AgentMonitoringDashboard() {
             </div>
 
       {/* Task Statistics */}
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle>Task Statistics</CardTitle>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"Task Statistics</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-4">
             <div className="flex items-center justify-between">
           <span className="text-sm font-medium">Total Tasks</span>
               <span className="text-2xl font-bold">{systemMetrics?.totalTasks || 0}</span>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="glass grid grid-cols-3 gap-4">
           <div className="text-center">
                 <CheckCircle className="w-8 h-8 text-green-500 mx-auto mb-2"  />
           <div className="text-xl font-bold">{systemMetrics?.completedTasks || 0}</div>
@@ -223,21 +223,21 @@ export function AgentMonitoringDashboard() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {agents.map((agent) => (
               <Card
                 key={agent.id}
                 className={`cursor-pointer transition-colors ${;
                   selectedAgent === agent.id ? 'border-primary' : ''
 }`}
-                onClick={() => setSelectedAgent(agent.id)}</Card>
+                onClick={() = className="glass setSelectedAgent(agent.id)}</Card>
               >
-                <CardHeader>
+                <CardHeader className="glass"
           <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{agent.name}</CardTitle>
+                    <CardTitle className="text-lg" className="glass{agent.name}</CardTitle>
                     <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`/>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
           <div className="space-y-2">
                     <div className="flex items-center justify-between">
           <span className="text-sm">Status</span>
@@ -262,13 +262,13 @@ export function AgentMonitoringDashboard() {
           </div>
 
         <TabsContent value="performance" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             {agents.map((agent) => (
-              <Card key={agent.id}>
-          <CardHeader></CardHeader>
-                  <CardTitle>{agent.name} Performance</CardTitle>
+              <Card key={agent.id} className="glass"
+          <CardHeader className="glass"</CardHeader>
+                  <CardTitle className="glass"{agent.name} Performance</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
           <div className="space-y-4">
                     <div>
           <div className="flex items-center justify-between mb-2">
@@ -303,17 +303,17 @@ export function AgentMonitoringDashboard() {
           </div>
 
         <TabsContent value="tasks" className="space-y-4">
-          <Card></Card>
-            <CardHeader>
-          <CardTitle>Task History</CardTitle>
+          <Card className="glass"</Card>
+            <CardHeader className="glass"
+          <CardTitle className="glass"Task History</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
           <div className="space-y-2">
                 {agents.map((agent) => (
-                  <div key={agent.id} className="border rounded-lg p-4">
+                  <div key={agent.id} className="glass  rounded-xl-lg p-4">
           <div className="flex items-center justify-between mb-2">
                       <h4 className="font-medium">{agent.name}</h4>
-                      <div className="flex items-center gap-4 text-sm">
+                      <div className="glass flex items-center gap-4 text-sm">
           <span></span>
                           Completed: {agent.metrics?.tasksCompleted || 0}
                         </span>
@@ -332,14 +332,14 @@ export function AgentMonitoringDashboard() {
 
       {/* Alerts */}
       {systemMetrics?.systemHealth !== 'healthy' && (
-        <Card className="border-yellow-500">
-          <CardHeader></CardHeader>
-            <CardTitle className="flex items-center gap-2">
+        <Card className="-yellow-500" className="glass
+          <CardHeader className="glass"</CardHeader>
+            <CardTitle className="flex items-center gap-2" className="glass
           <AlertTriangle className="w-5 h-5 text-yellow-500"   />
               System Alerts
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="space-y-2">
               {systemMetrics?.systemHealth === 'degraded' && (
                 <div className="text-sm">

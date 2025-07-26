@@ -1,6 +1,7 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
@@ -14,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     })
 }
     // Visual generation logic would go here
-    // This is a placeholder for actual image generation
+    // This is a  for actual image generation
 
     const generation = { id: `gen_${Date.now()}`,
       prompt,
@@ -26,7 +27,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
     return NextResponse.json({ success: true, generation    })
 } catch (error) {
-    console.error('Visual generation error:', error);
+    logger.error('Visual generation error:', error);
         return NextResponse.json({ error: 'Generation failed' }, { status: 500   
     })
 }
@@ -49,7 +50,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
      }
     return NextResponse.json({ success: true, generation    })
 } catch (error) {
-    console.error('Get generation error:', error);
+    logger.error('Get generation error:', error);
         return NextResponse.json({ error: 'Failed to get generation' }, { status: 500   
     })
     }

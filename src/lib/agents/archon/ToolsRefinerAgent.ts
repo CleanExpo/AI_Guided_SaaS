@@ -107,14 +107,14 @@ export class ToolsRefinerAgent extends Agent {
       }};
       // Step, 1: Analyze current tools;
 
-const _toolAnalysis = await this.analyzeCurrentTools(;
+const _toolAnalysis = await this.analyzeCurrentTools();
         currentTools,
         // requirements;
       );
       this.observe('Tool analysis complete', toolAnalysis);
       // Step, 2: Identify missing capabilities;
 
-const _missingCapabilities = await this.identifyGaps(;
+const _missingCapabilities = await this.identifyGaps();
         currentTools,
         requirements,
         // toolAnalysis;
@@ -122,7 +122,7 @@ const _missingCapabilities = await this.identifyGaps(;
       this.observe('Identified capability gaps', missingCapabilities);
       // Step, 3: Recommend additions;
 
-const additions = await this.recommendAdditions(;
+const additions = await this.recommendAdditions();
         missingCapabilities,
         constraints,
         // currentTools;
@@ -131,7 +131,7 @@ const additions = await this.recommendAdditions(;
     });
       // Step, 4: Optimize configurations;
 
-const modifications = await this.optimizeConfigurations(;
+const modifications = await this.optimizeConfigurations();
         currentTools,
         requirements,
         // toolAnalysis;
@@ -140,7 +140,7 @@ const modifications = await this.optimizeConfigurations(;
       }};
       // Step, 5: Identify redundancies;
 
-const removals = await this.identifyRedundancies(;
+const removals = await this.identifyRedundancies();
         currentTools,
         additions,
         // requirements;
@@ -149,7 +149,7 @@ const removals = await this.identifyRedundancies(;
     });
       // Step, 6: Plan integrations;
 
-const integrations = await this.planIntegrations(;
+const integrations = await this.planIntegrations();
         [...currentTools, ...additions.map((a) => a.tool)],;
         // requirements;
       );
@@ -157,7 +157,7 @@ const integrations = await this.planIntegrations(;
     });
       // Step, 7: Analyze performance;
 
-const performance = await this.analyzePerformance(;
+const performance = await this.analyzePerformance();
         currentTools,
         additions,
         modifications,
@@ -166,7 +166,7 @@ const performance = await this.analyzePerformance(;
       this.observe('Performance analysis', performance);
       // Step, 8: Generate recommendations;
 
-const _recommendations = await this.generateRecommendations(;
+const _recommendations = await this.generateRecommendations();
         additions,
         modifications,
         removals,
@@ -175,7 +175,7 @@ const _recommendations = await this.generateRecommendations(;
       );
       // Compile refined tools;
 
-const _refinedTools = this.compileRefinedTools(;
+const _refinedTools = this.compileRefinedTools();
         currentTools,
         additions,
         modifications,
@@ -467,7 +467,7 @@ const response = await generateAIResponse(recommendPrompt, { model: this.config.
     temperature: 0.4
     }};
     return response.split('\n').filter((line) => line.trim().length > 0)};
-  private compileRefinedTools(;
+  private compileRefinedTools();
 currentTools: Tool[],
     additions: ToolAddition[],
     modifications: ToolModification[],

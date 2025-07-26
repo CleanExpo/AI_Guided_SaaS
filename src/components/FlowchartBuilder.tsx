@@ -6,6 +6,7 @@ import '@xyflow/react/dist/style.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Save, Download, Upload } from 'lucide-react';
+import { toast } from '@/components/ui/use-toast';
 interface FlowchartBuilderProps { projectName: string
   onSaveFlow: (nodes: Node[],
   edges: Edge[]) => void
@@ -47,7 +48,7 @@ const _addNode  = useCallback(() =>  {
 }, [nodeId, setNodes]);
 
 const _saveFlow = useCallback(() => {
-    onSaveFlow(nodes, edges, alert('Flow saved successfully!')}, [nodes, edges, onSaveFlow]);
+    onSaveFlow(nodes, edges, toast({ title: "Success", description: "Flow saved successfully!" })}, [nodes, edges, onSaveFlow]);
 
 const _exportFlow  = useCallback(() =>  {
     const flowData={
@@ -76,14 +77,14 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           if (flowData.nodes && flowData.edges) {
             setNodes(flowData.nodes);
             setEdges(flowData.edges);
-            alert('Flow imported successfully!')}; catch {
-          alert('Error importing, flow: Invalid file format')}
+            toast({ title: "Success", description: "Flow imported successfully!" })}; catch {
+          toast({ title: "Success", description: "Error importing, flow: Invalid file format" })}
       reader.readAsText(file)
 }, [setNodes, setEdges])
   return (
-    <div className="h-full flex flex-col"    /><Card className="mb-4"    />
-          <CardHeader     />
-          <CardTitle className="flex items-center justify-between"    />
+    <div className="h-full flex flex-col"    /><Card className="mb-4"    / className="glass
+          <CardHeader     / className="glass"
+          <CardTitle className="flex items-center justify-between"    / className="glass
           <span>Flowchart Builder - {projectName}</span>
             <div className="flex gap-2"    />
           <Button onClick={addNode} size="sm" variant="outline"     />
@@ -108,11 +109,11 @@ accept=".json";
 
 const onChange={importFlow}
                   className="hidden"    />
-          <CardContent     />
+          <CardContent     / className="glass"
           <p className="text-sm text-gray-600">
             Create and visualize your project workflow. Drag nodes to reposition them,
             connect nodes by dragging from one node to another, and use the controls to navigate.</p>
-      <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden"    />
+      <div className="flex-1  -gray-200 rounded-xl-lg overflow-hidden"    />
           <ReactFlow
 
 nodes={nodes} edges={edges}
@@ -127,9 +128,9 @@ nodes={nodes} edges={edges}
     </Button>
     </any>
   />
-      <Card className="mt-4"    />
-          <CardContent className="pt-4"     />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"    />
+      <Card className="mt-4"    / className="glass
+          <CardContent className="pt-4"     / className="glass
+          <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4 text-sm"    />
           <div     />
               <h4 className="font-medium text-gray-900 mb-1">Navigation</h4>
               <p className="text-gray-600">Use mouse wheel to zoom, drag to pan</p>

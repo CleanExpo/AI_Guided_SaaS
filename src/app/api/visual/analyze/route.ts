@@ -1,11 +1,12 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
         const body = await request.json();
-        const { imageUrl, analysisType = 'general'  }: any = body
+        const { imageUrl, analysisType = 'general' }: { imageUrl: string; analysisType?: string } = body
         
         if (!imageUrl) {
             return NextResponse.json({ error: 'Image URL is required' }, { status: 400   
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 }
         
         // Visual analysis logic would go here
-        // This is a placeholder for actual image analysis
+        // This is a  for actual image analysis
         const analysis= { id: `analysis_${Date.now()}`,
             type: analysisType,
             timestamp: new Date().toISOString(), results: { objects: ['person', 'building', 'tree'],
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json({ success: true, analysis    })
 } catch (error) {
-        console.error('Visual analysis error:', error);
+        logger.error('Visual analysis error:', error);
         return NextResponse.json({ error: 'Analysis failed' }, { status: 500   
     })
 }
@@ -54,7 +55,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json({ success: true, analysis    })
 } catch (error) {
-        console.error('Get analysis error:', error);
+        logger.error('Get analysis error:', error);
         return NextResponse.json({ error: 'Failed to get analysis' }, { status: 500   
     })
     }

@@ -12,10 +12,10 @@ import Link from 'next/link';
 
 export default function CommunityGuidelinesPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="glass flex items-center gap-4 mb-6">
             <Link href="/community">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -32,14 +32,14 @@ export default function CommunityGuidelinesPage() {
         </div>
 
         <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Heart className="h-5 w-5 text-red-500" />
                 Our Community Values
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 AI Guided SaaS is built on the principles of collaboration, innovation, and mutual respect.
                 Our community guidelines ensure everyone can participate in a safe and productive environment.
@@ -53,14 +53,14 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Shield className="h-5 w-5 text-blue-500" />
                 Code of Conduct
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">✅ Encouraged Behavior</h3>
@@ -86,15 +86,15 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Users className="h-5 w-5 text-green-500" />
                 How to Participate
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-2">
+            <CardContent className="glass"
+              <div className="glass grid gap-6 md:grid-cols-2">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3">Asking Questions</h3>
                   <ul className="space-y-2 text-gray-600 text-sm">
@@ -117,18 +117,18 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <AlertTriangle className="h-5 w-5 text-yellow-500" />
                 Reporting Issues
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 If you encounter behavior that violates our community guidelines, please report it to our moderation team.
               </p>
-              <div className="flex gap-4">
+              <div className="glass flex gap-4">
                 <Button variant="outline">
                   Report Content
                 </Button>
@@ -139,8 +139,8 @@ export default function CommunityGuidelinesPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="pt-6">
+          <Card className="glass"
+            <CardContent className="pt-6" className="glass
               <p className="text-center text-gray-600 text-sm">
                 These guidelines are subject to change as our community grows.
                 Last updated: January 2025

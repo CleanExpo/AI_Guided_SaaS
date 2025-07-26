@@ -1,9 +1,13 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
+import { validateInput } from '@/lib/api/validation-middleware';
+import { adminSchemas } from '@/lib/api/validation-schemas';
 export async function GET(request: NextRequest): Promise<NextResponse> {
-    try {
-        const url = new URL(request.url); const range = url.searchParams.get('range') || '7d';
+    return validateInput(adminSchemas.analytics, 'query')(request, async (params) => {
+        try {
+            const { range, startDate, endDate } = params;
         // Simulate analytics data
         const analyticsData = { totalUsers: 1247,
             activeUsers: 89,
@@ -14,10 +18,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 user_agent: request.headers.get('user-agent') || 'unknown'
             }
         }
-        return NextResponse.json(analyticsData)
-} catch (error) {
-        console.error('Analytics API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch analytics data' }, { status: 500   
-    })
-    }
+            return NextResponse.json(analyticsData);
+        } catch (error) {
+            logger.error('Analytics API error:', error);
+            return NextResponse.json({ 
+                error: 'Failed to fetch analytics data' 
+            }, { 
+                status: 500
+            });
+        }
+    });
 }

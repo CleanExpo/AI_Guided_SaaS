@@ -15,7 +15,7 @@ import { Palette, Type, Layout, Zap } from 'lucide-react';
 
 export default function DesignSystemDemoPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -26,54 +26,54 @@ export default function DesignSystemDemoPage() {
           </p>
         </div>
         
-        <div className="grid gap-8">
+        <div className="glass grid gap-8">
           {/* Color Palette */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Palette className="h-5 w-5 mr-2" />
                 Color Palette
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            <CardContent className="glass"
+              <div className="glass grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-blue-600 rounded"></div>
+                  <div className="w-full h-16 glass-button primary rounded-lg"></div>
                   <p className="text-sm font-medium">Primary</p>
                   <p className="text-xs text-gray-500">#2563eb</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-gray-900 rounded"></div>
+                  <div className="w-full h-16 glass-navbar rounded-lg"></div>
                   <p className="text-sm font-medium">Secondary</p>
                   <p className="text-xs text-gray-500">#111827</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-green-600 rounded"></div>
+                  <div className="w-full h-16 bg-green-600 rounded-lg"></div>
                   <p className="text-sm font-medium">Success</p>
                   <p className="text-xs text-gray-500">#16a34a</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-red-600 rounded"></div>
+                  <div className="w-full h-16 bg-red-600 rounded-lg"></div>
                   <p className="text-sm font-medium">Error</p>
                   <p className="text-xs text-gray-500">#dc2626</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-yellow-500 rounded"></div>
+                  <div className="w-full h-16 bg-yellow-500 rounded-lg"></div>
                   <p className="text-sm font-medium">Warning</p>
                   <p className="text-xs text-gray-500">#eab308</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-blue-500 rounded"></div>
+                  <div className="w-full h-16 glass-button primary rounded-lg"></div>
                   <p className="text-sm font-medium">Info</p>
                   <p className="text-xs text-gray-500">#3b82f6</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-gray-100 rounded border"></div>
+                  <div className="w-full h-16 glass rounded-lg "></div>
                   <p className="text-sm font-medium">Light</p>
                   <p className="text-xs text-gray-500">#f3f4f6</p>
                 </div>
                 <div className="space-y-2">
-                  <div className="w-full h-16 bg-gray-800 rounded"></div>
+                  <div className="w-full h-16 glass-navbar rounded-lg"></div>
                   <p className="text-sm font-medium">Dark</p>
                   <p className="text-xs text-gray-500">#1f2937</p>
                 </div>
@@ -82,14 +82,14 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Typography */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Type className="h-5 w-5 mr-2" />
                 Typography
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-6">
                 <div>
                   <h1 className="text-4xl font-bold text-gray-900">Heading 1</h1>
@@ -120,28 +120,28 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Buttons */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Zap className="h-5 w-5 mr-2" />
                 Buttons
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4">
-                <div className="flex flex-wrap gap-4">
+                <div className="glass flex flex-wrap gap-4">
                   <Button>Primary Button</Button>
                   <Button variant="secondary">Secondary</Button>
                   <Button variant="outline">Outline</Button>
                   <Button variant="ghost">Ghost</Button>
                   <Button variant="destructive">Destructive</Button>
                 </div>
-                <div className="flex flex-wrap gap-4">
+                <div className="glass flex flex-wrap gap-4">
                   <Button size="sm">Small</Button>
                   <Button size="default">Default</Button>
                   <Button size="lg">Large</Button>
                 </div>
-                <div className="flex flex-wrap gap-4">
+                <div className="glass flex flex-wrap gap-4">
                   <Button disabled>Disabled</Button>
                   <Button variant="outline" disabled>Disabled Outline</Button>
                 </div>
@@ -150,29 +150,29 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Form Elements */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center" className="glass
                 <Layout className="h-5 w-5 mr-2" />
                 Form Elements
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4 max-w-md">
-                <Input placeholder="Default input" />
-                <Input placeholder="Disabled input" disabled />
-                <Input type="email" placeholder="Email input" />
-                <Input type="password" placeholder="Password input" />
+                <Input ="Default input" />
+                <Input ="Disabled input" disabled />
+                <Input type="email" ="Email input" />
+                <Input type="password" ="Password input" />
               </div>
             </CardContent>
           </Card>
 
           {/* Badges */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Badges</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Badges</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="flex flex-wrap gap-2">
                 <Badge>Default</Badge>
                 <Badge variant="secondary">Secondary</Badge>

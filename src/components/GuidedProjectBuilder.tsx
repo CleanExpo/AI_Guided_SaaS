@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ArrowRight, ArrowLeft, CheckCircle, Target, Code, Palette, Database, Rocket, MessageSquare, Loader2, Lightbulb } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { useChat } from 'ai/react';
+import { logger } from '@/lib/logger';
 interface Step { id: string
   title: string
   description: string
@@ -21,14 +22,14 @@ e,
 interface Field { name: string
   label: string
   type: 'text' | 'textarea' | 'select' | 'multiselect' | 'radio'
-  placeholder?: string,
+  ?: string,
   options? null: { value: string
   label: string
 }[]
   required?: boolean
   validation? (value): string | null
 };
-interface GuidedProjectBuilderProps { onComplete: (projectData: any: any) => void
+interface GuidedProjectBuilderProps { onComplete: (projectData: unknown: unknown) => void
   initialData?: any
 }
 const steps: Step[]  = [
@@ -51,7 +52,7 @@ const steps: Step[]  = [
       } { name: 'projectName',
         label: 'Project Name',
         type: 'text',
-        placeholder: 'My Awesome Project',
+        : 'My Awesome Project',
         required: true
     validation: (value) => {
           if (!value || value.length < 3) {r}eturn 'Project name must be at least 3 characters'; return null
@@ -68,14 +69,14 @@ const steps: Step[]  = [
       { name: 'description',
         label: 'Project Description',
         type: 'textarea',
-        placeholder: 'I want to build a platform where users can...',
+        : 'I want to build a platform where users can...',
         required: true
     validation: (value) => {
           if (!value || value.length < 50) {r}eturn 'Please provide at least 50 characters to describe your project'; return null },
       { name: 'targetAudience',
         label: 'Who is this for?',
         type: 'text',
-placeholder: 'Small businesses, students, developers...',
+: 'Small businesses, students, developers...',
         required: true
 }
     ],
@@ -102,7 +103,7 @@ placeholder: 'Small businesses, students, developers...',
       } { name: 'customFeatures',
         label: 'Other features?',
         type: 'textarea',
-placeholder: 'Any specific features not listed above...'
+: 'Any specific features not listed above...'
 }
     ],
     helper: 'Select all features you need. You can always add more later!'
@@ -230,10 +231,10 @@ integrations: formData.integrations || []
 }
       onComplete(projectRequirements)
 } catch (error) {
-      console.error('Error processing, project:', error)} finally {
+      logger.error('Error processing, project:', error)} finally {
       setIsProcessing(false)}
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="glass max-w-4xl mx-auto p-6">
       {/* Progress, Bar */}</div>
       <div className="mb-8 flex items-center justify-between mb-2"    />
           <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>
@@ -248,16 +249,16 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
           animate={{ opacity: 1, x: 0 } exit={{ opacity: 0, x: -20 }
           const transition={{ duration: 0.3 }
         ></motion>
-          <Card className="p-8">
-          <div className="flex items-center gap-4 mb-6">
-              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+          <Card className="glass p-8">
+          <div className="glass flex items-center gap-4 mb-6">
+              <div className="h-12 w-12 rounded-lg-full glass-button primary/10 flex items-center justify-center">
           <step.icon className="h-6 w-6 text-primary"     />
 </div>
               <div>
           <h2 className="text-2xl font-bold">{step.title}</h2>
                 <p className="text-muted-foreground">{step.description}</p>
             {/* AI, Helper */},
-    {step.helper  && (div className="mb-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
+    {step.helper  && (div className="mb-6 p-4 glass-button primary/5 rounded-xl-lg  -primary/20">
                 <div className="flex items-start gap-3">
           <Lightbulb className="h-5 w-5 text-primary mt-0.5"     />
                   <p className="text-sm">{step.helper}</p>
@@ -269,11 +270,11 @@ key={currentStep} initial={{ opacity: 0, x: 20 }
                     {field.label}</label>
                     {field.required && <span className="text-red-500 ml-1">*</span>
                   {field.type === 'text'  && (Input; value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}
-                      placeholder={field.placeholder} className={cn(errors[field.name] && 'border-red-500')/>
+                      ={field.} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
     {field.type = == 'textarea'  && (/Input>
                     <Textarea value={formData[field.name] || ''} onChange={(e) => handleFieldChange(field.name, e.target.value)}</Textarea>
-{{field.placeholder}
+{{field.}
                       rows={4} className={cn(errors[field.name] && 'border-red-500')/>
                   )},
     {field.type = == 'radio'  && (/Textarea>
@@ -315,11 +316,11 @@ name={field.name} value={option.value}
 { formData[field.name] || [], if (e.target.checked) {
                                 handleFieldChange(field.name, [...values, option.value])} else { handleFieldChange(field.name, values.filter((v: string) => v !== option.value))
  };
-                            className="rounded border-gray-300" /></input>
+                            className="rounded-lg -gray-300" /></input>
         <span className="text-sm">{option.label}</span>)) })} {errors[field.name]  && (p className="text-sm text-red-500 mt-1">{errors[field.name]}</p>
               ))},
     {/* AI, Suggestions */},
-    {aiSuggestions.length > 0  && (div className="mt-6 p-4 bg-blue-50 rounded-lg">
+    {aiSuggestions.length > 0  && (div className="glass mt-6 p-4 bg-blue-50 rounded-xl-lg">
                 <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
           <Sparkles className="h-4 w-4"     />
                   AI Suggestions</Sparkles>

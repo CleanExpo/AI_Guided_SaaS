@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { ErrorInfo } from 'react';
 
 export interface ErrorLogEntry {
@@ -36,8 +38,8 @@ class ErrorLogger {
       retryDelay: 1000,
       batchSize: 10,
       flushInterval: 30000, // 30 seconds
-      enableConsole: process.env.NODE_ENV === 'development',
-      enableRemote: process.env.NODE_ENV === 'production',
+      enableConsole: (process.env.NODE_ENV || "development") === "development",
+      enableRemote: (process.env.NODE_ENV || "production") === "production",
       remoteEndpoint: '/api/errors',
       ...config
     };
@@ -71,7 +73,7 @@ class ErrorLogger {
 
     // Console logging in development
     if (this.config.enableConsole) {
-      console.error('Error logged:', entry);
+      
     }
 
     // Add to queue for remote logging
@@ -139,7 +141,7 @@ class ErrorLogger {
     } catch (error) {
       // Re-add errors to queue if send failed
       this.queue.unshift(...errors);
-      console.error('Failed to send error logs:', error);
+      logger.error('Failed to send error logs:', error);
     } finally {
       this.isProcessing = false;
     }
@@ -250,7 +252,7 @@ function extractComponentName(componentStack: string): string {
 }
 
 // Development helpers
-if (process.env.NODE_ENV === 'development') {
+if ((process.env.NODE_ENV || "development") === "development") {
   if (typeof window !== 'undefined') {
     (window as any).errorLogger = {
       getLogger: getErrorLogger,

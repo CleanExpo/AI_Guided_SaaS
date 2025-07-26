@@ -115,13 +115,13 @@ export default function ChatPage() {
         )}
 
         {/* Chat Container */}
-        <Card className={`${isMobile ? 'flex-1 rounded-none border-x-0 border-t-0' : ''}`}>
+        <Card className={`${isMobile ? 'flex-1 rounded-none border-x-0 border-t-0' : ''}`} className="glass
           {isMobile && (
-            <CardHeader className="border-b py-4">
+            <CardHeader className="-b py-4" className="glass
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-purple-600" />
-                  <CardTitle className="text-lg">AI Assistant</CardTitle>
+                  <CardTitle className="text-lg" className="glassAI Assistant</CardTitle>
                 </div>
                 <Badge variant={isOnline ? 'default' : 'secondary'}>
                   {isOnline ? 'Online' : 'Offline'}
@@ -130,7 +130,7 @@ export default function ChatPage() {
             </CardHeader>
           )}
 
-          <CardContent className={`${isMobile ? 'flex-1 overflow-y-auto p-4' : 'h-[600px] overflow-y-auto p-6'}`}>
+          <CardContent className={`${isMobile ? 'flex-1 overflow-y-auto p-4' : 'h-[600px] overflow-y-auto p-6'}`} className="glass
             <div className="space-y-4">
               {messages.map((message) => (
                 <div
@@ -158,7 +158,7 @@ export default function ChatPage() {
                             if (index % 2 === 1) {
                               return (
                                 <div key={index} className="relative">
-                                  <pre className="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto">
+                                  <pre className="glass-navbar text-gray-100 p-3 rounded-lg text-sm overflow-x-auto">
                                     <code>{part.replace(/^typescript\n/, '')}</code>
                                   </pre>
                                   <Button
@@ -195,10 +195,10 @@ export default function ChatPage() {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="flex gap-3">
-                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-purple-100 rounded-lg-full flex items-center justify-center">
                       <Bot className="h-4 w-4 text-purple-600" />
                     </div>
-                    <div className="bg-gray-100 rounded-lg px-4 py-3">
+                    <div className="glass rounded-xl-lg px-4 py-3">
                       <Loader2 className="h-4 w-4 animate-spin" />
                     </div>
                   </div>
@@ -217,7 +217,7 @@ export default function ChatPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me anything about building your SaaS..."
+                ="Ask me anything about building your SaaS..."
                 className="flex-1"
                 disabled={isLoading || !isOnline}
               />

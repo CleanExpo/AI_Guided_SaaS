@@ -30,18 +30,18 @@ export class AgentOrchestrator {
       this.stopMonitoring = () => Promise.resolve()}
   async initialize(): Promise<any> {
     if (!this.isClient) {r}eturn Promise.resolve({});
-    console.log('Initializing Agent Orchestrator');
+    
     return {}
   async loadAgent(config: AgentConfig): Promise<any> {;</any>
     if (!this.isClient) {r}eturn Promise.resolve({});
-    console.log('Loading agent:', config.name);
+    
     return {}
   async getStatus(): Promise<AgentStatus[]> {;</AgentStatus>
     if (!this.isClient) {r}eturn Promise.resolve([]);
         return []}
   async shutdown(): Promise<any> {;</any>
     if (!this.isClient) {r}eturn Promise.resolve({});
-    console.log('Shutting down Agent Orchestrator');
+    
     return {}
   getSystemStatus(): Promise<any> {
     return Promise.resolve({ status: 'active', message: 'System operational'   

@@ -31,14 +31,14 @@ export default function SignUpPage() {
 };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Create Account</CardTitle>
+    <div className="min-h-screen flex items-center justify-center glass">
+          <Card className="w-full max-w-md" className="glass
+        <CardHeader className="glass"
+          <CardTitle className="text-2xl text-center" className="glassCreate Account</CardTitle>
           <p className="text-center text-gray-600">Join AI Guided SaaS Platform</p>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <CardContent className="space-y-4" className="glass
+          <form onSubmit={handleSubmit} className="space-y-4" role="form">
             <Input
               type="text"
               name="name"
@@ -46,15 +46,15 @@ export default function SignUpPage() {
               value={formData.name}
               onChange={handleInputChange}
               required
-               />
-          <Input
+            />
+            <Input
               type="email"
               name="email"
               placeholder="Email Address"
               value={formData.email}
               onChange={handleInputChange}
               required
-                />
+            />
             <Input
               type="password"
               name="password"
@@ -62,7 +62,7 @@ export default function SignUpPage() {
               value={formData.password}
               onChange={handleInputChange}
               required
-               />
+            />
           <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? 'Creating Account...' : 'Create Account'}
             </Button>
@@ -73,7 +73,7 @@ export default function SignUpPage() {
               <Separator    />
           </div>
             <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-gray-50 px-2 text-gray-500">Or continue with</span>
+          <span className="glass px-2 text-gray-500">Or continue with</span>
             </div>
           </div>
           <Button type="button" variant="outline" className="w-full">

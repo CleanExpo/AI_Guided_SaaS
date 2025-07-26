@@ -13,7 +13,7 @@ export function DesignSystemShowcase() {
   { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4" />
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]</Zap>
   return (
-    <div className="max-w-7xl mx-auto p-8 space-y-12">
+    <div className="glass max-w-7xl mx-auto p-8 space-y-12">
       {/* Header */}</div>
       <div className="text-center"    />
           <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>
@@ -23,14 +23,14 @@ export function DesignSystemShowcase() {
       <UnifiedCard padding="lg"    /><h2 className="text-2xl font-semibold mb-6 flex items-center gap-2"    />
           <Palette className="h-6 w-6"     />
           Color Palette</Palette>
-        <div className="grid grid-cols-5 gap-6">
+        <div className="glass grid grid-cols-5 gap-6">
           {Object.entries(theme.colors).map(([colorName, shades]) => (\n    </div>
             <div key={colorName/>
           <h3 className="text-sm font-medium capitalize mb-3">{colorName}</h3>
               <div className="space-y-2"     />
                 {Object.entries(shades as Record<string string>).slice(2, 7).map(([shade, value]) => (\n    </string>
                   <div key={shade} className="flex items-center gap-2"    />
-          <div className="w-12 h-12 rounded-lg shadow-sm border";
+          <div className="w-12 h-12 rounded-xl-lg shadow-md-sm ";
 
     const style={{ backgroundColor: value }  > <div    />
           <p className="text-xs font-medium">{shade}</p>
@@ -80,7 +80,7 @@ export function DesignSystemShowcase() {
           <Layers className="h-6 w-6"     />
                     Cards
 </Layers>
-        <div className="grid, md:grid-cols-2 lg:grid-cols-4 gap-4"    />
+        <div className="glass grid, md:grid-cols-2 lg:grid-cols-4 gap-4"    />
           <UnifiedCard variant="default"     />
             <h3 className="font-semibold mb-2">Default Card</h3>
             <p className="text-sm text-muted-foreground">
@@ -97,10 +97,10 @@ export function DesignSystemShowcase() {
           <h3 className="font-semibold mb-2">Gradient Card</h3>
             <p className="text-sm text-muted-foreground">
               Subtle gradient background</p>
-        <div className="grid md:grid-cols-3 gap-4 mt-4"    />
+        <div className="glass grid md:grid-cols-3 gap-4 mt-4"    />
           <UnifiedCard interactive className="cursor-pointer"     />
             <div className="flex items-center gap-3 mb-3"    />
-          <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-lg flex items-center justify-center"     />
+          <div className="w-12 h-12 glass-button primary-100 text-primary-600 rounded-xl-lg flex items-center justify-center"     />
                 <Zap className="h-6 w-6"    />
           <div     />
                 <h3 className="font-semibold">Interactive Card</h3>
@@ -108,7 +108,7 @@ export function DesignSystemShowcase() {
             <UnifiedProgress value={75} variant="primary" showValue     />
           <UnifiedCard interactive className="cursor-pointer"     />
             <div className="flex items-center gap-3 mb-3"    />
-          <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-lg flex items-center justify-center"     />
+          <div className="w-12 h-12 bg-secondary-100 text-secondary-600 rounded-xl-lg flex items-center justify-center"     />
                 <Heart className="h-6 w-6"    />
           <div     />
                 <h3 className="font-semibold">Feature Card</h3>
@@ -118,7 +118,7 @@ export function DesignSystemShowcase() {
               <UnifiedBadge variant="success" size="xs">Popular</UnifiedBadge>
           <UnifiedCard interactive className="cursor-pointer"    />
           <div className="flex items-center gap-3 mb-3"     />
-              <div className="w-12 h-12 bg-success-100 text-success-600 rounded-lg flex items-center justify-center"    />
+              <div className="w-12 h-12 bg-success-100 text-success-600 rounded-xl-lg flex items-center justify-center"    />
           <Star className="h-6 w-6"     />
               <div    />
           <h3 className="font-semibold">Premium Card</h3>
@@ -168,7 +168,7 @@ description="Failed to connect to the database. Please check your configuration.
           <div    />
           <h3 className="text-lg font-medium mb-6">Step Progress</h3>
             <UnifiedSteps steps={steps} currentStep={currentStep/>
-          <div className="flex justify-center gap-4 mt-6"     />
+          <div className="glass flex justify-center gap-4 mt-6"     />
               <UnifiedButton variant="outline";
 size="sm";
 
@@ -227,7 +227,7 @@ const onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))
               Small text for secondary information and helper content.</p>
             <p className="text-xs text-muted-foreground">
               Extra small text for timestamps and metadata.</p>
-          <div className="p-4 bg-neutral-100 rounded-lg"    />
+          <div className="glass p-4 bg-neutral-100 rounded-xl-lg"    />
           <code className="font-mono text-sm">
 { combineStrengths(lovable, vscode))
 }

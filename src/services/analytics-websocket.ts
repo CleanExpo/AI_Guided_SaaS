@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { EventEmitter } from 'events';
 import { io, Socket } from 'socket.io-client';
 
@@ -57,7 +59,7 @@ export class AnalyticsWebSocket extends EventEmitter {
   
   subscribe(channels: string[]): void {
     if (!this.socket || !this.isConnected) {
-      console.warn('WebSocket not connected');
+      
       return;
     }
     
@@ -72,7 +74,7 @@ export class AnalyticsWebSocket extends EventEmitter {
   
   sendMetric(metric: RealtimeMetric): void {
     if (!this.socket || !this.isConnected) {
-      console.warn('WebSocket not connected, queueing metric');
+      
       return;
     }
     
@@ -93,7 +95,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     this.socket.on('connect', () => {
       this.isConnected = true;
       this.emit('connected');
-      console.log('Analytics WebSocket connected');
+      
       
       // Subscribe to default channels
       this.subscribe(['metrics', 'alerts', 'events']);
@@ -102,7 +104,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     this.socket.on('disconnect', (reason) => {
       this.isConnected = false;
       this.emit('disconnected', reason);
-      console.log('Analytics WebSocket disconnected:', reason);
+      
       
       // Attempt reconnection for certain disconnect reasons
       if (reason === 'io server disconnect' || reason === 'transport close') {
@@ -111,7 +113,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     });
     
     this.socket.on('error', (error) => {
-      console.error('Analytics WebSocket error:', error);
+      
       this.emit('error', error);
     });
     
@@ -159,7 +161,7 @@ export class AnalyticsWebSocket extends EventEmitter {
     
     this.reconnectTimer = setTimeout(() => {
       this.reconnectTimer = null;
-      console.log('Attempting to reconnect Analytics WebSocket...');
+      
       this.connect();
     }, 5000);
   }

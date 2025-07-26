@@ -2,6 +2,8 @@
 import { AgentConfig, AgentLoader } from './AgentLoader';
 import { AgentCoordinator } from './AgentCoordinator';
 import { mcp__memory__create_entities, mcp__memory__add_observations, mcp__memory__search_nodes } from '@/lib/mcp';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 export interface AgentMetrics { total_tasks: number;
   completed_tasks: number;
   failed_tasks: number;
@@ -73,7 +75,7 @@ export class AgentRegistry {
       await this.storeAgentInMemory(registration);
       return true
 } catch (error) {
-      console.error(`❌ Failed to register agent ${agent.agent_id}:`, error)``
+      logger.error(`❌ Failed to register agent ${agent.agent_id}:`, error)``
       return false
 }
 }
@@ -309,7 +311,14 @@ const _totalExecutionTime = allMetrics.reduce((sum, m) => sum + m.average_execut
             `Tags: ${registration.tags.join(', ')}`
           ]
         }]    })
-    } catch (error) {}
+    } catch (error) {
+      handleError(error, {
+        operation: 'reportRegisteredAgent',
+        module: 'AgentRegistry',
+        metadata: { agentId }
+      });
+    }
+  }
   private async logEvent(event: RegistryEvent): Promise<any> {
     this.eventHistory.push(event, // Keep only last 1000 events, if (this.eventHistory.length > 1000) {
       this.eventHistory = this.eventHistory.slice(-1000)

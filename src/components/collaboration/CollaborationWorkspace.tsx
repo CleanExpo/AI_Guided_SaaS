@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 'use client';
 import React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, MessageCircle, Copy, Crown, Eye, Edit3, Clock, Wifi, WifiOff } from 'lucide-react';
 import { CollaborationRoom, CollaborationUser, CursorPosition, Comment, ProjectChange } from '@/lib/collaboration';
+import { logger } from '@/lib/logger';
 interface CollaborationWorkspaceProps { projectId: string
   roomId?: string,
   onRoomCreated? (roomId: string) => void
@@ -57,13 +58,12 @@ const _initializeCollaboration = useCallback(async () =>  {
       setupSocketListeners(newSocket);
       // Authenticate with the server
       newSocket.emit('authenticate', {
-        userId?: session.user?.email || 'anonymous',
-token: 'mock-token' // TODO: Use real JWT token
-     
-    });
+        userId: session.user?.email || 'anonymous',
+        token: process.env.NEXT_PUBLIC_COLLABORATION_TOKEN || session.token || ''
+      });
       setSocket(newSocket)
 } catch (error) {
-      console.error('Error initializing, collaboration:', error)} finally {
+      logger.error('Error initializing, collaboration:', error)} finally {
       setLoading(false)}, [session?.user?.email, projectId, roomId, onRoomCreated])
   useEffect(() =>  {
     if (session?.user) {;
@@ -114,8 +114,7 @@ if (!roomId && onRoomCreated) {
       setComments(prev => [data.comment, ...prev])    })
     socket.on('error', (data: { message: string
     }) =>  {
-      console.error('Collaboration, error:', data.message)
-})}
+      })}
   
 const _createNewRoom = async (socket: Socket) =>  {
     try {
@@ -127,7 +126,7 @@ headers: { 'Content-Type': 'application/json'  },
       const data = await response.json();
       if (data.success) {
         socket.emit('join_room', { roomId: data.roomId, projectId })} catch (error) {
-      console.error('Error creating, room:', error)}
+      logger.error('Error creating, room:', error)}
   const _handleMouseMove = (e: React.MouseEvent) => {
     if (!socket || !room) {r}eturn null; const rect = workspaceRef.current?.getBoundingClientRect(, if (!rect) {r}eturn const position: CursorPosition={ x: e.clientX - rect.left,
 y: e.clientY - rect.top
@@ -171,13 +170,13 @@ break
       default: return null}}
   if (loading) {;
     return (
-    <div className="flex items-center justify-center p-8" />);</div>
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4" />
+    <div className="glass flex items-center justify-center p-8" />);</div>
+          <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto mb-4" />
           <p className="text-gray-600">Initializing collaboration...</p>
   return (
     <div className="h-full flex flex-col">
       {/* Header */}</div>
-      <div className="flex items-center justify-between p-4 border-b" />
+      <div className="glass flex items-center justify-between p-4 -b" />
           <div className="flex items-center space-x-4" />
           <div className="flex items-center space-x-2">
             {connected ? (</div>
@@ -222,7 +221,7 @@ Alert className="m-4"></Alert>
         <div;
 
     const ref={workspaceRef}
-          className="flex-1 relative bg-gray-50 overflow-hidden";
+          className="flex-1 relative glass overflow-hidden";
 
 const onMouseMove={handleMouseMove}
         ></div>
@@ -237,8 +236,8 @@ const onMouseMove={handleMouseMove}
     top: position.y,
 transform: 'translate(-2px, -2px)' />
           <div className="flex items-center space-x-1" />
-                <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg">
-          <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
+                <div className="w-4 h-4 glass-button primary rounded-lg-full -2 -white shadow-md-lg">
+          <div className="glass-button primary text-white text-xs px-2 py-1 rounded-lg shadow-md-lg">
                   {user.name}
           ))},
     {/* Comments, overlay */},
@@ -247,37 +246,37 @@ transform: 'translate(-2px, -2px)' />
               className="absolute z-40";
 
     const style={{ left: comment.position.x, top: comment.position.y />
-          <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-2 shadow-lg max-w-xs" />
+          <div className="bg-yellow-100  -yellow-300 rounded-xl-lg p-2 shadow-md-lg max-w-xs" />
                 <div className="text-xs font-medium text-yellow-800 mb-1">
                     Comment</div>
                 <div className="text-sm text-yellow-700">
                   {comment.content }))} {/* Project, workspace content */}</div>
-          <div className="p-8" />
+          <div className="glass p-8" />
           <div className="max-w-4xl mx-auto" />
               <h1 className="text-2xl font-bold mb-6">Collaborative Project Workspace</h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6" />
-          <Card />
-                  <CardHeader />
-          <CardTitle>Project Files</CardTitle>
-                    <CardDescription></CardDescription>
+              <div className="glass grid grid-cols-1 md:grid-cols-2 gap-6" />
+          <Card / className="glass"
+                  <CardHeader / className="glass"
+          <CardTitle className="glass"Project Files</CardTitle>
+                    <CardDescription className="glass"</CardDescription>
                       Collaborate on project files in real-time</Card>
-                  <CardContent />
+                  <CardContent / className="glass"
           <div className="space-y-2" />
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer" />
+                      <div className="p-3  rounded-lg hover:glass cursor-pointer" />
           <div className="font-medium">index.html</div>
                         <div className="text-sm text-gray-500">Main HTML file</div>
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer" />
+                      <div className="p-3  rounded-lg hover:glass cursor-pointer" />
           <div className="font-medium">styles.css</div>
                         <div className="text-sm text-gray-500">Stylesheet</div>
-                      <div className="p-3 border rounded hover:bg-gray-50 cursor-pointer" />
+                      <div className="p-3  rounded-lg hover:glass cursor-pointer" />
           <div className="font-medium">script.js</div>
                         <div className="text-sm text-gray-500">JavaScript logic</div>
-                <Card />
-          <CardHeader />
-                    <CardTitle>Recent Changes</CardTitle>
-                    <CardDescription></CardDescription>
+                <Card / className="glass"
+          <CardHeader / className="glass"
+                    <CardTitle className="glass"Recent Changes</CardTitle>
+                    <CardDescription className="glass"</CardDescription>
                       Live project updates from collaborators</Card>
-                  <CardContent />
+                  <CardContent / className="glass"
           <div className="space-y-2">
                       {changes.slice(0, 5).map((change) => (\n    </div>
                         <div key={change.id} className="flex items-center space-x-2 text-sm" />
@@ -289,14 +288,14 @@ div className="text-sm text-gray-500">No recent changes</div>
       )}
 
     {/* Add, comment section */}
-              <Card className="mt-6" />
-          <CardHeader />
-                  <CardTitle>Add Comment</CardTitle>
-                  <CardDescription></CardDescription>
+              <Card className="mt-6" / className="glass
+          <CardHeader / className="glass"
+                  <CardTitle className="glass"Add Comment</CardTitle>
+                  <CardDescription className="glass"</CardDescription>
                     Click anywhere on the workspace and add a comment</Card>
-                <CardContent />
+                <CardContent / className="glass"
           <div className="flex space-x-2" />
-                    <Input placeholder="Type your comment...";
+                    <Input ="Type your comment...";
 
 value={newComment} onChange={(e) => setNewComment(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleAddComment()/>/>
@@ -304,16 +303,16 @@ value={newComment} onChange={(e) => setNewComment(e.target.value)} />
           <MessageCircle className="h-4 w-4 mr-1" />Comment</MessageCircle>
         {/* Participants, sidebar */},
     {showParticipants && (div className = "w-80 border-l bg-white"></div>
-            <div className="p-4 border-b" />
+            <div className="glass p-4 -b" />
           <h3 className="font-semibold">Participants</h3>
-            <div className="p-4 space-y-3">
+            <div className="glass p-4 space-y-3">
               {participants.map((participant) => (\n    </div>
                 <div key={participant.id} className="flex items-center space-x-3" />
           <div className="relative" />
-                    <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 glass-sidebar rounded-lg-full flex items-center justify-center">
                       {participant.avatar ? (</div>
                         <img; src={participant.avatar} alt={participant.name}
-                          className="w-full h-full rounded-full" />
+                          className="w-full h-full rounded-lg-full" />
                       ) : (</img>
                         <span className="text-sm font-medium">
                           {participant.name.charAt(0)}</span>
@@ -332,12 +331,12 @@ div className="text-sm text-gray-500">No participants yet</div>
       )}
         )},
     {/* Comments, sidebar */},
-    {showComments && (div className="w-80 border-l bg-white"></div>
-            <div className="p-4 border-b" />
+    {showComments && (div className="w-80 -l glass"></div>
+            <div className="glass p-4 -b" />
           <h3 className="font-semibold">Comments</h3>
-            <div className="p-4 space-y-4 max-h-96 overflow-y-auto">
+            <div className="glass p-4 space-y-4 max-h-96 overflow-y-auto">
               {comments.map((comment) => (\n    </div>
-                <div key={comment.id} className="border rounded-lg p-3" />
+                <div key={comment.id} className=" rounded-xl-lg p-3" />
           <div className="text-sm font-medium mb-1">Anonymous User</div>
                   <div className="text-sm text-gray-700 mb-2">{comment.content}</div>
                   <div className="text-xs text-gray-500">

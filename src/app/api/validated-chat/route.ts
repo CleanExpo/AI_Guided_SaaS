@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 function validateOrThrow<T>(schema: z.ZodType<T>, data: unknown): T {
   return schema.parse(data)
@@ -31,7 +32,7 @@ const validatedResponse = validateOrThrow(chatResponseSchema, response);
     return NextResponse.json({ success: true, response: validatedResponse   
     })
 } catch (error) {
-    console.error('Validated chat error:', error);
+    logger.error('Validated chat error:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: 'Validation failed', details: error.errors }, { status: 400   
     })

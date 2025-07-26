@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 import * as React from "react";
 
 import { cn } from '@/lib/utils';

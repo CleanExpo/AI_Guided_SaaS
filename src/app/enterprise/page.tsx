@@ -67,7 +67,7 @@ export default function EnterprisePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4 max-w-6xl">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -82,11 +82,11 @@ export default function EnterprisePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
+        <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-16">
           {enterpriseFeatures.map((feature) => (
-            <Card key={feature.title}>
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <Card key={feature.title} className="glass"
+              <CardContent className="glass p-6 text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="h-6 w-6 text-blue-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
@@ -103,12 +103,12 @@ export default function EnterprisePage() {
             <p className="text-gray-600">Choose the plan that fits your organization's needs</p>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+          <div className="glass grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {pricingTiers.map((tier) => (
-              <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''}>
-                <CardHeader>
+              <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''} className="glass
+                <CardHeader className="glass"
                   <div className="flex items-center justify-between">
-                    <CardTitle>{tier.name}</CardTitle>
+                    <CardTitle className="glass"{tier.name}</CardTitle>
                     {tier.recommended && <Badge>Recommended</Badge>}
                   </div>
                   <div className="flex items-baseline">
@@ -116,7 +116,7 @@ export default function EnterprisePage() {
                     <span className="text-gray-500 ml-2">{tier.period}</span>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
                   <ul className="space-y-3 mb-6">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-center">
@@ -138,8 +138,8 @@ export default function EnterprisePage() {
         </div>
 
         {/* CTA Section */}
-        <Card className="bg-blue-600 text-white">
-          <CardContent className="p-12 text-center">
+        <Card className="glass-button primary text-white">
+          <CardContent className="p-12 text-center" className="glass
             <Building className="h-12 w-12 mx-auto mb-6 text-blue-100" />
             <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Development?</h3>
             <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
@@ -150,7 +150,7 @@ export default function EnterprisePage() {
               <Button variant="secondary" size="lg">
                 Schedule Demo
               </Button>
-              <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-blue-600">
+              <Button variant="outline" size="lg" className="text-white -white hover:glass hover:text-blue-600">
                 Contact Sales
               </Button>
             </div>

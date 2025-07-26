@@ -83,10 +83,10 @@ export function ThemeToggle() {
     <button;
 
     const onClick={toggleTheme };
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none,;
+      className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl-lg  -gray-200 glass text-gray-900 transition-colors, hover: glass, focus: outline-none,;
   focus: ring-2, focus: ring-blue-500,
-  focus: ring-offset-2, dark: border-gray-700,
-  dark: bg-gray-800, dark:text-gray-100 dark: hover bg-gray-700"
+  focus: ring-offset-2, dark: -gray-700,
+  dark: glass-navbar, dark:text-gray-100 dark: hover bg-gray-700"
       aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} theme`}``
     ></button>
       {/* Sun icon for light mode */}</button>
@@ -117,7 +117,7 @@ strokeLinejoin="round";
           d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"      />
       {/* System indicator */},
     {theme === 'system'  && (
-div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-full bg-blue-500" />
+div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-lg-full glass-button primary" />
             )}
     )
 };
@@ -135,11 +135,11 @@ const themes = [
     <div className="relative"    />
           <button;
 
-    const onClick={() => setIsOpen(!isOpen)};</button>
-        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: bg-gray-50, focus: outline-none,;
+    const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
+        className="flex items-center gap-2 rounded-xl-lg  -gray-200 glass px-3 py-2 text-sm font-medium text-gray-900 transition-colors, hover: glass, focus: outline-none,;
   focus: ring-2, focus: ring-blue-500,
-  focus: ring-offset-2, dark: border-gray-700,
-  dark: bg-gray-800, dark:text-gray-100 dark:hover:bg-gray-700"
+  focus: ring-offset-2, dark: -gray-700,
+  dark: glass-navbar, dark:text-gray-100 dark:hover:bg-gray-700"
       ></button>
         <span>{themes.find(t => t.value === theme)?.icon}</span>
         <span>{themes.find(t => t.value === theme)?.label}</span>
@@ -151,9 +151,9 @@ viewBox="0 0 24 24";
 stroke="currentColor";
             />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"      />
-      {isOpen && (div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-lg border border-gray-200 bg-white py-1 shadow-lg, dark:border-gray-700 dark:bg-gray-800">
+      {isOpen && (div className="absolute right-0 top-full z-50 mt-1 w-32 rounded-xl-lg  -gray-200 glass py-1 shadow-md-lg, dark:-gray-700 dark:glass-navbar">
           {themes.map((themeOption) => (\n    </div>
-            <button key={themeOption.value} onClick={() => {</button>
+            <button key={themeOption.value} onClick={() = aria-label="Button"> {</button>
                 setTheme(themeOption.value, setIsOpen(false)};
               const className={```flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors, hover: bg-gray-100, dark:hover:bg-gray-700 ${``, theme === themeOption.value, ? 'bg-blue-50 text-blue-900, dark: bg-blue-900 dark:text-blue-100'
                   : 'text-gray-900, dark:text-gray-100'

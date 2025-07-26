@@ -100,7 +100,7 @@ const _remainingSeparators = separators.slice(1);
     const splits = text.split(separator);
     // Check if any split is too large;
 
-const _needsFurtherSplitting = splits.some(;
+const _needsFurtherSplitting = splits.some();
       split: any => this.config.lengthFunction!(split) > this.config.chunkSize;
     );
     if (needsFurtherSplitting) {
@@ -121,7 +121,7 @@ if (this.config.keepSeparator && separator) {
   private splitByCharacter(text: string): TextChunk[] {
     const chunks: TextChunk[] = [], let currentIndex = 0; let chunkIndex = 0;
     while (currentIndex < text.length) {
-      const _endIndex = Math.min(;
+      const _endIndex = Math.min();
         currentIndex + this.config.chunkSize,
         text.length;
       );
@@ -229,7 +229,7 @@ if (!config.language) {
 break
   }
 }
-      return new CodeTextSplitter(;
+      return new CodeTextSplitter();
         config as TextSplitterConfig & { language: string 
     });
     case 'markdown':

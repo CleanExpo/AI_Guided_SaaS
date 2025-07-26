@@ -48,18 +48,18 @@ export default function ApiDocsPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {apiEndpoints.map((endpoint) => (
-            <Card key={endpoint.slug} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
+            <Card key={endpoint.slug} className="hover:shadow-md-lg transition-shadow-md" className="glass
+              <CardHeader className="glass"
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">{endpoint.name}</CardTitle>
+                  <CardTitle className="text-lg" className="glass{endpoint.name}</CardTitle>
                   <Badge variant={endpoint.status === 'stable' ? 'default' : 'secondary'}>
                     {endpoint.status}
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600 mb-4">{endpoint.description}</p>
                 <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">Version {endpoint.version}</span>
@@ -75,15 +75,15 @@ export default function ApiDocsPage() {
           ))}
         </div>
 
-        <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
+        <div className="mt-12 glass rounded-xl-lg shadow-md-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
           <div className="space-y-4">
           <p className="text-gray-600">
               To get started with our API, you'll need to authenticate using your API key.
             </p>
-            <div className="bg-gray-100 rounded-lg p-4">
+            <div className="glass rounded-xl-lg p-4">
           <code className="text-sm">
-                curl -H "Authorization: Bearer YOUR_API_KEY" https://api.aiguidedsaas.com/v1/
+                curl -H "Authorization: Bearer ${process.env.AUTH_TOKEN || ""}  || """ https://api.aiguidedsaas.com/v1/
               </code>
             </div>
           </div>

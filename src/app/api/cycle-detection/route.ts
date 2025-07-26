@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 interface DocumentationSearchResult { id: string,
   title: string,content: string,
@@ -11,7 +12,8 @@ interface CycleDetectionResult { hasCycle: boolean
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const body = await request.json(); const { query, context  }: any = body
+    const body = await request.json(); 
+    const { query, context }: { query: string; context?: Record<string, unknown> } = body
     if (!query) {
       return NextResponse.json({ error: 'Query is required' }, { status: 400   
     })
@@ -39,7 +41,7 @@ const result: CycleDetectionResult= { hasCycle: false,
       timestamp: new Date().toISOString()   
     })
   } catch (error) {
-    console.error('Cycle detection error:', error);
+    logger.error('Cycle detection error:', error);
         return NextResponse.json({ error: 'Cycle detection failed' }, { status: 500   
     })
 }};

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
@@ -9,7 +10,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             config: updates   
     })
     } catch (error) {
-        console.error('Pulse config error:', error)
         return NextResponse.json({ error: 'Failed to update pulse configuration' }, { status: 500   
     })
     }
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         };
         return NextResponse.json(config)
 } catch (error) {
-        console.error('Get pulse config error:', error);
+        logger.error('Get pulse config error:', error);
         return NextResponse.json({ error: 'Failed to get pulse configuration' }, { status: 500   
     })
     }

@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import { useEffect } from 'react';
@@ -34,7 +36,7 @@ const defaultThresholds = {
 
 export function WebVitalsMonitor({
   onReport,
-  enableLogging = process.env.NODE_ENV === 'development',
+  enableLogging = (process.env.NODE_ENV || "development") === "development",
   enableAnalytics = true,
   thresholds = defaultThresholds,
 }: WebVitalsConfig = {}) {
@@ -58,7 +60,7 @@ export function WebVitalsMonitor({
       // Console logging in development
       if (enableLogging) {
         const emoji = rating === 'good' ? '🟢' : rating === 'needs-improvement' ? '🟡' : '🔴';
-        console.log(`${emoji} ${metric.name}: ${metric.value.toFixed(2)}ms (${rating})`);
+        }ms (${rating})`);
       }
 
       // Send to analytics
@@ -73,7 +75,7 @@ export function WebVitalsMonitor({
       }
 
       // Send to monitoring endpoint
-      if (process.env.NODE_ENV === 'production') {
+      if ((process.env.NODE_ENV || "production") === "production") {
         sendToMonitoring(vitalsMetric);
       }
     };
@@ -129,8 +131,8 @@ async function sendToMonitoring(metric: WebVitalsMetric) {
     }
   } catch (error) {
     // Silently fail in production
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Failed to send Web Vitals:', error);
+    if ((process.env.NODE_ENV || "development") === "development") {
+      logger.error('Failed to send Web Vitals:', error);
     }
   }
 }
@@ -178,13 +180,13 @@ export function measurePerformance(name: string, startMark: string, endMark: str
       window.performance.measure(name, startMark, endMark);
       const measure = window.performance.getEntriesByName(name, 'measure')[0];
       
-      if (measure && process.env.NODE_ENV === 'development') {
-        console.log(`⏱️ ${name}: ${measure.duration.toFixed(2)}ms`);
+      if (measure && (process.env.NODE_ENV || "development") === "development") {
+        }ms`);
       }
       
       return measure?.duration;
     } catch (error) {
-      console.error('Performance measurement error:', error);
+      logger.error('Performance measurement error:', error);
     }
   }
   return null;

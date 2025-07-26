@@ -216,7 +216,7 @@ getOverallScore(, moduleReport: ModuleReport, depReport: DependencyReport;
 
 const _uxScore = getUXScore(causalInsights);
   // Weighted, average: Security is most important, then modules, then dependencies, then UX
-  return Math.round(;
+  return Math.round();
     securityScore * 0.4 + moduleScore * 0.3 + depScore * 0.2 + uxScore * 0.1
   )
 }

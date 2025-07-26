@@ -189,7 +189,7 @@ const total = count || 0;
   query<T>(collection: string): QueryBuilder<T> {</T>
     return new SupabaseQueryBuilder<T>(this.client, collection)}</T>
   // Real-time subscriptions
-  subscribe<T>(;</T>
+  subscribe<T>();</T>
 collection: string;
     callback: (event: DatabaseEvent<T>) => void;</T>
     filters?: Record<string any></string>

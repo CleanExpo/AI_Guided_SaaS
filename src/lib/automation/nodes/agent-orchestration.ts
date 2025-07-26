@@ -134,7 +134,7 @@ return {
 }
   // 3. Architect agent (always first);
 
-const _architectNode = createAgentNode(;
+const _architectNode = createAgentNode();
     'agent_architect',
     'Architect Agent',
     { agentType: 'architect',
@@ -156,7 +156,7 @@ const _architectNode = createAgentNode(;
     )
     nodes.push(frontendNode);
 
-const _qaNode = createAgentNode(;
+const _qaNode = createAgentNode();
       'agent_qa',
       'QA Agent',
       { agentType: 'qa',
@@ -179,7 +179,7 @@ const _qaNode = createAgentNode(;
     options: {}
     nodes.push(splitNode);
 
-const _frontendNode = createAgentNode(;
+const _frontendNode = createAgentNode();
       'agent_frontend',
       'Frontend Agent',
       { agentType: 'frontend',
@@ -189,7 +189,7 @@ const _frontendNode = createAgentNode(;
     )
     nodes.push(frontendNode);
 
-const _backendNode = createAgentNode(;
+const _backendNode = createAgentNode();
       'agent_backend',
       'Backend Agent',
       { agentType: 'backend',
@@ -217,7 +217,7 @@ const _qaNode = createAgentNode('agent_qa',;
     )
     nodes.push(qaNode);
 
-const _devopsNode = createAgentNode(;
+const _devopsNode = createAgentNode();
       'agent_devops',
       'DevOps Agent',
       { agentType: 'devops',

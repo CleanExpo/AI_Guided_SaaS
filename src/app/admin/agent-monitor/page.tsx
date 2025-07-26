@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 /* BREADCRUMB: pages - Application pages and routes */
 'use client';
 
@@ -12,7 +12,7 @@ import { AlertsPanel } from '@/components/health/AlertsPanel';
 
 export default function AgentMonitorPage() {
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="glass container mx-auto p-6 space-y-6">
           <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Agent Monitoring</h1>
       </div>
@@ -28,7 +28,7 @@ export default function AgentMonitorPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             <SystemMetrics  />
           <AlertsPanel   />
           </div>

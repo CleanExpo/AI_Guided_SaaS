@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 'use client';
 
 import React from 'react';
@@ -13,17 +13,17 @@ export function TaskQueueVisualizer() {
   ];
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card className="glass"
+      <CardHeader className="glass"
+        <CardTitle className="flex items-center gap-2" className="glass
           <Clock className="h-5 w-5" />
           Task Queue
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="glass"
         <div className="space-y-2">
           {tasks.map(task => (
-            <div key={task.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            <div key={task.id} className="flex items-center justify-between p-3 glass rounded-lg">
               <div className="flex items-center gap-3">
                 {task.status === 'completed' && <CheckCircle className="h-4 w-4 text-green-500" />}
                 {task.status === 'running' && <Clock className="h-4 w-4 text-blue-500 animate-pulse" />}

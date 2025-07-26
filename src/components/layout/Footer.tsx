@@ -2,9 +2,9 @@ import React from 'react';
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background">
+    <footer className="-t bg-background">
           <div className="container py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="glass grid grid-cols-1 md:grid-cols-4 gap-8">
           <div></div>
             <h3 className="font-bold text-lg mb-4">AI Guided SaaS</h3>
             <p className="text-sm text-muted-foreground">
@@ -69,7 +69,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+        <div className="-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           © 2024 AI Guided SaaS. All rights reserved.
         </div>
   )

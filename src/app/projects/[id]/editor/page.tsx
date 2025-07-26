@@ -23,7 +23,7 @@ export default function ProjectEditorPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto mb-4"></div>
           <p>Loading project...</p>
         </div>
       </div>
@@ -31,10 +31,10 @@ export default function ProjectEditorPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen glass">
       <div className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-8">Project Editor: {project?.name}</h1>
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="glass rounded-xl-lg shadow-md p-6">
           <p>Project editor interface would go here.</p>
         </div>
       </div>

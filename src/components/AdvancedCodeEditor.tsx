@@ -35,7 +35,7 @@ const defaultFiles: FileNode[]  = [
             language: 'typescript',
 content: `export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">, <h1>Welcome to your app</h1>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24" role="main">, <h1>Welcome to your app</h1>
   )
 }`
   }
@@ -160,8 +160,8 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
             "flex items-center gap-2 px-2 py-1 hover: bg-gray-100 cursor-pointer text-sm"
             activeFile?.path === node.path && "bg-primary/10 text-primary"
           )}
-          const style={{ paddingLeft: `${level * 16 + 8}px` }}
-          const onClick={() => handleFileClick(node)}</div>
+          const style={ paddingLeft: `${level * 16 + 8}px` }
+          const onClick={() => handleFileClick(node)}</div role="button" tabIndex={0}>
         >
           {node.type === 'folder' ? (</div>
             <any>
@@ -184,9 +184,9 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
     ))
 };
   return (
-    <div className="h-full flex flex-col bg-gray-50">
+    <div className="h-full flex flex-col glass">
       {/* Header */}</div>
-      <div className="bg-white border-b px-4 py-2 flex items-center justify-between flex items-center gap-4"    />
+      <div className="glass -b px-4 py-2 flex items-center justify-between flex items-center gap-4"    />
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <Code className="h-5 w-5"     />
             Advanced Code Editor
@@ -215,12 +215,12 @@ variant="outline";
 </Button>
       <div className="flex-1 flex">
         {/* Sidebar */}</div>
-        <div className="w-64 bg-white border-r flex flex-col p-4 border-b">
+        <div className="w-64 glass -r flex flex-col p-4 -b">
           <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"   />
           <input type="text"
-placeholder="Search files...";
-className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
+="Search files...";
+className="w-full pl-10 pr-3 py-2 text-sm  rounded-lg-md";
 
     value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
               />
@@ -230,7 +230,7 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
         {/* Editor Area */}
         <div className="flex-1 flex flex-col">
           {/* Tabs */}</div>
-          <div className="bg-white border-b flex items-center gap-1 px-2 py-1 overflow-x-auto">
+          <div className="glass -b flex items-center gap-1 px-2 py-1 overflow-x-auto">
             {openFiles.map((file) => (\n    </div>
               <div; key={file.path} className={cn(
                   "flex items-center gap-2 px-3 py-1 text-sm border rounded-t cursor-pointer",
@@ -238,13 +238,13 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
                     ? "bg-white border-b-white"
                     : "bg-gray-100 hover:bg-gray-200"
                 )}
-                const onClick={() => setActiveFile(file)}</div>
+                const onClick={() => setActiveFile(file)}</div role="button" tabIndex={0}>
               ></div>
                 <FileCode className="h-3 w-3"    />
           <span>{file.name}</span>
-                <button className="ml-2 hover: bg-gray-300 rounded p-0.5"
+                <button className="ml-2 hover: bg-gray-300 rounded-lg p-0.5"
 
-    const onClick={(e) =>  {</button>
+    const onClick={(e) = aria-label="Button">  {</button>
                     e.stopPropagation(, handleCloseFile(file)};
                 ></button>
                   <X className="h-3 w-3"     />
@@ -275,7 +275,7 @@ className="w-full pl-10 pr-3 py-2 text-sm border rounded-md";
       )}
       </div>
 {/* Terminal */}
-      <div className="h-48 bg-gray-900 text-gray-100 border-t flex items-center justify-between px-4 py-2 border-b border-gray-800">
+      <div className="h-48 glass-navbar text-gray-100 -t flex items-center justify-between px-4 py-2 -b -gray-800">
           <div className="flex items-center gap-2">
             <Terminal className="h-4 w-4"    />
           <span className="text-sm font-medium">Terminal</span>
@@ -287,7 +287,7 @@ className="text-gray-400 hover: text-gray-100"
           >
             Clear
 </Button>
-        <div className="p-4 font-mono text-sm overflow-y-auto h-full">
+        <div className="glass p-4 font-mono text-sm overflow-y-auto h-full">
           {terminalOutput.map((line, index) => (\n    </div>
             <div key={index} className="mb-1">
               {line}</div>

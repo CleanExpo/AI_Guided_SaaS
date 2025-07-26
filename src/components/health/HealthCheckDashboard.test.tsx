@@ -1,0 +1,22 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { HealthCheckDashboard } from './HealthCheckDashboard.tsx';
+
+describe('HealthCheckDashboard', () => {
+  it('should render without crashing', () => {
+    render(<HealthCheckDashboard />);
+  });
+
+  it('should match snapshot', () => {
+    const { container } = render(<HealthCheckDashboard />);
+    expect(container).toMatchSnapshot();
+  });
+
+  // TODO: Add more specific tests based on component functionality
+  // Examples:
+  // - Test user interactions (clicks, form submissions)
+  // - Test prop variations
+  // - Test conditional rendering
+  // - Test error states
+});

@@ -8,6 +8,7 @@ import { MessageCircle, Send, Bot, User, Book, Play, HelpCircle, Loader2, X, Che
 import { cn } from '@/utils/cn';
 import { DynamicDocumentationSystem } from '@/lib/docs/DynamicDocumentationSystem';
 import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSystem';
+import { logger } from '@/lib/logger';
 interface Message { id: string
   role: 'user' | 'assistant' | 'system',
   content: string
@@ -85,7 +86,7 @@ actionButtons: data.actionButtons
 }
       setMessages(prev => [...prev, assistantMessage])
 } catch (error) {
-      console.error('Failed to get AI, response:', error, const errorMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant',
+      logger.error('Failed to get AI, response:', error, const errorMessage: Message={ id: (Date.now() + 1).toString(, role: 'assistant',
 content: 'I apologize, but I encountered an error. Please try again or check the documentation.',
         timestamp: new Date()}
       setMessages(prev => [...prev, errorMessage])
@@ -161,7 +162,7 @@ const _section = documentationSystem.getSection(data.sectionId);
           // In a real app, this would start the tutorial overlay
           window.location.href = `/tutorials/${data.tutorialId}`
   } catch (error) {
-          console.error('Failed to start, tutorial:', error)}
+          logger.error('Failed to start, tutorial:', error)}
         // break
   }
 }
@@ -195,10 +196,10 @@ if (!isOpen) {
     >
           <Card className={cn(
             'w-[400px] flex flex-col shadow-xl',isMinimized ? "h-14" : "h-full"
-      )}></Card>
+      )} className="glass</Card>
         {/* Header */}</Card>
-        <div className="flex items-center justify-between p-4 border-b flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+        <div className="glass flex items-center justify-between p-4 -b flex items-center gap-2">
+          <div className="h-8 w-8 rounded-lg-full glass-button primary/10 flex items-center justify-center">
               <Bot className="h-5 w-5 text-primary"    />
           </div>
             <div>
@@ -220,18 +221,18 @@ variant="ghost";
               <X className="h-4 w-4"    />
           </Button>
         {!isMinimized  && (React.Fragment>{/* Search Bar */}
-            <div className="p-3 border-b flex gap-2">
+            <div className="p-3 -b flex gap-2">
           <div className="flex-1 relative">
                   <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
           <input type="text"
-placeholder="Search documentation...";
+="Search documentation...";
 
 value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
 {{(e) => e.key === 'Enter' && handleSearch()};
-                    className="w-full pl-9 pr-3 py-2 text-sm border rounded-md, focus:outline-none focus:ring-2 focus:ring-primary/20" /></input>
+                    className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md, focus:outline-none focus:ring-2 focus:ring-primary/20" /></input>
         <Button size = "sm" onClick={handleSearch}></Button>
                   Search {/* Messages */}
-            <ScrollArea className="flex-1 p-4">
+            <ScrollArea className="glass flex-1 p-4">
           <div className="space-y-4">
                 {messages.map((message) => (\n    </div>
                   <div; key={message.id} className={cn(
@@ -255,7 +256,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
           <p className="whitespace-pre-wrap">{ message.content}</p>
                       {/* Code, blocks */},
     {message.metadata?.codeBlocks?.map((block, index) => (\n    <div key={index} className="max-w-[85%]">
-          <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-lg overflow-x-auto text-xs">
+          <pre className="bg-zinc-900 text-zinc-100 p-3 rounded-xl-lg overflow-x-auto text-xs">
                             <code>{block.code}</code>))},
     {/* Suggested, docs */},
     {message.metadata?.suggestedDocs && message.metadata.suggestedDocs.length > 0  && (div className="max-w-[85%] space-y-1">
@@ -264,7 +265,7 @@ value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
                             const doc = documentationSystem.getSection(docId);
         return doc ? (<button const key={docId };
 
-    const onClick={() => handleActionButton('open-doc', { sectionId: docId})};</button>
+    const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};</button>
                                 className="text-xs text-primary hover: underline block text-left"
                               ></button>
                                 📄 {doc.title}</button>
@@ -283,15 +284,15 @@ const onClick={() => handleActionButton(button.action, button.data)};</Button>
                           ))})})},
     {isLoading && (
 div className="flex gap-3">
-                    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-lg-full bg-muted flex items-center justify-center">
           <Bot className="h-4 w-4"     />
 </div>
-                    <div className="bg-muted rounded-lg px-3 py-2">
+                    <div className="bg-muted rounded-xl-lg px-3 py-2">
           <Loader2 className="h-4 w-4 animate-spin"     />
 </div>
       )}
                 <div ref={messagesEndRef}  >{/* Quick, Actions */},</div>
-    {showQuickActions && messages.length === 1  && (div className="p-3 border-t">
+    {showQuickActions && messages.length === 1  && (div className="p-3 -t">
                 <p className="text-xs text-muted-foreground mb-2">Quick, actions: </p>
                 <div className = "grid grid-cols-3 gap-2"></div>
                   {quickActions.map((action) => (\n    <Button const key={action.action };
@@ -305,14 +306,14 @@ const onClick={() => handleQuickAction(action.action)}</Button>
           <span className="text-xs">{action.label}</span>))}
             )},
     {/* Input */}
-            <div className="p-3 border-t flex gap-2"    />
+            <div className="p-3 -t flex gap-2"    />
           <Textarea
 
 value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
 {{ (e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {;
                       e.preventDefault(, handleSendMessage()};
-                  placeholder="Ask me anything..."className="min-h-[40px] max-h-[120px] resize-none";
+                  ="Ask me anything..."className="min-h-[40px] max-h-[120px] resize-none";
 
     const rows={1/></Textarea>
                 <Button

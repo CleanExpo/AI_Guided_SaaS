@@ -2,524 +2,157 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Code2, Smartphone, Monitor, Server, Package, FileCode2, Settings, Rocket, CheckCircle } from 'lucide-react';
+import { Rocket, CheckCircle } from 'lucide-react';
 import { useKiroIDE } from '@/hooks/useKiroIDE';
 import { useToast } from '@/components/ui/use-toast';
-interface KiroProjectSetupProps {
-onProjectCreated? (projectId: string) => void
-  initialData? null : {
-    name?: string,
-  description?: string,
-  type?: string,
-  framework?: string
-}
+import { logger } from '@/lib/logger';
+import {
+  KiroProjectSetupProps,
+  ProjectData,
+  ProjectFeatures,
+  BasicInfoForm,
+  FeaturesTab,
+  SettingsTab,
+  EnvironmentTab,
+  ProjectGenerator
+} from './kiro';
 
-export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps, initialData }: KiroProjectSetupProps) {
-  const { toast    }: any  = useToast()
-
-const { createProject, connect, connected, loading    }: any = useKiroIDE()
+export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectSetupProps) {
+  const { toast } = useToast();
+  const { createProject, connect, connected, loading } = useKiroIDE();
   
-const [projectData, setProjectData] = useState<any>({</any>
-    name?: initialData.name || '',
-    description?: initialData.description || '',
-    type?: initialData.type || 'web',
-    framework?: initialData.framework || '',
+  const [projectData, setProjectData] = useState<ProjectData>({
+    name: initialData?.name || '',
+    description: initialData?.description || '',
+    type: (initialData?.type as any) || 'web',
+    framework: initialData?.framework || '',
     language: 'typescript',
-    settings: { buildCommand: '', startCommand: '', testCommand: '', outputDirectory: '', environment: {} as Record<string string     />
-dependencies: {} as Record<string string /    />
+    settings: {
+      buildCommand: '',
+      startCommand: '',
+      testCommand: '',
+      outputDirectory: '',
+      environment: {},
+      dependencies: {}
+    }
   });
 
-const [features, setFeatures] = useState<any>({</any>
-    typescript: true
-    eslint: true
-    prettier: true
-    testing: true
-    docker: false
-    ci_cd: false
-    authentication: false
-database: false
- 
-    });
+  const [features, setFeatures] = useState<ProjectFeatures>({
+    typescript: true,
+    eslint: true,
+    prettier: true,
+    testing: true,
+    docker: false,
+    ci_cd: false,
+    authentication: false,
+    database: false
+  });
 
-const projectTypes  = [
-  { value: 'web', label: 'Web Application', icon: Monitor },
-    { value: 'mobile', label: 'Mobile App', icon: Smartphone },
-    { value: 'desktop', label: 'Desktop Application', icon: Monitor },
-    { value: 'api', label: 'API Service', icon: Server },
-    { value: 'library', label: 'Library/Package', icon: Package }
-   ];
-
-    const frameworks={ web: ['nextjs', 'react', 'vue', 'angular', 'svelte', 'vanilla'],
-    mobile: ['react-native', 'flutter', 'ionic', 'nativescript'],
-    desktop: ['electron', 'tauri', 'qt', 'gtk'],
-    api: ['express', 'fastapi', 'django', 'rails', 'phoenix'],
-    library: ['typescript', 'javascript', 'python', 'rust', 'go']
-}
-  const _handleCreateProject = async () =>  {
+  const handleCreateProject = async () => {
     if (!projectData.name) {
-      toast({ title: 'Error',
+      toast({
+        title: 'Error',
         description: 'Project name is required',
-variant: 'destructive'
-    });
-      return null
-};
+        variant: 'destructive'
+      });
+      return;
+    }
+
     try {
-      // Connect to Kiro if not connected, if (!connected) {
-        await connect()};
-      // Prepare project structure based on type and framework;
+      // Connect to Kiro if not connected
+      if (!connected) {
+        await connect();
+      }
 
-const _projectStructure = generateProjectStructure(projectData, features);
-      // Create the project;
+      // Prepare project structure based on type and framework
+      const projectStructure = ProjectGenerator.generateProjectStructure(projectData, features);
 
-const project = await createProject({
+      // Create the project
+      const project = await createProject({
         ...projectData,
-        structure: projectStructure   
-    })
-      toast({ title: 'Project Created',
-  description: `Successfully created project "${project.name}"`
-  });
-      // Callback with project ID;
-if (onProjectCreated) {
-        onProjectCreated(project.id)} catch (error) {
-      console.error('Failed to create, project:', error, toast({ title: 'Error',
+        structure: projectStructure
+      });
+
+      toast({
+        title: 'Project Created',
+        description: `Successfully created project "${project.name}"`
+      });
+
+      // Callback with project ID
+      if (onProjectCreated) {
+        onProjectCreated(project.id);
+      }
+    } catch (error) {
+      logger.error('Error creating project:', error);
+      toast({
+        title: 'Error',
         description: 'Failed to create project',
-variant: 'destructive'
-    })}
-  const _generateProjectStructure = (data: typeof projectData, features) =>  {
-    const structure={ name: data.name, type: 'directory' as const path: '/', children: any[]
-};
-    // Common files
-    structure.children.push(
-      { name: 'README.md', type: 'file', path: '/README.md', content: `# ${data.name}\n\n${data.description}` },``
-      { name: '.gitignore', type: 'file', path: '/.gitignore', content: generateGitignore(data.type) }
-    )
-    // Package.json for JS projects
-    if (['web', 'mobile', 'api'].includes(data.type) {)} {
-      structure.children.push({ name: 'package.json',
-        type: 'file',
-        path: '/package.json',
-        content: JSON.stringify({ name: data.name.toLowerCase().replace(/\s+/g, '-', version: '1.0.0',
-          description: data.description,
-    scripts: { dev: data.settings.startCommand || 'npm run dev', build: data.settings.buildCommand || 'npm run build', test: data.settings.testCommand || 'npm test' },
-          dependencies: data.settings.dependencies || {}, null, 2)
-})};
-    // TypeScript config;
-if (features.typescript) {
-      structure.children.push({ name: 'tsconfig.json',
-        type: 'file',
-        path: '/tsconfig.json',
-content: generateTsConfig(data.type)
-    })};
-    // ESLint config;
-if (features.eslint) {
-      structure.children.push({ name: '.eslintrc.json',
-        type: 'file',
-        path: '/.eslintrc.json',
-content: generateEslintConfig(data.type, features.typescript)
-})};
-    // Framework-specific structure;
-switch (data.framework) { case 'nextjs':
-      structure.children.push(
-    break
-    break}
-          { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'app', type: 'directory', path: '/src/app', children: [
-  { name: 'page.tsx', type: 'file', path: '/src/app/page.tsx', content: 'export default function Home() {\n  return <h1>Welcome to ' + data.name + '</h1>\n}' } { name: 'layout.tsx', type: 'file', path: '/src/app/layout.tsx', content: generateNextLayout(data.name) }
-   ]} { name: 'components', type: 'directory', path: '/src/components', children: any[] },
-            { name: 'lib', type: 'directory', path: '/src/lib', children: any[] }
-          ]} { name: 'public', type: 'directory', path: '/public', children: any[] },
-          { name: 'next.config.js', type: 'file', path: '/next.config.js', content: '/** @type {import(\'next\').NextConfig} */\nconst nextConfig = {}\n\nmodule.exports = nextConfig' }
-        )
-        // break
-      case 'react':
-      structure.children.push(
-    break;
-          { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'App.tsx', type: 'file', path: '/src/App.tsx', content: generateReactApp(data.name) },
-            { name: 'index.tsx', type: 'file', path: '/src/index.tsx', content: generateReactIndex() },
-            { name: 'components', type: 'directory', path: '/src/components', children: any[] }
-          ]} { name: 'public', type: 'directory', path: '/public', children: [
-            { name: 'index.html', type: 'file', path: '/public/index.html', content: generateHtmlTemplate(data.name) }
-   ]}
-        )
-        // break
-      case 'express':
-      structure.children.push(
-    break;
-          { name: 'src', type: 'directory', path: '/src', children: [
-            { name: 'index.ts', type: 'file', path: '/src/index.ts', content: generateExpressServer() },
-            { name: 'routes', type: 'directory', path: '/src/routes', children: any[] },
-            { name: 'middleware', type: 'directory', path: '/src/middleware', children: any[] } { name: 'models', type: 'directory', path: '/src/models', children: any[] }
-          ]}
-        )
-        // break
-}
-    // Docker files;
-if (features.docker) {
-      structure.children.push({ name: 'Dockerfile', type: 'file', path: '/Dockerfile', content: generateDockerfile(data.type, data.framework, name: 'docker-compose.yml', type: 'file', path: '/docker-compose.yml', content: generateDockerCompose(data.name) 
-    })};
-    // CI/CD files;
-if (features.ci_cd) {
-      structure.children.push({ name: '.github',
-        type: 'directory',
-        path: '/.github',
-        children: [{ name: 'workflows',
-          type: 'directory',
-          path: '/.github/workflows',
-          children: [{ name: 'ci.yml',
-            type: 'file',
-            path: '/.github/workflows/ci.yml',
-content: generateGithubWorkflow(data.name)}]
-        }]
-})};
-    return structure
-}
+        variant: 'destructive'
+      });
+    }
+  };
+
   return (
-    <div className="space-y-6"    />
-          <Card     />
-        <CardHeader    />
-          <CardTitle>Create New Kiro Project</CardTitle>
-          <CardDescription></CardDescription>
-            Set up a new project with Kiro IDE integration</Card>
-        <CardContent className="space-y-6"    />
-          <div className="grid gap-4"     />
-            <div className="space-y-2"    />
-          <Label htmlFor="name">Project Name</Label>
-              <Input id="name";
+    <div className="space-y-6">
+      <Card className="glass"
+        <CardHeader className="glass"
+          <CardTitle className="glass"Create New Kiro Project</CardTitle>
+          <CardDescription className="glass"
+            Set up a new project with Kiro IDE integration
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6" className="glass
+          <BasicInfoForm
+            projectData={projectData}
+            setProjectData={setProjectData}
+          />
 
-    const value={projectData.name};
-
-    const onChange={(e) => setProjectData({ ...projectData, name: e.target.value})};/>
-                placeholder="My Awesome Project";
-              />/>
-            <div className="space-y-2"    />
-          <Label htmlFor="description">Description</Label>
-              <Textarea
-id="description";
-
-    const value={projectData.description};
-
-    const onChange={(e) => setProjectData({ ...projectData, description: e.target.value})};</Textarea>
-                placeholder="A brief description of your project...";
-
-    const rows={ 3/></Textarea>
-            <div className="space-y-2"    />
-          <Label>Project Type</Label>
-              <div className="grid grid-cols-2 md: grid-cols-5 gap-2">
-                {projectTypes.map((type) => (\n    </div>
-                  <Button const key={type.value };
-                    const variant={ projectData.type === type.value ? 'default' : 'outline' };
-                    size="sm";
-
-    const onClick={() => setProjectData({ ...projectData: type, type.value})};</Button>
-                    className="flex flex-col items-center gap-1 h-auto py-3";
-                  ></Button>
-                    <type.icon className="h-5 w-5"    />
-          <span className="text-xs">{type.label}</span>))}
-            <div className="space-y-2"    />
-          <Label htmlFor="framework">Framework</Label>
-              <Select
-
-value={projectData.framework} onValueChange={(value) => setProjectData({ ...projectData, framework: value})}</Select>
-              ></Select>
-                <SelectTrigger id="framework"    />
-          <SelectValue placeholder="Select a framework"      />
-                <SelectContent></SelectContent>
-                  {frameworks[projectData.type as keyof typeof frameworks]?.map((fw) => (\n    </SelectContent>
-                    <SelectItem key={fw} value={fw}></SelectItem>
-                      {fw.charAt(0).toUpperCase() + fw.slice(1)}</SelectItem>
-                  ))}
-</SelectContent>
-          <Tabs defaultValue="features", className="w-full"    />
-          <TabsList className="grid w-full grid-cols-3"     />
+          <Tabs defaultValue="features" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="features">Features</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
               <TabsTrigger value="environment">Environment</TabsTrigger>
-            <TabsContent value="features", className="space-y-4"    />
-          <div className="grid grid-cols-2 gap-4">
-                {Object.entries(features).map(([key, value]) => (\n    </div>
-                  <div key={key} className="flex items-center justify-between"    />
-          <Label htmlFor={key} className="text-sm">
-                      {key.replace(/_/g, ', ').replace(/^\w/, c: any => c.toUpperCase())}</Label>
-                    <Switch
+            </TabsList>
 
-id={key} checked={value}
-                      const onCheckedChange={(checked) =></Switch>
-                        setFeatures({ ...features, [key]: checked})};
-                    /></Switch>))}
-            <TabsContent value="settings", className="space-y-4"    />
-          <div className="grid gap-4"     />
-                <div className="space-y-2"    />
-          <Label htmlFor="buildCommand">Build Command</Label>
-                  <Input
-id="buildCommand";
+            <TabsContent value="features" className="space-y-4">
+              <FeaturesTab features={features} setFeatures={setFeatures} />
+            </TabsContent>
 
-    value={projectData.settings.buildCommand} onChange={(e) => setProjectData({/>
-                      ...projectData,
-    settings: { ...projectData.settings buildCommand: e.target.value
-    })};
-                    placeholder="npm run build";
-                  />/>
-                <div className="space-y-2"    />
-          <Label htmlFor="startCommand">Start Command</Label>
-                  <Input
-id="startCommand";
+            <TabsContent value="settings" className="space-y-4">
+              <SettingsTab projectData={projectData} setProjectData={setProjectData} />
+            </TabsContent>
 
-    value={projectData.settings.startCommand} onChange={(e) => setProjectData({/>
-                      ...projectData,
-    settings: { ...projectData.settings startCommand: e.target.value
-    })};
-                    placeholder="npm run dev";
-                  />/>
-                <div className="space-y-2"    />
-          <Label htmlFor="testCommand">Test Command</Label>
-                  <Input
-id="testCommand";
+            <TabsContent value="environment" className="space-y-4">
+              <EnvironmentTab />
+            </TabsContent>
+          </Tabs>
 
-    value={projectData.settings.testCommand} onChange={(e) => setProjectData({/>
-                      ...projectData,
-    settings: { ...projectData.settings testCommand: e.target.value
-    })};
-                    placeholder="npm test";
-                  />/>
-            <TabsContent value="environment", className="space-y-4"    />
-          <div className="space-y-2"     />
-                <Label>Environment Variables</Label>
-                <div className="text-sm text-muted-foreground">
-                  Add environment variables for your project</div>
-                <Button variant="outline" size="sm"></Button>
-                  Add Variable</Button>
-          <div className="flex items-center justify-between"    />
-          <div className="flex items-center gap-2">
-              {connected ? (</div>
-                <Badge variant="outline", className="text-green-500"    />
-          <CheckCircle className="h-3 w-3 mr-1"     />
-                  // Connected
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {connected ? (
+                <Badge variant="outline" className="text-green-500">
+                  <CheckCircle className="h-3 w-3 mr-1" />
+                  Connected
+                </Badge>
               ) : (
-                <Badge variant="outline", className="text-yellow-500">
-                    Disconnected
-/>
-      )}
+                <Badge variant="outline" className="text-yellow-500">
+                  Disconnected
+                </Badge>
+              )}
+            </div>
+
             <Button
-
-onClick={handleCreateProject} disabled={loading || !projectData.name/>
-          <Rocket className="h-4 w-4 mr-2"     />
-              Create Project</Rocket>
-// Helper functions for generating file contents;
-generateGitignore(projectType: string): string) {
-  const _common = `# Dependencies, ``, node_modules/;
-.pnp
-.pnp.js
-# Testing
-coverage/
-# Production
-build/
-dist/
-out/
-# Misc
-.DS_Store
-*.pem
-.env*.local
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-```;
-
-const typeSpecific: Record<string string> = {</string>
-    web: '\n# Next.js\n.next/\n*.tsbuildinfo\nnext-env.d.ts',
-    api: '\n# Logs\nlogs/\n*.log',
-mobile: '\n# React Native\n.expo/\n*.jks\n*.p8\n*.p12\n*.key\n*.mobileprovision'
+              onClick={handleCreateProject}
+              disabled={loading || !projectData.name}
+            >
+              <Rocket className="h-4 w-4 mr-2" />
+              Create Project
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
-
-  return common + (typeSpecific[projectType] || '')
-}
-generateTsConfig(projectType: string): string) { const configs: Record<string any> = {</string>
-    web: { compilerOptions: {
-  target: 'es5',
-        lib: ['dom', 'dom.iterable', 'esnext'],
-        allowJs: true
-    skipLibCheck: true
-    strict: true
-    forceConsistentCasingInFileNames: true
-    noEmit: true
-    esModuleInterop: true
-    module: 'esnext',
-        moduleResolution: 'node',
-        resolveJsonModule: true
-    isolatedModules: true
-    jsx: 'preserve',
-incremental: true
-      },
-      include: ['src'],
-    exclude: ['node_modules']
-    },
-    api: { compilerOptions: {
-  target: 'ES2020',
-        module: 'commonjs',
-        lib: ['ES2020'],
-    outDir: './dist',
-        rootDir: './src',
-        strict: true
-    esModuleInterop: true
-    skipLibCheck: true
-    forceConsistentCasingInFileNames: true
-    resolveJsonModule: true
-moduleResolution: 'node'
-      },
-      include: ['src/**/*'],
-    exclude: ['node_modules', 'dist']
-  }
-}
-
-  return JSON.stringify(configs[projectType] || configs.web, null, 2)
-}
-generateEslintConfig(projectType: string, typescript: boolean): string,
-  typescript: boolean) {
-  const base={ extends: [
-      'eslint: recommended'
-      typescript && 'plugin: @typescript-eslint/recommended'
-   ].filter(Boolean, parser?: typescript '@typescript-eslint/parser' : undefined,
-    plugins?: typescript ['@typescript-eslint'] : any[],
-rules: {
-      'no-console': 'warn'
-      'no-unused-vars': 'warn'
-  }
-}
-  if (projectType === 'web') {
-    base.extends.push('plugin:react/recommended', 'plugin:react-hooks/recommended')}
-  return JSON.stringify(base, null, 2)
-}
-generateNextLayout(name: string): string) {
-  return `import, type {  Metadata  } from 'next'``;
-export const metadata: Metadata={ title: '${ name}',
-  description: 'Generated by Kiro IDE' };
-    export default function RootLayout() {
-  return (html lang="en"   />, <body>{children}</body>
-  }`
-  }
-generateReactApp(name: string): string) {
-  return `import React from 'react'``, App() {
-  return (
-    <div className="App"    />
-          <h1>Welcome to ${name}</h1>
-      <p>Edit src/App.tsx to get started</p>
-};
-export default App`
-}
-generateReactIndex() {
-  return `import React from 'react'``, import ReactDOM from 'react-dom/client', import App from './App';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-)
-root.render(
-  <React.StrictMode>
-          <App></React.StrictMode>
-)```
-  }
-generateExpressServer() {;
-  return `import express from 'express'``, import cors from 'cors', import helmet from 'helmet';
-
-const app  = express();
-
-const _PORT = process.env.PORT || 3000;
-// Middleware
-app.use(helmet())
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true
-    }))
-// Routes
-app.get('/', (req, res) => { res.json({ message: 'API is running!' 
-    })}
-// Error handling
-app.use((err: Error, req: express.Request,
-  res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack, res.status(500).send('Something broke!')    })
-// Start server
-app.listen(PORT, () => {})```
-  }
-generateHtmlTemplate(name: string): string) {
-  return `<!DOCTYPE html>``, <html lang="en"    />, <head    />
-          <meta charset="utf-8"      />
-    <meta name="viewport" content="width=device-width, initial-scale=1"     />
-          <meta name="theme-color" content="#000000"      />
-    <meta name="description" content="${name} - Created with Kiro IDE"     />
-          <title>${name}</title>
-  <body    />
-          <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"     />
-generateDockerfile(projectType: string, framework: string): string,
-  framework: string) {
-  if (projectType === 'web' && framework === 'nextjs') {
-    return `FROM, node:18-alpine AS base``, # Install dependencies only when needed, FROM base AS deps;
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \ if [ -f yarn.lock ]; then yarn --frozen-lockfile; \ elif [ -f package-lock.json ]; then npm ci; \ elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \ else echo "Lockfile not found." && exit 1 \ fi
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN yarn build
-# Production image
-FROM base AS runner
-WORKDIR /app
-ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-USER nextjs
-EXPOSE 3000
-ENV PORT 3000
-CMD ["node", "server.js"]```
-  }
-  return `FROM, node: 18-alpine``
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]```
-  }
-generateDockerCompose(name: string): string) {
-  return `version: '3.8',``, services: app, build: ., container_name: ${name.toLowerCase().replace(/\s+/g, '-')};
-    ports: - "3000:3000",
-    environment: - NODE_ENV=production,
-  restart: unless-stopped`
-  }
-generateGithubWorkflow(name: string): string) {
-  return `name: CI, on: push, branches: [ main ]``, pull_request, branches: [ main ],
-  jobs:  ,
-  test: runs-on: ubuntu-latest, steps: -,
-  uses: actions/checkout@v3
-    -, name: Use Node.js, uses: actions/setup-node@v3,
-  with: node-version: '18',
-  cache: 'npm'
-    - run: npm ci
-    -, run: npm run build --if-present
-    -, run: npm test```
-</div>
-    
-    </App>
-    </CardDescription>
-    </any>
-  }
-`
-}}}}}}}}

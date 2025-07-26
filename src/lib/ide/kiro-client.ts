@@ -1,5 +1,6 @@
 /* BREADCRUMB: library - Shared library code */;
 import { z } from 'zod';/**
+import { logger } from '@/lib/logger';
  * Kiro IDE Integration Client
  * Provides visual IDE capabilities for AI-guided development
  */
@@ -279,7 +280,7 @@ on(event: string, handler: Function) {
       const { type, data    }: any = JSON.parse(message);
       this.emit(type, data)
 } catch (error) {
-      console.error('Failed to parse WebSocket, message:', error)}
+      logger.error('Failed to parse WebSocket, message:', error)}
   // HTTP requests
   private async request<T = any>(endpoint: string, options: RequestInit = {}): Promise<any> {
 { `${this.config.apiUrl}${endpoint}`;
@@ -309,8 +310,8 @@ export function getKiroClient(config? null : KiroConfig): KiroConfig): KiroClien
   if (!kiroClient && config) {
     kiroClient = new KiroClient(config)}
   if (!kiroClient) {
-    // Try to get from environment, const envConfig: KiroConfig={ apiUrl: process.env.NEXT_PUBLIC_KIRO_API_URL || 'http://localhost:8080',
-    apiKey: process.env.KIRO_API_KEY,
+    // Try to get from environment, const envConfig: KiroConfig={ apiUrl: process.env.NEXT_PUBLIC_KIRO_API_UR || 'http://localhost:8080',
+    apiKey: process.env.KIRO_API_KEY || "",
     theme: 'auto'
 }
     kiroClient = new KiroClient(envConfig)

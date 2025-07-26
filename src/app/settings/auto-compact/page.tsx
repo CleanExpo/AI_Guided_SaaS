@@ -157,7 +157,7 @@ export default function AutoCompactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -166,11 +166,11 @@ export default function AutoCompactPage() {
         </div>
 
         {/* System Status */}
-        <Card className="mb-8">
-          <CardHeader>
+        <Card className="mb-8" className="glass
+          <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <CardTitle>Compaction Status</CardTitle>
+                <CardTitle className="glass"Compaction Status</CardTitle>
                 <Badge variant={isEnabled ? 'default' : 'secondary'}>
                   {isEnabled ? 'Enabled' : 'Disabled'}
                 </Badge>
@@ -181,8 +181,8 @@ export default function AutoCompactPage() {
               />
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <CardContent className="glass"
+            <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
                 <p className="text-sm text-gray-500">Total Reduction</p>
                 <p className="text-2xl font-bold text-green-600">
@@ -209,7 +209,7 @@ export default function AutoCompactPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="glass flex items-center gap-4">
               <Button
                 onClick={runCompaction}
                 disabled={stats.isRunning || !isEnabled}
@@ -244,15 +244,15 @@ export default function AutoCompactPage() {
         </Card>
 
         {/* Configuration */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+        <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Settings className="h-5 w-5" />
                 Configuration
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium">Compaction Level</label>
@@ -287,7 +287,7 @@ export default function AutoCompactPage() {
                     min="0.5"
                     max="100"
                     step="0.5"
-                    className="mt-1 w-full px-3 py-2 border rounded-lg"
+                    className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                   />
                   <p className="text-xs text-gray-500 mt-1">
                     Only process files larger than this size
@@ -312,16 +312,16 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Compressions</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Recent Compressions</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-3">
                 {recentResults.map((result, index) => {
                   const Icon = getFileIcon(result.type);
                   return (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
                       <div className="flex items-center gap-3">
                         <Icon className="h-4 w-4 text-gray-600" />
                         <div>
@@ -348,9 +348,9 @@ export default function AutoCompactPage() {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card>
-            <CardContent className="p-6">
+        <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Space Saved</p>
@@ -361,8 +361,8 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Compression Rate</p>
@@ -373,8 +373,8 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Next Run</p>
@@ -389,7 +389,7 @@ export default function AutoCompactPage() {
         </div>
 
         {/* Info Box */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="glass mt-6 bg-blue-50  -blue-200 rounded-xl-lg p-4">
           <div className="flex items-start gap-3">
             <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5" />
             <div className="flex-1">

@@ -6,6 +6,7 @@ import { getServerSession as nextAuthGetServerSession } from 'next-auth/next';
 import { authOptions } from './auth';
 import { isDemoMode } from './env';
 import type {  Session  } from 'next-auth';
+import { logger } from '@/lib/logger';
 // Extended session type with guaranteed user ID;
 export interface AuthenticatedSession extends Session  { user: { id: string, email: string, name: string, image?: string },
     expires: string
@@ -39,7 +40,7 @@ export async function getServerSession(): Promise<any> {
     image: session.user.image || undefined
       }} as AuthenticatedSession
   } catch (error) {
-    console.error('Error getting server, session:', error); return null
+    logger.error('Error getting server, session:', error); return null
 }}
 /**
  * Type-safe helper to check if user is authenticated

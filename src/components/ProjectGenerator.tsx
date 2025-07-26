@@ -49,15 +49,15 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
     type: 'page',
 content: `export default function Home() {``
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    />);</main>
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    / role="main">);</main>
         <div className="text-center"    />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Welcome to ${config.name}</h1>
           <p className="text-xl text-gray-600 mb-8">
             ${config.description}</p>
-          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             ${config.features.slice(0, 6).map((feature) => `</div>
-            <div className="bg-white p-6 rounded-lg shadow-md"    />
+            <div className="glass p-6 rounded-xl-lg shadow-md-md"    />
           <h3 className="text-lg font-semibold mb-2">${feature}</h3>
               <p className="text-gray-600">Coming soon...</p>`).join('')}``
     )
@@ -153,19 +153,19 @@ const files = generateProjectFiles(config);
     generateFiles()
 }, [config, onFilesGenerated])
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
-          <Card className="w-full max-w-2xl"     />
-        <CardHeader className="text-center"    />
-          <CardTitle className="text-2xl font-bold">
+    <div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+          <Card className="w-full max-w-2xl"     / className="glass
+        <CardHeader className="text-center"    / className="glass
+          <CardTitle className="text-2xl font-bold" className="glass
             Generating Your Project</Card>
           <p className="text-gray-600 mt-2"     />
             Creating <span className="font-semibold">{config.name}</span> with your selected features...
 </p>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6" className="glass
           {/* Project, Overview */}</Card>
-          <div className="bg-blue-50 p-4 rounded-lg"    />
+          <div className="glass bg-blue-50 p-4 rounded-xl-lg"    />
           <h3 className="font-semibold text-blue-900 mb-2">Project Overview</h3>
-            <div className="grid grid-cols-2 gap-4 text-sm"    />
+            <div className="glass grid grid-cols-2 gap-4 text-sm"    />
           <div     />
                 <span className="text-blue-700 font-medium">Frontend:</span>
                 <span className="ml-2">{config.technology?.frontend || 'React'}</span>
@@ -220,13 +220,13 @@ const key={step.id};
                       {step.label}</p>
                   {isCurrent && (
 div className="flex space-x-1"></div>
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce">
-          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' />
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' />
+                      <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce">
+          <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce" style={{ animationDelay: '0.1s' />
+                      <div className="w-2 h-2 glass-button primary rounded-lg-full animate-bounce" style={{ animationDelay: '0.2s' />
       )}
     )
 } {/* Features, List */}
-          <div className="bg-gray-50 p-4 rounded-lg"    /><h3 className="font-semibold text-gray-900 mb-2">Selected Features</h3>
+          <div className="glass p-4 rounded-xl-lg"    /><h3 className="font-semibold text-gray-900 mb-2">Selected Features</h3>
             <div className="grid grid-cols-2 gap-2">
               {config.features.map((feature, index) => (\n    </div>
                 <div key={index} className="flex items-center space-x-2"    />
@@ -240,7 +240,7 @@ div className="flex space-x-1"></div>
     </any>
   },
     {!isGenerating  && (div className="text-center"></div>
-              <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full"    />
+              <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-lg-full"    />
           <CheckCircle className="w-5 h-5"     />
                 <span className="font-medium">Generation Complete!</span>
               <p className="text-sm text-gray-600 mt-2">

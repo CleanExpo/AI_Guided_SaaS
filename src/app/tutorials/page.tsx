@@ -26,10 +26,10 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
   };
 
   return (
-    <Card className="h-full">
-          <CardHeader>
+    <Card className="h-full" className="glass
+          <CardHeader className="glass"
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">{tutorial.title}</CardTitle>
+          <CardTitle className="text-lg" className="glass{tutorial.title}</CardTitle>
           {isCompleted ? (
             <CheckCircle className="w-5 h-5 text-green-600" />
           ) : isLocked ? (
@@ -42,7 +42,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
           {tutorial.difficulty}
         </Badge>
       </CardHeader>
-      <CardContent>
+      <CardContent className="glass"
           <p className="text-gray-600 mb-4">{tutorial.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">{tutorial.duration}</span>
@@ -87,7 +87,7 @@ export default function TutorialsPage() {
   });
 
   const handleStartTutorial = (id: string) => {
-    console.log('Starting tutorial:', id);
+    
     // Navigate to tutorial detail page
   };
 
@@ -98,7 +98,7 @@ export default function TutorialsPage() {
         <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development</p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tutorials.map((tutorial, index) => {
           const isCompleted = userProgress.completedTutorials.includes(tutorial.id);
           const isLocked = !userProgress.unlockedTutorials.includes(tutorial.id);

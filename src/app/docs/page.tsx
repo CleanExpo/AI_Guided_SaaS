@@ -88,7 +88,7 @@ export default function DocsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
           <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -101,7 +101,7 @@ export default function DocsPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              placeholder="Search documentation..."
+              ="Search documentation..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -110,12 +110,12 @@ export default function DocsPage() {
         </div>
 
         {/* Quick Links */}
-        <div className="grid gap-4 md:grid-cols-4 mb-12">
+        <div className="glass grid gap-4 md:grid-cols-4 mb-12">
           {quickLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-                <CardContent className="flex items-center p-6">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <Card className="hover:shadow-md-lg transition-shadow-md cursor-pointer" className="glass
+                <CardContent className="glass flex items-center p-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mr-4">
                     <link.icon className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
@@ -130,19 +130,19 @@ export default function DocsPage() {
         {/* Documentation Categories */}
         <div className="space-y-8">
           {docCategories.map((category) => (
-            <Card key={category.title}>
-              <CardHeader>
-                <CardTitle className="flex items-center">
+            <Card key={category.title} className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="flex items-center" className="glass
                   <category.icon className="h-6 w-6 mr-3 text-blue-600" />
                   {category.title}
                 </CardTitle>
                 <p className="text-gray-600">{category.description}</p>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 md:grid-cols-3">
+              <CardContent className="glass"
+                <div className="glass grid gap-4 md:grid-cols-3">
                   {category.docs.map((doc) => (
                     <Link key={doc.slug} href={`/docs/${doc.slug}`}>
-                      <div className="p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                      <div className="p-4  rounded-xl-lg hover:glass transition-colors cursor-pointer">
                         <h4 className="font-semibold text-gray-900 mb-2">{doc.title}</h4>
                         <p className="text-sm text-gray-600">{doc.description}</p>
                       </div>
@@ -155,8 +155,8 @@ export default function DocsPage() {
         </div>
 
         {/* Help Section */}
-        <Card className="mt-12">
-          <CardContent className="p-8 text-center">
+        <Card className="mt-12" className="glass
+          <CardContent className="glass p-8 text-center">
             <Book className="h-12 w-12 text-blue-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Need more help?</h3>
             <p className="text-gray-600 mb-6">

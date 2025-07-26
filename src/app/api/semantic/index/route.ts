@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 
@@ -7,7 +8,7 @@ import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 const indexSchema = z.object({ 
     id: z.string().min(1),
     content: z.string().min(1),
-    metadata: z.record(z.any()).optional(),
+    metadata: z.record(z.unknown()).optional(),
     type: z.enum(['document', 'code', 'log', 'config', 'memory', 'conversation']).optional()    })
 const batchIndexSchema = z.array(indexSchema);
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   
     })
 }
-    console.error('Indexing error:', error);
+    logger.error('Indexing error:', error);
     return NextResponse.json({ error: 'Indexing failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
     })
 }
@@ -38,7 +39,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
 export async function DELETE(request: NextRequest): Promise<NextResponse> {
   try {
-    const { searchParams  }: any = new URL(request.url)
+    const url = new URL(request.url);
+    const { searchParams } = url;
     const docId = searchParams.get('id');
     if (!docId) {
       return NextResponse.json({ error: 'Document ID is required' }, { status: 400   
@@ -47,7 +49,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
     const result = await semanticSearch.deleteDocument(docId);
     return NextResponse.json(result)
 } catch (error) {
-    console.error('Delete error:', error);
+    logger.error('Delete error:', error);
         return NextResponse.json({ error: 'Delete failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
     })
   }

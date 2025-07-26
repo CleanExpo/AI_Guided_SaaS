@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken';
 import { SupabaseAdapter } from '@next-auth/supabase-adapter';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const supabase = supabaseUrl && supabaseKey
   ? createClient(supabaseUrl, supabaseKey)
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+      clientSecret: process.env.GOOGLE_CLIENT_SECRE || ''
     })
   ],
   adapter: supabase
@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
     signUp: '/auth/signup'
   },
-  debug: process.env.NODE_ENV === 'development'
+  debug: (process.env.NODE_ENV || "development") === "development"
 };
 
 const handler = NextAuth(authOptions);

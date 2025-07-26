@@ -1,0 +1,205 @@
+#!/usr/bin/env node
+
+const { Project } = require('ts-morph');
+const path = require('path');
+const fs = require('fs');
+const glob = require('glob');
+
+console.log('🔍 Quick Waste Analysis for AI Guided SaaS\n');
+
+// Simple waste analyzer
+class QuickWasteAnalyzer {
+  constructor() {
+    this.project = new Project({
+      skipFileDependencyResolution: true,
+      compilerOptions: {
+        allowJs: true,
+        jsx: 'react',
+      },
+    });
+  }
+
+  async analyzeDirectory(dirPath) {
+    const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
+      cwd: dirPath,
+      ignore: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.next/**'],
+      absolute: true,
+    });
+
+    console.log(`📁 Found ${files.length} files to analyze\n`);
+
+    const issues = [];
+    let totalLines = 0;
+    let totalFunctions = 0;
+
+    for (const file of files.slice(0, 50)) { // Analyze first 50 files for quick results
+      try {
+        const content = fs.readFileSync(file, 'utf-8');
+        const lines = content.split('\n');
+        totalLines += lines.length;
+
+        // Quick checks
+        lines.forEach((line, index) => {
+          // Console.log detection
+          if (line.includes('console.log')) {
+            issues.push({
+              type: 'console_log',
+              file: path.relative(dirPath, file),
+              line: index + 1,
+              severity: 'low',
+              message: 'Console statement in production code'
+            });
+          }
+
+          // TODO comments
+          if (line.match(/\/\/\s*TODO|\/\/\s*FIXME|\/\/\s*HACK/i)) {
+            issues.push({
+              type: 'todo_comment',
+              file: path.relative(dirPath, file),
+              line: index + 1,
+              severity: 'low',
+              message: 'Unresolved TODO/FIXME comment'
+            });
+          }
+
+          // Long lines
+          if (line.length > 120) {
+            issues.push({
+              type: 'long_line',
+              file: path.relative(dirPath, file),
+              line: index + 1,
+              severity: 'low',
+              message: `Line too long (${line.length} characters)`
+            });
+          }
+        });
+
+        // Count functions
+        totalFunctions += (content.match(/function\s+\w+|=>\s*{|=>\s*\(/g) || []).length;
+
+        // Check for unused exports (simple check)
+        const exports = content.match(/export\s+(const|function|class)\s+(\w+)/g) || [];
+        if (exports.length > 5) {
+          issues.push({
+            type: 'many_exports',
+            file: path.relative(dirPath, file),
+            line: 1,
+            severity: 'medium',
+            message: `File has ${exports.length} exports - consider splitting`
+          });
+        }
+
+      } catch (error) {
+        // Skip files that can't be read
+      }
+    }
+
+    return {
+      filesAnalyzed: files.length,
+      totalLines,
+      totalFunctions,
+      issues
+    };
+  }
+
+  generateReport(analysis) {
+    const { filesAnalyzed, totalLines, totalFunctions, issues } = analysis;
+    
+    // Group issues by type
+    const issuesByType = {};
+    issues.forEach(issue => {
+      issuesByType[issue.type] = (issuesByType[issue.type] || 0) + 1;
+    });
+
+    // Calculate score
+    const score = Math.max(0, 100 - (issues.length * 0.5));
+
+    let report = `# Waste Analysis Report
+
+**Date**: ${new Date().toLocaleString()}  
+**Project**: AI Guided SaaS  
+**Files Analyzed**: ${filesAnalyzed}  
+**Total Lines**: ${totalLines.toLocaleString()}  
+**Total Functions**: ${totalFunctions.toLocaleString()}  
+**Issues Found**: ${issues.length}  
+**Code Quality Score**: ${score.toFixed(1)}/100
+
+## Summary
+
+${score >= 80 ? '✅ Your code quality is GOOD!' : score >= 60 ? '⚠️ Your code quality is FAIR and could be improved.' : '❌ Your code quality needs attention.'}
+
+## Issues by Type
+
+| Issue Type | Count |
+|------------|-------|
+${Object.entries(issuesByType)
+  .sort((a, b) => b[1] - a[1])
+  .map(([type, count]) => `| ${type.replace(/_/g, ' ')} | ${count} |`)
+  .join('\n')}
+
+## Top Issues
+
+${issues.slice(0, 10).map((issue, i) => 
+  `${i + 1}. **[${issue.severity}]** ${issue.type.replace(/_/g, ' ')} in \`${issue.file}:${issue.line}\`
+   > ${issue.message}`
+).join('\n\n')}
+
+## Recommendations
+
+`;
+
+    if (issuesByType.console_log > 10) {
+      report += '1. **Remove Console Statements**: Replace console.log with proper logging\n';
+    }
+    if (issuesByType.todo_comment > 5) {
+      report += '2. **Address TODOs**: Review and resolve pending TODO/FIXME comments\n';
+    }
+    if (issuesByType.long_line > 20) {
+      report += '3. **Format Code**: Use prettier or similar to enforce line length\n';
+    }
+    if (issuesByType.many_exports > 5) {
+      report += '4. **Refactor Large Modules**: Split files with many exports\n';
+    }
+
+    report += `
+## Next Steps
+
+1. Run \`npm run lint:fix\` to auto-fix some issues
+2. Use the full Waste Eliminator Agent for deeper analysis
+3. Set up pre-commit hooks to prevent new issues
+
+---
+*Generated by Waste Eliminator Agent (Quick Mode)*`;
+
+    return report;
+  }
+}
+
+// Run the analysis
+async function main() {
+  const analyzer = new QuickWasteAnalyzer();
+  
+  console.log('🚀 Starting analysis...\n');
+  
+  const srcPath = path.join(__dirname, 'src');
+  const analysis = await analyzer.analyzeDirectory(srcPath);
+  
+  console.log('📊 Analysis Complete!');
+  console.log('='.repeat(50));
+  console.log(`Files Analyzed: ${analysis.filesAnalyzed}`);
+  console.log(`Total Lines: ${analysis.totalLines.toLocaleString()}`);
+  console.log(`Total Functions: ${analysis.totalFunctions.toLocaleString()}`);
+  console.log(`Issues Found: ${analysis.issues.length}`);
+  
+  // Generate report
+  const report = analyzer.generateReport(analysis);
+  
+  // Save report
+  const reportPath = path.join(__dirname, 'waste-analysis-report.md');
+  fs.writeFileSync(reportPath, report);
+  
+  console.log(`\n📄 Report saved to: ${reportPath}`);
+  console.log('\nOpen the report to see detailed findings and recommendations.');
+}
+
+main().catch(console.error);

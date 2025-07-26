@@ -129,19 +129,19 @@ export default function LandingPageProduction() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen glass">
       {/* Header */}
       <header className={cn(
         "fixed top-0 w-full z-50 transition-all border-b",
         scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent border-transparent"
       )}>
         <div className="container mx-auto px-4 py-4">
-          <nav className="flex items-center justify-between">
+          <nav className="flex items-center justify-between" aria-label="Navigation">
             <div className="flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-orange-500" />
               <span className="text-xl font-bold">AI Guided SaaS</span>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="glass flex items-center gap-6">
               <Link href="https://github.com/yourusername/ai-guided-saas" className="text-gray-600 hover:text-gray-900">
                 <Github className="w-5 h-5" />
               </Link>
@@ -189,7 +189,7 @@ export default function LandingPageProduction() {
 
           {/* Quick Start Command */}
           <div className="max-w-2xl mx-auto mb-8">
-            <div className="bg-gray-900 rounded-lg p-6 font-mono text-sm">
+            <div className="glass-navbar rounded-xl-lg p-6 font-mono text-sm">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-400"># Get started in 30 seconds</span>
                 <Terminal className="w-4 h-4 text-gray-400" />
@@ -203,7 +203,7 @@ export default function LandingPageProduction() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="glass flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button 
               size="lg" 
               className="bg-orange-500 hover:bg-orange-600 text-lg px-8"
@@ -234,7 +234,7 @@ export default function LandingPageProduction() {
       </section>
 
       {/* Tech Stack Pills */}
-      <section className="py-12 bg-gray-50 border-y">
+      <section className="py-12 glass -y">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap gap-3 justify-center">
             {techStack.map((tech, index) => (
@@ -254,7 +254,7 @@ export default function LandingPageProduction() {
             <p className="text-xl text-gray-600">Everything you need, nothing you don't</p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="glass grid md:grid-cols-2 gap-8 mb-12">
             {features.map((feature, index) => (
               <Card 
                 key={index} 
@@ -262,7 +262,7 @@ export default function LandingPageProduction() {
                   "p-8 hover:shadow-lg transition-all",
                   feature.highlight && "border-orange-200 bg-orange-50"
                 )}
-              >
+               className="glass
                 <feature.icon className="w-12 h-12 text-orange-500 mb-4" />
                 <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-gray-600 text-lg">{feature.description}</p>
@@ -273,15 +273,15 @@ export default function LandingPageProduction() {
       </section>
 
       {/* What's Included - Comprehensive List */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 glass">
         <div className="container mx-auto max-w-6xl">
-          <Card>
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="text-3xl">Out-of-the-Box Features</CardTitle>
+          <Card className="glass"
+            <CardHeader className="text-center pb-8" className="glass
+              <CardTitle className="text-3xl" className="glassOut-of-the-Box Features</CardTitle>
               <p className="text-gray-600 mt-2">Stop rebuilding the same features. Focus on your unique value.</p>
             </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
+            <CardContent className="glass"
+              <div className="glass grid md:grid-cols-2 gap-6">
                 {includedFeatures.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
@@ -302,8 +302,8 @@ export default function LandingPageProduction() {
             <p className="text-xl text-gray-600">Built with best practices. No compromises.</p>
           </div>
           
-          <Card className="bg-gray-900 text-white">
-            <CardContent className="p-8">
+          <Card className="glass-navbar text-white">
+            <CardContent className="glass p-8">
               <pre className="text-sm overflow-x-auto">
                 <code>{`// AI chat in 5 lines
 import { useAIChat } from '@/hooks/useAIChat';
@@ -326,17 +326,17 @@ export default function ChatInterface() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 glass">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Trusted by Speed-Seekers</h2>
             <p className="text-xl text-gray-600">Join 700+ founders who shipped faster</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="glass grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index}>
-                <CardContent className="p-6">
+              <Card key={index} className="glass"
+                <CardContent className="glass p-6">
                   <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-semibold">{testimonial.author}</p>
@@ -357,15 +357,15 @@ export default function ChatInterface() {
             <p className="text-xl text-gray-600">No subscriptions. No hidden fees. Just ship.</p>
           </div>
           
-          <Card className="border-2 border-orange-500">
-            <CardHeader className="text-center pb-8">
+          <Card className="-2 -orange-500" className="glass
+            <CardHeader className="text-center pb-8" className="glass
               <Badge className="bg-orange-100 text-orange-700 mb-4">LAUNCH OFFER - 40% OFF</Badge>
               <div className="text-5xl font-bold">
                 <span className="line-through text-gray-400 text-3xl">$299</span> $179
               </div>
               <p className="text-gray-600 mt-2">One-time payment • Lifetime updates</p>
             </CardHeader>
-            <CardContent className="space-y-4 pb-8">
+            <CardContent className="space-y-4 pb-8" className="glass
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-green-600" />
@@ -410,7 +410,7 @@ export default function ChatInterface() {
           <p className="text-xl text-gray-600 mb-8">
             Stop wasting weeks on boilerplate. Start building your business.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
               className="bg-orange-500 hover:bg-orange-600 text-lg px-8"
@@ -432,9 +432,9 @@ export default function ChatInterface() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t">
+      <footer className="py-12 px-4 -t">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="glass grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-6 h-6 text-orange-500" />
@@ -473,7 +473,7 @@ export default function ChatInterface() {
             </div>
           </div>
           
-          <div className="border-t mt-8 pt-8 text-center text-sm text-gray-600">
+          <div className="-t mt-8 pt-8 text-center text-sm text-gray-600">
             <p>© 2025 AI Guided SaaS. Built for builders, by builders.</p>
           </div>
         </div>

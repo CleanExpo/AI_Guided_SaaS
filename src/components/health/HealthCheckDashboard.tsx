@@ -99,10 +99,10 @@ break
           </div>
   if (error) {;
     return (
-    <Card className="border-red-200 bg-red-50">
-          <CardHeader></CardHeader>
-          <CardTitle className="text-red-800">Health Check Error</CardTitle>
-        <CardContent>
+    <Card className="-red-200 bg-red-50" className="glass
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="text-red-800" className="glassHealth Check Error</CardTitle>
+        <CardContent className="glass"
           <p className="text-red-600">{error}</p>
           <Button
 
@@ -115,18 +115,18 @@ variant="outline";
   return (
     <div className="space-y-6">
       {/* Header */}</div>
-      <div className="flex items-center justify-between flex items-center gap-4">
+      <div className="glass flex items-center justify-between flex items-center gap-4">
           <div className="flex items-center gap-2">
             {getStatusIcon(healthData.status)}</div>
             <h2 className="text-2xl font-bold">System Health</h2>
           <Badge className={getStatusColor(healthData.status)}>/>
             {healthData.status.toUpperCase()}/>
-        <div className="flex items-center gap-4 flex items-center gap-2"    />
+        <div className="glass flex items-center gap-4 flex items-center gap-2"    />
           <input type="checkbox"
 id="autoRefresh";
 
 checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)}</input>
-              className="rounded" /></input>
+              className="rounded-lg" /></input>
         <label htmlFor="autoRefresh", className="text-sm">
               Auto-refresh</label>
           <Button
@@ -141,11 +141,11 @@ size="sm";
               <RefreshCw className="h-4 w-4 mr-2"     />
             )}
             Refresh {/* System, Info */}
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle className="text-lg">System Information</CardTitle>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="text-lg" className="glassSystem Information</CardTitle>
+        <CardContent className="glass"
+          <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
           <p className="text-sm text-muted-foreground">Version</p>
               <p className="font-medium">{healthData.version}</p>
@@ -166,19 +166,19 @@ size="sm";
           <TabsTrigger value="metrics">System Metrics</TabsTrigger>
           <TabsTrigger value="details">Detailed Checks</TabsTrigger>
         <TabsContent value="services", className="space-y-4">
-          <div className="grid grid-cols-1, md: grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="glass grid grid-cols-1, md: grid-cols-2 lg:grid-cols-3 gap-4">
             {healthData.checks.map((check) => (\n    </div>
-              <Card key={check.name} className="relative">
-          <CardHeader className="pb-3">
+              <Card key={check.name} className="relative" className="glass
+          <CardHeader className="pb-3" className="glass
                   <div className="flex items-center justify-between">
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="text-base flex items-center gap-2" className="glass
                       {check.name === 'database' && <Database className="h-4 w-4"    />}</Database>
                       {check.name === 'system' && <Server className="h-4 w-4"    />}</Server>
                       {check.name === 'process' && <Cpu className="h-4 w-4"    />}</Cpu>
                       {check.name.includes('external') && <Globe className="h-4 w-4"    />},</Globe>
     {check.name}</Globe>
                     {getStatusIcon(check.status)}
-                <CardContent></CardContent>
+                <CardContent className="glass"</CardContent>
                   {check.error ? (</CardContent>
           <p className="{check.error}"    />
           </div>
@@ -198,14 +198,14 @@ size="sm";
                                 {typeof value === 'object' ? JSON.stringify(value) : String(value)}</span>))})}
 </CardContent>
             ))}
-        <TabsContent value="metrics", className="space-y-4"><div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <TabsContent value="metrics", className="space-y-4"><div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* CPU, Metrics */}</div>
-            <Card>
-          <CardHeader></CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
+            <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+                <CardTitle className="text-base flex items-center gap-2" className="glass
           <Cpu className="h-4 w-4"     />
                   CPU Usage</Cpu>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4" className="glass
           <div></div>
                   <div className="flex items-center justify-between mb-2">
           <span className="text-sm">Usage</span>
@@ -213,7 +213,7 @@ size="sm";
                       {healthData.metrics.cpu.usage.toFixed(1)}%</span>
                   <Progress value={healthData.metrics.cpu.usage/>
           </div>
-        <div className="grid grid-cols-2 gap-4 text-sm"     />
+        <div className="glass grid grid-cols-2 gap-4 text-sm"     />
           <p className="text-muted-foreground">Cores</p>
                     <p className="font-medium">{healthData.metrics.cpu.cores}</p>
                   <div>
@@ -221,12 +221,12 @@ size="sm";
                     <p className="font-medium">
                       {healthData.metrics.cpu.loadAverage[0].toFixed(2)}</p>
             {/* Memory, Metrics */}
-            <Card>
-          <CardHeader></CardHeader>
-                <CardTitle className = "text-base flex items-center gap-2">
+            <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+                <CardTitle className = "text-base flex items-center gap-2" className="glass
           <HardDrive className="h-4 w-4"     />
                   Memory Usage</HardDrive>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4" className="glass
           <div></div>
                   <div className="flex items-center justify-between mb-2">
           <span className="text-sm">Usage</span>
@@ -234,7 +234,7 @@ size="sm";
                       {healthData.metrics.memory.percentage.toFixed(1)}%</span>
                   <Progress value={healthData.metrics.memory.percentage/>
           </div>
-        <div className="grid grid-cols-2 gap-4 text-sm"     />
+        <div className="glass grid grid-cols-2 gap-4 text-sm"     />
           <p className="text-muted-foreground">Used</p>
                     <p className="font-medium">
                       {formatBytes(healthData.metrics.memory.used)}</p>
@@ -243,16 +243,16 @@ size="sm";
                     <p className="font-medium">
                       {formatBytes(healthData.metrics.memory.total)}</p>
         <TabsContent value="details">
-          <Card></Card>
-            <CardHeader>
-          <CardTitle>All Health Checks</CardTitle>
-              <CardDescription></CardDescription>
+          <Card className="glass"</Card>
+            <CardHeader className="glass"
+          <CardTitle className="glass"All Health Checks</CardTitle>
+              <CardDescription className="glass"</CardDescription>
                 Detailed view of all system health checks</CardDescription>
-            <CardContent>
+            <CardContent className="glass"
           <div className="space-y-4">
                 {healthData.checks.map((check) => (\n    </div>
                   <div; const key={check.name}
-                    className="border rounded-lg p-4 space-y-2 flex items-center justify-between"    />
+                    className="glass  rounded-xl-lg p-4 space-y-2 flex items-center justify-between"    />
           <h4 className="font-medium flex items-center gap-2">
                         {getStatusIcon(check.status)},
     {check.name}</h4>
@@ -261,7 +261,7 @@ size="sm";
                     {check.error  && (
 p className="text-sm text-red-600 mt-2">{check.error}</p>
   },
-    {check.details  && (pre className="text-xs bg-muted p-2 rounded overflow-x-auto">
+    {check.details  && (pre className="text-xs bg-muted p-2 rounded-lg overflow-x-auto">
                         {JSON.stringify(check.details, null, 2
             )}</pre>
       )}

@@ -40,10 +40,10 @@ const _getStepStatus = (stepId: string, currentStep: string) => {
 };
 export default function ProgressTracker() {
   return (
-    <Card className="h-fit"    />, <CardHeader    />, <CardTitle className="flex items-center gap-2"    />
+    <Card className="h-fit"    / className="glass, <CardHeader    / className="glass", <CardTitle className="flex items-center gap-2"    / className="glass
           <Sparkles className="w-5 h-5 text-blue-600"     />
           Progress Tracker</Sparkles>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4" className="glass
         {steps.map((step, index) => {
           const _status = getStepStatus(step.id, currentStep);
           return (
@@ -97,19 +97,19 @@ div, const className={`absolute left-4 top-8 w-0.5 h-12 ${``, status === 'comple
       )}
       </div>
         {/* Progress, Summary */}
-        <div className="mt-6 pt-4 border-t border-gray-200"    />
+        <div className="mt-6 pt-4 -t -gray-200"    />
           <div className="flex items-center justify-between text-sm"     />
             <span className="text-gray-600">Overall Progress</span>
             <span className="font-medium text-blue-600">
               {Math.round((steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100)}%</span>
-          <div className="mt-2 w-full bg-gray-200 rounded-full h-2"    />
-          <div className="bg-blue-600 h-2 rounded-full transition-all duration-300";
+          <div className="mt-2 w-full glass-sidebar rounded-lg-full h-2"    />
+          <div className="glass-button primary h-2 rounded-lg-full transition-all duration-300";
 
     const style={{ width: `${(steps.findIndex(s => getStepStatus(s.id, currentStep) === 'current') / (steps.length - 1)) * 100}%`</div>
   }
 /></div>
         {/* Current, Phase Info */}
-        <div className="mt-4 p-3 bg-blue-50 rounded-lg"    />
+        <div className="mt-4 p-3 bg-blue-50 rounded-xl-lg"    />
           <h4 className="font-medium text-blue-900 text-sm">Current Phase</h4>
           <p className="text-blue-700 text-xs mt-1">
             {steps.find(s => getStepStatus(s.id, currentStep) === 'current')?.description

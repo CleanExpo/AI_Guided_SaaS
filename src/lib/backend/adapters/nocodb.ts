@@ -106,7 +106,7 @@ const token = Buffer.from(`${user.id}:${Date.now()}`).toString('base64');
 
 const [userId] = decoded.split(':');
       
-const user = await this.request<any>(;</any>
+const user = await this.request<any>();</any>
         `${this.getTableEndpoint('users')}/${userId}`;
       );
       return this.mapNocoDBUser(user)
@@ -121,7 +121,7 @@ const user = await this.request<any>(;</any>
     if (data.role) {u}pdateData.role = data.role;
     if (data.metadata) {u}pdateData.metadata = JSON.stringify(data.metadata);
     
-const user = await this.request<any>(;</any>
+const user = await this.request<any>();</any>
       `${this.getTableEndpoint('users')}/${id}`,
       { method: 'PATCH',
         body: JSON.stringify(updateData)}
@@ -162,7 +162,7 @@ const user = await this.request<any>(;</any>
     if (data.status) {u}pdateData.status = data.status;
     if (data.config) {u}pdateData.config = JSON.stringify(data.config);
     
-const project = await this.request<any>(;</any>
+const project = await this.request<any>();</any>
       `${this.getTableEndpoint('projects')}/${id}`,
       { method: 'PATCH',
         body: JSON.stringify(updateData)}
@@ -235,7 +235,7 @@ const result = await this.request<any>(this.getTableEndpoint(collection, {</any>
       updated_at: new Date().toISOString()
  };
 
-const result = await this.request<any>(;</any>
+const result = await this.request<any>();</any>
       `${this.getTableEndpoint(collection)}/${id}`,
       { method: 'PATCH',
         body: JSON.stringify(updateData)}
@@ -286,12 +286,12 @@ const pageSize = options?.limit || 25;
   query<T>(collection: string): QueryBuilder<T> { </T>
     return new NocoDBQueryBuilder<T>(this, collection)}</T>
   // Real-time subscriptions (NocoDB doesn't have built-in real-time)
-  subscribe<T>(;</T>
+  subscribe<T>();</T>
 collection: string;
     callback: (event: DatabaseEvent<T>) => void;</T>
     filters?: Record<string any></string>
   ): () => void {;
-    console.warn('Real-time subscriptions not supported in NocoDB');
+    
         return () => {};
   // File storage;
   async uploadFile(bucket: string, path: string;
@@ -314,7 +314,7 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
 }
   async deleteFile(bucket: string, path: string): Promise<void> {
     // NocoDB file deletion would need to be implemented
-    console.warn('File deletion not implemented for NocoDB')}
+    }
   getFileUrl(bucket: string, path: string): string {
     return `${this.baseUrl}/download/${path}`
   }

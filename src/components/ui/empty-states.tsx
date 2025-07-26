@@ -351,8 +351,8 @@ export function LoadingState({
             'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',className
       )}
      >, className="w-32 h-32 mb-6 text-muted-foreground">
-        <div className="relative w-full h-full" >, className="absolute inset-0 border-4 border-brand-secondary-200 rounded-full">
-          <div className="absolute inset-0 border-4 border-brand-primary-600 rounded-full border-t-transparent animate-spin">
+        <div className="relative w-full h-full" >, className="absolute inset-0 -4 -brand-secondary-200 rounded-lg-full">
+          <div className="absolute inset-0 -4 -brand-primary-600 rounded-lg-full -t-transparent animate-spin">
           <h3 className="text-xl font-semibold text-foreground">{title}</h3>
       {description && (p, className="text-base text-muted-foreground max-w-md">
           {description}</p>

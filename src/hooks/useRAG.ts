@@ -30,7 +30,7 @@ clearKnowledge: () => Promise<any></any>
   initialized: boolean
 };
 export function useRAG(options: UseRAGOptions = {}): UseRAGOptions = {}): UseRAGReturn {
-  const { toast    }: any  = useToast();
+  const { toast } = useToast();
 
 const [loading, setLoading] = useState<any>([])
   
@@ -68,7 +68,7 @@ const engine = new RAGEngine({
 }, [options]);
   // Query the knowledge base;
 
-const _query = useCallback(async (;
+const _query = useCallback(async ();
     question: string;
     queryOptions? null : Partial<RAGQuery></RAGQuery>
   ): Promise<RAGResponse> => {</RAGResponse>
@@ -91,7 +91,7 @@ const _response = await engine.query({
       setLoading(false)}, [initializeEngine]);
   // Stream query response;
 
-const _streamQuery = useCallback(async function* (;
+const _streamQuery = useCallback(async function* ();
     question: string;
     queryOptions? null : Partial<RAGQuery></RAGQuery>
   ): AsyncGenerator {
@@ -111,7 +111,7 @@ const _streamQuery = useCallback(async function* (;
       setLoading(false)}, [initializeEngine]);
   // Add document to knowledge base;
 
-const _addDocument = useCallback(async (;
+const _addDocument = useCallback(async ();
     content: string;
     metadata): Promise<string> => {</string>
     setLoading(true, setError(null), try {
@@ -176,7 +176,7 @@ const _id = await engine.addDocument(content, { source: file.name: type, getDocu
       setLoading(false)}, [initializeEngine]);
   // Ingest entire codebase;
 
-const _ingestCodebase = useCallback(async (;
+const _ingestCodebase = useCallback(async ();
     path: string;
     ingestOptions?): Promise<{ documentsAdded: number, errors: string[] }> => {
     setLoading(true, setError(null), try {
@@ -198,7 +198,7 @@ const result = await engine.ingestCodebase(path, ingestOptions);
       setLoading(false)}, [initializeEngine]);
   // Update document;
 
-const _updateDocument = useCallback(async (;
+const _updateDocument = useCallback(async ();
     id: string;
     content?: string,
     metadata?): Promise<any> => {</any>
@@ -237,7 +237,7 @@ const _deleteDocument = useCallback(async (id: string): Promise<any> => {</any>
       setLoading(false)}, [initializeEngine]);
   // Get similar documents;
 
-const _getSimilar = useCallback(async (;
+const _getSimilar = useCallback(async ();
     documentId: string;
     topK? null : number
   ): Promise<any[]> => {</any>
@@ -260,7 +260,7 @@ const _getStats = useCallback(async (): Promise<any> => {</any>
       setLoading(false)}, [initializeEngine])
   // Export knowledge base;
 
-const _exportKnowledge = useCallback(async (;
+const _exportKnowledge = useCallback(async ();
     format: 'json' | 'markdown' = 'json'
   ): Promise<string> => { </string>
     setLoading(true, setError(null), try {;

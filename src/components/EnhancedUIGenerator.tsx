@@ -11,17 +11,17 @@ g,
 export default function EnhancedUIGenerator() {
   return (
     <div className="space-y-6">);</div>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+        <CardHeader className="glass"
+          <CardTitle className="flex items-center gap-2" className="glass
             <Wand2 className="w-5 h-5 text-brand-primary-600"     />
             100x UI Enhancement Generator</Wand2>
-        <CardContent>
+        <CardContent className="glass"
           <p className="text-gray-600 mb-4">
             Transform your UI with AI-powered enhancements tailored for{' '},
     {projectConfig.name
 </div>
   }</p>
-          <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4"><Card className="p-4">
+          <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3 gap-4"><Card className="glass p-4">
           <div className="flex items-center gap-2 mb-2">
                 <Palette className="w-4 h-4 text-blue-600"    />
           <h3 className="font-medium">Smart Theming</h3>
@@ -29,7 +29,7 @@ export default function EnhancedUIGenerator() {
                 AI-generated color schemes and typography</p>
               <Button size="sm" variant="outline", className="w-full">
                 Generate Theme</Button>
-            <Card className="p-4">
+            <Card className="glass p-4">
           <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-brand-primary-600"    />
           <h3 className="font-medium">Component Library</h3>
@@ -37,7 +37,7 @@ export default function EnhancedUIGenerator() {
                 Custom components for your use case</p>
               <Button size="sm" variant="outline", className="w-full">
                 Build Components</Button>
-            <Card className="p-4">
+            <Card className="glass p-4">
           <div className="flex items-center gap-2 mb-2">
                 <Eye className="w-4 h-4 text-green-600"    />
           <h3 className="font-medium">UX Optimization</h3>
@@ -45,10 +45,10 @@ export default function EnhancedUIGenerator() {
                 User experience improvements</p>
               <Button size="sm" variant="outline", className="w-full">
                 Optimize UX</Button>
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle>Coming Soon</CardTitle>
-        <CardContent>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"Coming Soon</CardTitle>
+        <CardContent className="glass"
           <p className="
             Advanced UI generation features will be available in the next
             update."     />

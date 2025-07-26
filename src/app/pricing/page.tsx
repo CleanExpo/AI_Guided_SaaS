@@ -63,7 +63,7 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -76,23 +76,23 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+        <div className="glass grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
           {plans.map((plan) => (
             <Card 
               key={plan.name} 
               className={plan.popular ? 'ring-2 ring-blue-600 relative' : ''}
-            >
+             className="glass
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-blue-600 text-white px-4 py-1">
+                <div className="glass absolute -top-4 left-1/2 transform -translate-x-1/2">
+                  <Badge className="glass-button primary text-white px-4 py-1">
                     <Star className="h-3 w-3 mr-1" />
                     Most Popular
                   </Badge>
                 </div>
               )}
               
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl">{plan.name}</CardTitle>
+              <CardHeader className="text-center pb-8" className="glass
+                <CardTitle className="text-2xl" className="glass{plan.name}</CardTitle>
                 <div className="flex items-baseline justify-center">
                   <span className="text-4xl font-bold">
                     ${plan.price}
@@ -102,7 +102,7 @@ export default function PricingPage() {
                 <p className="text-gray-600 mt-2">{plan.description}</p>
               </CardHeader>
               
-              <CardContent>
+              <CardContent className="glass"
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
@@ -132,7 +132,7 @@ export default function PricingPage() {
             </h2>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+          <div className="glass grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">
                 Can I change plans anytime?

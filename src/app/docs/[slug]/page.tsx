@@ -1,9 +1,4 @@
 /* BREADCRUMB: pages - Application pages and routes */
-'use client';
-
-// Force dynamic rendering to avoid SSG errors
-export const dynamic = 'force-dynamic';
-
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -12,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Clock, User } from 'lucide-react';
 import Link from 'next/link';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface DocPage { slug: string
   title: string
@@ -105,7 +101,7 @@ export default function DocPage({ params }: { params: { slug: string } }) {
   }
   
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <Link href="/docs">
@@ -115,7 +111,7 @@ export default function DocPage({ params }: { params: { slug: string } }) {
             </Button>
           </Link>
           
-          <div className="flex items-center gap-4 mb-4">
+          <div className="glass flex items-center gap-4 mb-4">
             <Badge variant="secondary">{doc.category}</Badge>
             <div className="flex items-center text-sm text-gray-500">
               <Clock className="h-4 w-4 mr-1" />
@@ -127,13 +123,13 @@ export default function DocPage({ params }: { params: { slug: string } }) {
           <p className="text-xl text-gray-600">{doc.description}</p>
         </div>
         
-        <Card>
-          <CardContent className="prose prose-lg max-w-none p-8">
-            <div dangerouslySetInnerHTML={{ __html: doc.content }} />
+        <Card className="glass"
+          <CardContent className="glass prose prose-lg max-w-none p-8">
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(doc.content ) }} />
           </CardContent>
         </Card>
         
-        <div className="mt-8 pt-6 border-t">
+        <div className="mt-8 pt-6 -t">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-sm text-gray-500">
               <User className="h-4 w-4 mr-1" />

@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import React, { Component, ReactNode, ErrorInfo } from 'react';
@@ -65,8 +67,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    if ((process.env.NODE_ENV || "development") === "development") {
+      
     }
 
     // Log error to error logging service
@@ -124,7 +126,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
       this.setState({ copied: true });
       setTimeout(() => this.setState({ copied: false }), 2000);
     } catch (err) {
-      console.error('Failed to copy error details:', err);
+      logger.error('Failed to copy error details:', err);
     }
   };
 
@@ -136,25 +138,25 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
       }
 
       const { error, errorInfo, showDetails, copied } = this.state;
-      const isDevelopment = process.env.NODE_ENV === 'development';
+      const isDevelopment = (process.env.NODE_ENV || "development") === "development";
 
       return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-          <Card className="max-w-2xl w-full">
-            <CardHeader>
+        <div className="min-h-screen glass flex items-center justify-center p-4">
+          <Card className="max-w-2xl w-full" className="glass
+            <CardHeader className="glass"
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-red-100 rounded-xl-lg flex items-center justify-center">
                   <AlertTriangle className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl">Something went wrong</CardTitle>
+                  <CardTitle className="text-2xl" className="glassSomething went wrong</CardTitle>
                   <p className="text-gray-600 text-sm mt-1">
                     We encountered an unexpected error. Please try again.
                   </p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4" className="glass
               {/* Error Message */}
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
@@ -182,12 +184,12 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
 
               {/* Developer Details (in development mode) */}
               {isDevelopment && (
-                <div className="border-t pt-4">
+                <div className="-t pt-4">
                   <div className="flex items-center justify-between mb-3">
                     <button
                       onClick={this.toggleDetails}
                       className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                    >
+                     aria-label="Button">
                       <Bug className="h-4 w-4" />
                       Developer Details
                       {showDetails ? (
@@ -222,7 +224,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                         <h4 className="text-sm font-medium text-gray-700 mb-1">
                           Error Stack:
                         </h4>
-                        <pre className="bg-gray-900 text-gray-100 p-3 rounded-lg text-xs overflow-x-auto">
+                        <pre className="glass-navbar text-gray-100 p-3 rounded-xl-lg text-xs overflow-x-auto">
                           {error?.stack || 'No stack trace available'}
                         </pre>
                       </div>
@@ -233,7 +235,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                           <h4 className="text-sm font-medium text-gray-700 mb-1">
                             Component Stack:
                           </h4>
-                          <pre className="bg-gray-900 text-gray-100 p-3 rounded-lg text-xs overflow-x-auto">
+                          <pre className="glass-navbar text-gray-100 p-3 rounded-xl-lg text-xs overflow-x-auto">
                             {errorInfo.componentStack}
                           </pre>
                         </div>
@@ -299,7 +301,7 @@ export function PageErrorBoundary({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundaryWrapper
       onError={(error, errorInfo) => {
-        console.error('Page Error:', error, errorInfo);
+        
       }}
     >
       {children}

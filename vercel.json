@@ -1,47 +1,15 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "devCommand": "npm run dev",
   "regions": [
-    "iad1",
-    "cdg1",
-    "sin1"
+    "iad1"
   ],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "s-maxage=1, stale-while-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
-      ]
+  "functions": {
+    "src/app/api/**/*": {
+      "maxDuration": 30
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/cdn/:path*",
-      "destination": "https://cdn.aiguidedsaas.com/:path*"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/cron/cache-warm",
-      "schedule": "*/15 * * * *"
-    }
-  ]
+  }
 }

@@ -29,14 +29,14 @@ export default function NoCodeBuilder() {
   };
 
   return (
-    <div className="h-screen flex bg-gray-100">
-      <div className="w-64 bg-white border-r border-gray-200 p-4">
+    <div className="h-screen flex glass">
+      <div className="w-64 glass -r -gray-200 p-4">
         <h3 className="font-semibold text-gray-900 mb-4">Components</h3>
         <div className="space-y-2">
           {componentLibrary.map(({ icon: Icon, label, type }) => (
             <div
               key={type}
-              className="flex items-center p-3 border border-gray-200 rounded cursor-grab hover:bg-gray-50"
+              className="flex items-center p-3  -gray-200 rounded-lg cursor-grab hover:glass"
               draggable
               onDragStart={() => handleDragStart(type)}
             >
@@ -46,10 +46,10 @@ export default function NoCodeBuilder() {
           ))}
         </div>
       </div>
-      <div className="flex-1 p-4">
+      <div className="glass flex-1 p-4">
         <div
           ref={canvasRef}
-          className="min-h-[600px] bg-white border-2 border-dashed border-gray-300 rounded relative"
+          className="min-h-[600px] glass -2 -dashed -gray-300 rounded-lg relative"
         >
           {components.length === 0 && (
             <div className="flex items-center justify-center h-full text-gray-500">
@@ -60,7 +60,7 @@ export default function NoCodeBuilder() {
           {components.map((component) => (
             <div
               key={component.id}
-              className="absolute border border-blue-500 p-2"
+              className="absolute  -blue-500 p-2"
               style={{
                 left: component.x,
                 top: component.y,

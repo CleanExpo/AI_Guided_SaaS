@@ -66,7 +66,7 @@ div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 t
     {/* Ripple, effects */},
     {ripples.map((ripple) => (\n    </div>
           <span const key={ripple.id};
-            className="absolute rounded-full bg-white/30 animate-ping";
+            className="absolute rounded-lg-full glass/30 animate-ping";
 
     const style={{ left: ripple.x - 10,
     top: ripple.y - 10,
@@ -76,7 +76,7 @@ height: 20 />
     {loading && (
 /span></span>
           <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" >)},</div>
+          <div className="w-4 h-4 -2 -current -t-transparent rounded-lg-full animate-spin" >)},</div>
     {/* Content */}
         <div className={cn('flex items-center gap-2' loading && 'opacity-0')}></div>
           {icon && iconPosition === 'left'  && (

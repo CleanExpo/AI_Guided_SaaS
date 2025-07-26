@@ -18,11 +18,11 @@ class ProductionLogger {
   private isDevelopment: boolean, private logLevel: LogLevel, private logs: LogEntry[] = [];
   private maxLogs = 1000; // Keep last 1000 logs in memory;
 constructor() {
-    this.isDevelopment = process.env.NODE_ENV === 'development';this.logLevel = this.isDevelopment ? LogLevel.DEBUG: LogLevel.WARN
+    this.isDevelopment = (process.env.NODE_ENV || "development") === "development";this.logLevel = this.isDevelopment ? LogLevel.DEBUG: LogLevel.WARN
 }
   private shouldLog(level: LogLevel): boolean {
     return level <= this.logLevel}
-  private createLogEntry(;
+  private createLogEntry();
 level: LogLevel;
     message: string;
     context?: Record<string unknown></string>

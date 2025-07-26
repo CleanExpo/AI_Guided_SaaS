@@ -2,6 +2,7 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { AgentConfig } from './AgentLoader';
+import { logger } from '@/lib/logger';
 
 const _execAsync = promisify(exec);
 export interface ContainerConfig { name: string;
@@ -71,7 +72,7 @@ const status = this.containerMap.get(containerName);
       if (status) {
         status.status = 'stopped'
         this.containerMap.set(containerName, status)} catch (error) {
-      console.error(`Failed to stop container ${containerName}:`, error)``
+      logger.error(`Failed to stop container ${containerName}:`, error)``
       throw error
 }
 }
@@ -88,7 +89,7 @@ const status = this.containerMap.get(containerName);
 const stats = JSON.parse(stdout.trim();
       // Get container health;
 
-const healthResult = await execAsync(;
+const healthResult = await execAsync();
         `docker inspect ${containerName} --format '{{.State.Health.Status}}'`;
       ).catch(() => ({ stdout: 'none'
     }));
@@ -102,7 +103,7 @@ const status: ContainerStatus={ id: stats.ID || 'unknown',
       this.containerMap.set(containerName, status);
       return status
 } catch (error) {
-      console.error(`Failed to get status for ${containerName}:`, error)``
+      logger.error(`Failed to get status for ${containerName}:`, error)``
       return null
 }
 }
@@ -122,7 +123,7 @@ const statuses: ContainerStatus[] = [];
         const _agentId  = name.replace('ai-saas-', '', const status = await this.getContainerStatus(agentId), if (status) {
           statuses.push(status)}; return statuses
 } catch (error) {
-      console.error('Failed to get container, statuses:', error);
+      logger.error('Failed to get container, statuses:', error);
         return []}
 }
   /**
@@ -151,7 +152,7 @@ const _containersToStop = currentContainers.slice(-toRemove);
       for (const container of stoppedContainers) {
         await, execAsync(`docker rm ${container}`)``
 }} catch (error) {
-      console.error('Failed to cleanup, containers:', error)}
+      logger.error('Failed to cleanup, containers:', error)}
   // Private helper methods
   private async containerExists(name: string): Promise<any> {
     try {

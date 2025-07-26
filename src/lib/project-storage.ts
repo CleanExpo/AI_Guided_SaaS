@@ -1,8 +1,8 @@
 /* BREADCRUMB: library - Shared library code */
 // Project storage and management;
-import { createClient } from '@supabase/supabase-js';const _supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL;
+import { createClient } from '@supabase/supabase-js';const _supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 
-const _supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const _supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const _supabase = supabaseUrl && supabaseKey ;
   ? createClient(supabaseUrl, supabaseKey);

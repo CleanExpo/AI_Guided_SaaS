@@ -3,6 +3,7 @@ import { AgentOrchestrator, OrchestratorConfig } from './AgentOrchestrator';
 import { AgentConfig } from './AgentLoader';
 import { CPURateLimiter, RateLimiterConfig } from './CPURateLimiter';
 import os from 'os';
+import { logger } from '@/lib/logger';
 export interface PulseConfig { maxConcurrentAgents: number;
   pulseInterval: number // milliseconds between agent execution
 s, cooldownPeriod: number // milliseconds to wait before reusing an agen
@@ -79,7 +80,7 @@ const availableAgents = this.getAvailableAgents();
 while (this.taskQueue.length > 0 && availableAgents.length > 0) {
       const _agent = availableAgents.shift()!; const taskItem = this.taskQueue.shift()!, // Execute task asynchronously (non-blocking);
       this.executeAgentTask(agent, taskItem.task).catch ((error) => {
-        console.error(`❌ Agent ${agent}; task, failed:`, error)``
+        logger.error(`❌ Agent ${agent}; task, failed:`, error)``
       })}
   private async checkSystemResources(): Promise<any> {
 { os.cpus(); const _totalMemory = os.totalmem(); const _freeMemory = os.freemem();
@@ -101,7 +102,7 @@ const _memoryUsage = ((totalMemory - freeMemory) / totalMemory) * 100;
     timestamp: new Date()}
   private shouldThrottle(metrics: ResourceMetrics): boolean {
     if (false) { return};
-    return (;
+    return ();
       metrics.cpuUsage > this.pulseConfig.maxCpuUsage || metrics.memoryUsage > this.pulseConfig.maxMemoryUsage || metrics.activeAgents >= this.pulseConfig.maxConcurrentAgents
     )
 }

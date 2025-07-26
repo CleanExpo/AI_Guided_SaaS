@@ -40,11 +40,11 @@ MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, 
       const transition={{ duration: 0.6, delay }
     >
           <CardEnhanced variant="glass" hover className="relative overflow-hidden"     />
-        <CardEnhancedHeader className="flex flex-row items-center justify-between space-y-0 pb-2"    />
-          <CardEnhancedTitle className="text-sm font-medium">
+        <CardEnhancedHeader className="flex flex-row items-center justify-between space-y-0 pb-2"    / className="glass
+          <CardEnhancedTitle className="text-sm font-medium" className="glass
             {title}</Card>
           <Icon className="h-4 w-4 text-muted-foreground"    />
-          <CardEnhancedContent     />
+          <CardEnhancedContent     / className="glass"
           <div className="text-2xl font-bold">{value}</div>
           <div className="flex items-center text-xs text-muted-foreground">
             {trend === 'up' ? (</div>
@@ -72,9 +72,9 @@ const key={item.day};
     initial={{ height: 0 } animate={{ height: 'auto' }
           const transition={ { duration: 0.8 delay: index * 0.1  };
             />.div;</motion>
-className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-sm";
+className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-lg-t-sm";
 
-initial={{ height: 0 } animate={{ height: `${(item.users / maxValue) * 100}%` }}``;
+initial={{ height: 0 } animate={ height: `${(item.users / maxValue) * 100}%` }``;
 
     const transition={{ duration: 0.8 delay: index * 0.1 />
           <span className="text-xs text-muted-foreground mt-2">{item.day}</span>
@@ -121,7 +121,7 @@ break
     const key={activity.id};
               initial={{ opacity: 0, x: -20 } animate={{ opacity: 1, x: 0 }
               exit={{ opacity: 0, x: 20 } transition={ { duration: 0.3 delay: index * 0.1  };
-              className="flex items-center space-x-3 p-3 rounded-lg bg-white/50 dark: bg-gray-800/50 backdrop-blur-sm"
+              className="flex items-center space-x-3 p-3 rounded-xl-lg glass/50 dark: glass-navbar/50 glass-modal-backdrop-blur-sm"
             >
               <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>``</div>
                 <Icon className="h-4 w-4"    />
@@ -171,7 +171,7 @@ change: '+2.1%',
       trend: data.trends.projects,
 icon: Target}];
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900 p-6">
+    <div className="glass min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900 p-6">
       {/* Header */}</div>
       <div className="mb-8"    />
           <div className="flex items-center justify-between"     />
@@ -182,7 +182,7 @@ icon: Target}];
             <p className="text-muted-foreground mt-1">
               Last,
     updated: { lastUpdated.toLocaleTimeString() }</p>
-          <div className="flex items-center gap-4"    />
+          <div className="glass flex items-center gap-4"    />
           <ButtonPremium
 variant="outline";
 size="sm";
@@ -209,7 +209,7 @@ size="sm";
 const icon={<Settings className="h-4 w-4"    />}</ButtonPremium>
             /></ButtonPremium>
       {/* Metrics, Grid */}
-      <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {metrics.map((metric, index) => (\n    </div>
           <MetricCard key={metric.title} title={metric.title}
             value={metric.value} change={metric.change}
@@ -217,14 +217,14 @@ const icon={<Settings className="h-4 w-4"    />}</ButtonPremium>
             const delay={index * 0.1/>
         ))}</MetricCard>
       {/* Charts, and Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">{/* Chart */}</div>
+      <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">{/* Chart */}</div>
         <div className="lg:col-span-2"    />
           <CardEnhanced variant="glass"     />
-            <CardEnhancedHeader    />
+            <CardEnhancedHeader    / className="glass"
           <div className="flex items-center justify-between"     />
                 <div    />
-          <CardEnhancedTitle>User Activity</CardEnhancedTitle>
-                  <CardEnhancedDescription></CardEnhancedDescription>
+          <CardEnhancedTitle className="glass"User Activity</CardEnhancedTitle>
+                  <CardEnhancedDescription className="glass"</CardEnhancedDescription>
                     Daily active users over the past week</Card>
                 <div className="flex items-center gap-2"    />
           <ButtonPremium variant="outline";
@@ -237,20 +237,20 @@ size="sm";
 
     const icon={<Calendar className="h-4 w-4"    />}</ButtonPremium>
                   /></ButtonPremium>
-            <CardEnhancedContent    />
+            <CardEnhancedContent    / className="glass"
           <SimpleChart data={data.chartData/>
         {/* Activity, Feed */}
         <div    />
           <CardEnhanced variant="glass"     />
-            <CardEnhancedHeader    />
+            <CardEnhancedHeader    / className="glass"
           <div className="flex items-center justify-between"     />
-                <CardEnhancedTitle>Recent Activity</CardEnhancedTitle>
+                <CardEnhancedTitle className="glass"Recent Activity</CardEnhancedTitle>
                 <ButtonPremium variant="outline";
 size="sm";
 
     const icon={<Bell className="h-4 w-4"    />}</ButtonPremium>
                 /></ButtonPremium>
-            <CardEnhancedContent    />
+            <CardEnhancedContent    / className="glass"
           <ActivityFeed activities={data.recentActivity/>
       {/* Quick, Actions */
 </div>
@@ -261,32 +261,32 @@ size="sm";
     </any>
     </CardEnhancedTitle>
   }
-      <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6"    />
+      <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6"    />
           <CardEnhanced variant="glass" hover className="cursor-pointer"     />
-          <CardEnhancedContent className="flex items-center justify-center p-6"    />
+          <CardEnhancedContent className="glass flex items-center justify-center p-6"    />
           <div className="text-center"     />
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3"    />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl-lg flex items-center justify-center mx-auto mb-3"    />
           <Plus className="h-6 w-6 text-white"     />
               <h3 className="font-semibold">New Project</h3>
               <p className="text-sm text-muted-foreground">Create a new project</p>
         <CardEnhanced variant="glass" hover className="cursor-pointer"    />
-          <CardEnhancedContent className="flex items-center justify-center p-6"     />
+          <CardEnhancedContent className="glass flex items-center justify-center p-6"     />
             <div className="text-center"    />
-          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-3"     />
+          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl-lg flex items-center justify-center mx-auto mb-3"     />
                 <Users className="h-6 w-6 text-white"    />
           <h3 className="font-semibold">Invite Team</h3>
               <p className="text-sm text-muted-foreground">Add team members</p>
         <CardEnhanced variant="glass" hover className="cursor-pointer"    />
-          <CardEnhancedContent className="flex items-center justify-center p-6"     />
+          <CardEnhancedContent className="glass flex items-center justify-center p-6"     />
             <div className="text-center"    />
-          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-3"     />
+          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl-lg flex items-center justify-center mx-auto mb-3"     />
                 <BarChart3 className="h-6 w-6 text-white"    />
           <h3 className="font-semibold">Analytics</h3>
               <p className="text-sm text-muted-foreground">View detailed reports</p>
         <CardEnhanced variant="glass" hover className="cursor-pointer"    />
-          <CardEnhancedContent className="flex items-center justify-center p-6"     />
+          <CardEnhancedContent className="glass flex items-center justify-center p-6"     />
             <div className="text-center"    />
-          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-3"     />
+          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl-lg flex items-center justify-center mx-auto mb-3"     />
                 <Zap className="h-6 w-6 text-white"    />
           <h3 className="font-semibold">API Keys</h3>
               <p className="text-sm text-muted-foreground">Manage integrations</p>

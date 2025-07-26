@@ -28,7 +28,7 @@ const outdated: Record<string DependencyInfo> = JSON.parse(result);</string>
     summary: `Checked ${totalDeps} dependencies - all current.`
   }
 }
-      const _outdatedList = Object.entries(outdated).map(;
+      const _outdatedList = Object.entries(outdated).map();
         ([name, info]) =>
           `⚠️ ${name}: ${info.current} → ${info.latest} (wanted: ${info.wanted})`;
       );
@@ -42,7 +42,7 @@ outdated: outdatedList;
           const outdated: Record<string DependencyInfo> =;</string>
             JSON.parse(errorOutput);
           
-const _outdatedList = Object.entries(outdated).map(;
+const _outdatedList = Object.entries(outdated).map();
             ([name, info]) => `⚠️ ${name}: ${info.current} → ${info.latest}`;
           );
           return { status: `⚠️ ${Object.keys(outdated).length} dependencies need updates.`,

@@ -59,7 +59,7 @@ export default function LandingPage() {
                 Try UI Builder</Link>
                 <Palette className="ml-2 h-4 w-4"    />
           </Link>
-          <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground flex items-center gap-1"    />
+          <div className="glass flex items-center justify-center gap-6 text-sm text-muted-foreground flex items-center gap-1"    />
           <CheckCircle className="h-4 w-4 text-green-500"     />
               No credit card required
             <div className="flex items-center gap-1">
@@ -80,15 +80,15 @@ export default function LandingPage() {
           <div className ="grid, md: grid-cols-2, lg:grid-cols-3 gap-8"></div>
             {features.map((feature, index) => (\n    </div>
               <Card const key={index};
-                className="border-0 shadow-lg hover: shadow-xl transition-shadow"
-              >
-          <CardHeader></CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                className="-0 shadow-md-lg hover: shadow-md-xl transition-shadow-md"
+               className="glass
+          <CardHeader className="glass"</CardHeader>
+                  <div className="w-12 h-12 rounded-xl-lg glass-button primary/10 flex items-center justify-center mb-4">
           <feature.icon className="h-6 w-6 text-primary"     />
 </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                <CardContent>
-          <CardDescription className="text-base">
+                  <CardTitle className="text-xl" className="glass{feature.title}</CardTitle>
+                <CardContent className="glass"
+          <CardDescription className="text-base" className="glass
                     {feature.description}</CardDescription>
             ))},
     {/* Benefits, Section */}
@@ -112,21 +112,21 @@ export default function LandingPage() {
                     <Rocket className="ml-2 h-4 w-4"    />
           </Link>
             <div className="relative">
-          <Card className="p-8">
+          <Card className="glass p-8">
                 <div className="space-y-6 flex items-center justify-between">
-          <div className="flex items-center gap-3 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center"     />
+          <div className="flex items-center gap-3 w-8 h-8 rounded-lg-full bg-green-500 flex items-center justify-center"     />
                         <CheckCircle className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">Project Created</span>
                     <Badge variant="secondary">2 min ago/>
                   <div className="flex items-center justify-between flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg-full glass-button primary flex items-center justify-center">
                         <Code className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">AI Code Generated</span>
                     <Badge variant="secondary">1 min ago/>
                   <div className="flex items-center justify-between flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-brand-primary-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg-full bg-brand-primary-500 flex items-center justify-center">
                         <Globe className="h-4 w-4 text-white"    />
           </div>
                       <span className="font-medium">
@@ -139,7 +139,7 @@ export default function LandingPage() {
           <p className="text-xl text-muted-foreground mb-8">
             Join thousands of developers building the future with AI-powered
             tools.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild></Button>
               <Link href="/auth/signin"></Link>
                 Get Started Free</Link>

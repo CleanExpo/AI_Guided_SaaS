@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/components/ui/use-toast';
 
 export default function NewGuidedProjectPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,26 +20,26 @@ export default function NewGuidedProjectPage() {
     // Simulate project creation
     setTimeout(() => {
       setIsLoading(false);
-      alert('Project created successfully!');
+      toast({ title: "Success", description: "Project created successfully!" });
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
           <div className="container mx-auto max-w-2xl px-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Create New Guided Project</CardTitle>
+        <Card className="glass"
+          <CardHeader className="glass"
+            <CardTitle className="glass"Create New Guided Project</CardTitle>
           </CardHeader>
-          <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="glass"
+          <form onSubmit={handleSubmit} className="space-y-6" role="form">
               <div>
           <label className="block text-sm font-medium mb-2">Project Name</label>
                 <Input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  placeholder="Enter project name"
+                  ="Enter project name"
                   required
                 />
               </div>
@@ -48,7 +49,7 @@ export default function NewGuidedProjectPage() {
                   type="text"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  placeholder="Describe your project"
+                  ="Describe your project"
                 />
               </div>
               <Button type="submit" disabled={isLoading} className="w-full">

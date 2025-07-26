@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -33,7 +35,7 @@ export default function PWAInstallPrompt() {
       await install();
       setShowPrompt(false);
     } catch (error) {
-      console.error('Installation failed:', error);
+      logger.error('Installation failed:', error);
     }
   };
 
@@ -51,18 +53,18 @@ export default function PWAInstallPrompt() {
     <>
       {/* Mobile Bottom Sheet Style */}
       {isMobile ? (
-        <div className="fixed inset-x-0 bottom-0 z-50 p-4 bg-gradient-to-t from-black/50 to-transparent">
-          <Card className="bg-white shadow-2xl">
-            <CardContent className="p-6">
+        <div className="glass fixed inset-x-0 bottom-0 z-50 p-4 bg-gradient-to-t from-black/50 to-transparent">
+          <Card className="glass shadow-md-2xl">
+            <CardContent className="glass p-6">
               <button
                 onClick={handleDismiss}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              >
+                className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+               aria-label="Button">
                 <X className="h-5 w-5" />
               </button>
               
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <div className="glass flex items-start gap-4">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg-xl flex items-center justify-center flex-shrink-0">
                   <Smartphone className="h-6 w-6 text-orange-600" />
                 </div>
                 <div className="flex-1">
@@ -93,17 +95,17 @@ export default function PWAInstallPrompt() {
       ) : (
         /* Desktop Floating Card */
         <div className="fixed bottom-8 right-8 z-50 max-w-sm">
-          <Card className="shadow-2xl border-orange-200">
-            <CardContent className="p-6">
+          <Card className="shadow-md-2xl -orange-200" className="glass
+            <CardContent className="glass p-6">
               <button
                 onClick={handleDismiss}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              >
+                className="glass absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+               aria-label="Button">
                 <X className="h-5 w-5" />
               </button>
               
               <div className="mb-4">
-                <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-orange-100 rounded-lg-xl flex items-center justify-center mb-4">
                   <Zap className="h-6 w-6 text-orange-600" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Ship Faster with Our App</h3>
@@ -115,15 +117,15 @@ export default function PWAInstallPrompt() {
 
               <div className="space-y-3 mb-4 text-sm">
                 <div className="flex items-center gap-2 text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-lg-full" />
                   <span>One-click access from your desktop</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-lg-full" />
                   <span>Works offline - sync when ready</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-lg-full" />
                   <span>Deployment notifications</span>
                 </div>
               </div>

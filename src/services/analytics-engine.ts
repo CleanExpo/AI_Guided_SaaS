@@ -1,240 +1,39 @@
+import { logger } from '@/lib/logger';
 import { EventEmitter } from 'events';
+import { 
+  AnalyticsEvent, 
+  AnalyticsMetrics, 
+  AnalyticsConfig,
+  AnalyticsProvider,
+  DashboardData
+} from './analytics/types';
+import { EventTracker } from './analytics/event-tracker';
+import { MetricsCalculator } from './analytics/metrics-calculator';
+import { DashboardGenerator } from './analytics/dashboard-generator';
 
-// Analytics event types
-export type AnalyticsEvent = 
-  | UserEvent
-  | PageViewEvent
-  | FeatureEvent
-  | ConversionEvent
-  | PerformanceEvent
-  | ErrorEvent
-  | CustomEvent;
+export * from './analytics/types';
 
-interface BaseEvent {
-  id: string;
-  timestamp: Date;
-  sessionId: string;
-  userId?: string;
-  deviceInfo?: DeviceInfo;
-  location?: LocationInfo;
-}
-
-interface UserEvent extends BaseEvent {
-  type: 'user';
-  action: 'signup' | 'login' | 'logout' | 'profile_update' | 'subscription_change';
-  metadata?: Record<string, any>;
-}
-
-interface PageViewEvent extends BaseEvent {
-  type: 'pageview';
-  url: string;
-  referrer?: string;
-  duration?: number;
-  exitUrl?: string;
-}
-
-interface FeatureEvent extends BaseEvent {
-  type: 'feature';
-  feature: string;
-  action: string;
-  value?: any;
-  metadata?: Record<string, any>;
-}
-
-interface ConversionEvent extends BaseEvent {
-  type: 'conversion';
-  goal: string;
-  value?: number;
-  currency?: string;
-  metadata?: Record<string, any>;
-}
-
-interface PerformanceEvent extends BaseEvent {
-  type: 'performance';
-  metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay';
-  value: number;
-  unit: 'ms' | 's';
-  metadata?: Record<string, any>;
-}
-
-interface ErrorEvent extends BaseEvent {
-  type: 'error';
-  error: {
-    message: string;
-    stack?: string;
-    code?: string;
-  };
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  context?: Record<string, any>;
-}
-
-interface CustomEvent extends BaseEvent {
-  type: 'custom';
-  name: string;
-  data: Record<string, any>;
-}
-
-interface DeviceInfo {
-  type: 'desktop' | 'mobile' | 'tablet';
-  os: string;
-  browser: string;
-  screenResolution: string;
-  language: string;
-}
-
-interface LocationInfo {
-  country?: string;
-  region?: string;
-  city?: string;
-  timezone?: string;
-}
-
-// Analytics metrics
-export interface AnalyticsMetrics {
-  users: UserMetrics;
-  engagement: EngagementMetrics;
-  performance: PerformanceMetrics;
-  conversion: ConversionMetrics;
-  revenue: RevenueMetrics;
-}
-
-interface UserMetrics {
-  total: number;
-  active: {
-    daily: number;
-    weekly: number;
-    monthly: number;
-  };
-  new: {
-    today: number;
-    thisWeek: number;
-    thisMonth: number;
-  };
-  retention: {
-    day1: number;
-    day7: number;
-    day30: number;
-  };
-  churn: number;
-}
-
-interface EngagementMetrics {
-  sessions: {
-    total: number;
-    average: number;
-    duration: number;
-  };
-  pageViews: {
-    total: number;
-    perSession: number;
-    unique: number;
-  };
-  bounceRate: number;
-  features: {
-    [key: string]: {
-      usage: number;
-      uniqueUsers: number;
-      avgTime: number;
-    };
-  };
-}
-
-interface PerformanceMetrics {
-  pageLoad: {
-    average: number;
-    median: number;
-    p95: number;
-  };
-  apiLatency: {
-    average: number;
-    median: number;
-    p95: number;
-  };
-  errors: {
-    total: number;
-    rate: number;
-    bySeverity: Record<string, number>;
-  };
-  uptime: number;
-}
-
-interface ConversionMetrics {
-  funnel: {
-    [stage: string]: {
-      visitors: number;
-      conversions: number;
-      rate: number;
-    };
-  };
-  goals: {
-    [goal: string]: {
-      conversions: number;
-      value: number;
-      rate: number;
-    };
-  };
-}
-
-interface RevenueMetrics {
-  total: number;
-  mrr: number;
-  arr: number;
-  arpu: number;
-  ltv: number;
-  byPlan: Record<string, number>;
-  growth: {
-    daily: number;
-    weekly: number;
-    monthly: number;
-  };
-}
-
-// Analytics configuration
-interface AnalyticsConfig {
-  enabled: boolean;
-  providers: AnalyticsProvider[];
-  sampling: {
-    enabled: boolean;
-    rate: number;
-  };
-  privacy: {
-    anonymizeIp: boolean;
-    respectDnt: boolean;
-    cookieless: boolean;
-  };
-  retention: {
-    raw: number; // Days to keep raw events
-    aggregated: number; // Days to keep aggregated data
-  };
-}
-
-interface AnalyticsProvider {
-  name: string;
-  enabled: boolean;
-  config: Record<string, any>;
-  send: (event: AnalyticsEvent) => Promise<void>;
-}
-
-// Main Analytics Engine
 export class AnalyticsEngine extends EventEmitter {
   private config: AnalyticsConfig;
   private providers: Map<string, AnalyticsProvider> = new Map();
-  private sessionId: string;
-  private userId?: string;
-  private eventQueue: AnalyticsEvent[] = [];
-  private metrics: AnalyticsMetrics;
+  private eventTracker: EventTracker;
+  private metricsCalculator: MetricsCalculator;
+  private dashboardGenerator: DashboardGenerator;
   private isInitialized: boolean = false;
+  private realtimeEvents: AnalyticsEvent[] = [];
+  private processInterval?: NodeJS.Timeout;
 
   constructor(config: AnalyticsConfig) {
     super();
     this.config = config;
-    this.sessionId = this.generateSessionId();
-    this.metrics = this.initializeMetrics();
+    const sessionId = this.generateSessionId();
+    this.eventTracker = new EventTracker(sessionId);
+    this.metricsCalculator = new MetricsCalculator();
+    this.dashboardGenerator = new DashboardGenerator();
   }
 
   async initialize(): Promise<void> {
     if (!this.config.enabled) {
-      console.log('Analytics disabled');
       return;
     }
 
@@ -255,70 +54,98 @@ export class AnalyticsEngine extends EventEmitter {
     this.emit('initialized');
   }
 
-  // Track events
-  track(event: Omit<AnalyticsEvent, 'id' | 'timestamp' | 'sessionId'>): void {
+  track(eventData: AnalyticsEvent): void {
     if (!this.config.enabled || !this.shouldSample()) {
       return;
     }
 
-    const fullEvent: AnalyticsEvent = {
-      ...event,
-      id: this.generateEventId(),
-      timestamp: new Date(),
-      sessionId: this.sessionId,
-      userId: this.userId,
-      deviceInfo: this.getDeviceInfo(),
-      location: this.getLocationInfo()
-    } as AnalyticsEvent;
+    let event: AnalyticsEvent;
 
-    this.eventQueue.push(fullEvent);
-    this.updateMetrics(fullEvent);
-    this.emit('event', fullEvent);
+    // Use appropriate tracker method based on event type
+    switch (eventData.type) {
+      case 'pageview':
+        event = this.eventTracker.trackPageView(eventData.url, eventData.referrer);
+        break;
+      case 'feature':
+        event = this.eventTracker.trackFeature(
+          eventData.feature, 
+          eventData.action, 
+          eventData.value, 
+          eventData.metadata
+        );
+        break;
+      case 'conversion':
+        event = this.eventTracker.trackConversion(
+          eventData.goal, 
+          eventData.value, 
+          eventData.currency, 
+          eventData.metadata
+        );
+        break;
+      case 'performance':
+        event = this.eventTracker.trackPerformance(
+          eventData.metric, 
+          eventData.value, 
+          eventData.unit, 
+          eventData.metadata
+        );
+        break;
+      case 'error':
+        event = this.eventTracker.trackError(
+          eventData.error, 
+          eventData.severity, 
+          eventData.context
+        );
+        break;
+      case 'user':
+        event = this.eventTracker.trackUser(
+          eventData.action, 
+          eventData.metadata
+        );
+        break;
+      case 'custom':
+        event = this.eventTracker.trackCustom(
+          eventData.name, 
+          eventData.data
+        );
+        break;
+      default:
+        throw new Error(`Unknown event type: ${eventData.type}`);
+    }
+
+    this.eventTracker.addToQueue(event);
+    this.metricsCalculator.updateMetrics(event);
+    this.updateRealtimeEvents(event);
+    this.emit('event', event);
   }
 
-  // Convenience methods
   trackPageView(url: string, referrer?: string): void {
-    this.track({
-      type: 'pageview',
-      url,
-      referrer
-    });
+    this.track({ type: 'pageview', url, referrer });
   }
 
-  trackFeature(feature: string, action: string, value?: any): void {
-    this.track({
-      type: 'feature',
-      feature,
-      action,
-      value
-    });
+  trackFeature(feature: string, action: string, value?: number | string | boolean, metadata?: Record<string, unknown>): void {
+    this.track({ type: 'feature', feature, action, value, metadata });
   }
 
-  trackConversion(goal: string, value?: number, currency?: string): void {
-    this.track({
-      type: 'conversion',
-      goal,
-      value,
-      currency
-    });
+  trackConversion(goal: string, value?: number, currency?: string, metadata?: Record<string, any>): void {
+    this.track({ type: 'conversion', goal, value, currency, metadata });
   }
 
-  trackError(error: Error, severity: 'low' | 'medium' | 'high' | 'critical', context?: Record<string, any>): void {
-    this.track({
-      type: 'error',
-      error: {
-        message: error.message,
-        stack: error.stack,
-        code: (error as any).code
-      },
-      severity,
-      context
-    });
+  trackError(error: Error | string, severity: 'low' | 'medium' | 'high' | 'critical', context?: Record<string, any>): void {
+    this.track({ type: 'error', error, severity, context });
   }
 
-  // User identification
+  trackPerformance(
+    metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
+    value: number,
+    unit: 'ms' | 's' = 'ms',
+    metadata?: Record<string, any>
+  ): void {
+    this.track({ type: 'performance', metric, value, unit, metadata });
+  }
+
   identify(userId: string, traits?: Record<string, any>): void {
-    this.userId = userId;
+    this.eventTracker.setUserId(userId);
     this.track({
       type: 'user',
       action: 'profile_update',
@@ -326,15 +153,13 @@ export class AnalyticsEngine extends EventEmitter {
     });
   }
 
-  // Get current metrics
   getMetrics(): AnalyticsMetrics {
-    return { ...this.metrics };
+    return this.metricsCalculator.getMetrics();
   }
 
-  // Get specific metric
-  getMetric(path: string): any {
+  getMetric(path: string): unknown {
     const parts = path.split('.');
-    let current: any = this.metrics;
+    let current: unknown = this.getMetrics();
     
     for (const part of parts) {
       if (current && typeof current === 'object' && part in current) {
@@ -347,7 +172,10 @@ export class AnalyticsEngine extends EventEmitter {
     return current;
   }
 
-  // Query historical data
+  calculateFunnel(steps: string[]): Record<string, unknown> {
+    return this.metricsCalculator.calculateFunnel(steps);
+  }
+
   async query(params: {
     startDate: Date;
     endDate: Date;
@@ -359,144 +187,51 @@ export class AnalyticsEngine extends EventEmitter {
     // For now, return mock data
     return {
       data: [],
-      summary: this.metrics
+      summary: this.getMetrics()
     };
   }
 
-  // Real-time dashboard data
-  getDashboardData(): {
-    realtime: {
-      activeUsers: number;
-      pageViews: number;
-      events: number;
-    };
-    trends: {
-      users: number[];
-      revenue: number[];
-      conversions: number[];
-    };
-    top: {
-      pages: Array<{ url: string; views: number }>;
-      features: Array<{ name: string; usage: number }>;
-      errors: Array<{ message: string; count: number }>;
-    };
-  } {
-    return {
-      realtime: {
-        activeUsers: Math.floor(Math.random() * 100) + 50,
-        pageViews: Math.floor(Math.random() * 1000) + 500,
-        events: Math.floor(Math.random() * 5000) + 2000
-      },
-      trends: {
-        users: Array(7).fill(0).map(() => Math.floor(Math.random() * 1000) + 500),
-        revenue: Array(7).fill(0).map(() => Math.floor(Math.random() * 10000) + 5000),
-        conversions: Array(7).fill(0).map(() => Math.floor(Math.random() * 100) + 50)
-      },
-      top: {
-        pages: [
-          { url: '/dashboard', views: 1234 },
-          { url: '/projects', views: 987 },
-          { url: '/settings', views: 654 }
-        ],
-        features: [
-          { name: 'Deploy', usage: 543 },
-          { name: 'AI Chat', usage: 432 },
-          { name: 'Analytics', usage: 321 }
-        ],
-        errors: [
-          { message: 'API timeout', count: 12 },
-          { message: 'Invalid input', count: 8 },
-          { message: 'Auth failed', count: 5 }
-        ]
-      }
-    };
+  getDashboardData(): DashboardData {
+    const allEvents = this.eventTracker.getQueue();
+    const metrics = this.getMetrics();
+    return this.dashboardGenerator.generateDashboardData(
+      allEvents,
+      metrics,
+      this.realtimeEvents
+    );
   }
 
-  // Private methods
-  private initializeMetrics(): AnalyticsMetrics {
-    return {
-      users: {
-        total: 0,
-        active: { daily: 0, weekly: 0, monthly: 0 },
-        new: { today: 0, thisWeek: 0, thisMonth: 0 },
-        retention: { day1: 0, day7: 0, day30: 0 },
-        churn: 0
-      },
-      engagement: {
-        sessions: { total: 0, average: 0, duration: 0 },
-        pageViews: { total: 0, perSession: 0, unique: 0 },
-        bounceRate: 0,
-        features: {}
-      },
-      performance: {
-        pageLoad: { average: 0, median: 0, p95: 0 },
-        apiLatency: { average: 0, median: 0, p95: 0 },
-        errors: { total: 0, rate: 0, bySeverity: {} },
-        uptime: 99.9
-      },
-      conversion: {
-        funnel: {},
-        goals: {}
-      },
-      revenue: {
-        total: 0,
-        mrr: 0,
-        arr: 0,
-        arpu: 0,
-        ltv: 0,
-        byPlan: {},
-        growth: { daily: 0, weekly: 0, monthly: 0 }
-      }
-    };
-  }
-
-  private updateMetrics(event: AnalyticsEvent): void {
-    // Update metrics based on event type
-    switch (event.type) {
-      case 'pageview':
-        this.metrics.engagement.pageViews.total++;
-        break;
-      case 'user':
-        if (event.action === 'signup') {
-          this.metrics.users.new.today++;
-        }
-        break;
-      case 'conversion':
-        if (!this.metrics.conversion.goals[event.goal]) {
-          this.metrics.conversion.goals[event.goal] = {
-            conversions: 0,
-            value: 0,
-            rate: 0
-          };
-        }
-        this.metrics.conversion.goals[event.goal].conversions++;
-        if (event.value) {
-          this.metrics.conversion.goals[event.goal].value += event.value;
-        }
-        break;
-      case 'error':
-        this.metrics.performance.errors.total++;
-        this.metrics.performance.errors.bySeverity[event.severity] =
-          (this.metrics.performance.errors.bySeverity[event.severity] || 0) + 1;
-        break;
+  private updateRealtimeEvents(event: AnalyticsEvent): void {
+    this.realtimeEvents.push(event);
+    
+    // Keep only last 1000 events for realtime display
+    if (this.realtimeEvents.length > 1000) {
+      this.realtimeEvents = this.realtimeEvents.slice(-1000);
     }
+    
+    // Clean up old events (older than 5 minutes)
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    this.realtimeEvents = this.realtimeEvents.filter(
+      e => e.timestamp >= fiveMinutesAgo
+    );
   }
 
   private async startQueueProcessor(): Promise<void> {
-    setInterval(async () => {
-      if (this.eventQueue.length === 0) return;
+    this.processInterval = setInterval(async () => {
+      const queue = this.eventTracker.getQueue();
+      if (queue.length === 0) return;
 
-      const events = [...this.eventQueue];
-      this.eventQueue = [];
+      const events = [...queue];
+      this.eventTracker.clearQueue();
 
       for (const provider of this.providers.values()) {
         try {
           await Promise.all(events.map(event => provider.send(event)));
         } catch (error) {
-          console.error(`Analytics provider ${provider.name} failed:`, error);
+          logger.error(`Analytics provider ${provider.name} failed:`, error);
         }
       }
-    }, 5000); // Process every 5 seconds
+    }, this.config.flushInterval || 5000);
   }
 
   private setupAutoTracking(): void {
@@ -517,12 +252,7 @@ export class AnalyticsEngine extends EventEmitter {
       const perfObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'navigation') {
-            this.track({
-              type: 'performance',
-              metric: 'page_load',
-              value: entry.duration,
-              unit: 'ms'
-            });
+            this.trackPerformance('page_load', entry.duration, 'ms');
           }
         }
       });
@@ -544,64 +274,19 @@ export class AnalyticsEngine extends EventEmitter {
   }
 
   private shouldSample(): boolean {
-    if (!this.config.sampling.enabled) return true;
-    return Math.random() < this.config.sampling.rate;
+    if (!this.config.samplingRate) return true;
+    return Math.random() < this.config.samplingRate;
   }
 
   private generateSessionId(): string {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `ses_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private generateEventId(): string {
-    return `event_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  }
-
-  private getDeviceInfo(): DeviceInfo {
-    if (typeof window === 'undefined') {
-      return {
-        type: 'desktop',
-        os: 'unknown',
-        browser: 'unknown',
-        screenResolution: 'unknown',
-        language: 'en'
-      };
+  destroy(): void {
+    if (this.processInterval) {
+      clearInterval(this.processInterval);
     }
-
-    const ua = window.navigator.userAgent;
-    const isMobile = /Mobile|Android|iPhone/i.test(ua);
-    const isTablet = /Tablet|iPad/i.test(ua);
-
-    return {
-      type: isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop',
-      os: this.detectOS(ua),
-      browser: this.detectBrowser(ua),
-      screenResolution: `${window.screen.width}x${window.screen.height}`,
-      language: window.navigator.language
-    };
-  }
-
-  private getLocationInfo(): LocationInfo {
-    // This would typically use IP geolocation
-    return {
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    };
-  }
-
-  private detectOS(ua: string): string {
-    if (ua.includes('Windows')) return 'Windows';
-    if (ua.includes('Mac')) return 'macOS';
-    if (ua.includes('Linux')) return 'Linux';
-    if (ua.includes('Android')) return 'Android';
-    if (ua.includes('iOS')) return 'iOS';
-    return 'Unknown';
-  }
-
-  private detectBrowser(ua: string): string {
-    if (ua.includes('Chrome')) return 'Chrome';
-    if (ua.includes('Firefox')) return 'Firefox';
-    if (ua.includes('Safari')) return 'Safari';
-    if (ua.includes('Edge')) return 'Edge';
-    return 'Unknown';
+    this.removeAllListeners();
   }
 }
 

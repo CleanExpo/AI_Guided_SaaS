@@ -78,8 +78,8 @@ const backendInfo={ supabase: {
     description: 'Open source Firebase alternative with PostgreSQL',
       color: 'text-green-600',
       fields: [
-        { name: 'url', label: 'Project URL', placeholder: 'https://your-project.supabase.co' }
-        { name: 'apiKey', label: 'Anon Key', placeholder: 'your-anon-key' }
+        { name: 'url', label: 'Project URL', : 'https://your-project.supabase.co' }
+        { name: 'apiKey', label: 'Anon Key', : 'your-anon-key' }
    ]
     },
     strapi: { name: 'Strapi',
@@ -87,8 +87,8 @@ const backendInfo={ supabase: {
     description: 'Leading open-source headless CMS',
       color: 'text-purple-600',
       fields: [
-        { name: 'url', label: 'API URL', placeholder: 'http://localhost:1337' },
-        { name: 'apiKey', label: 'API Token (Optional)', placeholder: 'your-api-token' }
+        { name: 'url', label: 'API URL', : 'http://localhost:1337' },
+        { name: 'apiKey', label: 'API Token (Optional)', : 'your-api-token' }
    ]
     },
     nocodb: { name: 'NocoDB',
@@ -96,31 +96,31 @@ const backendInfo={ supabase: {
     description: 'Open source Airtable alternative',
       color: 'text-blue-600',
       fields: [
-        { name: 'url', label: 'Instance URL', placeholder: 'http://localhost:8080' },
-        { name: 'apiKey', label: 'API Token', placeholder: 'your-api-token' }
+        { name: 'url', label: 'Instance URL', : 'http://localhost:8080' },
+        { name: 'apiKey', label: 'API Token', : 'your-api-token' }
    ]
   }
 }
   return (
     <div className="space-y-6"    />
-          <Card     />
-        <CardHeader    />
-          <CardTitle>Backend Configuration</CardTitle>
-          <CardDescription></CardDescription>
+          <Card     / className="glass"
+        <CardHeader    / className="glass"
+          <CardTitle className="glass"Backend Configuration</CardTitle>
+          <CardDescription className="glass"</CardDescription>
             Choose and configure your preferred backend service</Card>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6" className="glass
           {/* Backend, Selection */}</Card>
           <RadioGroup
 
 value={selectedBackend} onValueChange={setSelectedBackend};
-            className="grid grid-cols-1 md: grid-cols-3 gap-4"
+            className="glass grid grid-cols-1 md: grid-cols-3 gap-4"
           ></RadioGroup>
             {Object.entries(backendInfo).map(([key, info]) => {
               const _Icon = info.icon, return (Label;
 
     const key={key};
                   const htmlFor={key};
-                  className="flex flex-col items-center space-y-2 border rounded-lg p-4 cursor-pointer hover: bg-accent"
+                  className="glass flex flex-col items-center space-y-2  rounded-xl-lg p-4 cursor-pointer hover: bg-accent"
                    />
                   <RadioGroupItem value={key} id={key} className="sr-only"    />
           <Icon className={`h-8, w-8 ${info.color}`/>``</Icon>
@@ -146,7 +146,7 @@ span className="text-xs text-green-600 flex items-center"></span>
 ;
 const id={field.name};
 
-    type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'} placeholder={field.placeholder}
+    type={field.name.includes('key') || field.name.includes('token') ? 'password' : 'text'} ={field.}
                   value={formData[selectedBackend as keyof typeof formData][field.name as 'url' | 'apiKey']} onChange={(e) => setFormData(prev => ({/>
                     ...prev,
                     [selectedBackend]: {
@@ -193,10 +193,10 @@ Alert></Alert>
             your data before switching backends.</AlertDescription>
             )},
     {/* Setup, Instructions */}
-      <Card    />
-          <CardHeader     />
-          <CardTitle>Setup Instructions</CardTitle>
-        <CardContent    />
+      <Card    / className="glass"
+          <CardHeader     / className="glass"
+          <CardTitle className="glass"Setup Instructions</CardTitle>
+        <CardContent    / className="glass"
           <div className="space-y-4">
             {selectedBackend === 'supabase'  && (
 /div></div>

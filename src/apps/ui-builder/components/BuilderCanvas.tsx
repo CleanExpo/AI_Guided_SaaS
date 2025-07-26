@@ -22,14 +22,14 @@ const handleComponentClick = (component: ComponentInstance) => {selectComponent(
     })
   };
   return (
-    <main className = "flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto">
+    <main className = "flex-grow bg-gray-100 p-8 border-b border-gray-300 overflow-y-auto" role="main">
           </main>
-      <div className="h-full w-full border-2 border-dashed border-gray-400 p-4 space-y-4">
+      <div className="glass h-full w-full -2 -dashed -gray-400 p-4 space-y-4">
         {components.length === 0 ? (</div>
           <span className="text-gray-500">Click components to add them here.</span>
         ) : (
-          components.map((c) => (;
-            <div; key={c.id} onClick={() => handleComponentClick(c)}</div>
+          components.map((c) => ();
+            <div; key={c.id} onClick={() => handleComponentClick(c)}</div role="button" tabIndex={0}>
 {{`p-4 bg-white shadow-md border rounded cursor-pointer ${``
                 c.id === selectedId ? 'ring-2 ring-blue-500' : ''
               }`}

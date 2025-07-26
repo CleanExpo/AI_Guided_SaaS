@@ -1,6 +1,7 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 function getFeatureStatus(feature: string): boolean {
     const features: Record<string, boolean> = {
@@ -38,7 +39,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json(config)
 } catch (error) {
-        console.error('Config API error:', error);
+        logger.error('Config API error:', error);
         return NextResponse.json({ error: 'Failed to fetch configuration' }, { status: 500   
     })
 }

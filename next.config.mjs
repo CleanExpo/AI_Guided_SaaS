@@ -12,6 +12,7 @@ const nextConfig = {
     domains: ['localhost'],
   },
   typescript: {
+    // TODO: Remove this once all TypeScript errors are fixed
     ignoreBuildErrors: true,
   },
   eslint: {

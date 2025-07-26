@@ -12,7 +12,7 @@ export function usePerformance(componentName: string) {
     return () => {
       const end = performance.now();
       const totalTime = end - mountTime.current;
-      console.log(`[${componentName}] Total time: ${totalTime.toFixed(2)}ms, Renders: ${renderCount.current}`);
+      }ms, Renders: ${renderCount.current}`);
     };
   }, [componentName]);
 
@@ -24,7 +24,7 @@ export function usePerformance(componentName: string) {
     renderCount: renderCount.current,
     trackEvent: (eventName: string) => {
       const timestamp = performance.now();
-      console.log(`[${componentName}] Event "${eventName}" at ${timestamp.toFixed(2)}ms`);
+      }ms`);
     }
   };
 }

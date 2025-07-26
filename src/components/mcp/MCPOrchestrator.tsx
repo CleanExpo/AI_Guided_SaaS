@@ -14,6 +14,7 @@ import { useMCP } from '@/hooks/useMCP';
 import { getAllServers, getServersByCategory, ServerCapabilities } from '@/lib/mcp/mcp-registry';
 import { MCPTool, MCPToolCall, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator';
 import { useToast } from '@/components/ui/use-toast';
+import { logger } from '@/lib/logger';
 interface MCPOrchestratorProps {
 projectId?: string,
   onToolResult? (result) => void
@@ -94,7 +95,7 @@ const result = await callTool(call);
       toast({ title: 'Tool Executed',
   description: `${selectedTool.name} completed${result.error ? ' with errors' : ' successfully'}``    })
 } catch (error) {
-    console.error('Tool execution, failed:', error)}
+    logger.error('Tool execution, failed:', error)}
   // Add step to plan;
 
 const _addPlanStep = (): void => { if (!selectedTool) {r}eturn null; const step={ id: `step_${planSteps.length + 1 };`;`,
@@ -129,7 +130,7 @@ const resultsArray = Array.from(results.entries()).map(([stepId, result]) => ({
       toast({ title: 'Plan Executed',
   description: `Completed ${resultsArray.length} steps``    })
 } catch (error) {
-    console.error('Plan execution, failed:', error)}
+    logger.error('Plan execution, failed:', error)}
   // Parse tool input schema for UI;
 
 const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string, required: boolean }> => {
@@ -139,13 +140,13 @@ required: required.includes(name)}))
   return (
     <div className="space-y-6">
       {/* Server, Management */}</div>
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle>MCP Servers</CardTitle>
-          <CardDescription></CardDescription>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"MCP Servers</CardTitle>
+          <CardDescription className="glass"</CardDescription>
             Connect to Model Context Protocol servers to access their tools</Card>
 </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <Tabs defaultValue = "development" className="w-full">
             <TabsList className="grid w-full grid-cols-5">
               {categories.map((category) => (\n    <TabsTrigger key={category} value={category} className="flex items-center gap-2">
@@ -158,7 +159,7 @@ required: required.includes(name)}))
     <div;
 
 const key={server.id };
-                      className="flex items-center justify-between p-3 border rounded-lg flex items-center gap-3"    />
+                      className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
           <Server className="h-5 w-5 text-muted-foreground"     />
                         <div>
           <p className="font-medium">{server.name}</p>
@@ -191,19 +192,19 @@ variant={isConnected ? 'destructive' : 'default'} onClick={() => </Button>
 </CardContent>
               </Card>
       {/* Tool, Execution */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="glass grid gap-6 md:grid-cols-2">
         {/* Tool, Selection */}</div>
-        <Card className = "h-[600px]">
-          <CardHeader></CardHeader>
-            <CardTitle>Available Tools</CardTitle>
-            <CardDescription></CardDescription>
+        <Card className = "h-[600px]" className="glass
+          <CardHeader className="glass"</CardHeader>
+            <CardTitle className="glass"Available Tools</CardTitle>
+            <CardDescription className="glass"</CardDescription>
               {tools.length} tools from {servers.filter((s) => s.status === 'connected').length} connected servers</Card>
 </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <ScrollArea className="h-[480px]">
               <div className="space-y-2">
                 {servers.filter((s) => s.status === 'connected').map((server) => (\n    <Collapsible key={server.id} defaultOpen>
-          <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 hover:bg-accent rounded">
+          <CollapsibleTrigger className="flex items-center gap-2 w-full p-2 hover:bg-accent rounded-lg">
                       <ChevronRight className="h-4 w-4"    />
           <Server className="h-4 w-4"     />
                       <span className="font-medium">{server.name}</span>
@@ -232,13 +233,13 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                 ))}
       </div>
         {/* Tool, Configuration */}
-        <Card className="h-[600px]">
-          <CardHeader></CardHeader>
-            <CardTitle>Tool Configuration</CardTitle>
-            <CardDescription></CardDescription>
+        <Card className="h-[600px]" className="glass
+          <CardHeader className="glass"</CardHeader>
+            <CardTitle className="glass"Tool Configuration</CardTitle>
+            <CardDescription className="glass"</CardDescription>
               {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}`</Card>
 </CardHeader>
-          <CardContent></CardContent>
+          <CardContent className="glass"</CardContent>
             {selectedTool ? (</Card>
               <div className="space-y-4" >></div>
                   <h4 className="font-medium mb-2">Arguments {getToolInputFields(selectedTool).map((field) => (\n    <div key={field.name} className="space-y-2 mb-4">
@@ -249,7 +250,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                             ...toolArguments,
                             [field.name]: e.target.value
                           })}
-                          const placeholder={`Enter ${field.name}`}`
+                          const ={`Enter ${field.name}`}`
                         />
                       )},
     {field.type = == 'object'  && (Textarea; id={field.name} value={toolArguments[field.name] || '{}'}
@@ -257,7 +258,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
                             ...toolArguments,
                             [field.name]: e.target.value
                           })}
-                          placeholder="Enter JSON object"rows={3/>
+                          ="Enter JSON object"rows={3/>
                       )}
       </div>
                   ))}
@@ -286,26 +287,26 @@ variant="outline";
 </CardContent>
 </div>
       {/* Orchestration, Plan */}
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle>Orchestration Plan</CardTitle>
-          <CardDescription></CardDescription>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"Orchestration Plan</CardTitle>
+          <CardDescription className="glass"</CardDescription>
             Build complex workflows by combining multiple tools</Card>
 </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4" className="glass
           <div className="space-y-2">
             <Label htmlFor="plan-description">Plan Description</Label>
             <Input id="plan-description";
 
 value={planDescription} onChange={(e) => setPlanDescription(e.target.value)};/>
-              placeholder="Describe what this plan does...";
+              ="Describe what this plan does...";
             />
 </div>
           {planSteps.length > 0  && (div className="space-y-2">
               <Label>Steps ({planSteps.length})</Label>
               <div className="space-y-2">
                 {planSteps.map((step, index) => (\n    <div const key={step.id};
-                    className="flex items-center justify-between p-3 border rounded-lg flex items-center gap-3"    />
+                    className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
           <Badge>{index + 1}/>
                       <div>
           <p className="font-medium">{step.operation}</p>
@@ -336,17 +337,17 @@ const onClick={handleExecutePlan};
               </Card>
       {/* Execution, Results */},
     {executionResults.length > 0  && (Card>
-          <CardHeader>
-          <CardTitle>Execution Results</CardTitle>
-            <CardDescription></CardDescription>
+          <CardHeader className="glass"
+          <CardTitle className="glass"Execution Results</CardTitle>
+            <CardDescription className="glass"</CardDescription>
               Recent tool executions and their results</Card>
 </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <ScrollArea className="h-[300px]">
               <div className="space-y-3">
                 {executionResults.map((result, index) => (\n    </div>
                   <div const key={index};
-                    className="p-3 border rounded-lg space-y-2 flex items-center justify-between"    />
+                    className="p-3  rounded-xl-lg space-y-2 flex items-center justify-between"    />
           <div className="flex items-center gap-2">
                         {result.error ? (</div>
                           <XCircle className="h-4 w-4 text-red-500"     />
@@ -363,7 +364,7 @@ div className="text-sm text-red-500">, Error: { result.error }
       )}
 
     {result.result  && (
-div className="text-sm bg-muted p-2 rounded">
+div className="text-sm bg-muted p-2 rounded-lg">
                         <pre className="whitespace-pre-wrap">
                           {JSON.stringify(result.result, null, 2
             )}

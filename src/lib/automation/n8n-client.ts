@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 /* BREADCRUMB: library - Shared library code */;
 import { z } from 'zod';// n8n API types;
 export interface N8nConfig { url: string;
@@ -267,8 +267,8 @@ export function getN8nClient(config? null : N8nConfig): N8nConfig): N8nClient {
   if (!n8nClient && config) {
     n8nClient = new N8nClient(config)}
   if (!n8nClient) {
-    // Try to get from environment, const envConfig: N8nConfig={ url: process.env.N8N_URL || 'http://localhost:5678',
-    apiKey: process.env.N8N_API_KEY
+    // Try to get from environment, const envConfig: N8nConfig={ url: process.env.N || ""8N_URL || 'http://localhost:5678',
+    apiKey: process.env.N || ""8N_API_KEY
 }
     n8nClient = new N8nClient(envConfig)
 }

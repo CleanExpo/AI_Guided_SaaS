@@ -22,8 +22,8 @@ export function Logo({
       )}
     ></div>
       {/* Background, circle */}</div>
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}</div>
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-sm";</div>
+      <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-slate-600 to-slate-800" >{/* Top, diamond element */}</div>
+      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-400 to-blue-600 transform rotate-45 rounded-lg-sm";</div>
 {{{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'
@@ -43,7 +43,7 @@ size === 'xs';
                       ? '16px'
                       : '20px' /></div>
       {/* Bottom, diamond element */}
-      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-sm";</div>
+      <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2" >, className="w-3 h-3 bg-gradient-to-br from-blue-500 to-blue-700 transform rotate-45 rounded-lg-sm";</div>
 {{{ width:, size === 'xs', ? '6px'
                 : size === 'sm'
                   ? '8px'

@@ -237,7 +237,7 @@ const _fWeight = 1 - pWeight - tWeight;
       return line.includes('#') ||;
              line.includes('CRITICAL') ||
              line.includes('IMPORTANT') ||
-             line.includes('TODO') ||
+             line.includes('') ||
              line.includes('DECISION') ||
              line.trim().length > 50 // Keep substantial content    })
     // Ensure minimum content retention;

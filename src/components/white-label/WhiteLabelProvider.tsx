@@ -155,7 +155,7 @@ export function WhiteLabelHead() {
         document.head.appendChild(customHead);
       }
       
-      customHead.innerHTML = config.custom.head;
+      customHead.textContent = config.custom.head;
     }
   }, [config]);
   

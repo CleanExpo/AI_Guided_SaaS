@@ -48,13 +48,13 @@ const mockProjects = [
   if (status === 'loading') {
     return (
     <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600"></div>
       </div>
     );
   }
   
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen glass">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
           <div className="absolute inset-0 bg-grid-gray-100 bg-grid opacity-50"></div>
@@ -95,73 +95,73 @@ const mockProjects = [
             </p>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
+          <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+              <CardHeader className="glass"
           <Share2 className="h-12 w-12 text-blue-600 mb-4" />
-                <CardTitle>Real-time Sync</CardTitle>
+                <CardTitle className="glass"Real-time Sync</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   See changes instantly as your team works. No more merge conflicts or outdated versions.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
+            <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"
                 <Users className="h-12 w-12 text-green-600 mb-4" />
-          <CardTitle>Team Management</CardTitle>
+          <CardTitle className="glass"Team Management</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   Invite team members, manage permissions, and track contributions all in one place.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
+            <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"
                 <MessageCircle className="h-12 w-12 text-purple-600 mb-4" />
-          <CardTitle>Built-in Chat</CardTitle>
+          <CardTitle className="glass"Built-in Chat</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   Discuss ideas and solve problems together with integrated team chat and comments.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
+            <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"
                 <Clock className="h-12 w-12 text-orange-600 mb-4" />
-          <CardTitle>Version History</CardTitle>
+          <CardTitle className="glass"Version History</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   Track every change and revert to any previous version with complete history.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
+            <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"
                 <Lock className="h-12 w-12 text-red-600 mb-4" />
-          <CardTitle>Secure & Private</CardTitle>
+          <CardTitle className="glass"Secure & Private</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   Enterprise-grade security with end-to-end encryption and access controls.
                 </p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
+            <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"
                 <Zap className="h-12 w-12 text-yellow-600 mb-4" />
-          <CardTitle>AI-Powered</CardTitle>
+          <CardTitle className="glass"AI-Powered</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600">
                   Get intelligent suggestions, auto-completion, and code reviews powered by AI.
                 </p>
@@ -173,7 +173,7 @@ const mockProjects = [
 
       {/* Projects Section (for logged-in users) */}
       {session && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 glass">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900">Your Projects</h2>
@@ -183,13 +183,13 @@ const mockProjects = [
               </Button>
             </div>
             
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {mockProjects.map((project) => (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => setActiveProject(project.id)}>
-                  <CardHeader>
+                <Card key={project.id} className="hover:shadow-md-lg transition-shadow-md cursor-pointer"
+                  onClick={() = className="glass setActiveProject(project.id)}>
+                  <CardHeader className="glass"
                     <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg">{project.name}</CardTitle>
+                      <CardTitle className="text-lg" className="glass{project.name}</CardTitle>
                       {project.isPublic ? (
                         <Globe className="h-4 w-4 text-gray-400" />
                       ) : (
@@ -197,7 +197,7 @@ const mockProjects = [
                       )}
                     </div>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="glass"
           <p className="text-gray-600 text-sm mb-4">{project.description}</p>
                     <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -224,7 +224,7 @@ const mockProjects = [
 
       {/* CTA Section */}
       {!session && (
-        <section className="py-16 bg-blue-600">
+        <section className="py-16 glass-button primary">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to start collaborating?

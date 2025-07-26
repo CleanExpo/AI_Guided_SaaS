@@ -167,15 +167,15 @@ default: return `✅ Command executed successfully```}
     if (memoryStatus.utilizationRate < 0.9) {r}eturn 'Consider /compact-docs optimization';
     return 'Immediate /compact-docs recommended' };
   const _renderMemoryStatus = () => (
-    <Card>
-          <CardHeader></CardHeader>
-          <CardTitle className="flex items-center gap-2">
+    <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="flex items-center gap-2" className="glass
           <Brain className="w-5 h-5"     />
             Claude Code Memory Status</Brain>
-          <CardDescription></CardDescription>
+          <CardDescription className="glass"</CardDescription>
             Context window utilization and optimization status</CardDescription>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <CardContent className="space-y-4" className="glass
+          <div className="glass grid grid-cols-2 gap-4">
             <div className="flex justify-between text-sm mb-1"    />
           <span>Token Usage</span>
                 <span;
@@ -194,7 +194,7 @@ const value={memoryStatus.utilizationRate * 100}
                 <span>{memoryStatus.efficiency}%</span>
               <Progress value={memoryStatus.efficiency} className="h-2"    />
           </div>
-        <div className="grid grid-cols-2 gap-4 text-sm" >></div>
+        <div className="glass grid grid-cols-2 gap-4 text-sm" >></div>
               <p className="text-muted-foreground">Utilization Rate</p>
               <p;
 
@@ -212,14 +212,14 @@ const className={`font-medium ${getUtilizationColor(memoryStatus.utilizationRate
 };
 
 const _renderCommandInterface = () => (
-    <Card>
-          <CardHeader></CardHeader>
-          <CardTitle className="flex items-center gap-2">
+    <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="flex items-center gap-2" className="glass
           <Terminal className="w-5 h-5"     />
             Claude Code Commands</Terminal>
-          <CardDescription></CardDescription>
+          <CardDescription className="glass"</CardDescription>
             Execute Claude Code documentation commands</CardDescription>
-        <CardContent>
+        <CardContent className="glass"
           <div className="grid grid-cols-2 gap-3">
             {claudeCommands.map((cmd, index) => {
               const _Icon = cmd.icon, </div>, return (
@@ -232,7 +232,7 @@ const key={cmd.command};
           <Button
 
 const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
-                    className="w-full h-auto p-4 flex flex-col items-start";
+                    className="glass w-full h-auto p-4 flex flex-col items-start";
 
     const onClick={() => executeCommand(cmd.command)}</Button>
 {{isExecuting}
@@ -253,14 +253,14 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
 </div>
       )};
   const _renderCommandHistory = () => (
-    <Card>
-          <CardHeader></CardHeader>
-          <CardTitle className="flex items-center gap-2">
+    <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="flex items-center gap-2" className="glass
           <Clock className="w-5 h-5"     />
             Command History</Clock>
-          <CardDescription></CardDescription>
+          <CardDescription className="glass"</CardDescription>
             Recent Claude Code command executions</CardDescription>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-3 max-h-96 overflow-y-auto">
             {commandHistory.length === 0 ? (</div>
           <p className="
@@ -268,7 +268,7 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
           </div>
     , : (commandHistory.map((execution, index) => (\n    <motion.div, key={index} initial={{ opacity: 0, x: -20 }
                   const animate={ { opacity: 1, x: 0  };
-                  className="border rounded-lg p-3";
+                  className=" rounded-xl-lg p-3";
                 >
           <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-sm">
@@ -276,17 +276,17 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };
                     <div className="flex items-center gap-2">
                       {execution.status === 'executing'  && (
 /div></div>
-                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" >)},</div>
+                        <div className="w-2 h-2 glass-button primary rounded-lg-full animate-pulse" >)},</div>
     {execution.status === 'completed'  && (
 /div></div>
                         <CheckCircle className="w-4 h-4 text-green-500"     />
             )},
     {execution.status === 'error'  && (
-div className="w-2 h-2 bg-red-500 rounded-full" />
+div className="w-2 h-2 bg-red-500 rounded-lg-full" />
             )}
                       <span className="text-xs text-muted-foreground">
                         {execution.executionTime}ms {execution.output  && (
-div className="bg-muted p-2 rounded text-xs font-mono">
+div className="bg-muted p-2 rounded-lg text-xs font-mono">
                       {execution.output}
             )}</span>
                   <div className="flex justify-between text-xs text-muted-foreground mt-2">
@@ -301,13 +301,13 @@ Token: Impact: {execution.tokenImpact > 0 ? '+' : ''},</span>
   
 const _renderWorkflowResults = (): void => {
     if (!workflowResult) {r}eturn null, return (Card>
-        <CardHeader>
-          <CardTitle className = "flex items-center gap-2"><TrendingUp className="w-5 h-5"     />
+        <CardHeader className="glass"
+          <CardTitle className = "flex items-center gap-2" className="glass<TrendingUp className="w-5 h-5"     />
             Workflow Results</TrendingUp>
-          <CardDescription></CardDescription>
+          <CardDescription className="glass"</CardDescription>
             Claude Code integration workflow outcomes</CardDescription>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <CardContent className="space-y-4" className="glass
+          <div className="glass grid grid-cols-2 gap-4">
             <div>
           <p className="text-sm text-muted-foreground">Total Token Usage</p>
               <p className="text-2xl font-bold">
@@ -322,7 +322,7 @@ const _renderWorkflowResults = (): void => {
             <div className="space-y-1">
               {workflowResult.integrationCommands?.map((cmd: string, index: number) => (\n    </div>
                   <div; const key={index}
-                    className="font-mono text-sm bg-muted p-2 rounded";
+                    className="font-mono text-sm bg-muted p-2 rounded-lg";
                   ></div>
                     {cmd}
     ))}</div>

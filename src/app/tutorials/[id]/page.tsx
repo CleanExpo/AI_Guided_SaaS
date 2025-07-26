@@ -44,22 +44,22 @@ export default function TutorialPage({ params }: TutorialPageProps) {
           <div className="mb-8">
         <h1 className="text-4xl font-bold mb-4">{tutorial.title}</h1>
         <p className="text-xl text-gray-600 mb-4">{tutorial.description}</p>
-        <div className="flex gap-4">
-          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+        <div className="glass flex gap-4">
+          <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg-full text-sm">
             {tutorial.difficulty}
           </span>
-          <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+          <span className="px-3 py-1 glass text-gray-800 rounded-lg-full text-sm">
             {tutorial.duration}
           </span>
         </div>
       </div>
 
       <div className="prose max-w-none">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="glass rounded-xl-lg shadow-md p-6">
           <h2 className="text-2xl font-semibold mb-4">Tutorial Content</h2>
           <p>{tutorial.content}</p>
           
-          <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+          <div className="glass mt-8 p-4 bg-blue-50 rounded-xl-lg">
             <h3 className="text-lg font-semibold mb-2">What you will learn:</h3>
             <ul className="list-disc ml-6 space-y-1">
               <li>Platform navigation and basic features</li>

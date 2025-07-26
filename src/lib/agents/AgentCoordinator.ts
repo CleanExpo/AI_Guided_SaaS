@@ -3,6 +3,8 @@ import { AgentConfig, AgentLoader } from './AgentLoader';
 import { mcp__memory__create_entities, mcp__memory__add_observations } from '@/lib/mcp';
 import { writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 export interface CoordinationTask { id: string;
   agent_id: string;
   action: string, input,
@@ -154,12 +156,7 @@ const result: CoordinationResult={;
       return result
 } catch (error) {
       plan.status = 'failed'
-      console.error('❌ Coordination plan, failed:', error, throw error}
-}
-  /**
-   * Execute individual coordination task
-   */
-  private async executeTask(plan: CoordinationPlan, taskId: string): Promise<any> {
+      : Promise<any> {
 { plan.tasks.find(t => t.id === taskId, if (!task) {
       throw new Error(`Task not, found: ${taskId}`)``
 }
@@ -353,13 +350,30 @@ timestamp: new Date().toISOString(, artifacts: [`${task.action}_output.json`]``
     await this.appendToErrorLog(errorEntry)
 }
   private async appendToActionLog(entry: string): Promise<any> {
-    try {;
-      const _existingContent = readFileSync(this.actionLogPath, 'utf-8', const _updatedContent = existingContent + '\n' + entry, writeFileSync(this.actionLogPath, updatedContent)
-} catch (error) {}
+    try {
+      const existingContent = readFileSync(this.actionLogPath, 'utf-8');
+      const updatedContent = existingContent + '\n' + entry;
+      writeFileSync(this.actionLogPath, updatedContent);
+    } catch (error) {
+      handleError(error, {
+        operation: 'appendToActionLog',
+        module: 'AgentCoordinator',
+        metadata: { entry }
+      });
+    }
   private async appendToErrorLog(entry: string): Promise<any> {
     try {
-      const _existingContent  = readFileSync(this.errorLogPath, 'utf-8', const _updatedContent = existingContent + '\n' + entry, writeFileSync(this.errorLogPath, updatedContent)
-} catch (error) {}
+      const existingContent = readFileSync(this.errorLogPath, 'utf-8');
+      const updatedContent = existingContent + '\n' + entry;
+      writeFileSync(this.errorLogPath, updatedContent);
+    } catch (error) {
+      handleError(error, {
+        operation: 'appendToErrorLog',
+        module: 'AgentCoordinator',
+        metadata: { entry }
+      });
+    }
+  }
 // Convenience functions;
 export async function createProjectCoordination(
     requirements: string;

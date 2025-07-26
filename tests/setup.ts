@@ -14,15 +14,16 @@ jest.mock('next/navigation', () => ({
     }
 },
   usePathname() {
-    return '/', },
+    return '/';
+  },
 }));
 
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props: any) => {
-    return <img {...props} />
-},
+    return <img {...props} />;
+  },
 }));
 
 // Suppress console errors in tests
@@ -31,11 +32,14 @@ beforeAll(() => {
   console.error = (...args: any[]) => {
     if (
       typeof args[0] === 'string' &&
-      args[0].includes('Warning: ReactDOM.render'), ) {
-      return, }
-    originalError.call(console, ...args)
-}
+      args[0].includes('Warning: ReactDOM.render')
+    ) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
 });
 
 afterAll(() => {
-  console.error = originalError, });
+  console.error = originalError;
+});

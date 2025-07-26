@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { useState, useEffect } from 'react';
 
 interface PWAStatus {
@@ -66,11 +68,11 @@ export function usePWA(): PWAStatus {
 
   // Register service worker
   useEffect(() => {
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    if ('serviceWorker' in navigator && (process.env.NODE_ENV || "production") === "production") {
       navigator.serviceWorker
         .register('/sw.js')
         .then((registration) => {
-          console.log('Service Worker registered:', registration);
+          
           
           // Check for updates
           registration.addEventListener('updatefound', () => {
@@ -79,14 +81,14 @@ export function usePWA(): PWAStatus {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                   // New content available, could show update notification
-                  console.log('New content available, refresh to update');
+                  
                 }
               });
             }
           });
         })
         .catch((error) => {
-          console.error('Service Worker registration failed:', error);
+          logger.error('Service Worker registration failed:', error);
         });
     }
   }, []);
@@ -105,9 +107,9 @@ export function usePWA(): PWAStatus {
     const { outcome } = await deferredPrompt.userChoice;
     
     if (outcome === 'accepted') {
-      console.log('PWA installed successfully');
+      
     } else {
-      console.log('PWA installation declined');
+      
     }
     
     setDeferredPrompt(null);

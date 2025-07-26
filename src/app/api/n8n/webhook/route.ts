@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const WebhookPayloadSchema = z.object({ 
     action: z.enum(['deploy', 'test', 'notify', 'custom']),
     projectId: z.string(),
-    data: z.record(z.any()).optional(),
+    data: z.record(z.unknown()).optional(),
     timestamp: z.string().optional()
     });
 
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         const validatedData = WebhookPayloadSchema.parse(body)
         
         // Process webhook based on action
-        let result: any
+        let result: Record<string, unknown>
         
         switch (validatedData.action) {
             case 'deploy':
@@ -48,7 +49,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
                 processedAt: new Date().toISOString()
             }    })
 } catch (error) {
-        console.error('Webhook processing error:', error);
+        logger.error('Webhook processing error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid webhook payload', details: error.errors }, { status: 400   
     })
@@ -70,7 +71,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json(webhookInfo)
 } catch (error) {
-        console.error('Webhook info error:', error);
+        logger.error('Webhook info error:', error);
         return NextResponse.json({ error: 'Failed to get webhook info' }, { status: 500   
     })
 }

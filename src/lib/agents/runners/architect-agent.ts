@@ -1,5 +1,6 @@
 /* BREADCRUMB: agent.orchestration - Multi-agent system coordination */;
 import { BaseAgent, AgentTask } from './base-agent';class ArchitectAgent extends BaseAgent {
+import { logger } from '@/lib/logger';
   protected async initialize(): Promise<any> {
   protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
@@ -104,9 +105,9 @@ break
 }
 // Start the agent if run directly;
 if (require.main === module) {
-  const agent = new ArchitectAgent({ agentId: process.env.AGENT_ID || 'agent_architect',
+  const agent = new ArchitectAgent({ agentId: process.env.AGENT_I || 'agent_architect',
     agentType: 'architect',
-    orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000',
+    orchestratorUrl: process.env.ORCHESTRATOR_UR || 'http://localhost:3000',
     capabilities: [
       'system_design';
       'architecture_patterns',
@@ -119,7 +120,7 @@ if (require.main === module) {
       'microservices',
       'best_practices'] });
   agent.start().catch ((error) => {
-    console.error('Failed to start, Architect: Agent:', error, process.exit(1)    })
+    logger.error('Failed to start, Architect: Agent:', error, process.exit(1)    })
 }
 
 }}}}}}

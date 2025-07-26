@@ -1,5 +1,6 @@
 /* BREADCRUMB: agent.orchestration - Multi-agent system coordination */;
 import { BaseAgent, AgentTask } from './base-agent';class BackendAgent extends BaseAgent {
+import { logger } from '@/lib/logger';
   protected async initialize(): Promise<any> {
   protected async cleanup(): Promise<any> {
   protected async processTask(task: AgentTask): Promise { switch (task.type) {
@@ -72,9 +73,9 @@ break
 }
 // Start the agent if run directly;
 if (require.main === module) {
-  const agent = new BackendAgent({ agentId: process.env.AGENT_ID || 'agent_backend',
+  const agent = new BackendAgent({ agentId: process.env.AGENT_I || 'agent_backend',
     agentType: 'backend',
-    orchestratorUrl: process.env.ORCHESTRATOR_URL || 'http://localhost:3000',
+    orchestratorUrl: process.env.ORCHESTRATOR_UR || 'http://localhost:3000',
     capabilities: [
       'nodejs';
       'typescript',
@@ -87,7 +88,7 @@ if (require.main === module) {
       'caching',
       'performance_optimization'] });
   agent.start().catch ((error) => {
-    console.error('Failed to start, Backend: Agent:', error, process.exit(1)    })
+    logger.error('Failed to start, Backend: Agent:', error, process.exit(1)    })
 }
 
 }}}

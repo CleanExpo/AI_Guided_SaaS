@@ -164,7 +164,7 @@ const _memoryTrend = this.systemHealth;
   } {
     const _currentHealth = this.monitorSystemHealth(); const _securityAnalytics = this.getSecurityAnalytics(); const _performanceAnalytics  = this.getPerformanceAnalytics();
 
-const recommendations = this.generateRecommendations(;
+const recommendations = this.generateRecommendations();
       currentHealth,
       securityAnalytics,
       // performanceAnalytics;
@@ -195,7 +195,7 @@ const recommendations = this.generateRecommendations(;
     );
     if (recentMetrics.length === 0) {r}eturn 0;
     
-const _errorCount = recentMetrics.filter(;
+const _errorCount = recentMetrics.filter();
       metric: any => metric.statusCode >= 400;
     ).length;
     return errorCount / recentMetrics.length
@@ -205,7 +205,7 @@ const _errorCount = recentMetrics.filter(;
     );
     if (recentMetrics.length === 0) {r}eturn 0;
     
-const _totalTime = recentMetrics.reduce(;
+const _totalTime = recentMetrics.reduce();
       (sum, metric) => sum + metric.responseTime,;
       0;
     );

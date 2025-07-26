@@ -161,7 +161,7 @@ export function generateCausalInsights(): { totalInteractions: number;
 } {
   const logs = logger.getLogs(); const analysis = analyzeCausalLogs(logs); const problematicComponents  = getTopProblematicComponents(logs, 3);
 
-const _uniqueComponents = new Set(;
+const _uniqueComponents = new Set();
     logs.map((log) => `${log.page}::${ log.componentType}`)``;
   ).size;
   

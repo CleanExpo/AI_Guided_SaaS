@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Users, Shield, Activity, BarChart3, AlertTriangle, CheckCircle, Search, Eye, Edit, UserCheck, UserX, Flag, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { adminService, SystemStats, UserManagement, ContentModeration, SystemConfiguration, AdminActivity } from '@/lib/admin';
+import { logger } from '@/lib/logger';
 export default function AdminPanel() {
   const [adminUser, setAdminUser] = useState<any>([])
   const [activeTab, setActiveTab] = useState('overview');
@@ -36,7 +37,7 @@ const adminUserData = localStorage.getItem('admin-user');
       try {
         setAdminUser(JSON.parse(adminUserData))
       }; catch (error) {
-        console.error('Error parsing admin user:', error)}, []);
+        logger.error('Error parsing admin user:', error)}, []);
   useEffect(() => {
     loadAdminData()}, []);
   
@@ -56,7 +57,7 @@ const [statsData, usersData, contentData, configData, activityData] = ;
       setConfiguration(configData);
       setActivities(activityData.activities)
 }; catch (error) {
-      console.error('Error loading admin data:', error)} finally {
+      logger.error('Error loading admin data:', error)} finally {
       setLoading(false)};
   
 const handleUserStatusUpdate = async (
@@ -70,7 +71,7 @@ const handleUserStatusUpdate = async (
         adminUser?.email || 'admin'
       , await loadAdminData() // Refresh data
     }; catch (error) {
-      console.error('Error updating user status:', error)};
+      logger.error('Error updating user status:', error)};
   
 const handleContentModeration = async (
     contentId: string
@@ -83,7 +84,7 @@ const handleContentModeration = async (
         adminUser?.email || 'admin'
       , await loadAdminData() // Refresh data
     }; catch (error) {
-      console.error('Error moderating content:', error)};
+      logger.error('Error moderating content:', error)};
   
 const getStatusColor = (status: string) =>  {
     switch (status) {
@@ -135,9 +136,9 @@ const matchesFilter = ;
     )
 }
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen glass">
       {/* Header */}</div>
-      <div className="bg-white border-b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="glass -b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 flex items-center space-x-4"     />
               <Shield className="h-6 w-6 text-blue-600"    />
           <h1 className="text-xl font-semibold">Admin Panel</h1>
@@ -177,50 +178,50 @@ const className={
                       ' - Attention required'}
 </AlertDescription>
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card></Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
+                <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="glass"</Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+          <CardTitle className="text-sm font-medium" className="glass
                         Total Users</Card>
                       <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent>
+                    <CardContent className="glass"
           <div className="text-2xl font-bold">
                         {systemStats.totalUsers.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.activeUsers} active users
 </p>
-                  <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
+                  <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+                      <CardTitle className="text-sm font-medium" className="glass
                         Total Projects</Card>
                       <BarChart3 className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent>
+                    <CardContent className="glass"
           <div className="text-2xl font-bold">
                         {systemStats.totalProjects.toLocaleString()}</div>
                       <p className="text-xs text-muted-foreground">
                         {systemStats.totalTemplates} templates available
 </p>
-                  <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
+                  <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+                      <CardTitle className="text-sm font-medium" className="glass
                         Total Revenue</Card>
                       <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent>
+                    <CardContent className="glass"
           <div className="text-2xl font-bold">
                         {formatCurrency(systemStats.totalRevenue)}</div>
                       <p className="text-xs text-muted-foreground">
                         Monthly recurring revenue
 </p>
-                  <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
+                  <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+                      <CardTitle className="text-sm font-medium" className="glass
                         System Uptime</Card>
                       <CheckCircle className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-                    <CardContent>
+                    <CardContent className="glass"
           <div className="text-2xl font-bold">
                         {systemStats.uptime}%</div>
                       <p className="text-xs text-muted-foreground">
@@ -234,7 +235,7 @@ const className={
               <h2 className="text-2xl font-bold">User Management</h2>
               <div className="flex items-center space-x-2 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
-                  <Input placeholder="Search users...";
+                  <Input ="Search users...";
 
 value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                     className="pl-10 w-64" />
@@ -242,18 +243,18 @@ value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                 <select;
 
     value={userFilter} onChange={e => setUserFilter(e.target.value)};</select>
-                  className="px-3 py-2 border border-gray-300 rounded-md text-sm";
+                  className="px-3 py-2  -gray-300 rounded-lg-md text-sm";
                 >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
 </div>
-            <Card>
-          <CardContent className="p-0">
+            <Card className="glass"
+          <CardContent className="p-0" className="glass
                 <div className="overflow-x-auto">
           <table className="w-full">
-                    <thead className="bg-gray-50">
+                    <thead className="glass">
           <tr></tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           User
@@ -271,7 +272,7 @@ value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                           Actions
 </th>
 </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="glass divide-y divide-gray-200">
                       {filteredUsers.map((user) => (\n    <tr key={user.id}>
           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center ml-4">
@@ -331,7 +332,7 @@ const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
               <select;
 
     value={contentFilter} onChange={e => setContentFilter(e.target.value)};</select>
-                className="px-3 py-2 border border-gray-300 rounded-md text-sm";
+                className="px-3 py-2  -gray-300 rounded-lg-md text-sm";
               >
                 <option value="all">All Content</option>
                 <option value="pending">Pending Review</option>
@@ -339,10 +340,10 @@ const onClick={() => handleUserStatusUpdate(user.id, 'active')}</Button>
                 <option value="rejected">Rejected</option>
                 <option value="flagged">Flagged</option>
 </div>
-            <div className="grid gap-4">
+            <div className="glass grid gap-4">
               {filteredContent.map((item) => (\n    </div>
-                <Card key={item.id}>
-          <CardContent className="p-6">
+                <Card key={item.id} className="glass"
+          <CardContent className="glass p-6">
                     <div className="flex items-start justify-between space-y-2"    />
           <h3 className="text-lg font-medium">{item.title}</h3>
                         <p className="text-sm text-gray-600">
@@ -382,10 +383,10 @@ variant="outline";
           {/* System Tab */}
           <TabsContent value="system" className="space-y-6">
           <h2 className="text-2xl font-bold">System Configuration</h2>
-            <div className="grid gap-4">
+            <div className="glass grid gap-4">
               {configuration.map((config) => (\n    </div>
-                <Card key={config.key}>
-          <CardContent className="p-6">
+                <Card key={config.key} className="glass"
+          <CardContent className="glass p-6">
                     <div className="flex items-center justify-between"     />
           <h3 className="text-lg font-medium">{config.key}</h3>
                         <p className="text-sm text-gray-600">{config.description}</p>
@@ -399,11 +400,11 @@ variant="outline";
           {/* Activity Tab */}
           <TabsContent value="activity" className="space-y-6">
           <h2 className="text-2xl font-bold">Admin Activity Log</h2>
-            <Card>
-          <CardContent className="p-0">
+            <Card className="glass"
+          <CardContent className="p-0" className="glass
                 <div className="overflow-x-auto">
           <table className="w-full">
-                    <thead className="bg-gray-50">
+                    <thead className="glass">
           <tr></tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Timestamp
@@ -418,7 +419,7 @@ variant="outline";
                           Details
 </th>
 </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="glass divide-y divide-gray-200">
                       {activities.map((activity) => (\n    <tr key={activity.id}>
           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {formatDate(activity.timestamp)}

@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { MCPOrchestrator, MCPServer, MCPTool, MCPToolCall, MCPToolResult, MCPOrchestrationPlan } from '@/lib/mcp/mcp-orchestrator';
 import { getServerConfig, checkServerEnvironment, getAllServers } from '@/lib/mcp/mcp-registry';
 import { useToast } from '@/hooks/use-toast';
+import { logger } from '@/lib/logger';
 export interface UseMCPOptions {
   autoConnect?: string[] // Server IDs to auto-connect,
   debug?: boolean,
@@ -31,7 +32,7 @@ n, executePlan: (plan: MCPOrchestrationPlan) => Promise<Map<string MCPToolResult
 l, initialized: boolean
 };
 export function useMCP(options: UseMCPOptions = {}): UseMCPOptions = {}): UseMCPReturn {
-  const { toast    }: any  = useToast();
+  const { toast } = useToast();
 
 const [servers, setServers] = useState<MCPServer[]>([]);</MCPServer>
   
@@ -56,14 +57,14 @@ if (options.autoConnect && options.autoConnect.length > 0) { autoConnectServers(
     return () =>  {
       // Cleanup: disconnect all servers
       servers.forEach((server) => {
-        orchestrator.disconnectServer(server.id).catch(console.error)    })
+        orchestrator.disconnectServer(server.id).catch(err => logger.error('Failed to disconnect server:', err))    })
 }, []);
   // Auto-connect servers on initialization;
 
 const _autoConnectServers  = async (serverIds: string[]) =>  {
     for (const serverId of serverIds) {
       try {; await connectServer(serverId)}; catch (err) {
-        console.error(`Failed to auto-connect ${serverId}:`, err)``
+        logger.error(`Failed to auto-connect ${serverId}:`, err)``
   }
 };
   // Connect to a server;

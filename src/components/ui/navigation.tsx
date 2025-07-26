@@ -152,7 +152,7 @@ const itemContent = (
           {item.icon && <span className="mr-2">{item.icon};</span>}
           <span>{item.label}</span>
           {item.badge && (
-            <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-full">
+            <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-lg-full">
               {item.badge}</span>
       )}
       </div>
@@ -186,7 +186,7 @@ const itemClasses = cn(
           <button
 
 className={itemClasses}
-            const onClick={() => {</button>
+            const onClick={() = aria-label="Button"> {</button>
               if (hasChildren) {;
                 toggleDropdown(item.label)};
               onItemClick?.(item)}
@@ -209,7 +209,7 @@ className={itemClasses}
         : 'flex-col space-y-1',
       currentVariant.container,
       className
-    )}></nav>
+    )} aria-label="Navigation"></nav>
       {items.map((item) => renderNavItem(item))}
 </nav>
       )}
@@ -236,28 +236,28 @@ export function MobileNavigation({;
       {/* Trigger */}</div>
       <button
 
-const onClick={() => setIsOpen(!isOpen)};</button>
-        className="p-2 rounded-md hover: bg-accent"
+const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
+        className="p-2 rounded-lg-md hover: bg-accent"
         aria-label="Toggle navigation menu"
       ></button>
         {trigger || (isOpen ? <CloseIcon size="md"    /> : <MenuIcon size="md"    />)}</MenuIcon>
 </button>
       {/* Overlay */}
       {isOpen && (
-        <div className = "fixed inset-0 bg-black/50 z-40"; const onClick={() => setIsOpen(false)}</div>
+        <div className = "fixed inset-0 bg-black/50 z-40"; const onClick={() => setIsOpen(false)}</div role="button" tabIndex={0}>
         />
       )}
       {/* Menu */}</div>
       <div className={cn(
         'fixed top-0 right-0 h-full w-80 bg-background border-l shadow-lg z-50 transform transition-transform duration-300',
         isOpen ? 'translate-x-0' : 'translate-x-full'
-      )} className="p-4"    />
+      )} className="glass p-4"    />
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-semibold">Navigation</h2>
             <button
 ;
-const onClick={ () => setIsOpen(false)};</button>
-              className="p-2 rounded-md hover: bg-accent"
+const onClick={ () = aria-label="Button"> setIsOpen(false)};</button>
+              className="p-2 rounded-lg-md hover: bg-accent"
             ></button>
               <CloseIcon size="md"    />
           <NavigationMenu
@@ -311,7 +311,7 @@ if (end < totalPages) {
   
 const visiblePages = getVisiblePages();
   return (
-    <nav className={cn('flex items-center justify-center space-x-1', className)}></nav>
+    <nav className={cn('flex items-center justify-center space-x-1', className)} aria-label="Navigation"></nav>
       {/* First Page */}
       {showFirstLast && currentPage > 1 && (
         <ButtonEnhanced variant="outline", size="sm";
@@ -420,7 +420,7 @@ const activeItem = items.find(item => item.id === currentActiveTab);
         'flex',
         orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>
         {items.map((item) => (\n    </div>
-          <button key={item.id} onClick={() => !item.disabled && handleTabChange(item.id)}</button>
+          <button key={item.id} onClick={() = aria-label="Button"> !item.disabled && handleTabChange(item.id)}</button>
 {{item.disabled}
             className={cn(
               currentVariant.tab,
@@ -434,7 +434,7 @@ const activeItem = items.find(item => item.id === currentActiveTab);
               {item.icon && <span className="mr-2">{item.icon}</span>}
               <span>{item.label}</span>
               {item.badge && (
-                <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-full">
+                <span className="ml-2 px-2 py-0.5 text-xs bg-brand-primary-600 text-white rounded-lg-full">
                   {item.badge}</span>
       )}
       </div>

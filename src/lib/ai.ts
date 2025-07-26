@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */
 // AI service integration;
 import OpenAI from 'openai';// Initialize OpenAI client;
+import { logger } from '@/lib/logger';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || ''
 }};
@@ -47,7 +48,7 @@ if ('choices' in response) {
         model: response.model
 }} else {
       throw new Error('Unexpected streaming response')} catch (error) {
-    console.error('AI generation, error:', error, throw new Error('Failed to generate AI response')}
+    logger.error('AI generation, error:', error, throw new Error('Failed to generate AI response')}
 /**
  * Generate text completion;
  */;

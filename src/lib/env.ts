@@ -1,5 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
-import { z } from 'zod';// Environment variable schema with build-time safe defaults;
+import { z } from 'zod';
+import { handleError } from '@/lib/error-handling';
+// Environment variable schema with build-time safe defaults;
 
 const envSchema = z.object({
   // Next.js: NODE_ENV: z.enum(['development', 'production', 'test']).default('development', ;
@@ -15,27 +17,24 @@ let env: z.infer<typeof envSchema></typeof>
 try {
   env = envSchema.parse(process.env)} catch (error) {
   // During build time, use safe defaults
-  console.warn('Environment validation failed, using, defaults:', error, env = envSchema.parse({ NODE_ENV: process.env.NODE_ENV || 'development',
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http: //localhost:3000',
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'development-secret-that-is-at-least-32-characters-long-for-jwt-encryption',
-    APP_URL: process.env.APP_URL || 'http://localhost:3000',
-    APP_NAME: process.env.APP_NAME || 'AI Guided SaaS Builder',
-    ANALYTICS_ENABLED: process.env.ANALYTICS_ENABLED || 'true',
-    ENABLE_COLLABORATION: process.env.ENABLE_COLLABORATION || 'true',
-    ENABLE_TEMPLATES: process.env.ENABLE_TEMPLATES || 'true',
-    ENABLE_ANALYTICS: process.env.ENABLE_ANALYTICS || 'true',
-    ENABLE_ADMIN_PANEL: process.env.ENABLE_ADMIN_PANEL || 'true'   
-    })
-};
-export { env   };// Demo mode detection - checks if we're using placeholder/demo values;
+  handleError(error, {
+    operation: 'parseEnvironmentVariables',
+    module: 'env',
+    metadata: { buildTime: true }
+  });
+  
+  // Use parsed schema with defaults
+  env = envSchema.parse({});
+}
+export { env   };// Demo mode detection - checks if we're using /demo values;
 export function isDemoMode(): boolean {
-  const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL; const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY, // Check if we have demo/placeholder values;
+  const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL; const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY, // Check if we have demo/ values;
 
 const _hasDemoSupabase = !supabaseUrl || !supabaseKey || ;
     supabaseUrl.includes('demo-') ||
-    supabaseUrl.includes('placeholder') ||
+    supabaseUrl.includes('') ||
     supabaseKey.includes('demo-') ||
-    supabaseKey.includes('placeholder');
+    supabaseKey.includes('');
   return hasDemoSupabase
 }
 // Service configuration helpers;

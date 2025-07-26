@@ -54,7 +54,7 @@ l,
   debugSessions: KiroDebugSession[]
 };
 export function useKiroIDE(): UseKiroIDEReturn {
-  const { toast    }: any  = useToast();
+  const { toast } = useToast();
 
 const [client, setClient] = useState<KiroClient | null>(null);</KiroClient>
   

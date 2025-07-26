@@ -181,7 +181,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header - Developer focused */}
         <div className="mb-8">
@@ -236,7 +236,7 @@ export default function Dashboard() {
             data-testid="filter-dropdown"
             value={selectedFilter}
             onChange={(e) => setSelectedFilter(e.target.value)}
-            className="px-4 py-2 border rounded-lg bg-white"
+            className="px-4 py-2  rounded-xl-lg glass"
           >
             <option value="all">All Activities</option>
             <option value="deployments">Deployments</option>
@@ -248,17 +248,17 @@ export default function Dashboard() {
         {/* Loading Indicator */}
         {isLoading && (
           <div className="flex justify-center mb-4">
-            <div data-testid="loading-spinner" className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div data-testid="loading-spinner" className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600"></div>
           </div>
         )}
 
         {/* Deployment Status Banner */}
         {deploymentStatus === 'deploying' && (
-          <Card className="mb-6 border-blue-500 bg-blue-50">
-            <CardContent className="p-4">
+          <Card className="mb-6 -blue-500 bg-blue-50" className="glass
+            <CardContent className="glass p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600" />
+                  <div className="animate-spin rounded-lg-full h-5 w-5 -b-2 -blue-600" />
                   <span className="font-medium">Deploying to production...</span>
                 </div>
                 <span className="text-sm text-gray-600">This usually takes less than 60 seconds</span>
@@ -268,8 +268,8 @@ export default function Dashboard() {
         )}
 
         {deploymentStatus === 'deployed' && (
-          <Card className="mb-6 border-green-500 bg-green-50">
-            <CardContent className="p-4">
+          <Card className="mb-6 -green-500 bg-green-50" className="glass
+            <CardContent className="glass p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
@@ -284,16 +284,16 @@ export default function Dashboard() {
         )}
 
         {/* Speed Metrics */}
-        <div data-testid="dashboard-metrics" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div data-testid="dashboard-metrics" className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat) => (
-            <Card key={stat.title}>
-              <CardContent className="p-6">
+            <Card key={stat.title} className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                     <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 glass rounded-xl-lg flex items-center justify-center">
                     <stat.icon className={`h-6 w-6 ${stat.color}`} />
                   </div>
                 </div>
@@ -305,19 +305,19 @@ export default function Dashboard() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Quick Actions */}
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Setup Actions</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Quick Setup Actions</CardTitle>
                 <p className="text-sm text-gray-600">Get your SaaS live in minutes, not months</p>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <CardContent className="glass"
+                <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
                   {quickActions.map((action) => (
                     <Link href={action.action} key={action.title} onClick={() => trackFeature('dashboard', 'quick_action', action.title)}>
-                      <div className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
+                      <div className="glass  rounded-xl-lg p-4 hover:shadow-md-md transition-shadow-md cursor-pointer">
                         <div className="flex items-start justify-between mb-2">
                           <div className={`w-10 h-10 ${action.color} rounded-lg flex items-center justify-center`}>
                             <action.icon className="h-5 w-5 text-white" />
@@ -338,13 +338,13 @@ export default function Dashboard() {
 
           {/* Developer Resources */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Developer Resources</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Developer Resources</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-3">
-                  <Link href="/docs" className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                  <Link href="/docs" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
                     <div className="flex items-center gap-3">
                       <Code2 className="h-5 w-5 text-gray-600" />
                       <span className="font-medium">Documentation</span>
@@ -352,7 +352,7 @@ export default function Dashboard() {
                     <ArrowRight className="h-4 w-4 text-gray-400" />
                   </Link>
                   
-                  <Link href="https://github.com" className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                  <Link href="https://github.com" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
                     <div className="flex items-center gap-3">
                       <Github className="h-5 w-5 text-gray-600" />
                       <span className="font-medium">GitHub Repo</span>
@@ -360,7 +360,7 @@ export default function Dashboard() {
                     <ArrowRight className="h-4 w-4 text-gray-400" />
                   </Link>
                   
-                  <Link href="/api/playground" className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                  <Link href="/api/playground" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
                     <div className="flex items-center gap-3">
                       <Terminal className="h-5 w-5 text-gray-600" />
                       <span className="font-medium">API Playground</span>
@@ -368,7 +368,7 @@ export default function Dashboard() {
                     <ArrowRight className="h-4 w-4 text-gray-400" />
                   </Link>
                   
-                  <Link href="/discord" className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
+                  <Link href="/discord" className="flex items-center justify-between p-3  rounded-xl-lg hover:glass">
                     <div className="flex items-center gap-3">
                       <Users className="h-5 w-5 text-gray-600" />
                       <span className="font-medium">Discord Community</span>
@@ -382,14 +382,14 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity */}
-        <Card>
-          <CardHeader>
+        <Card className="glass"
+          <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle>Setup Progress</CardTitle>
+              <CardTitle className="glass"Setup Progress</CardTitle>
               <Badge variant="outline">4/4 Complete</Badge>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
             <div className="space-y-4">
               {recentActivity.map((activity) => (
                 <div key={activity.id} className="flex items-center justify-between">
@@ -413,7 +413,7 @@ export default function Dashboard() {
               ))}
             </div>
             
-            <div className="mt-6 pt-6 border-t">
+            <div className="mt-6 pt-6 -t">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium">Overall Progress</span>
                 <span className="text-sm text-gray-600">100%</span>

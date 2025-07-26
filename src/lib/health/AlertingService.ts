@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { EventEmitter } from 'events';
 import { HealthStatus, HealthCheckResult } from './HealthCheckService';
+import { logger } from '@/lib/logger';
 export interface AlertConfig { enabled: boolean;
   channels: AlertChannel[],
   rules: AlertRule[],
@@ -88,7 +89,7 @@ timestamp: new Date(), severity: rule.severity,
       try {
         await this.sendToChannel(alert, channel)
 } catch (error) {
-        console.error(`Failed to send alert to ${channel.type}:`, error)``
+        logger.error(`Failed to send alert to ${channel.type}:`, error)``
   }
 }
   /**

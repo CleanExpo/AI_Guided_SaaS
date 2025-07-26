@@ -76,13 +76,13 @@ const _updateConfig = (key: string, value) =>  {
 }))
 }
   return (
-    <Card className="w-full max-w-2xl"    />
-          <CardHeader     />
-        <CardTitle>Create New Project</CardTitle>
-        <CardDescription></CardDescription>
+    <Card className="w-full max-w-2xl"    / className="glass
+          <CardHeader     / className="glass"
+        <CardTitle className="glass"Create New Project</CardTitle>
+        <CardDescription className="glass"</CardDescription>
           Fill in the details to create a new project with validation</Card>
-      <CardContent    />
-          <form onSubmit={handleSubmit} className="space-y-6">
+      <CardContent    / className="glass"
+          <form onSubmit={handleSubmit} className="space-y-6" role="form">
           {generalError && (
 /form>
             <Alert variant="destructive"    />
@@ -94,7 +94,7 @@ const _updateConfig = (key: string, value) =>  {
             <Input id="name";
 
     value={formData.name} onChange={(e) => updateField('name', e.target.value)};/>
-              placeholder="My Awesome Project";
+              ="My Awesome Project";
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined/>
             {errors.name  && (/Input>
@@ -106,7 +106,7 @@ const _updateConfig = (key: string, value) =>  {
 id="description";
 
 value={formData.description} onChange={(e) => updateField('description', e.target.value)};</Textarea>
-              placeholder="Describe your project...";
+              ="Describe your project...";
 
     const rows={4}
               aria-invalid={!!errors.description}
@@ -114,7 +114,7 @@ value={formData.description} onChange={(e) => updateField('description', e.targe
             {errors.description  && (/Textarea>
               <p id="description-error", className="text-sm text-destructive">
                 {errors.description}</p>
-          <div className="grid grid-cols-2 gap-4"    />
+          <div className="glass grid grid-cols-2 gap-4"    />
           <div className="space-y-2"     />
               <Label htmlFor="type">Project Type *</Label>
               <Select
@@ -136,7 +136,7 @@ value={formData.type} onValueChange={(value) => updateField('type', value as any
 value={formData.config?.framework || ''} onValueChange={(value) => updateConfig('framework', value)}</Select>
               ></Select>
                 <SelectTrigger id="framework"    />
-          <SelectValue placeholder="Select framework"      />
+          <SelectValue ="Select framework"      />
                 <SelectContent    />
           <SelectItem value="nextjs">Next.js</SelectItem>
                   <SelectItem value="react">React</SelectItem>
@@ -146,7 +146,7 @@ value={formData.config?.framework || ''} onValueChange={(value) => updateConfig(
                   <SelectItem value="express">Express</SelectItem>
                   <SelectItem value="fastapi">FastAPI</SelectItem>
                   <SelectItem value="django">Django</SelectItem>
-          <div className="grid grid-cols-2 gap-4"    />
+          <div className="glass grid grid-cols-2 gap-4"    />
           <div className="space-y-2"     />
               <Label htmlFor="language">Language (Optional)</Label>
               <Select
@@ -154,7 +154,7 @@ value={formData.config?.framework || ''} onValueChange={(value) => updateConfig(
 value={formData.config?.language || ''} onValueChange={(value) => updateConfig('language', value)}</Select>
               ></Select>
                 <SelectTrigger id="language"    />
-          <SelectValue placeholder="Select language"      />
+          <SelectValue ="Select language"      />
                 <SelectContent    />
           <SelectItem value="typescript">TypeScript</SelectItem>
                   <SelectItem value="javascript">JavaScript</SelectItem>
@@ -171,7 +171,7 @@ value={formData.config?.language || ''} onValueChange={(value) => updateConfig('
 value={formData.config?.database || ''} onValueChange={(value) => updateConfig('database', value)}</Select>
               ></Select>
                 <SelectTrigger id="database"    />
-          <SelectValue placeholder="Select database"      />
+          <SelectValue ="Select database"      />
                 <SelectContent    />
           <SelectItem value="postgresql">PostgreSQL</SelectItem>
                   <SelectItem value="mysql">MySQL</SelectItem>
@@ -195,13 +195,13 @@ value={formData.config?.database || ''} onValueChange={(value) => updateConfig('
                 'Analytics'
    ].map((feature) => (\n    </div>
                 <label key={feature} className="flex items-center space-x-2"    />
-          <input type="checkbox"
+          <input aria-label="checkbox" type="checkbox"
 
     checked={formData.config?.features?.includes(feature) || false} onChange={(e) =    /> {</input>
 { formData.config?.features || [], if (e.target.checked) {
                         updateConfig('features', [...features, feature])} else { updateConfig('features', features.filter((f) => f !== feature))
 }
-                    className="rounded border-gray-300" /></input>
+                    className="rounded-lg -gray-300" /></input>
         <span className="text-sm">{feature}</span>))}
           <div className="flex justify-end space-x-4"    />
           <Button type="button"

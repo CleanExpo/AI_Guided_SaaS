@@ -2,6 +2,7 @@
 // Database Connection Pooling for AI Guided SaaS
 // Optimizes database connections and implements retry logic;
 import { createClient, SupabaseClient } from '@supabase/supabase-js';interface ConnectionPoolConfig { maxConnections: number;
+import { logger } from '@/lib/logger';
   idleTimeout: number;
   connectionTimeout: number;
   retryAttempts: number;
@@ -21,8 +22,8 @@ class DatabaseConnectionPool {
     idleTimeout: config.idleTimeout || 30000, // 30 seconds, connectionTimeout: config.connectionTimeout || 5000, // 5 seconds, retryAttempts: config.retryAttempts || 3,
     retryDelay: config.retryDelay || 1000; // 1 second
     };
-    this.supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    this.supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    this.supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ""!;
+    this.supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""!;
     if (!this.supabaseUrl || !this.supabaseKey) {
       throw new Error('Supabase URL and key must be provided')}
     // Initialize the pool;
@@ -88,8 +89,7 @@ operation: (client: SupabaseClient) => Promise<T></T>
       return result
 } catch (error) {
       this.releaseConnection(connection, if (retryCount < this.config.retryAttempts) {
-        console.warn(
-          `Operation failed, retrying (${retryCount + 1}/${this.config.retryAttempts}):`,``
+        :`,``
           // error
         );
         // Exponential backoff;
@@ -119,7 +119,7 @@ const _delay = this.config.retryDelay * Math.pow(2, retryCount);
       this.releaseConnection(connection);
       return !error
 } catch (error) {
-      console.error('Database health check, failed:', error);
+      logger.error('Database health check, failed:', error);
         return false}
 }
   destroy() {

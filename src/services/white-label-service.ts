@@ -1,27 +1,29 @@
+import { logger } from '@/lib/logger';
+
 import { EventEmitter } from 'events';
 
 export interface WhiteLabelConfig {
   // Basic Info
-  companyName: string;
-  tagline: string;
+  companyName: string,
+  tagline: string,
   description: string;
   
   // Visual Identity
   logo: {
-    light: string;
-    dark: string;
-    format: 'png' | 'svg';
-    width: number;
-    height: number;
+    light: string,
+    dark: string,
+    format: 'png' | 'svg',
+    width: number,
+    height: number
   };
-  favicon: string;
+  favicon: string,
   colors: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    success: string;
-    warning: string;
-    error: string;
+    primary: string,
+    secondary: string,
+    accent: string,
+    success: string,
+    warning: string,
+    error: string,
     info: string;
     // Computed shades
     primaryShades?: Record<number, string>;
@@ -30,8 +32,8 @@ export interface WhiteLabelConfig {
   
   // Typography
   fonts: {
-    header: string;
-    body: string;
+    header: string,
+    body: string,
     mono: string;
     // Font imports
     imports?: string[];
@@ -39,14 +41,14 @@ export interface WhiteLabelConfig {
   
   // Contact & Legal
   contact: {
-    supportEmail: string;
+    supportEmail: string,
     supportUrl: string;
     salesEmail?: string;
     phone?: string;
     address?: string;
   };
   legal: {
-    privacyUrl: string;
+    privacyUrl: string,
     termsUrl: string;
     cookiesUrl?: string;
     gdprEmail?: string;
@@ -64,9 +66,9 @@ export interface WhiteLabelConfig {
   
   // SEO & Meta
   seo: {
-    defaultTitle: string;
-    titleTemplate: string;
-    description: string;
+    defaultTitle: string,
+    titleTemplate: string,
+    description: string,
     keywords: string[];
     ogImage?: string;
     twitterCard?: 'summary' | 'summary_large_image';
@@ -83,44 +85,44 @@ export interface WhiteLabelConfig {
   
   // Feature Flags
   features: {
-    removeBranding: boolean;
-    customDomain: boolean;
-    customEmails: boolean;
-    apiWhiteLabel: boolean;
-    customAnalytics: boolean;
+    removeBranding: boolean,
+    customDomain: boolean,
+    customEmails: boolean,
+    apiWhiteLabel: boolean,
+    customAnalytics: boolean
   };
   
   // Domain Configuration
   domains?: {
-    primary: string;
-    aliases: string[];
-    ssl: boolean;
+    primary: string,
+    aliases: string[],
+    ssl: boolean
   };
   
   // Email Templates
   emailTemplates?: {
-    welcome: EmailTemplate;
-    resetPassword: EmailTemplate;
-    invitation: EmailTemplate;
-    notification: EmailTemplate;
+    welcome: EmailTemplate,
+    resetPassword: EmailTemplate,
+    invitation: EmailTemplate,
+    notification: EmailTemplate
   };
 }
 
 export interface EmailTemplate {
-  subject: string;
-  header: string;
-  body: string;
-  footer: string;
+  subject: string,
+  header: string,
+  body: string,
+  footer: string,
   styles: Record<string, string>;
 }
 
 export interface ThemePreset {
-  id: string;
-  name: string;
-  description: string;
-  colors: WhiteLabelConfig['colors'];
-  fonts: WhiteLabelConfig['fonts'];
-  preview: string;
+  id: string,
+  name: string,
+  description: string,
+  colors: WhiteLabelConfig['colors'],
+  fonts: WhiteLabelConfig['fonts'],
+  preview: string
 }
 
 export class WhiteLabelService extends EventEmitter {
@@ -194,7 +196,7 @@ export class WhiteLabelService extends EventEmitter {
     this.updateMetaTags();
     
     this.appliedTheme = true;
-    this.emit('theme:applied');
+    this.emit('theme: applied')
   }
 
   // Generate CSS variables
@@ -453,7 +455,7 @@ export class WhiteLabelService extends EventEmitter {
         try {
           this.config = { ...this.config, ...JSON.parse(saved) };
         } catch (error) {
-          console.error('Failed to load white-label config:', error);
+          logger.error('Failed to load white-label config:', error);
         }
       }
     }

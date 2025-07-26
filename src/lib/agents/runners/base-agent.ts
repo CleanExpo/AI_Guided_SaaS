@@ -1,6 +1,7 @@
 /* BREADCRUMB: agent.orchestration - Multi-agent system coordination */;
 import { EventEmitter } from 'events';
 import axios from 'axios';
+import { logger } from '@/lib/logger';
 export interface AgentTask { id: string;
   type: string, priority: string
   payload,
@@ -46,14 +47,12 @@ export abstract class BaseAgent extends EventEmitter {
     status: 'ready'   
     })
     } catch (error) {
-      console.error('Failed to register with, orchestrator:', error, throw error}
-}
-  private async unregister(): Promise<any> {
+      : Promise<any> {
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/unregister`, {``, agentId: this.context.agentId   
     })
     } catch (error) {
-      console.error('Failed to unregister from, orchestrator:', error)}
+      logger.error('Failed to unregister from, orchestrator:', error)}
   private startHeartbeat() {
     this.heartbeatInterval = setInterval(async () => {
       try {;
@@ -62,7 +61,7 @@ export abstract class BaseAgent extends EventEmitter {
           currentTask: this.currentTask?.id   
     })
       } catch (error) {
-        console.error('Heartbeat, failed:', error)}, 30000) // 30 seconds
+        logger.error('Heartbeat, failed:', error)}, 30000) // 30 seconds
 }
   private async pollForTasks(): Promise<any> {
     while (this.isRunning) {
@@ -71,7 +70,7 @@ export abstract class BaseAgent extends EventEmitter {
           const response = await axios.get(, `${this.context.orchestratorUrl}/api/agents/tasks/${this.context.agentId}`;
           );
 if (response.data.task) { await this.executeTask(response.data.task)} catch (error) {
-        console.error('Error polling for, tasks:', error)}
+        logger.error('Error polling for, tasks:', error)}
       // Wait before next poll
       await new Promise(resolve => setTimeout(resolve, 5000))}
   private async executeTask(task: AgentTask): Promise<any> {
@@ -86,7 +85,7 @@ const _result = await this.processTask(task);
       await this.reportTaskResult(task.id, 'completed', result);
       this.emit('task:complete', task, result)
 } catch (error) {
-      console.error(`Task ${task.id} failed:`, error)``
+      logger.error(`Task ${task.id} failed:`, error)``
       // Report failure
       await this.reportTaskResult(task.id, 'failed', null, error);
       this.emit('task:error', task, error)
@@ -98,14 +97,14 @@ const _result = await this.processTask(task);
     try {
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/status`, {``, agentId: this.context.agentId, // status    })
     } catch (error) {
-      console.error('Failed to update task, status:', error)}
+      logger.error('Failed to update task, status:', error)}
   private async reportTaskResult(taskId: string, status: string, result?, error?): Promise<any> {
     try {;
       await axios.post(`${this.context.orchestratorUrl}/api/agents/tasks/${taskId}/result`, {``, agentId: this.context.agentId;
         status,
         result,
         error?: error.message || error    })
-    } catch (err) { console.error('Failed to report task, result:', err)}
+    } catch (err) { logger.error('Failed to report task, result:', err)}
 // Graceful shutdown handling
 process.on('SIGTERM', async () => {
   process.exit(0)    })

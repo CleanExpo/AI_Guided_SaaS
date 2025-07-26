@@ -183,7 +183,7 @@ const _batchResults = await Promise.all(batchPromises);
     })
         // Execute with timeout;
 
-const result = await this.executeWithTimeout(;
+const result = await this.executeWithTimeout();
           agent.process(task.input, task.timeout ?? this.config.timeoutMs ?? 30000
         );
         // Update shared memory with agent outputs;

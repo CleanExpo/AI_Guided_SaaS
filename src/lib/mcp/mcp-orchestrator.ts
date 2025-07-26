@@ -1,5 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 
 /**
  * MCP (Model Context Protocol) Orchestrator
@@ -119,8 +121,7 @@ const tools = await this.discoverTools(server.id);
      
     });
       if (this.config?.debug) {
-        console.log(`Connected to server ${server.id}`)
-}
+        }
     } catch (error) {
       this.servers.set(server.id, {
         ...server,
@@ -181,7 +182,7 @@ const tool = server.tools.find(t => t.name === validated.tool);
 };
       // Execute tool;
 
-const result = await this.executeToolCall(;
+const result = await this.executeToolCall();
         validated.server,
         validated.tool,
         validated.arguments,
@@ -208,7 +209,7 @@ const result = await this.executeToolCall(;
   /**
    * Create an orchestration plan
    */
-  createPlan(;
+  createPlan();
 description: string;
     steps: MCPExecutionStep[]
   ): MCPOrchestrationPlan {
@@ -359,7 +360,7 @@ const capabilities: MCPCapability[] = [];
 }
       return capabilities
 } catch (error) {
-      console.error(`Failed to discover capabilities for ${serverId}:`, error);
+      logger.error(`Failed to discover capabilities for ${serverId}:`, error);
       return []
 }
 }
@@ -372,7 +373,7 @@ const capabilities: MCPCapability[] = [];
      
     }))
 } catch (error) {
-      console.error(`Failed to discover tools for ${serverId}:`, error);
+      logger.error(`Failed to discover tools for ${serverId}:`, error);
       return []
 }
 }
@@ -414,10 +415,15 @@ const capabilities: MCPCapability[] = [];
         if (message.error) {
           reject(new Error(message.error.message || 'Unknown error'))} else {
           resolve(message.result)  }
-} catch (error) {
-      console.error(`Failed to parse message from ${serverId}:`, error)
-}
-}
+      }
+    } catch (error) {
+      handleError(error, {
+        operation: 'handleMessage',
+        module: 'MCPOrchestrator',
+        metadata: { serverId, data: data.substring(0, 100) }
+      });
+    }
+  }
   private generateId() {
     return Math.random().toString(36).substring(2, 15)}
 }

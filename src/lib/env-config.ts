@@ -4,6 +4,7 @@
  */
 
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 // Environment schema
 const envSchema = z.object({
@@ -45,28 +46,26 @@ class EnvironmentConfig {
 
     try {
       // In Vercel build/runtime, use process.env directly
-      if (process.env.VERCEL) {
-        console.log('🔄 Loading environment from Vercel')
-}
+      if (process.env.VERCEL || "") {
+        }
 
       // Parse and validate
       this.env = envSchema.parse(process.env);
 
       // Additional validation
       if (!this.env.OPENAI_API_KEY && !this.env.ANTHROPIC_API_KEY) {
-        console.warn('⚠️  No AI provider configured. AI features will be disabled.')
-}
+        }
 
       return this.env
 } catch (error) {
       if (error instanceof z.ZodError) {
-        console.error('❌ Environment validation failed: ');
+        logger.error('❌ Environment validation failed: ');
         error.errors.forEach(err => {
-          console.error(`   - ${err.path.join('.') };: ${err.message}`)
+          logger.error(`   - ${err.path.join('.') };: ${err.message}`)
 });
         
         // In production, throw error to prevent deployment
-        if (process.env.NODE_ENV === 'production') {
+        if ((process.env.NODE_ENV || "production") === "production") {
           throw new Error('Environment validation failed. Check Vercel environment variables.')
 }
       }
@@ -86,7 +85,7 @@ class EnvironmentConfig {
    * Check if running in Vercel
    */
   isVercel(): boolean {
-    return !!process.env.VERCEL
+    return !!process.env.VERCEL || ""
 }
 
   /**
@@ -100,8 +99,8 @@ class EnvironmentConfig {
       return env.NEXT_PUBLIC_APP_URL
 }
     
-    if (process.env.VERCEL_URL) {
-      return `https://${process.env.VERCEL_URL}`
+    if (process.env.VERCEL_URL || "") {
+      return `https://${process.env.VERCEL_URL || ""}`
 }
     
     if (env.NEXTAUTH_URL) {

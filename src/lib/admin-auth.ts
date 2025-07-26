@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 import { logAdmin, logWarn } from './production-logger';
+import { logger } from '@/lib/logger';
 
 export interface AdminUser { id: string;
   email: string, name: string;
@@ -61,7 +62,7 @@ export class AdminAuthService {
   async authenticateAdmin(email: string, password: string): Promise<AdminUser | null> {</AdminUser>
     try {
       // Check if admin panel is enabled
-      if (process.env.ENABLE_ADMIN_PANEL !== 'true') {
+      if (process.env.ENABLE_ADMIN_PANEL || "false" !== 'true') {
         logWarn('Admin panel is disabled'); return null
 }
 
@@ -86,7 +87,7 @@ export class AdminAuthService {
       logWarn('Invalid admin credentials provided', { email });
       return null
 } catch (error) {
-      console.error('Error authenticating admin:', error); return null
+      logger.error('Error authenticating admin:', error); return null
 }
   }
 
@@ -105,7 +106,7 @@ export class AdminAuthService {
         audience: 'admin-panel'   
     })
 } catch (error) {
-      console.error('Error generating admin token:', error, throw new Error('Failed to generate admin token')}
+      logger.error('Error generating admin token:', error, throw new Error('Failed to generate admin token')}
   }
 
   // Verify admin JWT token
@@ -117,7 +118,7 @@ export class AdminAuthService {
     }) as AdminSession;
       return decoded
 } catch (error) {
-      console.error('Error verifying admin token:', error); return null
+      logger.error('Error verifying admin token:', error); return null
 }
   }
 
@@ -134,7 +135,7 @@ export class AdminAuthService {
         return tokenCookie.value};
       return null
 } catch (error) {
-      console.error('Error extracting admin token:', error); return null
+      logger.error('Error extracting admin token:', error); return null
 }
   }
 
@@ -156,7 +157,7 @@ export class AdminAuthService {
 
       return session
 } catch (error) {
-      console.error('Error verifying admin session:', error); return null
+      logger.error('Error verifying admin session:', error); return null
 }
   }
 
@@ -184,7 +185,7 @@ export async function requireAdminAuth(
 
     return { authorized: true, session }
 } catch (error) {
-    console.error('Error in requireAdminAuth:', error);
+    logger.error('Error in requireAdminAuth:', error);
         return { authorized: false, error: 'Internal server error'   }
 }
 }

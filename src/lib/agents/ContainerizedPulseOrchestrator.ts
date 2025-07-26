@@ -3,6 +3,7 @@ import { PulsedAgentOrchestrator, PulseConfig } from './PulsedAgentOrchestrator'
 import { DockerAgentManager, ContainerStatus } from './DockerAgentManager';
 import { AgentConfig } from './AgentLoader';
 import { OrchestratorConfig } from './AgentOrchestrator';
+import { logger } from '@/lib/logger';
 export interface ContainerizedPulseConfig extends PulseConfig  { useContainers: boolean, autoScaling: boolean, minAgentsPerType: number, maxAgentsPerType: number, scaleUpThreshold: number // CPU/Memory percentage, scaleDownThreshold: number
 };
 export class ContainerizedPulseOrchestrator extends PulsedAgentOrchestrator {
@@ -29,12 +30,12 @@ for (const agent of agents) {
       try {
         await this.dockerManager.startAgentContainer(agent)
 } catch (error) {
-        console.error(`Failed to start container for ${agent.name}:`, error)``
+        logger.error(`Failed to start container for ${agent.name}:`, error)``
   }
 }
   protected async executeAgentTask(agentId: string, task): Promise<any> {
     if (this.containerizedConfig.useContainers) {
-      // Check if agent container is healthy, const status = await this.dockerManager.getContainerStatus(agentId, if (!status || status.status !== 'running' || status.health !== 'healthy') {; console.warn(`Agent ${agentId} container not healthy, attempting to start...`)``; const agent = this.loader.getLoadedAgents().find(a => a.agent_id === agentId);
+      // Check if agent container is healthy, const status = await this.dockerManager.getContainerStatus(agentId, if (!status || status.status !== 'running' || status.health !== 'healthy') {; ``; const agent = this.loader.getLoadedAgents().find(a => a.agent_id === agentId);
         if (agent) { await this.dockerManager.startAgentContainer(agent, // Wait for container to be ready
           await new Promise(resolve => setTimeout(resolve, 5000))
 }
@@ -123,7 +124,7 @@ scaleDownThreshold: `${this.containerizedConfig.scaleDownThreshold}%`
         try {
           await this.dockerManager.stopAgentContainer(agent.agent_id)
 } catch (error) {
-          console.error(`Failed to stop container for ${agent.agent_id}:`, error)``
+          logger.error(`Failed to stop container for ${agent.agent_id}:`, error)``
   }
 }
     await super.shutdown()}; // Factory function; export function createContainerizedOrchestrator(

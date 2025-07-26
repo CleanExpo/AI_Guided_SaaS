@@ -3,6 +3,7 @@ import { Document } from './vector-store';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { glob } from 'glob';
+import { logger } from '@/lib/logger';
 /**
  * Document Loader for various file types and sources
  */;
@@ -195,7 +196,7 @@ const _ext = path.extname(filePath).slice(1).toLowerCase();
     size: stats.size   
     })
         } catch (error) {
-          console.error(`Failed to load file ${filePath}:`, error)``
+          logger.error(`Failed to load file ${filePath}:`, error)``
   }
 }
     return files

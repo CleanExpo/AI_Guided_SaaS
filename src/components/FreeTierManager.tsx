@@ -46,7 +46,7 @@ export default function FreeTierManager({
     },
     {
       id: '2',
-      name: 'Todo List Pro',
+      name: ' List Pro',
       createdAt: new Date('2025-01-10'),
       lastModified: new Date('2025-01-19'),
       size: 8.3,
@@ -95,10 +95,10 @@ export default function FreeTierManager({
   return (
     <div className="space-y-6">
       {/* Free Tier Status Card */}
-      <Card className="border-2 border-blue-200 bg-blue-50/50">
-        <CardHeader>
+      <Card className="-2 -blue-200 bg-blue-50/50" className="glass
+        <CardHeader className="glass"
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2" className="glass
               <Sparkles className="h-5 w-5 text-blue-600" />
               Free Tier Status
             </CardTitle>
@@ -107,7 +107,7 @@ export default function FreeTierManager({
             )}
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-4">
             {/* Projects Usage */}
             <div>
@@ -143,7 +143,7 @@ export default function FreeTierManager({
             </div>
 
             {/* Free Tier Benefits */}
-            <div className="bg-white rounded-lg p-4 space-y-2">
+            <div className="glass rounded-xl-lg p-4 space-y-2">
               <h4 className="font-medium text-sm mb-2">Free Tier Includes:</h4>
               <div className="space-y-1 text-sm">
                 <div className="flex items-center gap-2 text-green-700">
@@ -169,10 +169,10 @@ export default function FreeTierManager({
       </Card>
 
       {/* Projects List */}
-      <Card>
-        <CardHeader>
+      <Card className="glass"
+        <CardHeader className="glass"
           <div className="flex items-center justify-between">
-            <CardTitle>Your Projects</CardTitle>
+            <CardTitle className="glass"Your Projects</CardTitle>
             <Button
               onClick={createNewProject}
               disabled={!canCreateNewProject && currentPlan === 'free'}
@@ -183,10 +183,10 @@ export default function FreeTierManager({
             </Button>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-3">
             {activeProjects.map((project, index) => (
-              <div key={project.id} className="border rounded-lg p-4">
+              <div key={project.id} className="glass  rounded-xl-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
                     <Folder className="h-5 w-5 text-blue-600" />
@@ -229,8 +229,8 @@ export default function FreeTierManager({
 
       {/* Upgrade Prompt */}
       {currentPlan === 'free' && projectsRemaining <= 1 && (
-        <Card className="border-2 border-purple-200 bg-purple-50/50">
-          <CardContent className="p-6">
+        <Card className="-2 -purple-200 bg-purple-50/50" className="glass
+          <CardContent className="glass p-6">
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
@@ -254,7 +254,7 @@ export default function FreeTierManager({
 
       {/* Usage Warning */}
       {storagePercentage > 80 && (
-        <div className="flex items-center gap-3 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+        <div className="glass flex items-center gap-3 p-4 bg-orange-50  -orange-200 rounded-xl-lg">
           <AlertCircle className="h-5 w-5 text-orange-600" />
           <div className="flex-1">
             <p className="text-sm font-medium text-orange-800">Storage limit approaching</p>

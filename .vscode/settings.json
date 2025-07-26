@@ -1,3 +1,64 @@
 {
-    "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "mcp.servers": {
+    "sequential-thinking": {
+      "command": "node",
+      "args": ["${userHome}/.mcp-global/scripts/mcp-autostart.js"],
+      "enabled": true
+    }
+  },
+  "terminal.integrated.env.windows": {
+    "MCP_GLOBAL_HOME": "${userHome}/.mcp-global"
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "task.autoDetect": "on",
+  "npm.autoDetect": "on",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.associations": {
+    "*.mcp": "json",
+    "mcp-config.json": "jsonc"
+  },
+  "terminal.integrated.profiles.windows": {
+    "PowerShell with MCP": {
+      "source": "PowerShell",
+      "args": ["-NoExit", "-Command", ". \"${userHome}/.mcp-global/scripts/mcp-init.ps1\""]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell with MCP",
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "workbench.editor.enablePreview": false,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/coverage": true,
+    "**/.turbo": true,
+    "**/evaluation-results": true
+  }
 }

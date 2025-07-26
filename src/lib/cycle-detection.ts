@@ -131,7 +131,7 @@ const cycleAnalysis = this.analyzeCyclicBehavior(patterns);
         const _searchResult = await this.searchDocumentationSource(source, searchQueries);
         if (searchResult) {
           results.push(searchResult)} catch (error) {
-        console.warn(`Failed to search ${sourceName}:`, error);``
+        ``
   }
 }
     return results.sort((a, b) => b.relevanceScore - a.relevanceScore)
@@ -264,7 +264,7 @@ const keyTerms = this.extractKeyTerms(problemDescription);
     // For now, return a structured result format, const _searchUrl = `${source.baseUrl}?q=${encodeURIComponent(queries[0])}`return { sourceName: source.name,;
     sourceUrl: source.baseUrl;
       searchUrl,
-      relevanceScore: Math.random() * 0.5 + 0.5, // Placeholder scoring, results: [
+      relevanceScore: Math.random() * 0.5 + 0.5, //  scoring, results: [
         { title: `Solution, for: ${queries[0].substring(0, 50)}...`, ``,
 url: searchUrl;
     snippet: "Relevant documentation content would be extracted here...",

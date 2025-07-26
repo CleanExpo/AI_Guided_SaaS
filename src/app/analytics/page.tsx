@@ -45,7 +45,7 @@ export default function AnalyticsPage() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto p-6">
+      <div className="glass container mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
         <div>Loading analytics data...</div>
       </div>
@@ -53,27 +53,27 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="glass container mx-auto p-6 space-y-6">
           <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
       
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+      <div className="glass grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+          <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{data?.totalUsers}</div>
             <p className="text-xs text-muted-foreground">Total registered users</p>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+        <Card className="glass"
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassActive Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{data?.activeUsers}</div>
             <p className="text-xs text-muted-foreground">Active in last 24h</p>
           </CardContent>

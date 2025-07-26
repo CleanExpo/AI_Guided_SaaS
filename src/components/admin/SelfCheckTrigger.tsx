@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { logger } from '@/lib/logger';
 
 interface HealthMetrics { moduleScore: number
   dependencyScore: number
@@ -26,12 +27,12 @@ const mockMetrics: HealthMetrics={ moduleScore: 85
       setMetrics(mockMetrics);
       onReportGenerated?.(mockMetrics)
 } catch (error) {
-      console.error('Self-check failed:', error)} finally {
+      logger.error('Self-check failed:', error)} finally {
       setIsRunning(false)}
   };
   
   return (
-    <div className="p-4 border border-gray-200 rounded-lg bg-white mb-4">
+    <div className="p-4  -gray-200 rounded-xl-lg glass mb-4">
           <div></div>
         <h3 className="text-lg font-semibold text-gray-900">System Health Check</h3>
         <p className="text-sm text-gray-600">Run comprehensive system diagnostics</p>
@@ -39,8 +40,8 @@ const mockMetrics: HealthMetrics={ moduleScore: 85
       <button;
 
     onClick={runSelfCheck} disabled={isRunning};
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover: bg-blue-700 disabled:opacity-50"
-      ></button>
+        className="mt-4 px-4 py-2 glass-button primary text-white rounded-lg hover: bg-blue-700 disabled:opacity-50"
+       aria-label="Button"></button>
         {isRunning ? 'Running Check...' : 'Run Self Check'}
       </button>
       

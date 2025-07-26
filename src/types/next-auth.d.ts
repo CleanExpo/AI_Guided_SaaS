@@ -17,3 +17,4 @@ declare module 'next-auth/jwt' {
   name: string;
   picture? null : string
 }
+}

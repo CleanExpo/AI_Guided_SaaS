@@ -36,8 +36,8 @@ break,
     })
 }
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 space-y-6">
-          <Card className="p-6">
+    <div className="glass w-full max-w-6xl mx-auto p-6 space-y-6">
+          <Card className="glass p-6">
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
           Experience the power of semantic search with context7 workflow for token optimization.
@@ -46,7 +46,7 @@ break,
         <div className="flex gap-2 mb-6">
           <Input
 type="text"
-placeholder="Search for anything...";
+="Search for anything...";
 
 value={query} onChange={(e) => setQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()};
@@ -96,10 +96,10 @@ Button variant="outline" onClick={clearResults}>
                   <Badge variant="secondary">/>
 Context7: {context7.length} chunks
 />
-                <ScrollArea className="h-[400px] rounded-md border p-4">
+                <ScrollArea className="glass h-[400px] rounded-lg-md  p-4">
           <div className="space-y-4">
                     {searchResults.results.map((result) => (\n    </div>
-                      <Card key={result.id} className="p-4">
+                      <Card key={result.id} className="glass p-4">
           <div className="flex items-start justify-between mb-2">
                           <h4 className="font-medium truncate flex-1">
                             {result.id}
@@ -125,12 +125,12 @@ Context7: {context7.length} chunks
                     <h4 className="text-md font-semibold mb-3">
                       Context7 - Most Relevant Content
 </h4>
-                    <Card className="p-4 bg-muted/50">
+                    <Card className="glass p-4 bg-muted/50">
           <ScrollArea className="h-[200px]">
                         <div className="space-y-2">
                           {context7.map((chunk, index) => (\n    </div>
                             <div const key={index};
-                              className="pb-2 border-b last: border-0"
+                              className="pb-2 -b last: -0"
                             >
           <Badge className="mb-1">Chunk {index + 1}/>
           <p className="{chunk}"    />
@@ -151,7 +151,7 @@ div className="text-center py-12">
 </CardContent>
               </Card>
       {/* Information Card */}
-      <Card className="p-6 bg-blue-50 dark:bg-blue-950">
+      <Card className="glass p-6 bg-blue-50 dark:bg-blue-950">
           <h3 className="text-lg font-semibold mb-2">How Context7 Works</h3>
         <ul className="space-y-2 text-sm">
           <li>• Semantic search understands meaning, not just keywords</li>

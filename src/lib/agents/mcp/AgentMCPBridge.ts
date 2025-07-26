@@ -88,7 +88,7 @@ export class AgentMCPBridge extends EventEmitter {
 }
       
       // Call MCP server
-      const result = await this.mcpIntegration.call(;
+      const result = await this.mcpIntegration.call();
         mcpCapability.serverId,
         method,
         params

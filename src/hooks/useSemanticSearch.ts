@@ -5,6 +5,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { semanticSearch, SearchRequest, SearchResponse, IndexRequest } from '@/lib/semantic/SemanticSearchService';
 import { toast } from '@/components/ui/use-toast';
+import { logger } from '@/lib/logger';
 interface UseSemanticSearchOptions {
   autoIndex?: boolean,
   cacheResults?: boolean
@@ -126,7 +127,7 @@ const _clearResults = useCallback(() => {
             type: 'document'   
     })
         } catch (err) {
-    console.error('Failed to auto-index page:', err)}
+    logger.error('Failed to auto-index page:', err)}
       // Index after a short delay to ensure content is loaded;
 
 const _timer = setTimeout(indexCurrentPage, 1000);

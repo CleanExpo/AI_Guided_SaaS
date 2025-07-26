@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
@@ -16,11 +18,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 name: 'John Doe', 
                 email: 'john@example.com' 
             }    })
-} catch (error) {
-        console.error('Session check error:', error)
+    } catch (error) {
+        handleError(error, {
+            operation: 'checkSession',
+            module: 'auth/session'
+        });
+        
         return NextResponse.json(
             { error: 'Session check failed' }, 
             { status: 500 }
-        )
+        );
+    }
 }
 }

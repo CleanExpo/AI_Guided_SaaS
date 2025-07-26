@@ -78,24 +78,24 @@ low: 'bg-gray-100 text-gray-800'
 }
   return (
     <div className="max-w-4xl mx-auto space-y-6"    />
-          <Card     />
-        <CardHeader    />
-          <CardTitle className="text-2xl">Describe Your Project</CardTitle>
+          <Card     / className="glass"
+        <CardHeader    / className="glass"
+          <CardTitle className="text-2xl" className="glassDescribe Your Project</CardTitle>
           <p className="text-muted-foreground">
             Tell us what you want to build in natural language. Our AI will analyze your requirements and create a development roadmap.</p>
-        <CardContent    />
-          <form onSubmit={handleSubmit} className="space-y-4"     />
+        <CardContent    / className="glass"
+          <form onSubmit={handleSubmit} className="space-y-4"     / role="form">
             <div className="space-y-2"    />
           <Label htmlFor="projectName">Project Name (optional)</Label>
               <Input id="projectName";
-placeholder="My Awesome Project";
+="My Awesome Project";
 
     value={projectName} onChange={(e) => setProjectName(e.target.value)} />
 {{isProcessing/>/>
             <div className="space-y-2"    />
           <Label htmlFor="requirements">Project Requirements</Label>
               <Textarea id="requirements";
-placeholder="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";
+="Describe what you want to build. Include features, technical requirements, design preferences, and any constraints...";
 
     value={input} onChange={(e) => setInput(e.target.value)}</Textarea>
 {{isProcessing}
@@ -127,20 +127,20 @@ const disabled={isProcessing || !input.trim()};
             <div className="space-y-2">
               {examplePrompts.map((example, index) => (\n    </div>
                 <button const key={index};
-                  const onClick={() => useExample(example)};</button>
-                  className="text-left text-sm p-3 rounded-lg border hover: bg-accent transition-colors w-full"
+                  const onClick={() = aria-label="Button"> useExample(example)};</button>
+                  className="text-left text-sm p-3 rounded-xl-lg  hover: bg-accent transition-colors w-full"
 
     const disabled={isProcessing}
                 >
                   {example}</button>
               ))},
     {result && (React.Fragment>Card></Card>
-            <CardHeader    />
-          <CardTitle className="flex items-center gap-2"     />
+            <CardHeader    / className="glass"
+          <CardTitle className="flex items-center gap-2"     / className="glass
                 <CheckCircle className="h-5 w-5 text-green-600"     />
                 Requirements Analyzed Successfully
-            <CardContent className="space-y-4"    />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4"     />
+            <CardContent className="space-y-4"    / className="glass
+          <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4"     />
                 <div className="text-center"    />
           <p className="text-2xl font-bold">{result.summary.totalRequirements}</p>
                   <p className="text-sm text-muted-foreground">Requirements</p>
@@ -153,13 +153,13 @@ const disabled={isProcessing || !input.trim()};
                 <div className="text-center"    />
           <p className="text-2xl font-bold">{result.summary.assignedAgents.length}</p>
                   <p className="text-sm text-muted-foreground">AI Agents</p>
-          <Card    />
-          <CardHeader     />
-              <CardTitle>Extracted Requirements</CardTitle>
-            <CardContent    />
+          <Card    / className="glass"
+          <CardHeader     / className="glass"
+              <CardTitle className="glass"Extracted Requirements</CardTitle>
+            <CardContent    / className="glass"
           <div className="space-y-3">
                 {result.requirements.map((req) => (\n    </div>
-                  <div key={req.id} className="p-4 border rounded-lg space-y-2"    />
+                  <div key={req.id} className="glass p-4  rounded-xl-lg space-y-2"    />
           <div className="flex items-start justify-between"     />
                       <p className="font-medium">{req.description}</p>
                       <Badge className={getPriorityColor(req.priority)}>/>
@@ -171,14 +171,14 @@ const disabled={isProcessing || !input.trim()};
                           {agent.replace('agent_', '')}/>
                   ))}
                 ))}
-          <Card    />
-          <CardHeader     />
-              <CardTitle>Development Roadmap</CardTitle>
-            <CardContent    />
+          <Card    / className="glass"
+          <CardHeader     / className="glass"
+              <CardTitle className="glass"Development Roadmap</CardTitle>
+            <CardContent    / className="glass"
           <div className="space-y-4">
                 {result.roadmap.phases.map((phase, index) => (\n    </div>
-                  <div key={phase.name} className="flex items-start gap-4"    />
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
+                  <div key={phase.name} className="glass flex items-start gap-4"    />
+          <div className="flex-shrink-0 w-8 h-8 rounded-lg-full glass-button primary text-primary-foreground flex items-center justify-center text-sm font-medium">
                       {index + 1}</div>
                     <div className="flex-1 space-y-1"    />
           <h4 className="font-medium">{phase.name}</h4>

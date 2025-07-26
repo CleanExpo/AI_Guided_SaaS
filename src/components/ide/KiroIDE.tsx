@@ -8,6 +8,8 @@ import { FileCode2, FolderTree, Terminal, Bug, Lightbulb, Play, Save, RefreshCw,
 import { getKiroClient, KiroClient, KiroFile, KiroFileTree, KiroTerminal, KiroAIAssistance } from '@/lib/ide/kiro-client';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 interface KiroIDEProps { projectId: string
   onClose? () => void
  };
@@ -54,11 +56,16 @@ const tree = await kiroClient.getFileTree(projectId);
         toast({ title: 'Connected to Kiro IDE',
   description: `Project "${project.name};" opened successfully`    })
 } catch (error) {
-        console.error('Failed to, initialize: Kiro,', error, toast({ title: 'Connection Error',
+        handleError(error, {
+          operation: 'initializeKiroClient',
+          module: 'KiroIDE',
+        });
+        toast({
+          title: 'Connection Failed',
           description: 'Failed to connect to Kiro IDE',
-variant: 'destructive'   
-    })
-} finally {
+          variant: 'destructive'
+        });
+        } finally {
         setLoading(false)}
     initializeClient();
     return () =>  {if (client) {;
@@ -91,19 +98,33 @@ const _openFile = async (path: string) =>  {
         return [...prev, file]    })
       setActiveFile(path)
 } catch (error) {
-      console.error('Failed to open, file:', error, toast({ title: 'Error',
-        description: 'Failed to open file',
-variant: 'destructive'
-    })}
+      handleError(error, {
+        operation: 'openFile',
+        module: 'KiroIDE',
+        metadata: { path }
+      });
+      toast({
+        title: 'Failed to open file',
+        description: `Could not open ${path}`,
+        variant: 'destructive'
+      });
+      }
   const _saveFile = async (path: string, content: string) =>  {
     if (!client) {r}eturn try {
       await client.writeFile(path, content, toast({ title: 'File Saved',
   description: `${path}; saved successfully`    })
 } catch (error) {
-      console.error('Failed to save, file:', error, toast({ title: 'Error',
-        description: 'Failed to save file',
-variant: 'destructive'
-    })}
+      handleError(error, {
+        operation: 'saveFile',
+        module: 'KiroIDE',
+        metadata: { path }
+      });
+      toast({
+        title: 'Failed to save file',
+        description: `Could not save ${path}`,
+        variant: 'destructive'
+      });
+      }
   const _closeFile = (path: string) =>  { setOpenFiles(prev => prev.filter((f) => f.path !== path), if (activeFile === path) {;
       const remaining  = openFiles.filter((f) => f.path !== path, setActiveFile(remaining.length > 0 ? remaining[0].path : null) };
   // Terminal operations;
@@ -115,33 +136,62 @@ const _createTerminal = async () =>  { if (!client) {r}eturn try {
       setTerminals(prev => [...prev, terminal]);
       setActiveTerminal(terminal.id)
 } catch (error) {
-      console.error('Failed to create, terminal:', error, toast({ title: 'Error',
-        description: 'Failed to create terminal',
-variant: 'destructive'
-    })}
+      handleError(error, {
+        operation: 'createTerminal',
+        module: 'KiroIDE'
+      });
+      toast({
+        title: 'Failed to create terminal',
+        description: 'Could not create new terminal',
+        variant: 'destructive'
+      });
+      }
   const _executeCommand  = async (command: string) =>  {
     if (!client || !activeTerminal) {r}eturn try {;
-      await client.executeCommand(activeTerminal, command)}; catch (error) {
-      console.error('Failed to execute, command:', error)};
+      await client.executeCommand(activeTerminal, command)
+    } catch (error) {
+      handleError(error, {
+        operation: 'executeCommand',
+        module: 'KiroIDE',
+        metadata: { command, terminalId: activeTerminal }
+      });
+      logger.error('Failed to execute command:', error)
+    }
   // AI operations;
 
 const _getAISuggestions = async () =>  {
     if (!client || !activeFile) {r}eturn try {;
-      const _assistance = await client.getAISuggestions(activeFile, setAiAssistance(assistance)}; catch (error) {
-      console.error('Failed to get AI, suggestions:', error, toast({ title: 'Error',
-        description: 'Failed to get AI suggestions',
-variant: 'destructive'
-    })}
+      const assistance = await client.getAISuggestions(activeFile)
+      setAiAssistance(assistance)
+    } catch (error) {
+      handleError(error, {
+        operation: 'getAISuggestions',
+        module: 'KiroIDE',
+        metadata: { file: activeFile }
+      });
+      toast({
+        title: 'AI Assist Failed',
+        description: 'Could not get AI suggestions',
+        variant: 'destructive'
+      });
+      }
   const _applySuggestion = async (suggestionId: string) =>  {
     if (!client) {r}eturn try {
       await client.applyAISuggestion(suggestionId, toast({ title: 'Success',
   description: 'AI suggestion applied successfully'   
     })
 } catch (error) {
-      console.error('Failed to apply, suggestion:', error, toast({ title: 'Error',
-        description: 'Failed to apply suggestion',
-variant: 'destructive'
-    })}
+      handleError(error, {
+        operation: 'applyAISuggestion',
+        module: 'KiroIDE',
+        metadata: { suggestionId }
+      });
+      toast({
+        title: 'Failed to apply suggestion',
+        description: 'Could not apply AI suggestion',
+        variant: 'destructive'
+      });
+      }
   // File tree rendering;
 
 const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _handleClick = (): void => {if (tree.type === 'file') {
@@ -149,11 +199,11 @@ const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _ha
     return (
     <div;
 
-    const key={tree.path} style={{ paddingLeft: `${level * 16}px` }}>``</div>
-        <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded cursor-pointer"
+    const key={tree.path} style={ paddingLeft: `${level * 16}px` }>``</div>
+        <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded-lg cursor-pointer"
 
 const onClick={handleClick}
-        ></div>
+         role="button" tabIndex={0}></div>
           {tree.type === 'directory' ? (</div>
             <FolderTree className="h-4 w-4"     />
           ) : (</FolderTree>
@@ -172,8 +222,8 @@ const onClick={handleClick}
   return (
     <div className="h-screen flex flex-col bg-background">
       {/* Header */}</div>
-      <div className="border-b px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-4"></div>
+      <div className="-b px-4 py-2 flex items-center justify-between">
+          <div className="glass flex items-center gap-4"></div>
           <h2 className="text-lg font-semibold">Kiro IDE</h2>
           <span className={`text-sm ${connected ? 'text-green-500' : 'text-red-500'}`}>``</span>
             {connected ? '● Connected' : '● Disconnected'}</span>
@@ -190,8 +240,8 @@ const onClick={handleClick}
         {/* File, explorer */}</ResizablePanelGroup>
         <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
           </ResizablePanel>
-          <div className="h-full border-r">
-          <div className="p-2 border-b"></div>
+          <div className="h-full -r">
+          <div className="p-2 -b"></div>
               <h3 className="text-sm font-medium">Explorer</h3>
             <ScrollArea className="h-[calc(100%-48px)]">
               {fileTree && renderFileTree(fileTree)}</ScrollArea>
@@ -205,21 +255,21 @@ const onClick={handleClick}
           </ResizablePanel>
               <div className="h-full flex flex-col">
                 {/* Tabs */}</div>
-                <div className="flex border-b overflow-x-auto">
+                <div className="flex -b overflow-x-auto">
                   {openFiles.map((file) => (\n    </div>
                     <div; key={file.path} className={`flex items-center gap-2 px-3 py-2 border-r cursor-pointer, hover:bg-accent ${``, activeFile === file.path ? 'bg-accent' : ''}`}
-                      const onClick={() => setActiveFile(file.path)}</div>
+                      const onClick={() => setActiveFile(file.path)}</div role="button" tabIndex={0}>
                     ></div>
                       <FileCode2 className="h-3 w-3"    />
           <span className="text-sm">{file.path.split('/').pop()}</span>
-                      <button className="ml-2 hover: bg-destructive/20 rounded"
+                      <button className="ml-2 hover: bg-destructive/20 rounded-lg"
 
-    const onClick={(e) =>  {</button>
+    const onClick={(e) = aria-label="Button">  {</button>
                           e.stopPropagation(, closeFile(file.path)};
                       ></button>
                         <X className="h-3 w-3"    />))},</X>
     {/* Editor, content */}
-                <div className="flex-1 p-4 overflow-auto">
+                <div className="glass flex-1 p-4 overflow-auto">
                   {activeFile && openFiles.find(f => f.path === activeFile) ? (</div>
                     <div ref={editorRef} className="font-mono text-sm">
                       {/* This would be replaced with a proper code editor like Monaco */}</div>
@@ -232,7 +282,7 @@ const onClick={handleClick}
             <ResizablePanel defaultSize={30} minSize={20}>
           </ResizablePanel>
               <div className="h-full flex flex-col">
-          <div className="flex items-center justify-between p-2 border-b">
+          <div className="flex items-center justify-between p-2 -b">
         <div className="flex items-center gap-2">
           </div>
                     <Terminal className="h-4 w-4"    />
@@ -247,7 +297,7 @@ const onClick={handleClick}
         {/* AI, Assistant */}</ResizableHandle>
         <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
           </ResizablePanel>
-          <div className="h-full border-l">
+          <div className="h-full -l">
           </div>
             <Tabs defaultValue="suggestions", className="h-full">
           </Tabs>
@@ -263,16 +313,16 @@ const onClick={handleClick}
                   <Bug className="h-4 w-4 mr-2"     />
                     Issues
 </Bug>
-              <TabsContent value="suggestions", className="h-[calc(100%-48px)] overflow-auto p-4">
+              <TabsContent value="suggestions", className="glass h-[calc(100%-48px)] overflow-auto p-4">
                 {aiAssistance? .suggestions.map((suggestion) => (\n    </TabsContent>
-                  <Card key={suggestion.id} className="mb-4">
+                  <Card key={suggestion.id} className="mb-4" className="glass
           </Card>
-                    <CardHeader className="pb-3">
+                    <CardHeader className="pb-3" className="glass
           </CardHeader>
-                      <CardTitle className="text-sm">{suggestion.title}</CardTitle>
-                      <CardDescription className="text-xs">
+                      <CardTitle className="text-sm" className="glass{suggestion.title}</CardTitle>
+                      <CardDescription className="text-xs" className="glass
                         {suggestion.type} • {suggestion.priority} priority</Card>
-                    <CardContent>
+                    <CardContent className="glass"
           </CardContent>
                       <p className="text-xs mb-3">{suggestion.description}</p>
                       <Button size="sm";
@@ -283,9 +333,9 @@ const onClick={handleClick}
 </Button>
                 ))}
 </TabsContent>
-              <TabsContent value="diagnostics", className="h-[calc(100%-48px)] overflow-auto p-4">
+              <TabsContent value="diagnostics", className="glass h-[calc(100%-48px)] overflow-auto p-4">
                 {aiAssistance?.diagnostics.map((diagnostic, index) => (\n    </TabsContent>
-                  <div key={index} className="mb-3 p-3 border rounded">
+                  <div key={index} className="mb-3 p-3  rounded-lg">
           <div className="flex items-start gap-2"></div>
                       <Bug className={`h-4 w-4 mt-0.5 ${``
                         diagnostic.severity === 'error' ? 'text-red-500'  : null

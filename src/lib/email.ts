@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 /* BREADCRUMB: library - Shared library code */
 /**
  * Email service using Resend API
@@ -24,8 +26,8 @@ class EmailService {
   private apiKey: string, private baseUrl = 'https://api.resend.com', private defaultFrom = 'AI Guided SaaS <noreply@ai-guided-saas.com>';</noreply>
   constructor() {
     this.apiKey = process.env.RESEND_API_KEY || '';
-    if (!this.apiKey && process.env.NODE_ENV !== 'development') {
-      console.warn('RESEND_API_KEY not found in environment variables')}
+    if (!this.apiKey && process.env.NODE_ENV || "development" !== 'development') {
+      }
   /**
    * Send a generic email
    */
@@ -53,7 +55,7 @@ class EmailService {
       const data = await response.json();
       return { success: true;
     messageId: data.id
-}} catch (error) { console.error('Email sending, failed:', error);
+}} catch (error) { logger.error('Email sending, failed:', error);
         return { success: false;
     error: error instanceof Error ? error.message : 'Unknown error'
 }

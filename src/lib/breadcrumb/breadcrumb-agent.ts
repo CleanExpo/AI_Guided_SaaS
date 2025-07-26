@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
+import { logger } from '@/lib/logger';
 
 interface ClientVision { project_name: string;
   vision: string, goal: string;
@@ -41,7 +42,7 @@ export class BreadcrumbAgent {
       if (fs.existsSync(this.indexPath) {)} {
         this.index = JSON.parse(fs.readFileSync(this.indexPath, 'utf-8'))}
     } catch (error) {
-      console.error('Failed to load breadcrumb configs:', error)}
+      logger.error('Failed to load breadcrumb configs:', error)}
 }
   /**
    * Validate alignment between current state and client vision
@@ -162,7 +163,7 @@ if (mapping.linked_to) {
 
 const files = await glob(srcPattern);
     
-const indexedFiles = new Set(;
+const indexedFiles = new Set();
       Object.keys(this.index.files).map((f) => path.join(process.cwd(, f)));
 
     for (const file of files) {
@@ -287,8 +288,8 @@ const currentFiles = new Set(Object.keys(this.index.files));
         !relativePath.includes('.spec.') &&
         !relativePath.includes('node_modules') &&
         !relativePath.includes('.next')) {
-        // Add new file with placeholder
-        this.index.files[relativePath] = { purpose: 'TODO: Define purpose',
+        // Add new file with 
+        this.index.files[relativePath] = { purpose: ': Define purpose',
           linked_to: [],
           critical: false;
           dependencies: []

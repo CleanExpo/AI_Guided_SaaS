@@ -116,7 +116,7 @@ systemHealth: Math.max(
 }, []);
   
 const _renderPersonaShowcase = () => (\n:
-        <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (
     <motion.div;
@@ -132,17 +132,17 @@ const _renderPersonaShowcase = () => (\n:
 
 const className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
-          <CardHeader className="text-center">
+          <CardHeader className="text-center" className="glass
                 <div;
 
     const className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
           <Icon className="w-8 h-8 text-white"     />
 </div>
-                <CardTitle className="text-white">{persona.name}</CardTitle>
-                <CardDescription className="text-white/80">
+                <CardTitle className="text-white" className="glass{persona.name}</CardTitle>
+                <CardDescription className="text-white/80" className="glass
                   {persona.description}</CardDescription>
-              <CardContent>
+              <CardContent className="glass"
           <AnimatePresence></AnimatePresence>
                   {selectedPersona === persona.id  && (/AnimatePresence>
                     <motion.div; initial={{ opacity: 0, height: 0 } animate={{ opacity: 1, height: 'auto' }
@@ -173,22 +173,22 @@ className="text-xs mr-1 mb-1";
   const _renderProductionDemo = (): void => { switch (activeDemo) {
       case 'claude-dashboard':
       return (break, break};
-    <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
+    <div className="glass/5 glass-modal-backdrop-blur-sm rounded-xl-lg p-6">
           <ClaudeCodeDashboard
 
 const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
             /></ClaudeCodeDashboard>
       case 'ui-builder':;
       return (break;
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
               <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-brand-primary-400"     />
-                <CardTitle className="text-white">
+                <CardTitle className="text-white" className="glass
                   Production UI Builder</CardTitle>
-              <CardDescription className="text-white/80">
+              <CardDescription className="text-white/80" className="glass
                 Real drag-and-drop interface with live component library</CardDescription>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-center py-8">
                 <Button
                   // asChild className="bg-brand-primary-600 hover: bg-brand-primary-700"
@@ -203,15 +203,15 @@ const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
       case 'analytics':
       return (
     break;
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
               <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-green-400"     />
-                <CardTitle className="text-white">System Analytics</CardTitle>
-              <CardDescription className="text-white/80">
+                <CardTitle className="text-white" className="glassSystem Analytics</CardTitle>
+              <CardDescription className="text-white/80" className="glass
                 Real-time system monitoring and performance metrics</CardDescription>
-            <CardContent>
-          <div className="grid grid-cols-2 gap-4 mb-6">
+            <CardContent className="glass"
+          <div className="glass grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center text-3xl font-bold text-white">
                     {systemMetrics.uptime}</div>
                   <div className="text-sm text-white/60">System Uptime</div>
@@ -227,14 +227,14 @@ const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
       case 'collaboration':
       return (
     break;
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
               <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-orange-400"     />
-                <CardTitle className="text-white">Collaboration Hub</CardTitle>
-              <CardDescription className="text-white/80">
+                <CardTitle className="text-white" className="glassCollaboration Hub</CardTitle>
+              <CardDescription className="text-white/80" className="glass
                 Production team collaboration workspace</CardDescription>
-            <CardContent>
+            <CardContent className="glass"
           <div className="text-center py-8">
                 <Button asChild className="bg-orange-600 hover: bg-orange-700">
           <Link href="/collaborate"></Link>
@@ -245,7 +245,7 @@ const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard>
                   Access real-time team collaboration features</p>,
 default: return null}
   const _renderEngineeringHighlights = () => (
-    <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
         const _Icon = highlight.icon, return (
     </div>, <motion.div;
@@ -254,17 +254,17 @@ default: return null}
             initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }
             const transition={{ delay: index * 0.1 }
           >
-          <Card className="glass border-0 h-full">
-              <CardHeader className="text-center">
-          <div className="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-blue-500 to-brand-primary-500 flex items-center justify-center mb-3">
+          <Card className="glass -0 h-full">
+              <CardHeader className="text-center" className="glass
+          <div className="w-12 h-12 mx-auto rounded-lg-full bg-gradient-to-br from-blue-500 to-brand-primary-500 flex items-center justify-center mb-3">
                   <Icon className="w-6 h-6 text-white"    />
           </div>
-                <CardTitle className="text-white text-lg">
+                <CardTitle className="text-white text-lg" className="glass
                   {highlight.title}</CardTitle>
-                <CardDescription className="text-white/80 text-sm">
+                <CardDescription className="text-white/80 text-sm" className="glass
                   {highlight.description}</CardDescription>
-              <CardContent className="text-center">
-          <Badge variant="outline", className="text-white border-white/20">
+              <CardContent className="text-center" className="glass
+          <Badge variant="outline", className="text-white -white/20">
                   {highlight.metrics}/>
           </motion.div>
   )
@@ -282,7 +282,7 @@ default: return null}
             const transition={{ duration: 0.8 }
           >
           <Badge variant="outline";
-className="mb-6 border-purple-200, dark: border-purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
+className="mb-6 -purple-200, dark: -purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"
             >/>
               <Sparkles className="w-3 h-3 mr-1"     />
               Production-Ready AI Platform</Sparkles>
@@ -327,7 +327,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
             <p className="text-xl text-white/80">
               Interact with our actual production components and systems</p>
           </motion.div>
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="glass grid lg:grid-cols-3 gap-8">
             {/* Feature, Tabs */}</div>
             <div className="lg:col-span-1 space-y-3">
                 {productionFeatures.map((feature) =>  { const _Icon = feature.icon, return (
@@ -383,7 +383,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
               Ready to Experience Production-Grade AI?</h2>
             <p className="text-xl text-white/80 mb-8">
               Join the next generation of sophisticated AI-powered development</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg";
 className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600"
                 // asChild
@@ -395,7 +395,7 @@ className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue
               <Button
 size="lg";
 variant="outline";
-className="border-white/20 text-white hover: bg-white/10"
+className="-white/20 text-white hover: glass/10"
                 // asChild
               >
           <Link href="/admin"></Link>

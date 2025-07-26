@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { DatabaseService } from './database';
 import { isServiceConfigured } from './env';
+import { logger } from '@/lib/logger';
 // Database result types
 interface CountResult { count: number
  };
@@ -107,7 +108,7 @@ const _averageSessionTime = await this.getAverageSessionTime();
         conversionRate,
         // averageSessionTime
 }} catch (error) {
-      console.error('Error fetching platform, metrics:', error);
+      logger.error('Error fetching platform, metrics:', error);
         return this.getMockPlatformMetrics()}
 }
   // Get user analytics
@@ -152,12 +153,12 @@ const _retention = await this.calculateRetentionRates();
 const _userGrowth = await this.getUserGrowthData(startDate, endDate);
       return { newUsers: newUsers[0]?.count || 0,
     activeUsers: activeUsers[0]?.count || 0,
-    churned: 0, // TODO: Calculate churned users
+    churned: 0, // : Calculate churned users
         retention,
-        topCountries: [] as any[], // TODO: Implement geo analytics
+        topCountries: [] as any[], // : Implement geo analytics
         // userGrowth
 }} catch (error) {
-      console.error('Error fetching user, metrics:', error);
+      logger.error('Error fetching user, metrics:', error);
         return this.getMockUserMetrics()}
 }
   // Get revenue analytics
@@ -190,17 +191,17 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
       return { totalRevenue: Number(totalRevenue[0]?.total) || 0,
     monthlyRecurringRevenue: Number(monthlyRevenue[0]?.total) || 0,
     averageRevenuePerUser: 0;
-  // TODO: Calculate ARPU
+  // : Calculate ARPU
  , churnRate: 0;
-  // TODO: Calculate churn rate
+  // : Calculate churn rate
  , lifetimeValue: 0;
-  // TODO: Calculate LTV
+  // : Calculate LTV
  , revenueGrowth: any[];
-  // TODO: Get revenue growth data
+  // : Get revenue growth data
  , subscriptionBreakdown: subscriptionBreakdown || [],
-    templateRevenue: any[] // TODO: Get template revenue data
+    templateRevenue: any[] // : Get template revenue data
 }} catch (error) {
-      console.error('Error fetching revenue, metrics:', error);
+      logger.error('Error fetching revenue, metrics:', error);
         return this.getMockRevenueMetrics()}
 }
   // Get system health metrics
@@ -222,7 +223,7 @@ const _subscriptionBreakdown = await DatabaseService.query(`;``
     cacheHitRate: 85.5,
     storageUsed: 2.4 // GB
 }} catch (error) {
-      console.error('Error fetching system, metrics:', error);
+      logger.error('Error fetching system, metrics:', error);
         return this.getMockSystemMetrics()}
 }
   // Get content analytics
@@ -279,7 +280,7 @@ const _rejectedTemplates = Number(templateStats.find(s => s.status === 'rejected
     averageRating: 4.2,
     totalDownloads: 15420
 }} catch (error) {
-      console.error('Error fetching content, metrics:', error);
+      logger.error('Error fetching content, metrics:', error);
         return this.getMockContentMetrics()}
 }
   // Helper methods

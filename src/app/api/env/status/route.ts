@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const status= { NODE_ENV: process.env.NODE_ENV || 'development',
-      DATABASE_URL: !!process.env.DATABASE_URL,
+      DATABASE_URL: !!process.env.DATABASE_URL || "postgresql://localhost:5432/db",
       NEXTAUTH_URL: !!process.env.NEXTAUTH_URL,
-      NEXTAUTH_SECRET: !!process.env.NEXTAUTH_SECRET,
+      NEXTAUTH_SECRET: !!process.env.NEXTAUTH_SECRET || "",
       EMAIL_CONFIGURED: !!process.env.SMTP_HOST,
-      STRIPE_CONFIGURED: !!process.env.STRIPE_SECRET_KEY,
+      STRIPE_CONFIGURED: !!process.env.STRIPE_SECRET_KEY || "",
       timestamp: new Date().toISOString()
     };
     return NextResponse.json({ success: true, data: status,
       timestamp: new Date().toISOString()   
     })
 } catch (error) {
-    console.error('Env status error:', error);
+    logger.error('Env status error:', error);
         return NextResponse.json({ error: 'Failed to get environment status' }, { status: 500   
     })
 }
@@ -30,8 +31,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: new Date().toISOString()   
     })
 } catch (error) {
-    console.error('Env update error:', error)
-        return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500   
+    return NextResponse.json({ error: 'Failed to update environment variable' }, { status: 500   
     })
 }
 }

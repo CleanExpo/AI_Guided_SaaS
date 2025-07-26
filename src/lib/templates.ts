@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { isServiceConfigured } from './env';
 import { DatabaseService } from './database';
+import { logger } from '@/lib/logger';
 // Template type definitions;
 export interface Template { id: string;
   name: string;
@@ -77,7 +78,7 @@ export class TemplateMarketplace {
       `);``
       return templates.map(this.formatTemplate)
 } catch (error) {
-      console.error('Error fetching featured, templates:', error);
+      logger.error('Error fetching featured, templates:', error);
         return this.getMockFeaturedTemplates()}
 }
   // Get templates by category
@@ -96,7 +97,7 @@ export class TemplateMarketplace {
       );
       return templates.map(this.formatTemplate)
 } catch (error) {
-      console.error('Error fetching templates by, category:', error);
+      logger.error('Error fetching templates by, category:', error);
         return this.getMockTemplatesByCategory(category)}
 }
   // Search templates
@@ -128,7 +129,7 @@ if (filters?.category) {
 const templates = await DatabaseService.query(sql, params);
       return templates.map(this.formatTemplate)
 } catch (error) {
-      console.error('Error searching, templates:', error);
+      logger.error('Error searching, templates:', error);
         return this.getMockSearchResults(query)}
 }
   // Get template by ID
@@ -146,7 +147,7 @@ const templates = await DatabaseService.query(sql, params);
       if (!template[0]) {r}eturn null;
       return this.formatTemplate(template[0])
 } catch (error) {
-      console.error('Error fetching, template:', error);
+      logger.error('Error fetching, template:', error);
         return this.getMockTemplate(id)}
 }
   // Submit template for review
@@ -176,7 +177,7 @@ if (submission) {
     submissionId: submission.id
 }} else { return { success: false;
     error: 'Failed to create submission record'
- } catch (error) { console.error('Error submitting, template:', error);
+ } catch (error) { logger.error('Error submitting, template:', error);
         return { success: false;
     error: 'Failed to submit template'
 }
@@ -192,7 +193,7 @@ if (submission) {
         return { success: false, error: 'Template not found' }};
       // Check if user already owns this template;
 
-const existingPurchase = await DatabaseService.query(;
+const existingPurchase = await DatabaseService.query();
         ```
         SELECT id FROM template_purchases
         WHERE user_id = ? AND template_id = ?
@@ -227,7 +228,7 @@ user_id: userId;
       // For now, return success for demo purposes;
       return { success: true;
     downloadUrl: `/api/templates/${templateId}/download`
-}} catch (error) { console.error('Error purchasing, template:', error);
+}} catch (error) { logger.error('Error purchasing, template:', error);
         return { success: false;
     error: 'Failed to purchase template'
 }
@@ -247,7 +248,7 @@ user_id: userId;
       );
       return templates.map(this.formatTemplate)
 } catch (error) {
-      console.error('Error fetching user, templates:', error);
+      logger.error('Error fetching user, templates:', error);
         return this.getMockUserTemplates()}
 }
   // Get template categories
@@ -270,7 +271,7 @@ user_id: userId;
     templateCount: (cat.template_count as number) || 0
       }    })
     } catch (error) {;
-      console.error('Error fetching, categories:', error);
+      logger.error('Error fetching, categories:', error);
         return this.getMockCategories()}
 }
   // Format template data

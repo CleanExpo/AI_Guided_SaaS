@@ -31,7 +31,7 @@ export default function FormBuilderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
           <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -42,14 +42,14 @@ export default function FormBuilderPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="glass grid gap-6 lg:grid-cols-3">
           {/* Form Elements Panel */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Form Elements</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Form Elements</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-2">
                   {elementTypes.map((element) => (
                     <Button
@@ -69,11 +69,11 @@ export default function FormBuilderPage() {
 
           {/* Form Builder */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Form Builder</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Form Builder</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
                   {formElements.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
@@ -81,14 +81,14 @@ export default function FormBuilderPage() {
                     </div>
                   ) : (
                     formElements.map((element) => (
-                      <div key={element.id} className="p-3 border rounded-lg">
+                      <div key={element.id} className="p-3  rounded-xl-lg">
                         <div className="flex items-center justify-between mb-2">
                           <label className="font-medium">{element.label}</label>
                           <Badge variant="outline">{element.type}</Badge>
                         </div>
                         {element.type === 'textarea' ? (
                           <textarea 
-                            className="w-full p-2 border rounded" 
+                            className="w-full p-2  rounded-lg" 
                             placeholder={`Enter ${element.label.toLowerCase()}`}
                             rows={3} />
                         ) : (
@@ -106,11 +106,11 @@ export default function FormBuilderPage() {
 
           {/* Settings Panel */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Form Settings</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Form Settings</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Form Title</label>
@@ -119,7 +119,7 @@ export default function FormBuilderPage() {
                   <div>
                     <label className="block text-sm font-medium mb-1">Description</label>
                     <textarea 
-                      className="w-full p-2 border rounded" 
+                      className="w-full p-2  rounded-lg" 
                       placeholder="Form description"
                       rows={3} />
                   </div>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json(status)
 } catch (error) {
-        console.error('MCP status error:', error);
+        logger.error('MCP status error:', error);
         return NextResponse.json({ status: 'error',
             error: 'Failed to get MCP status',
             timestamp: new Date().toISOString()

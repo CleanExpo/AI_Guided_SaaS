@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/utils/cn';
 import { Spinner } from './loading';
+import { logger } from '@/lib/logger';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {</HTMLButtonElement>
   variant?: null | 'default'
     | 'destructive'
@@ -224,7 +225,7 @@ export function SplitButton({;
       ></ButtonEnhanced>
         {children}
 </ButtonEnhanced>
-      <ButtonEnhanced className="rounded-l-none px-2";
+      <ButtonEnhanced className="rounded-lg-l-none px-2";
 
     variant={props.variant} size={props.size}
         const onClick={() => onDropdownToggle?.(!dropdownOpen)}</ButtonEnhanced>
@@ -242,13 +243,13 @@ strokeLinejoin="round";
 const strokeWidth={2}
             d="M19 9l-7 7-7-7"     />
       {dropdownOpen && (
-        <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background border rounded-md shadow-lg z-50">
+        <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background  rounded-lg-md shadow-md-lg z-50">
           {dropdownItems.map((item, index) => (\n    </div>
             <button const key={index};
               className="w-full px-3 py-2 text-left text-sm hover: bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
 
 onClick={ item.onClick} disabled={item.disabled}
-            ></button>
+             aria-label="Button"></button>
               {item.icon && <span className="mr-2">{item.icon}</span>}
               {item.label}
 </button>
@@ -275,7 +276,7 @@ export function CopyButton({;
       onCopy?.()
       setTimeout(() => setCopied(false, 2000)
 }; catch (err) {
-      console.error('Failed to copy text: ', err)};
+      logger.error('Failed to copy text: ', err)};
   return (
     <ButtonEnhanced
 

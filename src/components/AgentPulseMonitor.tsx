@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -93,15 +93,15 @@ export function AgentPulseMonitor() {
   return (
     <div className="space-y-4">
       {/* Resource Usage */}
-      <Card>
-          <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+      <Card className="glass"
+          <CardHeader className="glass"
+          <CardTitle className="flex items-center gap-2" className="glass
             <Activity className="h-5 w-5" />
             System Resources
           </CardTitle>
-          <CardDescription>Real-time resource utilization</CardDescription>
+          <CardDescription className="glass"Real-time resource utilization</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4" className="glass
           <div>
             <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
@@ -134,20 +134,20 @@ export function AgentPulseMonitor() {
       </Card>
 
       {/* Agent Status */}
-      <Card>
-          <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+      <Card className="glass"
+          <CardHeader className="glass"
+          <CardTitle className="flex items-center gap-2" className="glass
             <Users className="h-5 w-5" />
             Agent Status
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="glass"
             {pulse.activeAgents.length}/{pulse.config.maxConcurrentAgents} agents active
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="glass"
+          <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             {agents.map((agent) => (
-              <div key={agent.agentId} className="border rounded-lg p-3">
+              <div key={agent.agentId} className=" rounded-xl-lg p-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-medium">{agent.agentId}</span>
                   <Badge variant={agent.isAvailable ? "success" : "secondary"}>
@@ -171,14 +171,14 @@ export function AgentPulseMonitor() {
       </Card>
 
       {/* Task Queue */}
-      <Card>
-          <CardHeader>
-          <CardTitle>Task Queue</CardTitle>
-          <CardDescription>
+      <Card className="glass"
+          <CardHeader className="glass"
+          <CardTitle className="glass"Task Queue</CardTitle>
+          <CardDescription className="glass"
             {pulse.taskQueue.length} tasks pending
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-2">
             {Object.entries(pulse.taskQueue.priorities).map(([priority, count]) => (
               <div key={priority} className="flex items-center justify-between">
@@ -191,12 +191,12 @@ export function AgentPulseMonitor() {
       </Card>
 
       {/* Configuration */}
-      <Card>
-          <CardHeader>
-          <CardTitle>Pulse Configuration</CardTitle>
+      <Card className="glass"
+          <CardHeader className="glass"
+          <CardTitle className="glass"Pulse Configuration</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="grid grid-cols-2 gap-4 text-sm">
+        <CardContent className="space-y-3" className="glass
+          <div className="glass grid grid-cols-2 gap-4 text-sm">
             <div>
               <span className="text-gray-600">Max Concurrent:</span>
               <span className="ml-2 font-medium">{pulse.config.maxConcurrentAgents}</span>

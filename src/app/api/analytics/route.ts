@@ -1,11 +1,14 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
+import { validateInput } from '@/lib/api/validation-middleware';
+import { analyticsSchemas } from '@/lib/api/validation-schemas';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-    try {
-        const url = new URL(request.url);
-        const type = url.searchParams.get('type') || 'general';
+    return validateInput(analyticsSchemas.query, 'query')(request, async (params) => {
+        try {
+            const { type, startDate, endDate, metrics } = params;
         let data;
         
         switch (type) {
@@ -34,14 +37,51 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     })
 }
         
-        return NextResponse.json({
-            type,
-            data,
-            timestamp: new Date().toISOString()   
-    })
-} catch (error) {
-        console.error('Analytics API error:', error);
-        return NextResponse.json({ error: 'Failed to fetch analytics' }, { status: 500   
-    })
+            return NextResponse.json({
+                type,
+                data,
+                timestamp: new Date().toISOString()
+            });
+        } catch (error) {
+            logger.error('Analytics API error:', error);
+            return NextResponse.json({ 
+                error: 'Failed to fetch analytics' 
+            }, { 
+                status: 500
+            });
+        }
+    });
 }
+
+export async function POST(request: NextRequest): Promise<NextResponse> {
+    return validateInput(analyticsSchemas.trackEvent)(request, async (data) => {
+        try {
+            const { event, properties, timestamp, userId } = data;
+            
+            // Log the analytics event
+            logger.info('Analytics event tracked', {
+                event,
+                properties,
+                timestamp,
+                userId
+            });
+            
+            // In production, this would send to analytics service
+            // await sendToAnalyticsService({ event, properties, timestamp, userId });
+            
+            return NextResponse.json({
+                success: true,
+                event,
+                tracked: true,
+                timestamp: timestamp || new Date().toISOString()
+            });
+        } catch (error) {
+            logger.error('Analytics tracking error:', error);
+            return NextResponse.json({ 
+                error: 'Failed to track event' 
+            }, { 
+                status: 500
+            });
+        }
+    });
 }

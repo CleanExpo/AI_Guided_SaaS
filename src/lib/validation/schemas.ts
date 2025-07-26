@@ -115,7 +115,7 @@ export function validate<T>(</T>
     throw error
 }
 
-export function validateAsync<T>(;</T>
+export function validateAsync<T>();</T>
     schema: z.ZodSchema<T></T>
     data: unknown
 ): Promise<any> {

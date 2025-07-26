@@ -1,9 +1,4 @@
 /* BREADCRUMB: app - Application page or route */
-'use client';
-
-// Force dynamic rendering to avoid SSG errors
-export const dynamic = 'force-dynamic';
-
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -12,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, ArrowLeft, Share2, Bookmark } from 'lucide-react';
 import Link from 'next/link';
+import DOMPurify from 'isomorphic-dompurify';
 
 // Mock blog posts data
 const blogPosts = [
@@ -113,18 +109,18 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   }
   
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4 max-w-4xl">
         <Link href="/blog">
           <Button variant="ghost" className="mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4"   />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
           </Button>
         </Link>
         
         <article>
           <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="glass flex items-center gap-4 mb-4">
           <Badge variant="secondary">{post.category}</Badge>
               <span className="text-sm text-gray-500">{post.readTime}</span>
             </div>
@@ -133,9 +129,9 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
             
             <div className="flex items-center justify-between mb-8">
           <div className="flex items-center text-sm text-gray-500">
-                <User className="h-4 w-4 mr-1"  />
+                <User className="h-4 w-4 mr-1" />
           <span className="mr-3">{post.author}</span>
-                <Calendar className="h-4 w-4 mr-1"  />
+                <Calendar className="h-4 w-4 mr-1" />
           <span>{post.publishedAt}</span>
               </div>
               
@@ -149,18 +145,18 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               </div>
             </div>
             
-            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg mb-8"></div>
+            <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg mb-8"></div>
           </div>
           
-          <Card>
-            <CardContent className="prose prose-lg max-w-none p-8">
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <Card className="glass"
+            <CardContent className="glass prose prose-lg max-w-none p-8">
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content ) }} />
             </CardContent>
           </Card>
           
-          <div className="mt-12 pt-8 border-t">
+          <div className="mt-12 pt-8 -t">
             <h3 className="text-2xl font-bold mb-4">Share this article</h3>
-            <div className="flex gap-4">
+            <div className="glass flex gap-4">
               <Button variant="outline">Share on Twitter</Button>
               <Button variant="outline">Share on LinkedIn</Button>
               <Button variant="outline">Copy Link</Button>

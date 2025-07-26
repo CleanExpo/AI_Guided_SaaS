@@ -1,5 +1,6 @@
 /* BREADCRUMB: app - Application page or route */
 import React from 'react';
+import '@/styles/glass-theme.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -9,6 +10,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { WhiteLabelProvider, WhiteLabelHead } from '@/components/white-label/WhiteLabelProvider';
 import { ErrorBoundary } from '@/components/error/ErrorBoundary';
 import { WebVitalsMonitor } from '@/components/monitoring/WebVitals';
+import { AgentInitializer } from '@/components/agents/AgentInitializer';
+import { MCPDesignerIntegration } from '@/components/MCPDesignerIntegration';
 
 const inter = Inter({ subsets: ['latin']
     });
@@ -90,11 +93,13 @@ export default function RootLayout({
           <Providers>
             <ErrorBoundary>
               <WebVitalsMonitor />
+              <AgentInitializer />
               <div className="min-h-screen bg-background flex flex-col">
                 <ConditionalLayout>
                   {children}
                 </ConditionalLayout>
                 <Toaster />
+                <MCPDesignerIntegration />
               </div>
             </ErrorBoundary>
           </Providers>

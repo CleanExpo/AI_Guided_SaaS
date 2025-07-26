@@ -44,7 +44,7 @@ export default function DataFlexibilityPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -55,17 +55,17 @@ export default function DataFlexibilityPage() {
           </p>
         </div>
         
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="glass grid gap-6 lg:grid-cols-2">
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Available Data Sources</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Available Data Sources</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
                   {dataSources.map((source) => (
-                    <div key={source.id} className="flex items-center space-x-4 p-4 border rounded-lg">
-                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <div key={source.id} className="glass flex items-center space-x-4 p-4  rounded-xl-lg">
+                      <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center">
                         <source.icon className="h-6 w-6 text-blue-600" />
                       </div>
                       <div className="flex-1">
@@ -85,14 +85,14 @@ export default function DataFlexibilityPage() {
           </div>
           
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Sample Data Preview</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Sample Data Preview</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-3">
                   {mockData.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={item.id} className="flex items-center justify-between p-3 glass rounded-xl-lg">
                       <div>
                         <p className="font-medium text-gray-900">{item.name}</p>
                         <p className="text-sm text-gray-600">{item.email}</p>
@@ -101,7 +101,7 @@ export default function DataFlexibilityPage() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                <div className="glass mt-4 p-4 bg-blue-50 rounded-xl-lg">
                   <p className="text-sm text-blue-800">
                     <strong>AI Insight:</strong> This data shows 3 users with different roles. 
                     I can help you analyze patterns, generate reports, or create visualizations.

@@ -116,14 +116,14 @@ const analysis = await this.analyzeAgentTeam(currentAgents, requirements);
       this.observe('Agent team analysis complete', analysis);
       // Step, 2: Profile agent performance;
 
-const performanceProfiles = await this.profileAgentPerformance(;
+const performanceProfiles = await this.profileAgentPerformance();
         currentAgents,
         // analysis;
       );
       this.observe('Performance profiling complete', performanceProfiles);
       // Step, 3: Identify improvement opportunities;
 
-const improvements = await this.identifyImprovements(;
+const improvements = await this.identifyImprovements();
         currentAgents,
         analysis,
         performanceProfiles,
@@ -133,7 +133,7 @@ const improvements = await this.identifyImprovements(;
     });
       // Step, 4: Refine agent configurations;
 
-const refinedAgents = await this.refineAgents(;
+const refinedAgents = await this.refineAgents();
         currentAgents,
         improvements,
         // performanceProfiles;
@@ -142,7 +142,7 @@ const refinedAgents = await this.refineAgents(;
       }};
       // Step, 5: Design collaboration strategy;
 
-const collaborationStrategy = await this.designCollaboration(;
+const collaborationStrategy = await this.designCollaboration();
         refinedAgents,
         requirements,
         // constraints;
@@ -150,7 +150,7 @@ const collaborationStrategy = await this.designCollaboration(;
       this.observe('Designed collaboration strategy', collaborationStrategy);
       // Step, 6: Calculate performance metrics;
 
-const _performanceMetrics = await this.calculateMetrics(;
+const _performanceMetrics = await this.calculateMetrics();
         currentAgents,
         refinedAgents,
         // collaborationStrategy;
@@ -158,7 +158,7 @@ const _performanceMetrics = await this.calculateMetrics(;
       this.observe('Calculated performance metrics', performanceMetrics);
       // Step, 7: Generate recommendations;
 
-const _recommendations = await this.generateRecommendations(;
+const _recommendations = await this.generateRecommendations();
         refinedAgents,
         collaborationStrategy,
         // performanceMetrics;

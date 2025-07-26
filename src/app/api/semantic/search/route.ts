@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 import { semanticSearch } from '@/lib/semantic/SemanticSearchService';
 
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400   
     })
 }
-    console.error('Semantic search error:', error);
+    logger.error('Semantic search error:', error);
     return NextResponse.json({ error: 'Search failed', message: error instanceof Error ? error.message : 'Unknown error' }, { status: 500   
     })
 }

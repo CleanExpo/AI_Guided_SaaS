@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import fs from 'fs';import path from 'path';
 import { EnvManager } from '@/lib/env/EnvManager';
+import { logger } from '@/lib/logger';
 interface EPCCheckResult { env_check: 'pass' | 'fail' | 'warning',
   missing: string[],
   outdated: string[],
@@ -84,7 +85,7 @@ if (result.missing.length > 0 || result.invalid.length > 0) {
       this.cachedResult = result;
       this.lastCheckTime = Date.now();
       return result
-} catch (error) { console.error('EPC Engine, error:', error);
+} catch (error) { logger.error('EPC Engine, error:', error);
         return { env_check: 'fail',
         missing: [] as any[],
     outdated: [] as any[],
@@ -125,9 +126,9 @@ required: ServiceRequirements;
       if (fs.existsSync(defaultsPath) {)} {
         const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
         // Logic to compare current values with defaults
-        // This is a placeholder - implement actual comparison logic
+        // This is a  - implement actual comparison logic
 }} catch (error) {
-      console.error('Error checking outdated, variables:', error)}
+      logger.error('Error checking outdated, variables:', error)}
     return outdated
 }
   /**
@@ -149,7 +150,7 @@ const prodOverrides = envOverrides.production?.overrides || {};
               prodOverrides[key]
             ) {)} {
             mismatched.push(key)} catch (error) {
-      console.error('Error checking environment, mismatches:', error)}
+      logger.error('Error checking environment, mismatches:', error)}
     return mismatched
 }
   /**

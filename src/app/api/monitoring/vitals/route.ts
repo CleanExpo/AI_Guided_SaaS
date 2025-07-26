@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
@@ -37,7 +39,7 @@ export async function POST(request: NextRequest) {
     const ip = headersList.get('x-forwarded-for') || 'unknown';
 
     // Log metric for analysis
-    console.log(`Web Vital: ${metric.name} = ${metric.value} (${metric.rating}) from ${url}`);
+    logger.info(`Received ${metric.name}: ${metric.value} (${metric.rating}) from ${url}`);
 
     // Store metric
     const key = `${metric.name}-${new Date().toISOString().split('T')[0]}`;
@@ -64,7 +66,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
 
   } catch (error) {
-    console.error('Failed to process Web Vitals:', error);
+    logger.error('Failed to process Web Vitals:', error);
     return NextResponse.json(
       { error: 'Failed to process metrics' },
       { status: 500 }
@@ -104,7 +106,7 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Failed to retrieve Web Vitals:', error);
+    logger.error('Failed to retrieve Web Vitals:', error);
     return NextResponse.json(
       { error: 'Failed to retrieve metrics' },
       { status: 500 }
@@ -181,12 +183,19 @@ function generateSummary(metrics: Record<string, any>) {
   return scores;
 }
 
-async function sendPerformanceAlert(data: any) {
+interface PerformanceAlertData {
+  metric: VitalMetric;
+  url: string;
+  timestamp: string;
+  userAgent: string;
+}
+
+async function sendPerformanceAlert(data: PerformanceAlertData) {
   // Send alerts for poor performance
-  console.warn('Performance Alert:', data);
+  logger.warn(`Performance alert: ${data.metric.name} scored ${data.metric.rating}`);
 
   // In production, integrate with alerting systems
-  const alertWebhook = process.env.PERFORMANCE_ALERT_WEBHOOK;
+  const alertWebhook = process.env.PERFORMANCE_ALERT_WEBHOOK || "";
   if (alertWebhook) {
     try {
       await fetch(alertWebhook, {
@@ -199,7 +208,7 @@ async function sendPerformanceAlert(data: any) {
         }),
       });
     } catch (error) {
-      console.error('Failed to send performance alert:', error);
+      logger.error('Failed to send performance alert:', error);
     }
   }
 }

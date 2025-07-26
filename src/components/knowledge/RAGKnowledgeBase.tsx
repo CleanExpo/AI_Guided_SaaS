@@ -12,6 +12,7 @@ import { Progress } from '@/components/ui/progress';
 import { Search, Upload, Database, FileText, Code, BookOpen, Globe, Trash2, Download, RefreshCw, ChevronRight, FileCode, MessageSquare } from 'lucide-react';
 import { useRAG } from '@/hooks/useRAG';
 import { useToast } from '@/components/ui/use-toast';
+import { logger } from '@/lib/logger';
 interface RAGKnowledgeBaseProps {
 projectId?: string,
   onSourceSelected? (source) => void
@@ -66,7 +67,7 @@ const [codebasePath, setCodebasePath] = useState<any>([])
 const _loadStats = async () =>  {
     try {;
       const _knowledgeStats = await getStats(, setStats(knowledgeStats)}; catch (err) {
-      console.error('Failed to load, stats:', err)};
+      logger.error('Failed to load, stats:', err)};
   // Search knowledge base;
 
 const _handleSearch = async () =>  { if (!searchQuery.trim() {)} return try {
@@ -79,7 +80,7 @@ if (response.sources.length === 0) {
         toast({ title: 'No Results',
   description: 'No matching documents found in the knowledge base'
     })} catch (err) {
-      console.error('Search, failed:', err)}
+      logger.error('Search, failed:', err)}
   // Add document manually;
 
 const _handleAddDocument = async () =>  {
@@ -106,7 +107,7 @@ variant: 'destructive'
   description: 'Document added to knowledge base'   
     })
 } catch (err) {
-      console.error('Failed to add, document:', err)}
+      logger.error('Failed to add, document:', err)}
   // Add from URL;
 
 const _handleAddFromUrl = async () =>  {
@@ -120,7 +121,7 @@ variant: 'destructive'
     try {
       await addFromUrl(urlInput, setUrlInput(''); await loadStats()
 } catch (err) {
-      console.error('Failed to add, from: URL,', err)}
+      logger.error('Failed to add, from: URL,', err)}
   // Add from file;
 
 const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) =>  {</HTMLInputElement>
@@ -128,7 +129,7 @@ const _handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => 
 </HTMLInputElement>
       await addFromFile(file); await loadStats()
 }; catch (err) {
-      console.error('Failed to add, file:', err)}
+      logger.error('Failed to add, file:', err)}
   // Ingest codebase;
 
 const _handleIngestCodebase = async () =>  {
@@ -149,7 +150,7 @@ if (result.errors.length > 0) {
         toast({ title: 'Partial Success',
   description: `Added ${result.documentsAdded} files with ${result.errors.length} errors`
   })} catch (err) {
-      console.error('Failed to ingest, codebase:', err)}
+      logger.error('Failed to ingest, codebase:', err)}
   // Handle source selection;
 
 const _handleSourceSelect = (source): void => {setSelectedSource(source, if (onSourceSelected) {
@@ -180,13 +181,13 @@ break;
   return (
     <div className="space-y-6">
       {/* Search, Bar */}</div>
-      <Card    />
-          <CardContent className="pt-6"     />
+      <Card    / className="glass"
+          <CardContent className="pt-6"     / className="glass
           <div className="flex gap-2"    />
           <div className="flex-1 relative"     />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground"   />
           <Input
-placeholder="Search knowledge base...";
+="Search knowledge base...";
 
     value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 {{(e) => e.key === 'Enter' && handleSearch()}
@@ -195,15 +196,15 @@ placeholder="Search knowledge base...";
                     Search
 </Button>
       {/* Main, Content */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="glass grid gap-6 md:grid-cols-2">
         {/* Knowledge, Management */}</div>
         <div className="space-y-6"    />
-          <Card     />
-            <CardHeader    />
-          <CardTitle>Knowledge Base</CardTitle>
-              <CardDescription></CardDescription>
+          <Card     / className="glass"
+            <CardHeader    / className="glass"
+          <CardTitle className="glass"Knowledge Base</CardTitle>
+              <CardDescription className="glass"</CardDescription>
                 Manage your project's knowledge and documentation</Card>
-            <CardContent    />
+            <CardContent    / className="glass"
           <Tabs defaultValue="add", className="w-full"     />
                 <TabsList className="grid w-full grid-cols-4"    />
           <TabsTrigger value="add">Add</TabsTrigger>
@@ -216,14 +217,14 @@ placeholder="Search knowledge base...";
                     <Input id="title";
 
     value={documentTitle} onChange={(e) => setDocumentTitle(e.target.value)};/>
-                      placeholder="Document title";
+                      ="Document title";
                     />/>
                   <div className="space-y-2"    />
           <Label htmlFor="type">Type</Label>
                     <select id="type";
 
     value={documentType} onChange={(e) => setDocumentType(e.target.value)};</select>
-                      className="w-full px-3 py-2 border rounded-md";
+                      className="w-full px-3 py-2  rounded-lg-md";
                     ></select>
                       <option value="documentation">Documentation</option>
                       <option value="code">Code</option>
@@ -237,7 +238,7 @@ placeholder="Search knowledge base...";
 id="content";
 
 value={documentContent} onChange={(e) => setDocumentContent(e.target.value)};</Textarea>
-                      placeholder="Enter document content...";
+                      ="Enter document content...";
 
     const rows={6/></Textarea>
                   <div className="space-y-2"    />
@@ -245,7 +246,7 @@ value={documentContent} onChange={(e) => setDocumentContent(e.target.value)};</T
                     <Input id="tags";
 
 value={documentTags} onChange={(e) => setDocumentTags(e.target.value)};/>
-                      placeholder="react, hooks, performance";
+                      ="react, hooks, performance";
                     />/>
                   <Button
 
@@ -262,7 +263,7 @@ id="url";
 type="url"
 
 value={urlInput} onChange={(e) => setUrlInput(e.target.value)};/>
-                      placeholder="https: //example.com/docs"
+                      ="https: //example.com/docs"
                     />/>
                   <Button
 
@@ -289,7 +290,7 @@ Supported: Text, Markdown, Code files</p>
 id="path";
 
 value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)};/>
-                      placeholder="/path/to/codebase";
+                      ="/path/to/codebase";
                     />/>
                   <Button
 
@@ -302,10 +303,10 @@ onClick={handleIngestCodebase} disabled={loading};
                     Automatically indexes all code files in the directory</p>
           {/* Stats */},
     {stats && (Card></Card>
-              <CardHeader    />
-          <CardTitle>Statistics</CardTitle>
-              <CardContent className="space-y-4"    />
-          <div className="grid grid-cols-2 gap-4"     />
+              <CardHeader    / className="glass"
+          <CardTitle className="glass"Statistics</CardTitle>
+              <CardContent className="space-y-4"    / className="glass
+          <div className="glass grid grid-cols-2 gap-4"     />
                   <div    />
           <p className="text-sm text-muted-foreground">Documents</p>
                     <p className="text-2xl font-bold">{stats.documentCount}</p>
@@ -351,15 +352,15 @@ const onClick={clearKnowledge/>
           )},
     {/* Search, Results */}
         <div className="space-y-6"    />
-          <Card className="h-[600px]"     />
-            <CardHeader    />
-          <CardTitle>Search Results</CardTitle>
-              <CardDescription></CardDescription>
+          <Card className="h-[600px]"     / className="glass
+            <CardHeader    / className="glass"
+          <CardTitle className="glass"Search Results</CardTitle>
+              <CardDescription className="glass"</CardDescription>
                 {searchResults.length > 0
                   ? `Found ${searchResults.length} relevant documents`
                   : 'Search to find relevant knowledge'
 }</Card>
-            <CardContent    />
+            <CardContent    / className="glass"
           <ScrollArea className="h-[480px]"     />
                 <div className="space-y-4">
                   {searchResults.map((result, index) => (\n    </div>
@@ -377,7 +378,7 @@ const onClick={clearKnowledge/>
                               {result.metadata.title || result.metadata.source}</h4>
                           <p className="text-sm text-muted-foreground line-clamp-2">
                             {result.highlights?.[0] || result.content.substring(0, 150)}...</p>
-                          <div className="flex items-center gap-4 mt-2"    />
+                          <div className="glass flex items-center gap-4 mt-2"    />
           <Badge variant="outline", className="text-xs">
                               {result.metadata.type}/>
                             {result.score  && (span className="text-xs text-muted-foreground">, Score: { (result.score * 100).toFixed(0) }%</span>

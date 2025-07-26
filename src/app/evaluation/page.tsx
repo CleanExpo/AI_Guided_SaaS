@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -75,7 +77,7 @@ export default function EvaluationDashboard() {
       setHistory(mockHistory);
       setLastRefresh(new Date());
     } catch (error) {
-      console.error('Failed to load evaluation data:', error);
+      logger.error('Failed to load evaluation data:', error);
     }
   };
 
@@ -119,7 +121,7 @@ export default function EvaluationDashboard() {
   const trend = calculateTrend();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -128,7 +130,7 @@ export default function EvaluationDashboard() {
               <h1 className="text-3xl font-bold text-gray-900">Evaluation Dashboard</h1>
               <p className="text-gray-600 mt-1">Monitor your application quality scores in real-time</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="glass flex items-center gap-4">
               <Button
                 variant="outline"
                 onClick={loadEvaluationData}
@@ -158,16 +160,16 @@ export default function EvaluationDashboard() {
         </div>
 
         {/* Overall Score Card */}
-        <Card className="mb-8">
-          <CardHeader>
+        <Card className="mb-8" className="glass
+          <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl">Overall Score</CardTitle>
+              <CardTitle className="text-2xl" className="glassOverall Score</CardTitle>
               {latest && getStatusBadge(latest.overall)}
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
+              <div className="glass flex items-center gap-4">
                 <div className={`text-6xl font-bold ${latest ? getScoreColor(latest.overall) : ''}`}>
                   {latest ? latest.overall.toFixed(1) : '0.0'}/10
                 </div>
@@ -191,13 +193,13 @@ export default function EvaluationDashboard() {
         </Card>
 
         {/* Component Scores */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {latest && Object.entries(latest.scores).map(([component, data]) => (
-            <Card key={component}>
-              <CardHeader>
-                <CardTitle className="capitalize">{component}</CardTitle>
+            <Card key={component} className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="capitalize" className="glass{component}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className={`text-3xl font-bold ${getScoreColor(data.total)}`}>
@@ -226,19 +228,19 @@ export default function EvaluationDashboard() {
         </div>
 
         {/* History Chart */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Score History</CardTitle>
+        <Card className="glass"
+          <CardHeader className="glass"
+            <CardTitle className="glass"Score History</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="h-64 flex items-end justify-between gap-4">
+          <CardContent className="glass"
+            <div className="glass h-64 flex items-end justify-between gap-4">
               {history.map((entry, index) => (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
                   <div className="w-full flex flex-col items-center">
                     <span className="text-sm font-medium mb-1">{entry.overall.toFixed(1)}</span>
                     <div
-                      className="w-full bg-blue-500 rounded-t"
-                      style={{ height: `${(entry.overall / 10) * 200}px` }}
+                      className="w-full glass-button primary rounded-lg-t"
+                      style={ height: `${(entry.overall / 10) * 200}px` }
                     />
                   </div>
                   <div className="text-xs text-gray-600">
@@ -251,10 +253,10 @@ export default function EvaluationDashboard() {
         </Card>
 
         {/* Quick Actions */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4">
+        <div className="glass mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+            <CardContent className="glass p-6">
+              <div className="glass flex items-center gap-4">
                 <Activity className="h-8 w-8 text-blue-600" />
                 <div>
                   <h3 className="font-semibold">Continuous Monitoring</h3>
@@ -264,9 +266,9 @@ export default function EvaluationDashboard() {
             </CardContent>
           </Card>
           
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4">
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+            <CardContent className="glass p-6">
+              <div className="glass flex items-center gap-4">
                 <TrendingUp className="h-8 w-8 text-green-600" />
                 <div>
                   <h3 className="font-semibold">View Trends</h3>
@@ -276,9 +278,9 @@ export default function EvaluationDashboard() {
             </CardContent>
           </Card>
           
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4">
+          <Card className="cursor-pointer hover:shadow-md-lg transition-shadow-md" className="glass
+            <CardContent className="glass p-6">
+              <div className="glass flex items-center gap-4">
                 <BarChart3 className="h-8 w-8 text-purple-600" />
                 <div>
                   <h3 className="font-semibold">Detailed Report</h3>

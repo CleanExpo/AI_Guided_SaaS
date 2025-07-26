@@ -39,7 +39,7 @@ export default function PressPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Press & Media</h1>
@@ -48,17 +48,17 @@ export default function PressPage() {
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="glass grid gap-8 lg:grid-cols-3">
           {/* Press Releases */}
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Latest Press Releases</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Latest Press Releases</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-6">
                   {pressReleases.map((release, index) => (
-                    <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
+                    <div key={index} className="-b -gray-200 pb-4 last:-b-0">
                       <div className="flex items-start justify-between mb-2">
                         <Badge variant="outline">{release.category}</Badge>
                         <div className="flex items-center text-sm text-gray-500">
@@ -83,14 +83,14 @@ export default function PressPage() {
 
           {/* Media Kit */}
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Media Kit</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Media Kit</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-4">
                   {mediaKit.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
                       <div>
                         <p className="font-medium text-gray-900">{item.name}</p>
                         <p className="text-sm text-gray-500">{item.type} • {item.size}</p>
@@ -101,7 +101,7 @@ export default function PressPage() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 pt-4 border-t">
+                <div className="mt-6 pt-4 -t">
                   <Button className="w-full">
                     Download Complete Media Kit
                   </Button>
@@ -110,11 +110,11 @@ export default function PressPage() {
             </Card>
 
             {/* Contact */}
-            <Card className="mt-6">
-              <CardHeader>
-                <CardTitle>Media Contact</CardTitle>
+            <Card className="mt-6" className="glass
+              <CardHeader className="glass"
+                <CardTitle className="glass"Media Contact</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
                 <div className="space-y-2">
                   <p className="font-medium">Sarah Johnson</p>
                   <p className="text-gray-600">Head of Communications</p>

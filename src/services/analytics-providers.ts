@@ -2,7 +2,7 @@ import { AnalyticsEvent } from './analytics-engine';
 
 // Google Analytics 4 Provider
 export class GoogleAnalyticsProvider {
-  private gtag: any;
+  private gtag: (command: string, ...args: unknown[]) => void;
   
   constructor(private measurementId: string) {
     if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -51,7 +51,15 @@ export class GoogleAnalyticsProvider {
 
 // Mixpanel Provider
 export class MixpanelProvider {
-  private mixpanel: any;
+  private mixpanel: {
+    init: (token: string) => void;
+    track: (event: string, properties?: Record<string, unknown>) => void;
+    alias: (userId?: string) => void;
+    people: {
+      set: (properties?: Record<string, unknown>) => void;
+      track_charge: (amount: number) => void;
+    };
+  };
   
   constructor(private token: string) {
     if (typeof window !== 'undefined' && (window as any).mixpanel) {
@@ -123,7 +131,12 @@ export class MixpanelProvider {
 
 // Amplitude Provider
 export class AmplitudeProvider {
-  private amplitude: any;
+  private amplitude: {
+    init: (apiKey: string) => void;
+    setUserId: (userId: string) => void;
+    track: (event: string, properties?: Record<string, unknown>) => void;
+    setUserProperties: (properties: Record<string, unknown>) => void;
+  };
   
   constructor(private apiKey: string) {
     if (typeof window !== 'undefined' && (window as any).amplitude) {
@@ -197,7 +210,11 @@ export class AmplitudeProvider {
 
 // PostHog Provider
 export class PostHogProvider {
-  private posthog: any;
+  private posthog: {
+    init: (apiKey: string, config: Record<string, unknown>) => void;
+    capture: (event: string, properties?: Record<string, unknown>) => void;
+    identify: (userId?: string, properties?: Record<string, unknown>) => void;
+  };
   
   constructor(private apiKey: string, private apiHost?: string) {
     if (typeof window !== 'undefined' && (window as any).posthog) {
@@ -270,7 +287,7 @@ export class PostHogProvider {
 // Factory function to create providers
 export function createAnalyticsProvider(
   name: string, 
-  config: Record<string, any>
+  config: Record<string, unknown>
 ) {
   switch (name) {
     case 'google':

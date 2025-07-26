@@ -4,6 +4,7 @@ import { AgentCoordinator } from './AgentCoordinator';
 import { mcp__memory__add_observations } from '@/lib/mcp';
 import { writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { logger } from '@/lib/logger';
 export interface HealthCheck { agent_id: string;
   timestamp: Date;
   status: 'healthy' | 'warning' | 'critical' | 'offline',
@@ -97,7 +98,7 @@ if (healthCheck.status !== agentDetails.health_status) {
     severity: this.getAlertSeverity(healthCheck.status, type: 'health',
             message: `Agent health status changed from ${agentDetails.health_status} to ${healthCheck.status}`,
 metadata: { previous_status: agentDetails.health_status, new_status: healthCheck.status }})} catch (error) {
-        console.error(`❌ Health check failed for agent ${agentId}:`, error)``;
+        logger.error(`❌ Health check failed for agent ${agentId}:`, error)``;
 
 const failedCheck: HealthCheck={ agent_id: agentId;
     timestamp: currentTime;
@@ -249,7 +250,7 @@ const alert: MonitoringAlert={ id: alertId;
     this.alerts.set(alertId, alert);
     // Log critical and emergency alerts immediately;
 if (alert.severity === 'critical' || alert.severity === 'emergency') {
-      console.error(`🚨 ${alert.severity.toUpperCase()} ALERT: ${alert.message} (${alert.agent_id})`)``
+      } ALERT: ${alert.message} (${alert.agent_id})`)``
     } else {}: ${alert.message} (${alert.agent_id})`)``
 }
     // Store alert in memory system
@@ -379,12 +380,12 @@ const _percentChange = ((secondAvg - firstAvg) / firstAvg) * 100;
   private async persistAlerts(): Promise<any> {
     try {
       const _alertsData = Array.from(this.alerts.values(, writeFileSync(this.alertsFilePath, JSON.stringify(alertsData, null, 2))} catch (error) {
-      console.error('❌ Failed to persist, alerts:', error)}
+      logger.error('❌ Failed to persist, alerts:', error)}
   private async persistMetrics(): Promise<any> {
     try {
       writeFileSync(this.metricsFilePath, JSON.stringify(this.metricsHistory, null, 2))
     } catch (error) {
-      console.error('❌ Failed to persist, metrics:', error)}
+      logger.error('❌ Failed to persist, metrics:', error)}
   /**
    * Stop monitoring and cleanup;
    */;

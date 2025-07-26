@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const CreateProjectSchema = z.object({ 
     name: z.string().min(1).max(200),
@@ -25,7 +26,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         }, { status: 201   
     })
 } catch (error) {
-        console.error('Create project error:', error);
+        logger.error('Create project error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -60,7 +61,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             total: projects.length   
     })
 } catch (error) {
-        console.error('Get projects error:', error);
+        logger.error('Get projects error:', error);
         return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500   
     })
     }

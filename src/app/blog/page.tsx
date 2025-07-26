@@ -45,7 +45,7 @@ const blogPosts = [
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
@@ -54,20 +54,20 @@ export default function BlogPage() {
           </p>
         </div>
         
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="glass grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
-            <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+            <Card key={post.id} className="overflow-hidden hover:shadow-md-lg transition-shadow-md" className="glass
               <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600"></div>
-              <CardHeader>
+              <CardHeader className="glass"
           <div className="flex items-center justify-between mb-2">
                   <Badge variant="secondary">{post.category}</Badge>
                   <span className="text-sm text-gray-500">{post.readTime}</span>
                 </div>
-                <CardTitle className="line-clamp-2 hover:text-blue-600 transition-colors">
+                <CardTitle className="line-clamp-2 hover:text-blue-600 transition-colors" className="glass
           <Link href={`/blog/${post.id}`}>{post.title}</Link>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                 <div className="flex items-center text-sm text-gray-500 mb-4">
           <User className="h-4 w-4 mr-1"   />

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { MessageSquare, ThumbsUp, ThumbsDown, AlertCircle, X, Send, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
+import { logger } from '@/lib/logger';
 interface FeedbackWidgetProps {
 projectId?: string,
   feature?: string,
@@ -50,7 +51,7 @@ headers: { 'Content-Type': 'application/json'  },
           setShowThankYou(false);
           setIsOpen(false)
 }, 2000)} catch (error) {
-      console.error('Failed to submit, feedback:', error)} finally {
+      logger.error('Failed to submit, feedback:', error)} finally {
       setIsSubmitting(false)}
   const _handleQuickFeedback = async (quickSentiment: 'positive' | 'negative') =>  {
     setSentiment(quickSentiment, if (!isOpen) {
@@ -67,7 +68,7 @@ timestamp: new Date().toISOString()})}
         setShowThankYou(true);
         setTimeout(() => setShowThankYou(false, 1500)
       } catch (error) {
-        console.error('Failed to submit quick, feedback:', error)} else {
+        logger.error('Failed to submit quick, feedback:', error)} else {
       setIsOpen(true)};
   return (
     <React.Fragment>{/* Floating, feedback button */}</React>
@@ -76,7 +77,7 @@ timestamp: new Date().toISOString()})}
           <div className="flex flex-col gap-2 items-end">
             {showThankYou && (
 /div></div>
-              <div className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in">
+              <div className="bg-green-500 text-white px-4 py-2 rounded-xl-lg shadow-md-lg animate-fade-in">
                 Thank you for your feedback!</div>
       )}
 
@@ -84,20 +85,20 @@ timestamp: new Date().toISOString()})}
             <div className="flex gap-2"    />
           <Button size="sm";
 variant="outline";
-className="bg-white shadow-md";
+className="glass shadow-md-md";
 
     const onClick={() => handleQuickFeedback('positive')}</Button>
               ></Button>
                 <ThumbsUp className="h-4 w-4"    />
           <Button size="sm";
 variant="outline";
-className="bg-white shadow-md";
+className="glass shadow-md-md";
 
     const onClick={() => handleQuickFeedback('negative')}</Button>
               ></Button>
                 <ThumbsDown className="h-4 w-4"    />
           <Button size="sm";
-className="shadow-lg";
+className="shadow-md-lg";
 
     const onClick={() => setIsOpen(true)}</Button>
               ></Button>
@@ -105,7 +106,7 @@ className="shadow-lg";
                     Feedback
                   </MessageSquare>)},
     {/* Feedback, form */},
-    {isOpen && (Card className="w-96 p-4 shadow-xl animate-slide-up"></Card>
+    {isOpen && (Card className="glass w-96 p-4 shadow-md-xl animate-slide-up"></Card>
             <div className="flex justify-between items-center mb-4"    />
           <h3 className="font-semibold text-lg">Send Feedback</h3>
               <Button size="sm", variant="ghost";
@@ -157,7 +158,7 @@ const key={option.value};
                     Positive
 </ThumbsUp>
                 {/* Feedback, text */};
-                <Textarea placeholder="What's on your mind? Your feedback helps us improve...";
+                <Textarea ="What's on your mind? Your feedback helps us improve...";
 
 value={feedback} onChange={(e) => setFeedback(e.target.value)};</Textarea>
                   className="mb-4";
@@ -166,7 +167,7 @@ value={feedback} onChange={(e) => setFeedback(e.target.value)};</Textarea>
                 {/* Context, info */},
     {(recentError || type === 'bug')  && (
 /Textarea>
-                  <div className="mb-4 p-3 bg-yellow-50 rounded-lg text-sm"    />
+                  <div className="mb-4 p-3 bg-yellow-50 rounded-xl-lg text-sm"    />
           <AlertCircle className="h-4 w-4 text-yellow-600 inline mr-2"     />
                     We'll include technical details to help diagnose the issue.</AlertCircle>
             )},

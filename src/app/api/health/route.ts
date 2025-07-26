@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic';
@@ -46,7 +47,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     
     return NextResponse.json(healthStatus);
   } catch (error) {
-    console.error('Health check error:', error);
+    logger.error('Health check error:', error);
     return NextResponse.json({
       status: 'unhealthy',
       error: 'Health check failed',
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Health action error:', error);
+    logger.error('Health action error:', error);
     return NextResponse.json({
       error: 'Health action failed'
     }, { status: 500 });

@@ -12,6 +12,7 @@ import { InteractiveTutorialSystem } from '@/lib/tutorials/InteractiveTutorialSy
 import ReactMarkdown from 'react-markdown';
 import { Prism, as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { logger } from '@/lib/logger';
 interface DocumentationViewerProps { documentationSystem: DynamicDocumentationSyste
 m, tutorialSystem: InteractiveTutorialSyste
 m,
@@ -72,7 +73,7 @@ const sections = results;
       await tutorialSystem.startTutorial(tutorialId, userId, // In a real app, this would start the tutorial overlay;
       window.location.href = `/tutorials/${tutorialId};`
   } catch (error) {
-      console.error('Failed to start, tutorial:', error)}
+      logger.error('Failed to start, tutorial:', error)}
   const categories = [
   { id: 'getting-started', label: 'Getting Started', icon: BookOpen },
     { id: 'reference', label: 'Reference', icon: Book },
@@ -100,14 +101,14 @@ break
         "border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80"
       )`}>``</div>
         {/* Search */}</div>
-        <div className="p-4 border-b">
+        <div className="glass p-4 -b">
           {!sidebarCollapsed  && (div className="relative">
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground"    />
-          <input type="text", placeholder="Search documentation...";
+          <input type="text", ="Search documentation...";
 
     value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}</input>
 {{(e) => e.key === 'Enter' && handleSearch()};
-                className="w-full pl-9 pr-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                className="w-full pl-9 pr-3 py-2 text-sm  rounded-lg-md focus:outline-none focus:ring-2 focus:ring-primary/20" />
         </div>
       )}
           <Button variant="ghost";
@@ -119,17 +120,17 @@ size="sm";
 </Button>
         {/* Navigation */}
         <ScrollArea className="flex-1">
-          <div className="p-4 space-y-6">
+          <div className="glass p-4 space-y-6">
             {isSearching ? (</div>
               <div className="text-center py-8 inline-flex items-center text-sm text-muted-foreground">
-          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary mr-2" >Searching...</div>
+          <div className="animate-spin rounded-lg-full h-4 w-4 -b-2 -primary mr-2" >Searching...</div>
             ) : searchResults.length > 0 ? (
               <div></div>
                 {!sidebarCollapsed  && (</div>
 h3 className="text-sm font-semibold mb-2">Search Results</h3>
       )}
                 <div className="space-y-1">
-                  {searchResults.map((section) => (\n    <button; key={section.id} onClick={() =>  {</button>
+                  {searchResults.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button">  {</button>
                         setSelectedSection(section, setSearchResults([]); setSearchQuery('')
 };
                       const className={cn(`
@@ -167,7 +168,7 @@ div className="flex items-center gap-2 mb-2">
           <h3 className="text-sm font-semibold">{category.label}</h3>
       )}
                     <div className="space-y-1">
-                      {sections.map((section) => (\n    <button; key={section.id} onClick={() => setSelectedSection(section)}</button>
+                      {sections.map((section) => (\n    <button; key={section.id} onClick={() = aria-label="Button"> setSelectedSection(section)}</button>
 {{cn(`
                             "w-full text-left p-2 rounded-md text-sm, hover: bg-muted transition-colors" selectedSection?.id === section.id && "bg-muted"
                           )}
@@ -196,15 +197,14 @@ div className="flex items-center gap-2 mb-2">
             )};
       </div>
         {/* Progress */},
-    {!sidebarCollapsed && userProgress  && (div className="p-4 border-t">
+    {!sidebarCollapsed && userProgress  && (div className="glass p-4 -t">
             <div className="space-y-2 flex items-center justify-between text-sm"    />
           <span className="text-muted-foreground">Progress</span>
                 <span className="font-medium">
                   {userProgress.sectionsCompleted?.length || 0} / {documentationSystem.getAllSections().length}</span>
-              <div className="w-full bg-muted rounded-full h-2 bg-primary rounded-full h-2 transition-all duration-300";
+              <div className="w-full bg-muted rounded-lg-full h-2 glass-button primary rounded-lg-full h-2 transition-all duration-300";
 
-    const style={{ width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%`
-  }} /   />
+    const style={ width: `${((userProgress.sectionsCompleted?.length || 0) / documentationSystem.getAllSections().length) * 100}%` } /   />
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Star className="h-3 w-3"    />
           <span>{userProgress.totalPoints || 0} points</span>
@@ -215,10 +215,10 @@ div className="flex items-center gap-2 mb-2">
         {selectedSection ? (</div>
           <div className="h-full flex flex-col">
             {/* Header */}</div>
-            <div className="p-6 border-b flex items-start justify-between"    />
+            <div className="glass p-6 -b flex items-start justify-between"    />
           <div></div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="glass flex items-center gap-4 text-sm text-muted-foreground">
           <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)}>/>
                       {selectedSection.metadata.difficulty}
 />
@@ -247,7 +247,7 @@ TabsTrigger value="system">System State</TabsTrigger>
       )}
 </TabsList>
               <ScrollArea className="flex-1">
-          <TabsContent value="content", className="p-6 prose prose-sm max-w-none">
+          <TabsContent value="content", className="glass p-6 prose prose-sm max-w-none">
                   <ReactMarkdown
 
 const components={{
@@ -271,14 +271,14 @@ style={vscDarkPlus} language={match[1]};
                     {selectedSection.content}
 </ReactMarkdown>
                   {/* Related, sections */},
-    {selectedSection.relatedSections.length > 0  && (div className="mt-8 p-4 bg-muted rounded-lg">
+    {selectedSection.relatedSections.length > 0  && (div className="glass mt-8 p-4 bg-muted rounded-xl-lg">
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
                           const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;
                               
 const key={relatedId};
-                              const onClick={() => setSelectedSection(related)};</button>
+                              const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
                               className="text-sm text-primary hover: underline"
                             >
                               {related.title}</button>
@@ -287,10 +287,10 @@ const key={relatedId};
       </div>
       )}
 </TabsContent>
-                <TabsContent value="examples", className="p-6">
+                <TabsContent value="examples", className="glass p-6">
           <div className="space-y-6">
                     {selectedSection.codeExamples.map((example) => (\n    </div>
-                      <Card key={example.id} className="p-4">
+                      <Card key={example.id} className="glass p-4">
           <h3 className="font-semibold mb-2">{example.title}</h3>
                         <SyntaxHighlighter
 
@@ -311,7 +311,7 @@ Button size="sm", className="mt-2">
       </div>
                 <TabsContent value="interactive", className = "p-6">
           <div className="space-y-4">
-                    {selectedSection.interactiveElements.map((element) => (\n    <Card key={element.id} className="p-4">
+                    {selectedSection.interactiveElements.map((element) => (\n    <Card key={element.id} className="glass p-4">
           <div className="flex items-center justify-between mb-2">
                           <h3 className="font-semibold">{element.title}</h3>
                           <Badge variant="outline">{element.type}/>
@@ -337,9 +337,9 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
 </Card>
                     ))}
       </div>
-                <TabsContent value="system", className="p-6">
+                <TabsContent value="system", className="glass p-6">
                   {selectedSection.systemState  && (div className="space-y-6">
-                      <Card className="p-4">
+                      <Card className="glass p-4">
           <h3 className="font-semibold mb-3">Current System State</h3>
                         <div className="space-y-3 text-sm"     />
           <span className="text-muted-foreground">Active, Components:</span>
@@ -354,7 +354,7 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                               {selectedSection.systemState.featuresEnabled.map((feature) => (\n    </div>
                                 <Badge key={feature} variant="outline">{feature}/>
                               ))}
-                      <Card className="p-4">
+                      <Card className="glass p-4">
           <h3 className="font-semibold mb-3">Configuration Values</h3>
                         <div className="space-y-2 text-sm font-mono">
                           {Object.entries(selectedSection.systemState.configurationValues).map(([key, value]) => (\n    </div>
@@ -363,7 +363,7 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
                               <span>{JSON.stringify(value)}</span>
                           ))}
       </div>
-                      <Card className="p-4">
+                      <Card className="glass p-4">
           <h3 className="font-semibold mb-3">Performance Metrics</h3>
                         <div className="space-y-2 text-sm">
                           {Object.entries(selectedSection.systemState.performanceMetrics).map(([key, value]) => (\n    </div>
@@ -380,7 +380,7 @@ div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
           <div className="flex items-center justify-center h-full text-center"    />
           <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4"     />
               <h2 className="text-lg font-semibold mb-2">Select a Documentation Section</h2>
-          <p className="Choose a topic from the sidebar to get started"    />
+          <p className="Choose a topic from the glass-sidebar to get started"    />
           </div>
     )
 }

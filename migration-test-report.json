@@ -1,0 +1,685 @@
+{
+  "total": 10,
+  "passed": 0,
+  "warnings": 0,
+  "failed": 10,
+  "details": [
+    {
+      "file": "001_initial_schema.sql",
+      "metadata": {
+        "file": "001_initial_schema.sql",
+        "description": "",
+        "author": "",
+        "date": "",
+        "hasRollback": false,
+        "rollbackCommands": []
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 48 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": false,
+          "details": "Found 8 issues"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 8,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 8,
+          "found": true
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 1,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [
+        "Possible missing indexes: 9 FKs but only 7 indexes"
+      ],
+      "status": "failed"
+    },
+    {
+      "file": "001_initial_setup.sql",
+      "metadata": {
+        "file": "001_initial_setup.sql",
+        "description": "Initial database setup with extensions and basic tables",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.system_settings CASCADE;",
+          "DROP TABLE public.feature_flags CASCADE;",
+          "DROP TABLE public.subscriptions CASCADE;",
+          "DROP TABLE public.user_profiles CASCADE;",
+          "DROP TABLE public.users CASCADE;",
+          "DROP TYPE subscription_tier;",
+          "DROP TYPE subscription_status;",
+          "DROP TYPE user_role;",
+          "DROP FUNCTION update_updated_at_column();",
+          "DROP FUNCTION is_feature_enabled(TEXT, UUID);",
+          "DROP FUNCTION get_user_tier(UUID);",
+          "DROP EXTENSION \"pg_stat_statements\";",
+          "DROP EXTENSION \"pgcrypto\";",
+          "DROP EXTENSION \"uuid-ossp\";"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 63 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 5,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 3,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 2,
+          "found": true
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    },
+    {
+      "file": "002_auth_extensions.sql",
+      "metadata": {
+        "file": "002_auth_extensions.sql",
+        "description": "Extends authentication with sessions, API keys, and audit logging",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.two_factor_auth CASCADE;",
+          "DROP TABLE public.password_reset_tokens CASCADE;",
+          "DROP TABLE public.audit_logs CASCADE;",
+          "DROP TABLE public.api_keys CASCADE;",
+          "DROP TABLE public.user_sessions CASCADE;",
+          "DROP FUNCTION cleanup_expired_sessions();",
+          "DROP FUNCTION log_api_key_usage(UUID);"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 44 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 5,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    },
+    {
+      "file": "003_analytics_tables.sql",
+      "metadata": {
+        "file": "003_analytics_tables.sql",
+        "description": "Analytics and tracking tables for user behavior and system metrics",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP MATERIALIZED VIEW public.daily_analytics CASCADE;",
+          "DROP TABLE public.experiment_assignments CASCADE;",
+          "DROP TABLE public.experiments CASCADE;",
+          "DROP TABLE public.cohort_memberships CASCADE;",
+          "DROP TABLE public.user_cohorts CASCADE;",
+          "DROP TABLE public.conversions CASCADE;",
+          "DROP TABLE public.api_usage CASCADE;",
+          "DROP TABLE public.feature_usage CASCADE;",
+          "DROP TABLE public.analytics_events CASCADE;",
+          "DROP TABLE public.analytics_page_views CASCADE;",
+          "DROP FUNCTION refresh_daily_analytics();",
+          "DROP FUNCTION increment_feature_usage(UUID, TEXT, JSONB);"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 67 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 9,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 1,
+          "found": true
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    },
+    {
+      "file": "004_collaboration.sql",
+      "metadata": {
+        "file": "004_collaboration.sql",
+        "description": "Real-time collaboration features and room management",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.collaboration_annotations CASCADE;",
+          "DROP TABLE public.screen_sharing_sessions CASCADE;",
+          "DROP TABLE public.collaboration_invites CASCADE;",
+          "DROP TABLE public.collaboration_changes CASCADE;",
+          "DROP TABLE public.collaboration_cursors CASCADE;",
+          "DROP TABLE public.collaboration_messages CASCADE;",
+          "DROP TABLE public.room_participants CASCADE;",
+          "DROP TABLE public.collaboration_rooms CASCADE;",
+          "DROP FUNCTION can_join_room(UUID, UUID);",
+          "DROP FUNCTION cleanup_old_cursors();"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 63 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 8,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [
+        "Possible missing indexes: 18 FKs but only 9 indexes"
+      ],
+      "status": "failed"
+    },
+    {
+      "file": "005_marketplace.sql",
+      "metadata": {
+        "file": "005_marketplace.sql",
+        "description": "Template marketplace and plugin system",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.collection_items CASCADE;",
+          "DROP TABLE public.template_collections CASCADE;",
+          "DROP TABLE public.marketplace_transactions CASCADE;",
+          "DROP TABLE public.plugin_installations CASCADE;",
+          "DROP TABLE public.plugins CASCADE;",
+          "DROP TABLE public.template_stars CASCADE;",
+          "DROP TABLE public.template_reviews CASCADE;",
+          "DROP TABLE public.template_installations CASCADE;",
+          "DROP TABLE public.template_versions CASCADE;",
+          "DROP TABLE public.templates CASCADE;",
+          "DROP TABLE public.template_categories CASCADE;",
+          "DROP FUNCTION update_template_star_count();",
+          "DROP FUNCTION increment_template_downloads();"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 94 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 11,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [
+        "Possible missing indexes: 20 FKs but only 15 indexes"
+      ],
+      "status": "failed"
+    },
+    {
+      "file": "006_documentation_system.sql",
+      "metadata": {
+        "file": "006_documentation_system.sql",
+        "description": "",
+        "author": "",
+        "date": "",
+        "hasRollback": false,
+        "rollbackCommands": []
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 51 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 10,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [
+        "Possible missing indexes: 8 FKs but only 5 indexes"
+      ],
+      "status": "failed"
+    },
+    {
+      "file": "006_projects.sql",
+      "metadata": {
+        "file": "006_projects.sql",
+        "description": "Core project management tables",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.project_activity CASCADE;",
+          "DROP TABLE public.project_members CASCADE;",
+          "DROP TABLE public.project_env_vars CASCADE;",
+          "DROP TABLE public.project_dependencies CASCADE;",
+          "DROP TABLE public.project_deployments CASCADE;",
+          "DROP TABLE public.project_builds CASCADE;",
+          "DROP TABLE public.project_versions CASCADE;",
+          "DROP TABLE public.project_files CASCADE;",
+          "DROP TABLE public.projects CASCADE;",
+          "DROP FUNCTION increment_build_number();",
+          "DROP FUNCTION increment_version_number();"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 74 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 9,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    },
+    {
+      "file": "007_agent_system.sql",
+      "metadata": {
+        "file": "007_agent_system.sql",
+        "description": "Agent orchestration and monitoring tables",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.agent_dependencies CASCADE;",
+          "DROP TABLE public.agent_schedules CASCADE;",
+          "DROP TABLE public.agent_resource_limits CASCADE;",
+          "DROP TABLE public.agent_messages CASCADE;",
+          "DROP TABLE public.agent_logs CASCADE;",
+          "DROP TABLE public.agent_metrics CASCADE;",
+          "DROP TABLE public.agent_tasks CASCADE;",
+          "DROP TABLE public.agent_instances CASCADE;",
+          "DROP TABLE public.agents CASCADE;",
+          "DROP FUNCTION calculate_agent_health_score(UUID);",
+          "DROP FUNCTION cleanup_old_agent_metrics();"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 71 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 9,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 2,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    },
+    {
+      "file": "008_monitoring.sql",
+      "metadata": {
+        "file": "008_monitoring.sql",
+        "description": "System monitoring, health checks, and performance tracking",
+        "author": "AI Guided SaaS Team",
+        "date": "2025-07-26",
+        "hasRollback": true,
+        "rollbackCommands": [
+          "DROP TABLE public.audit_trail CASCADE;",
+          "DROP TABLE public.resource_usage CASCADE;",
+          "DROP TABLE public.uptime_checks CASCADE;",
+          "DROP TABLE public.uptime_monitors CASCADE;",
+          "DROP TABLE public.alerts CASCADE;",
+          "DROP TABLE public.alert_rules CASCADE;",
+          "DROP TABLE public.error_logs CASCADE;",
+          "DROP TABLE public.performance_traces CASCADE;",
+          "DROP TABLE public.system_metrics CASCADE;",
+          "DROP TABLE public.health_checks CASCADE;",
+          "DROP FUNCTION calculate_uptime_percentage(UUID, INTEGER);",
+          "DROP FUNCTION aggregate_metrics(TEXT, TEXT, TEXT);",
+          "DROP FUNCTION cleanup_monitoring_data();"
+        ]
+      },
+      "syntax": [
+        {
+          "check": "Semicolon termination",
+          "passed": false,
+          "details": "Found 80 issues"
+        },
+        {
+          "check": "IF NOT EXISTS usage",
+          "passed": true,
+          "details": "OK"
+        },
+        {
+          "check": "RLS enablement",
+          "passed": true,
+          "details": "OK"
+        }
+      ],
+      "idempotency": [
+        {
+          "pattern": "CREATE TABLE IF NOT EXISTS",
+          "count": 10,
+          "found": true
+        },
+        {
+          "pattern": "CREATE INDEX IF NOT EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "CREATE OR REPLACE FUNCTION",
+          "count": 3,
+          "found": true
+        },
+        {
+          "pattern": "DROP ... IF EXISTS",
+          "count": 0,
+          "found": false
+        },
+        {
+          "pattern": "ON CONFLICT",
+          "count": 0,
+          "found": false
+        }
+      ],
+      "issues": [],
+      "status": "failed"
+    }
+  ]
+}

@@ -112,23 +112,23 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
             Choose your AI development persona to get started with intelligent
             project guidance tailored to your expertise and goals.
 </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {personas.map((persona) => (\n    </div>
             <Card key={persona.id} className={`cursor-pointer transition-all duration-300 hover: shadow-lg hover:scale-105 ${
                 selectedPersona === persona.id, ? 'ring-2 ring-blue-500 shadow-lg scale-105';
                   : 'hover:shadow-md'
               }`}
-              const onClick={() => handlePersonaSelect(persona)}</Card>
+              const onClick={() = className="glass handlePersonaSelect(persona)}</Card>
             ></Card>
-              <CardHeader className="text-center">
+              <CardHeader className="text-center" className="glass
           <div className="flex justify-center mb-4 text-blue-600">
                   {getPersonaIcon(persona.id)}</div>
-                <CardTitle className="text-xl font-semibold">
+                <CardTitle className="text-xl font-semibold" className="glass
                   {persona.name}</Card>
-                <CardDescription className="text-sm text-gray-600">
+                <CardDescription className="text-sm text-gray-600" className="glass
                   {persona.description}</Card>
 </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <div className="space-y-3">
                   <div>
           <h4 className="font-medium text-sm text-gray-700 mb-2">
@@ -137,7 +137,7 @@ Expertise:
                     <div className="flex flex-wrap gap-1">
                       {persona.expertise.map((skill, index) => (\n    </div>
                         <span const key={index};
-                          className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full";
+                          className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg-full";
                         ></span>
                           {skill}</span>
                       ))}

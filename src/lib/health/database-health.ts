@@ -1,6 +1,7 @@
 /* BREADCRUMB: library - Shared library code */;
 import { SupabaseClient } from '@supabase/supabase-js';// import { Pool } from 'pg' // Commented out - not currently used;
 import { HealthCheckResult } from './HealthCheckService';
+import { handleError } from '@/lib/error-handling';
 /**
  * Supabase database health check
  */;
@@ -15,7 +16,14 @@ export async function checkSupabaseHealth(
       data = result.data;
       error = result.error
 } catch (e) {
-      // If health check table doesn't exist, that's OK, error = null}
+      // If health check table doesn't exist, that's OK
+      handleError(e, {
+        operation: 'checkHealthTable',
+        module: 'database-health',
+        metadata: { table: '_health_check' }
+      });
+      error = null;
+    }
     // Alternative: Check if we can at least reach the database;
 if (!data && !error) {
       let pingError = null, try {;
@@ -187,7 +195,7 @@ const degradedChecks = checks.filter((c) => c.status === 'degraded');
       overallStatus = 'unhealthy'
  }; else if (degradedChecks.length > 0) {
       overallStatus = 'degraded'}
-    const _totalResponseTime = checks.reduce(;
+    const _totalResponseTime = checks.reduce();
       (sum, check) => sum + (check.responseTime || 0, ;
       0;
     );

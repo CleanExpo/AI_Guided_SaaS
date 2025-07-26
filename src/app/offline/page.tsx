@@ -27,11 +27,11 @@ export default function OfflinePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <Card className="max-w-md w-full">
-        <CardContent className="p-8 text-center">
+    <div className="min-h-screen glass flex items-center justify-center p-4">
+      <Card className="max-w-md w-full" className="glass
+        <CardContent className="glass p-8 text-center">
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center">
+            <div className="w-20 h-20 bg-orange-100 rounded-lg-full flex items-center justify-center">
               <WifiOff className="h-10 w-10 text-orange-600" />
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function OfflinePage() {
             </Button>
           </div>
 
-          <div className="border-t pt-6">
+          <div className="-t pt-6">
             <h2 className="text-sm font-semibold text-gray-700 mb-4">
               Available Offline Pages:
             </h2>
@@ -62,7 +62,7 @@ export default function OfflinePage() {
                 <a
                   key={page.url}
                   href={page.url}
-                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-between p-3  rounded-xl-lg hover:glass transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <page.icon className="h-5 w-5 text-gray-600" />
@@ -74,7 +74,7 @@ export default function OfflinePage() {
             </div>
           </div>
 
-          <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+          <div className="glass mt-8 p-4 bg-blue-50 rounded-xl-lg">
             <div className="flex items-start gap-3">
               <Smartphone className="h-5 w-5 text-blue-600 mt-0.5" />
               <div className="text-left">

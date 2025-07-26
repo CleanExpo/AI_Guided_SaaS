@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import Stripe from 'stripe';
+import { logger } from '@/lib/logger';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-08-16'
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", { apiVersion: '2023-08-16'
     });
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -26,18 +27,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Process the webhook event
     switch (event.type) {
       case 'payment_intent.succeeded':
-        console.log('Payment succeeded:', event.data.object.id)
         break;
       case 'invoice.payment_succeeded':
-        console.log('Invoice payment succeeded:', event.data.object.id);
+        
         break;
       default:
-        console.log('Unhandled event type:', event.type)
-}
+        }
     return NextResponse.json({ received: true   
     })
 } catch (error) {
-    console.error('Stripe webhook error:', error);
+    logger.error('Stripe webhook error:', error);
         return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500   
     })
 }

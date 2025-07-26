@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import { minify } from 'terser';
@@ -210,7 +212,7 @@ class AutoCompactSystem {
         unused: true,
         collapse_vars: true,
         reduce_vars: true,
-        pure_funcs: this.config.compactLevel === 'aggressive' ? ['console.log'] : []
+        pure_funcs: this.config.compactLevel === 'aggressive' ? [] : []
       },
       mangle: this.config.compactLevel !== 'light',
       format: {
@@ -311,7 +313,7 @@ class AutoCompactSystem {
       try {
         await this.compact();
       } catch (error) {
-        console.error('Auto-compact failed:', error);
+        logger.error('Auto-compact failed:', error);
       }
     });
   }

@@ -1,6 +1,7 @@
 // Mark as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
@@ -74,7 +75,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             total: templates.length,
             filters: { query, category, framework, pricing, difficulty }    })
 } catch (error) {
-        console.error('Templates API error:', error);
+        logger.error('Templates API error:', error);
         return NextResponse.json({ error: 'Failed to fetch templates' }, { status: 500   
     })
 }

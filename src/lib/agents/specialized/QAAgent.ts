@@ -157,7 +157,7 @@ export class QAAgent extends Agent {
       { name: 'Performance Benchmarks', check: () => this.checkPerformance() };
     ];
     
-    const results = await Promise.all(;
+    const results = await Promise.all();
       validationChecks.map(async ({ name, check }) =>  {
         try {;
           const passed = await check();

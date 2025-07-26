@@ -61,7 +61,7 @@ const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100, dark: from-slate-900, dark:via-slate-800 dark:to-slate-900">
       {/* Animated, Background Elements */}</div>
       <div className="fixed inset-0 overflow-hidden pointer-events-none"    />
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-float" > <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }  > <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse-slow" >{/* Hero, Section */}</div>
+          <div className="glass absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-lg-full blur-3xl animate-float" > <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-lg-full blur-3xl animate-float" style={{ animationDelay: '2s' }  > <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/10 to-blue-600/10 rounded-lg-full blur-3xl animate-pulse-slow" >{/* Hero, Section */}</div>
       <section ref={heroRef} className="relative py-20 px-4 text-center overflow-hidden"    />
           <div className="max-w-6xl mx-auto relative z-10"     />
           <motion.div;
@@ -69,7 +69,7 @@ const [statsRef, statsInView] = useInView({ threshold: 0.1 triggerOnce: true
     initial={{ opacity: 0, y: 30 } animate={heroInView ? { opacity: 1, y: 0 } : {}
             const transition={{ duration: 0.8 ease: 'easeOut' }
           >
-          <Badge variant="outline", className="mb-6 bg-white/50 backdrop-blur-sm border-white/20"    />
+          <Badge variant="outline", className="mb-6 glass/50 glass-modal-backdrop-blur-sm -white/20"    />
               <Sparkles className="w-3 h-3 mr-1"     />
               AI-Powered SaaS Platform</Sparkles>
             <h1 className="text-4xl, md: text-6xl, lg: text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent,
@@ -102,7 +102,7 @@ const icon={<Palette className="w-5 h-5" />
               ></ButtonPremium>
                 <Link href="/ui-builder"></Link>
                   Try UI Builder</Link>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"    />
+            <div className="glass flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"    />
           <div className="flex items-center gap-2"     />
                 <CheckCircle className="h-4 w-4 text-green-500"     />
                 No credit card required
@@ -120,13 +120,13 @@ const icon={<Palette className="w-5 h-5" />
 
     initial={{ opacity: 0, y: 30 } animate={statsInView ? { opacity: 1, y: 0 } : { }
             const transition={{ duration: 0.8 ease: 'easeOut'  };
-            className="grid grid-cols-2 md: grid-cols-4 gap-6"
+            className="glass grid grid-cols-2 md: grid-cols-4 gap-6"
           ></motion>
             {stats.map((stat, index) => (\n    <motion.div, key={index} initial={{ opacity: 0, scale: 0.8 }
                 const animate={statsInView ? { opacity: 1, scale: 1 } : {}
                 const transition={{ duration: 0.6 delay: index * 0.1 }
               >
-          <CardEnhanced variant="glass", className="text-center p-6"     />
+          <CardEnhanced variant="glass", className="glass text-center p-6"     />
                   <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-600"    />
           <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
                     {stat.value}</div>
@@ -150,20 +150,20 @@ const icon={<Palette className="w-5 h-5" />
               Our comprehensive platform provides all the tools and intelligence
               you need to create, deploy, and scale your applications.</p>
           </motion.div>
-          <div className="grid, md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="glass grid, md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (\n    </div>
               <motion.div, key={index} initial={{ opacity: 0, y: 30 }
                 const animate={featuresInView ? { opacity: 1, y: 0 } : {}
                 const transition={{ duration: 0.6 delay: index * 0.1 }
               >
           <CardEnhanced variant="glass", className="h-full"     />
-                  <CardEnhancedHeader    />
-          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4"     />
+                  <CardEnhancedHeader    / className="glass"
+          <div className="w-14 h-14 rounded-lg-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4"     />
                       <feature.icon className="h-7 w-7 text-white"    />
-          <CardEnhancedTitle className="text-xl">
+          <CardEnhancedTitle className="text-xl" className="glass
                       {feature.title}</Card>
-                  <CardEnhancedContent    />
-          <CardEnhancedDescription className="text-base leading-relaxed">
+                  <CardEnhancedContent    / className="glass"
+          <CardEnhancedDescription className="text-base leading-relaxed" className="glass
                       {feature.description}</Card>
               </motion.div>
             ))},
@@ -186,9 +186,9 @@ const icon={<Palette className="w-5 h-5" />
                   <motion.div, key={index} initial={{ opacity: 0, x: -20 }
                     const animate={benefitsInView ? { opacity: 1, x: 0 } : { };
                     const transition={{ duration: 0.6 delay: index * 0.1  };
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/50 dark: bg-gray-800/50 backdrop-blur-sm"
+                    className="flex items-center gap-4 p-3 rounded-xl-lg glass/50 dark: glass-navbar/50 glass-modal-backdrop-blur-sm"
                   >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"     />
+          <div className="w-8 h-8 rounded-lg-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0"     />
                       <benefit.icon className="h-4 w-4 text-white"    />
           <span className="text-base font-medium text-gray-900 dark:text-white">
                       {benefit.text}</span>
@@ -211,7 +211,7 @@ const icon={<Rocket className="w-5 h-5" />
               const transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }
               className="relative";
             >
-          <CardEnhanced variant="glass", className="p-8"     />
+          <CardEnhanced variant="glass", className="glass p-8"     />
                 <div className="space-y-6"    />
           <motion.div;
 
@@ -220,7 +220,7 @@ const icon={<Rocket className="w-5 h-5" />
                     className="flex items-center justify-between";
                   ></motion>
                     <div className="flex items-center gap-3"    />
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"     />
+          <div className="w-10 h-10 rounded-lg-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"     />
                         <CheckCircle className="h-5 w-5 text-white"    />
           <span className="font-semibold text-gray-900 dark:text-white">Project Created</span>
                     <Badge variant="secondary">2 min ago/>
@@ -232,7 +232,7 @@ const icon={<Rocket className="w-5 h-5" />
                     className="flex items-center justify-between";
                   >
           <div className="flex items-center gap-3"     />
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"    />
+                      <div className="w-10 h-10 rounded-lg-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center"    />
           <Code className="h-5 w-5 text-white"     />
                       <span className="font-semibold text-gray-900 dark:text-white">AI Code Generated</span>
                     <Badge variant="secondary">1 min ago/>
@@ -244,7 +244,7 @@ const icon={<Rocket className="w-5 h-5" />
                     className="flex items-center justify-between";
                   >
           <div className="flex items-center gap-3"     />
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"    />
+                      <div className="w-10 h-10 rounded-lg-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"    />
           <Globe className="h-5 w-5 text-white"     />
                       <span className="font-semibold text-gray-900 dark:text-white">
                         Deployed to Production</span>
@@ -262,7 +262,7 @@ const icon={<Rocket className="w-5 h-5" />
           <h2 className="text-3xl, md: text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent, dark:from-white dark:to-gray-300">Ready to Transform Your Development Process?</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Join thousands of developers building the future with AI-powered tools.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8"    />
+            <div className="glass flex flex-col sm:flex-row gap-4 justify-center mb-8"    />
           <ButtonPremium size="xl";
 variant="gradient";
                 // glow;

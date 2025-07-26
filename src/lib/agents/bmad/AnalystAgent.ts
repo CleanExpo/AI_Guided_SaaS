@@ -47,7 +47,7 @@ const categorizedReqs =;
       this.observe('Categorized requirements', categorizedReqs);
       // Step, 3: Generate user stories;
 
-const _userStories = await this.generateUserStories(;
+const _userStories = await this.generateUserStories();
         categorizedReqs.functionalRequirements,
         // input;
       );
@@ -61,14 +61,14 @@ const _constraints = await this.identifyConstraints(input);
       this.observe('Identified constraints', constraints);
       // Step, 5: Define success criteria;
 
-const _successCriteria = await this.defineSuccessCriteria(;
+const _successCriteria = await this.defineSuccessCriteria();
         categorizedReqs.functionalRequirements,
         // userStories;
       );
       this.observe('Defined success criteria', successCriteria);
       // Step, 6: Technical considerations;
 
-const _technicalConsiderations = await this.analyzeTechnicalAspects(;
+const _technicalConsiderations = await this.analyzeTechnicalAspects();
         input,
         // categorizedReqs;
       );

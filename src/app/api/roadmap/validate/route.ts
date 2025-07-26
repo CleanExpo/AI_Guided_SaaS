@@ -2,6 +2,7 @@
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const validateSchema = z.object({ roadmapId: z.string(), milestones: z.array(z.object({ id: z.string(), title: z.string(), description: z.string(),
         dueDate: z.string(), status: z.enum(['pending', 'in-progress', 'completed'])
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json({ success: true, validation    })
 } catch (error) {
-        console.error('Validate roadmap error:', error);
+        logger.error('Validate roadmap error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -58,7 +59,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         
         return NextResponse.json({ success: true, validation    })
 } catch (error) {
-        console.error('Get validation error:', error);
+        logger.error('Get validation error:', error);
         return NextResponse.json({ error: 'Failed to get validation status' }, { status: 500   
     })
     }

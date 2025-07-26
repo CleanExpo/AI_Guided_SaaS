@@ -37,14 +37,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
+    <div className="min-h-screen flex items-center justify-center glass">
+          <Card className="w-full max-w-md" className="glass
+        <CardHeader className="glass"
+          <CardTitle className="text-2xl text-center" className="glassWelcome Back</CardTitle>
           <p className="text-center text-gray-600">Sign in to your account</p>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleEmailSignIn} className="space-y-4">
+        <CardContent className="space-y-4" className="glass
+          <form onSubmit={handleEmailSignIn} className="space-y-4" role="form">
             <Input
               type="email"
               placeholder="Enter your email"
@@ -59,10 +59,10 @@ export default function SignInPage() {
           
           <div className="relative">
           <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+              <span className="w-full -t" />
           </div>
             <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-gray-50 px-2 text-gray-500">Or continue with</span>
+          <span className="glass px-2 text-gray-500">Or continue with</span>
             </div>
           </div>
           <Button type="button"

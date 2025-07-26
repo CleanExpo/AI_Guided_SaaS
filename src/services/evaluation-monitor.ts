@@ -3,31 +3,31 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export interface EvaluationScore {
-  timestamp: string;
+  timestamp: string,
   scores: {
-    dashboard: ComponentScore;
-    prompts: ComponentScore;
-    folders: ComponentScore;
+    dashboard: ComponentScore,
+    prompts: ComponentScore,
+    folders: ComponentScore
   };
-  overall: number;
-  recommendations: string[];
+  overall: number,
+  recommendations: string[]
 }
 
 export interface ComponentScore {
-  functionality: number;
-  usability: number;
-  performance: number;
-  design: number;
-  testing: number;
+  functionality: number,
+  usability: number,
+  performance: number,
+  design: number,
+  testing: number,
   total: number;
   details?: Record<string, any>;
 }
 
 export interface ScoreThresholds {
-  critical: number;
-  warning: number;
-  good: number;
-  excellent: number;
+  critical: number,
+  warning: number,
+  good: number,
+  excellent: number
 }
 
 export class EvaluationMonitor extends EventEmitter {
@@ -55,7 +55,7 @@ export class EvaluationMonitor extends EventEmitter {
 
   async startMonitoring(intervalMs: number = 30000): Promise<void> {
     if (this.isMonitoring) {
-      console.log('Monitoring already active');
+      
       return;
     }
 
@@ -73,7 +73,7 @@ export class EvaluationMonitor extends EventEmitter {
       }
     }, intervalMs);
 
-    this.emit('monitoring:started');
+    this.emit('monitoring: started')
   }
 
   stopMonitoring(): void {
@@ -82,7 +82,7 @@ export class EvaluationMonitor extends EventEmitter {
       this.monitorInterval = null;
     }
     this.isMonitoring = false;
-    this.emit('monitoring:stopped');
+    this.emit('monitoring: stopped')
   }
 
   async checkScores(): Promise<void> {
@@ -178,7 +178,7 @@ export class EvaluationMonitor extends EventEmitter {
     }
   }
 
-  getScoreTrend(component?: string): { timestamps: string[]; scores: number[] } {
+  getScoreTrend(component?: string): { timestamps: string[], scores: number[] } {
     const timestamps: string[] = [];
     const scores: number[] = [];
     
@@ -210,9 +210,9 @@ export class EvaluationMonitor extends EventEmitter {
     return scores.reduce((sum, score) => sum + score, 0) / scores.length;
   }
 
-  getScoreStability(): { component: string; stability: number }[] {
+  getScoreStability(): { component: string, stability: number }[] {
     const components = ['dashboard', 'prompts', 'folders', 'overall'] as const;
-    const results: { component: string; stability: number }[] = [];
+    const results: { component: string, stability: number }[] = [];
     
     for (const component of components) {
       const trend = this.getScoreTrend(component === 'overall' ? undefined : component);
@@ -295,7 +295,7 @@ export class EvaluationMonitor extends EventEmitter {
 
   clearHistory(): void {
     this.scoreHistory = [];
-    this.emit('history:cleared');
+    this.emit('history: cleared')
   }
 }
 

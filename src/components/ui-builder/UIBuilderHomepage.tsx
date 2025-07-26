@@ -8,7 +8,7 @@ import { Palette, Layout, Code, Sparkles, Zap, Users } from 'lucide-react';
 
 export default function UIBuilderHomepage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
           <div className="container mx-auto max-w-4xl px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">UI Builder</h1>
@@ -17,8 +17,8 @@ export default function UIBuilderHomepage() {
           </p>
         </div>
         
-        <Card>
-          <CardContent className="py-12 text-center">
+        <Card className="glass"
+          <CardContent className="py-12 text-center" className="glass
             <Layout className="h-16 w-16 text-gray-400 mx-auto mb-4"  />
           <h3 className="text-xl font-semibold text-gray-900 mb-2">UI Builder Coming Soon</h3>
             <p className="text-gray-600 mb-6">

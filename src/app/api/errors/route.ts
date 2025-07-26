@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { writeFile, mkdir } from 'fs/promises';
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest) {
     }));
 
     // In development, write to file system
-    if (process.env.NODE_ENV === 'development') {
+    if ((process.env.NODE_ENV || "development") === "development") {
       await saveErrorsToFile(enrichedErrors);
     }
 
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Failed to process error logs:', error);
+    logger.error('Failed to process error logs:', error);
     return NextResponse.json(
       { error: 'Failed to process error logs' },
       { status: 500 }
@@ -65,7 +67,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function saveErrorsToFile(errors: any[]) {
+async function saveErrorsToFile(errors: Record<string, unknown>[]) {
   try {
     // Ensure log directory exists
     if (!existsSync(ERROR_LOG_DIR)) {
@@ -84,11 +86,11 @@ async function saveErrorsToFile(errors: any[]) {
     await writeFile(logFile, logContent, { flag: 'a' });
 
   } catch (error) {
-    console.error('Failed to save errors to file:', error);
+    logger.error('Failed to save errors to file:', error);
   }
 }
 
-async function sendCriticalErrorAlert(errors: any[]) {
+async function sendCriticalErrorAlert(errors: Record<string, unknown>[]) {
   // In production, integrate with:
   // - Slack webhooks
   // - Discord webhooks
@@ -96,10 +98,10 @@ async function sendCriticalErrorAlert(errors: any[]) {
   // - PagerDuty
   // - SMS alerts
 
-  console.error('CRITICAL ERRORS DETECTED:', errors);
+  
 
   // Example Discord webhook (if configured)
-  const discordWebhook = process.env.DISCORD_ERROR_WEBHOOK;
+  const discordWebhook = process.env.DISCORD_ERROR_WEBHOOK || "";
   if (discordWebhook) {
     try {
       await fetch(discordWebhook, {
@@ -116,7 +118,7 @@ async function sendCriticalErrorAlert(errors: any[]) {
         })
       });
     } catch (error) {
-      console.error('Failed to send Discord alert:', error);
+      logger.error('Failed to send Discord alert:', error);
     }
   }
 }
@@ -153,7 +155,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ errors, date });
 
   } catch (error) {
-    console.error('Failed to retrieve error logs:', error);
+    logger.error('Failed to retrieve error logs:', error);
     return NextResponse.json(
       { error: 'Failed to retrieve error logs' },
       { status: 500 }
@@ -165,5 +167,5 @@ function isAuthorized(authHeader: string): boolean {
   // Implement proper authorization
   // For now, check for a simple bearer token
   const token = authHeader.replace('Bearer ', '');
-  return token === process.env.ADMIN_API_KEY;
+  return token === process.env.ADMIN_API_KEY || "";
 }

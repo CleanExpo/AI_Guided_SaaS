@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import { v4 as uuidv4 } from 'uuid';
 import { 
+import { logger } from '@/lib/logger';
   AgentConfig, 
   AgentMessage, 
   AgentTask, 
@@ -58,21 +59,20 @@ export abstract class BaseAgent extends EventEmitter {
     const prefix = `[${this.config.name}]`;
     
     return { info: (message: string, data? null : any) => {
-        console.log(`${prefix}; INFO: ${message}`, data || '');
+        
         this.emit('log:info', { message, data    })
 },
       warn: (message: string, data? null : any) => {
-        console.warn(`${prefix}; WARN: ${message}`, data || '');
+        
         this.emit('log:warn', { message, data    })
 },
       error: (message: string, error? null : any) => {
-        console.error(`${prefix}; ERROR: ${message}`, error || '');
+        
         this.emit('log:error', { message, error    })
 },
       debug: (message: string, data? null : any) =>  {
-        if (process.env.DEBUG) {;
-          console.debug(`${prefix}; DEBUG: ${message}`, data || '')
-}
+        if (process.env.DEBUG || "") {;
+          }
         this.emit('log:debug', { message, data    })
 }
     }

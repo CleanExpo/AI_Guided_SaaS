@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 /* BREADCRUMB: pages - Application pages and routes */
 'use client';
 import React, { useState } from 'react';
@@ -40,13 +40,13 @@ export default function AdminDirectPage() {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-          <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Admin Direct Access</CardTitle>
+    <div className="min-h-screen flex items-center justify-center glass">
+          <Card className="w-full max-w-md" className="glass
+        <CardHeader className="glass"
+          <CardTitle className="text-2xl text-center" className="glassAdmin Direct Access</CardTitle>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleDirectAuth} className="space-y-4">
+        <CardContent className="glass"
+          <form onSubmit={handleDirectAuth} className="space-y-4" role="form">
             <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Master Password

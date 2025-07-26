@@ -62,10 +62,10 @@ if (currentIndex < workflowPhases.length - 1) {
   return (
     <div className="space-y-6">
       {/* Project, Overview */}</div>
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle>AI Development Workflow - {projectConfig.name}</CardTitle>
-        <CardContent>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"AI Development Workflow - {projectConfig.name}</CardTitle>
+        <CardContent className="glass"
           <div className ="grid grid-cols-1, md: grid-cols-2, lg:grid-cols-4 gap-4"></div>
             <div className="text-center text-2xl font-bold text-blue-600">
                 {projectConfig.features.length}</div>
@@ -89,9 +89,9 @@ const key={phase.id };
               const className={`transition-all duration-200 ${``
                 isActive ? 'ring-2 ring-blue-500 shadow-lg' : ''
               }`}
-            >
-          <CardHeader></CardHeader>
-                <CardTitle className="flex items-center gap-3">
+             className="glass
+          <CardHeader className="glass"</CardHeader>
+                <CardTitle className="flex items-center gap-3" className="glass
           <div;
 
     const className={`w-10 h-10 rounded-full flex items-center justify-center ${``
@@ -112,7 +112,7 @@ const key={phase.id };
           <h3 className="font-semibold">{phase.title}</h3>
                     <p className="text-sm text-gray-600 font-normal">
                       {phase.description}</p>
-              <CardContent>
+              <CardContent className="glass"
           <div className="space-y-3">
                   {phase.tasks.map((task, taskIndex) => (\n    </div>
                     <div key={taskIndex} className="flex items-center gap-2" className={`w-4 h-4 rounded-full flex items-center justify-center ${``
@@ -141,7 +141,7 @@ const className={`text-sm ${``
                     >
                       Complete {phase.title}</Button>)},
     {isCompleted && (
-div className="mt-4 pt-4 border-t">
+div className="mt-4 pt-4 -t">
                     <div className="flex items-center gap-2 text-green-600">
           <CheckCircle className="w-4 h-4"     />
                       <span className="text-sm font-medium">
@@ -150,12 +150,12 @@ div className="mt-4 pt-4 border-t">
     )
   },
     {/* AI, Recommendations */}
-      <Card>
-          <CardHeader></CardHeader>
-          <CardTitle></CardTitle>
+      <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+          <CardTitle className="glass"</CardTitle>
             AI Recommendations for {projectConfig.persona?.name || 'Developer'}</CardTitle>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="glass"
+          <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
           <h4 className="font-medium text-gray-900">Next Steps</h4>
               <ul className="text-sm text-gray-600 space-y-1">

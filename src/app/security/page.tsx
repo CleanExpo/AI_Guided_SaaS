@@ -39,17 +39,17 @@ export default function SecurityPage() {
         <p className="text-xl text-gray-600">Your data security is our top priority</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="glass grid md:grid-cols-2 gap-8">
         {securityFeatures.map((feature, index) => (
-          <Card key={index} className="p-6">
-            <CardHeader>
+          <Card key={index} className="glass p-6">
+            <CardHeader className="glass"
               <div className="flex items-center gap-3">
                 <feature.icon className="w-8 h-8 text-green-600" />
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
+                <CardTitle className="text-xl" className="glass{feature.title}</CardTitle>
                 <Badge className="bg-green-100 text-green-800">{feature.status}</Badge>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600">{feature.description}</p>
             </CardContent>
           </Card>

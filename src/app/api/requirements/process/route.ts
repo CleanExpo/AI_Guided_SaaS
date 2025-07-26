@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const processSchema = z.object({ 
     requirements: z.string().min(1, 'Requirements are required'),
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, processed }, { status: 201   
     })
 } catch (error) {
-        console.error('Process requirements error:', error);
+        logger.error('Process requirements error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -46,7 +47,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         // Simulate getting processed requirements
         const requirements = [
             { id: 'req_1',
-                requirements: 'Build a todo app',
+                requirements: 'Build a  app',
                 projectType: 'web-app',
                 status: 'processed',
                 createdAt: new Date().toISOString()
@@ -58,7 +59,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             total: requirements.length   
     })
 } catch (error) {
-        console.error('Get requirements error:', error);
+        logger.error('Get requirements error:', error);
         return NextResponse.json({ error: 'Failed to fetch requirements' }, { status: 500   
     })
 }

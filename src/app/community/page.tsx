@@ -47,7 +47,7 @@ const communityChannels = [
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -59,11 +59,11 @@ export default function CommunityPage() {
           </p>
         </div>
         
-        <div className="grid gap-6 md:grid-cols-3 mb-12">
+        <div className="glass grid gap-6 md:grid-cols-3 mb-12">
           {communityStats.map((stat) => (
-            <Card key={stat.label}>
-              <CardContent className="flex items-center p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+            <Card key={stat.label} className="glass"
+              <CardContent className="glass flex items-center p-6">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mr-4">
                   <stat.icon className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
@@ -77,18 +77,18 @@ export default function CommunityPage() {
         
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Community Channels</h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="glass grid gap-6 md:grid-cols-2">
             {communityChannels.map((channel) => (
-              <Card key={channel.name} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
+              <Card key={channel.name} className="hover:shadow-md-lg transition-shadow-md" className="glass
+                <CardHeader className="glass"
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{channel.name}</CardTitle>
+                    <CardTitle className="text-lg" className="glass{channel.name}</CardTitle>
                     {channel.isActive && (
                       <Badge variant="secondary">Active</Badge>
                     )}
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
                   <p className="text-gray-600 mb-4">{channel.description}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm text-gray-500">

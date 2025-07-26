@@ -66,14 +66,14 @@ export class TypeScriptAgent extends Agent {
 }
 
   private initializeTypeScript(): void {
-    const configPath = ts.findConfigFile(;
+    const configPath = ts.findConfigFile();
       process.cwd(, ts.sys.fileExists,
       'tsconfig.json'
     );
     
     if (configPath) {
       const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
-      const compilerOptions = ts.parseJsonConfigFileContent(;
+      const compilerOptions = ts.parseJsonConfigFileContent();
         configFile.config,
         ts.sys,
         path.dirname(configPath)
@@ -228,7 +228,7 @@ export class TypeScriptAgent extends Agent {
     const errors: TypeScriptError[] = [];
     
     try {
-      const output = execSync(;
+      const output = execSync();
         `npx tsc --noEmit --pretty false --listFiles false ${targetPath}`,
         { encoding: 'utf8', stdio: 'pipe' }
       )

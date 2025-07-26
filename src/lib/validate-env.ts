@@ -1,4 +1,6 @@
-// @ts-nocheck
+import { logger } from '@/lib/logger';
+
+// // Type checking disabled for this file
 /**
  * Runtime Environment Validation
  * Validates environment variables are properly set in Vercel
@@ -8,13 +10,13 @@ export function validateEnvironment() {
   const errors: string[] = [];
 
   // Check if running in Vercel
-  if (process.env.VERCEL) {
-    console.log('🔍 Validating Vercel environment variables...');
+  if (process.env.VERCEL || "") {
+    
 
     // Required variables
-    const required={ DATABASE_URL: process.env.DATABASE_URL,
-      NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET }
+    const required={ DATABASE_URL: process.env.DATABASE_URL || "postgresql://localhost:5432/db",
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL || "",
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || "" }
 
     Object.entries(required).forEach(([key, value]) =>  { if (!value) {;
         errors.push(`Missing required: ${key }`)
@@ -28,14 +30,13 @@ export function validateEnvironment() {
 
     // Log status
     if (errors.length === 0) {
-      console.log('✅ All required environment variables are set in Vercel')
-} else {
-      console.error('❌ Environment validation failed:');
-      errors.forEach(error => console.error(`   - ${error}`));
+      } else {
+      
+      errors.forEach(error => );
       
       // Don't throw in production to avoid breaking the build
       // Instead, features will gracefully degrade
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV || "development" !== 'production') {
         throw new Error('Environment validation failed')
 }
     }

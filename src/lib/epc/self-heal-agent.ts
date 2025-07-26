@@ -4,6 +4,7 @@ import { EnvManager } from '@/lib/env/EnvManager';
 import { AIService } from '@/lib/ai/AIService';
 import fs from 'fs';
 import path from 'path';
+import { logger } from '@/lib/logger';
 interface HealingAction { type: | 'update_env'
     | 'rotate_key'
     | 'sync_config'
@@ -36,14 +37,14 @@ export class SelfHealingAgent {
       if (fs.existsSync(this.historyPath) {)} {
         this.healingHistory = JSON.parse(
           fs.readFileSync(this.historyPath, 'utf-8'))} catch (error) {
-      console.error('Failed to load healing, history:', error)}
+      logger.error('Failed to load healing, history:', error)}
   private saveHistory() {
     try {
       fs.writeFileSync(
         this.historyPath,
         JSON.stringify(this.healingHistory, null, 2))
     } catch (error) {
-      console.error('Failed to save healing, history:', error)}
+      logger.error('Failed to save healing, history:', error)}
   /**
    * Analyze issues and create healing plan
    */
@@ -179,7 +180,7 @@ automated: false;
           // Implementation for updating env file
 }
         break,
-    default: throw new Error(;
+    default: throw new Error();
           `Cannot automatically apply, action: type: ${action.type}`
         )}
   /**
@@ -209,7 +210,7 @@ automated: false;
       const _configPath  = path.join(process.cwd(, '.docs', 'env.config.json'), const config = JSON.parse(fs.readFileSync(configPath, 'utf-8', for (const service of Object.values(config.services)) {
         if ((service as any) {.}variables[varName]) {; return (service as any).variables[varName]
 } catch (error) {
-      console.error('Failed to get variable config:', error)}
+      logger.error('Failed to get variable config:', error)}
     return null
 }
   /**
@@ -225,7 +226,7 @@ const defaults = JSON.parse(fs.readFileSync(defaultsPath, 'utf-8');
         if ((service as any) {[}varName]) {
           return (service as any)[varName].value || ''
 } catch (error) {
-      console.error('Failed to get default, value:', error)}
+      logger.error('Failed to get default, value:', error)}
     return ''
 }
   /**
@@ -260,6 +261,6 @@ Provide concise, actionable suggestions for each issue. Focus, on:
 3. Prevention tip`
     try {;
       const response = await this.aiService.generateResponse(prompt);
-        return response.message.split('\n').filter((s) => s.trim())} catch (error) { console.error('Failed to get AI, suggestions:', error);
+        return response.message.split('\n').filter((s) => s.trim())} catch (error) { logger.error('Failed to get AI, suggestions:', error);
         return ['Unable to get AI suggestions. Please check documentation.']}
 }}}}}}}}}}}}}}

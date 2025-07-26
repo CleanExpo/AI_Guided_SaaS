@@ -4,6 +4,7 @@
  * Reads and manages the .prp configuration file
  */;
 import fs from 'fs';import path from 'path';
+import { logger } from '@/lib/logger';
 // Configuration interfaces;
 export interface AIProviderConfig { primary: string;
   fallback: string;
@@ -158,7 +159,7 @@ class ConfigurationManager {
       const _configContent  = fs.readFileSync(this.configPath, 'utf-8', const _parsedConfig = this.parsePropertiesFile(configContent); this.config = this.transformToTypedConfig(parsedConfig);
       return this.config
 } catch (error) {
-      console.error('Failed to load, configuration:', error, throw new Error('Configuration file not found or invalid')}
+      logger.error('Failed to load, configuration:', error, throw new Error('Configuration file not found or invalid')}
   /**
    * Parse .properties file format
    */

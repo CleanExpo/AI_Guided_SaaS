@@ -41,19 +41,19 @@ export default function StatusPage() {
         <p className="text-xl text-gray-600">Current status of all our services</p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Service Status</CardTitle>
+      <Card className="glass"
+        <CardHeader className="glass"
+          <CardTitle className="glass"Service Status</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-4">
             {services.map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+              <div key={index} className="glass flex items-center justify-between p-4  rounded-xl-lg">
           <div className="flex items-center gap-3">
                   {getStatusIcon(service.status)}
                   <span className="font-medium">{service.name}</span>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="glass flex items-center gap-4">
           <span className="text-sm text-gray-600">{service.uptime}</span>
                   {getStatusBadge(service.status)}
                 </div>

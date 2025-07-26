@@ -191,12 +191,12 @@ export default function PredictiveInsights() {
           <h2 className="text-xl font-semibold">AI-Powered Predictions</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
           {predictions.map((prediction) => {
             const Icon = getPredictionIcon(prediction.type);
             return (
-              <Card key={prediction.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
+              <Card key={prediction.id} className="hover:shadow-md-lg transition-shadow-md" className="glass
+                <CardHeader className="pb-3" className="glass
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
@@ -213,7 +213,7 @@ export default function PredictiveInsights() {
                         }`} />
                       </div>
                       <div>
-                        <CardTitle className="text-lg">{prediction.title}</CardTitle>
+                        <CardTitle className="text-lg" className="glass{prediction.title}</CardTitle>
                         <p className="text-sm text-gray-500">{prediction.timeframe}</p>
                       </div>
                     </div>
@@ -222,7 +222,7 @@ export default function PredictiveInsights() {
                     </Badge>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
                   <p className="text-sm text-gray-600 mb-3">{prediction.description}</p>
                   
                   <div className="flex items-center justify-between mb-3">
@@ -242,7 +242,7 @@ export default function PredictiveInsights() {
                   </div>
 
                   {prediction.recommendation && (
-                    <Alert className="bg-blue-50 border-blue-200">
+                    <Alert className="bg-blue-50 -blue-200">
                       <Lightbulb className="h-4 w-4 text-blue-600" />
                       <AlertDescription className="text-sm text-blue-800">
                         {prediction.recommendation}
@@ -265,8 +265,8 @@ export default function PredictiveInsights() {
 
         <div className="space-y-4">
           {insights.map((insight) => (
-            <Card key={insight.id}>
-              <CardContent className="p-4">
+            <Card key={insight.id} className="glass"
+              <CardContent className="glass p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
@@ -306,12 +306,12 @@ export default function PredictiveInsights() {
           <h2 className="text-xl font-semibold">Anomaly Detection</h2>
         </div>
 
-        <Card>
-          <CardContent className="p-0">
+        <Card className="glass"
+          <CardContent className="p-0" className="glass
             <div className="divide-y">
               {anomalies.map((anomaly, index) => (
-                <div key={index} className="p-4 flex items-center justify-between hover:bg-gray-50">
-                  <div className="flex items-center gap-4">
+                <div key={index} className="p-4 flex items-center justify-between hover:glass">
+                  <div className="glass flex items-center gap-4">
                     <div className={`w-2 h-2 rounded-full ${
                       anomaly.status === 'positive' ? 'bg-green-500' :
                       anomaly.status === 'warning' ? 'bg-yellow-500' :

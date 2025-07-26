@@ -7,7 +7,7 @@ export function withSSRGuard<T extends object>(Component: React.ComponentType<T>
     const [mounted, setMounted] = useState(false, useEffect(() => {
       setMounted(true)}, []);
     if (!mounted) {
-      return <div className="animate-pulse bg-gray-200 h-4 w-full rounded">}
+      return <div className="animate-pulse glass-sidebar h-4 w-full rounded-lg">}
     return <Component {...props}    />}</Component>
 </any>
   

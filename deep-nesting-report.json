@@ -1,0 +1,1393 @@
+{
+  "timestamp": "2025-07-26T03:18:54.384Z",
+  "filesAnalyzed": 563,
+  "totalIssues": 0,
+  "filesWithIssues": [
+    {
+      "file": "src\\lib\\health\\external-services-health.ts",
+      "maxDepth": 55,
+      "issues": 262,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\components\\LandingPageEnhanced.tsx",
+      "maxDepth": 45,
+      "issues": 232,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ProductionShowcasePage.tsx",
+      "maxDepth": 34,
+      "issues": 282,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\health\\database-health.ts",
+      "maxDepth": 32,
+      "issues": 186,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\notification-system.ts",
+      "maxDepth": 32,
+      "issues": 374,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ShowcaseLandingPage.tsx",
+      "maxDepth": 32,
+      "issues": 308,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\testing-automation.ts",
+      "maxDepth": 30,
+      "issues": 386,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\automation\\workflows\\project-deployment.ts",
+      "maxDepth": 28,
+      "issues": 219,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\tutorials\\InteractiveTutorialSystem.old.ts",
+      "maxDepth": 26,
+      "issues": 552,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\env\\EnvManager.ts",
+      "maxDepth": 25,
+      "issues": 225,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\admin.ts",
+      "maxDepth": 24,
+      "issues": 289,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\empty-states.tsx",
+      "maxDepth": 24,
+      "issues": 190,
+      "suggestions": 6
+    },
+    {
+      "file": "src\\lib\\automation\\n8n-client.ts",
+      "maxDepth": 23,
+      "issues": 197,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\collaboration\\CollaborationWorkspace.tsx",
+      "maxDepth": 23,
+      "issues": 293,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\claude-code-integration.ts",
+      "maxDepth": 22,
+      "issues": 263,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\mcp\\mcp-orchestrator.ts",
+      "maxDepth": 22,
+      "issues": 287,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\health\\HealthCheckService.ts",
+      "maxDepth": 22,
+      "issues": 166,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\GuidedProjectBuilder.tsx",
+      "maxDepth": 22,
+      "issues": 175,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\ide\\kiro-server-mock.ts",
+      "maxDepth": 20,
+      "issues": 195,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\ide\\kiro-client.ts",
+      "maxDepth": 20,
+      "issues": 178,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\automation\\nodes\\agent-orchestration.ts",
+      "maxDepth": 20,
+      "issues": 277,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\knowledge\\rag-engine.ts",
+      "maxDepth": 19,
+      "issues": 193,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\ContainerizedPulseOrchestrator.ts",
+      "maxDepth": 19,
+      "issues": 100,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\hooks\\useKiroIDE.ts",
+      "maxDepth": 19,
+      "issues": 271,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ide\\KiroIDE.tsx",
+      "maxDepth": 19,
+      "issues": 321,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\design-system\\components.tsx",
+      "maxDepth": 18,
+      "issues": 225,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\hooks\\useMCP.ts",
+      "maxDepth": 18,
+      "issues": 257,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\EnvStatusDashboard.tsx",
+      "maxDepth": 18,
+      "issues": 120,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\support\\AISupportChat.tsx",
+      "maxDepth": 18,
+      "issues": 277,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\components\\dashboard\\DashboardEnhanced.tsx",
+      "maxDepth": 18,
+      "issues": 222,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\hierarchical-memory-system.ts",
+      "maxDepth": 17,
+      "issues": 284,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\knowledge\\vector-store.ts",
+      "maxDepth": 17,
+      "issues": 129,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\epc\\inference-telemetry.ts",
+      "maxDepth": 17,
+      "issues": 153,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\epc\\epc-engine.ts",
+      "maxDepth": 17,
+      "issues": 147,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\strapi.ts",
+      "maxDepth": 17,
+      "issues": 260,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\agents\\AgentMonitor.ts",
+      "maxDepth": 17,
+      "issues": 318,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\AgentCoordinator.ts",
+      "maxDepth": 17,
+      "issues": 275,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\hooks\\useRAG.ts",
+      "maxDepth": 17,
+      "issues": 280,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\components\\knowledge\\RAGKnowledgeBase.tsx",
+      "maxDepth": 17,
+      "issues": 317,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\forms\\ValidatedProjectForm.tsx",
+      "maxDepth": 17,
+      "issues": 167,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\nocodb.ts",
+      "maxDepth": 16,
+      "issues": 292,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\agents\\PulsedAgentOrchestrator.ts",
+      "maxDepth": 16,
+      "issues": 132,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\email.ts",
+      "maxDepth": 15,
+      "issues": 221,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\epc\\self-heal-agent.ts",
+      "maxDepth": 15,
+      "issues": 216,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\analytics\\PredictiveAnalytics.ts",
+      "maxDepth": 15,
+      "issues": 249,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\templates.ts",
+      "maxDepth": 14,
+      "issues": 228,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\advanced-monitoring.ts",
+      "maxDepth": 14,
+      "issues": 181,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\backend\\migration.ts",
+      "maxDepth": 14,
+      "issues": 171,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\DockerAgentManager.ts",
+      "maxDepth": 14,
+      "issues": 174,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\cycle-detection.ts",
+      "maxDepth": 13,
+      "issues": 190,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\config.ts",
+      "maxDepth": 13,
+      "issues": 243,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\hooks\\useN8nAutomation.ts",
+      "maxDepth": 13,
+      "issues": 184,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\AIChat.tsx",
+      "maxDepth": 13,
+      "issues": 80,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\navigation.tsx",
+      "maxDepth": 13,
+      "issues": 320,
+      "suggestions": 4
+    },
+    {
+      "file": "src\\components\\ui\\logo.tsx",
+      "maxDepth": 13,
+      "issues": 142,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\button-premium.tsx",
+      "maxDepth": 13,
+      "issues": 71,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\docs\\DocumentationViewer.tsx",
+      "maxDepth": 13,
+      "issues": 324,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\design-system.ts",
+      "maxDepth": 12,
+      "issues": 145,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\api-tracking.ts",
+      "maxDepth": 12,
+      "issues": 128,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\CPURateLimiter.ts",
+      "maxDepth": 12,
+      "issues": 130,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\AgentLoader.ts",
+      "maxDepth": 12,
+      "issues": 157,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\DevOpsAgent.ts",
+      "maxDepth": 12,
+      "issues": 428,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\AgentOrchestrator.ts",
+      "maxDepth": 12,
+      "issues": 121,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\base-agent.ts",
+      "maxDepth": 12,
+      "issues": 62,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\base\\ValidatedAgent.ts",
+      "maxDepth": 12,
+      "issues": 71,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\DesignSystemShowcase.tsx",
+      "maxDepth": 12,
+      "issues": 212,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\knowledge\\text-splitter.ts",
+      "maxDepth": 11,
+      "issues": 201,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\database\\connection-pool.ts",
+      "maxDepth": 11,
+      "issues": 105,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\GracefulShutdownManager.ts",
+      "maxDepth": 11,
+      "issues": 62,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\TypeScriptAgent.ts",
+      "maxDepth": 11,
+      "issues": 428,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\QAAgent.ts",
+      "maxDepth": 11,
+      "issues": 300,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\AgentRuntime.ts",
+      "maxDepth": 11,
+      "issues": 276,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\ToolsRefinerAgent.ts",
+      "maxDepth": 11,
+      "issues": 252,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\ProjectGenerator.tsx",
+      "maxDepth": 11,
+      "issues": 103,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\EnvVariableEditor.tsx",
+      "maxDepth": 11,
+      "issues": 136,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\components\\DataSourceManager.tsx",
+      "maxDepth": 11,
+      "issues": 226,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ClientRequirementsCapture.tsx",
+      "maxDepth": 11,
+      "issues": 156,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\AdvancedCodeEditor.tsx",
+      "maxDepth": 11,
+      "issues": 192,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\production-logger.ts",
+      "maxDepth": 10,
+      "issues": 81,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\auth-helpers.ts",
+      "maxDepth": 10,
+      "issues": 31,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\api-middleware.ts",
+      "maxDepth": 10,
+      "issues": 91,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\breadcrumb\\breadcrumb-agent.ts",
+      "maxDepth": 10,
+      "issues": 155,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\EnhancedAgentOrchestrator.ts",
+      "maxDepth": 10,
+      "issues": 307,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\lib\\agents\\mcp\\MCPIntegration.ts",
+      "maxDepth": 10,
+      "issues": 320,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\mcp\\AgentMCPBridge.ts",
+      "maxDepth": 10,
+      "issues": 227,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\FlowchartBuilder.tsx",
+      "maxDepth": 10,
+      "issues": 96,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\ui\\card-enhanced.tsx",
+      "maxDepth": 10,
+      "issues": 71,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\mcp\\MCPOrchestrator.tsx",
+      "maxDepth": 10,
+      "issues": 210,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\backend\\BackendSelector.tsx",
+      "maxDepth": 10,
+      "issues": 172,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\admin\\AdminPanel.tsx",
+      "maxDepth": 10,
+      "issues": 417,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\analytics.ts",
+      "maxDepth": 9,
+      "issues": 126,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\theme\\dark-mode.tsx",
+      "maxDepth": 9,
+      "issues": 97,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\knowledge\\document-loader.ts",
+      "maxDepth": 9,
+      "issues": 129,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\design-system\\theme.ts",
+      "maxDepth": 9,
+      "issues": 62,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\backend\\adapters\\supabase.ts",
+      "maxDepth": 9,
+      "issues": 168,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\architect-agent.ts",
+      "maxDepth": 9,
+      "issues": 106,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\InferenceSafeMode.tsx",
+      "maxDepth": 9,
+      "issues": 136,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\FeedbackWidget.tsx",
+      "maxDepth": 9,
+      "issues": 149,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ClaudeCodeDashboard.tsx",
+      "maxDepth": 9,
+      "issues": 175,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\dropdown-menu.tsx",
+      "maxDepth": 9,
+      "issues": 106,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\health\\HealthCheckDashboard.tsx",
+      "maxDepth": 9,
+      "issues": 96,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\config\\ConfigurationDashboard.tsx",
+      "maxDepth": 9,
+      "issues": 246,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\self-healing\\strategies\\security-strategy.ts",
+      "maxDepth": 8,
+      "issues": 215,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\hooks\\usePWA.ts",
+      "maxDepth": 8,
+      "issues": 10,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\llm-fallback-system.ts",
+      "maxDepth": 7,
+      "issues": 51,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\services\\auto-compact-system.ts",
+      "maxDepth": 7,
+      "issues": 38,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\packages\\self-check\\dependency-auditor.ts",
+      "maxDepth": 7,
+      "issues": 65,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\collaboration\\SocketEventHandler.ts",
+      "maxDepth": 7,
+      "issues": 121,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\MasterDevAgent.ts",
+      "maxDepth": 7,
+      "issues": 68,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\index.ts",
+      "maxDepth": 7,
+      "issues": 40,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\AgentRegistry.ts",
+      "maxDepth": 7,
+      "issues": 120,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\AgentOrchestrator.ts",
+      "maxDepth": 7,
+      "issues": 17,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\self-healing\\health-monitor.ts",
+      "maxDepth": 7,
+      "issues": 39,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\lib\\agents\\runtime\\PulsedExecutor.ts",
+      "maxDepth": 7,
+      "issues": 72,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\orchestrator\\HealthCheckManager.ts",
+      "maxDepth": 7,
+      "issues": 16,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\SemanticSearchDemo.tsx",
+      "maxDepth": 7,
+      "issues": 36,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\DevelopmentWorkflow.tsx",
+      "maxDepth": 7,
+      "issues": 43,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\loading.tsx",
+      "maxDepth": 7,
+      "issues": 70,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\ui\\button-basic.tsx",
+      "maxDepth": 7,
+      "issues": 11,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\auth\\SignInForm.tsx",
+      "maxDepth": 7,
+      "issues": 91,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\agents\\AgentMonitoringDashboard.tsx",
+      "maxDepth": 7,
+      "issues": 95,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\admin\\SystemResourceMonitor.tsx",
+      "maxDepth": 7,
+      "issues": 118,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\chat\\page.tsx",
+      "maxDepth": 7,
+      "issues": 23,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\middleware.ts",
+      "maxDepth": 6,
+      "issues": 11,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\marketplace-service.ts",
+      "maxDepth": 6,
+      "issues": 12,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\analytics-engine.ts",
+      "maxDepth": 6,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\marketplace\\StorageManager.ts",
+      "maxDepth": 6,
+      "issues": 7,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\error-handling.ts",
+      "maxDepth": 6,
+      "issues": 9,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\validation\\decorators.ts",
+      "maxDepth": 6,
+      "issues": 45,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\requirements\\ClientRequirementsProcessor.ts",
+      "maxDepth": 6,
+      "issues": 149,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\mcp\\mcp-registry.ts",
+      "maxDepth": 6,
+      "issues": 38,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\health\\AlertingService.ts",
+      "maxDepth": 6,
+      "issues": 74,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\docs\\generators\\troubleshooting-generator.ts",
+      "maxDepth": 6,
+      "issues": 22,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\docs\\generators\\component-generator.ts",
+      "maxDepth": 6,
+      "issues": 14,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\docs\\generators\\api-generator.ts",
+      "maxDepth": 6,
+      "issues": 16,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\data\\MockDataGenerator.ts",
+      "maxDepth": 6,
+      "issues": 37,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\collaboration\\ProjectManager.ts",
+      "maxDepth": 6,
+      "issues": 20,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\collaboration\\CommentManager.ts",
+      "maxDepth": 6,
+      "issues": 13,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\collaboration\\AuthenticationService.ts",
+      "maxDepth": 6,
+      "issues": 11,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\api\\validation-middleware.ts",
+      "maxDepth": 6,
+      "issues": 27,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\SelfHealingAgent.ts",
+      "maxDepth": 6,
+      "issues": 46,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\self-healing\\strategies\\build-strategy.ts",
+      "maxDepth": 6,
+      "issues": 25,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\AgentContainer.ts",
+      "maxDepth": 6,
+      "issues": 22,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\communication\\StatisticsManager.ts",
+      "maxDepth": 6,
+      "issues": 6,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\communication\\MessageRouter.ts",
+      "maxDepth": 6,
+      "issues": 12,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\PromptRefinerAgent.ts",
+      "maxDepth": 6,
+      "issues": 52,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\admin\\queries\\system-queries.ts",
+      "maxDepth": 6,
+      "issues": 22,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\components\\ProgressTracker.tsx",
+      "maxDepth": 6,
+      "issues": 25,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\LiveProjectPreview.tsx",
+      "maxDepth": 6,
+      "issues": 43,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\marketplace\\TemplateInstaller.tsx",
+      "maxDepth": 6,
+      "issues": 26,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ide\\kiro\\ProjectGenerator.ts",
+      "maxDepth": 6,
+      "issues": 115,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\error\\ErrorBoundary.tsx",
+      "maxDepth": 6,
+      "issues": 38,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\dashboard\\EnterpriseDashboard.tsx",
+      "maxDepth": 6,
+      "issues": 51,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\analytics\\PredictiveInsights.tsx",
+      "maxDepth": 6,
+      "issues": 12,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\settings\\api-keys\\page.tsx",
+      "maxDepth": 6,
+      "issues": 6,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\api\\errors\\route.ts",
+      "maxDepth": 6,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\utils\\helpers.ts",
+      "maxDepth": 5,
+      "issues": 7,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\white-label-service.ts",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\services\\resource-aware-system.ts",
+      "maxDepth": 5,
+      "issues": 13,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\services\\evaluation-monitor.ts",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\services\\error-logger.ts",
+      "maxDepth": 5,
+      "issues": 7,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\services\\analytics-websocket.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\services\\analytics-providers.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\packages\\self-check\\causal-feedback-replayer.ts",
+      "maxDepth": 5,
+      "issues": 14,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\packages\\causal-engine\\scorer.ts",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\token-optimization-engine.ts",
+      "maxDepth": 5,
+      "issues": 24,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\env-config.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\admin-auth.ts",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\validation\\schemas.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\tutorials\\tutorials\\deployment.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\token-optimization\\TokenAnalyzer.ts",
+      "maxDepth": 5,
+      "issues": 5,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\token-optimization\\StrategyManager.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\token-optimization\\ContentCompressor.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\semantic\\SemanticSearchService.ts",
+      "maxDepth": 5,
+      "issues": 10,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\roadmap\\RoadmapValidator.ts",
+      "maxDepth": 5,
+      "issues": 24,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\docs\\DynamicDocumentationSystem.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\docs\\search\\search-engine.ts",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\docs\\progress\\progress-tracker.ts",
+      "maxDepth": 5,
+      "issues": 7,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\database\\services\\user-service.ts",
+      "maxDepth": 5,
+      "issues": 9,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\database\\services\\activity-service.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\collaboration\\RoomManager.ts",
+      "maxDepth": 5,
+      "issues": 14,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\api\\rate-limiter.ts",
+      "maxDepth": 5,
+      "issues": 12,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\ai\\AIService.ts",
+      "maxDepth": 5,
+      "issues": 9,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\AgentSystem.ts",
+      "maxDepth": 5,
+      "issues": 121,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\AgentCommunication.ts",
+      "maxDepth": 5,
+      "issues": 7,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\specialized\\self-healing\\strategies\\performance-strategy.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\frontend-agent.ts",
+      "maxDepth": 5,
+      "issues": 28,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\runners\\backend-agent.ts",
+      "maxDepth": 5,
+      "issues": 29,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\ContainerOrchestrator.ts",
+      "maxDepth": 5,
+      "issues": 10,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\orchestrator\\NetworkManager.ts",
+      "maxDepth": 5,
+      "issues": 9,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\orchestrator\\DockerImageBuilder.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\docker\\orchestrator\\ContainerManager.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\communication\\MessageValidator.ts",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\communication\\MessageQueue.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\communication\\HandoffManager.ts",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\AnalystAgent.ts",
+      "maxDepth": 5,
+      "issues": 17,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\architecture\\data-model-designer.ts",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\bmad\\architecture\\component-designer.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\agents\\base\\BaseAgent.ts",
+      "maxDepth": 5,
+      "issues": 1,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\agents\\base\\Agent.ts",
+      "maxDepth": 5,
+      "issues": 1,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\lib\\agents\\archon\\AgentRefinerAgent.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\lib\\admin\\queries\\stats-queries.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\lib\\admin\\queries\\analytics-queries.ts",
+      "maxDepth": 5,
+      "issues": 34,
+      "suggestions": 2
+    },
+    {
+      "file": "src\\hooks\\useAnalytics.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\WelcomeScreen.tsx",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\LandingPageProduction.tsx",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\ui\\use-toast.tsx",
+      "maxDepth": 5,
+      "issues": 5,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\ui\\sheet.tsx",
+      "maxDepth": 5,
+      "issues": 15,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\ui\\button-enhanced.tsx",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 3
+    },
+    {
+      "file": "src\\components\\monitoring\\WebVitals.tsx",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\marketplace\\PluginManager.tsx",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\analytics\\AnalyticsExport.tsx",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\analytics\\advanced\\UsersTab.tsx",
+      "maxDepth": 5,
+      "issues": 8,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\components\\admin\\SelfCheckTrigger.tsx",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\components\\admin\\safe-mode\\SafeModeProcessor.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\apps\\ui-builder\\store\\useBuilderStore.ts",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\apps\\ui-builder\\components\\BuilderCanvas.tsx",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\settings\\resources\\page.tsx",
+      "maxDepth": 5,
+      "issues": 6,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\evaluation\\page.tsx",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\deploy\\page.tsx",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 1
+    },
+    {
+      "file": "src\\app\\api\\webhooks\\stripe\\route.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\support\\chat\\route.ts",
+      "maxDepth": 5,
+      "issues": 3,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\monitoring\\vitals\\route.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\email\\test\\route.ts",
+      "maxDepth": 5,
+      "issues": 10,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\cron\\cache-warm\\route.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\auth\\[...nextauth]\\options.ts",
+      "maxDepth": 5,
+      "issues": 4,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\analytics\\route.ts",
+      "maxDepth": 5,
+      "issues": 12,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\admin\\users\\route.ts",
+      "maxDepth": 5,
+      "issues": 10,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\admin\\auth\\login\\route.ts",
+      "maxDepth": 5,
+      "issues": 7,
+      "suggestions": 0
+    },
+    {
+      "file": "src\\app\\api\\admin\\analytics\\route.ts",
+      "maxDepth": 5,
+      "issues": 2,
+      "suggestions": 0
+    }
+  ],
+  "suggestions": [],
+  "summary": {
+    "totalIssues": 23984,
+    "filesWithIssues": 230,
+    "averageMaxDepth": "10.17"
+  }
+}

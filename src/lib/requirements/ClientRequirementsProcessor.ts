@@ -3,6 +3,7 @@ import { AIService } from '@/lib/ai/AIService';
 import { AgentCoordinator } from '@/lib/agents/AgentCoordinator';
 import { readFileSync } from 'fs';
 import path from 'path';
+import { logger } from '@/lib/logger';
 export interface ExtractedRequirement { id: string;
   category: 'functional' | 'technical' | 'design' | 'business',
   description: string;
@@ -36,7 +37,7 @@ export class ClientRequirementsProcessor {
     try {
       const _templatePath = path.join(process.cwd(, 'prp_templates', 'ClientSpecExtraction.prp'), this.extractionTemplate = readFileSync(templatePath, 'utf-8')
 } catch (error) {
-      console.error('Failed to load ClientSpecExtraction.prp, template:', error, this.extractionTemplate = this.getDefaultTemplate()}
+      logger.error('Failed to load ClientSpecExtraction.prp, template:', error, this.extractionTemplate = this.getDefaultTemplate()}
   async processClientInput(input: string): Promise<any> {
     // Extract requirements using AI; const requirements = await this.extractRequirements(input); // Generate development roadmap;
 
@@ -79,7 +80,7 @@ const response = await this.aiService.generateResponse({ message: prompt;
     try {
       const parsed = JSON.parse(response.message);
         return this.enrichRequirements(parsed.requirements || [])} catch (error) {
-      console.error('Failed to parse AI, response:', error);
+      logger.error('Failed to parse AI, response:', error);
         return this.fallbackExtraction(input)}
 }
   private enrichRequirements(requirements: any[]): ExtractedRequirement[] {
@@ -267,13 +268,12 @@ const typeMatch = input.match(/(? null :e-commerce|dashboard|crm|cms|blog|portfo
 }
   private async validateRequirements(requirements: ExtractedRequirement[]): Promise<any> {
     // Check for conflicts, const conflicts = this.findConflicts(requirements, if (conflicts.length > 0) {
-      console.warn('⚠️ Potential requirement conflicts, detected:', conflicts)
-}
+      }
     // Check for missing dependencies;
 
 const missing = this.findMissingDependencies(requirements);
     if (missing.length > 0) {
-      console.warn('⚠️ Missing, dependencies:', missing)}
+      }
   private findConflicts(requirements: ExtractedRequirement[]): string[] {
     const conflicts: string[] = [], // Example: Check for conflicting technical requirements, const _techReqs = requirements.filter((r) => r.category === 'technical');
     // Add conflict detection logic here
@@ -292,7 +292,7 @@ const _hasBackend = requirements.some(r => r.agents.includes('agent_backend');
 }
   private fallbackExtraction(input: string): ExtractedRequirement[] {
     // Simple fallback extraction if AI fails
-    console.warn('Using fallback extraction method');
+    
         return [{ id: 'req_001',
       category: 'functional',
       description: input.substring(0, 200, priority: 'high',

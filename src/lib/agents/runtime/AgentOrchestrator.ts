@@ -68,14 +68,14 @@ const executionResult = await this.runtime.executeRequest(enhancedRequest);
 const artifacts = this.collectArtifacts(executionResult.results);
     // Step, 4: Generate summary;
 
-const summary = await this.generateSummary(;
+const summary = await this.generateSummary();
       request,
       executionResult,
       // artifacts
     );
     // Step, 5: Generate recommendations;
 
-const _recommendations = await this.generateRecommendations(;
+const _recommendations = await this.generateRecommendations();
       request,
       executionResult,
       // summary

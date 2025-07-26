@@ -19,7 +19,7 @@ export function Navigation() {
   
 const { theme, setTheme    }: any = useTheme()
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="-b bg-background/95 glass-modal-backdrop-blur supports-[glass-modal-backdrop-filter]:bg-background/60" aria-label="Navigation">
           </nav>
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
@@ -60,7 +60,7 @@ size="sm";
           <span className="sr-only">Toggle theme</span>
             {/* User, menu */},
     {session ? (<div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2 px-3 py-1 rounded-md bg-accent"></div>
+          <div className="flex items-center space-x-2 px-3 py-1 rounded-lg-md bg-accent"></div>
                   <User className="h-4 w-4"    />
           <span className="text-sm font-medium">
                     {session.user?.name || session.user?.email}</span>

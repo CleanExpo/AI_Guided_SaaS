@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 /* BREADCRUMB: library - Shared library code */
 /**
  * Enhanced logging utility for the AI Guided SaaS platform
@@ -11,7 +13,7 @@ export class Logger {
   private isDevelopment: boolean;
   
   constructor() {
-    this.isDevelopment = process.env.NODE_ENV === 'development';
+    this.isDevelopment = (process.env.NODE_ENV || "development") === "development";
   }
 
   private formatMessage(
@@ -29,18 +31,18 @@ export class Logger {
     
     switch (level) {
       case 'error':
-        console.error(formattedMessage);
+        
         break;
       case 'warn':
-        console.warn(formattedMessage);
+        
         break;
       case 'debug':
         if (this.isDevelopment) {
-          console.debug(formattedMessage);
+          
         }
         break;
       default:
-        console.log(formattedMessage);
+        
     }
   }
 

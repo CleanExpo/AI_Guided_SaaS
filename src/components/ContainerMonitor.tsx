@@ -1,4 +1,4 @@
-// @ts-nocheck
+// // Type checking disabled for this file
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -46,17 +46,17 @@ export function ContainerMonitor() {
   
   return (
     <div className="space-y-4">
-          <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <Card className="glass"
+        <CardHeader className="glass"
+          <CardTitle className="flex items-center gap-2" className="glass
             <Activity className="h-5 w-5"   />
             Container Status
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="glass"
           <div className="space-y-4">
             {containers.map((container) => (
-              <div key={container.id} className="flex items-center justify-between p-3 border rounded">
+              <div key={container.id} className="flex items-center justify-between p-3  rounded-lg">
           <div className="flex items-center gap-3">
                   <div className={`w-3 h-3 rounded-full ${
                     container.status === 'running' ? 'bg-green-500' : 

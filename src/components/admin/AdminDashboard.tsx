@@ -66,24 +66,24 @@ const hours = Math.floor(minutes / 60);
   return (
     <div className="space-y-8">
       {/* Key Metrics */}</div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+          <CardTitle className="text-sm font-medium" className="glassTotal Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{formatNumber(stats.totalUsers)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
           <TrendingUp className="h-3 w-3 text-green-500 mr-1"     />
               <span className="text-green-600">+{stats.newUsersToday} today</span>
 </CardContent>
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassActive Users</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{formatNumber(stats.activeUsers)}</div>
             <div className="flex items-center mt-1">
           <Progress
@@ -92,22 +92,22 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
                 className="h-2"    />
         <span className="ml-2 text-xs text-muted-foreground">
                 {((stats.activeUsers / stats.totalUsers) * 100).toFixed(1)}%</span>
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassTotal Projects</CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{formatNumber(stats.totalProjects)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
           <span className="text-purple-600">{stats.activeProjects} active</span>
 </CardContent>
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">API Calls Today</CardTitle>
+        <Card className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2" className="glass
+            <CardTitle className="text-sm font-medium" className="glassAPI Calls Today</CardTitle>
             <Globe className="h-4 w-4 text-muted-foreground"    />
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
           <div className="text-2xl font-bold">{formatNumber(stats.apiCalls.today)}</div>
             <div className="flex items-center text-xs text-muted-foreground mt-1">
           <TrendingUp className="h-3 w-3 text-green-500 mr-1"     />
@@ -115,15 +115,15 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
 </CardContent>
 </div>
       {/* System Health & Performance */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card></Card>
-          <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+      <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="glass"</Card>
+          <CardHeader className="glass"
+          <CardTitle className="flex items-center gap-2" className="glass
               <Server className="h-5 w-5"     />
               System Health
 </CardTitle>
-            <CardDescription>Real-time system performance metrics</CardDescription>
-          <CardContent className="space-y-4">
+            <CardDescription className="glass"Real-time system performance metrics</CardDescription>
+          <CardContent className="space-y-4" className="glass
           <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Status</span>
               <div className={cn("flex items-center gap-2", getHealthColor(stats.systemHealth))}>
@@ -150,14 +150,14 @@ const value={(stats.activeUsers / stats.totalUsers) * 100}
           <span className="text-sm text-muted-foreground">Uptime</span>
                 <span className="text-sm font-medium text-green-600">{stats.uptime}</span>
         {/* Recent Activity */}
-        <Card>
-          <CardHeader></CardHeader>
-            <CardTitle className="flex items-center gap-2">
+        <Card className="glass"
+          <CardHeader className="glass"</CardHeader>
+            <CardTitle className="flex items-center gap-2" className="glass
           <Clock className="h-5 w-5"     />
               Recent Activity
 </CardTitle>
-            <CardDescription>Latest platform events and actions</CardDescription>
-          <CardContent>
+            <CardDescription className="glass"Latest platform events and actions</CardDescription>
+          <CardContent className="glass"
           <div className="space-y-4">
               {stats.recentActivity.map((activity, index) => (\n    </div>
                 <div key={index} className="flex items-start gap-3">
@@ -178,45 +178,45 @@ className="w-full mt-4";
                 <ArrowUpRight className="h-4 w-4 ml-2" /   />
           </div>
       {/* Quick Actions Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-blue-500"
+      <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-blue-500"
 
-    const onClick={() => onNavigate('users')}</Card>
+    const onClick={() = className="glass onNavigate('users')}</Card>
         ></Card>
-          <CardContent className="p-6">
+          <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">Manage</p>
                 <p className="text-xl font-semibold">Users</p>
               <Users className="h-8 w-8 text-blue-500"    />
           </Card>
-        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-purple-500"
+        <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-purple-500"
 
-    const onClick={() => onNavigate('analytics')}</Card>
+    const onClick={() = className="glass onNavigate('analytics')}</Card>
         ></Card>
-          <CardContent className="p-6">
+          <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">View</p>
                 <p className="text-xl font-semibold">Analytics</p>
               <BarChart3 className="h-8 w-8 text-purple-500"    />
           </Card>
-        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-green-500"
+        <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-green-500"
 
-    const onClick={() => onNavigate('database')}</Card>
+    const onClick={() = className="glass onNavigate('database')}</Card>
         ></Card>
-          <CardContent className="p-6">
+          <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">Monitor</p>
                 <p className="text-xl font-semibold">Database</p>
               <Database className="h-8 w-8 text-green-500"    />
           </Card>
-        <Card className="hover: shadow-md transition-all cursor-pointer border-l-4 border-l-orange-500"
+        <Card className="hover: shadow-md-md transition-all cursor-pointer -l-4 -l-orange-500"
 
-    const onClick={() => onNavigate('logs')}</Card>
+    const onClick={() = className="glass onNavigate('logs')}</Card>
         ></Card>
-          <CardContent className="p-6">
+          <CardContent className="glass p-6">
           <div className="flex items-center justify-between">
               <div>
           <p className="text-sm font-medium text-muted-foreground">Check</p>

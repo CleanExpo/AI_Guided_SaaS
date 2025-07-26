@@ -161,7 +161,7 @@ description?: existing.description })}
 };
       default: return 'bg-green-100 text-green-700'}}
   return (
-    <Card className="p-6">
+    <Card className="glass p-6">
           <div className="mb-6 flex items-center justify-between mb-4"     />
           <div>
           <h3 className="text-lg font-semibold flex items-center gap-2">
@@ -195,7 +195,7 @@ variant="outline";
                 <span>
           <Upload className="h-4 w-4 mr-2"     />
                   Import</Upload>
-              <input type="file"
+              <input aria-label="file" type="file"
 accept=".env, .env.local";
 
 const onChange={importEnvFile}
@@ -208,7 +208,7 @@ const onChange={importEnvFile}
             Environment variables marked as "secret" or "api_key" will be encrypted and never exposed in the UI after saving.</AlertDescription>
       {/* Variables, List */}
       <div className="space-y-4">
-        {variables.map((variable, index) => (\n    <div key={index} className="border rounded-lg p-4 grid grid-cols-12 gap-4">
+        {variables.map((variable, index) => (\n    <div key={index} className="glass  rounded-xl-lg p-4 grid grid-cols-12 gap-4">
               {/* Key */}</div>
               <div className="col-span-4">
           <label className="text-sm font-medium mb-1 block">Key</label>
@@ -216,7 +216,7 @@ const onChange={importEnvFile}
 
 const value={variable.key};
                   const onChange={(e) => handleUpdateVariable(index, 'key', e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_'))};/>
-                  placeholder="VARIABLE_NAME";
+                  ="VARIABLE_NAME";
 
     disabled={readOnly} className={cn(
                     validationErrors[variable.key] && "border-red-500"
@@ -234,7 +234,7 @@ type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'passwo
             'pr-10',validationErrors[variable.key] && "border-red-500"
                     )/>
                   {variable.type !== 'public'  && (/Input>
-                    <button type = "button"; const onClick={() => toggleShowSecret(variable.key)}</button>
+                    <button type = "button"; const onClick={() = aria-label="Button"> toggleShowSecret(variable.key)}</button>
                       className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600"
                     ></button>
                       {showSecrets[variable.key] ? (</button>
@@ -249,7 +249,7 @@ type={showSecrets[variable.key] || variable.type === 'public' ? 'text' : 'passwo
 
     value={variable.type} onChange={(e) => handleUpdateVariable(index, 'type', e.target.value)}</select>
 {{readOnly};
-                  className="flex-1 px-2 py-2 border rounded-md text-sm";
+                  className="flex-1 px-2 py-2  rounded-lg-md text-sm";
                 ></select>
                   <option value="public">Public</option>
                   <option value="secret">Secret</option>

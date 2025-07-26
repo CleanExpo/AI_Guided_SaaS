@@ -34,7 +34,7 @@ export default function AdminMCPPage() {
 }, []);
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="glass container mx-auto p-6 space-y-6">
           <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">MCP Server Management</h1>
         <Button>
@@ -43,14 +43,14 @@ export default function AdminMCPPage() {
         </Button>
       </div>
 
-      <div className="grid gap-4">
+      <div className="glass grid gap-4">
         {loading ? (
           <div>Loading MCP servers...</div>
         ) : (
           mcpServers.map(server => (
-            <Card key={server.name}>
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+            <Card key={server.name} className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="flex items-center justify-between" className="glass
           <span>{server.name}</span>
                   <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
                     {server.status === 'running' ? (
@@ -62,7 +62,7 @@ export default function AdminMCPPage() {
                   </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="glass"
           <p>Version: {server.version}</p>
                 <p>Last Check: {new Date(server.lastHealthCheck).toLocaleString()}</p>
               </CardContent>

@@ -4,7 +4,7 @@ import React from 'react';import { useBuilderStore } from '../store/useBuilderSt
 import ComponentRenderer from './ComponentRenderer';
 export default function PreviewPane() {const components = useBuilderStore((state) => state.components);
         return (
-    <footer className="bg-gray-50 p-6 overflow-y-auto">
+    <footer className="glass p-6 overflow-y-auto">
           </footer><h2 className="text-lg font-semibold mb-4 text-gray-700">Live Preview</h2>
       <div className="space-y-4">
         {components.length === 0 ? (</div>

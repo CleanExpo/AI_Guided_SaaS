@@ -21,7 +21,7 @@ export default function ConfigPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -32,18 +32,18 @@ export default function ConfigPage() {
           </p>
         </div>
         
-        <div className="grid gap-6 lg:grid-cols-4">
+        <div className="glass grid gap-6 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Configuration</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="text-lg" className="glassConfiguration</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <nav className="space-y-1">
+              <CardContent className="p-0" className="glass
+                <nav className="space-y-1" aria-label="Navigation">
                   {configSections.map((section) => (
                     <button
                       key={section.id}
-                      onClick={() => setActiveSection(section.id)}
+                      onClick={() = aria-label="Button"> setActiveSection(section.id)}
                       className={`w-full flex items-center px-4 py-2 text-left transition-colors ${
                         activeSection === section.id
                           ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
@@ -62,33 +62,33 @@ export default function ConfigPage() {
           <div className="lg:col-span-3 space-y-6">
             {activeSection === 'overview' && (
               <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>System Status</CardTitle>
+                <Card className="glass"
+                  <CardHeader className="glass"
+                    <CardTitle className="glass"System Status</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid gap-4 md:grid-cols-3">
+                  <CardContent className="glass"
+                    <div className="glass grid gap-4 md:grid-cols-3">
                       <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-green-500 rounded-full" />
+                        <div className="w-3 h-3 bg-green-500 rounded-lg-full" />
                         <span className="text-sm text-gray-600">Database Connected</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-green-500 rounded-full" />
+                        <div className="w-3 h-3 bg-green-500 rounded-lg-full" />
                         <span className="text-sm text-gray-600">AI Models Active</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+                        <div className="w-3 h-3 bg-yellow-500 rounded-lg-full" />
                         <span className="text-sm text-gray-600">Maintenance Mode</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
                 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Quick Actions</CardTitle>
+                <Card className="glass"
+                  <CardHeader className="glass"
+                    <CardTitle className="glass"Quick Actions</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="glass"
                     <div className="flex flex-wrap gap-2">
                       <Button variant="outline" size="sm">Restart Services</Button>
                       <Button variant="outline" size="sm">Clear Cache</Button>
@@ -101,14 +101,14 @@ export default function ConfigPage() {
             )}
             
             {activeSection !== 'overview' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center capitalize">
+              <Card className="glass"
+                <CardHeader className="glass"
+                  <CardTitle className="flex items-center capitalize" className="glass
                     <Settings className="h-5 w-5 mr-2" />
                     {activeSection} Configuration
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
                   <p className="text-gray-600 mb-4">
                     {activeSection} configuration options will be available here.
                   </p>

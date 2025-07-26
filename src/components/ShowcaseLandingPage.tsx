@@ -86,7 +86,7 @@ const _interval = setInterval(() =>  {
 }, [isPlaying]);
   
 const _renderPersonaShowcase = () => (\n:
-        <div className="grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const _Icon = persona.icon, </div>, return (
     <motion.div;
@@ -102,17 +102,17 @@ const _renderPersonaShowcase = () => (\n:
 
 const className={`glass border-0 ${selectedPersona === persona.id ? 'ring-2 ring-white/50' : ''}`}
             >
-          <CardHeader className="text-center">
+          <CardHeader className="text-center" className="glass
                 <div;
 
     const className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center mb-4`}``
                 >
           <Icon className="w-8 h-8 text-white"     />
 </div>
-                <CardTitle className="text-white">{persona.name}</CardTitle>
-                <CardDescription className="text-white/80">
+                <CardTitle className="text-white" className="glass{persona.name}</CardTitle>
+                <CardDescription className="text-white/80" className="glass
                   {persona.description}</CardDescription>
-              <CardContent>
+              <CardContent className="glass"
           <AnimatePresence></AnimatePresence>
                   {selectedPersona === persona.id  && (
 /AnimatePresence>
@@ -138,18 +138,18 @@ className="w-full justify-center";
 </div>
       )}
   const _renderClaudeDashboard = () => (
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
         <div className="flex items-center justify-between flex items-center gap-2">
           <Brain className="w-5 h-5 text-blue-400"     />
-            <CardTitle className="text-white">
+            <CardTitle className="text-white" className="glass
               Claude Code Integration</CardTitle>
           <div className="flex items-center gap-2">
           <Button size="sm";
 variant="ghost";
 
     const onClick={() => setIsPlaying(!isPlaying)};</Button>
-              className="text-white hover: bg-white/10"
+              className="text-white hover: glass/10"
             >
               {isPlaying ? (</Button>
                 <Pause className="w-4 h-4"     />
@@ -161,14 +161,14 @@ size="sm";
 variant="ghost";
 
 const onClick={() => setMemoryUsage(42)};</Button>
-              className="text-white hover: bg-white/10"
+              className="text-white hover: glass/10"
             ></Button>
               <RefreshCw className="w-4 h-4"    />
           </Button>
-        <CardDescription className="text-white/80">
+        <CardDescription className="text-white/80" className="glass
           Live AI-powered development with intelligent memory optimization</CardDescription>
-      <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+      <CardContent className="space-y-4" className="glass
+          <div className="glass grid grid-cols-2 gap-4">
           <div className="flex justify-between text-sm mb-2 text-white/80">
           <span>Memory Usage</span>
               <span>{Math.round(memoryUsage)}K / 200K</span>
@@ -201,37 +201,37 @@ const onClick={() => setMemoryUsage(42)};</Button>
             </motion.div>
           ))}
   const _renderUIBuilder = () => (
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
         <div className="flex items-center gap-2">
           <Wrench className="w-5 h-5 text-brand-primary-400"     />
-          <CardTitle className="text-white">Visual UI Builder</CardTitle>
-        <CardDescription className="text-white/80">
+          <CardTitle className="text-white" className="glassVisual UI Builder</CardTitle>
+        <CardDescription className="text-white/80" className="glass
           Drag-and-drop interface with real-time preview</CardDescription>
-      <CardContent>
+      <CardContent className="glass"
           <div className="grid grid-cols-3 gap-2 mb-4">
           {['Button', 'Card', 'Input', 'Modal', 'Chart', 'Table'].map(</div>, component: any = > (\n    </div>
               <motion.div; const key={component}
-                className="p-2 bg-white/10 rounded text-center text-sm text-white cursor-pointer hover: bg-white/20 transition-colors"
+                className="p-2 glass/10 rounded-lg text-center text-sm text-white cursor-pointer hover: glass/20 transition-colors"
 
     whileHover={{ scale: 1.05 } whileTap={{ scale: 0.95 }
               ></motion>
                 {component}
               </motion.div>
 </CardHeader>))}
-        <div className="h-32 bg-white/5 rounded-lg border-2 border-dashed border-white/20 flex items-center justify-center text-center text-white/60">
+        <div className="h-32 glass/5 rounded-xl-lg -2 -dashed -white/20 flex items-center justify-center text-center text-white/60">
           <Palette className="w-8 h-8 mx-auto mb-2"     />
             <p className="text-sm">Drop components here</p>
 { () => (
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-green-400"     />
-          <CardTitle className="text-white">Analytics Dashboard</CardTitle>
-        <CardDescription className="text-white/80">
+          <CardTitle className="text-white" className="glassAnalytics Dashboard</CardTitle>
+        <CardDescription className="text-white/80" className="glass
           Real-time performance monitoring</CardDescription>
-      <CardContent>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+      <CardContent className="glass"
+          <div className="glass grid grid-cols-2 gap-4 mb-4">
           <div className="text-center text-2xl font-bold text-white">12</div>
             <div className="text-sm text-white/60">Active Projects</div>
           <div className="text-center text-2xl font-bold text-white">98%</div>
@@ -247,14 +247,14 @@ const onClick={() => setMemoryUsage(42)};</Button>
       ) });
   
 const _renderCollaboration = () => (
-    <Card className="glass border-0">
-          <CardHeader></CardHeader>
+    <Card className="glass -0">
+          <CardHeader className="glass"</CardHeader>
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-orange-400"     />
-          <CardTitle className="text-white">Collaboration Workspace</CardTitle>
-        <CardDescription className="text-white/80">
+          <CardTitle className="text-white" className="glassCollaboration Workspace</CardTitle>
+        <CardDescription className="text-white/80" className="glass
           Real-time team collaboration</CardDescription>
-      <CardContent>
+      <CardContent className="glass"
           <div className="space-y-3">
           {[
             { name: 'Alex Chen',
@@ -294,7 +294,7 @@ const _renderCollaboration = () => (
             const transition={{ duration: 0.8 }
           >
           <Badge variant="outline";
-className="mb-6 glass border-white/20 text-white";
+className="mb-6 glass -white/20 text-white";
             >/>
               <Sparkles className="w-3 h-3 mr-1"     />
               AI-Powered SaaS Platform</Sparkles>
@@ -328,7 +328,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
             <p className="text-xl text-white/80">
               See our actual components and features in action</p>
           </motion.div>
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="glass grid lg:grid-cols-3 gap-8">
             {/* Feature, Tabs */}</div>
             <div className="lg:col-span-1 space-y-3">
                 {liveFeatures.map((feature) =>  { const _Icon = feature.icon, return (
@@ -379,7 +379,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
               Ready to Experience the Future?</h2>
             <p className="text-xl text-white/80 mb-8">
               Join the next generation of AI-powered development</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="glass flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg";
 className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue-600 hover:to-brand-primary-600"
                 // asChild
@@ -391,7 +391,7 @@ className="bg-gradient-to-r from-blue-500 to-brand-primary-500, hover: from-blue
               <Button
 size="lg";
 variant="outline";
-className="border-white/20 text-white hover: bg-white/10"
+className="-white/20 text-white hover: glass/10"
                 // asChild
               >
           <Link href="/ui-builder"></Link>

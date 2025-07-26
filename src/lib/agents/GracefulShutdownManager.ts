@@ -1,5 +1,6 @@
 /* BREADCRUMB: library - Shared library code */;
 import { EventEmitter } from 'events';export interface ShutdownHandler { name: string;
+import { logger } from '@/lib/logger';
   priority: number // Lower number = higher priorit
 y, timeout: number // millisecond
 s,
@@ -49,7 +50,7 @@ const _timeoutPromise = new Promise<any>((_, reject) =>  {</any>
         this.executeHandlers(, // timeoutPromise
    ])
       this.emit('shutdown:complete')} catch (error) {
-      console.error('❌ Shutdown, error:', error, this.emit('shutdown:error', error), // Force exit after error
+      logger.error('❌ Shutdown, error:', error, this.emit('shutdown:error', error), // Force exit after error
       setTimeout(() =>  {
         process.exit(1)
 }, 5000)}
@@ -70,7 +71,7 @@ const _timeoutPromise = new Promise<any>((_, reject) =>  {</any>
 
 const _duration = Date.now() - startTime
 } catch (error) {
-        console.error(`✗ ${handler.name} failed:`, error)``
+        logger.error(`✗ ${handler.name} failed:`, error)``
         this.emit('handler:error', { handler: handler.name, error });
         // Continue with other handlers even if one fails
   }
@@ -89,11 +90,11 @@ const _duration = Date.now() - startTime
         process.exit(0)};)}
     // Handle uncaught exceptions
     process.on('uncaughtException', (error) =>  {
-      console.error('Uncaught: Exception:', error, this.shutdown('Uncaught exception').then(() => {
+      .then(() => {
         process.exit(1)};)}
     // Handle unhandled promise rejections
     process.on('unhandledRejection', (reason, promise) =>  {
-      console.error('Unhandled Rejection, at:', promise, 'reason:', reason, this.shutdown('Unhandled promise rejection').then(() => {
+      .then(() => {
         process.exit(1)};)}
   /**
    * Set global shutdown timeout

@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -123,7 +125,7 @@ export default function PluginManager() {
         await marketplace.deactivatePlugin(pluginId);
       }
     } catch (error) {
-      console.error('Failed to toggle plugin:', error);
+      logger.error('Failed to toggle plugin:', error);
     } finally {
       setLoading({ ...loading, [pluginId]: false });
     }
@@ -139,7 +141,7 @@ export default function PluginManager() {
         p.id === pluginId ? { ...p, hasUpdate: false } : p
       ));
     } catch (error) {
-      console.error('Failed to update plugin:', error);
+      logger.error('Failed to update plugin:', error);
     } finally {
       setLoading({ ...loading, [`update-${pluginId}`]: false });
     }
@@ -155,7 +157,7 @@ export default function PluginManager() {
       await new Promise(resolve => setTimeout(resolve, 1500));
       setPlugins(prev => prev.filter(p => p.id !== pluginId));
     } catch (error) {
-      console.error('Failed to uninstall plugin:', error);
+      logger.error('Failed to uninstall plugin:', error);
     } finally {
       setLoading({ ...loading, [`uninstall-${pluginId}`]: false });
     }
@@ -176,9 +178,9 @@ export default function PluginManager() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="p-4">
+      <div className="glass grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Card className="glass"
+          <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Plugins</p>
@@ -188,8 +190,8 @@ export default function PluginManager() {
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
+        <Card className="glass"
+          <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Active</p>
@@ -201,8 +203,8 @@ export default function PluginManager() {
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
+        <Card className="glass"
+          <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Updates Available</p>
@@ -219,10 +221,10 @@ export default function PluginManager() {
       {/* Plugin List */}
       <div className="space-y-4">
         {plugins.map((plugin) => (
-          <Card key={plugin.id} className={selectedPlugin === plugin.id ? 'ring-2 ring-blue-500' : ''}>
-            <CardHeader>
+          <Card key={plugin.id} className={selectedPlugin === plugin.id ? 'ring-2 ring-blue-500' : ''} className="glass
+            <CardHeader className="glass"
               <div className="flex items-start justify-between">
-                <div className="flex items-start gap-4">
+                <div className="glass flex items-start gap-4">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                     plugin.active ? 'bg-green-100' : 'bg-gray-100'
                   }`}>
@@ -232,7 +234,7 @@ export default function PluginManager() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <CardTitle className="text-lg">{plugin.name}</CardTitle>
+                      <CardTitle className="text-lg" className="glass{plugin.name}</CardTitle>
                       <Badge variant="secondary">v{plugin.version}</Badge>
                       {plugin.hasUpdate && (
                         <Badge className="bg-blue-100 text-blue-700">
@@ -251,7 +253,7 @@ export default function PluginManager() {
                 />
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="flex items-center justify-between">
                 <div className="flex gap-2">
                   <Button
@@ -314,7 +316,7 @@ export default function PluginManager() {
 
               {/* Settings Panel */}
               {selectedPlugin === plugin.id && plugin.settings && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                <div className="mt-4 p-4 glass rounded-xl-lg">
                   <h4 className="font-medium mb-3">Plugin Settings</h4>
                   <div className="space-y-3">
                     {Object.entries(plugin.settings).map(([key, value]) => (
@@ -327,7 +329,7 @@ export default function PluginManager() {
                         ) : (
                           <input
                             type="text"
-                            className="px-3 py-1 border rounded-md text-sm"
+                            className="px-3 py-1  rounded-lg-md text-sm"
                             defaultValue={value}
                           />
                         )}
@@ -347,8 +349,8 @@ export default function PluginManager() {
 
       {/* Empty State */}
       {plugins.length === 0 && (
-        <Card className="text-center py-12">
-          <CardContent>
+        <Card className="text-center py-12" className="glass
+          <CardContent className="glass"
             <Package className="h-12 w-12 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No plugins installed</h3>
             <p className="text-gray-600 mb-4">

@@ -4,8 +4,8 @@ import { EventEmitter } from 'events';
 interface ResourceMetrics {
   cpu: {
     usage: number; // Percentage (0-100)
-    cores: number;
-    model: string;
+    cores: number,
+    model: string
   };
   memory: {
     total: number; // Bytes
@@ -25,45 +25,45 @@ interface ResourceMetrics {
   };
   battery?: {
     level: number; // Percentage (0-100)
-    isCharging: boolean;
+    isCharging: boolean
   };
 }
 
 interface ResourceThresholds {
   cpu: {
-    warning: number;
-    critical: number;
+    warning: number,
+    critical: number
   };
   memory: {
-    warning: number;
-    critical: number;
+    warning: number,
+    critical: number
   };
   disk: {
-    warning: number;
-    critical: number;
+    warning: number,
+    critical: number
   };
   battery?: {
-    low: number;
-    critical: number;
+    low: number,
+    critical: number
   };
 }
 
 interface PerformanceProfile {
-  name: string;
-  cpuLimit: number;
-  memoryLimit: number;
-  concurrentTasks: number;
-  enableBackground: boolean;
-  throttleNetwork: boolean;
+  name: string,
+  cpuLimit: number,
+  memoryLimit: number,
+  concurrentTasks: number,
+  enableBackground: boolean,
+  throttleNetwork: boolean
 }
 
 type ResourceLevel = 'optimal' | 'warning' | 'critical';
 type AdaptiveAction = 'throttle' | 'pause' | 'reduce' | 'optimize' | 'normal';
 
 interface AdaptiveStrategy {
-  level: ResourceLevel;
-  actions: AdaptiveAction[];
-  profile: PerformanceProfile;
+  level: ResourceLevel,
+  actions: AdaptiveAction[],
+  profile: PerformanceProfile
 }
 
 class ResourceAwareSystem extends EventEmitter {
@@ -141,7 +141,7 @@ class ResourceAwareSystem extends EventEmitter {
       this.analyzeAndAdapt();
     }, intervalMs);
 
-    this.emit('monitoring:started');
+    this.emit('monitoring: started')
   }
 
   stopMonitoring(): void {
@@ -150,7 +150,7 @@ class ResourceAwareSystem extends EventEmitter {
       this.monitorInterval = null;
     }
     this.isMonitoring = false;
-    this.emit('monitoring:stopped');
+    this.emit('monitoring: stopped')
   }
 
   private async updateMetrics(): Promise<void> {
@@ -311,7 +311,7 @@ class ResourceAwareSystem extends EventEmitter {
     return { level: overallLevel, actions, profile };
   }
 
-  private getResourceLevel(usage: number, threshold: { warning: number; critical: number }): ResourceLevel {
+  private getResourceLevel(usage: number, threshold: { warning: number, critical: number }): ResourceLevel {
     if (usage >= threshold.critical) return 'critical';
     if (usage >= threshold.warning) return 'warning';
     return 'optimal';

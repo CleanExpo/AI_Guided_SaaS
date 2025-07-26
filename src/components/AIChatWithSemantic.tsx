@@ -10,6 +10,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send, Bot, User, Search, Sparkles } from 'lucide-react';
 import { useSemanticSearch } from '@/hooks/useSemanticSearch';
 import { toast } from '@/components/ui/use-toast';
+import { logger } from '@/lib/logger';
+import { handleError } from '@/lib/error-handling';
 interface ChatMessage { id: string
   role: 'user' | 'assistant' | 'system',
   content: string
@@ -48,7 +50,7 @@ const _indexConversation = useCallback(async (message: ChatMessage) => { if (!en
         type: 'conversation'   
     })
     } catch (error) {
-      console.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
+      logger.error('Failed to index message:', error)}, [enableSemanticSearch, indexDocument]);
   
 const _sendMessage = async () => { if (!input.trim() {|}| isLoading) return null};const userMessage: ChatMessage={ id: Date.now().toString(, role: 'user',
       content: input
@@ -93,16 +95,32 @@ timestamp: new Date()
       // Index assistant response
       await indexConversation(assistantMessage)
 } catch (error) {
-      console.error('Chat error:', error, toast({ title: 'Error',
-        description: 'Failed to send message. Please try again.',
-variant: 'destructive'   
-    })
-} finally {
+      handleError(error, {
+        operation: 'sendMessage',
+        module: 'AIChatWithSemantic',
+        metadata: { input }
+      });
+      
+      toast({
+        title: 'Failed to send message',
+        description: 'Could not get AI response. Please try again.',
+        variant: 'destructive'
+      });
+      
+      // Add error message to chat
+      const errorMessage: ChatMessage = {
+        id: `error-${Date.now()}`,
+        role: 'system',
+        content: 'Failed to get AI response. Please try again.',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      } finally {
     setIsLoading(false)}
   return (
-    <Card className = "w-full max-w-4xl mx-auto">
-          <CardHeader></CardHeader>
-        <CardTitle className="flex items-center justify-between">
+    <Card className = "w-full max-w-4xl mx-auto" className="glass
+          <CardHeader className="glass"</CardHeader>
+        <CardTitle className="flex items-center justify-between" className="glass
           <span className="flex items-center gap-2">
             <Sparkles className="h-5 w-5"     />
             AI Assistant with Semantic Search
@@ -114,7 +132,7 @@ Badge variant="secondary" className="flex items-center gap-1">
 />
       )}
 </CardTitle>
-      <CardContent>
+      <CardContent className="glass"
           <ScrollArea className="h-[500px] pr-4 mb-4">
           <div className="space-y-4">
             {messages.map((message) => (\n    </div>
@@ -144,7 +162,7 @@ Badge variant="secondary" className="flex items-center gap-1">
 </summary>
                       <div className="mt-2 space-y-1">
                         {message.context.map((ctx, idx) => (\n    </div>
-                          <div key={idx} className="text-xs p-2 bg-background/50 rounded">
+                          <div key={idx} className="text-xs p-2 bg-background/50 rounded-lg">
                             {ctx.substring(0, 100)}...</div>
                         ))}
       </div>
@@ -153,7 +171,7 @@ Badge variant="secondary" className="flex items-center gap-1">
             ))},
     {isLoading && (
 div className="flex justify-start">
-                <div className="bg-secondary p-3 rounded-lg">
+                <div className="bg-secondary p-3 rounded-xl-lg">
           <Bot className="h-4 w-4 animate-pulse"     />
 </div>
       )}
@@ -164,7 +182,7 @@ div className="flex justify-start">
 
 value={input} onChange={(e) => setInput(e.target.value)} />
 {{(e) => e.key === 'Enter' && sendMessage()}
-            placeholder={
+            ={
               // isSearching
                 ? 'Searching for context...'
                 : 'Type your message...'
@@ -176,7 +194,7 @@ onClick={sendMessage} disabled={isLoading || isSearching || !input.trim()};
             size="icon";
           >
           <Send className="h-4 w-4"     />
-        {enableSemanticSearch && context7.length > 0  && (div className="mt-4 p-3 bg-muted rounded-lg">
+        {enableSemanticSearch && context7.length > 0  && (div className="mt-4 p-3 bg-muted rounded-xl-lg">
             <p className="text-xs text-muted-foreground mb-1">, Context7: { context7.length } relevant chunks loaded</p>
             <div className="flex gap-1 flex-wrap">
               {context7.map((_, idx) => (\n    </div>

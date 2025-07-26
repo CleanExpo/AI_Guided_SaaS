@@ -4,6 +4,7 @@ import React, { Component, ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface Props {
   children: ReactNode;
@@ -26,7 +27,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+    
   }
 
   handleReset = () => {
@@ -40,19 +41,19 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <Card className="max-w-md w-full">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-600">
+        <div className="glass min-h-screen flex items-center justify-center p-4">
+          <Card className="max-w-md w-full" className="glass
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2 text-red-600" className="glass
                 <AlertCircle className="h-5 w-5" />
                 Something went wrong
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 We apologize for the inconvenience. Please try again.
               </p>
-              <div className="bg-gray-100 p-3 rounded text-sm text-gray-700 mb-4">
+              <div className="glass p-3 rounded-lg text-sm text-gray-700 mb-4">
                 {this.state.error?.message || 'Unknown error'}
               </div>
               <Button onClick={this.handleReset} className="w-full">

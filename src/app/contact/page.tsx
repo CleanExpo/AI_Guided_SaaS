@@ -15,7 +15,7 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
@@ -24,21 +24,21 @@ export default function ContactPage() {
           </p>
         </div>
         
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="glass grid gap-8 lg:grid-cols-2">
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
+            <Card className="glass"
+              <CardHeader className="glass"
+                <CardTitle className="glass"Send us a message</CardTitle>
               </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Input placeholder="First Name" />
-                    <Input placeholder="Last Name" />
+              <CardContent className="glass"
+                <form className="space-y-4" role="form">
+                  <div className="glass grid gap-4 md:grid-cols-2">
+                    <Input ="First Name" />
+                    <Input ="Last Name" />
                   </div>
-                  <Input placeholder="Email Address" type="email" />
-                  <Input placeholder="Company" />
-                  <Textarea placeholder="How can we help you?" rows={4} />
+                  <Input ="Email Address" type="email" />
+                  <Input ="Company" />
+                  <Textarea ="How can we help you?" rows={4} />
                   <Button className="w-full">Send Message</Button>
                 </form>
               </CardContent>
@@ -46,8 +46,8 @@ export default function ContactPage() {
           </div>
           
           <div className="space-y-6">
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Mail className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -59,8 +59,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Phone className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -72,8 +72,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -87,8 +87,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Clock className="h-6 w-6 text-blue-600 mt-1" />
                   <div>

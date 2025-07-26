@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 'use client';
 
 import React, { useState } from 'react';
@@ -80,7 +82,7 @@ export default function AnalyticsExport() {
         }
       });
     } catch (error) {
-      console.error('Export failed:', error);
+      logger.error('Export failed:', error);
     } finally {
       setIsExporting(false);
     }
@@ -248,11 +250,11 @@ export default function AnalyticsExport() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Export Analytics</CardTitle>
+    <Card className="glass"
+      <CardHeader className="glass"
+        <CardTitle className="glass"Export Analytics</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="glass"
         <div className="space-y-6">
           {/* Format Selection */}
           <div>
@@ -261,7 +263,7 @@ export default function AnalyticsExport() {
               {(['csv', 'json', 'pdf', 'excel'] as const).map((format) => (
                 <button
                   key={format}
-                  onClick={() => setOptions({ ...options, format })}
+                  onClick={() = aria-label="Button"> setOptions({ ...options, format })}
                   className={`p-3 border rounded-lg flex flex-col items-center gap-2 transition-all ${
                     options.format === format
                       ? 'border-blue-500 bg-blue-50'
@@ -282,7 +284,7 @@ export default function AnalyticsExport() {
               {(['today', '7days', '30days', '90days'] as const).map((range) => (
                 <button
                   key={range}
-                  onClick={() => setOptions({ ...options, dateRange: range })}
+                  onClick={() = aria-label="Button"> setOptions({ ...options, dateRange: range })}
                   className={`p-2 border rounded-lg text-sm transition-all ${
                     options.dateRange === range
                       ? 'border-blue-500 bg-blue-50'
@@ -314,7 +316,7 @@ export default function AnalyticsExport() {
                         setOptions({ ...options, metrics: options.metrics.filter(m => m !== metric) });
                       }
                     }}
-                    className="rounded text-blue-600"
+                    className="rounded-lg text-blue-600"
                   />
                   <span className="capitalize">{metric}</span>
                 </label>
@@ -329,7 +331,7 @@ export default function AnalyticsExport() {
                 type="checkbox"
                 checked={options.includeRawData}
                 onChange={(e) => setOptions({ ...options, includeRawData: e.target.checked })}
-                className="rounded text-blue-600"
+                className="rounded-lg text-blue-600"
               />
               <span>Include raw data</span>
             </label>
@@ -339,7 +341,7 @@ export default function AnalyticsExport() {
                   type="checkbox"
                   checked={options.includeCharts}
                   onChange={(e) => setOptions({ ...options, includeCharts: e.target.checked })}
-                  className="rounded text-blue-600"
+                  className="rounded-lg text-blue-600"
                 />
                 <span>Include charts</span>
               </label>

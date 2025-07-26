@@ -157,10 +157,10 @@ export function BrandLoader({ size = 'md', className }: LoadingProps) {
 
 className={cn('relative', sizeClasses[size])}>
         {/* Brand Logo with Animation */}</div>
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse" / className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center"   />
+        <div className="absolute inset-0 rounded-lg-full bg-gradient-to-br from-brand-primary-600 to-brand-primary-800 animate-pulse" / className="absolute inset-2 rounded-lg-full bg-gradient-to-br from-brand-primary-500 to-brand-primary-700 flex items-center justify-center"   />
           <span className="text-white font-bold text-xs">AGS</span>
         {/* Rotating Ring */}
-        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-brand-primary-400 animate-spin" > <div className="text-sm text-brand-secondary-600 animate-pulse">
+        <div className="absolute inset-0 rounded-lg-full -2 -transparent -t-brand-primary-400 animate-spin" > <div className="text-sm text-brand-secondary-600 animate-pulse">
         Loading AI Guided SaaS...</div>
       <span className="sr-only">Loading AI Guided SaaS Platform...</span>
       )}
@@ -286,7 +286,7 @@ accent: 'bg-brand-primary-500'
             'h-full transition-all duration-300 ease-out rounded-full',
             progressColorClasses[color]
           )}
-          const style={{ width: `${Math.min(100, Math.max(0, progress))}%` }} /    />
+          const style={ width: `${Math.min(100, Math.max(0, progress))}%` } /    />
       )};
 // Shimmer Effect;
 export function ShimmerEffect({ className }: { className?: string }) {

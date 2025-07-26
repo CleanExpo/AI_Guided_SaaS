@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function CookiesPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Cookie Policy</h1>
@@ -21,11 +21,11 @@ export default function CookiesPage() {
         </div>
         
         <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>What are cookies?</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"What are cookies?</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600">
                 Cookies are small text files that are placed on your device when you visit our website. 
                 They help us provide you with a better experience by remembering your preferences and 
@@ -34,11 +34,11 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader>
-              <CardTitle>How we use cookies</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"How we use cookies</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900">Essential Cookies</h3>
@@ -65,11 +65,11 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader>
-              <CardTitle>Managing cookies</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Managing cookies</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600 mb-4">
                 You can control and manage cookies in various ways. Please note that removing or 
                 blocking cookies can impact your user experience and parts of our website may no 
@@ -82,11 +82,11 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card>
-            <CardHeader>
-              <CardTitle>Contact us</CardTitle>
+          <Card className="glass"
+            <CardHeader className="glass"
+              <CardTitle className="glass"Contact us</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <p className="text-gray-600">
                 If you have any questions about our use of cookies, please contact us at{' '}
                 <a href="mailto:privacy@aiguidedsaas.com" className="text-blue-600 hover:underline">

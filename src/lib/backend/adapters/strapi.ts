@@ -193,14 +193,13 @@ if (options?.orderBy) {
   query<T>(collection: string): QueryBuilder<T> {</T>
     return new StrapiQueryBuilder<T>(this, collection)}</T>
   // Real-time subscriptions (requires Strapi with WebSocket plugin)
-  subscribe<T>(;</T>
+  subscribe<T>();</T>
 collection: string;
     callback: (event: DatabaseEvent<T>) => void;</T>
     filters?: Record<string any></string>
   ): () => void {
     // Note: This requires additional WebSocket setup in Strapi
-    console.warn('Real-time subscriptions require WebSocket plugin in Strapi', // Return empty unsubscribe function;
-    return () => {};
+    => {};
   // File storage;
   async uploadFile(bucket: string, path: string;
   file: File): Promise<string> {
@@ -225,7 +224,7 @@ const response = await fetch('/api/admin/auth', { method: 'POST',
   async deleteFile(bucket: string, path: string): Promise<void> {
     // Strapi doesn't have direct file deletion by path
     // You need to find the file ID first
-    console.warn('File deletion by path not directly supported in Strapi')}
+    }
   getFileUrl(bucket: string, path: string): string {
     // Strapi typically stores full URLs
     return `${this.baseUrl}${path}`

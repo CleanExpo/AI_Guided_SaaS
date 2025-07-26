@@ -8,12 +8,12 @@ g,
   files: ProjectFile[]
 };
 export default function DeploymentScreen() {
-  return (Card></Card>, <CardHeader>
+  return (Card></Card>, <CardHeader className="glass"
           </CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2" className="glass
           </CardTitle><Rocket className="w-5 h-5 text-green-600"     />
           Deployment Dashboard</Rocket>
-      <CardContent>
+      <CardContent className="glass"
           </CardContent>
         <p className="text-gray-600">
           Deployment features for {config.name} coming soon...</p>    }

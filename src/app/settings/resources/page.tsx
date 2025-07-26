@@ -161,7 +161,7 @@ export default function ResourcesPage() {
   const diskStatus = getResourceStatus(resources.disk.percentage);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -170,8 +170,8 @@ export default function ResourcesPage() {
         </div>
 
         {/* Adaptive Mode Toggle */}
-        <Card className="mb-6">
-          <CardContent className="p-6">
+        <Card className="mb-6" className="glass
+          <CardContent className="glass p-6">
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-1">
@@ -184,7 +184,7 @@ export default function ResourcesPage() {
                   Automatically adjust performance based on available resources
                 </p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="glass flex items-center gap-4">
                 <Button
                   variant="outline"
                   size="sm"
@@ -212,10 +212,10 @@ export default function ResourcesPage() {
         </Card>
 
         {/* Resource Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {/* CPU */}
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Cpu className="h-5 w-5 text-blue-600" />
@@ -237,8 +237,8 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Memory */}
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <MemoryStick className="h-5 w-5 text-purple-600" />
@@ -260,8 +260,8 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Disk */}
-          <Card>
-            <CardContent className="p-6">
+          <Card className="glass"
+            <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <HardDrive className="h-5 w-5 text-green-600" />
@@ -284,8 +284,8 @@ export default function ResourcesPage() {
 
           {/* Network/Battery */}
           {resources.battery ? (
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Battery className="h-5 w-5 text-orange-600" />
@@ -310,8 +310,8 @@ export default function ResourcesPage() {
               </CardContent>
             </Card>
           ) : (
-            <Card>
-              <CardContent className="p-6">
+            <Card className="glass"
+              <CardContent className="glass p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Wifi className="h-5 w-5 text-cyan-600" />
@@ -334,16 +334,16 @@ export default function ResourcesPage() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Performance Profiles */}
-          <Card className="lg:col-span-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="lg:col-span-1" className="glass
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Gauge className="h-5 w-5" />
                 Performance Profile
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="space-y-3">
                 {Object.entries(profiles).map(([key, profile]) => (
                   <div
@@ -371,20 +371,20 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Real-time Monitor */}
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="lg:col-span-2" className="glass
+            <CardHeader className="glass"
+              <CardTitle className="flex items-center gap-2" className="glass
                 <Activity className="h-5 w-5" />
                 Real-time CPU Usage
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="glass"
               <div className="h-32 flex items-end gap-1">
                 {history.map((value, index) => (
                   <div
                     key={index}
-                    className="flex-1 bg-blue-500 rounded-t transition-all duration-500"
-                    style={{ height: `${value}%` }}
+                    className="flex-1 glass-button primary rounded-lg-t transition-all duration-500"
+                    style={ height: `${value}%` }
                   />
                 ))}
               </div>
@@ -413,15 +413,15 @@ export default function ResourcesPage() {
         )}
 
         {/* Resource Settings */}
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+        <Card className="mt-6" className="glass
+          <CardHeader className="glass"
+            <CardTitle className="flex items-center gap-2" className="glass
               <Settings className="h-5 w-5" />
               Resource Thresholds
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <CardContent className="glass"
+            <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="text-sm font-medium">CPU Warning Level</label>
                 <input

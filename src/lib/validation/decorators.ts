@@ -1,192 +1,308 @@
-/* BREADCRUMB: library - Shared library code */;
 import { z } from 'zod';
 import { ApiError } from './schemas';
+import { logger } from '@/lib/logger';
+
 // Decorator types
-type ValidationOptions={
-  validateReturn?: boolean,
-  throwOnError?: boolean
-  logErrors? null : boolean
+type ValidationOptions = {
+  validateReturn?: boolean;
+  throwOnError?: boolean;
+  logErrors?: boolean;
 };
-// Validation error class;
+
+type MethodDecorator = (
+  target: object,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) => PropertyDescriptor;
+
+// Validation error class
 export class ValidationError extends Error {
-  constructor(public errors: z.ZodError;
-    message = 'Validation failed', ) {
-    super(message, this.name = 'ValidationError'
+  constructor(
+    public errors: z.ZodError,
+    message = 'Validation failed'
+  ) {
+    super(message);
+    this.name = 'ValidationError';
   }
+
   toApiError(): ApiError {
-    return { error: 'VALIDATION_ERROR',
+    return {
+      error: 'VALIDATION_ERROR',
       message: this.message,
-      statusCode: 400;
-      details: this.errors.format()}
-// Input validation decorator;
-export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string,;
+      statusCode: 400,
+      details: this.errors.format()
+    };
+  }
+}
+
+// Input validation decorator
+export function ValidateInput(schema: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
+  return function (
+    target: object,
+    propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {
+    
+    descriptor.value = async function(...args: unknown[]): Promise<unknown> {
       const { throwOnError = true, logErrors = true } = options;
+      
       try {
-        // Validate first argument, const validatedInput = schema.parse(args[0]); args[0] = validatedInput;
+        // Validate first argument
+        const validatedInput = schema.parse(args[0]);
+        args[0] = validatedInput;
+        
         // Call original method
-        return await originalMethod.apply(this, args)
-} catch (error) {
+        return await originalMethod.apply(this, args);
+      } catch (error) {
         if (error instanceof z.ZodError) {
           if (logErrors) {
-            console.error(`Validation error in ${propertyKey}:`, error.errors)
-}
+            logger.error(`Input validation error in ${propertyKey}:`, error.errors);
+          }
           if (throwOnError) {
-            throw new ValidationError(error)}
-          return { success: false;
-            error: new ValidationError(error).toApiError()}
-        throw error
-}};
-    return descriptor
-}}
-// Output validation decorator;
-export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string,;
+            throw new ValidationError(error);
+          }
+          return {
+            success: false,
+            error: new ValidationError(error).toApiError()
+          };
+        }
+        throw error;
+      }
+    };
+    
+    return descriptor;
+  };
+}
+
+// Output validation decorator
+export function ValidateOutput(schema: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
+  return function (
+    target: object,
+    propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {
+    
+    descriptor.value = async function(...args: unknown[]): Promise<unknown> {
       const { throwOnError = true, logErrors = true } = options;
+      
       try {
-        // Call original method, const result = await originalMethod.apply(this, args); // Validate output;
-
-const validatedOutput = schema.parse(result);
-        return validatedOutput
-} catch (error) {
+        // Call original method
+        const result = await originalMethod.apply(this, args);
+        
+        // Validate output
+        const validatedOutput = schema.parse(result);
+        return validatedOutput;
+      } catch (error) {
         if (error instanceof z.ZodError) {
           if (logErrors) {
-            console.error(`Output validation error in ${propertyKey}:`, error.errors)``
-}
+            logger.error(`Output validation error in ${propertyKey}:`, error.errors);
+          }
           if (throwOnError) {
-            throw new ValidationError(error, 'Output validation failed')}
-          return { success: false;
-            error: new ValidationError(error).toApiError()}
-        throw error
-}};
-    return descriptor
-}}
-// Combined input/output validation decorator;
-export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, options: ValidationOptions = {}) {
-  return function (, target, propertyKey: string,;
+            throw new ValidationError(error, 'Output validation failed');
+          }
+          return {
+            success: false,
+            error: new ValidationError(error).toApiError()
+          };
+        }
+        throw error;
+      }
+    };
+    
+    return descriptor;
+  };
+}
+
+// Combined input/output validation decorator
+export function Validate(inputSchema: z.ZodSchema, outputSchema?: z.ZodSchema, options: ValidationOptions = {}): MethodDecorator {
+  return function (
+    target: object,
+    propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {
+    
+    descriptor.value = async function(...args: unknown[]): Promise<unknown> {
       const { throwOnError = true, logErrors = true } = options;
+      
       try {
-        // Validate input, const validatedInput = inputSchema.parse(args[0]); args[0] = validatedInput;
-        // Call original method;
-
-const result = await originalMethod.apply(this, args);
-        // Validate output if schema provided;
-if (outputSchema) {
+        // Validate input
+        const validatedInput = inputSchema.parse(args[0]);
+        args[0] = validatedInput;
+        
+        // Call original method
+        const result = await originalMethod.apply(this, args);
+        
+        // Validate output if schema provided
+        if (outputSchema) {
           const validatedOutput = outputSchema.parse(result);
-          return validatedOutput
-}
-        return result
-} catch (error) {
+          return validatedOutput;
+        }
+        
+        return result;
+      } catch (error) {
         if (error instanceof z.ZodError) {
           if (logErrors) {
-            console.error(`Validation error in ${propertyKey}:`, error.errors)
-}
+            logger.error(`Validation error in ${propertyKey}:`, error.errors);
+          }
           if (throwOnError) {
-            throw new ValidationError(error)}
-          return { success: false;
-            error: new ValidationError(error).toApiError()}
-        throw error
-}};
-    return descriptor
-}}
-// Parameter validation decorator (for multiple parameters);
-export function ValidateParams(...schemas: z.ZodSchema[]): z.ZodSchema[]) {
-  return function (, target, propertyKey: string,;
+            throw new ValidationError(error);
+          }
+          return {
+            success: false,
+            error: new ValidationError(error).toApiError()
+          };
+        }
+        throw error;
+      }
+    };
+    
+    return descriptor;
+  };
+}
+
+// Parameter validation decorator (for multiple parameters)
+export function ValidateParams(...schemas: z.ZodSchema[]): MethodDecorator {
+  return function (
+    target: object,
+    propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
-    descriptor.value = async function(...args: any[]): Promise<any> {
+    
+    descriptor.value = async function(...args: unknown[]): Promise<unknown> {
       try {
-        // Validate each parameter;
-
-const _validatedArgs = args.map((arg, index) => {
-          if (schemas[index]) {;
-            return schemas[index].parse(arg)
-};
-          return arg    })
+        // Validate each parameter
+        const validatedArgs = args.map((arg, index) => {
+          if (schemas[index]) {
+            return schemas[index].parse(arg);
+          }
+          return arg;
+        });
+        
         // Call original method with validated args
-        return await originalMethod.apply(this, validatedArgs)
-} catch (error) {
+        return await originalMethod.apply(this, validatedArgs);
+      } catch (error) {
         if (error instanceof z.ZodError) {
-          throw new ValidationError(error, 'Parameter validation failed')}
-        throw error
-}};
-    return descriptor
-}}
-// Environment validation decorator;
-export function ValidateEnv(schema: z.ZodSchema): z.ZodSchema) {
+          throw new ValidationError(error, 'Parameter validation failed');
+        }
+        throw error;
+      }
+    };
+    
+    return descriptor;
+  };
+}
+
+// Environment validation decorator
+export function ValidateEnv(schema: z.ZodSchema) {
   return function (constructor: Function) {
     try {
-      schema.parse(process.env)} catch (error) {
+      schema.parse(process.env);
+    } catch (error) {
       if (error instanceof z.ZodError) {
-        console.error('Environment validation, failed:', error.errors, throw new ValidationError(error, 'Invalid environment configuration')}
-      throw error
-}};
-// Middleware for API routes;
-export function createValidationMiddleware(_;
-    schema: z.ZodSchema, target: 'body' | 'query' | 'params' = 'body'): z.ZodSchema,
-  target: 'body' | 'query' | 'params' = 'body') {
-  return async (req, res, next?) => {
-    try {;
-      const _data = target === 'body' ? req.body : , target === 'query' ? req.query :, req.params;
+        logger.error('Environment validation failed:', error.errors);
+        throw new ValidationError(error, 'Invalid environment configuration');
+      }
+      throw error;
+    }
+  };
+}
 
-const _validated = schema.parse(data);
+// Middleware for API routes
+interface Request {
+  body?: unknown;
+  query?: unknown;
+  params?: unknown;
+}
+
+interface Response {
+  status?: (code: number) => Response;
+  json?: (data: unknown) => unknown;
+}
+
+type NextFunction = () => void;
+
+export function createValidationMiddleware(
+  schema: z.ZodSchema,
+  target: 'body' | 'query' | 'params' = 'body'
+) {
+  return async (req: Request, res: Response, next?: NextFunction) => {
+    try {
+      const data = target === 'body' ? req.body : 
+                   target === 'query' ? req.query : 
+                   req.params;
+      
+      const validated = schema.parse(data);
+      
       if (target === 'body') {
-        req.body = validated
-      }; else if (target === 'query') {
-        req.query = validated
+        req.body = validated;
+      } else if (target === 'query') {
+        req.query = validated;
       } else {
-        req.params = validated
-}
+        req.params = validated;
+      }
+      
       if (next) {
-        next()} catch (error) {
+        next();
+      }
+    } catch (error) {
       if (error instanceof z.ZodError) {
-        const apiError = new ValidationError(error).toApiError(, if (res.status && res.json) {
-          return res.status(400).json(apiError)}
-        throw new ValidationError(error)
+        const apiError = new ValidationError(error).toApiError();
+        if (res.status && res.json) {
+          return res.status(400).json(apiError);
+        }
+        throw new ValidationError(error);
+      }
+      throw error;
+    }
+  };
 }
-      throw error
-}};
-// Type guard utilities;
-export function isValidationError(error: unknown): error is ValidationError { return error instanceof ValidationError}
 
-export function createTypeGuard<T>(schema: z.ZodSchema<T>) {</T>
+// Type guard utilities
+export function isValidationError(error: unknown): error is ValidationError {
+  return error instanceof ValidationError;
+}
+
+export function createTypeGuard<T>(schema: z.ZodSchema<T>) {
   return (value: unknown): value is T => {
-    try {;
+    try {
       schema.parse(value);
-        return true }; catch {
-      return false}};
-// Async validation wrapper;
-export async validateAsync<T>(</T>
-    schema: z.ZodSchema<T></T>
-    data: unknown
+      return true;
+    } catch {
+      return false;
+    }
+  };
+}
+
+// Async validation wrapper
+export async function validateAsync<T>(
+  schema: z.ZodSchema<T>,
+  data: unknown
 ): Promise<T> {
   try {
-    return await schema.parseAsync(data)} catch (error) {
+    return await schema.parseAsync(data);
+  } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new ValidationError(error)}
-    throw error
-}};
-// Safe parsing wrapper;
-export function safeParse<T>(</T>
-    schema: z.ZodSchema<T></T>
-    data: unknown
-): { success: true, data: T } | { success: false, error: ValidationError } {
-  const result = schema.safeParse(data, if (result.success) {
-    return { success: true, data: result.data }}
-  return { success: false;
-    error: new ValidationError(result.error)}
+      throw new ValidationError(error);
+    }
+    throw error;
+  }
+}
 
-}}}}}}}}}    }
+// Safe parsing wrapper
+export function safeParse<T>(
+  schema: z.ZodSchema<T>,
+  data: unknown
+): { success: true; data: T } | { success: false; error: ValidationError } {
+  const result = schema.safeParse(data);
+  if (result.success) {
+    return { success: true, data: result.data };
+  }
+  return {
+    success: false,
+    error: new ValidationError(result.error)
+  };
+}

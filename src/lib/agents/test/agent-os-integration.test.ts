@@ -36,7 +36,7 @@ describe('Agent-OS Integration Test', () =>  {;
   };);
 
   test('should execute feature development workflow', async () =>  {;
-    const result = await agentSystem.developFeature(;
+    const result = await agentSystem.developFeature();
       'Add user authentication with JWT tokens',
       { framework: 'nextjs',
         database: 'supabase',
@@ -114,7 +114,7 @@ export async function exampleAgentOSUsage() {
 
   // Example 1: Develop a new feature
   console.log('Developing new feature...');
-  const featureResult = await agentSystem.developFeature(;
+  const featureResult = await agentSystem.developFeature();
     'Implement user dashboard with real-time analytics',
     { components: ['charts', 'data-tables', 'filters'],
       realtime: true,

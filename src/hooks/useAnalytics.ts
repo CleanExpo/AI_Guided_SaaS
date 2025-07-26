@@ -13,8 +13,8 @@ if (typeof window !== 'undefined') {
         enabled: true,
         config: {},
         send: async (event) => {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Analytics]', event);
+          if ((process.env.NODE_ENV || "development") === "development") {
+            
           }
         }
       }
@@ -31,7 +31,7 @@ export function useAnalytics() {
   }, []);
 
   // Track custom events
-  const track = useCallback((eventName: string, properties?: Record<string, any>) => {
+  const track = useCallback((eventName: string, properties?: Record<string, unknown>) => {
     analytics.track({
       type: 'custom',
       name: eventName,
@@ -40,7 +40,7 @@ export function useAnalytics() {
   }, [analytics]);
 
   // Track feature usage
-  const trackFeature = useCallback((feature: string, action: string, value?: any) => {
+  const trackFeature = useCallback((feature: string, action: string, value?: unknown) => {
     analytics.trackFeature(feature, action, value);
   }, [analytics]);
 
@@ -55,7 +55,7 @@ export function useAnalytics() {
   }, [analytics]);
 
   // Identify user
-  const identify = useCallback((userId: string, traits?: Record<string, any>) => {
+  const identify = useCallback((userId: string, traits?: Record<string, unknown>) => {
     analytics.identify(userId, traits);
   }, [analytics]);
 
@@ -93,15 +93,15 @@ export function usePerformanceTracking(componentName: string) {
 export function useInteractionTracking(feature: string) {
   const { trackFeature } = useAnalytics();
   
-  const trackClick = useCallback((action: string, value?: any) => {
+  const trackClick = useCallback((action: string, value?: unknown) => {
     trackFeature(feature, `click_${action}`, value);
   }, [feature, trackFeature]);
   
-  const trackHover = useCallback((action: string, value?: any) => {
+  const trackHover = useCallback((action: string, value?: unknown) => {
     trackFeature(feature, `hover_${action}`, value);
   }, [feature, trackFeature]);
   
-  const trackFocus = useCallback((action: string, value?: any) => {
+  const trackFocus = useCallback((action: string, value?: unknown) => {
     trackFeature(feature, `focus_${action}`, value);
   }, [feature, trackFeature]);
   
@@ -126,7 +126,7 @@ export function useFormAnalytics(formName: string) {
     });
   }, [formName, track, startTime]);
   
-  const trackFormSubmit = useCallback((success: boolean, data?: any) => {
+  const trackFormSubmit = useCallback((success: boolean, data?: Record<string, unknown>) => {
     const event = success ? 'form_submit_success' : 'form_submit_error';
     track(event, {
       form: formName,

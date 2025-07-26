@@ -1,0 +1,75 @@
+{
+  "timestamp": "2025-07-25T21:05:43.895Z",
+  "scores": {
+    "dashboard": {
+      "functionality": 4,
+      "usability": 10,
+      "performance": 10,
+      "design": 10,
+      "testing": 10,
+      "details": {
+        "functionality": {
+          "Metrics display correctly": "Error: Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"dashboard-metrics\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"dashboard-metrics\"]')\u001b[22m\n",
+          "Refresh button works": "Error: Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('[data-testid=\"refresh-button\"]')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"refresh-button\"]')\u001b[22m\n",
+          "Data updates in real-time": "Passed",
+          "Filter dropdown functions properly": "Failed",
+          "Loading states work correctly": "Passed"
+        },
+        "usability": {
+          "Intuitive navigation": "Passed",
+          "Clear visual hierarchy": "Passed",
+          "Responsive design": "Passed",
+          "Accessible controls": "Passed",
+          "Helpful error messages": "Passed"
+        },
+        "performance": {
+          "Page loads in < 2s": "Passed",
+          "Smooth animations": "Passed",
+          "No layout shifts": "Passed",
+          "Efficient data loading": "Passed",
+          "Optimized bundle size": "Passed"
+        },
+        "design": {
+          "Consistent styling": "Passed",
+          "Professional appearance": "Passed",
+          "Proper spacing": "Passed",
+          "Color contrast": "Passed",
+          "Typography hierarchy": "Passed"
+        },
+        "testing": {
+          "Test selectors present": "Passed",
+          "Error boundaries": "Passed",
+          "Edge case handling": "Passed",
+          "Cross-browser compatibility": "Passed"
+        }
+      },
+      "total": 8.2
+    },
+    "prompts": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    },
+    "folders": {
+      "functionality": 0,
+      "usability": 0,
+      "performance": 0,
+      "design": 0,
+      "testing": 0,
+      "total": 0,
+      "details": {}
+    }
+  },
+  "overall": 2.7,
+  "recommendations": [
+    "[CRITICAL] Folders requires immediate attention",
+    "[Prompts] Enhance usability - simplify the prompt creation workflow",
+    "[Prompts] Fix search functionality and form validation",
+    "[Folders] Implement drag-and-drop functionality properly",
+    "[Folders] Improve visual hierarchy and folder nesting indicators"
+  ]
+}

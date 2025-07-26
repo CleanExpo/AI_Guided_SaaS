@@ -52,7 +52,7 @@ export default function HelpPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -65,18 +65,18 @@ export default function HelpPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              placeholder="Search for help..."
+              ="Search for help..."
               className="pl-10"
             />
           </div>
         </div>
 
         {/* Support Options */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
+        <div className="glass grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
           {supportOptions.map((option) => (
-            <Card key={option.title} className="hover:shadow-lg transition-shadow cursor-pointer">
-          <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <Card key={option.title} className="hover:shadow-md-lg transition-shadow-md cursor-pointer" className="glass
+          <CardContent className="glass p-6 text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center mx-auto mb-4">
           <option.icon className="h-6 w-6 text-blue-600"   />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{option.title}</h3>
@@ -90,17 +90,17 @@ export default function HelpPage() {
         </div>
 
         {/* FAQ Section */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
+        <Card className="glass"
+          <CardHeader className="glass"
+            <CardTitle className="flex items-center" className="glass
               <HelpCircle className="h-6 w-6 mr-2" />
               Frequently Asked Questions
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="glass"
             <div className="space-y-6">
               {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
+                <div key={index} className="-b -gray-200 pb-4 last:-b-0">
                   <h3 className="font-semibold text-gray-900 mb-2">{faq.question}</h3>
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>

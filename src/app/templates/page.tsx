@@ -56,7 +56,7 @@ export default function TemplatesPage() {
       <div className="mb-8">
         <Input
           type="text"
-          placeholder="Search templates..."
+          ="Search templates..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-md mx-auto"
@@ -72,14 +72,14 @@ export default function TemplatesPage() {
         </TabsList>
 
         <TabsContent value="all" className="mt-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (
-              <Card key={template.id} className="overflow-hidden">
-                <CardHeader>
-                  <CardTitle className="text-lg">{template.name}</CardTitle>
+              <Card key={template.id} className="overflow-hidden" className="glass
+                <CardHeader className="glass"
+                  <CardTitle className="text-lg" className="glass{template.name}</CardTitle>
                   <p className="text-sm text-gray-600">{template.description}</p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="glass"
           <div className="flex flex-wrap gap-2 mb-4">
                     {template.tags.map((tag) => (
                       <Badge key={tag} variant="secondary">{tag}</Badge>

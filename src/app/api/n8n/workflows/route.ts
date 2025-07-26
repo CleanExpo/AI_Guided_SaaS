@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logger } from '@/lib/logger';
 
 const CreateWorkflowSchema = z.object({ 
     type: z.enum(['deployment', 'testing', 'notification', 'custom']),
@@ -24,7 +25,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         return NextResponse.json({ success: true, workflow }, { status: 201   
     })
 } catch (error) {
-        console.error('Create workflow error:', error);
+        logger.error('Create workflow error:', error);
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid input', details: error.errors }, { status: 400   
     })
@@ -57,7 +58,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             total: workflows.length   
     })
 } catch (error) {
-        console.error('Get workflows error:', error);
+        logger.error('Get workflows error:', error);
         return NextResponse.json({ error: 'Failed to fetch workflows' }, { status: 500   
     })
 }

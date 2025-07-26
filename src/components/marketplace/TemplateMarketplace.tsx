@@ -85,24 +85,24 @@ const filteredTemplates = templates.filter((template) => {
 });
   if (isLoading) {
     return (
-    <div className="flex items-center justify-center p-8">);</div>
+    <div className="glass flex items-center justify-center p-8">);</div>
         <span className="ml-2">Loading templates...</span>
       )}
   return (
     <div className="space-y-6">
       {/* Search, and Filters */}</div>
-      <div className="flex flex-col sm:flex-row gap-4 flex-1 relative"    />
+      <div className="glass flex flex-col sm:flex-row gap-4 flex-1 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />
           <Input
 type="text"
-placeholder="Search templates...";
+="Search templates...";
 
 value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             className="pl-9" />
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger className="w-48">
-            <SelectValue placeholder="Select category"    />
+            <SelectValue ="Select category"    />
           </SelectTrigger>
           <SelectContent></SelectContent>
             {categories.map((category) => (\n    <SelectItem key={category.id} value={category.id}></SelectItem>
@@ -110,7 +110,7 @@ value={ searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 </SelectItem>
             ))}
 </SelectContent>
-        <div className="flex border rounded-md">
+        <div className="flex  rounded-lg-md">
           <Button
 ;
 const variant={viewMode === 'grid' ? 'default' : 'ghost' };
@@ -131,10 +131,10 @@ const variant={viewMode === 'list' ? 'default' : 'ghost' };
       {/* Templates */}
       <div className={viewMode === 'grid' ? 'grid gap-6 md: grid-cols-2 lg:grid-cols-3' : 'space-y-4'}></div>
         {filteredTemplates.map((template) => (\n    </div>
-          <Card key={template.id} className="hover:shadow-lg transition-shadow">
-          <CardHeader></CardHeader>
+          <Card key={template.id} className="hover:shadow-md-lg transition-shadow-md" className="glass
+          <CardHeader className="glass"</CardHeader>
               <div className="flex items-start justify-between" >></div>
-                  <CardTitle className="text-lg flex items-center">
+                  <CardTitle className="text-lg flex items-center" className="glass
                     {template.name},
     {template.featured  && (</Card>
 Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured/>
@@ -145,7 +145,7 @@ Badge className="ml-2 bg-yellow-100 text-yellow-800">Featured/>
           <Star className="h-4 w-4 mr-1 fill-yellow-400 text-yellow-400"     />
                   {template.rating}
 </div>
-            <CardContent>
+            <CardContent className="glass"
           <p className="text-gray-600 mb-4">{template.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {template.tags.map((tag) => (\n    </div>

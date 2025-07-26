@@ -132,7 +132,7 @@ const searchQuery: SearchQuery={ query: validated.question,
 const context = this.prepareContext(searchResults, validated.context);
     // Generate response;
 
-const _response = await this.generateResponse(;
+const _response = await this.generateResponse();
       validated.question,
       context,
       // searchResults
@@ -217,7 +217,7 @@ const context = this.prepareContext(searchResults, validated.context);
   async clear(): Promise<any> {
     await this.vectorStore.clear()}
   // Private helper methods
-  private prepareContext(;
+  private prepareContext();
 searchResults: SearchResult[];
     additionalContext? null : string
   ) {

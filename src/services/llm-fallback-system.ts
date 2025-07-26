@@ -1,12 +1,14 @@
+import { logger } from '@/lib/logger';
+
 import { OpenAI } from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 
 interface LLMProvider {
-  name: string;
-  priority: number;
-  isAvailable: () => Promise<boolean>;
+  name: string,
+  priority: number,
+  isAvailable: () => Promise<boolean>,
   complete: (prompt: string, options?: CompletionOptions) => Promise<string>;
-  estimateCost: (tokens: number) => number;
+  estimateCost: (tokens: number) => number
 }
 
 interface CompletionOptions {
@@ -17,20 +19,20 @@ interface CompletionOptions {
 }
 
 interface FallbackConfig {
-  maxRetries: number;
-  retryDelay: number;
+  maxRetries: number,
+  retryDelay: number,
   timeout: number;
   costThreshold?: number;
-  providers: LLMProvider[];
+  providers: LLMProvider[]
 }
 
 interface LLMResponse {
-  provider: string;
-  response: string;
-  tokens: number;
-  cost: number;
-  latency: number;
-  fallbackAttempts: number;
+  provider: string,
+  response: string,
+  tokens: number,
+  cost: number,
+  latency: number,
+  fallbackAttempts: number
 }
 
 class LLMFallbackSystem {
@@ -39,12 +41,12 @@ class LLMFallbackSystem {
   private healthStatus: Map<string, boolean> = new Map();
   private lastHealthCheck: Map<string, Date> = new Map();
   private metrics: {
-    totalRequests: number;
-    successfulRequests: number;
-    failedRequests: number;
-    fallbacksUsed: number;
-    averageLatency: number;
-    totalCost: number;
+    totalRequests: number,
+    successfulRequests: number,
+    failedRequests: number,
+    fallbacksUsed: number,
+    averageLatency: number,
+    totalCost: number
   };
 
   constructor(config: FallbackConfig) {
@@ -64,7 +66,7 @@ class LLMFallbackSystem {
   private initializeProviders() {
     // OpenAI Provider
     const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: process.env.OPENAI_API_KEY || "",
     });
 
     this.providers.set('openai', {
@@ -74,7 +76,7 @@ class LLMFallbackSystem {
         try {
           const response = await fetch('https://api.openai.com/v1/models', {
             headers: {
-              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY || ""}`
             }
           });
           return response.ok;
@@ -97,7 +99,7 @@ class LLMFallbackSystem {
 
     // Anthropic Provider
     const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
+      apiKey: process.env.ANTHROPIC_API_KEY || "",
     });
 
     this.providers.set('anthropic', {
@@ -109,7 +111,7 @@ class LLMFallbackSystem {
           const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'HEAD',
             headers: {
-              'x-api-key': process.env.ANTHROPIC_API_KEY || '',
+              'x-api-key': process.env.ANTHROPIC_API_KEY || "",
               'anthropic-version': '2023-06-01'
             }
           });
@@ -157,7 +159,7 @@ class LLMFallbackSystem {
         // Check provider health with caching
         const isHealthy = await this.checkProviderHealth(provider.name);
         if (!isHealthy) {
-          console.log(`Provider ${provider.name} is unhealthy, skipping...`);
+          
           fallbackAttempts++;
           continue;
         }
@@ -167,7 +169,7 @@ class LLMFallbackSystem {
         const estimatedCost = provider.estimateCost(estimatedTokens);
 
         if (this.config.costThreshold && estimatedCost > this.config.costThreshold) {
-          console.log(`Provider ${provider.name} exceeds cost threshold, skipping...`);
+          
           fallbackAttempts++;
           continue;
         }
@@ -202,7 +204,7 @@ class LLMFallbackSystem {
         };
 
       } catch (error) {
-        console.error(`Provider ${provider.name} failed:`, error);
+        logger.error(`Provider ${provider.name} failed:`, error);
         lastError = error as Error;
         fallbackAttempts++;
         
@@ -282,10 +284,10 @@ class LLMFallbackSystem {
         const latency = Date.now() - startTime;
         
         results[name] = response.toLowerCase().includes('ok');
-        console.log(`✓ ${name}: OK (${latency}ms)`);
+        `);
       } catch (error) {
         results[name] = false;
-        console.log(`✗ ${name}: Failed - ${error}`);
+        
       }
     }
     

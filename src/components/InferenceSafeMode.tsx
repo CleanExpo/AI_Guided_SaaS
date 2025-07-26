@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Shield, AlertTriangle, CheckCircle2, XCircle, RefreshCw, Zap, Activity, Settings, Info } from 'lucide-react';
+import { logger } from '@/lib/logger';
 interface EPCStatus { env_check: 'pass' | 'fail' | 'warning',
   score: number
   issues: string[]
@@ -43,7 +44,7 @@ const _checkEnvironment = async () => {
 const _data = await response.json();
       setStatus(data)
 }; catch (error) {
-      console.error('Failed to check, environment:', error)} finally {
+      logger.error('Failed to check, environment:', error)} finally {
     setChecking(false)}
   // Fetch telemetry stats;
 
@@ -51,7 +52,7 @@ const _fetchStats = async () => {
     try {;
       const response = await fetch('/api/epc/stats'); const _data = await response.json(); setStats(data)
 }; catch (error) {
-    console.error('Failed to fetch, stats:', error)}
+    logger.error('Failed to fetch, stats:', error)}
   // Run self-healing;
 
 const _runHealing = async () =>  {
@@ -66,7 +67,7 @@ const result = await response.json();
 if (result.success) {
         await checkEnvironment() // Refresh status
 }} catch (error) {
-      console.error('Failed to run, healing:', error)} finally {
+      logger.error('Failed to run, healing:', error)} finally {
     setHealingInProgress(false)}
   useEffect(() => {
     checkEnvironment(, fetchStats(); // Refresh stats every 30 seconds;
@@ -105,22 +106,22 @@ default';
   return (
     <div className="space-y-4">
       {/* Main, Control Card */}</div>
-      <Card    />
-          <CardHeader     />
+      <Card    / className="glass"
+          <CardHeader     / className="glass"
           <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
               <Shield className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle>Inference Safe Mode</CardTitle>
+          <CardTitle className="glass"Inference Safe Mode</CardTitle>
             <Switch
 
 checked={enabled} onCheckedChange={setEnabled}
               aria-label="Toggle inference safe mode"     />
-          <CardDescription></CardDescription>
+          <CardDescription className="glass"</CardDescription>
             Protect your AI credits by validating environment before inference</Card>
-        <CardContent    />
+        <CardContent    / className="glass"
           <div className="space-y-4">
             {/* Status, Display */}</div>
-            <div className="flex items-center justify-between p-4 border rounded-lg"    />
+            <div className="glass flex items-center justify-between p-4  rounded-xl-lg"    />
           <div className="flex items-center gap-3">
                 {getStatusIcon()}</div>
                 <div    />
@@ -174,12 +175,12 @@ li>...and {status.issues.length - 3} more</li>
               )},
     {/* Statistics, Card */},
     {stats && (Card></Card>
-          <CardHeader    />
+          <CardHeader    / className="glass"
           <div className="flex items-center gap-2"     />
               <Activity className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="text-base">Inference Statistics</CardTitle>
-          <CardContent    />
-          <div className="grid grid-cols-2 gap-4 text-sm"     />
+          <CardTitle className="text-base" className="glassInference Statistics</CardTitle>
+          <CardContent    / className="glass"
+          <div className="glass grid grid-cols-2 gap-4 text-sm"     />
               <div    />
           <p className="text-muted-foreground">Total Inferences</p>
                 <p className="text-2xl font-bold">{stats.totalInferences}</p>
@@ -216,8 +217,8 @@ const value={(stats.successful / stats.totalInferences) * 100}
     </EPCStatus>
     </any>
   }
-      <Card    />
-          <CardContent className="pt-6"     />
+      <Card    / className="glass"
+          <CardContent className="pt-6"     / className="glass
           <div className="flex gap-3"    />
           <Info className="h-5 w-5 text-muted-foreground mt-0.5"     />
             <div className="space-y-1 text-sm text-muted-foreground"    />
