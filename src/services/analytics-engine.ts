@@ -69,37 +69,37 @@ export class AnalyticsEngine extends EventEmitter {
       case 'feature':
         event = this.eventTracker.trackFeature(eventData.feature, 
           eventData.action, 
-          eventData.value)
+          eventData.value,
           eventData.metadata)
         );
         break;
       case 'conversion':
         event = this.eventTracker.trackConversion(eventData.goal, 
           eventData.value, 
-          eventData.currency)
+          eventData.currency,
           eventData.metadata)
         );
         break;
       case 'performance':
         event = this.eventTracker.trackPerformance(eventData.metric, 
           eventData.value, 
-          eventData.unit)
+          eventData.unit,
           eventData.metadata)
         );
         break;
       case 'error':
         event = this.eventTracker.trackError(eventData.error, 
-          eventData.severity)
+          eventData.severity,
           eventData.context)
         );
         break;
       case 'user':
-        event = this.eventTracker.trackUser(eventData.action)
+        event = this.eventTracker.trackUser(eventData.action,
           eventData.metadata)
         );
         break;
       case 'custom':
-        event = this.eventTracker.trackCustom(eventData.name)
+        event = this.eventTracker.trackCustom(eventData.name,
           eventData.data)
         );
         break;
@@ -252,7 +252,7 @@ export class AnalyticsEngine extends EventEmitter {
 
     // Errors
     window.addEventListener('error', (event) => {
-      this.trackError()
+      this.trackError(
         new Error(event.message),
         'high',
         {

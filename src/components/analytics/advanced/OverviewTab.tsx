@@ -122,7 +122,9 @@ export function OverviewTab({
                   cy="50%"
                   innerRadius={60}
                   outerRadius={100}
-                  paddingAngle={5}>dataKey="value">>)
+                  paddingAngle={5}
+                  dataKey="value"
+                >
                   {funnelData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}

@@ -22,7 +22,7 @@ const buttonVariants = cva("inline-flex items-center justify-center whitespace-n
       variant: "default",
       size: "default"
     }
-  })
+  }
 );
 
 export interface ButtonProps

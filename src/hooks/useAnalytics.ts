@@ -11,10 +11,10 @@ if (typeof window !== 'undefined') {
       {
         name: 'console',
         enabled: true,
-        config: {}))
+        config: {},
         send: async (event) => {
           if ((process.env.NODE_ENV || "development") === "development") {
-            
+            console.log('[Analytics]', event);
           }
         }
       }
@@ -34,8 +34,8 @@ export function useAnalytics() {
   const track = useCallback((eventName: string, properties?: Record<string, unknown>) => {
     analytics.track({
       type: 'custom',
-      name: eventName)
-      data: properties || {})
+      name: eventName,
+      data: properties || {}
     });
   }, [analytics]);
 
@@ -82,8 +82,8 @@ export function usePerformanceTracking(componentName: string) {
         type: 'performance',
         metric: 'render_time',
         value: duration,
-        unit: 'ms')
-        metadata: { component: componentName })
+        unit: 'ms',
+        metadata: { component: componentName }
       });
     };
   }, [componentName, analytics]);
@@ -121,7 +121,7 @@ export function useFormAnalytics(formName: string) {
     track('form_interaction', {
       form: formName,
       field: fieldName,
-      action))
+      action,
       timeSpent: Date.now() - startTime
     });
   }, [formName, track, startTime]);
@@ -129,7 +129,7 @@ export function useFormAnalytics(formName: string) {
   const trackFormSubmit = useCallback((success: boolean, data?: Record<string, unknown>) => {
     const event = success ? 'form_submit_success' : 'form_submit_error';
     track(event, {
-      form: formName))
+      form: formName,
       timeToComplete: Date.now() - startTime,
       ...data
     });
@@ -141,7 +141,7 @@ export function useFormAnalytics(formName: string) {
   
   const trackFormAbandon = useCallback((reason?: string) => {
     track('form_abandon', {
-      form: formName))
+      form: formName,
       timeSpent: Date.now() - startTime,
       reason
     });

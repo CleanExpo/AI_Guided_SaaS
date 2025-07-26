@@ -21,10 +21,11 @@ export class AnalyticsWebSocket extends EventEmitter {
   private reconnectTimer: NodeJS.Timeout | null = null;
   private isConnected: boolean = false;
   private metrics: Map<string, RealtimeMetric> = new Map();
+  private url: string;
   
-  constructor(private url: string = process.env.NEXT_PUBLIC_ANALYTICS_WS_URL || 'ws://localhost:3001')
-  ) {
+  constructor() {
     super();
+    this.url = process.env.NEXT_PUBLIC_ANALYTICS_WS_URL || 'ws://localhost:3001';
   }
   
   connect(): void {
