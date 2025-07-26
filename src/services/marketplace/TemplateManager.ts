@@ -32,7 +32,7 @@ export class TemplateManager extends EventEmitter {
       
       // Save installation record
       this.installedItems.set(templateId, {
-        type: 'template',)
+        type: 'template',
         installedAt: new Date(),
         config: finalConfig,
         version: template.metadata.version

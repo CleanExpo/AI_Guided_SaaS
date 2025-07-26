@@ -24,14 +24,14 @@ export default function AdminMCPPage() {
   useEffect(() =>  {
     // Simulate loading MCP server status
     setTimeout(() => {
-      setMcpServers([)
+      setMcpServers([
         { status: 'running', name: 'context7', version: '1.0.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'serena', version: '2.1.0', lastHealthCheck: new Date().toISOString() },
         { status: 'running', name: 'sequential-thinking', version: '1.2.0', lastHealthCheck: new Date().toISOString() }
       ]);
-      setLoading(false)
-}, 1000)
-}, []);
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (<div className="glass container mx-auto p-6 space-y-6">
           <div className="flex items-center justify-between">
@@ -44,7 +44,7 @@ export default function AdminMCPPage() {
 
       <div className="glass grid gap-4">
         {loading ? (
-          <div>Loading MCP servers...</div>)
+          <div>Loading MCP servers...</div>
         ) : (
           mcpServers.map(server => (
             <Card key={server.name} className="glass">
@@ -53,7 +53,7 @@ export default function AdminMCPPage() {
                   <span>{server.name}</span>
                   <Badge variant={server.status === 'running' ? 'default' : 'destructive'}>
                     {server.status === 'running' ? (
-                      <CheckCircle className="w-3 h-3 mr-1"     />)
+                      <CheckCircle className="w-3 h-3 mr-1" />
                     ) : (
                       <XCircle className="w-3 h-3 mr-1"     />
                     )}

@@ -31,7 +31,7 @@ export class IntegrationManager extends EventEmitter {
       
       // Save installation record
       this.installedItems.set(integrationId, {
-        type: 'integration',)
+        type: 'integration',
         installedAt: new Date(),
         version: '1.0.0'
       });
@@ -44,7 +44,7 @@ export class IntegrationManager extends EventEmitter {
   }
 
   async callIntegration(integrationId: string, 
-    endpoint: string)
+    endpoint: string,
     params?: Record<string, any>)
   ): Promise<any> {
     const integration = this.integrations.get(integrationId);
