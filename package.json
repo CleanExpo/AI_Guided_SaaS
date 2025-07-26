@@ -65,6 +65,8 @@
     "mcp:master-dev:dev": "cd mcp/master-dev-analysis-agent && npm run dev",
     "mcp:build-doctor": "cd mcp/build-doctor-mcp && npm run build && npm start",
     "mcp:build-doctor:dev": "cd mcp/build-doctor-mcp && npm run dev",
+    "mcp:semantic-maestro": "cd mcp/semantic-reasoning-maestro && npm run build && npm start",
+    "mcp:semantic-maestro:dev": "cd mcp/semantic-reasoning-maestro && npm run dev",
     "build-doctor": "cd mcp/build-doctor-mcp && npm run build && node dist/cli.js",
     "deploy:safe": "npm run build:sync && npm run deploy:production",
     "purple:purge": "ts-node scripts/build-sync-agent.ts --color-only",

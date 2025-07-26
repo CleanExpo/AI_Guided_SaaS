@@ -78,6 +78,8 @@ npm run mcp:master-dev:dev     # Start Master Dev Agent in development mode
 npm run mcp:build-doctor       # Start Build Doctor MCP server
 npm run mcp:build-doctor:dev   # Start Build Doctor in development mode
 npm run build-doctor           # Use Build Doctor CLI directly
+npm run mcp:semantic-maestro   # Start Semantic Reasoning Maestro
+npm run mcp:semantic-maestro:dev  # Start Semantic Maestro in development mode
 ```
 
 **Configured MCP Servers**:
@@ -110,6 +112,14 @@ npm run build-doctor           # Use Build Doctor CLI directly
    - Validates builds and runs comprehensive checks
    - Commands: `npm run mcp:build-doctor` (server) or `npm run build-doctor` (CLI)
    - CLI Usage: `npm run build-doctor diagnose|fix|validate`
+
+9. **Semantic Reasoning Maestro** - The ultimate agent for human-like, autonomous reasoning
+   - Performs deep, semantically-anchored reasoning over complex multi-modal information
+   - Breaks down complex tasks with intelligent decomposition and orchestration
+   - Autonomous research synthesis with cross-source validation
+   - Multimodal analysis (text, code, images, diagrams, data)
+   - Self-evaluating and iterative refinement capabilities
+   - Commands: `npm run mcp:semantic-maestro` (production) or `npm run mcp:semantic-maestro:dev` (development)
 
 **MCP Resources**:
 - **ESLint MCP**: https://eslint.org/docs/latest/use/mcp
