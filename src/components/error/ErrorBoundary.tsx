@@ -87,7 +87,7 @@ export class ErrorBoundary extends Component<Props, State> {
     // Track error in analytics (if available)
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
-        componentStack: errorInfo.componentStack)
+        componentStack: errorInfo.componentStack,
         errorBoundary: true)
       });
     }
@@ -98,7 +98,7 @@ export class ErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      showDetails: false)
+      showDetails: false,
       copied: false)
     });
   };
@@ -271,7 +271,7 @@ export function ErrorBoundaryWrapper({
     // Track error with analytics if available
     if (typeof window !== 'undefined' && window.analytics) {
       window.analytics.trackError(error, 'high', {
-        errorBoundary: true)
+        errorBoundary: true,
         componentStack: errorInfo.componentStack)
       });
     }
@@ -290,7 +290,9 @@ export function ErrorBoundaryWrapper({
 
 // Page-level error boundary with custom styling
 export function PageErrorBoundary({ children }: { children: ReactNode }) {
-  return(<ErrorBoundaryWrapper)>onError={(error, errorInfo) => {
+  return (
+    <ErrorBoundaryWrapper
+      onError={(error, errorInfo) => {
         
       }}
     >
