@@ -23,6 +23,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     }
   ],
-  // Don't start a new server, use existing one
-  webServer: undefined
+  // Start development server before running tests
+  webServer: {
+    command: 'npm run dev',
+    port: 3000,
+    timeout: 120 * 1000,
+    reuseExistingServer: true, // Always reuse existing server
+  }
 });

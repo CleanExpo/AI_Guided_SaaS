@@ -44,6 +44,12 @@ export default function Dashboard() {
   const { isMobile } = usePWA();
   const { trackFeature, trackConversion } = useAnalytics();
   usePerformanceTracking('Dashboard');
+  
+  const handleRefresh = () => {
+    setIsLoading(true);
+    setLastRefresh(new Date());
+    setTimeout(() => setIsLoading(false), 1000);
+  };
 
   // Real-time data updates
   useEffect(() => {
