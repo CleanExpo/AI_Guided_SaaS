@@ -1,1 +1,3 @@
-export default function AnalyticsPage() { return <div>Analytics Coming Soon</div>; }
+export default function Page() {
+  return <div className="p-8">This feature is coming soon!</div>;
+}

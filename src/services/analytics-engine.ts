@@ -70,37 +70,37 @@ export class AnalyticsEngine extends EventEmitter {
         event = this.eventTracker.trackFeature(eventData.feature, 
           eventData.action, 
           eventData.value,
-          eventData.metadata)
+          eventData.metadata)
         );
         break;
       case 'conversion':
         event = this.eventTracker.trackConversion(eventData.goal, 
           eventData.value, 
           eventData.currency,
-          eventData.metadata)
+          eventData.metadata)
         );
         break;
       case 'performance':
         event = this.eventTracker.trackPerformance(eventData.metric, 
           eventData.value, 
           eventData.unit,
-          eventData.metadata)
+          eventData.metadata)
         );
         break;
       case 'error':
         event = this.eventTracker.trackError(eventData.error, 
           eventData.severity,
-          eventData.context)
+          eventData.context)
         );
         break;
       case 'user':
         event = this.eventTracker.trackUser(eventData.action,
-          eventData.metadata)
+          eventData.metadata)
         );
         break;
       case 'custom':
         event = this.eventTracker.trackCustom(eventData.name,
-          eventData.data)
+          eventData.data)
         );
         break;
       default:
@@ -131,8 +131,8 @@ export class AnalyticsEngine extends EventEmitter {
 
   trackPerformance(metric: 'page_load' | 'api_response' | 'render_time' | 'interaction_delay',
     value: number,
-    unit: 'ms' | 's' = 'ms')
-    metadata?: Record<string, any>)
+    unit: 'ms' | 's' = 'ms',
+    metadata?: Record<string, any>
   ): void {
     this.track({ type: 'performance', metric, value, unit, metadata });
   }
@@ -141,8 +141,8 @@ export class AnalyticsEngine extends EventEmitter {
     this.eventTracker.setUserId(userId);
     this.track({
       type: 'user',
-      action: 'profile_update')
-      metadata: traits)
+      action: 'profile_update',
+      metadata: traits
     });
   }
 
@@ -174,7 +174,7 @@ export class AnalyticsEngine extends EventEmitter {
     endDate: Date;
     metrics?: string[];
     groupBy?: 'hour' | 'day' | 'week' | 'month';
-    filters?: Record<string, any>;)
+    filters?: Record<string, any>;
   }): Promise<any> {
     // This would query from your analytics database
     // For now, return mock data
@@ -188,8 +188,8 @@ export class AnalyticsEngine extends EventEmitter {
     const allEvents = this.eventTracker.getQueue();
     const metrics = this.getMetrics();
     return this.dashboardGenerator.generateDashboardData(allEvents,
-      metrics)
-      this.realtimeEvents)
+      metrics,
+      this.realtimeEvents
     );
   }
 
@@ -203,8 +203,7 @@ export class AnalyticsEngine extends EventEmitter {
     
     // Clean up old events (older than 5 minutes)
     const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    this.realtimeEvents = this.realtimeEvents.filter(e => e.timestamp >= fiveMinutesAgo)
-    );
+    this.realtimeEvents = this.realtimeEvents.filter(e => e.timestamp >= fiveMinutesAgo);
   }
 
   private async startQueueProcessor(): Promise<void> {
@@ -298,8 +297,8 @@ export function initializeAnalytics(config?: Partial<AnalyticsConfig>): Analytic
       retention: {
         raw: 90,
         aggregated: 365
-      })
-      ...config)
+      },
+      ...config
     });
     analyticsInstance.initialize();
   }

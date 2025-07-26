@@ -96,8 +96,8 @@ export class IntegrationManager extends EventEmitter {
     };
   }
 
-  private validateCredentials(integration: Integration)
-    credentials: Record<string, string>)
+  private validateCredentials(integration: Integration,
+    credentials: Record<string, string>
   ): void {
     for (const cred of integration.credentials) {
       if (cred.required && !credentials[cred.key]) {
@@ -106,22 +106,22 @@ export class IntegrationManager extends EventEmitter {
     }
   }
 
-  private async testIntegrationConnection(integration: Integration)
-    credentials: Record<string, string>)
+  private async testIntegrationConnection(integration: Integration,
+    credentials: Record<string, string>
   ): Promise<void> {
     // Test if credentials work
     console.log(`Testing connection for integration: ${integration.name}`);
   }
 
-  private async saveCredentials(integrationId: string)
-    credentials: Record<string, string>)
+  private async saveCredentials(integrationId: string,
+    credentials: Record<string, string>
   ): Promise<void> {
     // Save credentials securely (encrypted)
     const encryptedCredentials = this.encryptCredentials(credentials);
     localStorage.setItem(`integration_creds_${integrationId}`, encryptedCredentials);
   }
 
-  private async getCredentials(integrationId: string): Promise<Record<string, string> {
+  private async getCredentials(integrationId: string): Promise<Record<string, string>> {
     // Retrieve stored credentials
     const encrypted = localStorage.getItem(`integration_creds_${integrationId}`);
     if (!encrypted) return {};

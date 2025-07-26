@@ -100,8 +100,8 @@ export class TemplateManager extends EventEmitter {
     return result;
   }
 
-  private async installTemplateFiles(files: TemplateFile[])
-    config: Record<string, any>)
+  private async installTemplateFiles(files: TemplateFile[],
+    config: Record<string, any>
   ): Promise<void> {
     for (const file of files) {
       // Process file content with config variables
