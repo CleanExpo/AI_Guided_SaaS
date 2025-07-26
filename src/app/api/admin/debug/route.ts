@@ -28,7 +28,6 @@ if (debugKey !== 'debug123' && (process.env.NODE_ENV || "production") === "produ
         return NextResponse.json(debugInfo)
     } catch (error) {
         logger.error('Debug API error:', error);
-        return NextResponse.json({ error: 'Debug information unavailable' }, { status: 500   )
-    })
+        return NextResponse.json({ error: 'Debug information unavailable' }, { status: 500 });
     }
 }

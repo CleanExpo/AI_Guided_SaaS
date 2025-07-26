@@ -19,7 +19,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
                 return NextResponse.json({ 
                     error: 'Invalid credentials' 
                 }, { 
-                    status: 401)
+                    status: 401
                 });
             }
         } catch (error) {

@@ -89,7 +89,6 @@ export default function ApiDocsPage() {
           </div>
         </div>
       </div>
-      </div>
     </div>
   );
 }

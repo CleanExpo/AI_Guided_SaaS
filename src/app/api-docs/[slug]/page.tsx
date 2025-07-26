@@ -34,12 +34,11 @@ export default function ApiDocPage({ params }: { params: { slug: string } }) {
   const doc = apiDocs[params.slug];
   if (!doc) {
     return (
-    <div className="glass container mx-auto p-6">
-          <h1 className="text-2xl font-bold">API Documentation Not Found</h1>
+      <div className="glass container mx-auto p-6">
+        <h1 className="text-2xl font-bold">API Documentation Not Found</h1>
         <p>The requested API documentation could not be found.</p>
       </div>
-    </div>
-  );
+    );
 }
 
   return (
