@@ -1,0 +1,51 @@
+# Dockerfile that mimics Vercel's build environment
+# Used for local testing and error detection before deployment
+FROM node:20-alpine
+
+# Install dependencies for native modules
+RUN apk add --no-cache python3 make g++ git curl
+
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package*.json ./
+COPY tsconfig*.json ./
+
+# Install ALL dependencies (not just production)
+# This mimics Vercel's build process
+RUN npm ci
+
+# Copy all source files
+COPY . .
+
+# Set environment variables similar to Vercel
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV SKIP_ENV_VALIDATION=true
+
+# Create a build script that captures all errors
+RUN echo '#!/bin/sh' > /app/build-check.sh && \
+    echo 'echo "🔍 Running TypeScript check..."' >> /app/build-check.sh && \
+    echo 'npm run typecheck 2>&1 | tee typecheck.log || echo "TypeScript errors found"' >> /app/build-check.sh && \
+    echo 'echo ""' >> /app/build-check.sh && \
+    echo 'echo "🔍 Running ESLint..."' >> /app/build-check.sh && \
+    echo 'npm run lint 2>&1 | tee lint.log || echo "Lint errors found"' >> /app/build-check.sh && \
+    echo 'echo ""' >> /app/build-check.sh && \
+    echo 'echo "🔍 Running Next.js build..."' >> /app/build-check.sh && \
+    echo 'npm run build 2>&1 | tee build.log || echo "Build errors found"' >> /app/build-check.sh && \
+    echo 'echo ""' >> /app/build-check.sh && \
+    echo 'echo "📊 Build Summary:"' >> /app/build-check.sh && \
+    echo 'echo "=================="' >> /app/build-check.sh && \
+    echo 'if [ -f typecheck.log ]; then echo "TypeScript: $(grep -c "error TS" typecheck.log || echo 0) errors"; fi' >> /app/build-check.sh && \
+    echo 'if [ -f lint.log ]; then echo "ESLint: $(grep -c "error" lint.log || echo 0) errors"; fi' >> /app/build-check.sh && \
+    echo 'if [ -f build.log ]; then echo "Build: $(grep -c "Error:" build.log || echo 0) errors"; fi' >> /app/build-check.sh && \
+    chmod +x /app/build-check.sh
+
+# Run the build check
+RUN /app/build-check.sh
+
+# If we get here, expose port for testing
+EXPOSE 3000
+
+# Default command
+CMD ["npm", "run", "dev"]
