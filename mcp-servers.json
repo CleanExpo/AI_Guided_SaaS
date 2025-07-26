@@ -3,17 +3,60 @@
     "context7": {
       "command": "npx",
       "args": ["@upstash/context7-mcp"],
-      "description": "Context7 MCP Server - Provides up-to-date documentation and code examples"
+      "description": "Context7 MCP Server - Provides up-to-date documentation and code examples",
+      "env": {
+        "UPSTASH_REDIS_REST_URL": "${UPSTASH_REDIS_REST_URL}",
+        "UPSTASH_REDIS_REST_TOKEN": "${UPSTASH_REDIS_REST_TOKEN}"
+      }
+    },
+    "sequential-thinking": {
+      "command": "node",
+      "args": ["./mcp/wsl-sequential-thinking-server.cjs"],
+      "description": "Sequential thinking server - Enables structured problem-solving through sequential reasoning"
+    },
+    "eslint": {
+      "command": "npx",
+      "args": ["@eslint/mcp"],
+      "description": "ESLint MCP Server - Provides linting and code quality analysis",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "model-context": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-memory"],
+      "description": "Model Context Protocol Memory Server - Maintains conversation context and memory"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "description": "GitHub MCP Server - Integrates with GitHub repositories",
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
     },
     "serena": {
       "command": "uv",
       "args": ["run", "--directory", "./serena", "serena-mcp-server", "--context", "agent", "--project", "."],
       "description": "Serena Semantic Search MCP Server - A powerful coding agent toolkit with semantic code analysis"
     },
-    "wsl-sequential-thinking": {
+    "master-dev-analysis": {
       "command": "node",
-      "args": ["./mcp/wsl-sequential-thinking-server.cjs"],
-      "description": "Sequential thinking server - Enables structured problem-solving through sequential reasoning"
+      "args": ["./mcp/master-dev-analysis-agent/dist/index.js"],
+      "description": "Master Development Analysis Agent - Comprehensive project intelligence and multi-agent coordination",
+      "env": {
+        "NODE_ENV": "production",
+        "LOG_LEVEL": "info"
+      }
+    },
+    "build-doctor": {
+      "command": "node",
+      "args": ["./mcp/build-doctor-mcp/dist/index.js"],
+      "description": "Build Doctor MCP - Ultimate build and code correctness expert that diagnoses and cures build issues",
+      "env": {
+        "NODE_ENV": "production",
+        "LOG_LEVEL": "info"
+      }
     }
   }
 }

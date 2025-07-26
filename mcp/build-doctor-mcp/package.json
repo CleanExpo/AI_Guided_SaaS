@@ -1,0 +1,42 @@
+{
+  "name": "@ai-guided-saas/build-doctor-mcp",
+  "version": "1.0.0",
+  "description": "Build Doctor MCP - Ultimate build and code correctness expert",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "analyze": "tsx src/cli.ts analyze",
+    "fix": "tsx src/cli.ts fix"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.24.0",
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
+    "@babel/types": "^7.24.0",
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "diff": "^5.2.0",
+    "eslint": "^8.56.0",
+    "glob": "^10.3.10",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3",
+    "winston": "^3.11.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.5",
+    "@types/diff": "^5.0.9",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "jest": "^29.7.0",
+    "tsx": "^4.7.0"
+  }
+}

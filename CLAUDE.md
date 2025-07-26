@@ -17,6 +17,8 @@ npm run dev                    # Start development server (port 3000)
 npm run build                  # Production build (NOW WORKING!)
 npm run build:validate         # Build with environment validation
 npm run build:dev              # Development build
+npm run build-doctor diagnose  # Diagnose build issues
+npm run build-doctor fix       # Auto-fix all build errors
 ```
 
 ### Code Quality
@@ -66,8 +68,48 @@ npm run agents:monitor         # Monitor running agents
 
 ### MCP Integration
 ```bash
-npm run mcp:start              # Start MCP servers (sequential-thinking)
+npm run mcp:start              # Start ALL MCP servers
+npm run mcp:status             # Check MCP server status
+npm run mcp:context7           # Start Context7 documentation server
+npm run mcp:eslint             # Start ESLint code quality server
+npm run mcp:sequential         # Start Sequential Thinking server
+npm run mcp:master-dev         # Start Master Development Analysis Agent
+npm run mcp:master-dev:dev     # Start Master Dev Agent in development mode
+npm run mcp:build-doctor       # Start Build Doctor MCP server
+npm run mcp:build-doctor:dev   # Start Build Doctor in development mode
+npm run build-doctor           # Use Build Doctor CLI directly
 ```
+
+**Configured MCP Servers**:
+1. **Context7** (`@upstash/context7-mcp`) - Provides up-to-date documentation and code examples
+   - Requires: `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables
+   
+2. **Sequential Thinking** - Enables structured problem-solving through sequential reasoning
+   - Local implementation at `./mcp/wsl-sequential-thinking-server.cjs`
+   
+3. **ESLint MCP** (`@eslint/mcp`) - Provides linting and code quality analysis
+   - Automatically uses project ESLint configuration
+   
+4. **Model Context Memory** (`@modelcontextprotocol/server-memory`) - Maintains conversation context and memory
+   
+5. **GitHub Integration** (`@modelcontextprotocol/server-github`) - Integrates with GitHub repositories
+   - Requires: `GITHUB_TOKEN` environment variable
+   
+6. **Serena Semantic Search** - Powerful coding agent toolkit with semantic code analysis
+   - Custom implementation in `./serena` directory
+
+7. **Master Development Analysis Agent** - Comprehensive project intelligence and multi-agent coordination
+   - Analyzes project structure, dependencies, and architecture
+   - Generates dynamic todo lists and risk predictions
+   - Coordinates multi-agent workflows
+   - Commands: `npm run mcp:master-dev` (production) or `npm run mcp:master-dev:dev` (development)
+
+8. **Build Doctor MCP** - Ultimate build and code correctness expert
+   - Diagnoses and automatically fixes all build errors
+   - Repairs syntax, TypeScript, JSX, and import issues
+   - Validates builds and runs comprehensive checks
+   - Commands: `npm run mcp:build-doctor` (server) or `npm run build-doctor` (CLI)
+   - CLI Usage: `npm run build-doctor diagnose|fix|validate`
 
 **MCP Resources**:
 - **ESLint MCP**: https://eslint.org/docs/latest/use/mcp
@@ -135,6 +177,15 @@ The system combines three paradigms:
 - Core Agents: Architect, Frontend, Backend, QA, DevOps
 - Orchestration: Conductor, Progress Tracker, Queue Manager
 - Specialists: TypeScript, Visual Builder, Self-Healing
+- **Master Development Analysis Agent**: Comprehensive project intelligence
+  - Tools: analyze_project, generate_todo_list, assess_production_readiness
+  - Tools: identify_missing_components, predict_risks, coordinate_agents
+  - Location: `mcp/master-dev-analysis-agent/`
+- **Build Doctor MCP**: Ultimate build and code correctness expert
+  - Tools: diagnose_build, fix_all_errors, fix_syntax_errors, fix_typescript_errors
+  - Tools: fix_jsx_errors, validate_build, generate_fix_report
+  - Location: `mcp/build-doctor-mcp/`
+  - CLI: `npm run build-doctor diagnose|fix|validate`
 
 ### MCP (Model Context Protocol) Integration
 - **Memory Server**: Context retention across sessions
