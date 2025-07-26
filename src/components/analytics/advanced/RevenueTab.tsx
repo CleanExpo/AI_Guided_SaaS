@@ -22,7 +22,7 @@ const revenueMetrics = [
 ];
 
 export function RevenueTab({ userTrendData }: RevenueTabProps) {
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">)
         {revenueMetrics.map((metric) => (
           <Card key={metric.title} className="glass"

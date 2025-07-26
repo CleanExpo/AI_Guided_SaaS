@@ -9,15 +9,16 @@ interface EngagementTabProps {
 export function EngagementTab({ dashboardData }: EngagementTabProps) {
   const maxFeatureUsage = Math.max(...dashboardData.top.features.map((f: any) => f.usage));
 
-  return(<div className="space-y-6">
+  return (
+    <div className="space-y-6">
       <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Pages */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Top Pages</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Top Pages</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
-            <div className="space-y-3">)
+          <CardContent className="glass">
+            <div className="space-y-3">
               {dashboardData.top.pages.map((page: any, index: number) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">

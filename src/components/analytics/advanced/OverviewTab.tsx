@@ -28,10 +28,11 @@ export function OverviewTab({
   metrics, 
   dashboardData, 
   userTrendData, 
-  funnelData)
-  revenueByPlan )
+  funnelData,
+  revenueByPlan
 }: OverviewTabProps) {
-  return(<div className="space-y-6">
+  return (
+    <div className="space-y-6">
       {/* Key Metrics */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
         <MetricCard
