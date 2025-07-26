@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger } from '@/lib/logger';
 
-const CreateProjectSchema = z.object({ )
+const CreateProjectSchema = z.object({
     name: z.string().min(1).max(200),
     description: z.string().max(1000),
     type: z.string(),
     config: z.record(z.any()).optional()   
-    })
+})
 export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
         const body = await request.json();

@@ -37,8 +37,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
         
             return NextResponse.json({
-                type)
-                data,)
+                type,
+                data,
                 timestamp: new Date().toISOString()
             });
         } catch (error) {

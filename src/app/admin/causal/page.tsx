@@ -1,13 +1,26 @@
-// // Type checking disabled for this file
 'use client';
+import React from 'react';
+import SelfCheckTrigger from '../../../components/admin/SelfCheckTrigger';
 
-export default function CausalPage() {
+export default function CausalAnalyticsPage() {
   return (
-    <div className="min-h-screen glass">
-      <div className="container mx-auto py-8">
-        <div className="glass rounded-xl-lg shadow-md p-6">
-          <h1 className="text-2xl font-bold mb-4">Causal Analysis</h1>
-          <p className="text-gray-600">Causal analysis dashboard is currently under construction.</p>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+          <p className="text-gray-600">System health monitoring and causal intelligence analytics</p>
+        </div>
+        
+        <SelfCheckTrigger />
+        
+        <div className="bg-white rounded-lg shadow">
+          <div className="p-6 border-b">
+            <h2 className="text-xl font-semibold text-gray-900">Causal Intelligence Analytics</h2>
+            <p className="text-gray-600 mt-1">User behavior patterns and component performance insights</p>
+          </div>
+          <div className="p-6">
+            <p className="text-gray-500">Causal analytics data will be displayed here.</p>
+          </div>
         </div>
       </div>
     </div>

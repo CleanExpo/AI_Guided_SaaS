@@ -47,9 +47,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(response);
     } catch (error) {
       logger.error('Agent chat error:', error);
-      return NextResponse.json({ error: 'Agent chat failed' })
-        { status: 500 })
-      );
+      return NextResponse.json({ error: 'Agent chat failed' }, { status: 500 });
     }
   });
 }
