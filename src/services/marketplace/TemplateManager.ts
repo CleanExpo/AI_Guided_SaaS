@@ -82,8 +82,8 @@ export class TemplateManager extends EventEmitter {
     }
   }
 
-  private processTemplateConfig(config: TemplateConfig)
-    userConfig?: Record<string, any>)
+  private processTemplateConfig(config: TemplateConfig,
+    userConfig?: Record<string, any>
   ): Record<string, any> {
     const result: Record<string, any> = {};
     

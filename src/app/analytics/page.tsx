@@ -24,9 +24,9 @@ export default function AnalyticsPage() {
   useEffect(() =>  {
     // Simulate loading analytics data
     setTimeout(() => {
-      setData({ totalUsers: 1247;
+      setData({ totalUsers: 1247,
         activeUsers: 89,
-        pageViews: 5643;
+        pageViews: 5643,
         bounceRate: 34.2,
         topPages: [
           { path: '/', views: 1543, percentage: 27.3 },

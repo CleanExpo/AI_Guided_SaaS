@@ -45,7 +45,7 @@ export class IntegrationManager extends EventEmitter {
 
   async callIntegration(integrationId: string, 
     endpoint: string,
-    params?: Record<string, any>)
+    params?: Record<string, any>
   ): Promise<any> {
     const integration = this.integrations.get(integrationId);
     if (!integration) throw new Error('Integration not found');
@@ -149,8 +149,8 @@ export class IntegrationManager extends EventEmitter {
 
   private async makeApiCall(integration: Integration,
     endpoint: IntegrationEndpoint,
-    credentials: Record<string, string>)
-    params?: Record<string, any>)
+    credentials: Record<string, string>,
+    params?: Record<string, any>
   ): Promise<any> {
     // Make actual API call
     const url = `${integration.provider}${endpoint.path}`;
