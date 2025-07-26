@@ -156,7 +156,7 @@ export default function AutoCompactPage() {
     }
   };
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -169,16 +169,16 @@ export default function AutoCompactPage() {
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <CardTitle className="glass"Compaction Status</CardTitle>
+                <CardTitle className="glass">Compaction Status</CardTitle>
                 <Badge variant={isEnabled ? 'default' : 'secondary'}>
                   {isEnabled ? 'Enabled' : 'Disabled'}
                 </Badge>
               </div>
               <Switch
-                checked={isEnabled}>onCheckedChange={setIsEnabled} />>
+                checked={isEnabled}>onCheckedChange={setIsEnabled} />
             </div>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
                 <p className="text-sm text-gray-500">Total Reduction</p>
@@ -240,15 +240,15 @@ export default function AutoCompactPage() {
 
         {/* Configuration */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Settings className="h-5 w-5" />
                 Configuration
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium">Compaction Level</label>
                   <div className="mt-2 space-y-2">
@@ -256,7 +256,7 @@ export default function AutoCompactPage() {
                       <label key={level} className="flex items-center gap-3">
                         <input
                           type="radio"
-                          value={level}>checked={compactLevel === level})>onChange={(e) => setCompactLevel(e.target.value as any)}
+                          value={level}>checked={compactLevel === level}>onChange={(e) => setCompactLevel(e.target.value as any)}
                         />
                         <span className={`capitalize ${getCompactLevelColor(level)}`}>
                           {level}
@@ -291,7 +291,7 @@ export default function AutoCompactPage() {
                     <p className="text-xs text-gray-500">Keep important code comments</p>
                   </div>
                   <Switch
-                    checked={preserveComments}>onCheckedChange={setPreserveComments} />>
+                    checked={preserveComments}>onCheckedChange={setPreserveComments} />
                 </div>
 
                 <Button variant="outline" className="w-full">
@@ -301,15 +301,15 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Recent Compressions</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Recent Compressions</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-3">
+            <CardContent className="glass">
+            <div className="space-y-3">
                 {recentResults.map((result, index) => {
                   const Icon = getFileIcon(result.type);
-                  return(<div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
+                  return (<div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
                       <div className="flex items-center gap-3">
                         <Icon className="h-4 w-4 text-gray-600" />
                         <div>)
@@ -337,8 +337,8 @@ export default function AutoCompactPage() {
 
         {/* Summary Stats */}
         <div className="glass grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Space Saved</p>
@@ -349,8 +349,8 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Compression Rate</p>
@@ -361,8 +361,8 @@ export default function AutoCompactPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Next Run</p>

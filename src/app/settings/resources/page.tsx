@@ -160,7 +160,7 @@ export default function ResourcesPage() {
   const memoryStatus = getResourceStatus(resources.memory.percentage);
   const diskStatus = getResourceStatus(resources.disk.percentage);
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -185,7 +185,7 @@ export default function ResourcesPage() {
               </div>
               <div className="glass flex items-center gap-4">
                 <Button
-                  variant="outline">size="sm")>onClick={() => setIsMonitoring(!isMonitoring)}
+                  variant="outline">size="sm">onClick={() => setIsMonitoring(!isMonitoring)}
                 >
                   {isMonitoring ? (
                     <>
@@ -200,7 +200,7 @@ export default function ResourcesPage() {
                   )}
                 </Button>
                 <Switch
-                  checked={adaptiveMode}>onCheckedChange={setAdaptiveMode} />>
+                  checked={adaptiveMode}>onCheckedChange={setAdaptiveMode} />
               </div>
             </div>
           </CardContent>
@@ -209,8 +209,8 @@ export default function ResourcesPage() {
         {/* Resource Overview */}
         <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {/* CPU */}
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Cpu className="h-5 w-5 text-blue-600" />
@@ -232,8 +232,8 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Memory */}
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <MemoryStick className="h-5 w-5 text-purple-600" />
@@ -255,8 +255,8 @@ export default function ResourcesPage() {
           </Card>
 
           {/* Disk */}
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <HardDrive className="h-5 w-5 text-green-600" />
@@ -279,8 +279,8 @@ export default function ResourcesPage() {
 
           {/* Network/Battery */}
           {resources.battery ? (
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Battery className="h-5 w-5 text-orange-600" />
@@ -305,8 +305,8 @@ export default function ResourcesPage() {
               </CardContent>
             </Card>
           ) : (
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Wifi className="h-5 w-5 text-cyan-600" />
@@ -332,14 +332,14 @@ export default function ResourcesPage() {
         <div className="glass grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Performance Profiles */}
           <Card className="lg:col-span-1 glass
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+            <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Gauge className="h-5 w-5" />
                 Performance Profile
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-3">
+            <CardContent className="glass">
+            <div className="space-y-3">
                 {Object.entries(profiles).map(([key, profile]) => (
                   <div
                     key={key}
@@ -365,18 +365,18 @@ export default function ResourcesPage() {
 
           {/* Real-time Monitor */}
           <Card className="lg:col-span-2 glass
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+            <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Activity className="h-5 w-5" />
                 Real-time CPU Usage
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="h-32 flex items-end gap-1">
+            <CardContent className="glass">
+            <div className="h-32 flex items-end gap-1">
                 {history.map((value, index) => (
                   <div
                     key={index}
-                    className="flex-1 glass-button primary rounded-lg-t transition-all duration-500">style={ height: `${value}%` } />>
+                    className="flex-1 glass-button primary rounded-lg-t transition-all duration-500">style={ height: `${value}%` } />
                 ))}
               </div>
               <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
@@ -405,13 +405,13 @@ export default function ResourcesPage() {
 
         {/* Resource Settings */}
         <Card className="mt-6 glass
-          <CardHeader className="glass"
+          <CardHeader className="glass">
             <CardTitle className="flex items-center gap-2 glass
               <Settings className="h-5 w-5" />
               Resource Thresholds
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="text-sm font-medium">CPU Warning Level</label>
@@ -419,7 +419,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="50"
                   max="90"
-                  defaultValue="70">className="w-full mt-2" />>
+                  defaultValue="70">className="w-full mt-2" />
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>50%</span>
                   <span>70%</span>
@@ -433,7 +433,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="50"
                   max="90"
-                  defaultValue="75">className="w-full mt-2" />>
+                  defaultValue="75">className="w-full mt-2" />
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>50%</span>
                   <span>75%</span>
@@ -447,7 +447,7 @@ export default function ResourcesPage() {
                   type="range"
                   min="70"
                   max="95"
-                  defaultValue="85">className="w-full mt-2" />>
+                  defaultValue="85">className="w-full mt-2" />
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                   <span>70%</span>
                   <span>85%</span>

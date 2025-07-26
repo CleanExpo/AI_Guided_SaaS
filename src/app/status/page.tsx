@@ -41,12 +41,12 @@ export default function StatusPage() {
         <p className="text-xl text-gray-600">Current status of all our services</p>
       </div>
 
-      <Card className="glass"
-        <CardHeader className="glass"
-          <CardTitle className="glass"Service Status</CardTitle>
+      <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Service Status</CardTitle>
         </CardHeader>
-        <CardContent className="glass"
-          <div className="space-y-4">
+        <CardContent className="glass">
+            <div className="space-y-4">
             {services.map((service, index) => (
               <div key={index} className="glass flex items-center justify-between p-4  rounded-xl-lg">
           <div className="flex items-center gap-3">

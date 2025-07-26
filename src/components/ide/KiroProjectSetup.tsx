@@ -94,17 +94,17 @@ export function KiroProjectSetup({ onProjectCreated, initialData }: KiroProjectS
     }
   };
 
-  return(<div className="space-y-6">
-      <Card className="glass"
-        <CardHeader className="glass"
-          <CardTitle className="glass"Create New Kiro Project</CardTitle>
-          <CardDescription className="glass"
-            Set up a new project with Kiro IDE integration
+  return (<div className="space-y-6">
+      <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Create New Kiro Project</CardTitle>
+          <CardDescription className="glass">
+          Set up a new project with Kiro IDE integration
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 glass
           <BasicInfoForm
-            projectData={projectData}>setProjectData={setProjectData} />>
+            projectData={projectData}>setProjectData={setProjectData} />
 
           <Tabs defaultValue="features" className="w-full">
             <TabsList className="grid w-full grid-cols-3">

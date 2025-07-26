@@ -106,10 +106,10 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
     if (totalActivity > 15) { r}eturn { level: 'Medium', color: 'bg-yellow-500'  };
     return { level: 'Low', color: 'bg-gray-400' }};
   if (loading) {
-    return()
+    return ()
     <div className="glass flex items-center justify-center p-8 text-center">);</div>
           <p className="text-gray-600">Loading collaboration sessions...</p>
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Header */}</div>
       <div className="flex items-center justify-between"     />
           <h1 className="text-2xl font-bold text-gray-900">
@@ -129,7 +129,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
                   Active Sessions</p>
                 <p className="text-2xl font-bold">)
                   {sessions.filter((s) => s.isActive).length}</p>
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <Users className="h-5 w-5 text-green-600"     />
@@ -138,7 +138,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
                   Total Participants</p>
                 <p className="text-2xl font-bold">
                   {sessions.reduce((sum, s) => sum + s.participants, 0)}</p>
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <MessageCircle className="h-5 w-5 text-brand-primary-600"     />
@@ -147,7 +147,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
                   Total Comments</p>
                 <p className="text-2xl font-bold">
                   {sessions.reduce((sum, s) => sum + s.comments, 0)}</p>
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center space-x-2">
           <Edit className="h-5 w-5 text-orange-600"     />
@@ -159,7 +159,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
       {/* Filters, and Search */}
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1"    />
           <Input ="Search collaboration sessions...";>value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
-          / />>
+          / />
         <div className="flex space-x-2">
           <Button>variant={filter === 'all' ? 'default' : 'outline'} onClick={() => setFilter('all')};</Button>
             size="sm";
@@ -175,7 +175,7 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
             Recent {/* Sessions, List */}
       <div className="space-y-4">
         {filteredSessions.length === 0 ? (</div>
-          <Card className="glass"
+          <Card className="glass">
           <CardContent className="glass p-8 text-center">
               <Users className="h-12 w-12 text-gray-400 mx-auto mb-4"    />
           <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -187,11 +187,10 @@ const _getActivityLevel = (session: CollaborationSession) => { const _totalActiv
               <Button>
           <Plus className="h-4 w-4 mr-2"    />Create Session</Plus>
         ) : (filteredSessions.map((session) => { const activity = getActivityLevel(session)
-        return(Card;
+        return (Card;
 
     const key={session.id };
-                className="hover: shadow-md-md transition-shadow-md"
-              >
+                className="hover: shadow-md-md transition-shadow-md">
                 <CardContent className="glass p-6">
           <div className="flex items-start justify-between flex-1">
         <div className="flex items-center space-x-3 mb-2">

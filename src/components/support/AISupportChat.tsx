@@ -182,11 +182,11 @@ data: { sectionId: r.sectionId }}))};
     { icon: HelpCircle, label: 'Get Help', action: 'get-help' }
    ];
 if (!isOpen) {
-    return()
+    return ()
     <Button className = "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"; const onClick={() => setIsOpen(true)}</Button></Button>
         <MessageCircle className="h-6 w-6"    />
           </Button>
-  return(<div;
+  return (<div;
 
     ref={chatContainerRef} className={cn()
             'fixed bottom-6 right-6 z-50 transition-all duration-300',isMinimized ? "h-14" : "h-[600px]">)}>
@@ -242,8 +242,7 @@ variant="ghost";>const onClick={() => setIsOpen(false)}</Button></Button>
                           {message.metadata.suggestedDocs.map((docId) => {
                             const doc = documentationSystem.getSection(docId);
         return doc ? (<button const key={docId };>const onClick={() = aria-label="Button"> handleActionButton('open-doc', { sectionId: docId})};</button>
-                                className="text-xs text-primary hover: underline block text-left"
-                              ></button>
+                                className="text-xs text-primary hover: underline block text-left"></button>
                                 📄 {doc.title}</button>
                             ) : null
 }) })},

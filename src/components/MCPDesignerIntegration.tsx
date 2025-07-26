@@ -73,8 +73,7 @@ export const MCPDesignerIntegration: React.FC = () => {
           variant="outline"
           size="sm"
           onClick={() => setShowCustomizer(!showCustomizer)}
-          className="w-full mb-2"
-        >
+          className="w-full mb-2">
           <Settings className="h-4 w-4 mr-2" />
           Customize
         </Button>
@@ -136,16 +135,14 @@ export const MCPDesignerIntegration: React.FC = () => {
             variant="outline"
             size="sm"
             onClick={() => window.location.reload()}
-            className="flex-1"
-          >
+            className="flex-1">
             <RefreshCw className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsActive(false)}
-            className="flex-1"
-          >
+            className="flex-1">
             <Eye className="h-4 w-4" />
           </Button>
         </div>
@@ -155,8 +152,7 @@ export const MCPDesignerIntegration: React.FC = () => {
       {!showCustomizer && (
         <button
           onClick={() => setShowCustomizer(true)}
-          className="glass-button primary rounded-full p-3 shadow-lg hover:scale-110 transition-transform"
-        >
+          className="glass-button primary rounded-full p-3 shadow-lg hover:scale-110 transition-transform">
           <Palette className="h-6 w-6" />
         </button>
       )}

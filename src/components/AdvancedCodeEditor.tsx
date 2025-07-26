@@ -34,7 +34,7 @@ const defaultFiles: FileNode[]  = [
             type: 'file',
             language: 'typescript',
 content: `export default function Home() {
-  return(<main className="flex min-h-screen flex-col items-center justify-between p-24" role="main">, <h1>Welcome to your app</h1>)
+  return (<main className="flex min-h-screen flex-col items-center justify-between p-24" role="main">, <h1>Welcome to your app</h1>)
   )
 }`
   }
@@ -178,7 +178,7 @@ const renderFileTree = (nodes: FileNode[], level = 0): React.ReactNode => {
       </div>
     ))
 };
-  return(<div className="h-full flex flex-col glass">
+  return (<div className="h-full flex flex-col glass">
       {/* Header */}</div>
       <div className="glass -b px-4 py-2 flex items-center justify-between flex items-center gap-4"    />
           <h2 className="text-lg font-semibold flex items-center gap-2">

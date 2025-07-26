@@ -9,10 +9,10 @@ import { BarChart3, Users, TrendingUp, DollarSign, Activity, Zap, Target, ArrowU
 // Mock data for demonstration;
 
 const _generateMockData = () => ({ metrics: { totalUsers: Math.floor(Math.random() * 10000) + 5000, revenue: Math.floor(Math.random() * 50000) + 25000, conversionRate: (Math.random() * 5 + 2).toFixed(1, activeProjects: Math.floor(Math.random() * 100) + 50 },
-    trends: { users: Math.random() > 0.5 ? 'up' : 'down',
-    revenue: Math.random() > 0.3 ? 'up' : 'down',
-    conversion: Math.random() > 0.4 ? 'up' : 'down',
-projects: Math.random() > 0.6 ? 'up' : 'down'},
+    trends: { users: Math.random(> 0.5 ? 'up' : 'down',
+    revenue: Math.random(> 0.3 ? 'up' : 'down',
+    conversion: Math.random(> 0.4 ? 'up' : 'down',
+projects: Math.random(> 0.6 ? 'up' : 'down'},
     chartData: Array.from({ length: 7 }, (_, i) => ({ day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i],
     users: Math.floor(Math.random() * 1000) + 500,
 revenue: Math.floor(Math.random() * 5000) + 2000});
@@ -32,7 +32,7 @@ e,
 MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, value, change, trend, icon: Icon, delay }: MetricCardProps) {
   const [ref, inView] = useInView({ threshold: 0.1 triggerOnce: true)
     });
-  return(<motion.div;
+  return (<motion.div;
 
     ref={ref} initial={{ opacity: 0, y: 20 }
       const animate={inView ? { opacity: 1, y: 0 } : {}>const transition={{ duration: 0.6, delay }>
@@ -59,7 +59,7 @@ MetricCard({ title, value, change, trend, icon: Icon, delay }: MetricCardProps, 
   )}
 SimpleChart({ data }: { data }): { data }) {;
   const _maxValue = Math.max(...data.map((d) => d.users);
-        return()
+        return ()
     <div className="flex items-end justify-between h-32 gap-2">, {data.map((item, index) => (\n    </div>
         <motion.div;
 
@@ -106,17 +106,16 @@ break
 break
 };
     default: return 'text-gray-500'}}
-  return(<div className="space-y-4"    />
+  return (<div className="space-y-4"    />
           <AnimatePresence></AnimatePresence>)
         {activities.map((activity, index) => {
           const _Icon = getActivityIcon(activity.type);
-        return(motion.div;
+        return (motion.div;
 
     const key={activity.id};
               initial={{ opacity: 0, x: -20 } animate={{ opacity: 1, x: 0 }
               exit={{ opacity: 0, x: 20 } transition={ { duration: 0.3 delay: index * 0.1  };
-              className="flex items-center space-x-3 p-3 rounded-xl-lg glass/50 dark: glass-navbar/50 glass-modal-backdrop-blur-sm"
-            >)
+              className="flex items-center space-x-3 p-3 rounded-xl-lg glass/50 dark: glass-navbar/50 glass-modal-backdrop-blur-sm">)
               <div className={`p-2 rounded-full bg-gray-100, dark:bg-gray-700 ${getActivityColor(activity.type)}`}>``</div>
                 <Icon className="h-4 w-4"    />
           <div className="flex-1"     />

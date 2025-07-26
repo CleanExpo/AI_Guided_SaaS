@@ -11,10 +11,10 @@ interface PreviewPanelProps {
 export function PreviewPanel({ config }: PreviewPanelProps) {
   const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
 
-  return(<Card className="glass sticky top-4">
+  return (<Card className="glass sticky top-4">
       <CardHeader className="glass"
         <div className="flex items-center justify-between">
-          <CardTitle className="glass"Live Preview</CardTitle>
+          <CardTitle className="glass">Live Preview</CardTitle>
           <div className="flex gap-2">
             <Button)
               variant={previewMode === 'desktop' ? 'default' : 'outline'}>size="sm">onClick={() => setPreviewMode('desktop')}
@@ -29,8 +29,8 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="glass"
-        <div className={`border rounded-lg overflow-hidden ${>previewMode === 'mobile' ? 'max-w-xs mx-auto' : ''>}`}>
+      <CardContent className="glass">
+            <div className={`border rounded-lg overflow-hidden ${>previewMode === 'mobile' ? 'max-w-xs mx-auto' : ''>}`}>
           {/* Preview Header */}
           <div 
             className="glass p-4 text-white">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}}>
@@ -90,11 +90,11 @@ export function PreviewPanel({ config }: PreviewPanelProps) {
             <span className="text-gray-600">Colors</span>
             <div className="flex gap-2">
               <div 
-                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}} />>
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.primaryColor , backdropFilter: "blur(var(--glass-blur))"}} />
               <div 
-                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.secondaryColor , backdropFilter: "blur(var(--glass-blur))"}} />>
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.secondaryColor , backdropFilter: "blur(var(--glass-blur))"}} />
               <div 
-                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}} />>
+                className="w-6 h-6 rounded-lg">style={{ backgroundColor: config.accentColor , backdropFilter: "blur(var(--glass-blur))"}} />
             </div>
           </div>
           <div className="flex items-center justify-between text-sm">

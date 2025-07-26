@@ -10,7 +10,7 @@ interface FeaturesTabProps {
 }
 
 export function FeaturesTab({ features, setFeatures }: FeaturesTabProps) {
-  return(<div className="glass grid grid-cols-2 gap-4">)
+  return (<div className="glass grid grid-cols-2 gap-4">)
       {Object.entries(features).map(([key, value]) => (
         <div key={key} className="flex items-center justify-between">
           <Label htmlFor={key} className="text-sm">

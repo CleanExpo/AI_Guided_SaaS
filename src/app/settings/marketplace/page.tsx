@@ -52,12 +52,12 @@ export default function MarketplaceSettingsPage() {
           </TabsContent>
 
           <TabsContent value="templates" className="mt-6">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Installed Templates</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Installed Templates</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="text-center py-12">
+              <CardContent className="glass">
+            <div className="text-center py-12">
                   <Puzzle className="h-12 w-12 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
                     No templates installed yet
@@ -71,12 +71,12 @@ export default function MarketplaceSettingsPage() {
           </TabsContent>
 
           <TabsContent value="integrations" className="mt-6">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Active Integrations</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Active Integrations</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   <div className="glass flex items-center justify-between p-4  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-green-100 rounded-xl-lg flex items-center justify-center">

@@ -101,10 +101,10 @@ const backendInfo={ supabase: {
    ]
   }
 }
-  return(<div className="space-y-6"    />
+  return (<div className="space-y-6"    />
           <Card     / className="glass"
         <CardHeader    / className="glass"
-          <CardTitle className="glass"Backend Configuration</CardTitle>
+          <CardTitle className="glass">Backend Configuration</CardTitle>
           <CardDescription className="glass"</CardDescription>
             Choose and configure your preferred backend service</Card>
         <CardContent className="space-y-6 glass
@@ -113,7 +113,7 @@ const backendInfo={ supabase: {
 
 value={selectedBackend} onValueChange={setSelectedBackend};>className="glass grid grid-cols-1 md: grid-cols-3 gap-4">></RadioGroup>)
             {Object.entries(backendInfo).map(([key, info]) => {
-              const _Icon = info.icon, return(Label;
+              const _Icon = info.icon, return (Label;
 
     const key={key};
                   const htmlFor={key};
@@ -186,7 +186,7 @@ Alert></Alert>
     {/* Setup, Instructions */}
       <Card    / className="glass"
           <CardHeader     / className="glass"
-          <CardTitle className="glass"Setup Instructions</CardTitle>
+          <CardTitle className="glass">Setup Instructions</CardTitle>
         <CardContent    / className="glass"
           <div className="space-y-4">
             {selectedBackend === 'supabase'  && (

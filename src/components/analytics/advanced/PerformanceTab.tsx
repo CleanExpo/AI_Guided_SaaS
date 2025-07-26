@@ -23,11 +23,11 @@ export function PerformanceTab({ dashboardData }: PerformanceTabProps) {
     <div className="space-y-6">
       <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Page Load Times */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Page Load Times</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Page Load Times</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-3">
               {pageLoadMetrics.map((metric) => (
                 <div key={metric.label} className="flex items-center justify-between">
@@ -40,11 +40,11 @@ export function PerformanceTab({ dashboardData }: PerformanceTabProps) {
         </Card>
 
         {/* API Performance */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"API Performance</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">API Performance</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-3">
               {apiMetrics.map((metric) => (
                 <div key={metric.label} className="flex items-center justify-between">
@@ -59,11 +59,11 @@ export function PerformanceTab({ dashboardData }: PerformanceTabProps) {
         </Card>
 
         {/* Error Tracking */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Recent Errors</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Recent Errors</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-3">
               {dashboardData.top.errors.map((error: any, index: number) => (
                 <div key={index} className="flex items-center justify-between">

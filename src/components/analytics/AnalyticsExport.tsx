@@ -250,12 +250,12 @@ export default function AnalyticsExport() {
   };
 
   return (
-    <Card className="glass"
-      <CardHeader className="glass"
-        <CardTitle className="glass"Export Analytics</CardTitle>
+    <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Export Analytics</CardTitle>
       </CardHeader>
-      <CardContent className="glass"
-        <div className="space-y-6">
+      <CardContent className="glass">
+            <div className="space-y-6">
           {/* Format Selection */}
           <div>
             <Label>Export Format</Label>

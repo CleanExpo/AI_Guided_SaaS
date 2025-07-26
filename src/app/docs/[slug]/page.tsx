@@ -123,7 +123,7 @@ export default function DocPage({ params }: { params: { slug: string } }) {
           <p className="text-xl text-gray-600">{doc.description}</p>
         </div>
         
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass prose prose-lg max-w-none p-8">
             <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(doc.content ) }} />
           </CardContent>

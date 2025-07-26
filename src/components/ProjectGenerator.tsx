@@ -48,7 +48,7 @@ This project was generated using AI-Guided SaaS Builder with the ${config.person
     path: 'app/page.tsx')
     type: 'page',)
 content: `export default function Home() {``
-  return()
+  return ()
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100"    / role="main">);</main>
         <div className="text-center"    />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -75,7 +75,7 @@ const inter = Inter({ subsets: ['latin'])
 export const metadata: Metadata={ title: '${config.name}',
   description: '${config.description}'};
     export default function RootLayout() {
-  return(html lang="en"   />, <body className={inter.className}>{children}</body>)
+  return (html lang="en"   />, <body className={inter.className}>{children}</body>)
   }`    })
   // Generate global CSS
   files.push({ name: 'globals.css',
@@ -152,7 +152,7 @@ const files = generateProjectFiles(config);
 }
     generateFiles()
 }, [config, onFilesGenerated])
-  return(<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+  return (<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
           <Card className="w-full max-w-2xl"     / className="glass
         <CardHeader className="text-center"    / className="glass
           <CardTitle className="text-2xl font-bold glass
@@ -181,7 +181,7 @@ const files = generateProjectFiles(config);
           <div className="space-y-3">)
             {generationSteps.map((step, index) => {
               const _isCompleted = completedSteps.includes(step.id); const _isCurrent = currentStep === index && isGenerating; const _IconComponent = step.icon;
-              return(</div>
+              return (</div>
         <div;
 
 const key={step.id};

@@ -15,8 +15,8 @@ interface MarketplaceStatsProps {
 export function MarketplaceStats({ stats }: MarketplaceStatsProps) {
   return (
     <div className="glass grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Total Items</p>
@@ -27,8 +27,8 @@ export function MarketplaceStats({ stats }: MarketplaceStatsProps) {
         </CardContent>
       </Card>
       
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Free Items</p>
@@ -39,8 +39,8 @@ export function MarketplaceStats({ stats }: MarketplaceStatsProps) {
         </CardContent>
       </Card>
       
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Avg Rating</p>
@@ -51,8 +51,8 @@ export function MarketplaceStats({ stats }: MarketplaceStatsProps) {
         </CardContent>
       </Card>
       
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-600">Total Downloads</p>

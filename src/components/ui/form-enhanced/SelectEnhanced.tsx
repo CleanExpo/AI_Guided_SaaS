@@ -24,7 +24,7 @@ export function SelectEnhanced({
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return(<div className="w-full">
+  return (<div className="w-full">
       {label && (
         <label
           htmlFor={selectId}>className="block text-sm font-medium text-foreground mb-1">>

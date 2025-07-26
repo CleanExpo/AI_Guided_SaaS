@@ -28,15 +28,15 @@ export default function DesignSystemDemoPage() {
         
         <div className="glass grid gap-8">
           {/* Color Palette */}
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center glass
                 <Palette className="h-5 w-5 mr-2" />
                 Color Palette
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            <CardContent className="glass">
+            <div className="glass grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                 <div className="space-y-2">
                   <div className="w-full h-16 glass-button primary rounded-lg"></div>
                   <p className="text-sm font-medium">Primary</p>
@@ -82,15 +82,15 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Typography */}
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center glass
                 <Type className="h-5 w-5 mr-2" />
                 Typography
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-6">
+            <CardContent className="glass">
+            <div className="space-y-6">
                 <div>
                   <h1 className="text-4xl font-bold text-gray-900">Heading 1</h1>
                   <p className="text-sm text-gray-500">text-4xl font-bold</p>
@@ -120,15 +120,15 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Buttons */}
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center glass
                 <Zap className="h-5 w-5 mr-2" />
                 Buttons
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 <div className="glass flex flex-wrap gap-4">
                   <Button>Primary Button</Button>
                   <Button variant="secondary">Secondary</Button>
@@ -150,15 +150,15 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Form Elements */}
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center glass
                 <Layout className="h-5 w-5 mr-2" />
                 Form Elements
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4 max-w-md">
+            <CardContent className="glass">
+            <div className="space-y-4 max-w-md">
                 <Input ="Default input" />
                 <Input ="Disabled input" disabled />
                 <Input type="email" ="Email input" />
@@ -168,12 +168,12 @@ export default function DesignSystemDemoPage() {
           </Card>
 
           {/* Badges */}
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Badges</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Badges</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="flex flex-wrap gap-2">
+            <CardContent className="glass">
+            <div className="flex flex-wrap gap-2">
                 <Badge>Default</Badge>
                 <Badge variant="secondary">Secondary</Badge>
                 <Badge variant="outline">Outline</Badge>

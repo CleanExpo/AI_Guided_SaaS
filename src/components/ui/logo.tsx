@@ -112,7 +112,7 @@ export function LogoSVG({)
     lg: 64
 xl: 96 }
   const _dim = dimensions[size];
-  return(<svg
+  return (<svg
 
 width={dim} height={dim};
       viewBox="0 0 100 100";

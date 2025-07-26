@@ -20,7 +20,7 @@ export default function ConfigPage() {
     { id: 'users', label: 'User Management', icon: Users }
   ];
 
-  return(<div className="min-h-screen glass py-8">
+  return (<div className="min-h-screen glass py-8">
 
 
       <div className="container mx-auto px-4 max-w-6xl">
@@ -39,8 +39,8 @@ export default function ConfigPage() {
 
 
           <div className="lg:col-span-1">
-            <Card className="glass"
-              <CardHeader className="glass">
+            <Card className="glass">
+          <CardHeader className="glass">
 
 
                 <CardTitle className="text-lg glassConfiguration</CardTitle>
@@ -71,14 +71,14 @@ export default function ConfigPage() {
               <div className="space-y-6">
 
 
-                <Card className="glass"
-                  <CardHeader className="glass">
+                <Card className="glass">
+          <CardHeader className="glass">
 
 
-                    <CardTitle className="glass"System Status</CardTitle>
+                    <CardTitle className="glass">System Status</CardTitle>
                   </CardHeader>
-                  <CardContent className="glass"
-                    <div className="glass grid gap-4 md:grid-cols-3">
+                  <CardContent className="glass">
+            <div className="glass grid gap-4 md:grid-cols-3">
 
 
                       <div className="flex items-center space-x-2">
@@ -103,14 +103,14 @@ export default function ConfigPage() {
                   </CardContent>
                 </Card>
                 
-                <Card className="glass"
-                  <CardHeader className="glass">
+                <Card className="glass">
+          <CardHeader className="glass">
 
 
-                    <CardTitle className="glass"Quick Actions</CardTitle>
+                    <CardTitle className="glass">Quick Actions</CardTitle>
                   </CardHeader>
-                  <CardContent className="glass"
-                    <div className="flex flex-wrap gap-2">
+                  <CardContent className="glass">
+            <div className="flex flex-wrap gap-2">
 
 
                       <Button variant="outline" size="sm">Restart Services</Button>
@@ -124,9 +124,9 @@ export default function ConfigPage() {
             )}
             
             {activeSection !== 'overview' && (
-              <Card className="glass"
-                <CardHeader className="glass"
-                  <CardTitle className="flex items-center capitalize glass>
+              <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center capitalize glass>
 
 
                     <Settings className="h-5 w-5 mr-2" />

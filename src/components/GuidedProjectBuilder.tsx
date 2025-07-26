@@ -233,7 +233,7 @@ integrations: formData.integrations || []
 } catch (error) {
       logger.error('Error processing, project:', error)} finally {
       setIsProcessing(false)}
-  return(<div className="glass max-w-4xl mx-auto p-6">
+  return (<div className="glass max-w-4xl mx-auto p-6">
       {/* Progress, Bar */}</div>
       <div className="mb-8 flex items-center justify-between mb-2"    />
           <span className="text-sm text-muted-foreground">Step {currentStep + 1} of {steps.length}</span>)

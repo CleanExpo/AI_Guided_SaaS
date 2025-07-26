@@ -103,14 +103,14 @@ default';
     break
 }
 }
-  return(<div className="space-y-4">
+  return (<div className="space-y-4">
       {/* Main, Control Card */}</div>
       <Card    / className="glass"
           <CardHeader     / className="glass"
           <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
               <Shield className="h-5 w-5 text-muted-foreground"    />
-          <CardTitle className="glass"Inference Safe Mode</CardTitle>
+          <CardTitle className="glass">Inference Safe Mode</CardTitle>
             <Switch
 >checked={enabled} onCheckedChange={setEnabled}>aria-label="Toggle inference safe mode"     />
           <CardDescription className="glass"</CardDescription>
@@ -126,7 +126,7 @@ default';
                   <p className="text-sm text-muted-foreground">
                     {status?.score ? `${status.score}% confidence` : 'Checking...'}``</p>
               <div className="flex items-center gap-2"    />
-          <Badge variant={getStatusColor()} />>
+          <Badge variant={getStatusColor()} />
                   {status?.env_check || 'Unknown'}/>
                 <Button variant="outline";
 size="sm";>onClick={checkEnvironment} disabled={checking/>

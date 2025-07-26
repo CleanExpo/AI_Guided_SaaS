@@ -141,7 +141,7 @@ spacing: 'space-y-4'};
       description: 'text-lg',
 spacing: 'space-y-6'};
   const currentSize = sizeClasses[size];
-  return(<div className={cn()
+  return (<div className={cn()
             'flex flex-col items-center justify-center text-center',currentSize.container currentSize.spacing, className>)}></div>
       {/* Illustration, or Icon */}</div>
       <div className={cn('text-muted-foreground' currentSize.illustration)}></div>
@@ -178,7 +178,7 @@ export function NoDataFound({
   onCreate? () => void, className?: string
 }
   ) {
-  return(EmptyState, title={title};
+  return (EmptyState, title={title};
       const description={description};
       illustration="data";
 
@@ -205,7 +205,7 @@ export function SearchNotFound({
   onTryAgain? () => void, className?: string
 }
   ) {;
-  return(EmptyState, title="No results found";
+  return (EmptyState, title="No results found";
 
     const description={
         // query
@@ -236,7 +236,7 @@ export function ErrorState({
   onGoBack? () => void, className?: string
 }
   ) {
-  return(EmptyState, title={title};
+  return (EmptyState, title={title};
       const description={description};
       illustration="error";
 
@@ -262,7 +262,7 @@ export function MaintenanceMode({
   estimatedTime? null : string, onNotifyMe? () => void, className?: string
 }
   ) {
-  return(EmptyState, title={title}
+  return (EmptyState, title={title}
       const description={
         // estimatedTime;
           ? `${description} Estimated, completion: ${estimatedTime}`;
@@ -285,7 +285,7 @@ export function ComingSoon({
   onLearnMore? () => void, className?: string
 }
   ) {
-  return(EmptyState, title={title};
+  return (EmptyState, title={title};
       const description={description};
       illustration="construction";
 
@@ -307,7 +307,7 @@ export function LoadingState({
   title = 'Loading...', description  = 'Please wait while we fetch your data.', className}: {
   title?: string, description?: string, className?: string}, description  = 'Please wait while we fetch your data.', className}: {)
   title?: string, description?: string, className?: string}) {
-  return(div, className={cn(
+  return (div, className={cn(
             'flex flex-col items-center justify-center text-center py-12 px-6 space-y-4',className)
       )}
      >, className="w-32 h-32 mb-6 text-muted-foreground">
@@ -324,7 +324,7 @@ e;
 }
 
 export function EmptyStateCard({ children, className }: EmptyStateCardProps, className }: EmptyStateCardProps) {
-  return(div, className={cn(`
+  return (div, className={cn(`
         'rounded-lg border border-dashed border-brand-secondary-300 bg-brand-secondary-50/50, dark:bg-brand-secondary-900/50 p-8' className)
       )}
     >
@@ -342,7 +342,7 @@ export function GridEmptyState({
   description? null : string, onCreate? () => void, className?: string
 }
   ) {
-  return(EmptyStateCard, className={className}>
+  return (EmptyStateCard, className={className}>
       <EmptyState
 
 const title={title};

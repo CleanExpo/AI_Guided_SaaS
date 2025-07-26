@@ -36,11 +36,11 @@ export function EngagementTab({ dashboardData }: EngagementTabProps) {
         </Card>
 
         {/* Feature Usage */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Feature Usage</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Feature Usage</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-3">
               {dashboardData.top.features.map((feature: any, index: number) => (
                 <div key={index}>
@@ -50,7 +50,9 @@ export function EngagementTab({ dashboardData }: EngagementTabProps) {
                   </div>
                   <div className="w-full glass-sidebar rounded-lg-full h-2">
                     <div 
-                      className="glass-button primary h-2 rounded-lg-full" >style={{ width: `${(feature.usage / maxFeatureUsage) * 100}%` }}  />>
+                      className="glass-button primary h-2 rounded-lg-full"
+                      style={{ width: `${(feature.usage / maxFeatureUsage) * 100}%` }}
+                    />
                   </div>
                 </div>
               ))}

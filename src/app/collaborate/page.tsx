@@ -46,7 +46,7 @@ const mockProjects = [
   ];
   
   if (status === 'loading') {
-    return(<div className="flex items-center justify-center min-h-screen">
+    return (<div className="flex items-center justify-center min-h-screen">
 
 
         <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600"></div>
@@ -54,7 +54,7 @@ const mockProjects = [
     );
   }
   
-  return(<div className="min-h-screen glass">
+  return (<div className="min-h-screen glass">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
 

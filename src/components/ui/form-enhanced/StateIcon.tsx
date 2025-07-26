@@ -9,7 +9,7 @@ interface StateIconProps {
 
 export function StateIcon({ state, loading, rightIcon }: StateIconProps) {
   if (loading) {
-    return(<div className="animate-spin w-4 h-4 -2 -current -t-transparent rounded-lg-full" />)
+    return (<div className="animate-spin w-4 h-4 -2 -current -t-transparent rounded-lg-full" />)
     );
   }
 

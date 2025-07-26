@@ -122,12 +122,12 @@ const fullData = await fullResponse.json();
   useEffect(() => {
     fetchConfiguration()}, []);
   if (loading) {
-    return(<div className="glass flex items-center justify-center p-8"    />
+    return (<div className="glass flex items-center justify-center p-8"    />
           <div className="text-center"     />
           <Progress value={66} className="w-64 mb-4"    />
           <p className="text-sm text-muted-foreground">Loading configuration...</p>)
   if (error) {;
-    return()
+    return ()
     <Alert className="m-4"    />);</Alert>
           Error loading,
     configuration: { error }</AlertDescription>
@@ -143,7 +143,7 @@ size="sm";>className="ml-4";>></Button>
 const _totalFeaturesCount = features ? Object.keys(features).length : 0
   
 const _featureCompletionPercentage = totalFeaturesCount > 0 ? (enabledFeaturesCount / totalFeaturesCount) * 100 : 0
-  return(<div className = "container mx-auto p-6 space-y-6"    />
+  return (<div className = "container mx-auto p-6 space-y-6"    />
           <div className="flex justify-between items-center"     />
         <div    />
           <h1 className="text-3xl font-bold">Platform Configuration</h1>
@@ -161,7 +161,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <CardHeader className="pb-2"    / className="glass
           <CardTitle className="text-sm font-medium glassStatus</CardTitle>
           <CardContent    / className="glass"
-          <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'} />>
+          <Badge variant={configData?.status === 'active' ? 'default' : 'destructive'} />
               {configData?.status || 'Unknown'}/>
         <Card    / className="glass"
           <CardHeader className="pb-2"     / className="glass
@@ -174,7 +174,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <CardHeader className="pb-2"    / className="glass
           <CardTitle className="text-sm font-medium glassPrimary AI Provider</CardTitle>
           <CardContent    / className="glass"
-          <Badge variant="outline" />>
+          <Badge variant="outline" />
               {configData?.aiProviders.primary || 'Not configured'}/>
         <Card    / className="glass"
           <CardHeader className="pb-2"     / className="glass
@@ -193,7 +193,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
         <TabsContent value="features", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Feature Flags</CardTitle>
+          <CardTitle className="glass">Feature Flags</CardTitle>
               <CardDescription className="glass"</CardDescription>
                 Current status of platform features and experimental capabilities</Card>
             <CardContent className="glass"</CardContent>
@@ -203,7 +203,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                     <div key={feature} className="flex items-center justify-between p-3  rounded-xl-lg"    />
           <span className="font-medium">
                         {feature.replace(/([A-Z])/g, ' $1').replace(/^./, str: any => str.toUpperCase())}</span>
-                      <Badge variant={enabled ? 'default' : 'secondary'} />>
+                      <Badge variant={enabled ? 'default' : 'secondary'} />
                         {enabled ? 'Enabled' : 'Disabled'}/>
                   ))}
               )}
@@ -267,7 +267,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
         <TabsContent value="framework", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Framework Configuration</CardTitle>
+          <CardTitle className="glass">Framework Configuration</CardTitle>
               <CardDescription className="glass"Development framework and build settings</CardDescription>
             <CardContent className="glass"</CardContent>
               {fullConfig && (
@@ -283,17 +283,17 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">TypeScript:</span>
-                      <Badge variant={fullConfig.framework.typescript ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.framework.typescript ? 'default' : 'secondary'} />
                         {fullConfig.framework.typescript ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Tailwind: CSS,</span>
-                      <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.framework.tailwind ? 'default' : 'secondary'} />
                         {fullConfig.framework.tailwind ? 'Enabled' : 'Disabled'}/>
       )}
         <TabsContent value="security", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Security Configuration</CardTitle>
+          <CardTitle className="glass">Security Configuration</CardTitle>
               <CardDescription className="glass"Security features and protection settings</CardDescription>
             <CardContent className="glass"</CardContent>
               {fullConfig && (
@@ -302,7 +302,7 @@ Button; onClick={reloadConfiguration} disabled={reloading};
           <div className="space-y-3"     />
                     <div className="flex justify-between"    />
           <span className="font-medium">Rate: Limiting,</span>
-                      <Badge variant={fullConfig.security.rateLimitEnabled ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.security.rateLimitEnabled ? 'default' : 'secondary'} />
                         {fullConfig.security.rateLimitEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Auth: Provider,</span>
@@ -310,17 +310,17 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">CSP:</span>
-                      <Badge variant={fullConfig.security.cspEnabled ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.security.cspEnabled ? 'default' : 'secondary'} />
                         {fullConfig.security.cspEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">DDoS: Protection,</span>
-                      <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.security.ddosProtection ? 'default' : 'secondary'} />
                         {fullConfig.security.ddosProtection ? 'Enabled' : 'Disabled'}/>
       )}
         <TabsContent value="performance", className="space-y-4"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Performance Configuration</CardTitle>
+          <CardTitle className="glass">Performance Configuration</CardTitle>
               <CardDescription className="glass"Caching, monitoring, and optimization settings</CardDescription>
             <CardContent className="glass"</CardContent>
               {fullConfig && (
@@ -332,16 +332,16 @@ Button; onClick={reloadConfiguration} disabled={reloading};
                       <Badge variant="outline">{fullConfig.performance.cacheStrategy}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">CDN:</span>
-                      <Badge variant={fullConfig.performance.cdnEnabled ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.performance.cdnEnabled ? 'default' : 'secondary'} />
                         {fullConfig.performance.cdnEnabled ? 'Enabled' : 'Disabled'}/>
                   <div className="space-y-3"    />
           <div className="flex justify-between"     />
                       <span className="font-medium">APM:</span>
-                      <Badge variant={fullConfig.performance.apmEnabled ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.performance.apmEnabled ? 'default' : 'secondary'} />
                         {fullConfig.performance.apmEnabled ? 'Enabled' : 'Disabled'}/>
                     <div className="flex justify-between"    />
           <span className="font-medium">Analytics:</span>
-                      <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'} />>
+                      <Badge variant={fullConfig.performance.analyticsEnabled ? 'default' : 'secondary'} />
                         {fullConfig.performance.analyticsEnabled ? 'Enabled' : 'Disabled'}/>
       )});
 </CardContent>

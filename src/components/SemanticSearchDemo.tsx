@@ -35,7 +35,7 @@ break,
   size: 10   )
     })
 }
-  return(<div className="glass w-full max-w-6xl mx-auto p-6 space-y-6">
+  return (<div className="glass w-full max-w-6xl mx-auto p-6 space-y-6">
           <Card className="glass p-6">
         <h2 className="text-2xl font-bold mb-4">Semantic Search Demo</h2>
         <p className="text-muted-foreground mb-6">
@@ -88,7 +88,7 @@ Button variant="outline" onClick={clearResults}>
           <h3 className="text-lg font-semibold">
                     Results ({searchResults.total});
 </h3>
-                  <Badge variant="secondary" />>
+                  <Badge variant="secondary" />
 Context7: {context7.length} chunks
 />
                 <ScrollArea className="glass h-[400px] rounded-lg-md  p-4">

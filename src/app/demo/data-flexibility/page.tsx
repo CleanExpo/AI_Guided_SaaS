@@ -43,7 +43,7 @@ export default function DataFlexibilityPage() {
     }
   ];
 
-  return(<div className="min-h-screen glass py-8">
+  return (<div className="min-h-screen glass py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -56,12 +56,12 @@ export default function DataFlexibilityPage() {
         
         <div className="glass grid gap-6 lg:grid-cols-2">
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Available Data Sources</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Available Data Sources</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">)
+              <CardContent className="glass">
+            <div className="space-y-4">)
                   {dataSources.map((source) => (
                     <div key={source.id} className="glass flex items-center space-x-4 p-4  rounded-xl-lg">
                       <div className="w-12 h-12 bg-blue-100 rounded-xl-lg flex items-center justify-center">
@@ -82,12 +82,12 @@ export default function DataFlexibilityPage() {
           </div>
           
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Sample Data Preview</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Sample Data Preview</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   {mockData.map((item) => (
                     <div key={item.id} className="flex items-center justify-between p-3 glass rounded-xl-lg">
                       <div>

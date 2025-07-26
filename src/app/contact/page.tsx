@@ -26,9 +26,9 @@ export default function ContactPage() {
         
         <div className="glass grid gap-8 lg:grid-cols-2">
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Send us a message</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Send us a message</CardTitle>
               </CardHeader>
               <CardContent className="glass"
                 <form className="space-y-4" role="form">
@@ -46,8 +46,8 @@ export default function ContactPage() {
           </div>
           
           <div className="space-y-6">
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Mail className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -59,8 +59,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Phone className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -72,8 +72,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <MapPin className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
@@ -87,8 +87,8 @@ export default function ContactPage() {
               </CardContent>
             </Card>
             
-            <Card className="glass"
-              <CardContent className="glass p-6">
+            <Card className="glass">
+          <CardContent className="glass p-6">
                 <div className="flex items-start space-x-4">
                   <Clock className="h-6 w-6 text-blue-600 mt-1" />
                   <div>

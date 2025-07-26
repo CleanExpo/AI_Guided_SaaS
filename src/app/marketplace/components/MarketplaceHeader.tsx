@@ -107,7 +107,7 @@ export function MarketplaceHeader({
 
       {/* Stats Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -119,7 +119,7 @@ export function MarketplaceHeader({
           </CardContent>
         </Card>
         
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -131,7 +131,7 @@ export function MarketplaceHeader({
           </CardContent>
         </Card>
         
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -143,7 +143,7 @@ export function MarketplaceHeader({
           </CardContent>
         </Card>
         
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>

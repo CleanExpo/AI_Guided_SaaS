@@ -45,7 +45,7 @@ const communityChannels = [
 ];
 
 export default function CommunityPage() {
-  return(<div className="min-h-screen glass py-8">
+  return (<div className="min-h-screen glass py-8">
 
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}

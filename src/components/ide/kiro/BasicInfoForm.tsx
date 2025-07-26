@@ -40,8 +40,7 @@ export function BasicInfoForm({ projectData, setProjectData }: BasicInfoFormProp
             <Button
               key={type.value}
               variant={projectData.type === type.value ? 'default' : 'outline'}>size="sm">onClick={() => setProjectData({ ...projectData, type: type.value as any })}
-              className="flex flex-col items-center gap-1 h-auto py-3"
-            >
+              className="flex flex-col items-center gap-1 h-auto py-3">
               <type.icon className="h-5 w-5" />
               <span className="text-xs">{type.label}</span>
             </Button>

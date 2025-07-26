@@ -109,7 +109,7 @@ export default function ShowcaseLandingPage() {
     <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
         const Icon = persona.icon;
-        return(<motion.div
+        return (<motion.div
             key={persona.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -172,8 +172,7 @@ export default function ShowcaseLandingPage() {
             <Button 
               size="sm" 
               variant="ghost">onClick={() => setIsPlaying(!isPlaying)}
-              className="text-white hover:bg-white/10"
-            >
+              className="text-white hover:bg-white/10">
               {isPlaying ? (
                 <Pause className="w-4 h-4" />
               ) : (
@@ -183,8 +182,7 @@ export default function ShowcaseLandingPage() {
             <Button
               size="sm"
               variant="ghost">onClick={() => setMemoryUsage(42)}
-              className="text-white hover:bg-white/10"
-            >
+              className="text-white hover:bg-white/10">
               <RefreshCw className="w-4 h-4" />
             </Button>
           </div>
@@ -367,7 +365,7 @@ export default function ShowcaseLandingPage() {
     }
   };
 
-  return(<div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
+  return (<div className="min-h-screen bg-gradient-to-br from-slate-900 via-brand-primary-900 to-slate-900">
       {/* Hero Section */}
       <section className="relative py-20 px-4 text-center">
         <div className="max-w-6xl mx-auto">
@@ -424,7 +422,7 @@ export default function ShowcaseLandingPage() {
             <div className="lg:col-span-1 space-y-3">
               {liveFeatures.map((feature) => {
                 const Icon = feature.icon;
-                return(<motion.button
+                return (<motion.button
                     key={feature.demo}
                     className={`w-full p-4 rounded-lg text-left transition-all ${
                       activeDemo === feature.demo

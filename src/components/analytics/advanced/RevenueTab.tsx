@@ -36,11 +36,11 @@ export function RevenueTab({ userTrendData }: RevenueTabProps) {
       </div>
 
       {/* Revenue Growth Chart */}
-      <Card className="glass"
-        <CardHeader className="glass"
-          <CardTitle className="glass"Revenue Growth</CardTitle>
+      <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Revenue Growth</CardTitle>
         </CardHeader>
-        <CardContent className="glass"
+        <CardContent className="glass">
           <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={userTrendData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -51,7 +51,9 @@ export function RevenueTab({ userTrendData }: RevenueTabProps) {
                 type="monotone" 
                 dataKey="revenue" 
                 stroke="#10b981" 
-                fill="#10b98133">strokeWidth={2} />>
+                fill="#10b98133"
+                strokeWidth={2}
+              />
             </AreaChart>
           </ResponsiveContainer>
         </CardContent>

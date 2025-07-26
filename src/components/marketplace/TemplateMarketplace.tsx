@@ -84,11 +84,11 @@ const filteredTemplates = templates.filter((template) => {
     return matchesSearch && matchesCategory
 });
   if (isLoading) {
-    return()
+    return ()
     <div className="glass flex items-center justify-center p-8">);</div>
         <span className="ml-2">Loading templates...</span>
       )}
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Search, and Filters */}</div>
       <div className="glass flex flex-col sm:flex-row gap-4 flex-1 relative"    />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"    />

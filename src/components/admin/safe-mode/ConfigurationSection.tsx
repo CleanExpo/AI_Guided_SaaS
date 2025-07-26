@@ -14,7 +14,7 @@ export function ConfigurationSection({
   setBatchConfig)
   isProcessing)
 }: ConfigurationSectionProps) {
-  return(<Card className="glass p-4">
+  return (<Card className="glass p-4">
       <h3 className="font-medium text-gray-700 mb-3">
         ⚙️ Batch Configuration
       </h3>

@@ -166,7 +166,7 @@ const user = await prisma.user.create({
 });`
   };
 
-  return(<div className="min-h-screen glass py-12 px-4">
+  return (<div className="min-h-screen glass py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -196,9 +196,9 @@ const user = await prisma.user.create({
           </TabsList>
 
           <TabsContent value="instant" className="mt-8">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="flex items-center justify-between glass
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center justify-between glass
                   <span>5-Minute Setup</span>
                   <Badge variant="outline">
                     <Zap className="h-3 w-3 mr-1" />
@@ -206,8 +206,8 @@ const user = await prisma.user.create({
                   </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-6">)
+              <CardContent className="glass">
+            <div className="space-y-6">)
                   {instantSetupSteps.map((step, index) => (
                     <div key={step.id} className="glass flex gap-4">
                       <div className="flex-shrink-0">
@@ -260,9 +260,9 @@ const user = await prisma.user.create({
           </TabsContent>
 
           <TabsContent value="manual" className="mt-8">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Manual Configuration</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Manual Configuration</CardTitle>
               </CardHeader>
               <CardContent className="glass"
                 <p className="text-gray-600 mb-6">
@@ -298,15 +298,15 @@ const user = await prisma.user.create({
 
         {/* Code Examples */}
         <div className="glass grid md:grid-cols-2 gap-6 mb-12">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Bot className="h-5 w-5" />
                 AI Integration
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass-navbar rounded-xl-lg p-4">
+            <CardContent className="glass">
+            <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.ai}</code>
                 </pre>
@@ -314,15 +314,15 @@ const user = await prisma.user.create({
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Users className="h-5 w-5" />
                 Authentication
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass-navbar rounded-xl-lg p-4">
+            <CardContent className="glass">
+            <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.auth}</code>
                 </pre>
@@ -330,15 +330,15 @@ const user = await prisma.user.create({
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <CreditCard className="h-5 w-5" />
                 Payments
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass-navbar rounded-xl-lg p-4">
+            <CardContent className="glass">
+            <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.payments}</code>
                 </pre>
@@ -346,15 +346,15 @@ const user = await prisma.user.create({
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="flex items-center gap-2 glass
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="flex items-center gap-2 glass
                 <Package className="h-5 w-5" />
                 Database
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass-navbar rounded-xl-lg p-4">
+            <CardContent className="glass">
+            <div className="glass-navbar rounded-xl-lg p-4">
                 <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
                   <code>{codeExamples.database}</code>
                 </pre>

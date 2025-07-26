@@ -129,15 +129,15 @@ export default function DocsPage() {
         <div className="space-y-8">
           {docCategories.map((category) => (
             <Card key={category.title} className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="flex items-center glass
+              <CardHeader className="glass">
+            <CardTitle className="flex items-center glass
                   <category.icon className="h-6 w-6 mr-3 text-blue-600" />
                   {category.title}
                 </CardTitle>
                 <p className="text-gray-600">{category.description}</p>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="glass grid gap-4 md:grid-cols-3">
+              <CardContent className="glass">
+            <div className="glass grid gap-4 md:grid-cols-3">
                   {category.docs.map((doc) => (
                     <Link key={doc.slug} href={`/docs/${doc.slug}`}>
                       <div className="p-4  rounded-xl-lg hover:glass transition-colors cursor-pointer">

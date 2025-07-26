@@ -94,10 +94,10 @@ break
     return `${minutes}m`
 }
   if (isLoading) {
-    return(<div className="flex items-center justify-center min-h-[400px]">, <RefreshCw className="h-8 w-8 animate-spin text-primary"    />
+    return (<div className="flex items-center justify-center min-h-[400px]">, <RefreshCw className="h-8 w-8 animate-spin text-primary"    />
           </div>)
   if (error) {;
-    return(<Card className="-red-200 bg-red-50 glass">
+    return (<Card className="-red-200 bg-red-50 glass">
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="text-red-800 glassHealth Check Error</CardTitle>">
         <CardContent className="glass">
@@ -108,13 +108,13 @@ const onClick={fetchHealthData};
             className="mt-4";>variant="outline";>></Button>
             Retry</Button>)
   if (!healthData) {r}eturn null;
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Header */}</div>
       <div className="glass flex items-center justify-between flex items-center gap-4">
           <div className="flex items-center gap-2">)
             {getStatusIcon(healthData.status)}</div>
             <h2 className="text-2xl font-bold">System Health</h2>
-          <Badge className={getStatusColor(healthData.status)} />>
+          <Badge className={getStatusColor(healthData.status)} />
             {healthData.status.toUpperCase()}/>
         <div className="glass flex items-center gap-4 flex items-center gap-2"    />
           <input type="checkbox"
@@ -236,7 +236,7 @@ onClick={fetchHealthData} disabled={isRefreshing};
         <TabsContent value="details">
           <Card className="glass"</Card>
             <CardHeader className="glass">
-              <CardTitle className="glass"All Health Checks</CardTitle>
+              <CardTitle className="glass">All Health Checks</CardTitle>
               <CardDescription className="glass"</CardDescription>
                 Detailed view of all system health checks</CardDescription>
             <CardContent className="glass">
@@ -246,7 +246,7 @@ onClick={fetchHealthData} disabled={isRefreshing};
           <h4 className="font-medium flex items-center gap-2">
                         {getStatusIcon(check.status)},
     {check.name}</h4>
-                      <Badge className={getStatusColor(check.status)} />>
+                      <Badge className={getStatusColor(check.status)} />
                         {check.status}/>
                     {check.error  && (
 p className="text-sm text-red-600 mt-2">{check.error}</p>

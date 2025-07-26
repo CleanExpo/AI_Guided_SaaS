@@ -39,7 +39,7 @@ export default function MarketplacePage() {
     });
   };
 
-  return(<div className="min-h-screen glass py-8 px-4">
+  return (<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="flex items-center justify-between mb-8">
@@ -62,7 +62,7 @@ export default function MarketplacePage() {
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
           selectedFilter={selectedFilter}
-          onFilterChange={setSelectedFilter}>stats={stats} />>
+          onFilterChange={setSelectedFilter}>stats={stats} />
 
         {/* Stats */}
         <MarketplaceStats stats={stats} />

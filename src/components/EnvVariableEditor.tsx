@@ -160,7 +160,7 @@ description?: existing.description })}
     break
 };
       default: return 'bg-green-100 text-green-700'}}
-  return(<Card className="glass p-6">
+  return (<Card className="glass p-6">
           <div className="mb-6 flex items-center justify-between mb-4"     />
           <div>
           <h3 className="text-lg font-semibold flex items-center gap-2">
@@ -208,7 +208,7 @@ accept=".env, .env.local";
                   ="VARIABLE_NAME";
 
     disabled={readOnly} className={cn(validationErrors[variable.key] && "border-red-500")
-                  )/ />>
+                  )/ />
               {/* Value */}
               <div className="col-span-6">
           <label className="text-sm font-medium mb-1 block">Value</label>
@@ -220,8 +220,7 @@ accept=".env, .env.local";
                     )/>
                   {variable.type !== 'public'  && (/Input>
                     <button type = "button"; const onClick={() = aria-label="Button"> toggleShowSecret(variable.key)}</button>
-                      className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600"
-                    ></button>
+                      className="absolute right-2 top-2.5 text-gray-400 hover: text-gray-600"></button>
                       {showSecrets[variable.key] ? (</button>
                         <EyeOff className="h-4 w-4"     />
                       ) : (</EyeOff>
@@ -249,7 +248,7 @@ accept=".env, .env.local";
   },
     {validationErrors[variable.key]  && (p className="text-sm text-red-500 mt-1">{validationErrors[variable.key]}</p>
               <div className="flex items-center gap-2">
-          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))} />>
+          <Badge className={cn("text-xs" getTypeBadgeColor(variable.type))} />
                   {getTypeIcon(variable.type)}/>
                   <span className="ml-1">{variable.type}</span>
                 {variable.required  && (

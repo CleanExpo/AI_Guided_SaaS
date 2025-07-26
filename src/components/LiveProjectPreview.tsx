@@ -225,7 +225,7 @@ switch (projectType) { case 'website':
     tablet: 'w-[768px]',
 mobile: 'w-[375px]'
 }
-  return(<Card className="h-full flex flex-col glass
+  return (<Card className="h-full flex flex-col glass
           <div className="glass p-4 -b">
         <div className="flex items-center justify-between mb-4 flex items-center gap-2"    />
           <Eye className="h-5 w-5 text-muted-foreground"     />
@@ -237,8 +237,7 @@ Badge variant="secondary", className="animate-pulse">
           <button;
 
 const onClick={generatePreview};
-            className="p-2 hover: glass rounded-xl-lg transition-colors"
->const disabled={isGenerating}>aria-label="Button">
+            className="p-2 hover: glass rounded-xl-lg transition-colors">const disabled={isGenerating}>aria-label="Button">
           <RefreshCw className={cn("h-4, w-4" isGenerating && "animate-spin")/>
 </button>
         {/* Device, Selector */}

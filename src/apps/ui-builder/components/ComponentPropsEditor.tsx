@@ -10,7 +10,7 @@ const { type, props, schema    }: any  = selectedComponent;
 
 const handleChange = (key: string, value: string) => { updateProps(selectedComponent.id, { [key]: value    })
 };
-  return(<div className="p-4 glass -t -gray-300">
+  return (<div className="p-4 glass -t -gray-300">
           </div>
       <h2 className="text-lg font-semibold mb-2">Edit {type} Properties</h2>
       <form className="space-y-3" role="form">)

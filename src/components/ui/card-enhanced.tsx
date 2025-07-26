@@ -51,7 +51,7 @@ boxShadow: variant === 'glass'? getGlassStyle(glassVariant).boxShadow
 { getVariantStyles();
 
 const _glowStyles = glow ? { boxShadow: `${designTokens.shadows.glow.primary}, ${baseStyles.boxShadow || designTokens.shadows.sm}`} : {},``
-    return(<motion.div;
+    return (<motion.div;
 
     const ref={ref}
         className={cn(`'rounded-xl p-6 text-card-foreground transition-all duration-300' glow && 'animate-pulse-slow' className)

@@ -28,7 +28,7 @@ export default function NoCodeBuilder() {
     // Handle drag start logic
   };
 
-  return(<div className="h-screen flex glass">
+  return (<div className="h-screen flex glass">
       <div className="w-64 glass -r -gray-200 p-4">
         <h3 className="font-semibold text-gray-900 mb-4">Components</h3>
         <div className="space-y-2">)

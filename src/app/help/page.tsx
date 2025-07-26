@@ -51,7 +51,7 @@ export default function HelpPage() {
     }
   ];
 
-  return(<div className="min-h-screen glass py-12">
+  return (<div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -64,7 +64,7 @@ export default function HelpPage() {
           <div className="max-w-md mx-auto relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"  />
             <Input
-              ="Search for help...">className="pl-10" />>
+              ="Search for help...">className="pl-10" />
           </div>
         </div>
 
@@ -87,14 +87,14 @@ export default function HelpPage() {
         </div>
 
         {/* FAQ Section */}
-        <Card className="glass"
-          <CardHeader className="glass"
+        <Card className="glass">
+          <CardHeader className="glass">
             <CardTitle className="flex items-center glass
               <HelpCircle className="h-6 w-6 mr-2" />
               Frequently Asked Questions
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <div key={index} className="-b -gray-200 pb-4 last:-b-0">

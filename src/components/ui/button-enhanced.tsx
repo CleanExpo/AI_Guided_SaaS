@@ -73,7 +73,7 @@ export function ButtonEnhanced({
   children)
   ...props)
 }: ButtonProps) {
-  return(button, className={cn(
+  return (button, className={cn(
         'inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible: outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
         buttonVariants[variant],
         buttonSizes[size],
@@ -112,7 +112,7 @@ lg: 'h-16 w-16'};
     'bottom-left': 'fixed bottom-6 left-6',
     'top-right': 'fixed top-6 right-6',
     'top-left': 'fixed top-6 left-6'};
-  return(<ButtonEnhanced
+  return (<ButtonEnhanced
 
 className={cn(
         fabSizes[size])
@@ -139,7 +139,7 @@ export function ButtonGroup({
   orientation = 'horizontal', size)
   variant)
 }: ButtonGroupProps) {
-  return(div, className={cn(
+  return (div, className={cn(
         'inline-flex')
         orientation === 'horizontal' ? 'flex-row' : 'flex-col'
         '[&>button]: rounded-none [&>button: first-child]:rounded-l-md [&>button:last-child]:rounded-r-md'
@@ -173,7 +173,7 @@ export function IconButton({
   className)
   ...props)
 }: IconButtonProps) {
-  return()
+  return ()
     <ButtonEnhanced className={cn('p-0', className)} size="icon" {...props}></ButtonEnhanced>
       {icon}
 </ButtonEnhanced>
@@ -216,7 +216,7 @@ export function SplitButton({;
   className)
   ...props)
 }: SplitButtonProps) {
-  return()
+  return ()
     <div className="relative inline-flex">, <ButtonEnhanced className={cn('rounded-r-none border-r-0', className)}>{...props}></ButtonEnhanced>
         {children}
 </ButtonEnhanced>
@@ -235,8 +235,7 @@ strokeLinejoin="round";
         <div className="absolute top-full left-0 mt-1 w-full min-w-48 bg-background  rounded-lg-md shadow-md-lg z-50">
           {dropdownItems.map((item, index) => (\n    </div>
             <button const key={index};
-              className="w-full px-3 py-2 text-left text-sm hover: bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
->onClick={ item.onClick} disabled={item.disabled}>aria-label="Button"></button>
+              className="w-full px-3 py-2 text-left text-sm hover: bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center">onClick={ item.onClick} disabled={item.disabled}>aria-label="Button"></button>
               {item.icon && <span className="mr-2">{item.icon}</span>}
               {item.label}
 </button>
@@ -264,7 +263,7 @@ export function CopyButton({;
       setTimeout(() => setCopied(false, 2000)
 }; catch (err) {
       logger.error('Failed to copy text: ', err)};
-  return(<ButtonEnhanced
+  return (<ButtonEnhanced
 
 onClick={handleCopy} variant={copied ? 'success' : 'outline'}>{...props}></ButtonEnhanced>
       {copied ? successMessage : children}
@@ -320,7 +319,7 @@ d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1
     }};
   
 const config = providerConfig[provider];
-  return(<ButtonEnhanced variant="outline";
+  return (<ButtonEnhanced variant="outline";
 
     const leftIcon={config.icon})
       className={cn('w-full', config.className, className)}>{...props}></ButtonEnhanced>

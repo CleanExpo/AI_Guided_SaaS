@@ -26,7 +26,7 @@ const _sheetVariants = cva('fixed z-50 gap-4 bg-background p-6 shadow-lg transit
 interface SheetContentProps</SheetPrimitive>
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,VariantProps { }const SheetContent = React.forwardRef<)
   React.ElementRef<typeof SheetPrimitive.Content>, SheetContentProps</typeof>(({  side = 'right', className, children, ...props  }, ref) => (\n    <SheetPortal></SheetPortal>
-    return(<SheetOverlay    />
+    return (<SheetOverlay    />
           <SheetPrimitive.Content;
 
     const ref={ref})

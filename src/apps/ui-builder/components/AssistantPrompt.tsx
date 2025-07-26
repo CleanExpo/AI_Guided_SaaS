@@ -38,7 +38,7 @@ if (generatedComponents.length > 0) {
     alert(`Assistant has scaffolded ${generatedComponents.length} components! ${causalContext ? '🧠 Using causal insights.' : ''}`);``
     setInput('')
 };
-  return(<div className="p-4 glass -t">
+  return (<div className="p-4 glass -t">
           </div>
       <h2 className="text-lg font-semibold mb-2">🧠 AI Assistant</h2>)
       <input;>value={input} onChange={(e) => setInput(e.target.value)};</input>

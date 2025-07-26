@@ -45,12 +45,12 @@ export default function FormBuilderPage() {
         <div className="glass grid gap-6 lg:grid-cols-3">
           {/* Form Elements Panel */}
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Form Elements</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Form Elements</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-2">
+              <CardContent className="glass">
+            <div className="space-y-2">
                   {elementTypes.map((element) => (
                     <Button
                       key={element.type}
@@ -67,12 +67,12 @@ export default function FormBuilderPage() {
 
           {/* Form Builder */}
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Form Builder</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Form Builder</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   {formElements.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
                       Add elements from the panel to start building your form
@@ -100,12 +100,12 @@ export default function FormBuilderPage() {
 
           {/* Settings Panel */}
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Form Settings</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Form Settings</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Form Title</label>
                     <Input placeholder="Contact Form" />

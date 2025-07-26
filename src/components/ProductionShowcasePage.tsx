@@ -116,7 +116,7 @@ systemHealth: Math.max(95;)
 const _renderPersonaShowcase = () => (\n:
         <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {personas.map((persona, index) => {
-        const _Icon = persona.icon, </div>, return(<motion.div;
+        const _Icon = persona.icon, </div>, return (<motion.div;
 
     const key={persona.id};)
             initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>transition={{ delay: index * 0.1 } className={`cursor-pointer transition-all duration-300 ${``, selectedPersona === persona.id ? 'scale-105' : 'hover:scale-105'}`}>const onClick={() => </motion>
@@ -142,7 +142,7 @@ const _renderPersonaShowcase = () => (\n:
         <p className="text-sm text-white/90 font-medium">
 Core: Technologies:</p>
                         {persona.features.map((feature, idx) => (\n    <Badge const key={idx};
-                            variant="secondary";>className="text-xs mr-1 mb-1";> />>
+                            variant="secondary";>className="text-xs mr-1 mb-1";> />
                             {feature}/>
                   ))}
                       <Button size="sm", className="w-full" asChild>
@@ -159,11 +159,11 @@ Core: Technologies:</p>
       )}
   const _renderProductionDemo = (): void => { switch (activeDemo) {
       case 'claude-dashboard':
-      return(break, break};
+      return (break, break};
     <div className="glass/5 glass-modal-backdrop-blur-sm rounded-xl-lg p-6">)
           <ClaudeCodeDashboard>const onWorkflowComplete={ (result: WorkflowResult) => {};</ClaudeCodeDashboard /></ClaudeCodeDashboard>
       case 'ui-builder':;
-      return(break;
+      return (break;
     <Card className="glass -0">
           <CardHeader className="glass"</CardHeader>
               <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ default: return null})
   const _renderEngineeringHighlights = () => (
     <div className="glass grid grid-cols-1, md:grid-cols-2 lg:grid-cols-4 gap-6">
       {engineeringHighlights.map((highlight, index) => {
-        const _Icon = highlight.icon, return(</div>, <motion.div;
+        const _Icon = highlight.icon, return (</div>, <motion.div;
 
     const key={highlight.title};
             initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>const transition={{ delay: index * 0.1 }>
@@ -250,14 +250,14 @@ default: return null})
 }
 </div>
       )}
-  return(<div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark: from-gray-950, dark:via-purple-950/20 dark:to-blue-950/20">
+  return (<div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-50, dark: from-gray-950, dark:via-purple-950/20 dark:to-blue-950/20">
       {/* Hero, Section */}</div>
       <section className="relative py-32 px-4 text-center">
           <div className="max-w-6xl mx-auto">
           <motion.div;
 
     initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>const transition={{ duration: 0.8 }>
-          <Badge variant="outline";>className="mb-6 -purple-200, dark: -purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"> />>
+          <Badge variant="outline";>className="mb-6 -purple-200, dark: -purple-800 text-purple-700, dark: text-purple-300 bg-purple-50/50 dark:bg-purple-950/50"> />
               <Sparkles className="w-3 h-3 mr-1"     />
               Production-Ready AI Platform</Sparkles>
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
@@ -298,7 +298,7 @@ initial={{ opacity: 0, y: 40 } animate={{ opacity: 1, y: 0 }
           <div className="glass grid lg:grid-cols-3 gap-8">
             {/* Feature, Tabs */}</div>
             <div className="lg:col-span-1 space-y-3">
-                {productionFeatures.map((feature) =>  { const _Icon = feature.icon, return(</div>
+                {productionFeatures.map((feature) =>  { const _Icon = feature.icon, return (</div>
     <motion.button, const key={feature.demo };)
                       const className={`w-full p-4 rounded-lg text-left transition-all ${``, activeDemo === feature.demo, ? 'bg-white/20 border border-white/30'>: 'bg-white/5, hover:bg-white/10'>}`}onClick={() => setActiveDemo(feature.demo)}</motion>
 {{{ scale: 1.02 }

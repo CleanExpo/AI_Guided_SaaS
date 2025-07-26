@@ -196,9 +196,8 @@ const _getAISuggestions = async () =>  {
 
 const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _handleClick = (): void => {if (tree.type === 'file') {
         openFile(tree.path) };
-    return(<div;>const key={tree.path} style={ paddingLeft: `${level * 16}px` }>``</div>
-        <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded-lg cursor-pointer"
->const onClick={handleClick}>role="button" tabIndex={0}></div>
+    return (<div;>const key={tree.path} style={ paddingLeft: `${level * 16}px` }>``</div>
+        <div className="flex items-center gap-2 py-1 px-2 hover: bg-accent rounded-lg cursor-pointer">const onClick={handleClick}>role="button" tabIndex={0}></div>
           {tree.type === 'directory' ? (</div>
             <FolderTree className="h-4 w-4"     />)
           ) : (</FolderTree>
@@ -209,7 +208,7 @@ const _renderFileTree  = (tree: KiroFileTree, level: number = 0) =>  { const _ha
     )
 }
   if (loading) {;
-    return(<div className="flex items-center justify-center h-screen">, </div>, <div className="text-center">
+    return (<div className="flex items-center justify-center h-screen">, </div>, <div className="text-center">
           </div>
         <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4"    />
           <p>Connecting to Kiro IDE...</p>

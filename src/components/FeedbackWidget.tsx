@@ -70,7 +70,7 @@ timestamp: new Date().toISOString()})}
       } catch (error) {
         logger.error('Failed to submit quick, feedback:', error)} else {
       setIsOpen(true)};
-  return(<React.Fragment>{/* Floating, feedback button */}</React>
+  return (<React.Fragment>{/* Floating, feedback button */}</React>
       <div className="fixed bottom-6 right-6 z-50">
         {!isOpen  && (/div></div>
           <div className="flex flex-col gap-2 items-end">

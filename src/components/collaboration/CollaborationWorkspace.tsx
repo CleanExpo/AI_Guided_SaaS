@@ -169,11 +169,11 @@ break
 }
       default: return null}}
   if (loading) {;
-    return()
+    return ()
     <div className="glass flex items-center justify-center p-8" />);</div>
           <div className="animate-spin rounded-lg-full h-8 w-8 -b-2 -blue-600 mx-auto mb-4" />
           <p className="text-gray-600">Initializing collaboration...</p>
-  return(<div className="h-full flex flex-col">
+  return (<div className="h-full flex flex-col">
       {/* Header */}</div>
       <div className="glass flex items-center justify-between p-4 -b" />
           <div className="flex items-center space-x-4" />
@@ -244,7 +244,7 @@ Alert className="m-4"></Alert>
               <div className="glass grid grid-cols-1 md:grid-cols-2 gap-6" />
           <Card / className="glass"
                   <CardHeader / className="glass"
-          <CardTitle className="glass"Project Files</CardTitle>
+          <CardTitle className="glass">Project Files</CardTitle>
                     <CardDescription className="glass"</CardDescription>
                       Collaborate on project files in real-time</Card>
                   <CardContent / className="glass"
@@ -260,7 +260,7 @@ Alert className="m-4"></Alert>
                         <div className="text-sm text-gray-500">JavaScript logic</div>
                 <Card / className="glass"
           <CardHeader / className="glass"
-                    <CardTitle className="glass"Recent Changes</CardTitle>
+                    <CardTitle className="glass">Recent Changes</CardTitle>
                     <CardDescription className="glass"</CardDescription>
                       Live project updates from collaborators</Card>
                   <CardContent / className="glass"
@@ -277,7 +277,7 @@ div className="text-sm text-gray-500">No recent changes</div>
     {/* Add, comment section */}
               <Card className="mt-6" / className="glass
           <CardHeader / className="glass"
-                  <CardTitle className="glass"Add Comment</CardTitle>
+                  <CardTitle className="glass">Add Comment</CardTitle>
                   <CardDescription className="glass"</CardDescription>
                     Click anywhere on the workspace and add a comment</Card>
                 <CardContent / className="glass"

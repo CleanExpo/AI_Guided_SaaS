@@ -3,7 +3,7 @@
 import React from 'react';import { componentList } from '../lib/componentList';
 import { useBuilderStore } from '../store/useBuilderStore';
 export default function Sidebar() {const addComponent = useBuilderStore((state) => state.addComponent);
-        return(<aside className="w-64 glass-navbar text-white p-4 overflow-y-auto">
+        return (<aside className="w-64 glass-navbar text-white p-4 overflow-y-auto">
           </aside><h2 className="text-xl font-semibold mb-4">Components</h2>
       <ul></ul>)
         {componentList.map((comp) =>  ();</ul>

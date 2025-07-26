@@ -39,12 +39,12 @@ const _getStepStatus = (stepId: string, currentStep: string) => {
   return 'pending'
 };
 export default function ProgressTracker() {
-  return(<Card className="h-fit"    / className="glass, <CardHeader    / className="glass", <CardTitle className="flex items-center gap-2"    / className="glass
+  return (<Card className="h-fit"    / className="glass, <CardHeader    / className="glass", <CardTitle className="flex items-center gap-2"    / className="glass
           <Sparkles className="w-5 h-5 text-blue-600"     />
           Progress Tracker</Sparkles>)
       <CardContent className="space-y-4 glass>{steps.map((step, index) => {
           const _status = getStepStatus(step.id, currentStep);
-          return(</Card>
+          return (</Card>
         <div;>const key={step.id}; className="relative">
               {/* Connector, Line */},</div>
     {index < steps.length - 1  && (

@@ -156,7 +156,7 @@ timestamp: new Date()};
       handleUserResponse(userInput)}
   const currentQuestion = chatQuestions[currentQuestionIndex];</ProjectConfig>
 { currentQuestionIndex < chatQuestions.length && !isTyping;
-  return(<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
+  return (<div className="glass min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4"    />
           <Card className="w-full max-w-4xl h-[80vh] flex flex-col"     / className="glass
         <CardHeader className="-b"    / className="glass
           <CardTitle className="flex items-center gap-3"     / className="glass

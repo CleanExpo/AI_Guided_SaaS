@@ -140,7 +140,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
       const { error, errorInfo, showDetails, copied } = this.state;
       const isDevelopment = (process.env.NODE_ENV || "development") === "development";
 
-      return(<div className="min-h-screen glass flex items-center justify-center p-4">
+      return (<div className="min-h-screen glass flex items-center justify-center p-4">
           <Card className="max-w-2xl w-full glass">
             <CardHeader className="glass">
               <div className="flex items-center gap-3">
@@ -174,8 +174,7 @@ User Agent: ${typeof navigator !== 'undefined' ? navigator.userAgent : 'N/A'}
                 <Button
                   variant="outline"
                   onClick={() => window.location.href = '/'}
-                  className="flex-1"
-                >
+                  className="flex-1">
                   <Home className="h-4 w-4 mr-2" />
                   Go to Homepage
                 </Button>

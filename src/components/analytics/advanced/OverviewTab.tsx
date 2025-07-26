@@ -39,33 +39,41 @@ export function OverviewTab({
           icon={Users}
           iconColor="text-blue-600"
           title="Total Users"
-          value="24,567">trend={{ value: 12, isPositive: true }} />>
+          value="24,567"
+          trend={{ value: 12, isPositive: true }}
+        />
         
         <MetricCard
           icon={DollarSign}
           iconColor="text-green-600"
           title="MRR"
-          value="$45,678">trend={{ value: 23, isPositive: true }} />>
+          value="$45,678"
+          trend={{ value: 23, isPositive: true }}
+        />
         
         <MetricCard
           icon={ShoppingCart}
           iconColor="text-purple-600"
           title="Conversion Rate"
-          value="3.4%">trend={{ value: 8, isPositive: true }} />>
+          value="3.4%"
+          trend={{ value: 8, isPositive: true }}
+        />
         
         <MetricCard
           icon={Clock}
           iconColor="text-orange-600"
           title="Avg Session"
-          value="4m 32s">trend={{ value: 5, isPositive: false }} />>
+          value="4m 32s"
+          trend={{ value: 5, isPositive: false }}
+        />
       </div>
 
       {/* Trends Chart */}
-      <Card className="glass"
-        <CardHeader className="glass"
-          <CardTitle className="glass"Growth Trends</CardTitle>
+      <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Growth Trends</CardTitle>
         </CardHeader>
-        <CardContent className="glass"
+        <CardContent className="glass">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={userTrendData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -77,17 +85,23 @@ export function OverviewTab({
                 type="monotone" 
                 dataKey="users" 
                 stroke="#3b82f6" 
-                strokeWidth={2}>name="Users" />>
+                strokeWidth={2}
+                name="Users"
+              />
               <Line 
                 type="monotone" 
                 dataKey="revenue" 
                 stroke="#10b981" 
-                strokeWidth={2}>name="Revenue" />>
+                strokeWidth={2}
+                name="Revenue"
+              />
               <Line 
                 type="monotone" 
                 dataKey="conversions" 
                 stroke="#8b5cf6" 
-                strokeWidth={2}>name="Conversions" />>
+                strokeWidth={2}
+                name="Conversions"
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -95,11 +109,11 @@ export function OverviewTab({
 
       <div className="glass grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Conversion Funnel */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Conversion Funnel</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Conversion Funnel</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -121,11 +135,11 @@ export function OverviewTab({
         </Card>
 
         {/* Revenue by Plan */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Revenue by Plan</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Revenue by Plan</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie

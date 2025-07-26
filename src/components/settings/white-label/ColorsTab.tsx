@@ -58,22 +58,22 @@ export function ColorsTab({ config, updateConfig }: ColorsTabProps) {
     </div>
   );
 
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       <div>
         <h3 className="text-lg font-medium mb-4">Color Scheme</h3>
         
         <div className="space-y-4">
           <ColorInput
             label="Primary Color"
-            field="primaryColor">placeholder="#3B82F6" />>
+            field="primaryColor">placeholder="#3B82F6" />
           
           <ColorInput
             label="Secondary Color"
-            field="secondaryColor">placeholder="#8B5CF6" />>
+            field="secondaryColor">placeholder="#8B5CF6" />
           
           <ColorInput
             label="Accent Color"
-            field="accentColor">placeholder="#F97316" />>
+            field="accentColor">placeholder="#F97316" />
         </div>
       </div>
 
@@ -87,8 +87,7 @@ export function ColorsTab({ config, updateConfig }: ColorsTabProps) {
                 updateConfig('secondaryColor', theme.colors.secondary);
                 updateConfig('accentColor', theme.colors.accent);
               }}
-              className="glass p-4  rounded-xl-lg hover:shadow-md-md transition-shadow-md"
-            >
+              className="glass p-4  rounded-xl-lg hover:shadow-md-md transition-shadow-md">
               <div className="flex gap-2 justify-center mb-2">
                 {theme.preview.map((color, index) => (
                   <div key={index} className={`w-6 h-6 rounded ${color}`} />

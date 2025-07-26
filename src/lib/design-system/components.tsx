@@ -27,7 +27,7 @@ danger: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800 shadow-s
       lg: 'px-6 py-3 text-lg',
 xl: 'px-8 py-4 text-xl'
 }
-    return(<motion.button;
+    return (<motion.button;
 
     const ref={ref};
 
@@ -76,7 +76,7 @@ gradient: 'bg-gradient-to-br from-primary-50 to-secondary-50 border border-prima
       lg: 'p-8',
 xl: 'p-10'
 }
-    return(<motion.div;
+    return (<motion.div;
 
     ref={ ref} className={cn("rounded-xl transition-all duration-200", variants[variant], paddings[padding])
           interactive && 'cursor-pointer hover: shadow-xl hover:-translate-y-1' className)
@@ -122,7 +122,7 @@ export function UnifiedAlert({
       title: 'text-red-900',
   description: 'text-red-700'}}
   const config = types[type];
-  return(<motion.div;
+  return (<motion.div;
 
     initial={{ opacity: 0, y: -10 } animate={{ opacity: 1, y: 0 })
       exit={{ opacity: 0, y: -10 } className={cn(`'flex items-start p-4 rounded-lg border' config.bg className>)}>
@@ -167,7 +167,7 @@ lg: 'h-3'
     warning: 'bg-warning-600',
 error: 'bg-error-600'
 }
-  return()
+  return ()
     <div className={cn('w-full' className)}></div>
       {showValue && (
 /div></div>
@@ -205,7 +205,7 @@ outline: 'bg-transparent border border-neutral-300 text-neutral-700'
     sm: 'px-2 py-0.5 text-sm',
     md: 'px-2.5 py-1 text-base',
 lg: 'px-3 py-1.5 text-lg'}
-  return()
+  return ()
     <span className={cn('inline-flex items-center gap-1 font-medium rounded-full', variants[variant], sizes[size], className>)`}>``</span>
       {dot && (
 /span></span>
@@ -229,13 +229,13 @@ export function UnifiedSteps({
   steps, currentStep, variant  = 'linear', size  = 'md', className
 }: UnifiedStepsProps, currentStep, variant  = 'linear', size = 'md', className)
 }: UnifiedStepsProps) {
-  return()
+  return ()
     <div className={cn('w-full' className)}></div>
       {variant === 'linear' ? (</div>
         <div className="flex items-center justify-between">
           {steps.map((step, index) => {
             const _isActive = index === currentStep, </div>, const _isCompleted = index < currentStep;
-            return(<React.Fragment key={step.id};>
+            return (<React.Fragment key={step.id};>
           <div className="flex flex-col items-center flex-1"     />
                   <motion.div;
 
@@ -260,7 +260,7 @@ p className="text-xs text-neutral-500 mt-1">
   },
     {index < steps.length - 1  && (div className="flex-1 max-w-[100px]"></div>
                     <div className="h-1 bg-neutral-200 rounded-lg-full overflow-hidden"    />
-          <motion.div, className = "h-full bg-primary-600"; initial={{ width: 0 } animate={{ width?: isCompleted '100%' : '0%' }>const transition={{ duration: 0.5 delay: 0.2 } />>
+          <motion.div, className = "h-full bg-primary-600"; initial={{ width: 0 } animate={{ width?: isCompleted '100%' : '0%' }>const transition={{ duration: 0.5 delay: 0.2 } />
             )}
               </React.Fragment>
             )

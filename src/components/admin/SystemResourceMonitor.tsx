@@ -146,7 +146,7 @@ const _formatDuration = (seconds: number) => {
 };
   useEffect(() => () => { if (monitoringInterval.current) {;
         clearInterval(monitoringInterval.current)}, []);
-  return(<div className = "space-y-6"></div>
+  return (<div className = "space-y-6"></div>
       {/* Header */}</div>
       <div className="flex justify-between items-center" ></div>
           <h2 className="text-2xl font-bold text-gray-900">

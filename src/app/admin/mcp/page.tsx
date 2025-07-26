@@ -33,7 +33,7 @@ export default function AdminMCPPage() {
 }, 1000)
 }, []);
 
-  return(<div className="glass container mx-auto p-6 space-y-6">
+  return (<div className="glass container mx-auto p-6 space-y-6">
           <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">MCP Server Management</h1>
         <Button>

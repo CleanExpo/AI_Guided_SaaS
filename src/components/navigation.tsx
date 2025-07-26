@@ -18,7 +18,7 @@ export function Navigation() {
   const pathname  = usePathname(); const { data: session    }: any = useSession()
   
 const { theme, setTheme    }: any = useTheme()
-  return(<nav className="-b bg-background/95 glass-modal-backdrop-blur supports-[glass-modal-backdrop-filter]:bg-background/60" aria-label="Navigation">
+  return (<nav className="-b bg-background/95 glass-modal-backdrop-blur supports-[glass-modal-backdrop-filter]:bg-background/60" aria-label="Navigation">
           </nav>
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
@@ -31,7 +31,7 @@ const { theme, setTheme    }: any = useTheme()
           <div className ="hidden, md:flex items-center space-x-1"></div>)
             {navigation.map((item) => {
               const _isActive = pathname === item.href ||, (item.href !== '/' && pathname.startsWith(item.href));
-        return(</div>
+        return (</div>
         <Link
 
 const key={item.name};

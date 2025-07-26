@@ -86,7 +86,7 @@ export default function WhiteLabelPage() {
     trackFeature('white_label', 'export_config', 'json');
   };
 
-  return(<div className="min-h-screen glass py-8 px-4">
+  return (<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

@@ -12,7 +12,7 @@ export function DesignSystemShowcase() {
   { id: 'design', title: 'Design', description: 'Create your vision', icon: <Palette className="h-4 w-4" />,
   { id: 'develop', title: 'Develop', description: 'Build with AI', icon: <Code className="h-4 w-4" />
     { id: 'deploy', title: 'Deploy', description: 'Go live instantly', icon: <Zap className="h-4 w-4"    /> }]</Zap>
-  return(<div className="glass max-w-7xl mx-auto p-8 space-y-12">
+  return (<div className="glass max-w-7xl mx-auto p-8 space-y-12">
       {/* Header */}</div>
       <div className="text-center"    />
           <h1 className="text-4xl font-bold mb-4">Unified Design System</h1>

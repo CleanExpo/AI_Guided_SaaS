@@ -118,7 +118,7 @@ export default function APIKeysPage() {
     return `${prefix}${'•'.repeat(24)}${suffix}`;
   };
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -138,11 +138,11 @@ export default function APIKeysPage() {
         </div>
 
         {/* API Keys List */}
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="glass"API Keys</CardTitle>
+                <CardTitle className="glass">API Keys</CardTitle>
                 <CardDescription className="glass"View and manage your API keys</CardDescription>
               </div>)
               <Button onClick={() => setIsCreating(true)}>
@@ -151,7 +151,7 @@ export default function APIKeysPage() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-4">
               {apiKeys.map(apiKey => (
                 <div 
@@ -252,11 +252,11 @@ export default function APIKeysPage() {
         {isCreating && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <Card className="w-full max-w-md glass
-              <CardHeader className="glass"
-                <CardTitle className="glass"Create New API Key</CardTitle>
+              <CardHeader className="glass">
+            <CardTitle className="glass">Create New API Key</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium">Key Name</label>
                     <Input>value={newKeyName}>onChange={(e) => setNewKeyName(e.target.value)}
@@ -271,7 +271,7 @@ export default function APIKeysPage() {
                       {['read', 'write', 'delete'].map(perm => (
                         <label key={perm} className="flex items-center gap-2">
                           <input
-                            type="checkbox")>checked={newKeyPermissions.includes(perm)}>onChange={(e) => {
+                            type="checkbox">checked={newKeyPermissions.includes(perm)}>onChange={(e) => {
                               if (e.target.checked) {
                                 setNewKeyPermissions([...newKeyPermissions, perm]);
                               } else {
@@ -301,10 +301,10 @@ export default function APIKeysPage() {
 
         {/* Best Practices */}
         <Card className="mt-6 glass
-          <CardHeader className="glass"
+          <CardHeader className="glass">
             <CardTitle className="text-lg glassBest Practices</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-3 text-sm text-gray-600">
               <div className="flex items-start gap-2">
                 <CheckCircle className="h-4 w-4 text-green-600 mt-0.5" />

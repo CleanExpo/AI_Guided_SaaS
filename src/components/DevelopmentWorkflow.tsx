@@ -59,13 +59,13 @@ const _currentIndex = workflowPhases.findIndex(p => p.id === phaseId);
 if (currentIndex < workflowPhases.length - 1) {
       setActivePhase(workflowPhases[currentIndex + 1].id)
  };
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Project, Overview */}</div>
-      <Card className="glass"
+      <Card className="glass">
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass"AI Development Workflow - {projectConfig.name}</CardTitle>
-        <CardContent className="glass"
-          <div className ="grid grid-cols-1, md: grid-cols-2, lg:grid-cols-4 gap-4"></div>
+          <CardTitle className="glass">AI Development Workflow - {projectConfig.name}</CardTitle>
+        <CardContent className="glass">
+            <div className ="grid grid-cols-1, md: grid-cols-2, lg:grid-cols-4 gap-4"></div>
             <div className="text-center text-2xl font-bold text-blue-600">
                 {projectConfig.features.length}</div>
               <div className="text-sm text-gray-600">Features</div>
@@ -80,7 +80,7 @@ if (currentIndex < workflowPhases.length - 1) {
               <div className="text-sm text-gray-600">Timeline</div>
       {/* Workflow, Phases */}
       <div className = "grid grid-cols-1 lg:grid-cols-2 gap-6"></div>)
-        {workflowPhases.map((phase) => { const _IconComponent  = phase.icon; const _isActive = activePhase === phase.id; const _isCompleted  = phase.status === 'completed', return(</div>
+        {workflowPhases.map((phase) => { const _IconComponent  = phase.icon; const _isActive = activePhase === phase.id; const _isCompleted  = phase.status === 'completed', return (</div>
         <Card
 
 const key={phase.id };
@@ -107,8 +107,8 @@ const key={phase.id };
           <h3 className="font-semibold">{phase.title}</h3>
                     <p className="text-sm text-gray-600 font-normal">
                       {phase.description}</p>
-              <CardContent className="glass"
-          <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   {phase.tasks.map((task, taskIndex) => (\n    </div>
                     <div key={taskIndex} className="flex items-center gap-2" className={`w-4 h-4 rounded-full flex items-center justify-center ${``
                           // isCompleted
@@ -143,12 +143,12 @@ div className="mt-4 pt-4 -t">
     )
   },
     {/* AI, Recommendations */}
-      <Card className="glass"
+      <Card className="glass">
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="glass"</CardTitle>
             AI Recommendations for {projectConfig.persona?.name || 'Developer'}</CardTitle>
-        <CardContent className="glass"
-          <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CardContent className="glass">
+            <div className="glass grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
           <h4 className="font-medium text-gray-900">Next Steps</h4>
               <ul className="text-sm text-gray-600 space-y-1">

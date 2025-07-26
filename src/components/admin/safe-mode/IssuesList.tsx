@@ -12,7 +12,7 @@ interface IssuesListProps {
 export function IssuesList({ issues, checkpoint }: IssuesListProps) {
   if (issues.length === 0) return null;
 
-  return(<Card className="glass p-4">
+  return (<Card className="glass p-4">
       <h3 className="font-medium text-gray-700 mb-3">)
         📋 Detected Issues ({issues.length})
       </h3>

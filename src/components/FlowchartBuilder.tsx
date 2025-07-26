@@ -81,7 +81,7 @@ const _importFlow = useCallback((event: React.ChangeEvent<HTMLInputElement>) => 
           toast({ title: "Success", description: "Error importing, flow: Invalid file format" })}
       reader.readAsText(file)
 }, [setNodes, setEdges])
-  return(<div className="h-full flex flex-col"    /><Card className="mb-4"    / className="glass
+  return (<div className="h-full flex flex-col"    /><Card className="mb-4"    / className="glass
           <CardHeader     / className="glass"
           <CardTitle className="flex items-center justify-between"    / className="glass
           <span>Flowchart Builder - {projectName}</span>
@@ -115,7 +115,7 @@ accept=".json";
 
 nodes={nodes} edges={edges}
           onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
-          const onConnect={onConnect}; />/ fitView attributionPosition="bottom-left"; />>
+          const onConnect={onConnect}; />/ fitView attributionPosition="bottom-left"; />
           <Controls><MiniMap     />
           <Background variant={BackgroundVariant.Dots} gap={12} size={1
     

@@ -101,7 +101,7 @@ export default function MarketingPage() {
     return ((campaign.revenue - cost) / cost * 100).toFixed(0);
   };
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -111,13 +111,13 @@ export default function MarketingPage() {
 
         {/* Funnel Visualization */}
         <Card className="mb-8 glass
-          <CardHeader className="glass"
+          <CardHeader className="glass">
             <CardTitle className="flex items-center gap-2 glass
               <Target className="h-5 w-5" />
               Conversion Funnel
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-6">)
               {funnelStages.map((stage, index) => (
                 <div key={stage.name}>
@@ -145,12 +145,12 @@ export default function MarketingPage() {
 
         {/* Campaign Performance */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Active Campaigns</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Active Campaigns</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 {campaigns.filter(c => c.status === 'active').map(campaign => (
                   <div key={campaign.id} className="glass  rounded-xl-lg p-4">
                     <div className="flex items-center justify-between mb-2">
@@ -183,12 +183,12 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Email Capture Widget</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Email Capture Widget</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="glass bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg p-6 text-white">
+            <CardContent className="glass">
+            <div className="glass bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl-lg p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">Start Building Faster</h3>
                 <p className="mb-4 text-blue-100">Join 10,000+ developers using AI Guided SaaS</p>
                 <form onSubmit={handleEmailSubmit} className="space-y-3" role="form">
@@ -225,8 +225,8 @@ export default function MarketingPage() {
 
         {/* Marketing Metrics */}
         <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Total Leads</p>
@@ -238,8 +238,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Conversion Rate</p>
@@ -251,8 +251,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Avg. Deal Size</p>
@@ -264,8 +264,8 @@ export default function MarketingPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">CAC Payback</p>

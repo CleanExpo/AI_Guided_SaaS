@@ -59,11 +59,11 @@ export default function CausalExplorerUI() {
       
       <div className="glass grid gap-6 md:grid-cols-2">
           <Card className="glass"</Card>
-          <CardHeader className="glass"
-          <CardTitle className="glass"Top Insights</CardTitle>
+          <CardHeader className="glass">
+            <CardTitle className="glass">Top Insights</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
-          <div className="space-y-4">
+          <CardContent className="glass">
+            <div className="space-y-4">
               {insights.map((insight) => (
                 <div key={insight.id} className="-l-4 -blue-500 pl-4">
           <h3 className="font-semibold text-gray-900">{insight.title}</h3>
@@ -78,12 +78,12 @@ Confidence: { insight.confidence }%
               ))}
             </div>
         
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="glass"</CardHeader>
-            <CardTitle className="glass"Component Analysis</CardTitle>
+            <CardTitle className="glass">Component Analysis</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
-          <div className="space-y-4">
+          <CardContent className="glass">
+            <div className="space-y-4">
               {topComponents.map((component) => (
                 <div key={component.id} className="p-3 glass rounded-lg flex items-center justify-between">
           <span className="font-medium">{component.page}</span>

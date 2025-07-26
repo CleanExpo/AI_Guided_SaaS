@@ -137,11 +137,11 @@ const _getToolInputFields  = (tool: MCPTool): Array<{ name: string, type: string
     if (!tool.inputSchema || !tool.inputSchema.properties) {r}eturn [], const required = tool.inputSchema.required || [], return Object.entries(tool.inputSchema.properties).map(([name, schema]: [string, any]) => ({ name: type: schema.type || 'string',
 required: required.includes(name)}))
   };
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Server, Management */}</div>
-      <Card className="glass"
+      <Card className="glass">
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass"MCP Servers</CardTitle>
+          <CardTitle className="glass">MCP Servers</CardTitle>
           <CardDescription className="glass"</CardDescription>
             Connect to Model Context Protocol servers to access their tools</Card>
 </CardHeader>
@@ -154,7 +154,7 @@ required: required.includes(name)}))
               ))}
 </TabsList>
             {categories.map((category) => (\n    <TabsContent key={category} value={category} className="space-y-2">
-                {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return(<div;
+                {getServersByCategory(category).map((server) => { const _status  = getServerStatus(server.id); const _isConnected = status === 'connected', return (<div;
 >const key={server.id };>className="flex items-center justify-between p-3  rounded-xl-lg flex items-center gap-3"    />
           <Server className="h-5 w-5 text-muted-foreground"     />
                         <div>
@@ -165,7 +165,7 @@ required: required.includes(name)}))
                       <div className="flex items-center gap-2">
           <Badge
 
-const variant={isConnected ? 'default' : 'secondary' };>className="capitalize";> />>
+const variant={isConnected ? 'default' : 'secondary' };>className="capitalize";> />
                           {status}
 />
                         <Button)
@@ -188,7 +188,7 @@ size="sm";>variant={isConnected ? 'destructive' : 'default'} onClick={() => </Bu
         {/* Tool, Selection */}</div>
         <Card className = "h-[600px]" className="glass
           <CardHeader className="glass"</CardHeader>
-            <CardTitle className="glass"Available Tools</CardTitle>
+            <CardTitle className="glass">Available Tools</CardTitle>
             <CardDescription className="glass"</CardDescription>
               {tools.length} tools from {servers.filter((s) => s.status === 'connected').length} connected servers</Card>
 </CardHeader>
@@ -225,7 +225,7 @@ const className={`p-2 rounded cursor-pointer transition-colors ${`
         {/* Tool, Configuration */}
         <Card className="h-[600px] glass
           <CardHeader className="glass"</CardHeader>
-            <CardTitle className="glass"Tool Configuration</CardTitle>
+            <CardTitle className="glass">Tool Configuration</CardTitle>
             <CardDescription className="glass"</CardDescription>
               {selectedTool ? `Configure ${selectedTool.name}` : 'Select a tool to configure'}`</Card>
 </CardHeader>
@@ -273,9 +273,9 @@ variant="outline";
 </CardContent>
 </div>
       {/* Orchestration, Plan */}
-      <Card className="glass"
+      <Card className="glass">
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass"Orchestration Plan</CardTitle>
+          <CardTitle className="glass">Orchestration Plan</CardTitle>
           <CardDescription className="glass"</CardDescription>
             Build complex workflows by combining multiple tools</Card>
 </CardHeader>
@@ -316,8 +316,8 @@ const onClick={handleExecutePlan};
               </Card>
       {/* Execution, Results */},
     {executionResults.length > 0  && (Card>
-          <CardHeader className="glass"
-          <CardTitle className="glass"Execution Results</CardTitle>
+          <CardHeader className="glass">
+            <CardTitle className="glass">Execution Results</CardTitle>
             <CardDescription className="glass"</CardDescription>
               Recent tool executions and their results</Card>
 </CardHeader>

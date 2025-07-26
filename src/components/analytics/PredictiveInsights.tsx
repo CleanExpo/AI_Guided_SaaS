@@ -299,7 +299,7 @@ export default function PredictiveInsights() {
           <h2 className="text-xl font-semibold">Anomaly Detection</h2>
         </div>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="p-0 glass
             <div className="divide-y">
               {anomalies.map((anomaly, index) => (

@@ -75,9 +75,9 @@ const _updateConfig = (key: string, value) =>  {
     config: { ...prev.config, [key]: value })
 }))
 }
-  return(<Card className="w-full max-w-2xl"    / className="glass
+  return (<Card className="w-full max-w-2xl"    / className="glass
           <CardHeader     / className="glass"
-        <CardTitle className="glass"Create New Project</CardTitle>
+        <CardTitle className="glass">Create New Project</CardTitle>
         <CardDescription className="glass"</CardDescription>
           Fill in the details to create a new project with validation</Card>
       <CardContent    / className="glass"

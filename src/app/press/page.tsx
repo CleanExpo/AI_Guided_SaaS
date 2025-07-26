@@ -51,12 +51,12 @@ export default function PressPage() {
         <div className="glass grid gap-8 lg:grid-cols-3">
           {/* Press Releases */}
           <div className="lg:col-span-2">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Latest Press Releases</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Latest Press Releases</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-6">
+              <CardContent className="glass">
+            <div className="space-y-6">
                   {pressReleases.map((release, index) => (
                     <div key={index} className="-b -gray-200 pb-4 last:-b-0">
                       <div className="flex items-start justify-between mb-2">
@@ -83,12 +83,12 @@ export default function PressPage() {
 
           {/* Media Kit */}
           <div>
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Media Kit</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Media Kit</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   {mediaKit.map((item, index) => (
                     <div key={index} className="flex items-center justify-between p-3  rounded-xl-lg">
                       <div>
@@ -111,11 +111,11 @@ export default function PressPage() {
 
             {/* Contact */}
             <Card className="mt-6 glass
-              <CardHeader className="glass"
-                <CardTitle className="glass"Media Contact</CardTitle>
+              <CardHeader className="glass">
+            <CardTitle className="glass">Media Contact</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-2">
+              <CardContent className="glass">
+            <div className="space-y-2">
                   <p className="font-medium">Sarah Johnson</p>
                   <p className="text-gray-600">Head of Communications</p>
                   <p className="text-gray-600">press@aiguidedsaas.com</p>

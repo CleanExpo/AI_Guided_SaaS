@@ -15,7 +15,7 @@ export function FormGroup({
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return()
+  return ()
     <div className={cn('space-y-2', className)}>
       {label && (
         <div className="flex items-center space-x-1">

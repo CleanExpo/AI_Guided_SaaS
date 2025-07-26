@@ -125,7 +125,7 @@ const a = document.createElement('a');
     break
 };
       default: return 'bg-gray-100 text-gray-700'}}
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Data, Sources List */}</div>
       <Card className = "p-6" className="glass
           <h3 className="text-lg font-semibold mb-4">Data Sources</h3>
@@ -137,7 +137,7 @@ const a = document.createElement('a');
                 <div>
           <h4 className="font-medium">{source.name}</h4>
                   <div className="flex items-center gap-2 mt-1">
-          <Badge className={cn("text-xs" getSourceBadgeColor(source.type))} />>
+          <Badge className={cn("text-xs" getSourceBadgeColor(source.type))} />
                       {source.type}/>
                     {source.lastSync  && (
 span className="text-xs text-muted-foreground">
@@ -158,7 +158,7 @@ span className="text-xs text-muted-foreground">
       <Card className="glass p-6">
           <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Configure {activeSource.name}</h3>
-          <Badge className={getSourceBadgeColor(activeSource.type)} />>
+          <Badge className={getSourceBadgeColor(activeSource.type)} />
             {getSourceIcon(activeSource.type)}/>
             <span className="ml-1">{activeSource.type}</span>
         {activeSource.type === 'mock'  && (div className="space-y-4">
@@ -216,7 +216,7 @@ span className="text-xs text-muted-foreground">
                   endpoint: e.target.value)
     })};
                 ="https: //api.example.com/data"
-className="mt-1" / />>
+className="mt-1" / />
         <div>
           <label className="text-sm font-medium">Headers (JSON)</label>
               <Textarea
@@ -259,7 +259,7 @@ const rows={4/></Textarea>
                   connectionString: e.target.value)
     })};
                 ="postgresql: //user:password@host:port/database"
-className="mt-1" / />>
+className="mt-1" / />
         <Alert>
           <AlertTriangle className="h-4 w-4"     />
               <AlertDescription></AlertDescription>

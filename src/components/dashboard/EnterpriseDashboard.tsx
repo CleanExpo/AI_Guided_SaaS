@@ -74,7 +74,7 @@ export default function EnterpriseDashboard({
   };
 
   if (loading) {
-    return(<div className="flex items-center justify-center min-h-screen">
+    return (<div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <p className="text-gray-600">Loading enterprise dashboard...</p>
         </div>
@@ -82,7 +82,7 @@ export default function EnterpriseDashboard({
     );
   }
 
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div>
@@ -94,8 +94,7 @@ export default function EnterpriseDashboard({
         <div className="flex items-center space-x-2">
           <select)
             value={timeRange}>onChange={(e) => setTimeRange(e.target.value)}
-            className="px-3 py-2 border rounded-md"
-          >
+            className="px-3 py-2 border rounded-md">
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>
             <option value="90d">Last 90 days</option>

@@ -58,7 +58,7 @@ export function AdminAnalytics({ data, timeRange = '7d' }: AdminAnalyticsProps =
   
   const analyticsData = data || defaultData;
   
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Overview Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="glass">

@@ -26,7 +26,7 @@ export function TextareaEnhanced({
   const displayText = hasError ? errorText : helperText;
   const currentLength = typeof value === 'string' ? value.length : 0;
 
-  return(<div className="w-full">
+  return (<div className="w-full">
       {label && (
         <label
           htmlFor={textareaId}>className="block text-sm font-medium text-foreground mb-1">>
@@ -45,7 +45,7 @@ export function TextareaEnhanced({
           className)
         )}
         maxLength={maxLength}
-        value={value}>{...props} />>
+        value={value}>{...props} />
       
       <div className="flex justify-between items-center mt-1">
         {displayText && (

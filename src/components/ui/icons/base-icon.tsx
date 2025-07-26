@@ -9,7 +9,7 @@ export function Icon({
   color = 'current')
   ...props)
 }: IconProps & { children: React.ReactNode }) {
-  return(<svg
+  return (<svg
       className={cn(
         sizeClasses[size],
         colorClasses[color],

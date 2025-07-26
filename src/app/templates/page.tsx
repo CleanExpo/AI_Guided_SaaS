@@ -46,7 +46,7 @@ export default function TemplatesPage() {
     template.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return(<div className="container mx-auto max-w-6xl py-12 px-4">
+  return (<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Template Marketplace</h1>
         <p className="text-xl text-gray-600">Start your project with professional templates</p>
@@ -72,19 +72,18 @@ export default function TemplatesPage() {
           <div className="glass grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (
               <Card key={template.id} className="overflow-hidden glass
-                <CardHeader className="glass"
-                  <CardTitle className="text-lg glass{template.name}</CardTitle>
+                <CardHeader className="glass">
+            <CardTitle className="text-lg glass{template.name}</CardTitle>
                   <p className="text-sm text-gray-600">{template.description}</p>
                 </CardHeader>
-                <CardContent className="glass"
-          <div className="flex flex-wrap gap-2 mb-4">
+                <CardContent className="glass">
+            <div className="flex flex-wrap gap-2 mb-4">
                     {template.tags.map((tag) => (
                       <Badge key={tag} variant="secondary">{tag}</Badge>
                     ))}
                   </div>
                   <Button >onClick={() => handleUseTemplate(template.id)}
-                    className="w-full bg-orange-500 hover:bg-orange-600"
-                  >
+                    className="w-full bg-orange-500 hover:bg-orange-600">
                     Use Template
                   </Button>
                 </CardContent>

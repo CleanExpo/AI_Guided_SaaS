@@ -94,7 +94,7 @@ break
       default: return 'text-gray-600 bg-gray-100'}}
   const _isCompleted = (sectionId: string) => {
     return userProgress?.sectionsCompleted?.includes(sectionId)};
-  return(<div className="flex h-full">
+  return (<div className="flex h-full">
       {/* Sidebar */}</div>)
       <div className={cn(`>"border-r transition-all duration-300 flex flex-col" sidebarCollapsed ? "w-16" : "w-80">)`}>``</div>
         {/* Search */}</div>
@@ -150,7 +150,7 @@ h3 className="text-sm font-semibold mb-2">Search Results</h3>
                   ))}
       </div>
             ) : (categories.map((category) => {
-                const sections = documentationSystem.getSectionsByCategory(category.id, if (sections.length === 0) {r}eturn null, return(<div;>const key={category.id};></div>
+                const sections = documentationSystem.getSectionsByCategory(category.id, if (sections.length === 0) {r}eturn null, return (<div;>const key={category.id};></div>
                     {!sidebarCollapsed  && (
 div className="flex items-center gap-2 mb-2">
                         <category.icon className="h-4 w-4 text-muted-foreground"    />
@@ -206,7 +206,7 @@ div className="flex items-center gap-2 mb-2">
           <div></div>
                   <h1 className="text-2xl font-bold mb-2">{selectedSection.title}</h1>
                   <div className="glass flex items-center gap-4 text-sm text-muted-foreground">
-          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)} />>
+          <Badge className={getDifficultyColor(selectedSection.metadata.difficulty)} />
                       {selectedSection.metadata.difficulty}
 />
                     <div className="flex items-center gap-1">
@@ -260,10 +260,8 @@ style={vscDarkPlus} language={match[1]};
                       <h3 className="text-sm font-semibold mb-2">Related Topics</h3>
                       <div className="space-y-1">
                         {selectedSection.relatedSections.map((relatedId) => {
-                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;)
-                              >const key={relatedId};>const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
-                              className="text-sm text-primary hover: underline"
-                            >
+                          const related = documentationSystem.getSection(relatedId, </div>, return related ? (<button;>const key={relatedId};>const onClick={() = aria-label="Button"> setSelectedSection(related)};</button>
+                              className="text-sm text-primary hover: underline">
                               {related.title}</button>
                           ) : null
                         })}

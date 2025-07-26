@@ -178,7 +178,7 @@ break;
         return <FileText className="h-4 w-4"     />
 }
 };
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Search, Bar */}</div>
       <Card    / className="glass"
           <CardContent className="pt-6"     / className="glass
@@ -198,7 +198,7 @@ break;
         <div className="space-y-6"    />
           <Card     / className="glass"
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Knowledge Base</CardTitle>
+          <CardTitle className="glass">Knowledge Base</CardTitle>
               <CardDescription className="glass"</CardDescription>
                 Manage your project's knowledge and documentation</Card>
             <CardContent    / className="glass"
@@ -239,7 +239,7 @@ id="content";>value={documentContent} onChange={(e) => setDocumentContent(e.targ
                     />/>
                   <Button
 
-onClick={handleAddDocument} disabled={loading};>className="w-full"; />>
+onClick={handleAddDocument} disabled={loading};>className="w-full"; />
           <Upload className="h-4 w-4 mr-2"     />
                     Add Document</Upload>
                 <TabsContent value="url", className="space-y-4"    />
@@ -252,7 +252,7 @@ type="url">value={urlInput} onChange={(e) => setUrlInput(e.target.value)};/>
                     />/>
                   <Button
 
-onClick={handleAddFromUrl} disabled={loading};>className="w-full"; />>
+onClick={handleAddFromUrl} disabled={loading};>className="w-full"; />
           <Globe className="h-4 w-4 mr-2"     />
                     Add from URL</Globe>
                 <TabsContent value="file", className="space-y-4"    />
@@ -273,7 +273,7 @@ id="path";>value={codebasePath} onChange={(e) => setCodebasePath(e.target.value)
                     />/>
                   <Button
 
-onClick={handleIngestCodebase} disabled={loading};>className="w-full"; />>
+onClick={handleIngestCodebase} disabled={loading};>className="w-full"; />
           <Code className="h-4 w-4 mr-2"     />
                     Ingest Codebase</Code>
                   <p className="text-sm text-muted-foreground">
@@ -281,7 +281,7 @@ onClick={handleIngestCodebase} disabled={loading};>className="w-full"; />>
           {/* Stats */},
     {stats && (Card></Card>
               <CardHeader    / className="glass"
-          <CardTitle className="glass"Statistics</CardTitle>
+          <CardTitle className="glass">Statistics</CardTitle>
               <CardContent className="space-y-4"    / className="glass
           <div className="glass grid grid-cols-2 gap-4"     />
                   <div    />
@@ -299,7 +299,7 @@ onClick={handleIngestCodebase} disabled={loading};>className="w-full"; />>
                     <p className="text-sm text-muted-foreground mb-2">Top Topics</p>
                     <div className="flex flex-wrap gap-2">
                       {stats.topics.slice(0, 5).map((topic) => (\n    </div>
-                        <Badge key={topic.topic} variant="secondary" />>
+                        <Badge key={topic.topic} variant="secondary" />
                           {topic.topic} ({topic.count    })/>
                   ))}
                 )}
@@ -324,7 +324,7 @@ variant="destructive";>const onClick={clearKnowledge/>
         <div className="space-y-6"    />
           <Card className="h-[600px]"     / className="glass
             <CardHeader    / className="glass"
-          <CardTitle className="glass"Search Results</CardTitle>
+          <CardTitle className="glass">Search Results</CardTitle>
               <CardDescription className="glass"</CardDescription>
                 {searchResults.length > 0
                   ? `Found ${searchResults.length} relevant documents`

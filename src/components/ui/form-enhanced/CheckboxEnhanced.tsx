@@ -29,7 +29,7 @@ export function CheckboxEnhanced({
     }
   }, [indeterminate]);
 
-  return(<div className="flex items-start space-x-2">
+  return (<div className="flex items-start space-x-2">
       <div className="relative flex items-center justify-center">
         <input
           ref={checkboxRef}
@@ -43,7 +43,7 @@ export function CheckboxEnhanced({
             state === 'success' && 'border-green-500 focus:ring-green-500',
             state === 'warning' && 'border-yellow-500 focus:ring-yellow-500')
             className)
-          )}>{...props} />>
+          )}>{...props} />
         
         {(checked || indeterminate) && (
           <div className={cn()

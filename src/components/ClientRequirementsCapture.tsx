@@ -76,7 +76,7 @@ low: 'bg-gray-100 text-gray-800'
 };
     return colors[priority] || 'bg-gray-100 text-gray-800'
 }
-  return(<div className="max-w-4xl mx-auto space-y-6"    />
+  return (<div className="max-w-4xl mx-auto space-y-6"    />
           <Card     / className="glass"
         <CardHeader    / className="glass"
           <CardTitle className="text-2xl glassDescribe Your Project</CardTitle>
@@ -147,17 +147,17 @@ const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
                   <p className="text-sm text-muted-foreground">AI Agents</p>
           <Card    / className="glass"
           <CardHeader     / className="glass"
-              <CardTitle className="glass"Extracted Requirements</CardTitle>
+              <CardTitle className="glass">Extracted Requirements</CardTitle>
             <CardContent    / className="glass"
           <div className="space-y-3">
                 {result.requirements.map((req) => (\n    </div>
                   <div key={req.id} className="glass p-4  rounded-xl-lg space-y-2"    />
           <div className="flex items-start justify-between"     />
                       <p className="font-medium">{req.description}</p>
-                      <Badge className={getPriorityColor(req.priority)} />>
+                      <Badge className={getPriorityColor(req.priority)} />
                         {req.priority}/>
                     <div className="flex items-center gap-2"    />
-          <Badge className={getCategoryColor(req.category)} />>
+          <Badge className={getCategoryColor(req.category)} />
                         {req.category}/>
                       {req.agents.map((agent) => (\n    <Badge key={agent} variant="outline", className="text-xs">
                           {agent.replace('agent_', '')}/>
@@ -165,7 +165,7 @@ const disabled={isProcessing || !input.trim()};>className="w-full";>></Button>
                 ))}
           <Card    / className="glass"
           <CardHeader     / className="glass"
-              <CardTitle className="glass"Development Roadmap</CardTitle>
+              <CardTitle className="glass">Development Roadmap</CardTitle>
             <CardContent    / className="glass"
           <div className="space-y-4">
                 {result.roadmap.phases.map((phase, index) => (\n    </div>

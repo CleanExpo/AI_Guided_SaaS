@@ -49,7 +49,7 @@ export default function PWAInstallPrompt() {
     return null;
   }
 
-  return(<>
+  return (<>
       {/* Mobile Bottom Sheet Style */}
       {isMobile ? (
         <div className="glass fixed inset-x-0 bottom-0 z-50 p-4 bg-gradient-to-t from-black/50 to-transparent">

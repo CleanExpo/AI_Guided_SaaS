@@ -125,13 +125,13 @@ const matchesFilter = ;
     return matchesSearch && matchesFilter
 });
   if (loading) {
-    return()
+    return ()
     <div className="flex items-center justify-center min-h-screen text-center">);</div>
           <p className="Loading admin panel..."    />
           </div>
     )
 }
-  return(<div className="min-h-screen glass">
+  return (<div className="min-h-screen glass">
       {/* Header */}</div>
       <div className="glass -b max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 flex items-center space-x-4"     />
@@ -239,7 +239,7 @@ const className={
                   <option value="suspended">Suspended</option>
                   <option value="deleted">Deleted</option>
 </div>
-            <Card className="glass"
+            <Card className="glass">
           <CardContent className="p-0 glass>">
               <div className="overflow-x-auto">
           <table className="w-full">
@@ -272,7 +272,7 @@ ID: { user.id }</div>
                           <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-900">{user.email}</div>
                           <td className="px-6 py-4 whitespace-nowrap">
-          <Badge className={getStatusColor(user.status)} />>
+          <Badge className={getStatusColor(user.status)} />
                               {user.status}
 />
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -324,7 +324,7 @@ variant="ghost";>const onClick={() => handleUserStatusUpdate(user.id, 'active')}
                         <p className="text-sm text-gray-600">
                           By {item.author} • {formatDate(item.createdAt)}
 </p>
-                        <Badge className={getStatusColor(item.status)} />>
+                        <Badge className={getStatusColor(item.status)} />
                           {item.status}
 />
                       <div className="flex space-x-2">
@@ -366,7 +366,7 @@ variant="outline";>const onClick={() => handleContentModeration(item.id, 'flag')
           {/* Activity Tab */}
           <TabsContent value="activity" className="space-y-6">
           <h2 className="text-2xl font-bold">Admin Activity Log</h2>
-            <Card className="glass"
+            <Card className="glass">
           <CardContent className="p-0 glass>">
               <div className="overflow-x-auto">
           <table className="w-full">

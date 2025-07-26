@@ -64,7 +64,7 @@ export default function LLMSettingsPage() {
     for (let i = 0; i < providers.length; i++) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setProviders(prev => prev.map((p, idx) => 
-        idx === i ? { ...p, available: Math.random() > 0.2 } : p
+        idx === i ? { ...p, available: Math.random(> 0.2 } : p
       ));
     }
     
@@ -79,7 +79,7 @@ export default function LLMSettingsPage() {
     return available ? CheckCircle : AlertCircle;
   };
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -89,8 +89,8 @@ export default function LLMSettingsPage() {
 
         {/* System Status */}
         <div className="glass grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Success Rate</p>
@@ -101,8 +101,8 @@ export default function LLMSettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Avg Latency</p>
@@ -113,8 +113,8 @@ export default function LLMSettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Total Cost</p>)
@@ -125,8 +125,8 @@ export default function LLMSettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardContent className="glass p-6">
+          <Card className="glass">
+          <CardContent className="glass p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Fallback Rate</p>
@@ -142,7 +142,7 @@ export default function LLMSettingsPage() {
         <Card className="mb-8 glass
           <CardHeader className="glass"
             <div className="flex items-center justify-between">
-              <CardTitle className="glass"Provider Status</CardTitle>
+              <CardTitle className="glass">Provider Status</CardTitle>
               <Button
                 onClick={testProviders}
                 disabled={isTestingProviders}>variant="outline">>
@@ -151,11 +151,11 @@ export default function LLMSettingsPage() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="space-y-4">
               {providers.map((provider) => {
                 const StatusIcon = getProviderStatusIcon(provider.available);
-                return(<div key={provider.name} className="glass  rounded-xl-lg p-4">
+                return (<div key={provider.name} className="glass  rounded-xl-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
                         <Brain className="h-5 w-5 text-gray-600" />
@@ -196,7 +196,7 @@ export default function LLMSettingsPage() {
                           <span>{provider.latency}ms</span>
                         </div>
                         <Progress 
-                          value={(1000 - provider.latency) / 10} >className="h-2" />>
+                          value={(1000 - provider.latency) / 10} >className="h-2" />
                       </div>
                     )}
                   </div>
@@ -208,12 +208,12 @@ export default function LLMSettingsPage() {
 
         {/* Configuration */}
         <div className="glass grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Fallback Configuration</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Fallback Configuration</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700">Provider Selection</label>
                   <select 
@@ -233,7 +233,7 @@ export default function LLMSettingsPage() {
                     type="number" 
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="3"
-                    min="1">max="5" />>
+                    min="1">max="5" />
                 </div>
 
                 <div>
@@ -243,7 +243,7 @@ export default function LLMSettingsPage() {
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="30000"
                     min="5000"
-                    max="60000">step="1000" />>
+                    max="60000">step="1000" />
                 </div>
 
                 <div>
@@ -253,7 +253,7 @@ export default function LLMSettingsPage() {
                     className="mt-1 w-full px-3 py-2  rounded-xl-lg"
                     defaultValue="0.50"
                     min="0.01"
-                    max="10">step="0.01" />>
+                    max="10">step="0.01" />
                 </div>
 
                 <Button className="w-full">Save Configuration</Button>
@@ -261,12 +261,12 @@ export default function LLMSettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Usage Statistics</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Usage Statistics</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">Total Requests</span>
@@ -283,7 +283,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={metrics.successRate} >className="h-2 bg-green-100" />>
+                    value={metrics.successRate} >className="h-2 bg-green-100" />
                 </div>
 
                 <div>
@@ -294,7 +294,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={(metrics.failedRequests / metrics.totalRequests) * 100} >className="h-2 bg-red-100" />>
+                    value={(metrics.failedRequests / metrics.totalRequests) * 100} >className="h-2 bg-red-100" />
                 </div>
 
                 <div>
@@ -305,7 +305,7 @@ export default function LLMSettingsPage() {
                     </span>
                   </div>
                   <Progress 
-                    value={metrics.fallbackRate} >className="h-2 bg-yellow-100" />>
+                    value={metrics.fallbackRate} >className="h-2 bg-yellow-100" />
                 </div>
 
                 <div className="pt-4 -t">

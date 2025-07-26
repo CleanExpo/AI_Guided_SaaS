@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 
 export default function CookiesPage() {
-  return(<div className="min-h-screen glass py-12">
+  return (<div className="min-h-screen glass py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Cookie Policy</h1>
@@ -20,9 +20,9 @@ export default function CookiesPage() {
         </div>
         
         <div className="space-y-8">
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"What are cookies?</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">What are cookies?</CardTitle>
             </CardHeader>
             <CardContent className="glass"
               <p className="text-gray-600">
@@ -33,12 +33,12 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"How we use cookies</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">How we use cookies</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="space-y-4">
+            <CardContent className="glass">
+            <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900">Essential Cookies</h3>
                   <p className="text-gray-600">
@@ -64,9 +64,9 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Managing cookies</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Managing cookies</CardTitle>
             </CardHeader>
             <CardContent className="glass"
               <p className="text-gray-600 mb-4">
@@ -81,9 +81,9 @@ export default function CookiesPage() {
             </CardContent>
           </Card>
           
-          <Card className="glass"
-            <CardHeader className="glass"
-              <CardTitle className="glass"Contact us</CardTitle>
+          <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Contact us</CardTitle>
             </CardHeader>
             <CardContent className="glass"
               <p className="text-gray-600">

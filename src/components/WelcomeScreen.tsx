@@ -102,7 +102,7 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
       onSelectPersona(persona)
 }, 300)
 };
-  return(<div className = "min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4 max-w-6xl w-full">
+  return (<div className = "min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-brand-primary-50 flex items-center justify-center p-4 max-w-6xl w-full">
           <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-brand-primary-600 bg-clip-text text-transparent mb-4">
             AI-Guided SaaS Builder
@@ -124,8 +124,8 @@ export default function WelcomeScreen({ onSelectPersona }: WelcomeScreenProps) {
                 <CardDescription className="text-sm text-gray-600 glass
                   {persona.description}</Card>
 </CardHeader>
-              <CardContent className="glass"
-          <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   <div>
           <h4 className="font-medium text-sm text-gray-700 mb-2">
 Expertise:

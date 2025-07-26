@@ -166,7 +166,7 @@ default: return `✅ Command executed successfully```}
     if (memoryStatus.utilizationRate < 0.9) {r}eturn 'Consider /compact-docs optimization';
     return 'Immediate /compact-docs recommended' };
   const _renderMemoryStatus = () => (
-    <Card className="glass"
+    <Card className="glass">
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="flex items-center gap-2 glass
           <Brain className="w-5 h-5"     />
@@ -205,17 +205,17 @@ default: return `✅ Command executed successfully```}
 };
 
 const _renderCommandInterface = () => (
-    <Card className="glass"
+    <Card className="glass">
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="flex items-center gap-2 glass
           <Terminal className="w-5 h-5"     />
             Claude Code Commands</Terminal>
           <CardDescription className="glass"</CardDescription>
             Execute Claude Code documentation commands</CardDescription>
-        <CardContent className="glass"
-          <div className="grid grid-cols-2 gap-3">
+        <CardContent className="glass">
+            <div className="grid grid-cols-2 gap-3">
             {claudeCommands.map((cmd, index) => {
-              const _Icon = cmd.icon, </div>, return(<motion.div;
+              const _Icon = cmd.icon, </div>, return (<motion.div;
                   
 const key={cmd.command};
                   initial={{ opacity: 0, y: 20 } animate={{ opacity: 1, y: 0 }>const transition={{ delay: index * 0.1 }>
@@ -241,15 +241,15 @@ const variant={ currentCommand === cmd.command ? 'default' : 'outline' };)
 </div>
       )};
   const _renderCommandHistory = () => (
-    <Card className="glass"
+    <Card className="glass">
           <CardHeader className="glass"</CardHeader>
           <CardTitle className="flex items-center gap-2 glass
           <Clock className="w-5 h-5"     />
             Command History</Clock>
           <CardDescription className="glass"</CardDescription>
             Recent Claude Code command executions</CardDescription>
-        <CardContent className="glass"
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+        <CardContent className="glass">
+            <div className="space-y-3 max-h-96 overflow-y-auto">
             {commandHistory.length === 0 ? (</div>
           <p className=">No commands executed yet"    />
           </div>
@@ -285,9 +285,9 @@ Token: Impact: {execution.tokenImpact > 0 ? '+' : ''},</span>
   };
   
 const _renderWorkflowResults = (): void => {
-    if (!workflowResult) {r}eturn null, return(Card>
-        <CardHeader className="glass"
-          <CardTitle className = "flex items-center gap-2" className="glass<TrendingUp className="w-5 h-5"     />
+    if (!workflowResult) {r}eturn null, return (Card>
+        <CardHeader className="glass">
+            <CardTitle className = "flex items-center gap-2" className="glass<TrendingUp className="w-5 h-5"     />
             Workflow Results</TrendingUp>
           <CardDescription className="glass"</CardDescription>
             Claude Code integration workflow outcomes</CardDescription>
@@ -318,7 +318,7 @@ const _renderWorkflowResults = (): void => {
               ))}
 </ul>
 };
-  return(<div className="space-y-6 text-center"    />
+  return (<div className="space-y-6 text-center"    />
           <h2 className="text-2xl font-bold mb-2">
           Claude Code Integration Dashboard</h2>
         <p className="text-muted-foreground">

@@ -155,9 +155,9 @@ export default function TemplateInstaller({
   const completedSteps = installSteps.filter(s => s.status === 'completed').length;
   const progress = (completedSteps / installSteps.length) * 100;
 
-  return(<Card className="max-w-2xl mx-auto glass
-      <CardHeader className="glass"
-        <CardTitle className="glass"Install {templateName}</CardTitle>
+  return (<Card className="max-w-2xl mx-auto glass
+      <CardHeader className="glass">
+            <CardTitle className="glass">Install {templateName}</CardTitle>
       </CardHeader>
       <CardContent className="glass"
         {currentStep === 'config' && (
@@ -194,8 +194,7 @@ export default function TemplateInstaller({
                         ...config)
                         [variable.name]: e.target.value)
                       })}
-                      className="mt-1 w-full px-3 py-2  rounded-xl-lg"
-                    >
+                      className="mt-1 w-full px-3 py-2  rounded-xl-lg">
                       {variable.options?.map(option => (
                         <option key={option} value={option}>)
                           {option.charAt(0).toUpperCase() + option.slice(1)}

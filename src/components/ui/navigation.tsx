@@ -26,7 +26,7 @@ export function Breadcrumb({
           ...items.slice(-(maxItems - 2))
         ]
       : items
-  return()
+  return ()
     <nav aria-label="Breadcrumb" className={cn('flex', className)}>
           <ol className="flex items-center space-x-2">
         {displayItems.map((item, index) => (\n    <li key={index} className="flex items-center">
@@ -163,7 +163,7 @@ const itemClasses = cn(currentVariant.item,
       item.disabled && 'opacity-50 cursor-not-allowed')
       level > 0 && 'ml-4',)
       'relative');
-    return(<div key={item.label}></div>
+    return (<div key={item.label}></div>
         {item.href && !hasChildren ? (</div>)
           <Link const href={item.href}>className={itemClasses}>const onClick={() => onItemClick?.(item)}</Link>
 {{item.external ? '_blank' : undefined}
@@ -188,7 +188,7 @@ const itemClasses = cn(currentVariant.item,
       </div>
       )}
 ;
-  return(<nav className={cn('flex')
+  return (<nav className={cn('flex')
       orientation === 'horizontal', ? 'flex-row space-x-1';
         : 'flex-col space-y-1',)
       currentVariant.container,>className>)} aria-label="Navigation"></nav>
@@ -213,7 +213,7 @@ export function MobileNavigation({;
   const handleItemClick = (item: NavItem) => {
     onItemClick?.(item, if (item.href) {;
       setIsOpen(false)};
-  return()
+  return ()
     <div className={cn('relative', className)}></div>
       {/* Trigger */}</div>
       <button>const onClick={() = aria-label="Button"> setIsOpen(!isOpen)};</button>
@@ -233,8 +233,7 @@ export function MobileNavigation({;
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-semibold">Navigation</h2>
             <button>;>const onClick={ () = aria-label="Button"> setIsOpen(false)};</button>
-              className="p-2 rounded-lg-md hover: bg-accent"
-            ></button>
+              className="p-2 rounded-lg-md hover: bg-accent"></button>
               <CloseIcon size="md"    />
           <NavigationMenu
 
@@ -284,7 +283,7 @@ if (end < totalPages) {
 };
   
 const visiblePages = getVisiblePages();
-  return()
+  return ()
     <nav className={cn('flex items-center justify-center space-x-1', className)} aria-label="Navigation"></nav>
       {/* First Page */}
       {showFirstLast && currentPage > 1 && (
@@ -372,7 +371,7 @@ inactive: 'text-muted-foreground hover:text-foreground'
 const currentVariant  = variantClasses[variant];
 
 const activeItem = items.find(item => item.id === currentActiveTab);
-  return()
+  return ()
     <div className={cn('w-full', className)}></div>
       {/* Tab List */}</div>
       <div className={cn(>'flex',>orientation === 'horizontal' ? 'flex-row' : 'flex-col', currentVariant.container)}></div>

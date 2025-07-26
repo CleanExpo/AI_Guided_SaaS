@@ -120,7 +120,7 @@ export default function EvaluationDashboard() {
 
   const trend = calculateTrend();
 
-  return(<div className="min-h-screen glass p-8">
+  return (<div className="min-h-screen glass p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -162,7 +162,7 @@ export default function EvaluationDashboard() {
               {latest && getStatusBadge(latest.overall)}
             </div>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="flex items-center justify-between">
               <div className="glass flex items-center gap-4">
                 <div className={`text-6xl font-bold ${latest ? getScoreColor(latest.overall) : ''}`}>
@@ -191,11 +191,11 @@ export default function EvaluationDashboard() {
         <div className="glass grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {latest && Object.entries(latest.scores).map(([component, data]) => (
             <Card key={component} className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="capitalize glass{component}</CardTitle>
+              <CardHeader className="glass">
+            <CardTitle className="capitalize glass{component}</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-4">
+              <CardContent className="glass">
+            <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className={`text-3xl font-bold ${getScoreColor(data.total)}`}>
                       {data.total.toFixed(1)}/10
@@ -223,18 +223,18 @@ export default function EvaluationDashboard() {
         </div>
 
         {/* History Chart */}
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Score History</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Score History</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="glass h-64 flex items-end justify-between gap-4">
               {history.map((entry, index) => (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
                   <div className="w-full flex flex-col items-center">
                     <span className="text-sm font-medium mb-1">{entry.overall.toFixed(1)}</span>
                     <div
-                      className="w-full glass-button primary rounded-lg-t">style={ height: `${(entry.overall / 10) * 200}px` } />>
+                      className="w-full glass-button primary rounded-lg-t">style={ height: `${(entry.overall / 10) * 200}px` } />
                   </div>
                   <div className="text-xs text-gray-600">
                     Cycle {entry.cycle}

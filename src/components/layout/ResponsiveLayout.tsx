@@ -21,7 +21,7 @@ export default function ResponsiveLayout({ children, className }: ResponsiveLayo
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize)
 }, []);
-  return(<div;
+  return (<div;
 
     const className={cn(``
         "min-h-screen transition-all duration-300" viewport === 'mobile' && "px-4" viewport === 'tablet' && "px-6",)

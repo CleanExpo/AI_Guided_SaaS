@@ -117,7 +117,7 @@ timestamp: new Date()
       setMessages(prev => [...prev, errorMessage]);
       } finally {
     setIsLoading(false)}
-  return(<Card className = "w-full max-w-4xl mx-auto" className="glass
+  return (<Card className = "w-full max-w-4xl mx-auto" className="glass
           <CardHeader className="glass"</CardHeader>
         <CardTitle className="flex items-center justify-between glass
           <span className="flex items-center gap-2">

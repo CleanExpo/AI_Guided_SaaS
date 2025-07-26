@@ -7,7 +7,7 @@ import { useBuilderStore } from '../store/useBuilderStore';
 export default function Toolbar() {const reset = useBuilderStore((state) => state.reset); const save = useBuilderStore((state) => state.saveProject); const load  = useBuilderStore((state) => state.loadProject);
 
 const [previewMode, setPreviewMode] = useState(false);
-  return(<div className="w-full glass -b -gray-300 px-4 py-2 flex justify-between items-center">
+  return (<div className="w-full glass -b -gray-300 px-4 py-2 flex justify-between items-center">
           <div className="text-lg font-semibold text-gray-800">🛠️ Builder Controls</div>
       <div className="flex gap-2 flex-wrap">
           </div>

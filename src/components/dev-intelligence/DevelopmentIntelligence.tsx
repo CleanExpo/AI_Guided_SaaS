@@ -157,7 +157,7 @@ export function DevelopmentIntelligence() {
 
       {/* Summary Cards */}
       <div className="glass grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="pb-2 glass
             <CardTitle className="text-sm font-medium glassProject Phase</CardTitle>
           </CardHeader>
@@ -168,11 +168,11 @@ export function DevelopmentIntelligence() {
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="pb-2 glass
             <CardTitle className="text-sm font-medium glassCompletion</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="flex items-center space-x-2">
               <Progress value={intelligence.completionPercentage} className="flex-1" />
               <span className="text-sm font-medium">{intelligence.completionPercentage}%</span>
@@ -180,22 +180,22 @@ export function DevelopmentIntelligence() {
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="pb-2 glass
             <CardTitle className="text-sm font-medium glassProduction Readiness</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className={`text-2xl font-bold ${getScoreColor(intelligence.productionReadinessScore)}`}>
               {intelligence.productionReadinessScore}/10
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="pb-2 glass
             <CardTitle className="text-sm font-medium glassIssues</CardTitle>
           </CardHeader>
-          <CardContent className="glass"
+          <CardContent className="glass">
             <div className="flex space-x-4">
               <div className="text-center">
                 <div className="text-red-600 font-bold">{intelligence.criticalIssues}</div>
@@ -337,8 +337,8 @@ function DependencyAnalysis() {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Dependency Health</h3>
       {/* Add dependency visualization here */}
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center gap-3">
             <Package className="h-5 w-5 text-gray-500" />
             <p>Dependency analysis will be displayed here</p>
@@ -376,8 +376,8 @@ function ProductionReadiness({ score }: { score: number }) {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Production Readiness Checklist</h3>
-      <Card className="glass"
-        <CardContent className="glass p-4">
+      <Card className="glass">
+          <CardContent className="glass p-4">
           <div className="flex items-center gap-3">
             <Shield className="h-5 w-5 text-gray-500" />
             <p>Score: {score}/10</p>

@@ -74,7 +74,7 @@ export default function SafeModeHealthCheck() {
     );
   };
 
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       <HeaderSection
         issues={issues}
         isScanning={isScanning}
@@ -83,11 +83,11 @@ export default function SafeModeHealthCheck() {
         onScanForIssues={handleScanForIssues}
         onStartSafeProcessing={handleStartSafeProcessing}
         onPauseProcessing={handlePauseProcessing}
-        onResumeProcessing={handleResumeProcessing}>onResetProcessing={handleResetProcessing} />>
+        onResumeProcessing={handleResumeProcessing}>onResetProcessing={handleResetProcessing} />
 
       <ConfigurationSection
         batchConfig={batchConfig}
-        setBatchConfig={setBatchConfig}>isProcessing={isProcessing} />>
+        setBatchConfig={setBatchConfig}>isProcessing={isProcessing} />
 
       <ProgressSection checkpoint={checkpoint} issues={issues} />
 

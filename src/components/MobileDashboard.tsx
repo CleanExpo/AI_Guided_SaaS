@@ -86,7 +86,7 @@ export default function MobileDashboard({ stats = {
     { icon: Settings, label: 'Settings', href: '/settings' }
   ];
 
-  return(<div className="min-h-screen glass pb-20">
+  return (<div className="min-h-screen glass pb-20">
       {/* Mobile Header */}
       <header className="sticky top-0 z-50 glass -b">
         <div className="glass flex items-center justify-between p-4">
@@ -102,7 +102,7 @@ export default function MobileDashboard({ stats = {
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-lg-full" />
             </Button>
             <Button 
-              variant="ghost" >size="sm")>onClick={() => setIsMenuOpen(!isMenuOpen)}
+              variant="ghost" >size="sm">onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>

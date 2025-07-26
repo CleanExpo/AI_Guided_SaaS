@@ -27,9 +27,9 @@ export default function NewGuidedProjectPage() {
   return (
     <div className="min-h-screen glass py-12">
           <div className="container mx-auto max-w-2xl px-4">
-        <Card className="glass"
-          <CardHeader className="glass"
-            <CardTitle className="glass"Create New Guided Project</CardTitle>
+        <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Create New Guided Project</CardTitle>
           </CardHeader>
           <CardContent className="glass"
           <form onSubmit={handleSubmit} className="space-y-6" role="form">

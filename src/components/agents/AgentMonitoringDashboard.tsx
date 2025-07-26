@@ -111,7 +111,7 @@ export function AgentMonitoringDashboard() {
 }
 };
 
-  return(<div className="w-full space-y-6">
+  return (<div className="w-full space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold">Agent Monitoring Dashboard</h2>
@@ -138,54 +138,54 @@ export function AgentMonitoringDashboard() {
           <CardTitle className="text-sm font-medium glassSystem Health</CardTitle>
             <Activity className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent className="glass"
-          <div className={`text-2xl font-bold ${getHealthColor(systemMetrics?.systemHealth || 'healthy')}`}></div>
+          <CardContent className="glass">
+            <div className={`text-2xl font-bold ${getHealthColor(systemMetrics?.systemHealth || 'healthy')}`}></div>
               {systemMetrics?.systemHealth || 'Unknown'}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
             <CardTitle className="text-sm font-medium glassActive Agents</CardTitle>
             <Users className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent className="glass"
-          <div className="text-2xl font-bold">
+          <CardContent className="glass">
+            <div className="text-2xl font-bold">
               {systemMetrics?.activeAgents || 0} / {agents.length}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
             <CardTitle className="text-sm font-medium glassTask Queue</CardTitle>
             <Clock className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent className="glass"
-          <div className="text-2xl font-bold">{systemMetrics?.queueLength || 0}</div>
+          <CardContent className="glass">
+            <div className="text-2xl font-bold">{systemMetrics?.queueLength || 0}</div>
           </CardContent>
         </Card>
 
-        <Card className="glass"
+        <Card className="glass">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 glass
             <CardTitle className="text-sm font-medium glassSuccess Rate</CardTitle>
             <BarChart3 className="w-4 h-4 text-muted-foreground"  />
           </CardHeader>
-          <CardContent className="glass"
-          <div className="text-2xl font-bold">
+          <CardContent className="glass">
+            <div className="text-2xl font-bold">
               {systemMetrics && systemMetrics.totalTasks > 0
                 ? Math.round((systemMetrics.completedTasks / systemMetrics.totalTasks) * 100)
                 : 0}%
             </div>
 
       {/* Task Statistics */}
-      <Card className="glass"
+      <Card className="glass">
           <CardHeader className="glass"</CardHeader>
-          <CardTitle className="glass"Task Statistics</CardTitle>
+          <CardTitle className="glass">Task Statistics</CardTitle>
         </CardHeader>
-        <CardContent className="glass"
-          <div className="space-y-4">
+        <CardContent className="glass">
+            <div className="space-y-4">
             <div className="flex items-center justify-between">
           <span className="text-sm font-medium">Total Tasks</span>
               <span className="text-2xl font-bold">{systemMetrics?.totalTasks || 0}</span>
@@ -231,11 +231,11 @@ export function AgentMonitoringDashboard() {
                     <CardTitle className="text-lg glass{agent.name}</CardTitle>
                     <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`/>
                 </CardHeader>
-                <CardContent className="glass"
-          <div className="space-y-2">
+                <CardContent className="glass">
+            <div className="space-y-2">
                     <div className="flex items-center justify-between">
           <span className="text-sm">Status</span>
-                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'} />>
+                      <Badge variant={agent.status === 'busy' ? 'default' : 'secondary'} />
                         {agent.status}
                       />
                     </div>
@@ -260,10 +260,10 @@ export function AgentMonitoringDashboard() {
             {agents.map((agent) => (
               <Card key={agent.id} className="glass"
           <CardHeader className="glass"</CardHeader>
-                  <CardTitle className="glass"{agent.name} Performance</CardTitle>
+                  <CardTitle className="glass">{agent.name} Performance</CardTitle>
                 </CardHeader>
-                <CardContent className="glass"
-          <div className="space-y-4">
+                <CardContent className="glass">
+            <div className="space-y-4">
                     <div>
           <div className="flex items-center justify-between mb-2">
                         <span className="text-sm flex items-center gap-2">
@@ -298,11 +298,11 @@ export function AgentMonitoringDashboard() {
 
         <TabsContent value="tasks" className="space-y-4">
           <Card className="glass"</Card>
-            <CardHeader className="glass"
-          <CardTitle className="glass"Task History</CardTitle>
+            <CardHeader className="glass">
+            <CardTitle className="glass">Task History</CardTitle>
             </CardHeader>
-            <CardContent className="glass"
-          <div className="space-y-2">
+            <CardContent className="glass">
+            <div className="space-y-2">
                 {agents.map((agent) => (
                   <div key={agent.id} className="glass  rounded-xl-lg p-4">
           <div className="flex items-center justify-between mb-2">
@@ -333,8 +333,8 @@ export function AgentMonitoringDashboard() {
               System Alerts
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass"
-          <div className="space-y-2">
+          <CardContent className="glass">
+            <div className="space-y-2">
               {systemMetrics?.systemHealth === 'degraded' && (
                 <div className="text-sm">
                   System performance is degraded. High resource usage detected.

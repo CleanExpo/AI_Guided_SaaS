@@ -11,7 +11,7 @@ interface CurrentBatchSectionProps {
 export function CurrentBatchSection({ currentBatch }: CurrentBatchSectionProps) {
   if (currentBatch.length === 0) return null;
 
-  return(<Card className="glass p-4">
+  return (<Card className="glass p-4">
       <h3 className="font-medium text-gray-700 mb-3">🔧 Current Batch</h3>
       <div className="space-y-2">)
         {currentBatch.map((issue) => (

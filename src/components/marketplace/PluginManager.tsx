@@ -163,7 +163,7 @@ export default function PluginManager() {
     }
   };
 
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -178,7 +178,7 @@ export default function PluginManager() {
 
       {/* Stats */}
       <div className="glass grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -189,7 +189,7 @@ export default function PluginManager() {
             </div>
           </CardContent>
         </Card>
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -202,7 +202,7 @@ export default function PluginManager() {
             </div>
           </CardContent>
         </Card>
-        <Card className="glass"
+        <Card className="glass">
           <CardContent className="glass p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -246,8 +246,8 @@ export default function PluginManager() {
                 />
               </div>
             </CardHeader>
-            <CardContent className="glass"
-              <div className="flex items-center justify-between">
+            <CardContent className="glass">
+            <div className="flex items-center justify-between">
                 <div className="flex gap-2">
                   <Button
                     variant="outline">size="sm">onClick={() => setSelectedPlugin(selectedPlugin === plugin.id ? null : plugin.id)
@@ -315,7 +315,7 @@ export default function PluginManager() {
                         ) : (
                           <input
                             type="text"
-                            className="px-3 py-1  rounded-lg-md text-sm">defaultValue={value} />>
+                            className="px-3 py-1  rounded-lg-md text-sm">defaultValue={value} />
                         )}
                       </div>
                     ))}

@@ -39,7 +39,7 @@ const handleGoogleSignIn = async () =>  {
     })
     } catch {;
       setError('Failed to sign in with Google'); setIsGoogleLoading(false)};
-  return(<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
+  return (<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
           <Card className="w-full max-w-md glass
         <CardHeader className="text-center glass
           <CardTitle className="text-2xl font-bold glassWelcome Back</CardTitle>

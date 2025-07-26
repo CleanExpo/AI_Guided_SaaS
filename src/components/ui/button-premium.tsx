@@ -45,7 +45,7 @@ export interface ButtonPremiumProps extends Omit<React.ButtonHTMLAttributes<HTML
         default: return { boxShadow: designTokens.shadows.glow.primary }};
     const _motionProps  = asChild ? {} : { whileHover: { scale: variant === 'floating' ? 1.05 : 1.02 },
     whileTap: { scale: 0.98 }
-        return(<Comp className={ cn(
+        return (<Comp className={ cn(
           buttonVariants({ variant size animation, className `}
   , ``
           glow && 'animate-pulse-slow')

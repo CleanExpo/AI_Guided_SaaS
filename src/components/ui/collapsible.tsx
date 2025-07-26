@@ -28,7 +28,7 @@ const Collapsible = React.forwardRef<HTMLDivElement, CollapsibleProps>(
     const openState = isControlled ? open || false : internalOpen;
     const setOpenState = isControlled ? onOpenChange || (() => {}) : setInternalOpen;
     
-    return(<CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}>)
+    return (<CollapsibleContext.Provider value={{ open: openState, onOpenChange: setOpenState }}>)
         <div ref={ref} className={cn('', className)}>
           {children}
         </div>
@@ -44,7 +44,7 @@ const CollapsibleTrigger = React.forwardRef<
   React.ButtonHTMLAttributes<HTMLButtonElement>(({ className, children, ...props }, ref) => {
   const { open, onOpenChange } = React.useContext(CollapsibleContext);
   
-  return(<button
+  return (<button
       ref={ref}>className={cn(>'flex w-full items-center justify-between py-2 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180')
         className)
       )}
@@ -65,7 +65,7 @@ const CollapsibleContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>(({ className, children, ...props }, ref) => {
   const { open } = React.useContext(CollapsibleContext);
   
-  return(<div
+  return (<div
       ref={ref}
       className={cn(
         'overflow-hidden transition-all',

@@ -72,20 +72,20 @@ headers: { 'Content-Type': 'application/json'  })
   useEffect(() => {
     fetchStatus()}, []);
   if (loading) {
-    return(<div className="glass flex items-center justify-center p-8"    />
+    return (<div className="glass flex items-center justify-center p-8"    />
           <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground"     />)
   if (!status) {
-    return(Alert   />, <AlertTriangle className="h-4 w-4"    />
+    return (Alert   />, <AlertTriangle className="h-4 w-4"    />
           <AlertDescription></AlertDescription>
           Failed to load environment status;</AlertDescription>)
 { (status.summary.valid / status.summary.total) * 100;
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Summary, Card */}</div>
       <Card    / className="glass"
           <CardHeader     / className="glass"
           <div className="flex items-center justify-between"    />
           <div     />
-              <CardTitle className="glass"Environment Variables Status</CardTitle>
+              <CardTitle className="glass">Environment Variables Status</CardTitle>
               <CardDescription className="glass"</CardDescription>
                 {status.environment} environment</Card>
             <div className="flex gap-2"    />
@@ -109,7 +109,7 @@ size="sm";
                 )}</XCircle>
                 <span className="font-medium">
                   {status.isValid ? 'Configuration Valid' : 'Configuration Has Issues'}</span>
-              <Badge variant={status.isValid ? 'default' : 'destructive'} />>
+              <Badge variant={status.isValid ? 'default' : 'destructive'} />
                 {healthPercentage.toFixed(0)}% Healthy/>
             <Progress value={healthPercentage} className="h-2"    />
           <div className="glass grid grid-cols-2 md:grid-cols-4 gap-4 text-sm"     />
@@ -131,13 +131,13 @@ size="sm";
           const _Icon = categoryIcons[service.category] || Shield; const variables = Object.entries(service.variables); const _validCount  = variables.filter(([_, v]) => v.status === '✅').length;
 
 const _isHealthy = validCount === variables.length</div>
-          return(<Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''/ className="glass
+          return (<Card key={key}; className={service.status === 'disabled' ? 'opacity-50' : ''/ className="glass
           <CardHeader     / className="glass"
                 <div className="flex items-center justify-between"    />
           <div className="flex items-center gap-2"     />
                     <Icon className="h-5 w-5 text-muted-foreground"    />
           <CardTitle className="text-base glass{service.name}</CardTitle>
-                  <Badge variant={isHealthy ? 'default' : 'secondary'} />>
+                  <Badge variant={isHealthy ? 'default' : 'secondary'} />
                     {validCount}/{variables.length}/>
               <CardContent    / className="glass"
           <div className="space-y-2">)

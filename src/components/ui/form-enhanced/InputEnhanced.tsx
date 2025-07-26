@@ -27,7 +27,7 @@ export function InputEnhanced({
   const hasError = state === 'error' || !!errorText;
   const displayText = hasError ? errorText : helperText;
 
-  return(<div className="w-full">
+  return (<div className="w-full">
       {label && (
         <label
           htmlFor={inputId}>className="block text-sm font-medium text-foreground mb-1">>
@@ -61,7 +61,7 @@ export function InputEnhanced({
               leftAddon && 'rounded-l-none border-l-0',
               rightAddon && 'rounded-r-none border-r-0',
               className
-            )}>{...props} />>
+            )}>{...props} />
           
           {(rightIcon || state !== 'default' || loading) && (
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">

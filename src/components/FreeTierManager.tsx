@@ -92,7 +92,7 @@ export default function FreeTierManager({
     setProjects(projects.filter(p => p.id !== projectId));
   };
 
-  return(<div className="space-y-6">
+  return (<div className="space-y-6">
       {/* Free Tier Status Card */}
       <Card className="-2 -blue-200 bg-blue-50/50 glass
         <CardHeader className="glass"
@@ -106,8 +106,8 @@ export default function FreeTierManager({
             )}
           </div>
         </CardHeader>
-        <CardContent className="glass"
-          <div className="space-y-4">
+        <CardContent className="glass">
+            <div className="space-y-4">
             {/* Projects Usage */}
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -117,7 +117,7 @@ export default function FreeTierManager({
                 </span>
               </div>
               <Progress 
-                value={(projectsUsed / MAX_FREE_PROJECTS) * 100} >className="h-2" />>
+                value={(projectsUsed / MAX_FREE_PROJECTS) * 100} >className="h-2" />
               {projectsRemaining === 0 && currentPlan === 'free' && (
                 <p className="text-xs text-orange-600 mt-1">
                   You've reached the free tier limit
@@ -134,7 +134,7 @@ export default function FreeTierManager({
                 </span>
               </div>
               <Progress 
-                value={storagePercentage} >className="h-2" />>
+                value={storagePercentage} >className="h-2" />
             </div>
 
             {/* Free Tier Benefits */}
@@ -164,10 +164,10 @@ export default function FreeTierManager({
       </Card>
 
       {/* Projects List */}
-      <Card className="glass"
-        <CardHeader className="glass"
+      <Card className="glass">
+          <CardHeader className="glass"
           <div className="flex items-center justify-between">
-            <CardTitle className="glass"Your Projects</CardTitle>
+            <CardTitle className="glass">Your Projects</CardTitle>
             <Button
               onClick={createNewProject}
               disabled={!canCreateNewProject && currentPlan === 'free'}>size="sm">>
@@ -176,8 +176,8 @@ export default function FreeTierManager({
             </Button>
           </div>
         </CardHeader>
-        <CardContent className="glass"
-          <div className="space-y-3">
+        <CardContent className="glass">
+            <div className="space-y-3">
             {activeProjects.map((project, index) => (
               <div key={project.id} className="glass  rounded-xl-lg p-4">
                 <div className="flex items-center justify-between mb-2">

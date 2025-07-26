@@ -25,7 +25,7 @@ function TutorialCard({ tutorial, isCompleted, isLocked, onStart }: TutorialCard
     advanced: 'bg-red-100 text-red-700'
   };
 
-  return(<Card className="h-full glass
+  return (<Card className="h-full glass
           <CardHeader className="glass"
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg glass{tutorial.title}</CardTitle>
@@ -89,7 +89,7 @@ export default function TutorialsPage() {
     // Navigate to tutorial detail page
   };
 
-  return(<div className="container mx-auto max-w-6xl py-12 px-4">
+  return (<div className="container mx-auto max-w-6xl py-12 px-4">
           <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Learn & Master</h1>
         <p className="text-xl text-gray-600">Interactive tutorials to help you master AI-guided development</p>
@@ -100,7 +100,7 @@ export default function TutorialsPage() {
           const isCompleted = userProgress.completedTutorials.includes(tutorial.id);
           const isLocked = !userProgress.unlockedTutorials.includes(tutorial.id);
           
-          return(<TutorialCard
+          return (<TutorialCard
               key={tutorial.id}
               tutorial={tutorial}
               isCompleted={isCompleted}

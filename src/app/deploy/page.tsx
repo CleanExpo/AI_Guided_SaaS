@@ -121,7 +121,7 @@ export default function DeployPage() {
   const completedSteps = deploymentSteps.filter(s => s.status === 'completed').length;
   const progress = (completedSteps / deploymentSteps.length) * 100;
 
-  return(<div className="min-h-screen glass py-8 px-4">
+  return (<div className="min-h-screen glass py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -141,12 +141,12 @@ export default function DeployPage() {
         <div className="glass grid lg:grid-cols-3 gap-8">
           {/* Deployment Providers */}
           <div className="lg:col-span-1">
-            <Card className="glass"
-              <CardHeader className="glass"
-                <CardTitle className="glass"Choose Provider</CardTitle>
+            <Card className="glass">
+          <CardHeader className="glass">
+            <CardTitle className="glass">Choose Provider</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   {deployProviders.map((provider) => (
                     <div
                       key={provider.id}
@@ -182,11 +182,11 @@ export default function DeployPage() {
 
             {/* Environment */}
             <Card className="mt-6 glass
-              <CardHeader className="glass"
-                <CardTitle className="glass"Environment</CardTitle>
+              <CardHeader className="glass">
+            <CardTitle className="glass">Environment</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <Server className="h-5 w-5 text-gray-600" />
@@ -215,10 +215,10 @@ export default function DeployPage() {
 
           {/* Deployment Process */}
           <div className="lg:col-span-2">
-            <Card className="glass"
-              <CardHeader className="glass"
+            <Card className="glass">
+          <CardHeader className="glass"
                 <div className="flex items-center justify-between">
-                  <CardTitle className="glass"Deployment Process</CardTitle>
+                  <CardTitle className="glass">Deployment Process</CardTitle>
                   {isDeploying && (
                     <Badge className="bg-blue-100 text-blue-700">
                       <Activity className="h-3 w-3 mr-1 animate-pulse" />
@@ -314,11 +314,11 @@ export default function DeployPage() {
 
             {/* Recent Deployments */}
             <Card className="mt-6 glass
-              <CardHeader className="glass"
-                <CardTitle className="glass"Recent Deployments</CardTitle>
+              <CardHeader className="glass">
+            <CardTitle className="glass">Recent Deployments</CardTitle>
               </CardHeader>
-              <CardContent className="glass"
-                <div className="space-y-3">
+              <CardContent className="glass">
+            <div className="space-y-3">
                   <div className="flex items-center justify-between p-3  rounded-xl-lg">
                     <div className="flex items-center gap-3">
                       <GitBranch className="h-5 w-5 text-gray-600" />

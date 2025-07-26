@@ -66,7 +66,7 @@ export default function EnterprisePage() {
     }
   ];
 
-  return(<div className="min-h-screen glass py-12">
+  return (<div className="min-h-screen glass py-12">
           <div className="container mx-auto px-4 max-w-6xl">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -107,7 +107,7 @@ export default function EnterprisePage() {
               <Card key={tier.name} className={tier.recommended ? 'ring-2 ring-blue-600' : ''} className="glass
                 <CardHeader className="glass"
                   <div className="flex items-center justify-between">
-                    <CardTitle className="glass"{tier.name}</CardTitle>
+                    <CardTitle className="glass">{tier.name}</CardTitle>
                     {tier.recommended && <Badge>Recommended</Badge>}
                   </div>
                   <div className="flex items-baseline">
